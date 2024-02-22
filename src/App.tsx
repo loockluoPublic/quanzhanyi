@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
+
+// https://demo.vidol.chat/demos/leva
+// https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
 import { button, useControls } from "leva";
 import SerialMonitor from "@ridge18/web-serial-monitor";
 
@@ -125,23 +128,33 @@ export default function App() {
   const { name, aNumber, bluetooth } = useControls({
     // aNumber: 0,
 
-    a指令: "World",
+    a指令: "%R1Q,9027:1.5,1.5,0,0,0",
     // bluetooth: false,
     打开串口: button(connectSerial),
+    关闭串口: button(() => {
+      serial.disconnect();
+    }),
     // vector: { v: 0, h: 0 },
     发送: button((get) => {
-      alert(`Number value is ${get("a指令")}`);
       console.log(
-        "%c Line:135 🍏 `${get()}\n`",
+        "%c Line:135 🍏 发送指令",
         "color:#ea7e5c",
         `${get("a指令")}`
       );
       serial.send(`${get("a指令")}\r\n`);
     }),
+    读取: button((get) => {
+      console.log(
+        "%c Line:135 🍏 发送读取指令",
+        "color:#ea7e5c",
+        `%R1Q,2107:2`
+      );
+      serial.send(`%R1Q,2107:2\r\n`);
+    }),
   });
 
   const getB = () => {
-    var deviceOptions = {
+    const deviceOptions = {
       optionalServices: [
         "00001f10-0000-1000-8000-00805f9b34fb",
         "00010203-0405-0607-0809-0a0b0c0d1912",
@@ -169,37 +182,38 @@ export default function App() {
       .requestDevice(deviceOptions)
       .then(async function (device) {
         console.log("名称：" + device.name);
-        window.bluetoothDevice = device;
+
         device.addEventListener("gattserverdisconnected", () => {
           console.log("%c Line:84 🥥 gattserverdisconnected", "color:#f5ce50");
         });
 
-        device.gatt
-          .connect()
-          .then((server) => {
-            console.log("Found GATT server");
+        // device.gatt
+        //   .connect()
+        //   .then((server) => {
+        //     console.log("Found GATT server");
 
-            console.log("%c Line:92 🍏 server", "color:#fca650", server);
-            return server.getPrimaryServices();
-          })
-          .then((services) => {
-            console.log("%c Line:96 🍌 services", "color:#f5ce50", services);
+        //     console.log("%c Line:92 🍏 server", "color:#fca650", server);
+        //     return server.getPrimaryServices();
+        //   })
+        //   .then((services) => {
+        //     console.log("%c Line:96 🍌 services", "color:#f5ce50", services);
 
-            return service.getCharacteristic(
-              "00001f1f-0000-1000-8000-00805f9b34fb"
-            );
-          })
-          .then((characteristic) => {
-            // 发送数据
-            let data = new TextEncoder().encode("helloworld");
-            return characteristic.writeValue(data);
-          })
-          .then(() => {
-            console.log("数据成功发送到蓝牙设备");
-          })
-          .catch((error) => {
-            console.error("发送数据时出现错误:", error);
-          });
+        //     return service.getCharacteristic(
+        //       "00001f1f-0000-1000-8000-00805f9b34fb"
+        //     );
+        //   })
+        //   .then((characteristic) => {
+        //     // 发送数据
+        //     let data = new TextEncoder().encode("helloworld");
+        //     return characteristic.writeValue(data);
+        //   })
+        //   .then(() => {
+        //     console.log("数据成功发送到蓝牙设备");
+        //   })
+        //   .catch((error) => {
+        //     console.error("发送数据时出现错误:", error);
+        //   });
+
         // try {
         //   // 连接到 GATT 服务器
         //   const server = await device.gatt.connect();
@@ -243,7 +257,7 @@ export default function App() {
     <>
       {/* <button onClick={blList}>打开蓝牙</button>
       <button onClick={connectSerial}>打开串口</button> */}
-      {/* <Canvas dpr={window.devicePixelRatio}>
+      <Canvas dpr={window.devicePixelRatio}>
         <ambientLight intensity={Math.PI / 2} />
         <axesHelper args={[10]} />
         <spotLight
@@ -256,7 +270,7 @@ export default function App() {
 
         <Box position={[0, 0, 0]} />
         <OrbitControls />
-      </Canvas> */}
+      </Canvas>
     </>
   );
 }
