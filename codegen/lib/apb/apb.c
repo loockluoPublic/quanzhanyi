@@ -7,6 +7,9 @@
 
 /* Include Files */
 #include "apb.h"
+#include <emscripten.h>
+
+// 定义两数相加的函数
 
 /* Function Definitions */
 /*
@@ -14,6 +17,7 @@
  *                double v
  * Return Type  : double
  */
+EMSCRIPTEN_KEEPALIVE
 double apb(double u, double v)
 {
   return u + v;
