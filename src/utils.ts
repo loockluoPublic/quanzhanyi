@@ -1,7 +1,10 @@
-import * as math from "mathjs";
+// import * as math from "mathjs";
 
-console.log(
-  "%c Line:5 🍞 math.round(math.e, 3)",
-  "color:#33a5ff",
-  math.round(math.e, 3)
-);
+// import matlab from "matlabjs";
+// var { add, linspace, zeros } = matlab;
+// console.log("%c Line:5 🍭 matlab", "color:#42b983", matlab);
+
+// let f = linspace(0, 1, 20);
+// let A = add(f, 200);
+// console.log(A);
+// console.log(zeros(10, 1));
