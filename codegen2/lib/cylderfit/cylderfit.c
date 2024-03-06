@@ -7,6 +7,8 @@
 
 /* Include Files */
 #include "cylderfit.h"
+#include "PCANormalCore_api.hpp"
+#include "cvstCG_kdtree.h"
 #include "cylderfit_data.h"
 #include "cylderfit_emxutil.h"
 #include "cylderfit_initialize.h"
@@ -15,8 +17,7 @@
 #include "msac.h"
 #include "pcfitcylinder.h"
 #include "rt_nonfinite.h"
-#include "PCANormalCore_api.hpp"
-#include "cvstCG_kdtree.h"
+#include <emscripten.h>
 #include <math.h>
 #include <string.h>
 
@@ -28,6 +29,7 @@
  *                emxArray_real_T *retrn
  * Return Type  : void
  */
+EMSCRIPTEN_KEEPALIVE
 void cylderfit(const double x[45], const double y[45], const double z[45],
                emxArray_real_T *retrn)
 {

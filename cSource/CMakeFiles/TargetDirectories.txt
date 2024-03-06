@@ -1,0 +1,3 @@
+/Users/alsc/myFile/quanzhaunyi/cSource/CMakeFiles/quanzhanyi.dir
+/Users/alsc/myFile/quanzhaunyi/cSource/CMakeFiles/edit_cache.dir
+/Users/alsc/myFile/quanzhaunyi/cSource/CMakeFiles/rebuild_cache.dir
