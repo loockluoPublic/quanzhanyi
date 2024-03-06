@@ -3,16 +3,18 @@ cmake_minimum_required(VERSION 3.10)
 project(quanzhanyi)
 
 # 设置构建目录
-set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/../public/matlab)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
-set(CMAKE_EXECUTABLE_SUFFIX ".html") # 编译生成.html
+set(CMAKE_EXECUTABLE_SUFFIX )
+# set(CMAKE_EXECUTABLE_SUFFIX ".html") # 编译生成.html
 
 # 设置源文件目录
-set(SRC_DIR "./")
+set(SRC_DIR "../codegen/lib/cylderfit/examples")
 set(LIB_DIR "../codegen/lib/cylderfit")
 set(INC_DIR "../codegen/lib/cylderfit/interface" 
     "../codegen/lib/cylderfit"
+    "../codegen/lib/cylderfit/examples"
     "./include"
 )
 # 查找所有源文件
