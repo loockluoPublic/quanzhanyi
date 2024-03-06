@@ -1,1 +1,0 @@
-/Users/alsc/work/emsdk/upstream/emscripten/emcc @CMakeFiles/quanzhanyi.dir/objects1.rsp -o build/quanzhanyi.html 

@@ -55,6 +55,8 @@ void mycylderfit_xil_shutdown(void);
 
 void mycylderfit_xil_terminate(void);
 
+int add200(int a, int b);
+
 #ifdef __cplusplus
 }
 #endif
