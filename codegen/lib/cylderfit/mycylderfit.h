@@ -17,7 +17,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+extern int add200(int a, int b);
 /* Function Declarations */
 extern void mycylderfit(const emxArray_real_T *x, const emxArray_real_T *y,
                         const emxArray_real_T *z, double *xn1, double *xn2,

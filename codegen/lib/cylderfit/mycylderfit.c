@@ -7,6 +7,7 @@
 
 /* Include Files */
 #include "mycylderfit.h"
+#include "cvstCG_kdtree.h"
 #include "minOrMax.h"
 #include "mycylderfit_data.h"
 #include "mycylderfit_emxutil.h"
@@ -19,13 +20,15 @@
 #include "pointCloudBase.h"
 #include "rt_nonfinite.h"
 #include "svd.h"
-#include "cvstCG_kdtree.h"
-#include "rt_nonfinite.h"
 #include <math.h>
 
 /* Function Declarations */
 static double rt_hypotd_snf(double u0, double u1);
 
+int add200(int a, int b)
+{
+  return a + b + 200;
+}
 /* Function Definitions */
 /*
  * Arguments    : double u0

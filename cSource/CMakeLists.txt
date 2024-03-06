@@ -11,7 +11,10 @@ set(CMAKE_EXECUTABLE_SUFFIX ".html") # 编译生成.html
 # 设置源文件目录
 set(SRC_DIR "./")
 set(LIB_DIR "../codegen/lib/cylderfit")
-set(INC_DIR "../codegen/lib/cylderfit/interface")
+set(INC_DIR "../codegen/lib/cylderfit/interface" 
+    "../codegen/lib/cylderfit"
+    "./include"
+)
 # 查找所有源文件
 file(GLOB SOURCES "${SRC_DIR}/*.c")
 

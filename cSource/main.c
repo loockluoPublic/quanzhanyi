@@ -1,5 +1,5 @@
 #include <emscripten.h>
-#include "_coder_mycylderfit_api.h"
+#include "mycylderfit.h"
 
 EMSCRIPTEN_KEEPALIVE
 int add(int a, int b)
