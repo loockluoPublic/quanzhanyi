@@ -37,6 +37,7 @@
 #include "mycylderfit_terminate.h"
 #include "mycylderfit_types.h"
 #include "rt_nonfinite.h"
+#include <emscripten.h>
 
 /* Function Declarations */
 static emxArray_real_T *argInit_Unboundedx1_real_T(void);
@@ -80,6 +81,7 @@ static double argInit_real_T(void)
  * Arguments    : void
  * Return Type  : void
  */
+EMSCRIPTEN_KEEPALIVE
 static void main_mycylderfit(void)
 {
   emxArray_real_T *x;
@@ -111,6 +113,7 @@ static void main_mycylderfit(void)
  *                char **argv
  * Return Type  : int
  */
+EMSCRIPTEN_KEEPALIVE
 int main(int argc, char **argv)
 {
   (void)argc;

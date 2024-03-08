@@ -1,0 +1,46 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(mycylinderfit)
+
+# 设置构建目录
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/../public/matlab)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+# set(CMAKE_EXECUTABLE_SUFFIX )
+set(CMAKE_EXECUTABLE_SUFFIX ".html") # 编译生成.html
+
+# 设置源文件目录
+set(SRC_DIR "../codegen/lib/cylderfit")
+set(LIB_DIR "../codegen/lib/cylderfit")
+set(INC_DIR "../codegen/lib/cylderfit/interface" 
+    "../codegen/lib/cylderfit"
+    "../codegen/lib/cylderfit/examples"
+    "./include"
+)
+# 查找所有源文件
+file(GLOB SOURCES "${SRC_DIR}/*.c")
+
+# 添加头文件目录
+set(projectDir ../../../)
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${projectDir}/cSource/extern/include
+    ${projectDir}/cSource/vision/include
+    ${projectDir}/cSource/vision/export/include/vision
+)
+
+# # 生成可执行文件
+# add_executable(quanzhanyi2 ${SOURCES})
+
+# 生成静态库
+add_library(mycylinderfit STATIC ${SRC_DIR})
+
+# 链接外部库
+target_link_libraries(mycylinderfit 
+    ${projectDir}/cSource/extern/lib/win64/microsoft/libmwkdtree.lib
+)
+
+
+# # 添加链接库
+# add_subdirectory(${LIB_DIR})
+# target_link_libraries(quanzhanyi cylderfit)
