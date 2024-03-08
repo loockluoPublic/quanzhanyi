@@ -4,58 +4,33 @@ cmake_minimum_required(VERSION 3.0)
 project(mycylinderfit)
 
 
-set(projectDir ../)
+set(ROOT ..)
 
-set(SRCDIR ${projectDir}/codegen/lib/cylderfit)
+set(SRCDIR ${ROOT}/codegen/lib/cylderfit)
 
-set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/../../../public/matlab)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+set(CMAKE_BINARY_DIR ${ROOT}/public/matlab)
+# set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(CMAKE_EXECUTABLE_SUFFIX ".html")
+MESSAGE(${ROOT})
 
-# 添加源文件
-set(SRCDIR
-    ${SRCDIR}/mycylderfit_data.c
-    ${SRCDIR}/rt_nonfinite.c
-    ${SRCDIR}/rtGetNaN.c
-    ${SRCDIR}/rtGetInf.c
-    ${SRCDIR}/mycylderfit_initialize.c
-    ${SRCDIR}/mycylderfit_terminate.c
-    ${SRCDIR}/mycylderfit.c
-    ${SRCDIR}/pointCloud.c
-    ${SRCDIR}/pca.c
-    ${SRCDIR}/xzsvdc.c
-    ${SRCDIR}/xnrm2.c
-    ${SRCDIR}/svd.c
-    ${SRCDIR}/minOrMax.c
-    ${SRCDIR}/pctransform.c
-    ${SRCDIR}/pointCloudBase.c
-    ${SRCDIR}/pinv.c
-    ${SRCDIR}/xdotc.c
-    ${SRCDIR}/xaxpy.c
-    ${SRCDIR}/xrotg.c
-    ${SRCDIR}/xrot.c
-    ${SRCDIR}/xswap.c
-    ${SRCDIR}/mycylderfit_emxutil.c
-    ${SRCDIR}/mycylderfit_emxAPI.c
-)
-# /Users/alsc/myFile/quanzhaunyi/cSource
-# 设置头文件路径
+file(GLOB SOURCES "${SRCDIR}/*.c" )
+
+MESSAGE(${SOURCES})
 
 include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    # ${CMAKE_CURRENT_SOURCE_DIR}/examples
-    ${projectDir}/cSource/extern/include
-    ${projectDir}/cSource/vision/include
-    ${projectDir}/cSource/vision/export/include/vision
+    ${SRCDIR}
+    ${SRCDIR}/interface
+    ${ROOT}/cSource/extern/include
+    ${ROOT}/cSource/vision/include
+    ${ROOT}/cSource/vision/export/include/vision
 )
 
-# add_executable(mycylinderfit2 examples/main.c)
-
-# 生成静态库
-add_library(mycylinderfit STATIC ${SRCDIR})
+# add_executable(mycylinderfit   SOURCES    )
+# # 生成静态库
+add_library(mycylinderfit STATIC ${SOURCES})
 
 # 链接外部库
 target_link_libraries(mycylinderfit 
-    ${projectDir}/cSource/extern/lib/win64/microsoft/libmwkdtree.lib
+    ${ROOT}/cSource/extern/lib/win64/microsoft/libmwkdtree.lib
 )
