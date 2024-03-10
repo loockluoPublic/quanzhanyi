@@ -1,30 +1,36 @@
-cmake_minimum_required(VERSION 3.10)
-project(MyProject)
-set(SRC lib/cylderfit)
-set(ROOT ../)
+cmake_minimum_required(VERSION 3.0)
 
+# 设置项目名称
+project(mycylinderfit)
+
+
+set(ROOT ..)
+
+set(SRCDIR ${ROOT}/codegen/lib/cylderfit)
+
+# set(CMAKE_BINARY_DIR ${ROOT}/public/matlab)
+# set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+# set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+# set(CMAKE_EXECUTABLE_SUFFIX ".html")
+MESSAGE(${ROOT})
+
+file(GLOB SOURCES "${SRCDIR}/*.c" )
+
+MESSAGE(${SOURCES})
 
 include_directories(
-    # ${CMAKE_CURRENT_SOURCE_DIR}/examples
-    ${SRC}
+    ${SRCDIR}
+    ${SRCDIR}/interface
     ${ROOT}/cSource/extern/include
     ${ROOT}/cSource/vision/include
     ${ROOT}/cSource/vision/export/include/vision
-    )
+)
 
-# 添加可执行文件
-add_executable(MyExecutable ${SRC}/examples/main.c)
+# add_executable(mycylinderfit   SOURCES    )
+# # 生成静态库
+add_library(mycylinderfit STATIC ${SOURCES})
 
-# 添加头文件路径
-target_include_directories(MyExecutable PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/examples)
-
-
-
-# 添加其他依赖项
-# target_link_libraries(MyExecutable some_library)
-
-# 设置编译选项
-# target_compile_options(MyExecutable PRIVATE -Wall -Wextra)
-
-# 设置安装规则
-# install(TARGETS MyExecutable DESTINATION bin)
+# 链接外部库
+target_link_libraries(mycylinderfit 
+    ${ROOT}/cSource/extern/lib/win64/microsoft/libmwkdtree.lib
+)

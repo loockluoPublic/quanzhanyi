@@ -3,20 +3,22 @@ cmake_minimum_required(VERSION 3.0)
 # 设置项目名称
 project(mycylinderfit)
 
+set(CMAKE_C_STANDARD 11) 
 
-set(ROOT ..)
+set(ROOT ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 set(SRCDIR ${ROOT}/codegen/lib/cylderfit)
 
 set(CMAKE_BINARY_DIR ${ROOT}/public/matlab)
-# set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(CMAKE_EXECUTABLE_SUFFIX ".html")
-MESSAGE(${ROOT})
 
-file(GLOB SOURCES "${SRCDIR}/*.c" )
+MESSAGE(${CMAKE_CURRENT_SOURCE_DIR})
 
-MESSAGE(${SOURCES})
+# file(GLOB SOURCES "${SRCDIR}/*.c" )
+
+
 
 include_directories(
     ${SRCDIR}
@@ -26,11 +28,12 @@ include_directories(
     ${ROOT}/cSource/vision/export/include/vision
 )
 
-# add_executable(mycylinderfit   SOURCES    )
-# # 生成静态库
-add_library(mycylinderfit STATIC ${SOURCES})
+# # # # 生成静态库
+# add_library(mycylinderfit STATIC ${SOURCES})
 
-# 链接外部库
-target_link_libraries(mycylinderfit 
-    ${ROOT}/cSource/extern/lib/win64/microsoft/libmwkdtree.lib
-)
+
+add_executable(main   main.c  )
+
+link_directories(${ROOT}/codegen)
+
+target_link_libraries(main  ${ROOT}/codegen/libmycylinderfit.a)
