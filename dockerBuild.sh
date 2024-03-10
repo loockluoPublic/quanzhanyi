@@ -1,5 +1,1 @@
-docker run \
-  --rm \
-  -v $(pwd):/quanzhanyi \
-  emscripten/emsdk \
-  sh emmake.sh
+docker run   --rm   -it   -v $(pwd):/quanzhanyi   emscripten/emsdk   bash
