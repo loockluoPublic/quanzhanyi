@@ -27,3 +27,5 @@ Makefile
 *.njsproj
 *.sln
 *.sw?
+
+!codegen0310\lib\mycylderfit\mycylderfit.lib
