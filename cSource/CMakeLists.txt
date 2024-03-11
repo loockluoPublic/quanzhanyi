@@ -7,7 +7,7 @@ set(CMAKE_C_STANDARD 11)
 
 set(ROOT ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-set(SRCDIR ${ROOT}/codegen/lib/cylderfit)
+set(SRCDIR ${ROOT}/codegen0310/lib/mycylderfit)
 
 set(CMAKE_BINARY_DIR ${ROOT}/public/matlab)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
@@ -36,4 +36,4 @@ add_executable(main   main.c  )
 
 link_directories(${ROOT}/codegen)
 
-target_link_libraries(main  ${ROOT}/codegen/libmycylinderfit.a)
+target_link_libraries(main  ${ROOT}/codegen0310/lib/mycylderfit/mycylderfit.lib)

@@ -1,10 +1,11 @@
 #include <emscripten.h>
 #include "mycylderfit_types.h"
-// #include "mycylderfit_emxAPI.h"
+#include "mycylderfit_emxAPI.h"
 // #include "mycylderfit_terminate.h"
 #include "cvstCG_kdtree.h"
 #include "mycylderfit_emxAPI.h"
 #include "mycylderfit.h"
+// /Users/alsc/myFile/quanzhaunyi/codegen0310/lib/mycylderfit/mycylderfit_emxAPI.h
 // /Users/alsc/myFile/quanzhaunyi/codegen/lib/cylderfit/mycylderfit.h
 
 EMSCRIPTEN_KEEPALIVE
