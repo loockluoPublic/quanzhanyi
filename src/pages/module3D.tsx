@@ -1,15 +1,12 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
-import "./utils";
-import { Route } from "react-router-dom";
+import "../utils";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
 import { button, useControls } from "leva";
 import SerialMonitor from "@ridge18/web-serial-monitor";
-import Layout from "./Layout";
-import Setting from "./pages/setting";
 
 const serial = new SerialMonitor({ mode: "text", parseLines: true });
 
@@ -75,8 +72,7 @@ function Box(props) {
   );
 }
 
-export default function App(p) {
-  console.log("%c Line:79 🍕 p11", "color:#33a5ff", p);
+export default function Index(props: { className?: string; height: string }) {
   // const value = useControls({
   //   // aNumber: 0,
 
@@ -104,10 +100,30 @@ export default function App(p) {
   //     serial.send(`%R1Q,2107:2\r\n`);
   //   }),
   // });
+  // console.log("%c Line:78 🥛 value", "color:#6ec1c2", value);
+
+  // return <div>测试</div>;
 
   return (
-    <Layout>
-      <Route path="/" element={<Setting />}></Route>
-    </Layout>
+    <>
+      <Canvas
+        dpr={window.devicePixelRatio}
+        className={props.className}
+        style={{ height: props.height }}
+      >
+        <ambientLight intensity={Math.PI / 2} />
+        <axesHelper args={[10]} />
+        <spotLight
+          position={[10, 10, 10]}
+          angle={0.15}
+          penumbra={1}
+          decay={0}
+          intensity={Math.PI}
+        />
+
+        <Box position={[0, 0, 0]} />
+        <OrbitControls />
+      </Canvas>
+    </>
   );
 }
