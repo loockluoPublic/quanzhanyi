@@ -18,10 +18,10 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void mycylderfit2(const double x[45], const double y[45],
-                         const double z[45], double *XXX1, double *XXX2,
-                         double *XXX3, double *XXX4, double *XXX5, double *XXX6,
-                         double *XXX7);
+extern double mycylderfit2(const double x[45], const double y[45],
+                           const double z[45], double *XXX1, double *XXX2,
+                           double *XXX3, double *XXX4, double *XXX5,
+                           double *XXX6, double *XXX7);
 
 #ifdef __cplusplus
 }

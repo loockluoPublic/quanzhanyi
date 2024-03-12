@@ -16,7 +16,7 @@ set(CMAKE_EXECUTABLE_SUFFIX ".html")
 
 MESSAGE(${CMAKE_CURRENT_SOURCE_DIR})
 
-# file(GLOB SOURCES "${SRCDIR}/*.c" )
+file(GLOB SOURCES "${SRCDIR}/*.c" )
 
 
 
@@ -34,6 +34,6 @@ include_directories(
 
 add_executable(main   main.c  )
 
-link_directories(${ROOT}/codegen)
+# link_directories(${ROOT}/codegen0310)
 
 target_link_libraries(main  ${ROOT}/codegen0310/lib/mycylderfit/mycylderfit.lib)
