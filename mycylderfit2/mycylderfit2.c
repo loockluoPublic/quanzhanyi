@@ -35,36 +35,35 @@
  */
 
 EMSCRIPTEN_KEEPALIVE
-int add(int a)
+void mycylderfit2(const double x[45], const double y[45], const double z[45],
+                  double *XXX1, double *XXX2, double *XXX3, double *XXX4,
+                  double *XXX5, double *XXX6, double *XXX7)
 {
-  printf("开始计算");
-  return a + 1;
-}
 
-EMSCRIPTEN_KEEPALIVE
-double mycylderfit2(const double x[45], const double y[45], const double z[45],
-                    double *XXX1, double *XXX2, double *XXX3, double *XXX4,
-                    double *XXX5, double *XXX6, double *XXX7)
-{
-  printf(" x \n");
+  printf("x : \n");
 
-  printf("Hello, World! %f \n", x[0]);
+  for (int i = 0; i < 10; i++) {
+    printf("%f  ", x[i]);
+  }
+  printf("\n");
 
-  EM_ASM_(
-      {
-        var number = $0;
-        console.log("x: " + number);
-      },
-      x[0]);
+  printf("y : \n");
+  for (int i = 0; i < 10; i++) {
+    printf("%f  ", y[i]);
+  }
+  printf("\n");
 
-  EM_ASM_(
-      {
-        var number = $0;
-        console.log("XXX1: " + number);
-      },
-      *XXX1);
+  printf("z : \n");
+  for (int i = 0; i < 10; i++) {
+    printf("%f  ", z[i]);
+  }
+  printf("\n");
 
-  printf("开始计算");
+  printf("XXX1: %f \n", *XXX1);
+  printf("XXX2: %f \n", *XXX2);
+  printf("XXX3: %f \n", *XXX3);
+
+  printf("开始计算 \n");
   emxArray_real_T *Xnn;
   emxArray_real_T *YuanDu;
   double Bn[315];
@@ -520,18 +519,10 @@ double mycylderfit2(const double x[45], const double y[45], const double z[45],
   *XXX6 = Xnn->data[r1 + 5];
   *XXX7 = Xnn->data[r1 + 6];
 
-  // printf('结束计算： %f %f %f %f %f %f %f %f ', XXX1, XXX2, XXX3, XXX4, XXX5,
-  //        XXX6, XXX7);
+  printf("结束计算： %f %f %f %f %f %f %f \n", *XXX1, *XXX2, *XXX3, *XXX4,
+         *XXX5, *XXX6, *XXX7);
   emxFree_real_T(&Xnn);
   emxFree_real_T(&YuanDu);
-
-  EM_ASM_(
-      {
-        var number = $0;
-        console.log("XXX1 end: " + number);
-      },
-      *XXX1);
-  return *XXX1;
 }
 
 /*

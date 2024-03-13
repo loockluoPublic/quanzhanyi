@@ -15,8 +15,8 @@ set(SRCDIR ${ROOT}/mycylderfit2)
 
 set(CMAKE_EXECUTABLE_SUFFIX ".html")
 # 设置编译参数
-# set(CMAKE_CXX_FLAGS "-s EXPORTED_RUNTIME_METHODS=['addFunction']")
-set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -s EXPORTED_FUNCTIONS=['getValue','setValue','setValue','_malloc','_free']")
+# set(CMAKE_CXX_FLAGS "-s EXTRA_EXPORTED_RUNTIME_METHODS=['addFunction']")
+set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -s EXPORTED_FUNCTIONS=['getValue','setValue','setValue','_malloc','_free'] -s EXTRA_EXPORTED_RUNTIME_METHODS=['ccall']")
 
 # 获取所有默认变量
 get_cmake_property(_variableNames CACHE_VARIABLES)

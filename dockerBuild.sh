@@ -1,1 +1,1 @@
-docker run   --rm   -it   -v $(pwd):/quanzhanyi   emscripten/emsdk   bash
+docker run -it --rm  -v $(pwd):/src -w /src/cSource/build emscripten/emsdk  /bin/bash -c "emcmake cmake .. && emmake make"
