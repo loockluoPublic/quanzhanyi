@@ -2,7 +2,9 @@ import SerialMonitor from "@ridge18/web-serial-monitor";
 import { Button } from "antd";
 import { useRecoilState } from "recoil";
 import { connectState } from "../atom/globalState";
+import * as commont from "./commond";
 
+(window as any).commond = commont;
 export const serial = new SerialMonitor({ mode: "text", parseLines: true });
 
 export default function Connect(props: { onConnected: () => void }) {

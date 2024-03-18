@@ -1,5 +1,14 @@
 import { MinusCircleOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Radio, Select, Steps } from "antd";
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  InputNumber,
+  Radio,
+  Select,
+  Steps,
+} from "antd";
 import { DefaultOptionType } from "antd/es/select";
 import { useState } from "react";
 import Module3D from "./module3D";
@@ -21,7 +30,7 @@ const sdmOptions = [
 ];
 
 export default function Setting() {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(3);
   const onChange = (value: number) => {
     setStep(value);
   };
@@ -75,13 +84,49 @@ export default function Setting() {
       case 2: {
         return (
           <div className="q-w-[500px]">
-            <Form.List name="points" initialValue={["", "", "", "", ""]}>
-              {(fields, { add, remove }) => {
+            <h3>定位点</h3>
+            <Form.List name="firstPoints" initialValue={["", ""]}>
+              {(fields) => {
+                console.log("%c Line:80 🥝 fields", "color:#93c0a4", fields);
                 return (
                   <>
                     {fields.map((field, index) => (
                       <Form.Item
-                        label={`手动采集第${index + 1}个点`}
+                        label={["圆柱顶面点", "圆柱底面点"][index]}
+                        required={true}
+                        key={field.key}
+                      >
+                        <Form.Item
+                          {...field}
+                          validateTrigger={["onChange", "onBlur"]}
+                          rules={[
+                            {
+                              required: true,
+                              whitespace: true,
+                            },
+                          ]}
+                          noStyle
+                        >
+                          <Input disabled style={{ width: "70%" }} />
+                        </Form.Item>
+                        <Button style={{ marginLeft: "10px" }} type="primary">
+                          采集
+                        </Button>
+                      </Form.Item>
+                    ))}
+                  </>
+                );
+              }}
+            </Form.List>
+            <h3>初始拟合点</h3>
+            <Form.List name="points" initialValue={["", "", "", "", ""]}>
+              {(fields, { add, remove }) => {
+                console.log("%c Line:80 🥝 fields", "color:#93c0a4", fields);
+                return (
+                  <>
+                    {fields.map((field, index) => (
+                      <Form.Item
+                        label={`采集第${index + 1}个点`}
                         required={true}
                         key={field.key}
                       >
@@ -130,6 +175,46 @@ export default function Setting() {
       }
 
       case 3:
+        return (
+          <div className="q-flex">
+            <Module3D
+              className="q-mb-4 q-grow"
+              height={"calc( 100vh - 268px - 1em )"}
+            />
+            <div className="q-w-[400px]  q-ml-3 q-pl-2 ">
+              <Item
+                label="算法生成测点数量"
+                name="autoPointsNum"
+                rules={[{ required: true }]}
+                initialValue={40}
+              >
+                <InputNumber min={10} max={100} />
+              </Item>
+
+              <Item
+                label="xxx阈值"
+                name="autoPointsOfffset"
+                rules={[{ required: true }]}
+                initialValue={1}
+              >
+                <InputNumber min={0} />
+              </Item>
+              <div className="q-h-[600px] q-overflow-y-scroll">
+                {new Array(40)
+                  .fill(0)
+                  .map((_, index) => index + 1)
+                  .map((i) => {
+                    return (
+                      <div key={i}>
+                        ({i},{i + 1},{i + 2})
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+          </div>
+        );
+
       case 4: {
         return (
           <Module3D className="q-mb-4" height={"calc( 100vh - 268px - 1em )"} />
@@ -164,8 +249,8 @@ export default function Setting() {
         ]}
       />
 
-      <div className=" q-flex q-justify-center q-bg-white q-m-4 q-p-8">
-        <Form onFinish={next} className={step > 1 ? " q-w-full" : ""}>
+      <div className=" q-flex q-justify-center q-bg-white q-m-4 q-p-8 q-rounded-xl">
+        <Form onFinish={next} className={step > 2 ? " q-w-full" : ""}>
           {panel()}
 
           {step !== 0 && (

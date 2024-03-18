@@ -1,46 +1,19 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Html } from "@react-three/drei";
 import * as THREE from "three";
+import "./index.css";
 import "../utils";
+import { useMemo, useRef } from "react";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
-import { button, useControls } from "leva";
-import SerialMonitor from "@ridge18/web-serial-monitor";
+// import { button, useControls } from "leva";
 
-const serial = new SerialMonitor({ mode: "text", parseLines: true });
-
-const points = [];
+const pointsData = [];
 for (let i = 0; i < 10; i++) {
-  points.push(new THREE.Vector2(Math.sin(i * 0.2) * 3 + 5, (i - 5) * 2));
+  pointsData.push(new THREE.Vector2(Math.sin(i * 0.2) * 3 + 5, (i - 5) * 2));
 }
 
-const connectSerial = () => {
-  const handleSerialEvent = (ev) => {
-    console.log(ev.detail);
-  };
-  serial.addEventListener("serial-connected", handleSerialEvent);
-
-  serial.addEventListener("serial-disconnected", handleSerialEvent);
-
-  serial.addEventListener("serial-error", handleSerialEvent);
-
-  serial.addEventListener("serial-data", handleSerialEvent);
-
-  // This will open a browser dialog which prompts the user to select a serial device.
-  // If no device is selected, then a serial-error event is fired.
-  serial
-    .connect(19200)
-    .then(() => {
-      // connect at 57600 bauds rate.
-      serial.send("Hello serial\n");
-    })
-    .catch(() => {
-      console.log("Something went wrong...");
-    });
-
-  serial.disconnect();
-};
 function Box(props) {
   // This reference gives us direct access to the THREE.Mesh object
   // const ref = useRef()
@@ -61,7 +34,8 @@ function Box(props) {
     >
       {/* <boxGeometry args={[1, 1, 1]} /> */}
       {/* <cylinderGeometry args={[ 5, 5, 20, 32]} /> */}
-      <latheGeometry args={[points]} />
+      <latheGeometry args={[pointsData]} />
+      <points />
       <meshBasicMaterial
         color={"#00aec7"}
         side={THREE.DoubleSide}
@@ -70,6 +44,40 @@ function Box(props) {
       />
     </mesh>
   );
+}
+
+const vertices = new Float32Array([
+  -1.0,
+  -1.0,
+  1.0, // v0
+  1.0,
+  -1.0,
+  1.0, // v1
+  1.0,
+  1.0,
+  1.0, // v2
+
+  1.0,
+  1.0,
+  1.0, // v3
+  -1.0,
+  1.0,
+  1.0, // v4
+  -1.0,
+  -1.0,
+  1.0, // v5
+]);
+
+function PointsLabel(props: {
+  points: { label: string; position: THREE.Vector3 }[];
+}) {
+  return props?.points?.map((item) => {
+    return (
+      <Html position={item.position}>
+        <div className="q-w-20 relative">{item.label}</div>
+      </Html>
+    );
+  });
 }
 
 export default function Index(props: { className?: string; height: string }) {
@@ -120,8 +128,22 @@ export default function Index(props: { className?: string; height: string }) {
           decay={0}
           intensity={Math.PI}
         />
-
+        {/* <Html position={new THREE.Vector3(1, 0, 0)}>
+          <div className="q-w-20">第一个点</div>
+        </Html> */}
         <Box position={[0, 0, 0]} />
+        <PointsLabel
+          points={[
+            { label: "第1个点", position: new THREE.Vector3(1, 0, 0) },
+            { label: "第2个点", position: new THREE.Vector3(1, 1, 0) },
+            { label: "第2个点", position: new THREE.Vector3(1, 1, 1) },
+            { label: "第2个点", position: new THREE.Vector3(1, 0, 1) },
+            { label: "第2个点", position: new THREE.Vector3(0, 1, 0) },
+            { label: "第2个点", position: new THREE.Vector3(0, 0, 0) },
+            { label: "第2个点", position: new THREE.Vector3(0, 1, 1) },
+            { label: "第2个点", position: new THREE.Vector3(0, 0, 1) },
+          ]}
+        />
         <OrbitControls />
       </Canvas>
     </>
