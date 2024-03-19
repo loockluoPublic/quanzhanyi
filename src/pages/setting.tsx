@@ -13,6 +13,10 @@ import { DefaultOptionType } from "antd/es/select";
 import { useState } from "react";
 import Module3D from "./module3D";
 import Connect from "../components/ConnectDevice";
+import { getPoint } from "../components/commond";
+import PointsVector3 from "../components/PointVector3";
+import { useRecoilState } from "recoil";
+import { Data } from "../atom/globalState";
 
 const { Item } = Form;
 
@@ -30,19 +34,52 @@ const sdmOptions = [
 ];
 
 export default function Setting() {
-  const [step, setStep] = useState(3);
+  const [data, setData] = useRecoilState(Data);
+  const [step, setStep] = useState(2);
+  console.log("%c Line:34 🍌 step", "color:#ffdd4d", step);
+
+  const [form] = Form.useForm();
+
+  const pickPoint = (key: string, field: any) => {
+    console.log("%c Line:39 🎂 key", "color:#42b983", key, field);
+    const arr = form.getFieldValue(key);
+    console.log("%c Line:42 🌽 arr", "color:#42b983", arr);
+    getPoint().then((res) => {
+      console.log("%c Line:44 🥪 res", "color:#4fff4B", res);
+      arr[field.key] = res;
+      form.setFieldValue(key, [...arr]);
+    });
+  };
+
   const onChange = (value: number) => {
     setStep(value);
   };
 
   const next = () => {
+    switch (step) {
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+    }
+    const formValues = form.getFieldsValue();
+    setData({ ...data, ...formValues });
     setStep(step + 1);
   };
 
+  const getFromPoints = () => {
+    const { firstPoints, points } = form.getFieldsValue() ?? {};
+    console.log("%c Line:61 🥝 points", "color:#ffdd4d", points);
+    return [...(firstPoints ?? []), ...(points ?? [])];
+  };
   const panel = () => {
     switch (step) {
       case 0:
-        return <Connect onConnected={next} />;
+        return <Connect />;
 
       case 1: {
         return (
@@ -87,7 +124,6 @@ export default function Setting() {
             <h3>定位点</h3>
             <Form.List name="firstPoints" initialValue={["", ""]}>
               {(fields) => {
-                console.log("%c Line:80 🥝 fields", "color:#93c0a4", fields);
                 return (
                   <>
                     {fields.map((field, index) => (
@@ -98,18 +134,20 @@ export default function Setting() {
                       >
                         <Form.Item
                           {...field}
-                          validateTrigger={["onChange", "onBlur"]}
                           rules={[
                             {
                               required: true,
-                              whitespace: true,
                             },
                           ]}
                           noStyle
                         >
-                          <Input disabled style={{ width: "70%" }} />
+                          <PointsVector3 style={{ width: "70%" }} />
                         </Form.Item>
-                        <Button style={{ marginLeft: "10px" }} type="primary">
+                        <Button
+                          style={{ marginLeft: "10px" }}
+                          type="primary"
+                          onClick={() => pickPoint("firstPoints", field)}
+                        >
                           采集
                         </Button>
                       </Form.Item>
@@ -121,7 +159,6 @@ export default function Setting() {
             <h3>初始拟合点</h3>
             <Form.List name="points" initialValue={["", "", "", "", ""]}>
               {(fields, { add, remove }) => {
-                console.log("%c Line:80 🥝 fields", "color:#93c0a4", fields);
                 return (
                   <>
                     {fields.map((field, index) => (
@@ -132,18 +169,14 @@ export default function Setting() {
                       >
                         <Form.Item
                           {...field}
-                          validateTrigger={["onChange", "onBlur"]}
                           rules={[
                             {
                               required: true,
-                              whitespace: true,
-                              message:
-                                "Please input passenger's name or delete this field.",
                             },
                           ]}
                           noStyle
                         >
-                          <Input disabled style={{ width: "70%" }} />
+                          <PointsVector3 style={{ width: "70%" }} />
                         </Form.Item>
                         {fields.length > 5 ? (
                           <MinusCircleOutlined
@@ -152,7 +185,11 @@ export default function Setting() {
                             onClick={() => remove(field.name)}
                           />
                         ) : null}
-                        <Button style={{ marginLeft: "10px" }} type="primary">
+                        <Button
+                          style={{ marginLeft: "10px" }}
+                          type="primary"
+                          onClick={() => pickPoint("points", field)}
+                        >
                           采集
                         </Button>
                       </Form.Item>
@@ -200,16 +237,13 @@ export default function Setting() {
                 <InputNumber min={0} />
               </Item>
               <div className="q-h-[600px] q-overflow-y-scroll">
-                {new Array(40)
-                  .fill(0)
-                  .map((_, index) => index + 1)
-                  .map((i) => {
-                    return (
-                      <div key={i}>
-                        ({i},{i + 1},{i + 2})
-                      </div>
-                    );
-                  })}
+                {getFromPoints().map((value, i) => {
+                  return (
+                    <div key={i}>
+                      <PointsVector3 value={value} />
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -250,16 +284,24 @@ export default function Setting() {
       />
 
       <div className=" q-flex q-justify-center q-bg-white q-m-4 q-p-8 q-rounded-xl">
-        <Form onFinish={next} className={step > 2 ? " q-w-full" : ""}>
+        <Form
+          onFinish={next}
+          className={step > 2 ? " q-w-full" : ""}
+          form={form}
+        >
           {panel()}
-
-          {step !== 0 && (
+          <div className=" q-text-center">
+            <Button type="primary" htmlType="submit">
+              下一步
+            </Button>
+          </div>
+          {/* {step >= 0 && (
             <Item wrapperCol={{ offset: 10, span: 16 }}>
               <Button type="primary" htmlType="submit">
                 下一步
               </Button>
             </Item>
-          )}
+          )} */}
         </Form>
       </div>
     </>

@@ -3,7 +3,8 @@ import { OrbitControls, Html } from "@react-three/drei";
 import * as THREE from "three";
 import "./index.css";
 import "../utils";
-import { useMemo, useRef } from "react";
+import { useRecoilState } from "recoil";
+import { Data } from "../atom/globalState";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
@@ -81,6 +82,7 @@ function PointsLabel(props: {
 }
 
 export default function Index(props: { className?: string; height: string }) {
+  const [data, setData] = useRecoilState(Data);
   // const value = useControls({
   //   // aNumber: 0,
 
@@ -112,6 +114,15 @@ export default function Index(props: { className?: string; height: string }) {
 
   // return <div>测试</div>;
 
+  const points = [...(data?.firstPoints ?? []), ...(data?.points ?? [])]?.map?.(
+    (p, i) => {
+      return {
+        label: `第${i + 1}个点`,
+        position: p,
+      };
+    }
+  );
+
   return (
     <>
       <Canvas
@@ -132,18 +143,7 @@ export default function Index(props: { className?: string; height: string }) {
           <div className="q-w-20">第一个点</div>
         </Html> */}
         <Box position={[0, 0, 0]} />
-        <PointsLabel
-          points={[
-            { label: "第1个点", position: new THREE.Vector3(1, 0, 0) },
-            { label: "第2个点", position: new THREE.Vector3(1, 1, 0) },
-            { label: "第2个点", position: new THREE.Vector3(1, 1, 1) },
-            { label: "第2个点", position: new THREE.Vector3(1, 0, 1) },
-            { label: "第2个点", position: new THREE.Vector3(0, 1, 0) },
-            { label: "第2个点", position: new THREE.Vector3(0, 0, 0) },
-            { label: "第2个点", position: new THREE.Vector3(0, 1, 1) },
-            { label: "第2个点", position: new THREE.Vector3(0, 0, 1) },
-          ]}
-        />
+        <PointsLabel points={points} />
         <OrbitControls />
       </Canvas>
     </>
