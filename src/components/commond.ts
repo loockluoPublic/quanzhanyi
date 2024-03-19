@@ -2,6 +2,7 @@ import { serial } from "./ConnectDevice";
 import { Vector3 } from "three";
 
 const mock = new URLSearchParams(location.search).has("mock");
+
 export const sendText = (text): Promise<string> => {
   return new Promise((resolve) => {
     if (import.meta.env.DEV || mock) {
@@ -22,7 +23,6 @@ export const sendText = (text): Promise<string> => {
         "2107:2": "1.069995191213058,1.000012316348839",
       };
       resolve(mockData[text]);
-      console.log("%c Line:29 🍉 text", "color:#ea7e5c", text, mockData[text]);
       return;
     }
     const flag = setTimeout(() => {

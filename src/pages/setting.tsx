@@ -34,17 +34,14 @@ const sdmOptions = [
 
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
-  const [step, setStep] = useState(2);
-  console.log("%c Line:34 🍌 step", "color:#ffdd4d", step);
+  const [step, setStep] = useState(0);
 
   const [form] = Form.useForm();
 
   const pickPoint = (key: string, field: any) => {
-    console.log("%c Line:39 🎂 key", "color:#42b983", key, field);
     const arr = form.getFieldValue(key);
-    console.log("%c Line:42 🌽 arr", "color:#42b983", arr);
+
     getPoint().then((res) => {
-      console.log("%c Line:44 🥪 res", "color:#4fff4B", res);
       arr[field.key] = res;
       form.setFieldValue(key, [...arr]);
     });
@@ -55,16 +52,16 @@ export default function Setting() {
   };
 
   const next = () => {
-    switch (step) {
-      case 0:
-        break;
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-    }
+    // switch (step) {
+    //   case 0:
+    //     break;
+    //   case 1:
+    //     break;
+    //   case 2:
+    //     break;
+    //   case 3:
+    //     break;
+    // }
     const formValues = form.getFieldsValue();
     setData({ ...data, ...formValues });
     setStep(step + 1);
@@ -72,7 +69,6 @@ export default function Setting() {
 
   const getFromPoints = () => {
     const { firstPoints, points } = form.getFieldsValue() ?? {};
-    console.log("%c Line:61 🥝 points", "color:#ffdd4d", points);
     return [...(firstPoints ?? []), ...(points ?? [])];
   };
   const panel = () => {

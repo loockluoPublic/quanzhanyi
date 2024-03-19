@@ -9,7 +9,6 @@ export const serial = new SerialMonitor({ mode: "text", parseLines: true });
 
 export default function Connect() {
   const [deviceInfoData, setDeviceInfo] = useRecoilState(deviceInfo);
-  console.log("%c Line:12 🍬 DeviceInfo", "color:#f5ce50", deviceInfoData);
   return (
     <div className="q-mb-4 q-text-center">
       <table className="q-mb-4 ">
