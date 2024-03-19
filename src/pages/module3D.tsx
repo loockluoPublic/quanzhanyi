@@ -47,27 +47,27 @@ function Box(props) {
   );
 }
 
-const vertices = new Float32Array([
-  -1.0,
-  -1.0,
-  1.0, // v0
-  1.0,
-  -1.0,
-  1.0, // v1
-  1.0,
-  1.0,
-  1.0, // v2
+// const vertices = new Float32Array([
+//   -1.0,
+//   -1.0,
+//   1.0, // v0
+//   1.0,
+//   -1.0,
+//   1.0, // v1
+//   1.0,
+//   1.0,
+//   1.0, // v2
 
-  1.0,
-  1.0,
-  1.0, // v3
-  -1.0,
-  1.0,
-  1.0, // v4
-  -1.0,
-  -1.0,
-  1.0, // v5
-]);
+//   1.0,
+//   1.0,
+//   1.0, // v3
+//   -1.0,
+//   1.0,
+//   1.0, // v4
+//   -1.0,
+//   -1.0,
+//   1.0, // v5
+// ]);
 
 function PointsLabel(props: {
   points: { label: string; position: THREE.Vector3 }[];
@@ -83,6 +83,7 @@ function PointsLabel(props: {
 
 export default function Index(props: { className?: string; height: string }) {
   const [data, setData] = useRecoilState(Data);
+  console.log("%c Line:86 🍪 setData", "color:#4fff4B", setData);
   // const value = useControls({
   //   // aNumber: 0,
 
