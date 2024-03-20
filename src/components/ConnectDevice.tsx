@@ -2,9 +2,9 @@ import SerialMonitor from "@ridge18/web-serial-monitor";
 import { Button } from "antd";
 import { useRecoilState } from "recoil";
 import { deviceInfo } from "../atom/globalState";
-import * as commont from "./commond";
+import * as commond from "./commond";
 import { getDeviceInfo } from "./commond";
-(window as any).commond = commont;
+(window as any).commond = commond;
 export const serial = new SerialMonitor({ mode: "text", parseLines: true });
 
 export default function Connect() {
@@ -56,6 +56,34 @@ export default function Connect() {
         >
           连接设备
         </Button>
+      )}
+      {deviceInfoData && (
+        <div className="q-flex q-flex-col">
+          <Button
+            type="primary"
+            onClick={() => {
+              commond.goTo(0, 1.57);
+            }}
+          >
+            0, 90
+          </Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              commond.goTo(3.14, 1.57);
+            }}
+          >
+            180, 90
+          </Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              commond.goTo(6.28, 1.57);
+            }}
+          >
+            360, 90
+          </Button>
+        </div>
       )}
     </div>
   );

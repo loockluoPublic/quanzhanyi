@@ -102,6 +102,12 @@ export const getDeviceInfo = async () => {
     dInfo.SoftwareVersion = res.replace(/,/g, ".");
   });
 
+  // 设置当前位置为原点
+  await setOrigin();
+
+  // 设置模式，设置后才能采集点
+  await getStation();
+
   // // 获取当前时间
   // await sendText("5008:").then((res) => {
   //   console.log("%c Line:41 🧀 5008", "color:#ffdd4d", res);
