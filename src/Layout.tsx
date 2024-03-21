@@ -1,8 +1,8 @@
 import React, { PropsWithChildren } from "react";
 import type { MenuProps } from "antd";
-import { Layout, Menu, theme } from "antd";
+import { Layout, Menu } from "antd";
 import { BrowserRouter as Router, Routes } from "react-router-dom";
-const { Header, Content, Sider } = Layout;
+const { Header, Content } = Layout;
 
 const items1: MenuProps["items"] = [
   {

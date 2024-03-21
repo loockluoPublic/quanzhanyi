@@ -14,8 +14,9 @@
 #include "mycylderfit2_types.h"
 #include "pinv.h"
 #include "rt_nonfinite.h"
-#include "rt_nonfinite.h"
+#include <emscripten.h>
 #include <math.h>
+#include <stdio.h>
 #include <string.h>
 
 /* Function Definitions */
@@ -32,10 +33,37 @@
  *                double *XXX7
  * Return Type  : void
  */
+
+EMSCRIPTEN_KEEPALIVE
 void mycylderfit2(const double x[45], const double y[45], const double z[45],
                   double *XXX1, double *XXX2, double *XXX3, double *XXX4,
                   double *XXX5, double *XXX6, double *XXX7)
 {
+
+  printf("x : \n");
+
+  for (int i = 0; i < 10; i++) {
+    printf("%f  ", x[i]);
+  }
+  printf("\n");
+
+  printf("y : \n");
+  for (int i = 0; i < 10; i++) {
+    printf("%f  ", y[i]);
+  }
+  printf("\n");
+
+  printf("z : \n");
+  for (int i = 0; i < 10; i++) {
+    printf("%f  ", z[i]);
+  }
+  printf("\n");
+
+  printf("XXX1: %f \n", *XXX1);
+  printf("XXX2: %f \n", *XXX2);
+  printf("XXX3: %f \n", *XXX3);
+
+  printf("开始计算 \n");
   emxArray_real_T *Xnn;
   emxArray_real_T *YuanDu;
   double Bn[315];
@@ -490,6 +518,9 @@ void mycylderfit2(const double x[45], const double y[45], const double z[45],
   *XXX5 = Xnn->data[r1 + 4];
   *XXX6 = Xnn->data[r1 + 5];
   *XXX7 = Xnn->data[r1 + 6];
+
+  printf("结束计算： %f %f %f %f %f %f %f \n", *XXX1, *XXX2, *XXX3, *XXX4,
+         *XXX5, *XXX6, *XXX7);
   emxFree_real_T(&Xnn);
   emxFree_real_T(&YuanDu);
 }
