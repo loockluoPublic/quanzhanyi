@@ -9,6 +9,7 @@
 #include "G5P.h"
 #include "G5P_emxutil.h"
 #include "G5P_types.h"
+#include <emscripten.h>
 #include <math.h>
 
 /* Function Declarations */
@@ -200,6 +201,7 @@ static void c_binary_expand_op(emxArray_real_T *in1, const double in2[3],
  *                emxArray_real_T *Point
  * Return Type  : void
  */
+EMSCRIPTEN_KEEPALIVE
 void G5P(double t1, double t2, double num, emxArray_real_T *Point)
 {
   emxArray_real_T *theta;

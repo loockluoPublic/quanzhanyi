@@ -6,7 +6,7 @@ project(mycylinderfit2)
 
 set(ROOT /src)
 
-set(SRCDIR ${ROOT}/generate_unit_circle_with_normal_vector)
+set(SRCDIR ${ROOT}/G5P)
 
 set(EXECUTABLE_OUTPUT_PATH ${ROOT}/public)
 
@@ -43,7 +43,7 @@ include_directories(
     ${ROOT}/cSource/vision/export/include/vision
 )
 
-add_executable(mycylinderfit    ${SOURCES} "./main.c"   )
+add_executable(mycylinderfit    ${SOURCES}    )
 # # 生成静态库
 # add_library(mycylinderfit STATIC ${SOURCES})
 
