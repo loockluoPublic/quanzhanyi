@@ -9,6 +9,7 @@
 #include "generate_unit_circle_with_normal_vector.h"
 #include "generate_unit_circle_with_normal_vector_emxutil.h"
 #include "generate_unit_circle_with_normal_vector_types.h"
+#include <emscripten.h>
 #include <math.h>
 
 /* Function Definitions */
@@ -21,6 +22,7 @@
  *                emxArray_real_T *z_circle
  * Return Type  : void
  */
+EMSCRIPTEN_KEEPALIVE
 void generate_unit_circle_with_normal_vector(double t1, double t2, double num,
                                              emxArray_real_T *x_circle,
                                              emxArray_real_T *y_circle,

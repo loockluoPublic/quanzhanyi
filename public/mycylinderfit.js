@@ -1341,9 +1341,11 @@ var wasmImports = {
 };
 var wasmExports = createWasm();
 var ___wasm_call_ctors = createExportWrapper('__wasm_call_ctors');
-var _mycylderfit2 = Module['_mycylderfit2'] = createExportWrapper('mycylderfit2');
+var _generate_unit_circle_with_normal_vector = Module['_generate_unit_circle_with_normal_vector'] = createExportWrapper('generate_unit_circle_with_normal_vector');
 var _free = Module['_free'] = createExportWrapper('free');
 var _malloc = Module['_malloc'] = createExportWrapper('malloc');
+var _test = Module['_test'] = createExportWrapper('test');
+var _add = Module['_add'] = createExportWrapper('add');
 var _fflush = createExportWrapper('fflush');
 var _emscripten_stack_init = () => (_emscripten_stack_init = wasmExports['emscripten_stack_init'])();
 var _emscripten_stack_get_free = () => (_emscripten_stack_get_free = wasmExports['emscripten_stack_get_free'])();

@@ -10,6 +10,28 @@
 
 <body>
   <div id="root"></div>
+  <script type="text/javascript">
+    // 定义一个模块对象，重写print和printErr
+    var Module = {
+      print: function (text) {
+        // 用于处理标准输出
+        var element = document.getElementById('output');
+        element.innerHTML += text + "<br>";
+      },
+      printErr: function (text) {
+        // 用于处理标准错误输出
+        var element = document.getElementById('output');
+        element.innerHTML += 'Error: ' + text + "<br>";
+      },
+      onRuntimeInitialized: function () {
+        console.log("%c Line:27 🥓 onRuntimeInitialized", "color:#33a5ff", Module);
+        // 当Emscripten运行时初始化完成后，调用模块中的_main函数（如果存在）
+        // Module._main();
+      }
+    };
+  </script>
+
+  <script src="mycylinderfit.js"></script>
   <script type="module" src="/src/main.tsx"></script>
   <!-- <script type="module">
     import("./apb.js").then((module) => {
