@@ -1,1 +1,0 @@
-MODEL=generate_unit_circle_with_normal_vector
