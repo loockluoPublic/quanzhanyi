@@ -337,7 +337,7 @@ var wasmBinary;
 if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];legacyModuleProp('wasmBinary', 'wasmBinary');
 
 if (typeof WebAssembly != 'object') {
-  abort('no native wasm support detected');
+  err('no native wasm support detected');
 }
 
 // Wasm globals
@@ -806,10 +806,6 @@ function createWasm() {
     wasmMemory = wasmExports['memory'];
     
     assert(wasmMemory, 'memory not found in wasm exports');
-    // This assertion doesn't hold when emscripten is run in --post-link
-    // mode.
-    // TODO(sbc): Read INITIAL_MEMORY out of the wasm file in post-link mode.
-    //assert(wasmMemory.buffer.byteLength === 16777216);
     updateMemoryViews();
 
     addOnInit(wasmExports['__wasm_call_ctors']);

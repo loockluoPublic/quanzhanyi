@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2024 22:01:39
+ * C/C++ source code generated on  : 24-Mar-2024 23:35:55
  */
 
 /* Include Files */
@@ -12,7 +12,6 @@
 #include "QuanZhanYi_initialize.h"
 #include "QuanZhanYi_types.h"
 #include "rt_nonfinite.h"
-#include <emscripten.h>
 #include <math.h>
 
 /* Function Definitions */
@@ -25,7 +24,6 @@
  *                emxArray_real_T *z_circle1
  * Return Type  : void
  */
-EMSCRIPTEN_KEEPALIVE
 void generate_unit_circle_with_normal_vector(double t1, double t2, double num,
                                              emxArray_real_T *x_circle1,
                                              emxArray_real_T *y_circle1,
