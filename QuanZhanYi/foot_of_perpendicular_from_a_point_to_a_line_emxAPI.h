@@ -1,15 +1,15 @@
 /*
- * File: QuanZhanYi_emxAPI.h
+ * File: foot_of_perpendicular_from_a_point_to_a_line_emxAPI.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 24-Mar-2024 13:55:20
+ * C/C++ source code generated on  : 24-Mar-2024 17:37:00
  */
 
-#ifndef QUANZHANYI_EMXAPI_H
-#define QUANZHANYI_EMXAPI_H
+#ifndef FOOT_OF_PERPENDICULAR_FROM_A_POINT_TO_A_LINE_EMXAPI_H
+#define FOOT_OF_PERPENDICULAR_FROM_A_POINT_TO_A_LINE_EMXAPI_H
 
 /* Include Files */
-#include "QuanZhanYi_types.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -39,7 +39,7 @@ extern void emxInitArray_real_T(emxArray_real_T **pEmxArray, int numDimensions);
 
 #endif
 /*
- * File trailer for QuanZhanYi_emxAPI.h
+ * File trailer for foot_of_perpendicular_from_a_point_to_a_line_emxAPI.h
  *
  * [EOF]
  */

@@ -2,13 +2,13 @@
  * File: Three_Points_Initial_Rough_Cylindrical_Judgment.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 24-Mar-2024 13:55:20
+ * C/C++ source code generated on  : 24-Mar-2024 17:37:00
  */
 
 /* Include Files */
 #include "Three_Points_Initial_Rough_Cylindrical_Judgment.h"
-#include "QuanZhanYi_data.h"
-#include "QuanZhanYi_initialize.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_data.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_initialize.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 
@@ -40,8 +40,8 @@ void Three_Points_Initial_Rough_Cylindrical_Judgment(const double x[3],
   double b_y;
   double scale;
   double t;
-  if (!isInitialized_QuanZhanYi) {
-    QuanZhanYi_initialize();
+  if (!isInitialized_foot_of_perpendicular_from_a_point_to_a_line) {
+    foot_of_perpendicular_from_a_point_to_a_line_initialize();
   }
   N12_idx_0 = x[1] - x[0];
   N12_idx_1 = y[1] - y[0];

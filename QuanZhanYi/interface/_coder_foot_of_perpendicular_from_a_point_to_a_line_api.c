@@ -1,13 +1,13 @@
 /*
- * File: _coder_QuanZhanYi_api.c
+ * File: _coder_foot_of_perpendicular_from_a_point_to_a_line_api.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 24-Mar-2024 13:55:20
+ * C/C++ source code generated on  : 24-Mar-2024 17:37:00
  */
 
 /* Include Files */
-#include "_coder_QuanZhanYi_api.h"
-#include "_coder_QuanZhanYi_mex.h"
+#include "_coder_foot_of_perpendicular_from_a_point_to_a_line_api.h"
+#include "_coder_foot_of_perpendicular_from_a_point_to_a_line_mex.h"
 
 /* Variable Definitions */
 emlrtCTX emlrtRootTLSGlobal = NULL;
@@ -17,7 +17,7 @@ emlrtContext emlrtContextGlobal = {
     false,                                                /* bInitialized */
     131626U,                                              /* fVersionInfo */
     NULL,                                                 /* fErrorFunction */
-    "QuanZhanYi",                                         /* fFunctionName */
+    "foot_of_perpendicular_from_a_point_to_a_line",       /* fFunctionName */
     NULL,                                                 /* fRTCallStack */
     false,                                                /* bDebugMode */
     {2045744189U, 2170104910U, 2743257031U, 4284093946U}, /* fSigWrd */
@@ -371,61 +371,6 @@ static real_T i_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
 }
 
 /*
- * Arguments    : void
- * Return Type  : void
- */
-void QuanZhanYi_atexit(void)
-{
-  emlrtStack st = {
-      NULL, /* site */
-      NULL, /* tls */
-      NULL  /* prev */
-  };
-  mexFunctionCreateRootTLS();
-  st.tls = emlrtRootTLSGlobal;
-  emlrtEnterRtStackR2012b(&st);
-  emlrtLeaveRtStackR2012b(&st);
-  emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
-  QuanZhanYi_xil_terminate();
-  QuanZhanYi_xil_shutdown();
-  emlrtExitTimeCleanup(&emlrtContextGlobal);
-}
-
-/*
- * Arguments    : void
- * Return Type  : void
- */
-void QuanZhanYi_initialize(void)
-{
-  emlrtStack st = {
-      NULL, /* site */
-      NULL, /* tls */
-      NULL  /* prev */
-  };
-  mexFunctionCreateRootTLS();
-  st.tls = emlrtRootTLSGlobal;
-  emlrtClearAllocCountR2012b(&st, false, 0U, NULL);
-  emlrtEnterRtStackR2012b(&st);
-  emlrtFirstTimeR2012b(emlrtRootTLSGlobal);
-}
-
-/*
- * Arguments    : void
- * Return Type  : void
- */
-void QuanZhanYi_terminate(void)
-{
-  emlrtStack st = {
-      NULL, /* site */
-      NULL, /* tls */
-      NULL  /* prev */
-  };
-  st.tls = emlrtRootTLSGlobal;
-  emlrtLeaveRtStackR2012b(&st);
-  emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
-}
-
-/*
  * Arguments    : const mxArray * const prhs[7]
  *                const mxArray **plhs
  * Return Type  : void
@@ -571,43 +516,98 @@ void c_generate_unit_circle_with_nor(const mxArray *const prhs[3], int32_T nlhs,
       NULL, /* tls */
       NULL  /* prev */
   };
-  emxArray_real_T *x_circle;
-  emxArray_real_T *y_circle;
-  emxArray_real_T *z_circle;
+  emxArray_real_T *x_circle1;
+  emxArray_real_T *y_circle1;
+  emxArray_real_T *z_circle1;
   real_T num;
   real_T t1;
   real_T t2;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T(&st, &x_circle, 2);
-  emxInit_real_T(&st, &y_circle, 2);
-  emxInit_real_T(&st, &z_circle, 2);
+  emxInit_real_T(&st, &x_circle1, 2);
+  emxInit_real_T(&st, &y_circle1, 2);
+  emxInit_real_T(&st, &z_circle1, 2);
   /* Marshall function inputs */
   t1 = e_emlrt_marshallIn(&st, emlrtAliasP(prhs[0]), "t1");
   t2 = e_emlrt_marshallIn(&st, emlrtAliasP(prhs[1]), "t2");
   num = e_emlrt_marshallIn(&st, emlrtAliasP(prhs[2]), "num");
   /* Invoke the target function */
-  generate_unit_circle_with_normal_vector(t1, t2, num, x_circle, y_circle,
-                                          z_circle);
+  generate_unit_circle_with_normal_vector(t1, t2, num, x_circle1, y_circle1,
+                                          z_circle1);
   /* Marshall function outputs */
-  x_circle->canFreeData = false;
-  plhs[0] = b_emlrt_marshallOut(x_circle);
-  emxFree_real_T(&st, &x_circle);
+  x_circle1->canFreeData = false;
+  plhs[0] = b_emlrt_marshallOut(x_circle1);
+  emxFree_real_T(&st, &x_circle1);
   if (nlhs > 1) {
-    y_circle->canFreeData = false;
-    plhs[1] = b_emlrt_marshallOut(y_circle);
+    y_circle1->canFreeData = false;
+    plhs[1] = b_emlrt_marshallOut(y_circle1);
   }
-  emxFree_real_T(&st, &y_circle);
+  emxFree_real_T(&st, &y_circle1);
   if (nlhs > 2) {
-    z_circle->canFreeData = false;
-    plhs[2] = b_emlrt_marshallOut(z_circle);
+    z_circle1->canFreeData = false;
+    plhs[2] = b_emlrt_marshallOut(z_circle1);
   }
-  emxFree_real_T(&st, &z_circle);
+  emxFree_real_T(&st, &z_circle1);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 
 /*
- * File trailer for _coder_QuanZhanYi_api.c
+ * Arguments    : void
+ * Return Type  : void
+ */
+void foot_of_perpendicular_from_a_point_to_a_line_atexit(void)
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  mexFunctionCreateRootTLS();
+  st.tls = emlrtRootTLSGlobal;
+  emlrtEnterRtStackR2012b(&st);
+  emlrtLeaveRtStackR2012b(&st);
+  emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
+  foot_of_perpendicular_from_a_point_to_a_line_xil_terminate();
+  foot_of_perpendicular_from_a_point_to_a_line_xil_shutdown();
+  emlrtExitTimeCleanup(&emlrtContextGlobal);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+void foot_of_perpendicular_from_a_point_to_a_line_initialize(void)
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  mexFunctionCreateRootTLS();
+  st.tls = emlrtRootTLSGlobal;
+  emlrtClearAllocCountR2012b(&st, false, 0U, NULL);
+  emlrtEnterRtStackR2012b(&st);
+  emlrtFirstTimeR2012b(emlrtRootTLSGlobal);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+void foot_of_perpendicular_from_a_point_to_a_line_terminate(void)
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  st.tls = emlrtRootTLSGlobal;
+  emlrtLeaveRtStackR2012b(&st);
+  emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
+}
+
+/*
+ * File trailer for _coder_foot_of_perpendicular_from_a_point_to_a_line_api.c
  *
  * [EOF]
  */

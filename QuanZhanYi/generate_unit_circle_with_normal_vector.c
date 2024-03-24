@@ -2,15 +2,15 @@
  * File: generate_unit_circle_with_normal_vector.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 24-Mar-2024 13:55:20
+ * C/C++ source code generated on  : 24-Mar-2024 17:37:00
  */
 
 /* Include Files */
 #include "generate_unit_circle_with_normal_vector.h"
-#include "QuanZhanYi_data.h"
-#include "QuanZhanYi_emxutil.h"
-#include "QuanZhanYi_initialize.h"
-#include "QuanZhanYi_types.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_data.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_emxutil.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_initialize.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_types.h"
 #include "rt_nonfinite.h"
 #include <emscripten.h>
 #include <math.h>
@@ -147,7 +147,6 @@ static void binary_expand_op(emxArray_real_T *in1, const double in2[3],
  *                const double in4[3]
  * Return Type  : void
  */
-EMSCRIPTEN_KEEPALIVE
 static void c_binary_expand_op(emxArray_real_T *in1, const double in2[3],
                                const emxArray_real_T *in3, const double in4[3])
 {
@@ -202,19 +201,21 @@ static void c_binary_expand_op(emxArray_real_T *in1, const double in2[3],
  * Arguments    : double t1
  *                double t2
  *                double num
- *                emxArray_real_T *x_circle
- *                emxArray_real_T *y_circle
- *                emxArray_real_T *z_circle
+ *                emxArray_real_T *x_circle1
+ *                emxArray_real_T *y_circle1
+ *                emxArray_real_T *z_circle1
  * Return Type  : void
  */
 EMSCRIPTEN_KEEPALIVE
 void generate_unit_circle_with_normal_vector(double t1, double t2, double num,
-                                             emxArray_real_T *x_circle,
-                                             emxArray_real_T *y_circle,
-                                             emxArray_real_T *z_circle)
+                                             emxArray_real_T *x_circle1,
+                                             emxArray_real_T *y_circle1,
+                                             emxArray_real_T *z_circle1)
 {
-  emxArray_real_T *a;
   emxArray_real_T *theta;
+  emxArray_real_T *x_circle;
+  emxArray_real_T *y_circle;
+  emxArray_real_T *z_circle;
   double u[3];
   double v[3];
   double absxk;
@@ -224,14 +225,15 @@ void generate_unit_circle_with_normal_vector(double t1, double t2, double num,
   double normal_vector_idx_2;
   double scale;
   double t;
-  double *a_data;
   double *theta_data;
   double *x_circle_data;
+  double *y_circle_data;
+  double *z_circle_data;
   int i;
   int k;
   int nx;
-  if (!isInitialized_QuanZhanYi) {
-    QuanZhanYi_initialize();
+  if (!isInitialized_foot_of_perpendicular_from_a_point_to_a_line) {
+    foot_of_perpendicular_from_a_point_to_a_line_initialize();
   }
   delta1 = cos(t1);
   /*  定义法向量 */
@@ -357,6 +359,7 @@ void generate_unit_circle_with_normal_vector(double t1, double t2, double num,
     t = absxk / scale;
     delta1 += t * t;
   }
+  emxInit_real_T(&x_circle, 2);
   delta1 = scale * sqrt(delta1);
   v[0] /= delta1;
   v[1] /= delta1;
@@ -380,83 +383,85 @@ void generate_unit_circle_with_normal_vector(double t1, double t2, double num,
   for (k = 0; k < nx; k++) {
     x_circle_data[k] = cos(x_circle_data[k]);
   }
-  emxInit_real_T(&a, 2);
-  i = a->size[0] * a->size[1];
-  a->size[0] = 1;
-  a->size[1] = theta->size[1];
-  emxEnsureCapacity_real_T(a, i);
-  a_data = a->data;
+  emxInit_real_T(&z_circle, 2);
+  i = z_circle->size[0] * z_circle->size[1];
+  z_circle->size[0] = 1;
+  z_circle->size[1] = theta->size[1];
+  emxEnsureCapacity_real_T(z_circle, i);
+  z_circle_data = z_circle->data;
   nx = theta->size[1];
   for (i = 0; i < nx; i++) {
-    a_data[i] = theta_data[i];
+    z_circle_data[i] = theta_data[i];
   }
   nx = theta->size[1];
   for (k = 0; k < nx; k++) {
-    a_data[k] = sin(a_data[k]);
+    z_circle_data[k] = sin(z_circle_data[k]);
   }
-  if (x_circle->size[1] == a->size[1]) {
+  if (x_circle->size[1] == z_circle->size[1]) {
     nx = x_circle->size[1] - 1;
     i = x_circle->size[0] * x_circle->size[1];
     x_circle->size[0] = 1;
     emxEnsureCapacity_real_T(x_circle, i);
     x_circle_data = x_circle->data;
     for (i = 0; i <= nx; i++) {
-      x_circle_data[i] = x_circle_data[i] * v[0] + a_data[i] * u[0];
+      x_circle_data[i] = x_circle_data[i] * v[0] + z_circle_data[i] * u[0];
     }
   } else {
-    c_binary_expand_op(x_circle, v, a, u);
+    c_binary_expand_op(x_circle, v, z_circle, u);
+    x_circle_data = x_circle->data;
   }
+  emxInit_real_T(&y_circle, 2);
   i = y_circle->size[0] * y_circle->size[1];
   y_circle->size[0] = 1;
   y_circle->size[1] = theta->size[1];
   emxEnsureCapacity_real_T(y_circle, i);
-  x_circle_data = y_circle->data;
+  y_circle_data = y_circle->data;
   nx = theta->size[1];
   for (i = 0; i < nx; i++) {
-    x_circle_data[i] = theta_data[i];
+    y_circle_data[i] = theta_data[i];
   }
   nx = theta->size[1];
   for (k = 0; k < nx; k++) {
-    x_circle_data[k] = cos(x_circle_data[k]);
+    y_circle_data[k] = cos(y_circle_data[k]);
   }
-  i = a->size[0] * a->size[1];
-  a->size[0] = 1;
-  a->size[1] = theta->size[1];
-  emxEnsureCapacity_real_T(a, i);
-  a_data = a->data;
-  nx = theta->size[1];
-  for (i = 0; i < nx; i++) {
-    a_data[i] = theta_data[i];
-  }
-  nx = theta->size[1];
-  for (k = 0; k < nx; k++) {
-    a_data[k] = sin(a_data[k]);
-  }
-  if (y_circle->size[1] == a->size[1]) {
-    nx = y_circle->size[1] - 1;
-    i = y_circle->size[0] * y_circle->size[1];
-    y_circle->size[0] = 1;
-    emxEnsureCapacity_real_T(y_circle, i);
-    x_circle_data = y_circle->data;
-    for (i = 0; i <= nx; i++) {
-      x_circle_data[i] = x_circle_data[i] * v[1] + a_data[i] * u[1];
-    }
-  } else {
-    b_binary_expand_op(y_circle, v, a, u);
-  }
-  emxFree_real_T(&a);
   i = z_circle->size[0] * z_circle->size[1];
   z_circle->size[0] = 1;
   z_circle->size[1] = theta->size[1];
   emxEnsureCapacity_real_T(z_circle, i);
-  x_circle_data = z_circle->data;
+  z_circle_data = z_circle->data;
   nx = theta->size[1];
   for (i = 0; i < nx; i++) {
-    x_circle_data[i] = theta_data[i];
+    z_circle_data[i] = theta_data[i];
   }
   nx = theta->size[1];
   for (k = 0; k < nx; k++) {
-    x_circle_data[k] = cos(x_circle_data[k]);
+    z_circle_data[k] = sin(z_circle_data[k]);
+  }
+  if (y_circle->size[1] == z_circle->size[1]) {
+    nx = y_circle->size[1] - 1;
+    i = y_circle->size[0] * y_circle->size[1];
+    y_circle->size[0] = 1;
+    emxEnsureCapacity_real_T(y_circle, i);
+    y_circle_data = y_circle->data;
+    for (i = 0; i <= nx; i++) {
+      y_circle_data[i] = y_circle_data[i] * v[1] + z_circle_data[i] * u[1];
+    }
+  } else {
+    b_binary_expand_op(y_circle, v, z_circle, u);
+    y_circle_data = y_circle->data;
+  }
+  i = z_circle->size[0] * z_circle->size[1];
+  z_circle->size[0] = 1;
+  z_circle->size[1] = theta->size[1];
+  emxEnsureCapacity_real_T(z_circle, i);
+  z_circle_data = z_circle->data;
+  nx = theta->size[1];
+  for (i = 0; i < nx; i++) {
+    z_circle_data[i] = theta_data[i];
+  }
+  nx = theta->size[1];
+  for (k = 0; k < nx; k++) {
+    z_circle_data[k] = cos(z_circle_data[k]);
   }
   nx = theta->size[1];
   for (k = 0; k < nx; k++) {
@@ -467,35 +472,57 @@ void generate_unit_circle_with_normal_vector(double t1, double t2, double num,
     i = z_circle->size[0] * z_circle->size[1];
     z_circle->size[0] = 1;
     emxEnsureCapacity_real_T(z_circle, i);
-    x_circle_data = z_circle->data;
+    z_circle_data = z_circle->data;
     for (i = 0; i <= nx; i++) {
-      x_circle_data[i] = x_circle_data[i] * v[2] + theta_data[i] * u[2];
+      z_circle_data[i] = z_circle_data[i] * v[2] + theta_data[i] * u[2];
     }
   } else {
     binary_expand_op(z_circle, v, theta, u);
+    z_circle_data = z_circle->data;
   }
   emxFree_real_T(&theta);
-  i = x_circle->size[0] * x_circle->size[1];
   if (x_circle->size[1] - 1 < 1) {
-    x_circle->size[1] = 0;
+    nx = 0;
   } else {
-    x_circle->size[1]--;
+    nx = x_circle->size[1] - 1;
   }
-  emxEnsureCapacity_real_T(x_circle, i);
-  i = y_circle->size[0] * y_circle->size[1];
+  i = x_circle1->size[0] * x_circle1->size[1];
+  x_circle1->size[0] = 1;
+  x_circle1->size[1] = nx;
+  emxEnsureCapacity_real_T(x_circle1, i);
+  theta_data = x_circle1->data;
+  for (i = 0; i < nx; i++) {
+    theta_data[i] = x_circle_data[i];
+  }
+  emxFree_real_T(&x_circle);
   if (y_circle->size[1] - 1 < 1) {
-    y_circle->size[1] = 0;
+    nx = 0;
   } else {
-    y_circle->size[1]--;
+    nx = y_circle->size[1] - 1;
   }
-  emxEnsureCapacity_real_T(y_circle, i);
-  i = z_circle->size[0] * z_circle->size[1];
+  i = y_circle1->size[0] * y_circle1->size[1];
+  y_circle1->size[0] = 1;
+  y_circle1->size[1] = nx;
+  emxEnsureCapacity_real_T(y_circle1, i);
+  theta_data = y_circle1->data;
+  for (i = 0; i < nx; i++) {
+    theta_data[i] = y_circle_data[i];
+  }
+  emxFree_real_T(&y_circle);
   if (z_circle->size[1] - 1 < 1) {
-    z_circle->size[1] = 0;
+    nx = 0;
   } else {
-    z_circle->size[1]--;
+    nx = z_circle->size[1] - 1;
   }
-  emxEnsureCapacity_real_T(z_circle, i);
+  i = z_circle1->size[0] * z_circle1->size[1];
+  z_circle1->size[0] = 1;
+  z_circle1->size[1] = nx;
+  emxEnsureCapacity_real_T(z_circle1, i);
+  theta_data = z_circle1->data;
+  for (i = 0; i < nx; i++) {
+    theta_data[i] = z_circle_data[i];
+  }
+  emxFree_real_T(&z_circle);
 }
 
 /*
