@@ -15,10 +15,10 @@
 #include "generate_unit_circle_with_normal_vector.h"
 #include "mean.h"
 #include "nchoosek.h"
-#include "rt_nonfinite.h"
 #include "rt_defines.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <stdio.h>
 
 /* Function Declarations */
 static double rt_atan2d_snf(double u0, double u1);
@@ -80,6 +80,9 @@ void Generate_multi_layered_measurement_points(
     const emxArray_real_T *z, double num, double laynum, const double P3[3],
     const double P4[3], emxArray_real_T *Point_test)
 {
+
+  printf("收到的 num %f", num);
+  printf("收到的 num %f \n", num);
   emxArray_real_T *Layer;
   emxArray_real_T *S;
   emxArray_real_T *XCenter;
