@@ -2,8 +2,8 @@ import EmxArray_real_T, { pickCol } from "./class/EmxArray_real_T";
 import { data, ev, p3array, p4array } from "./mockData";
 
 const {
-  _generate_unit_circle_with_normal_vector,
-  _Generate_multi_layered_measurement_points,
+  _generateUnitCircleWithNormalVector,
+  _GenerateMultiLayeredMeasurementPoints,
 } = (window as any).Module;
 
 const init = () => {
@@ -29,7 +29,7 @@ const init = () => {
   const x = new EmxArray_real_T(1, 9);
   const y = new EmxArray_real_T(1, 9);
   const z = new EmxArray_real_T(1, 9);
-  _generate_unit_circle_with_normal_vector(
+  _generateUnitCircleWithNormalVector(
     Math.PI / 3,
     Math.PI / 4,
     6,
@@ -54,9 +54,9 @@ const init = () => {
   const p4 = new EmxArray_real_T(p4array[i]);
   const resultPoints = new EmxArray_real_T(3, 15);
 
-  console.log("%c Line:76 🍫", "color:#7f2b82", resultPoints.toJSON());
+  // console.log("%c Line:76 🍫", "color:#7f2b82", resultPoints.toJSON());
 
-  const res = _Generate_multi_layered_measurement_points(
+  _GenerateMultiLayeredMeasurementPoints(
     x2.ptr,
     y2.ptr,
     z2.ptr,
@@ -66,7 +66,7 @@ const init = () => {
     p4.arrayPtr,
     resultPoints.ptr
   );
-  console.log("%c Line:55 🍷 res", "color:#ed9ec7", res);
+  // console.log("%c Line:55 🍷 res", "color:#ed9ec7", res);
   // // console.log("%c Line:67 🍊 res", "color:#fca650", res);
   // // const numDimensions = callTest((window as any).Module, a, data, size);
   // // console.log("%c Line:64 🥤 numDimensions", "color:#ffdd4d", numDimensions);
@@ -79,12 +79,15 @@ const init = () => {
   // );
   // console.log("%c Line:51 🥪 de112", "color:#ffdd4d", res);
 
-  console.log("x,y,z:", x2.toJSON(), y2.toJSON(), z2.toJSON());
+  console.log("x,y,z:");
+  console.table([x2.toJSON(), y2.toJSON(), z2.toJSON()]);
 
-  console.log("p3,p4:", p3.toJSON(), p4.toJSON());
+  console.log("p3,p4:");
+  console.table([p3.toJSON(), p4.toJSON()]);
   console.log("num,laynum:", 5, 3);
 
-  console.log("%c Line:76 🍫", "color:#7f2b82", resultPoints.toJSON());
+  console.log("%c Line:76 🍫 结果：", "color:#7f2b82");
+  console.table(resultPoints.toJSON());
 
   // const x22 = new EmxArray_real_T(pickCol(data[i], 0).slice(0, 3));
   // const y22 = new EmxArray_real_T(pickCol(data[i], 1).slice(0, 3));
