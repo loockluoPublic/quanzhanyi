@@ -19,19 +19,19 @@ void GenerateMultiLayeredMeasurementPoints(
     const emxArray_real_T *z, double num, double laynum, const double P3[3],
     const double P4[3], emxArray_real_T *Point_test)
 {
-    printf("daas %f", num);
+    printf("daas %f \n", num);
     Generate_multi_layered_measurement_points(x, y, z, num, laynum, P3, P4, Point_test);
 }
 
 EMSCRIPTEN_KEEPALIVE
 void test(int i)
 {
-    printf("测试 %d", i);
+    printf("测试 %d \n", i);
 }
 
 int main()
 {
-    printf("run main");
+    printf("run main \n");
     test(1);
 
     return 0;
