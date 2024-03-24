@@ -18,6 +18,7 @@
 #include "rt_nonfinite.h"
 #include <emscripten.h>
 #include <math.h>
+#include <stdio.h>
 
 /* Function Declarations */
 static double rt_atan2d_snf(double u0, double u1);
@@ -98,11 +99,18 @@ static double rt_roundd_snf(double u)
  * Return Type  : void
  */
 EMSCRIPTEN_KEEPALIVE
-void Generate_multi_layered_measurement_points(
+double Generate_multi_layered_measurement_points(
     const emxArray_real_T *x, const emxArray_real_T *y,
     const emxArray_real_T *z, double num, double laynum, const double P3[3],
     const double P4[3], emxArray_real_T *Point_test)
 {
+
+  printf("num = %f", num);
+  printf("laynum = %f", laynum);
+  printf("P3 = %f", P3[0]);
+
+  // return x->data[0];
+
   emxArray_real_T *Layer;
   emxArray_real_T *Point_testx;
   emxArray_real_T *Point_testy;
@@ -361,6 +369,7 @@ void Generate_multi_layered_measurement_points(
   N23_idx_1 = mean(temp);
   YCenterMean = mean(YCenter);
   ZCenterMean = mean(ZCenter);
+  return ZCenterMean;
   if (S->size[1] == 0) {
     N12_idx_0 = 0.0;
     N12_idx_1 = 0.0;

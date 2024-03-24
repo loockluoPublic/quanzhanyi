@@ -10,7 +10,7 @@ set(SRCDIR ${ROOT}/QuanZhanYi)
 
 set(EXECUTABLE_OUTPUT_PATH ${ROOT}/public)
 
-set(CMAKE_EXECUTABLE_SUFFIX ".js")
+set(CMAKE_EXECUTABLE_SUFFIX ".html")
 # 设置编译参数
 # set(CMAKE_CXX_FLAGS "-s EXTRA_EXPORTED_RUNTIME_METHODS=['addFunction']")
 set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -s EXPORTED_FUNCTIONS=['getValue','setValue','setValue','_malloc','_free'] -s EXTRA_EXPORTED_RUNTIME_METHODS=['ccall']")

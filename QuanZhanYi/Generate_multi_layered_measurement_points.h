@@ -19,7 +19,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void Generate_multi_layered_measurement_points(
+extern double Generate_multi_layered_measurement_points(
     const emxArray_real_T *x, const emxArray_real_T *y,
     const emxArray_real_T *z, double num, double laynum, const double P3[3],
     const double P4[3], emxArray_real_T *Point_test);

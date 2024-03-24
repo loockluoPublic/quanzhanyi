@@ -10,17 +10,31 @@ struct emxArray_real_T {
 
 const emModule = (window as any).Module;
 export default class EmxArray_real_T {
+  /**
+   * @description 结构体的指针
+   * @memberof EmxArray_real_T
+   */
   ptr: number;
   // 多维数组平铺后的一维数组
   #arrayFlat: number[] = [];
-  #dataPtr: number;
+  /**
+   * @description 分配的数组指针
+   * @memberof EmxArray_real_T
+   */
+  arrayPtr: number;
 
   // n*m维度的 矩阵
   #size: [number, number];
   #sizePtr: number;
 
-  constructor(m: number[][] | number[] | number, n?: number) {
-    if (typeof m === "number" && typeof n === "number") {
+  /**
+   * 创建对象
+   * @param m 一维数组，二维数组，二维数组的宽度
+   * @param n 一维数组的长度
+   * @memberof EmxArray_real_T
+   */
+  constructor(m: number[][] | number[] | number, n: number = 1) {
+    if (typeof m === "number") {
       this.#arrayFlat = new Array(m * n).fill(0);
       this.#initSize(m, n);
       return this.#init();
@@ -49,13 +63,13 @@ export default class EmxArray_real_T {
     var emxArrayPtr = emModule._malloc(24);
 
     // Allocate and set data pointer
-    this.#dataPtr = emModule._malloc(
+    this.arrayPtr = emModule._malloc(
       arrayF64.length * Float64Array.BYTES_PER_ELEMENT
     ); // 8 bytes per double
 
     emModule.HEAPF64.set(
       arrayF64,
-      this.#dataPtr / Float64Array.BYTES_PER_ELEMENT
+      this.arrayPtr / Float64Array.BYTES_PER_ELEMENT
     );
 
     emModule.HEAP32.set(
@@ -66,7 +80,7 @@ export default class EmxArray_real_T {
     // 设置一个可移动的指针，让他等于初始地址
     let dynamicPtr = emxArrayPtr;
     // this.#dataPtr  是一个指针，占据8个字节（8*8=64位）。
-    emModule.setValue(dynamicPtr, this.#dataPtr, "*");
+    emModule.setValue(dynamicPtr, this.arrayPtr, "*");
 
     // 64 位电脑占用  指针所占用的内存大小为 64 bit 即 8 bytes
     dynamicPtr += Float64Array.BYTES_PER_ELEMENT;
@@ -110,8 +124,6 @@ export default class EmxArray_real_T {
 
     const [m, n] = this.#size;
 
-    console.log("%c Line:114 🥕 m, n", "color:#f5ce50", m, n);
-
     if (m > 1 && n > 1) {
       const res = [];
       for (let index = 0; index < data.length; index += m) {
@@ -135,7 +147,7 @@ export default class EmxArray_real_T {
 
   free() {
     // 首先，释放data数组的内存
-    emModule._free(this.#dataPtr);
+    emModule._free(this.arrayPtr);
 
     // 然后，释放size数组的内存
     emModule._free(this.#sizePtr);
@@ -145,7 +157,21 @@ export default class EmxArray_real_T {
 
     // 清理类实例中的指针，以防止悬挂指针（虽然这不是必需的，但是是个好习惯）
     this.ptr = null;
-    this.#dataPtr = null;
+    this.arrayPtr = null;
     this.#sizePtr = null;
   }
 }
+
+/**
+ * 从二维数组中提取某列
+ * @param array
+ * @param index
+ * @returns
+ */
+export const pickCol = (array: number[][], index: number) => {
+  const res = [];
+  for (const row of array) {
+    res.push(row[index]);
+  }
+  return res;
+};
