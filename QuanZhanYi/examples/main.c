@@ -1,8 +1,8 @@
 /*
  * File: main.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 24-Mar-2024 17:37:00
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 24-Mar-2024 21:46:36
  */
 
 /*************************************************************************/
@@ -33,11 +33,11 @@
 /* Include Files */
 #include "main.h"
 #include "Generate_multi_layered_measurement_points.h"
+#include "QuanZhanYi_emxAPI.h"
+#include "QuanZhanYi_terminate.h"
+#include "QuanZhanYi_types.h"
 #include "Three_Points_Initial_Rough_Cylindrical_Judgment.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
-#include "foot_of_perpendicular_from_a_point_to_a_line_emxAPI.h"
-#include "foot_of_perpendicular_from_a_point_to_a_line_terminate.h"
-#include "foot_of_perpendicular_from_a_point_to_a_line_types.h"
 #include "generate_unit_circle_with_normal_vector.h"
 #include "rt_nonfinite.h"
 
@@ -79,18 +79,16 @@ Change this value to the value that the application requires. */
 static emxArray_real_T *argInit_Unboundedx1_real_T(void)
 {
   emxArray_real_T *result;
-  double *result_data;
   const int i = 2;
   int idx0;
   /* Set the size of the array.
 Change this size to the value that the application requires. */
   result = emxCreateND_real_T(1, &i);
-  result_data = result->data;
   /* Loop over the array to initialize each element. */
   for (idx0 = 0; idx0 < result->size[0U]; idx0++) {
     /* Set the value of the array element.
 Change this value to the value that the application requires. */
-    result_data[idx0] = argInit_real_T();
+    result->data[idx0] = argInit_real_T();
   }
   return result;
 }
@@ -144,8 +142,10 @@ static void c_main_Generate_multi_layered_m(void)
  */
 static void c_main_Three_Points_Initial_Rou(void)
 {
-  double S[3];
   double x_tmp[3];
+  double S1;
+  double S2;
+  double S3;
   double b_y0;
   double x0;
   double z0;
@@ -156,8 +156,8 @@ static void c_main_Three_Points_Initial_Rou(void)
   /* Initialize function input argument 'y'. */
   /* Initialize function input argument 'z'. */
   /* Call the entry-point 'Three_Points_Initial_Rough_Cylindrical_Judgment'. */
-  Three_Points_Initial_Rough_Cylindrical_Judgment(x_tmp, x_tmp, x_tmp, S, &x0,
-                                                  &b_y0, &z0);
+  Three_Points_Initial_Rough_Cylindrical_Judgment(x_tmp, x_tmp, x_tmp, &S1, &S2,
+                                                  &S3, &x0, &b_y0, &z0);
 }
 
 /*
@@ -224,7 +224,7 @@ You can call entry-point functions multiple times. */
   c_main_Three_Points_Initial_Rou();
   /* Terminate the application.
 You do not need to do this more than one time. */
-  foot_of_perpendicular_from_a_point_to_a_line_terminate();
+  QuanZhanYi_terminate();
   return 0;
 }
 

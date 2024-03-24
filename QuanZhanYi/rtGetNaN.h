@@ -1,8 +1,8 @@
 /*
  * File: rtGetNaN.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 24-Mar-2024 17:37:00
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 24-Mar-2024 21:46:36
  */
 
 #ifndef RTGETNAN_H

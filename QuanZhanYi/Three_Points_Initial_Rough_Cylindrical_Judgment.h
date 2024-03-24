@@ -1,8 +1,8 @@
 /*
  * File: Three_Points_Initial_Rough_Cylindrical_Judgment.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 24-Mar-2024 17:37:00
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 24-Mar-2024 21:46:36
  */
 
 #ifndef THREE_POINTS_INITIAL_ROUGH_CYLINDRICAL_JUDGMENT_H
@@ -19,8 +19,8 @@ extern "C" {
 
 /* Function Declarations */
 extern void Three_Points_Initial_Rough_Cylindrical_Judgment(
-    const double x[3], const double y[3], const double z[3], double S[3],
-    double *x0, double *b_y0, double *z0);
+    const double x[3], const double y[3], const double z[3], double *S1,
+    double *S2, double *S3, double *x0, double *b_y0, double *z0);
 
 #ifdef __cplusplus
 }
