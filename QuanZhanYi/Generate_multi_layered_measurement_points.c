@@ -2,7 +2,7 @@
  * File: Generate_multi_layered_measurement_points.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2024 21:46:36
+ * C/C++ source code generated on  : 24-Mar-2024 22:01:39
  */
 
 /* Include Files */
@@ -82,9 +82,6 @@ void Generate_multi_layered_measurement_points(
     const double P4[3], emxArray_real_T *Point_test)
 {
   emxArray_real_T *Layer;
-  emxArray_real_T *Point_testx;
-  emxArray_real_T *Point_testy;
-  emxArray_real_T *Point_testz;
   emxArray_real_T *S;
   emxArray_real_T *XCenter;
   emxArray_real_T *YCenter;
@@ -109,16 +106,20 @@ void Generate_multi_layered_measurement_points(
   double ZCenterMean;
   double absxk;
   double b_N12_tmp;
-  double b_y;
   double c_N12_tmp;
   double d;
   double d1;
   double d_N12_tmp;
+  double e_N12_tmp;
   double scale;
   double t;
   int comb[3];
+  int b_loop_ub;
+  int c_loop_ub;
   int combj;
+  int i;
   int icomb;
+  int loop_ub;
   int nblocks;
   int nmkpi;
   int nrows;
@@ -132,23 +133,23 @@ void Generate_multi_layered_measurement_points(
     temp->size[0] = 1;
     temp->size[1] = 0;
   } else {
-    nblocks = temp->size[0] * temp->size[1];
+    i = temp->size[0] * temp->size[1];
     temp->size[0] = 1;
     temp->size[1] = x->size[0];
-    emxEnsureCapacity_real_T(temp, nblocks);
+    emxEnsureCapacity_real_T(temp, i);
     icomb = x->size[0] - 1;
-    for (nblocks = 0; nblocks <= icomb; nblocks++) {
-      temp->data[nblocks] = (double)nblocks + 1.0;
+    for (i = 0; i <= icomb; i++) {
+      temp->data[i] = (double)i + 1.0;
     }
   }
   emxInit_real_T(&order, 2);
   if (temp->size[1] == 1) {
     u = (unsigned int)temp->data[0];
     if (3U <= u) {
-      nblocks = order->size[0] * order->size[1];
+      i = order->size[0] * order->size[1];
       order->size[0] = 1;
       order->size[1] = 1;
-      emxEnsureCapacity_real_T(order, nblocks);
+      emxEnsureCapacity_real_T(order, i);
       order->data[0] = nCk(u, 3.0);
     }
   } else if (3 > temp->size[1]) {
@@ -156,10 +157,10 @@ void Generate_multi_layered_measurement_points(
     order->size[1] = 3;
   } else {
     nrows = (int)floor(nCk(temp->size[1], 3.0));
-    nblocks = order->size[0] * order->size[1];
+    i = order->size[0] * order->size[1];
     order->size[0] = nrows;
     order->size[1] = 3;
-    emxEnsureCapacity_real_T(order, nblocks);
+    emxEnsureCapacity_real_T(order, i);
     comb[0] = 1;
     comb[1] = 2;
     comb[2] = 3;
@@ -175,8 +176,8 @@ void Generate_multi_layered_measurement_points(
         combj = comb[icomb] + 1;
         comb[icomb]++;
         if (nblocks + 1 < nmkpi) {
-          nblocks = icomb + 2;
-          for (icomb = nblocks; icomb < 4; icomb++) {
+          i = icomb + 2;
+          for (icomb = i; icomb < 4; icomb++) {
             combj++;
             comb[icomb - 1] = combj;
           }
@@ -191,18 +192,18 @@ void Generate_multi_layered_measurement_points(
   }
   emxInit_real_T(&S, 2);
   /*  -----------------------平均轴向量、圆心----------------------- */
-  nblocks = S->size[0] * S->size[1];
+  i = S->size[0] * S->size[1];
   S->size[0] = 3;
   S->size[1] = order->size[0];
-  emxEnsureCapacity_real_T(S, nblocks);
+  emxEnsureCapacity_real_T(S, i);
   icomb = 3 * order->size[0];
-  for (nblocks = 0; nblocks < icomb; nblocks++) {
-    S->data[nblocks] = 0.0;
+  for (i = 0; i < icomb; i++) {
+    S->data[i] = 0.0;
   }
   emxInit_real_T(&XCenter, 1);
   emxInit_real_T(&YCenter, 1);
   emxInit_real_T(&ZCenter, 1);
-  nblocks = order->size[0];
+  i = order->size[0];
   icomb = XCenter->size[0];
   XCenter->size[0] = order->size[0];
   emxEnsureCapacity_real_T(XCenter, icomb);
@@ -212,25 +213,25 @@ void Generate_multi_layered_measurement_points(
   icomb = ZCenter->size[0];
   ZCenter->size[0] = order->size[0];
   emxEnsureCapacity_real_T(ZCenter, icomb);
-  for (nmkpi = 0; nmkpi < nblocks; nmkpi++) {
+  for (nmkpi = 0; nmkpi < i; nmkpi++) {
     d = order->data[nmkpi];
     S_idx_2 = order->data[nmkpi + order->size[0]];
-    S_idx_1 = order->data[nmkpi + order->size[0] * 2];
+    d1 = order->data[nmkpi + order->size[0] * 2];
     N12_tmp = x->data[(int)S_idx_2 - 1];
-    d1 = x->data[(int)d - 1];
-    N12[0] = N12_tmp - d1;
+    P12_idx_1 = x->data[(int)d - 1];
+    N12[0] = N12_tmp - P12_idx_1;
     b_N12_tmp = y->data[(int)S_idx_2 - 1];
-    P12_idx_1 = y->data[(int)d - 1];
-    N12[1] = b_N12_tmp - P12_idx_1;
-    c_N12_tmp = z->data[(int)S_idx_2 - 1];
-    d_N12_tmp = z->data[(int)d - 1];
-    N12[2] = c_N12_tmp - d_N12_tmp;
-    XCenterMean = x->data[(int)S_idx_1 - 1];
+    c_N12_tmp = y->data[(int)d - 1];
+    N12[1] = b_N12_tmp - c_N12_tmp;
+    d_N12_tmp = z->data[(int)S_idx_2 - 1];
+    e_N12_tmp = z->data[(int)d - 1];
+    N12[2] = d_N12_tmp - e_N12_tmp;
+    XCenterMean = x->data[(int)d1 - 1];
     N23_idx_0 = XCenterMean - N12_tmp;
-    ZCenterMean = y->data[(int)S_idx_1 - 1];
+    ZCenterMean = y->data[(int)d1 - 1];
     N23_idx_1 = ZCenterMean - b_N12_tmp;
-    N23_idx_2_tmp = z->data[(int)S_idx_1 - 1];
-    N23_idx_2 = N23_idx_2_tmp - c_N12_tmp;
+    N23_idx_2_tmp = z->data[(int)d1 - 1];
+    N23_idx_2 = N23_idx_2_tmp - d_N12_tmp;
     Radius = N12[1] * N23_idx_2 - N23_idx_1 * N12[2];
     S_idx_1 = N23_idx_0 * N12[2] - N12[0] * N23_idx_2;
     S_idx_2 = N12[0] * N23_idx_1 - N23_idx_0 * N12[1];
@@ -238,44 +239,44 @@ void Generate_multi_layered_measurement_points(
     scale = 3.3121686421112381E-170;
     absxk = fabs(Radius);
     if (absxk > 3.3121686421112381E-170) {
-      b_y = 1.0;
+      d1 = 1.0;
       scale = absxk;
     } else {
       t = absxk / 3.3121686421112381E-170;
-      b_y = t * t;
+      d1 = t * t;
     }
     absxk = fabs(S_idx_1);
     if (absxk > scale) {
       t = scale / absxk;
-      b_y = b_y * t * t + 1.0;
+      d1 = d1 * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      b_y += t * t;
+      d1 += t * t;
     }
     absxk = fabs(S_idx_2);
     if (absxk > scale) {
       t = scale / absxk;
-      b_y = b_y * t * t + 1.0;
+      d1 = d1 * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      b_y += t * t;
+      d1 += t * t;
     }
-    b_y = scale * sqrt(b_y);
-    S_idx_1 /= b_y;
-    S_idx_2 /= b_y;
-    S->data[3 * nmkpi] = Radius / b_y;
+    d1 = scale * sqrt(d1);
+    S_idx_1 /= d1;
+    S_idx_2 /= d1;
+    S->data[3 * nmkpi] = Radius / d1;
     S->data[3 * nmkpi + 1] = S_idx_1;
     S->data[3 * nmkpi + 2] = S_idx_2;
     /*     %% 计算交点 */
-    d1 = -((N12[0] * ((d1 + N12_tmp) / 2.0) +
-            N12[1] * ((P12_idx_1 + b_N12_tmp) / 2.0)) +
-           N12[2] * ((d_N12_tmp + c_N12_tmp) / 2.0));
+    d1 = -((N12[0] * ((P12_idx_1 + N12_tmp) / 2.0) +
+            N12[1] * ((c_N12_tmp + b_N12_tmp) / 2.0)) +
+           N12[2] * ((e_N12_tmp + d_N12_tmp) / 2.0));
     S_idx_1 = (d1 * N23_idx_1 -
                N12[1] * -((N23_idx_0 * ((N12_tmp + XCenterMean) / 2.0) +
                            N23_idx_1 * ((b_N12_tmp + ZCenterMean) / 2.0)) +
-                          N23_idx_2 * ((c_N12_tmp + N23_idx_2_tmp) / 2.0))) /
+                          N23_idx_2 * ((d_N12_tmp + N23_idx_2_tmp) / 2.0))) /
               Radius;
     YCenter->data[nmkpi] = -(N12[2] * S_idx_1 + d1) / N12[1];
     XCenter->data[nmkpi] = 0.0;
@@ -287,20 +288,17 @@ void Generate_multi_layered_measurement_points(
   ZCenterMean = mean(ZCenter);
   b_mean(S, dv);
   /*  -----------------------------计算参数------------------------------- */
-  nblocks = temp->size[0] * temp->size[1];
+  i = temp->size[0] * temp->size[1];
   temp->size[0] = 1;
   temp->size[1] = x->size[0];
-  emxEnsureCapacity_real_T(temp, nblocks);
+  emxEnsureCapacity_real_T(temp, i);
   icomb = x->size[0];
   emxFree_real_T(&S);
-  emxFree_real_T(&ZCenter);
-  emxFree_real_T(&YCenter);
-  emxFree_real_T(&XCenter);
-  for (nblocks = 0; nblocks < icomb; nblocks++) {
-    temp->data[nblocks] = 0.0;
+  for (i = 0; i < icomb; i++) {
+    temp->data[i] = 0.0;
   }
-  nblocks = x->size[0];
-  for (nmkpi = 0; nmkpi < nblocks; nmkpi++) {
+  i = x->size[0];
+  for (nmkpi = 0; nmkpi < i; nmkpi++) {
     S_idx_1 = x->data[nmkpi] - XCenterMean;
     S_idx_2 = y->data[nmkpi] - N23_idx_0;
     d1 = z->data[nmkpi] - ZCenterMean;
@@ -308,7 +306,7 @@ void Generate_multi_layered_measurement_points(
   }
   /* %%%%%%%           圆柱参数          %%%%%%%%%%% */
   if (temp->size[1] == 0) {
-    b_y = 0.0;
+    d1 = 0.0;
   } else {
     if (temp->size[1] <= 1024) {
       icomb = temp->size[1];
@@ -324,9 +322,9 @@ void Generate_multi_layered_measurement_points(
         nrows = 1024;
       }
     }
-    b_y = temp->data[0];
+    d1 = temp->data[0];
     for (row = 2; row <= icomb; row++) {
-      b_y += temp->data[row - 1];
+      d1 += temp->data[row - 1];
     }
     for (combj = 2; combj <= nblocks; combj++) {
       icomb = (combj - 1) << 10;
@@ -339,51 +337,51 @@ void Generate_multi_layered_measurement_points(
       for (row = 2; row <= nmkpi; row++) {
         S_idx_1 += temp->data[(icomb + row) - 1];
       }
-      b_y += S_idx_1;
+      d1 += S_idx_1;
     }
   }
-  Radius = b_y / (double)temp->size[1];
+  Radius = d1 / (double)temp->size[1];
   scale = 3.3121686421112381E-170;
   absxk = fabs(dv[0]);
   if (absxk > 3.3121686421112381E-170) {
-    b_y = 1.0;
+    d1 = 1.0;
     scale = absxk;
   } else {
     t = absxk / 3.3121686421112381E-170;
-    b_y = t * t;
+    d1 = t * t;
   }
   absxk = fabs(dv[1]);
   if (absxk > scale) {
     t = scale / absxk;
-    b_y = b_y * t * t + 1.0;
+    d1 = d1 * t * t + 1.0;
     scale = absxk;
   } else {
     t = absxk / scale;
-    b_y += t * t;
+    d1 += t * t;
   }
   absxk = fabs(dv[2]);
   if (absxk > scale) {
     t = scale / absxk;
-    b_y = b_y * t * t + 1.0;
+    d1 = d1 * t * t + 1.0;
     scale = absxk;
   } else {
     t = absxk / scale;
-    b_y += t * t;
+    d1 += t * t;
   }
-  b_y = scale * sqrt(b_y);
+  d1 = scale * sqrt(d1);
   P23[0] = XCenterMean;
   P23[1] = N23_idx_0;
   P23[2] = ZCenterMean;
   /* -------------------------管路确定范围（轴线端点）---------------------- */
-  d = dv[0] / b_y;
+  d = dv[0] / d1;
   N23_idx_1 = d;
   N12[0] = XCenterMean + d;
-  d = dv[1] / b_y;
+  d = dv[1] / d1;
   P12_idx_1 = d;
   N12[1] = N23_idx_0 + d;
-  d = dv[2] / b_y;
+  d = dv[2] / d1;
   N12[2] = ZCenterMean + d;
-  foot_of_perpendicular_from_a_point_to_a_line(P4, P23, N12, &d_N12_tmp,
+  foot_of_perpendicular_from_a_point_to_a_line(P4, P23, N12, &e_N12_tmp,
                                                &N23_idx_2_tmp, &N23_idx_2);
   foot_of_perpendicular_from_a_point_to_a_line(P3, P23, N12, &S_idx_1, &S_idx_2,
                                                &d1);
@@ -422,26 +420,26 @@ void Generate_multi_layered_measurement_points(
       rt_atan2d_snf(d, sqrt(N23_idx_1 * N23_idx_1 + P12_idx_1 * P12_idx_1)),
       rt_atan2d_snf(P12_idx_1, N23_idx_1), num, temp, Ylay0, Zlay0);
   /*  ----------------------------移动到原点------------------------------- */
-  nblocks = temp->size[0] * temp->size[1];
+  i = temp->size[0] * temp->size[1];
   temp->size[0] = 1;
-  emxEnsureCapacity_real_T(temp, nblocks);
+  emxEnsureCapacity_real_T(temp, i);
   icomb = temp->size[1] - 1;
-  for (nblocks = 0; nblocks <= icomb; nblocks++) {
-    temp->data[nblocks] = temp->data[nblocks] * Radius + d_N12_tmp;
+  for (i = 0; i <= icomb; i++) {
+    temp->data[i] = temp->data[i] * Radius + e_N12_tmp;
   }
-  nblocks = Ylay0->size[0] * Ylay0->size[1];
+  i = Ylay0->size[0] * Ylay0->size[1];
   Ylay0->size[0] = 1;
-  emxEnsureCapacity_real_T(Ylay0, nblocks);
+  emxEnsureCapacity_real_T(Ylay0, i);
   icomb = Ylay0->size[1] - 1;
-  for (nblocks = 0; nblocks <= icomb; nblocks++) {
-    Ylay0->data[nblocks] = Ylay0->data[nblocks] * Radius + N23_idx_2_tmp;
+  for (i = 0; i <= icomb; i++) {
+    Ylay0->data[i] = Ylay0->data[i] * Radius + N23_idx_2_tmp;
   }
-  nblocks = Zlay0->size[0] * Zlay0->size[1];
+  i = Zlay0->size[0] * Zlay0->size[1];
   Zlay0->size[0] = 1;
-  emxEnsureCapacity_real_T(Zlay0, nblocks);
+  emxEnsureCapacity_real_T(Zlay0, i);
   icomb = Zlay0->size[1] - 1;
-  for (nblocks = 0; nblocks <= icomb; nblocks++) {
-    Zlay0->data[nblocks] = Zlay0->data[nblocks] * Radius + N23_idx_2;
+  for (i = 0; i <= icomb; i++) {
+    Zlay0->data[i] = Zlay0->data[i] * Radius + N23_idx_2;
   }
   /*  -----------------------------生成多层测点-------------------------------
    */
@@ -454,10 +452,10 @@ void Generate_multi_layered_measurement_points(
     Layer->size[1] = 0;
   } else {
     S_idx_2 = floor(laynum);
-    nblocks = Layer->size[0] * Layer->size[1];
+    i = Layer->size[0] * Layer->size[1];
     Layer->size[0] = 1;
     Layer->size[1] = (int)S_idx_2;
-    emxEnsureCapacity_real_T(Layer, nblocks);
+    emxEnsureCapacity_real_T(Layer, i);
     if ((int)S_idx_2 >= 1) {
       icomb = (int)S_idx_2 - 1;
       Layer->data[(int)floor(laynum) - 1] = S_idx_1;
@@ -475,8 +473,8 @@ void Generate_multi_layered_measurement_points(
             }
           } else {
             S_idx_1 = (S_idx_1 - d1) / ((double)Layer->size[1] - 1.0);
-            nblocks = Layer->size[1];
-            for (row = 0; row <= nblocks - 3; row++) {
+            i = Layer->size[1];
+            for (row = 0; row <= i - 3; row++) {
               Layer->data[row + 1] = d1 + ((double)row + 1.0) * S_idx_1;
             }
           }
@@ -484,51 +482,85 @@ void Generate_multi_layered_measurement_points(
       }
     }
   }
-  emxInit_real_T(&Point_testx, 2);
-  emxInit_real_T(&Point_testy, 2);
-  emxInit_real_T(&Point_testz, 2);
-  nblocks = Point_testx->size[0] * Point_testx->size[1];
-  Point_testx->size[0] = 1;
-  icomb = (int)laynum;
-  Point_testx->size[1] = (int)laynum;
-  emxEnsureCapacity_real_T(Point_testx, nblocks);
-  nblocks = Point_testy->size[0] * Point_testy->size[1];
-  Point_testy->size[0] = 1;
-  Point_testy->size[1] = (int)laynum;
-  emxEnsureCapacity_real_T(Point_testy, nblocks);
-  nblocks = Point_testz->size[0] * Point_testz->size[1];
-  Point_testz->size[0] = 1;
-  Point_testz->size[1] = (int)laynum;
-  emxEnsureCapacity_real_T(Point_testz, nblocks);
-  for (nmkpi = 0; nmkpi < icomb; nmkpi++) {
-    S_idx_2 = Layer->data[nmkpi];
-    Point_testx->data[nmkpi] = temp->data[0] - S_idx_2 * N23_idx_1;
-    Point_testy->data[nmkpi] = Ylay0->data[0] - S_idx_2 * P12_idx_1;
-    Point_testz->data[nmkpi] = Zlay0->data[0] - S_idx_2 * d;
+  icomb = (int)(laynum * num);
+  i = XCenter->size[0];
+  XCenter->size[0] = icomb;
+  emxEnsureCapacity_real_T(XCenter, i);
+  for (i = 0; i < icomb; i++) {
+    XCenter->data[i] = 0.0;
+  }
+  i = YCenter->size[0];
+  YCenter->size[0] = icomb;
+  emxEnsureCapacity_real_T(YCenter, i);
+  for (i = 0; i < icomb; i++) {
+    YCenter->data[i] = 0.0;
+  }
+  i = ZCenter->size[0];
+  ZCenter->size[0] = icomb;
+  emxEnsureCapacity_real_T(ZCenter, i);
+  for (i = 0; i < icomb; i++) {
+    ZCenter->data[i] = 0.0;
+  }
+  i = (int)laynum;
+  if (0 <= (int)laynum - 1) {
+    loop_ub = temp->size[1];
+    b_loop_ub = Ylay0->size[1];
+    c_loop_ub = Zlay0->size[1];
+  }
+  for (nmkpi = 0; nmkpi < i; nmkpi++) {
+    S_idx_2 = (((double)nmkpi + 1.0) - 1.0) * num + 1.0;
+    d1 = ((double)nmkpi + 1.0) * num;
+    if (S_idx_2 > d1) {
+      icomb = 1;
+    } else {
+      icomb = (int)S_idx_2;
+    }
+    S_idx_1 = Layer->data[nmkpi] * N23_idx_1;
+    for (nblocks = 0; nblocks < loop_ub; nblocks++) {
+      XCenter->data[(icomb + nblocks) - 1] = temp->data[nblocks] - S_idx_1;
+    }
+    if (S_idx_2 > d1) {
+      icomb = 1;
+    } else {
+      icomb = (int)S_idx_2;
+    }
+    S_idx_1 = Layer->data[nmkpi] * P12_idx_1;
+    for (nblocks = 0; nblocks < b_loop_ub; nblocks++) {
+      YCenter->data[(icomb + nblocks) - 1] = Ylay0->data[nblocks] - S_idx_1;
+    }
+    if (S_idx_2 > d1) {
+      icomb = 1;
+    } else {
+      icomb = (int)S_idx_2;
+    }
+    S_idx_1 = Layer->data[nmkpi] * d;
+    for (nblocks = 0; nblocks < c_loop_ub; nblocks++) {
+      ZCenter->data[(icomb + nblocks) - 1] = Zlay0->data[nblocks] - S_idx_1;
+    }
   }
   emxFree_real_T(&Layer);
   emxFree_real_T(&Zlay0);
   emxFree_real_T(&Ylay0);
   emxFree_real_T(&temp);
-  nblocks = Point_test->size[0] * Point_test->size[1];
-  Point_test->size[0] = 3;
-  Point_test->size[1] = Point_testx->size[1];
-  emxEnsureCapacity_real_T(Point_test, nblocks);
-  icomb = Point_testx->size[1];
-  for (nblocks = 0; nblocks < icomb; nblocks++) {
-    Point_test->data[3 * nblocks] = Point_testx->data[nblocks];
+  i = Point_test->size[0] * Point_test->size[1];
+  Point_test->size[0] = XCenter->size[0];
+  Point_test->size[1] = 3;
+  emxEnsureCapacity_real_T(Point_test, i);
+  icomb = XCenter->size[0];
+  for (i = 0; i < icomb; i++) {
+    Point_test->data[i] = XCenter->data[i];
   }
-  emxFree_real_T(&Point_testx);
-  icomb = Point_testy->size[1];
-  for (nblocks = 0; nblocks < icomb; nblocks++) {
-    Point_test->data[3 * nblocks + 1] = Point_testy->data[nblocks];
+  emxFree_real_T(&XCenter);
+  icomb = YCenter->size[0];
+  for (i = 0; i < icomb; i++) {
+    Point_test->data[i + Point_test->size[0]] = YCenter->data[i];
   }
-  emxFree_real_T(&Point_testy);
-  icomb = Point_testz->size[1];
-  for (nblocks = 0; nblocks < icomb; nblocks++) {
-    Point_test->data[3 * nblocks + 2] = Point_testz->data[nblocks];
+  emxFree_real_T(&YCenter);
+  icomb = ZCenter->size[0];
+  for (i = 0; i < icomb; i++) {
+    Point_test->data[i + Point_test->size[0] * 2] = ZCenter->data[i];
   }
-  emxFree_real_T(&Point_testz);
+  emxFree_real_T(&ZCenter);
 }
 
 /*
