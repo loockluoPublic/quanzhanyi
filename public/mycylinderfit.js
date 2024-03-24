@@ -1287,9 +1287,11 @@ var wasmImports = {
 };
 var wasmExports = createWasm();
 var ___wasm_call_ctors = createExportWrapper('__wasm_call_ctors');
-var _G5P = Module['_G5P'] = createExportWrapper('G5P');
+var _Generate_multi_layered_measurement_points = Module['_Generate_multi_layered_measurement_points'] = createExportWrapper('Generate_multi_layered_measurement_points');
+var _generate_unit_circle_with_normal_vector = Module['_generate_unit_circle_with_normal_vector'] = createExportWrapper('generate_unit_circle_with_normal_vector');
 var _free = Module['_free'] = createExportWrapper('free');
 var _malloc = Module['_malloc'] = createExportWrapper('malloc');
+var _Three_Points_Initial_Rough_Cylindrical_Judgment = Module['_Three_Points_Initial_Rough_Cylindrical_Judgment'] = createExportWrapper('Three_Points_Initial_Rough_Cylindrical_Judgment');
 var _fflush = createExportWrapper('fflush');
 var _emscripten_stack_init = () => (_emscripten_stack_init = wasmExports['emscripten_stack_init'])();
 var _emscripten_stack_get_free = () => (_emscripten_stack_get_free = wasmExports['emscripten_stack_get_free'])();

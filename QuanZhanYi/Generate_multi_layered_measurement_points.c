@@ -14,11 +14,10 @@
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
 #include "generate_unit_circle_with_normal_vector.h"
 #include "mean.h"
-#include "rt_nonfinite.h"
 #include "rt_defines.h"
 #include "rt_nonfinite.h"
+#include <emscripten.h>
 #include <math.h>
-
 /* Function Declarations */
 static double rt_atan2d_snf(double u0, double u1);
 
@@ -97,6 +96,7 @@ static double rt_roundd_snf(double u)
  *                emxArray_real_T *Point_test
  * Return Type  : void
  */
+EMSCRIPTEN_KEEPALIVE
 void Generate_multi_layered_measurement_points(
     const emxArray_real_T *x, const emxArray_real_T *y,
     const emxArray_real_T *z, double num, double laynum, const double P3[3],

@@ -6,7 +6,7 @@ project(mycylinderfit2)
 
 set(ROOT /src)
 
-set(SRCDIR ${ROOT}/G5P)
+set(SRCDIR ${ROOT}/QuanZhanYi)
 
 set(EXECUTABLE_OUTPUT_PATH ${ROOT}/public)
 

@@ -4,7 +4,6 @@ import { useRecoilState } from "recoil";
 import { deviceInfo } from "../atom/globalState";
 import * as commond from "./commond";
 import { getDeviceInfo } from "./commond";
-import { getPoints } from "../utils";
 (window as any).commond = commond;
 export const serial = new SerialMonitor({ mode: "text", parseLines: true });
 
@@ -58,16 +57,6 @@ export default function Connect() {
           连接设备
         </Button>
       )}
-      <div className="q-flex q-flex-col">
-        <Button
-          type="primary"
-          onClick={() => {
-            getPoints();
-          }}
-        >
-          360, 90
-        </Button>
-      </div>
     </div>
   );
 }

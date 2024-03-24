@@ -10,7 +10,7 @@
 #include "QuanZhanYi_data.h"
 #include "QuanZhanYi_initialize.h"
 #include "rt_nonfinite.h"
-
+#include <emscripten.h>
 /* Function Definitions */
 /*
  * Arguments    : const double x[3]
@@ -22,6 +22,7 @@
  *                double *z0
  * Return Type  : void
  */
+EMSCRIPTEN_KEEPALIVE
 void Three_Points_Initial_Rough_Cylindrical_Judgment(const double x[3],
                                                      const double y[3],
                                                      const double z[3],
