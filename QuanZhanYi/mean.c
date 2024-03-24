@@ -2,12 +2,12 @@
  * File: mean.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 24-Mar-2024 00:17:09
+ * C/C++ source code generated on  : 24-Mar-2024 17:37:00
  */
 
 /* Include Files */
 #include "mean.h"
-#include "QuanZhanYi_types.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_types.h"
 #include "rt_nonfinite.h"
 
 /* Function Definitions */

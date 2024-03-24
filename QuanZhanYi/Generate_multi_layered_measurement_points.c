@@ -2,16 +2,16 @@
  * File: Generate_multi_layered_measurement_points.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 24-Mar-2024 00:17:09
+ * C/C++ source code generated on  : 24-Mar-2024 17:37:00
  */
 
 /* Include Files */
 #include "Generate_multi_layered_measurement_points.h"
-#include "QuanZhanYi_data.h"
-#include "QuanZhanYi_emxutil.h"
-#include "QuanZhanYi_initialize.h"
-#include "QuanZhanYi_types.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_data.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_emxutil.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_initialize.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_types.h"
 #include "generate_unit_circle_with_normal_vector.h"
 #include "mean.h"
 #include "rt_nonfinite.h"
@@ -111,27 +111,29 @@ void Generate_multi_layered_measurement_points(
   emxArray_real_T *ZCenter;
   emxArray_real_T *order;
   emxArray_real_T *temp;
-  double P12[3];
-  double P23[3];
+  double f_P12[3];
+  double f_P23[3];
   const double *x_data;
   const double *y_data;
   const double *z_data;
-  double N12_idx_0;
-  double N12_idx_0_tmp;
-  double N12_idx_1;
-  double N12_idx_1_tmp;
-  double N12_idx_2;
-  double N12_idx_2_tmp;
-  double N23_idx_0;
-  double N23_idx_1;
-  double N23_idx_2;
+  double XCenterMean;
   double YCenterMean;
-  double ZCenterMean;
   double absxk;
   double b_nmk;
   double b_y;
-  double d;
-  double d1;
+  double f_N12_idx_0;
+  double f_N12_idx_1;
+  double f_N12_idx_2;
+  double f_N23_idx_0;
+  double f_N23_idx_0_tmp;
+  double f_N23_idx_1;
+  double f_N23_idx_2;
+  double f_S_idx_0;
+  double f_S_idx_1;
+  double f_S_idx_2;
+  double f_d1;
+  double scale;
+  double t;
   double *Point_testy_data;
   double *Point_testz_data;
   double *S_data;
@@ -148,8 +150,8 @@ void Generate_multi_layered_measurement_points(
   int nmk;
   int nmkpi;
   int row;
-  if (!isInitialized_QuanZhanYi) {
-    QuanZhanYi_initialize();
+  if (!isInitialized_foot_of_perpendicular_from_a_point_to_a_line) {
+    foot_of_perpendicular_from_a_point_to_a_line_initialize();
   }
   z_data = z->data;
   y_data = y->data;
@@ -261,44 +263,80 @@ void Generate_multi_layered_measurement_points(
   S->size[0] = 3;
   S->size[1] = 0;
   i = order->size[0];
-  for (combj = 0; combj <= i - 3; combj++) {
-    d = order_data[combj];
-    b_y = order_data[combj + order->size[0]];
+  for (combj = 0; combj < i; combj++) {
+    /*      [s,xcenter,ycenter,zcenter] =
+     * Three_Points_Initial_Rough_Cylindrical_Judgment(xxx,yyy,zzz); */
+    /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+    f_S_idx_1 = order_data[combj];
+    f_d1 = order_data[combj + order->size[0]];
     b_nmk = order_data[combj + order->size[0] * 2];
-    YCenterMean = x_data[(int)b_y - 1];
-    N12_idx_0_tmp = x_data[(int)d - 1];
-    N12_idx_0 = YCenterMean - N12_idx_0_tmp;
-    ZCenterMean = y_data[(int)b_y - 1];
-    N12_idx_1_tmp = y_data[(int)d - 1];
-    N12_idx_1 = ZCenterMean - N12_idx_1_tmp;
-    N12_idx_2_tmp = z_data[(int)b_y - 1];
-    d1 = z_data[(int)d - 1];
-    N12_idx_2 = N12_idx_2_tmp - d1;
-    b_y = x_data[(int)b_nmk - 1];
-    N23_idx_0 = b_y - YCenterMean;
-    absxk = y_data[(int)b_nmk - 1];
-    N23_idx_1 = absxk - ZCenterMean;
+    XCenterMean = x_data[(int)f_d1 - 1];
+    scale = x_data[(int)f_S_idx_1 - 1];
+    f_N12_idx_0 = XCenterMean - scale;
+    YCenterMean = y_data[(int)f_d1 - 1];
+    absxk = y_data[(int)f_S_idx_1 - 1];
+    f_N12_idx_1 = YCenterMean - absxk;
+    t = z_data[(int)f_d1 - 1];
+    f_d1 = z_data[(int)f_S_idx_1 - 1];
+    f_N12_idx_2 = t - f_d1;
+    f_N23_idx_0_tmp = x_data[(int)b_nmk - 1];
+    f_N23_idx_0 = f_N23_idx_0_tmp - XCenterMean;
+    b_y = y_data[(int)b_nmk - 1];
+    f_N23_idx_1 = b_y - YCenterMean;
     b_nmk = z_data[(int)b_nmk - 1];
-    N23_idx_2 = b_nmk - N12_idx_2_tmp;
+    f_N23_idx_2 = b_nmk - t;
+    f_S_idx_0 = f_N12_idx_1 * f_N23_idx_2 - f_N23_idx_1 * f_N12_idx_2;
+    f_S_idx_1 = f_N23_idx_0 * f_N12_idx_2 - f_N12_idx_0 * f_N23_idx_2;
+    f_S_idx_2 = f_N12_idx_0 * f_N23_idx_1 - f_N23_idx_0 * f_N12_idx_1;
     /* 方向向量 */
     /*     %% 计算交点 */
-    d1 = -((N12_idx_0 * ((N12_idx_0_tmp + YCenterMean) / 2.0) +
-            N12_idx_1 * ((N12_idx_1_tmp + ZCenterMean) / 2.0)) +
-           N12_idx_2 * ((d1 + N12_idx_2_tmp) / 2.0));
-    b_nmk = (d1 * N23_idx_1 -
-             N12_idx_1 * -((N23_idx_0 * ((YCenterMean + b_y) / 2.0) +
-                            N23_idx_1 * ((ZCenterMean + absxk) / 2.0)) +
-                           N23_idx_2 * ((N12_idx_2_tmp + b_nmk) / 2.0))) /
-            (N12_idx_1 * N23_idx_2 - N23_idx_1 * N12_idx_2);
+    f_d1 = -((f_N12_idx_0 * ((scale + XCenterMean) / 2.0) +
+              f_N12_idx_1 * ((absxk + YCenterMean) / 2.0)) +
+             f_N12_idx_2 * ((f_d1 + t) / 2.0));
+    b_nmk = (f_d1 * f_N23_idx_1 -
+             f_N12_idx_1 *
+                 -((f_N23_idx_0 * ((XCenterMean + f_N23_idx_0_tmp) / 2.0) +
+                    f_N23_idx_1 * ((YCenterMean + b_y) / 2.0)) +
+                   f_N23_idx_2 * ((t + b_nmk) / 2.0))) /
+            (f_N12_idx_1 * f_N23_idx_2 - f_N23_idx_1 * f_N12_idx_2);
+    /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+    scale = 3.3121686421112381E-170;
+    absxk = fabs(f_S_idx_0);
+    if (absxk > 3.3121686421112381E-170) {
+      b_y = 1.0;
+      scale = absxk;
+    } else {
+      t = absxk / 3.3121686421112381E-170;
+      b_y = t * t;
+    }
+    absxk = fabs(f_S_idx_1);
+    if (absxk > scale) {
+      t = scale / absxk;
+      b_y = b_y * t * t + 1.0;
+      scale = absxk;
+    } else {
+      t = absxk / scale;
+      b_y += t * t;
+    }
+    absxk = fabs(f_S_idx_2);
+    if (absxk > scale) {
+      t = scale / absxk;
+      b_y = b_y * t * t + 1.0;
+      scale = absxk;
+    } else {
+      t = absxk / scale;
+      b_y += t * t;
+    }
+    b_y = scale * sqrt(b_y);
     nmkpi = S->size[1];
     nblocks = S->size[0] * S->size[1];
     S->size[0] = 3;
     S->size[1]++;
     emxEnsureCapacity_real_T(S, nblocks);
     S_data = S->data;
-    S_data[3 * nmkpi] = N12_idx_1 * N23_idx_2 - N23_idx_1 * N12_idx_2;
-    S_data[3 * nmkpi + 1] = N23_idx_0 * N12_idx_2 - N12_idx_0 * N23_idx_2;
-    S_data[3 * nmkpi + 2] = N12_idx_0 * N23_idx_1 - N23_idx_0 * N12_idx_1;
+    S_data[3 * nmkpi] = f_S_idx_0 / b_y;
+    S_data[3 * nmkpi + 1] = f_S_idx_1 / b_y;
+    S_data[3 * nmkpi + 2] = f_S_idx_2 / b_y;
     nmkpi = temp->size[1];
     nblocks = temp->size[0] * temp->size[1];
     temp->size[1]++;
@@ -310,7 +348,7 @@ void Generate_multi_layered_measurement_points(
     YCenter->size[1]++;
     emxEnsureCapacity_real_T(YCenter, nblocks);
     YCenter_data = YCenter->data;
-    YCenter_data[nmkpi] = -(N12_idx_2 * b_nmk + d1) / N12_idx_1;
+    YCenter_data[nmkpi] = -(f_N12_idx_2 * b_nmk + f_d1) / f_N12_idx_1;
     nmkpi = ZCenter->size[1];
     nblocks = ZCenter->size[0] * ZCenter->size[1];
     ZCenter->size[1]++;
@@ -319,13 +357,13 @@ void Generate_multi_layered_measurement_points(
     ZCenter_data[nmkpi] = b_nmk;
   }
   emxFree_real_T(&order);
-  N23_idx_1 = mean(temp);
+  XCenterMean = mean(temp);
   YCenterMean = mean(YCenter);
-  ZCenterMean = mean(ZCenter);
+  f_S_idx_0 = mean(ZCenter);
   if (S->size[1] == 0) {
-    N12_idx_0 = 0.0;
-    N12_idx_1 = 0.0;
-    N12_idx_2 = 0.0;
+    f_N12_idx_0 = 0.0;
+    f_N12_idx_1 = 0.0;
+    f_N12_idx_2 = 0.0;
   } else {
     if (S->size[1] <= 1024) {
       nmk = S->size[1];
@@ -341,20 +379,20 @@ void Generate_multi_layered_measurement_points(
         lastBlockLength = 1024;
       }
     }
-    N12_idx_0 = S_data[0];
-    N12_idx_1 = S_data[1];
-    N12_idx_2 = S_data[2];
+    f_N12_idx_0 = S_data[0];
+    f_N12_idx_1 = S_data[1];
+    f_N12_idx_2 = S_data[2];
     for (k = 2; k <= nmk; k++) {
       combj = (k - 1) * 3;
-      N12_idx_0 += S_data[combj];
-      N12_idx_1 += S_data[combj + 1];
-      N12_idx_2 += S_data[combj + 2];
+      f_N12_idx_0 += S_data[combj];
+      f_N12_idx_1 += S_data[combj + 1];
+      f_N12_idx_2 += S_data[combj + 2];
     }
     for (row = 2; row <= nblocks; row++) {
       nmk = (row - 1) * 3072;
-      P12[0] = S_data[nmk];
-      P12[1] = S_data[nmk + 1];
-      P12[2] = S_data[nmk + 2];
+      f_P12[0] = S_data[nmk];
+      f_P12[1] = S_data[nmk + 1];
+      f_P12[2] = S_data[nmk + 2];
       if (row == nblocks) {
         nmkpi = lastBlockLength;
       } else {
@@ -362,112 +400,114 @@ void Generate_multi_layered_measurement_points(
       }
       for (k = 2; k <= nmkpi; k++) {
         combj = nmk + (k - 1) * 3;
-        P12[0] += S_data[combj];
-        P12[1] += S_data[combj + 1];
-        P12[2] += S_data[combj + 2];
+        f_P12[0] += S_data[combj];
+        f_P12[1] += S_data[combj + 1];
+        f_P12[2] += S_data[combj + 2];
       }
-      N12_idx_0 += P12[0];
-      N12_idx_1 += P12[1];
-      N12_idx_2 += P12[2];
+      f_N12_idx_0 += f_P12[0];
+      f_N12_idx_1 += f_P12[1];
+      f_N12_idx_2 += f_P12[2];
     }
   }
-  N12_idx_0 /= (double)S->size[1];
-  N12_idx_1 /= (double)S->size[1];
-  N12_idx_2 /= (double)S->size[1];
+  f_N12_idx_0 /= (double)S->size[1];
+  f_N12_idx_1 /= (double)S->size[1];
+  f_N12_idx_2 /= (double)S->size[1];
   /*  -----------------------------计算参数------------------------------- */
   temp->size[0] = 1;
   temp->size[1] = 0;
   i = x->size[0];
   emxFree_real_T(&S);
   for (combj = 0; combj < i; combj++) {
-    b_nmk = x_data[combj] - N23_idx_1;
+    b_nmk = x_data[combj] - XCenterMean;
     b_y = y_data[combj] - YCenterMean;
-    d1 = z_data[combj] - ZCenterMean;
+    f_d1 = z_data[combj] - f_S_idx_0;
     nmkpi = temp->size[1];
     nblocks = temp->size[0] * temp->size[1];
     temp->size[0] = 1;
     temp->size[1]++;
     emxEnsureCapacity_real_T(temp, nblocks);
     temp_data = temp->data;
-    temp_data[nmkpi] = sqrt((b_nmk * b_nmk + b_y * b_y) + d1 * d1);
+    temp_data[nmkpi] = sqrt((b_nmk * b_nmk + b_y * b_y) + f_d1 * f_d1);
   }
   /* %%%%%%%           圆柱参数          %%%%%%%%%%% */
-  N23_idx_0 = mean(temp);
-  d1 = 3.3121686421112381E-170;
-  absxk = fabs(N12_idx_0);
+  f_N23_idx_1 = mean(temp);
+  scale = 3.3121686421112381E-170;
+  absxk = fabs(f_N12_idx_0);
   if (absxk > 3.3121686421112381E-170) {
     b_y = 1.0;
-    d1 = absxk;
+    scale = absxk;
   } else {
-    N23_idx_2 = absxk / 3.3121686421112381E-170;
-    b_y = N23_idx_2 * N23_idx_2;
+    t = absxk / 3.3121686421112381E-170;
+    b_y = t * t;
   }
-  absxk = fabs(N12_idx_1);
-  if (absxk > d1) {
-    N23_idx_2 = d1 / absxk;
-    b_y = b_y * N23_idx_2 * N23_idx_2 + 1.0;
-    d1 = absxk;
+  absxk = fabs(f_N12_idx_1);
+  if (absxk > scale) {
+    t = scale / absxk;
+    b_y = b_y * t * t + 1.0;
+    scale = absxk;
   } else {
-    N23_idx_2 = absxk / d1;
-    b_y += N23_idx_2 * N23_idx_2;
+    t = absxk / scale;
+    b_y += t * t;
   }
-  absxk = fabs(N12_idx_2);
-  if (absxk > d1) {
-    N23_idx_2 = d1 / absxk;
-    b_y = b_y * N23_idx_2 * N23_idx_2 + 1.0;
-    d1 = absxk;
+  absxk = fabs(f_N12_idx_2);
+  if (absxk > scale) {
+    t = scale / absxk;
+    b_y = b_y * t * t + 1.0;
+    scale = absxk;
   } else {
-    N23_idx_2 = absxk / d1;
-    b_y += N23_idx_2 * N23_idx_2;
+    t = absxk / scale;
+    b_y += t * t;
   }
-  b_y = d1 * sqrt(b_y);
-  P12[0] = N23_idx_1;
-  P12[1] = YCenterMean;
-  P12[2] = ZCenterMean;
+  b_y = scale * sqrt(b_y);
+  f_P12[0] = XCenterMean;
+  f_P12[1] = YCenterMean;
+  f_P12[2] = f_S_idx_0;
   /* -------------------------管路确定范围（轴线端点）---------------------- */
-  d = N12_idx_0 / b_y;
-  N12_idx_0 = d;
-  P23[0] = N23_idx_1 + d;
-  d = N12_idx_1 / b_y;
-  N12_idx_1 = d;
-  P23[1] = YCenterMean + d;
-  d = N12_idx_2 / b_y;
-  P23[2] = ZCenterMean + d;
-  foot_of_perpendicular_from_a_point_to_a_line(P4, P12, P23, &N12_idx_0_tmp,
-                                               &N12_idx_1_tmp, &N12_idx_2_tmp);
-  foot_of_perpendicular_from_a_point_to_a_line(P3, P12, P23, &b_nmk, &d1, &b_y);
-  d1 = 3.3121686421112381E-170;
-  absxk = fabs(P23[0] - N23_idx_1);
+  f_S_idx_1 = f_N12_idx_0 / b_y;
+  f_N12_idx_0 = f_S_idx_1;
+  f_P23[0] = XCenterMean + f_S_idx_1;
+  f_S_idx_1 = f_N12_idx_1 / b_y;
+  f_N12_idx_1 = f_S_idx_1;
+  f_P23[1] = YCenterMean + f_S_idx_1;
+  f_S_idx_1 = f_N12_idx_2 / b_y;
+  f_P23[2] = f_S_idx_0 + f_S_idx_1;
+  foot_of_perpendicular_from_a_point_to_a_line(P4, f_P12, f_P23, &f_N23_idx_2,
+                                               &f_N23_idx_0_tmp, &f_N23_idx_0);
+  foot_of_perpendicular_from_a_point_to_a_line(P3, f_P12, f_P23, &b_nmk, &b_y,
+                                               &f_d1);
+  scale = 3.3121686421112381E-170;
+  absxk = fabs(f_P23[0] - XCenterMean);
   if (absxk > 3.3121686421112381E-170) {
     b_nmk = 1.0;
-    d1 = absxk;
+    scale = absxk;
   } else {
-    N23_idx_2 = absxk / 3.3121686421112381E-170;
-    b_nmk = N23_idx_2 * N23_idx_2;
+    t = absxk / 3.3121686421112381E-170;
+    b_nmk = t * t;
   }
-  absxk = fabs(P23[1] - YCenterMean);
-  if (absxk > d1) {
-    N23_idx_2 = d1 / absxk;
-    b_nmk = b_nmk * N23_idx_2 * N23_idx_2 + 1.0;
-    d1 = absxk;
+  absxk = fabs(f_P23[1] - YCenterMean);
+  if (absxk > scale) {
+    t = scale / absxk;
+    b_nmk = b_nmk * t * t + 1.0;
+    scale = absxk;
   } else {
-    N23_idx_2 = absxk / d1;
-    b_nmk += N23_idx_2 * N23_idx_2;
+    t = absxk / scale;
+    b_nmk += t * t;
   }
-  absxk = fabs(P23[2] - ZCenterMean);
-  if (absxk > d1) {
-    N23_idx_2 = d1 / absxk;
-    b_nmk = b_nmk * N23_idx_2 * N23_idx_2 + 1.0;
-    d1 = absxk;
+  absxk = fabs(f_P23[2] - f_S_idx_0);
+  if (absxk > scale) {
+    t = scale / absxk;
+    b_nmk = b_nmk * t * t + 1.0;
+    scale = absxk;
   } else {
-    N23_idx_2 = absxk / d1;
-    b_nmk += N23_idx_2 * N23_idx_2;
+    t = absxk / scale;
+    b_nmk += t * t;
   }
-  b_nmk = d1 * sqrt(b_nmk);
+  b_nmk = scale * sqrt(b_nmk);
   /*  -----------------------------生成抽样点------------------------------- */
   generate_unit_circle_with_normal_vector(
-      rt_atan2d_snf(d, sqrt(N12_idx_0 * N12_idx_0 + N12_idx_1 * N12_idx_1)),
-      rt_atan2d_snf(N12_idx_1, N12_idx_0), num, temp, YCenter, ZCenter);
+      rt_atan2d_snf(f_S_idx_1, sqrt(f_N12_idx_0 * f_N12_idx_0 +
+                                    f_N12_idx_1 * f_N12_idx_1)),
+      rt_atan2d_snf(f_N12_idx_1, f_N12_idx_0), num, temp, YCenter, ZCenter);
   /*  ----------------------------移动到原点------------------------------- */
   i = temp->size[0] * temp->size[1];
   temp->size[0] = 1;
@@ -475,7 +515,7 @@ void Generate_multi_layered_measurement_points(
   temp_data = temp->data;
   nmk = temp->size[1] - 1;
   for (i = 0; i <= nmk; i++) {
-    temp_data[i] = temp_data[i] * N23_idx_0 + N12_idx_0_tmp;
+    temp_data[i] = temp_data[i] * f_N23_idx_1 + f_N23_idx_2;
   }
   i = YCenter->size[0] * YCenter->size[1];
   YCenter->size[0] = 1;
@@ -483,7 +523,7 @@ void Generate_multi_layered_measurement_points(
   YCenter_data = YCenter->data;
   nmk = YCenter->size[1] - 1;
   for (i = 0; i <= nmk; i++) {
-    YCenter_data[i] = YCenter_data[i] * N23_idx_0 + N12_idx_1_tmp;
+    YCenter_data[i] = YCenter_data[i] * f_N23_idx_1 + f_N23_idx_0_tmp;
   }
   i = ZCenter->size[0] * ZCenter->size[1];
   ZCenter->size[0] = 1;
@@ -491,12 +531,12 @@ void Generate_multi_layered_measurement_points(
   ZCenter_data = ZCenter->data;
   nmk = ZCenter->size[1] - 1;
   for (i = 0; i <= nmk; i++) {
-    ZCenter_data[i] = ZCenter_data[i] * N23_idx_0 + N12_idx_2_tmp;
+    ZCenter_data[i] = ZCenter_data[i] * f_N23_idx_1 + f_N23_idx_0;
   }
   /*  -----------------------------生成多层测点-------------------------------
    */
   /*  阈值  */
-  d1 = 0.2 * b_nmk;
+  b_y = 0.2 * b_nmk;
   b_nmk *= 0.8;
   emxInit_real_T(&Layer, 2);
   order_data = Layer->data;
@@ -504,31 +544,31 @@ void Generate_multi_layered_measurement_points(
     Layer->size[0] = 1;
     Layer->size[1] = 0;
   } else {
-    b_y = floor(laynum);
+    f_d1 = floor(laynum);
     i = Layer->size[0] * Layer->size[1];
     Layer->size[0] = 1;
-    Layer->size[1] = (int)b_y;
+    Layer->size[1] = (int)f_d1;
     emxEnsureCapacity_real_T(Layer, i);
     order_data = Layer->data;
-    if ((int)b_y >= 1) {
-      nmk = (int)b_y - 1;
+    if ((int)f_d1 >= 1) {
+      nmk = (int)f_d1 - 1;
       order_data[(int)floor(laynum) - 1] = b_nmk;
       if (Layer->size[1] >= 2) {
-        order_data[0] = d1;
+        order_data[0] = b_y;
         if (Layer->size[1] >= 3) {
-          if ((d1 == -b_nmk) && ((int)b_y > 2)) {
-            b_nmk /= (double)(int)b_y - 1.0;
+          if ((b_y == -b_nmk) && ((int)f_d1 > 2)) {
+            b_nmk /= (double)(int)f_d1 - 1.0;
             for (k = 2; k <= nmk; k++) {
-              order_data[k - 1] = (double)(((k << 1) - (int)b_y) - 1) * b_nmk;
+              order_data[k - 1] = (double)(((k << 1) - (int)f_d1) - 1) * b_nmk;
             }
-            if (((int)b_y & 1) == 1) {
-              order_data[(int)b_y >> 1] = 0.0;
+            if (((int)f_d1 & 1) == 1) {
+              order_data[(int)f_d1 >> 1] = 0.0;
             }
           } else {
-            b_nmk = (b_nmk - d1) / ((double)Layer->size[1] - 1.0);
+            b_nmk = (b_nmk - b_y) / ((double)Layer->size[1] - 1.0);
             i = Layer->size[1];
             for (k = 0; k <= i - 3; k++) {
-              order_data[k + 1] = d1 + ((double)k + 1.0) * b_nmk;
+              order_data[k + 1] = b_y + ((double)k + 1.0) * b_nmk;
             }
           }
         }
@@ -555,7 +595,7 @@ void Generate_multi_layered_measurement_points(
     Point_testx->size[1] += temp->size[1];
     emxEnsureCapacity_real_T(Point_testx, nblocks);
     S_data = Point_testx->data;
-    b_nmk = order_data[combj] * N12_idx_0;
+    b_nmk = order_data[combj] * f_N12_idx_0;
     for (nblocks = 0; nblocks < nmk; nblocks++) {
       S_data[nmkpi + nblocks] = temp_data[nblocks] - b_nmk;
     }
@@ -565,7 +605,7 @@ void Generate_multi_layered_measurement_points(
     Point_testy->size[1] += YCenter->size[1];
     emxEnsureCapacity_real_T(Point_testy, nblocks);
     Point_testy_data = Point_testy->data;
-    b_nmk = order_data[combj] * N12_idx_1;
+    b_nmk = order_data[combj] * f_N12_idx_1;
     for (nblocks = 0; nblocks < nmk; nblocks++) {
       Point_testy_data[nmkpi + nblocks] = YCenter_data[nblocks] - b_nmk;
     }
@@ -575,7 +615,7 @@ void Generate_multi_layered_measurement_points(
     Point_testz->size[1] += ZCenter->size[1];
     emxEnsureCapacity_real_T(Point_testz, nblocks);
     Point_testz_data = Point_testz->data;
-    b_nmk = order_data[combj] * d;
+    b_nmk = order_data[combj] * f_S_idx_1;
     for (nblocks = 0; nblocks < nmk; nblocks++) {
       Point_testz_data[nmkpi + nblocks] = ZCenter_data[nblocks] - b_nmk;
     }
