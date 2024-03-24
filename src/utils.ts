@@ -4,6 +4,7 @@ import { data, ev, p3array, p4array } from "./mockData";
 const {
   _generate_unit_circle_with_normal_vector,
   _Generate_multi_layered_measurement_points,
+  _Three_Points_Initial_Rough_Cylindrical_Judgment,
 } = (window as any).Module;
 
 const init = () => {
@@ -44,7 +45,7 @@ const init = () => {
     x.toJSON()
   );
 
-  const i = 1;
+  const i = 0;
 
   const x2 = new EmxArray_real_T(pickCol(data[i], 0));
   const y2 = new EmxArray_real_T(pickCol(data[i], 1));
@@ -85,6 +86,29 @@ const init = () => {
   console.log("num,laynum:", 5, 3);
 
   console.log("%c Line:76 🍫", "color:#7f2b82", resultPoints.toJSON());
+
+  const x22 = new EmxArray_real_T(pickCol(data[i], 0).slice(0, 3));
+  const y22 = new EmxArray_real_T(pickCol(data[i], 1).slice(0, 3));
+  const z22 = new EmxArray_real_T(pickCol(data[i], 2).slice(0, 3));
+  const ss = new EmxArray_real_T(1, 3);
+  const zzzz = new EmxArray_real_T(1, 10);
+
+  _Three_Points_Initial_Rough_Cylindrical_Judgment(
+    x22.arrayPtr,
+    y22.arrayPtr,
+    z22.arrayPtr,
+    ss.arrayPtr,
+    zzzz.arrayPtr,
+    zzzz.arrayPtr + Float64Array.BYTES_PER_ELEMENT,
+    zzzz.arrayPtr + 2 * Float64Array.BYTES_PER_ELEMENT
+  );
+
+  console.log("%c Line:91 🥪 x22", "color:#fca650", x22.toJSON());
+  console.log("%c Line:91 🥪 y22", "color:#fca650", y22.toJSON());
+  console.log("%c Line:91 🥪 z22", "color:#fca650", z22.toJSON());
+  console.log("%c Line:99 🍑 ss", "color:#e41a6a", ss.toJSON());
+  console.log("%c Line:99 🍑 xyz", "color:#e41a6a", zzzz.toJSON());
+
   // x.free();
 };
 

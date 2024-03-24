@@ -4,7 +4,7 @@
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 24-Mar-2024 17:37:00
  */
-
+#include <emscripten.h>
 /* Include Files */
 #include "Three_Points_Initial_Rough_Cylindrical_Judgment.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line_data.h"
@@ -23,6 +23,7 @@
  *                double *z0
  * Return Type  : void
  */
+EMSCRIPTEN_KEEPALIVE
 void Three_Points_Initial_Rough_Cylindrical_Judgment(const double x[3],
                                                      const double y[3],
                                                      const double z[3],
