@@ -43,7 +43,7 @@ include_directories(
     ${ROOT}/cSource/vision/export/include/vision
 )
 
-add_executable(mycylinderfit    ${SOURCES}    )
+add_executable(mycylinderfit    ${SOURCES}  "main.c"  )
 # # 生成静态库
 # add_library(mycylinderfit STATIC ${SOURCES})
 
