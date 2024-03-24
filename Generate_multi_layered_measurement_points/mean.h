@@ -1,0 +1,35 @@
+/*
+ * File: mean.h
+ *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 24-Mar-2024 21:24:04
+ */
+
+#ifndef MEAN_H
+#define MEAN_H
+
+/* Include Files */
+#include "Generate_multi_layered_measurement_points_types.h"
+#include "rtwtypes.h"
+#include <stddef.h>
+#include <stdlib.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Function Declarations */
+void b_mean(const emxArray_real_T *x, double y[3]);
+
+double mean(const emxArray_real_T *x);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+/*
+ * File trailer for mean.h
+ *
+ * [EOF]
+ */
