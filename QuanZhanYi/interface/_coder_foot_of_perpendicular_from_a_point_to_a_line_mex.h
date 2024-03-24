@@ -1,12 +1,12 @@
 /*
- * File: _coder_QuanZhanYi_mex.h
+ * File: _coder_foot_of_perpendicular_from_a_point_to_a_line_mex.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 24-Mar-2024 13:55:20
+ * C/C++ source code generated on  : 24-Mar-2024 17:37:00
  */
 
-#ifndef _CODER_QUANZHANYI_MEX_H
-#define _CODER_QUANZHANYI_MEX_H
+#ifndef _CODER_FOOT_OF_PERPENDICULAR_FROM_A_POINT_TO_A_LINE_MEX_H
+#define _CODER_FOOT_OF_PERPENDICULAR_FROM_A_POINT_TO_A_LINE_MEX_H
 
 /* Include Files */
 #include "emlrt.h"
@@ -41,7 +41,7 @@ void unsafe_generate_unit_circle_with_normal_vector_mexFunction(
 
 #endif
 /*
- * File trailer for _coder_QuanZhanYi_mex.h
+ * File trailer for _coder_foot_of_perpendicular_from_a_point_to_a_line_mex.h
  *
  * [EOF]
  */

@@ -1,13 +1,13 @@
 /*
- * File: _coder_QuanZhanYi_mex.c
+ * File: _coder_foot_of_perpendicular_from_a_point_to_a_line_mex.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 24-Mar-2024 13:55:20
+ * C/C++ source code generated on  : 24-Mar-2024 17:37:00
  */
 
 /* Include Files */
-#include "_coder_QuanZhanYi_mex.h"
-#include "_coder_QuanZhanYi_api.h"
+#include "_coder_foot_of_perpendicular_from_a_point_to_a_line_mex.h"
+#include "_coder_foot_of_perpendicular_from_a_point_to_a_line_api.h"
 
 /* Function Definitions */
 /*
@@ -30,9 +30,9 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
       NULL, /* tls */
       NULL  /* prev */
   };
-  mexAtExit(&QuanZhanYi_atexit);
+  mexAtExit(&foot_of_perpendicular_from_a_point_to_a_line_atexit);
   /* Module initialization. */
-  QuanZhanYi_initialize();
+  foot_of_perpendicular_from_a_point_to_a_line_initialize();
   st.tls = emlrtRootTLSGlobal;
   /* Dispatch the entry-point. */
   switch (emlrtGetEntryPointIndexR2016a(
@@ -55,7 +55,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
     break;
   }
   /* Module termination. */
-  QuanZhanYi_terminate();
+  foot_of_perpendicular_from_a_point_to_a_line_terminate();
 }
 
 /*
@@ -216,7 +216,7 @@ void unsafe_generate_unit_circle_with_normal_vector_mexFunction(
 }
 
 /*
- * File trailer for _coder_QuanZhanYi_mex.c
+ * File trailer for _coder_foot_of_perpendicular_from_a_point_to_a_line_mex.c
  *
  * [EOF]
  */

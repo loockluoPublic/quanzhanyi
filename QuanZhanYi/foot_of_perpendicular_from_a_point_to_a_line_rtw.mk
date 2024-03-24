@@ -1,9 +1,9 @@
 ###########################################################################
-## Makefile generated for component 'QuanZhanYi'. 
+## Makefile generated for component 'foot_of_perpendicular_from_a_point_to_a_line'. 
 ## 
-## Makefile     : QuanZhanYi_rtw.mk
-## Generated on : Sun Mar 24 13:55:32 2024
-## Final product: ./QuanZhanYi.lib
+## Makefile     : foot_of_perpendicular_from_a_point_to_a_line_rtw.mk
+## Generated on : Sun Mar 24 17:37:26 2024
+## Final product: ./foot_of_perpendicular_from_a_point_to_a_line.lib
 ## Product type : static-library
 ## 
 ###########################################################################
@@ -18,8 +18,8 @@
 # CMD_FILE                Command file
 # MODELLIB                Static library target
 
-PRODUCT_NAME              = QuanZhanYi
-MAKEFILE                  = QuanZhanYi_rtw.mk
+PRODUCT_NAME              = foot_of_perpendicular_from_a_point_to_a_line
+MAKEFILE                  = foot_of_perpendicular_from_a_point_to_a_line_rtw.mk
 MATLAB_ROOT               = E:/matlab2022a
 MATLAB_BIN                = E:/matlab2022a/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
@@ -29,10 +29,10 @@ SOLVER_OBJ                =
 CLASSIC_INTERFACE         = 0
 MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 
 RELATIVE_PATH_TO_ANCHOR   = ../../..
-CMD_FILE                  = QuanZhanYi_rtw.rsp
+CMD_FILE                  = foot_of_perpendicular_from_a_point_to_a_line_rtw.rsp
 C_STANDARD_OPTS           = 
 CPP_STANDARD_OPTS         = 
-MODELLIB                  = QuanZhanYi.lib
+MODELLIB                  = foot_of_perpendicular_from_a_point_to_a_line.lib
 
 ###########################################################################
 ## TOOLCHAIN SPECIFICATIONS
@@ -129,7 +129,7 @@ SHAREDLIB_LDFLAGS    = -dll -entry LibMain -s -L$(LCC_LIB) $(LDFLAGS_ADDITIONAL)
 ## OUTPUT INFO
 ###########################################################################
 
-PRODUCT = ./QuanZhanYi.lib
+PRODUCT = ./foot_of_perpendicular_from_a_point_to_a_line.lib
 PRODUCT_TYPE = "static-library"
 BUILD_TYPE = "Static Library"
 
@@ -137,7 +137,7 @@ BUILD_TYPE = "Static Library"
 ## INCLUDE PATHS
 ###########################################################################
 
-INCLUDES_BUILDINFO = -I$(START_DIR)/codegen/lib/QuanZhanYi -I$(START_DIR) -I$(MATLAB_ROOT)/extern/include
+INCLUDES_BUILDINFO = -I$(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line -I$(START_DIR) -I$(MATLAB_ROOT)/extern/include
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 
@@ -146,7 +146,7 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 ###########################################################################
 
 DEFINES_CUSTOM = 
-DEFINES_STANDARD = -DMODEL=QuanZhanYi
+DEFINES_STANDARD = -DMODEL=foot_of_perpendicular_from_a_point_to_a_line
 
 DEFINES = $(DEFINES_CUSTOM) $(DEFINES_STANDARD)
 
@@ -154,7 +154,7 @@ DEFINES = $(DEFINES_CUSTOM) $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_data.c $(START_DIR)/codegen/lib/QuanZhanYi/rt_nonfinite.c $(START_DIR)/codegen/lib/QuanZhanYi/rtGetNaN.c $(START_DIR)/codegen/lib/QuanZhanYi/rtGetInf.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_initialize.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_terminate.c $(START_DIR)/codegen/lib/QuanZhanYi/foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)/codegen/lib/QuanZhanYi/Generate_multi_layered_measurement_points.c $(START_DIR)/codegen/lib/QuanZhanYi/mean.c $(START_DIR)/codegen/lib/QuanZhanYi/generate_unit_circle_with_normal_vector.c $(START_DIR)/codegen/lib/QuanZhanYi/Three_Points_Initial_Rough_Cylindrical_Judgment.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_emxutil.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_emxAPI.c
+SRCS = $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/foot_of_perpendicular_from_a_point_to_a_line_data.c $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/rt_nonfinite.c $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/rtGetNaN.c $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/rtGetInf.c $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/foot_of_perpendicular_from_a_point_to_a_line_initialize.c $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/foot_of_perpendicular_from_a_point_to_a_line_terminate.c $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/Generate_multi_layered_measurement_points.c $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/mean.c $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/generate_unit_circle_with_normal_vector.c $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/Three_Points_Initial_Rough_Cylindrical_Judgment.c $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/foot_of_perpendicular_from_a_point_to_a_line_emxutil.c $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/foot_of_perpendicular_from_a_point_to_a_line_emxAPI.c
 
 ALL_SRCS = $(SRCS)
 
@@ -162,7 +162,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = QuanZhanYi_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj QuanZhanYi_initialize.obj QuanZhanYi_terminate.obj foot_of_perpendicular_from_a_point_to_a_line.obj Generate_multi_layered_measurement_points.obj mean.obj generate_unit_circle_with_normal_vector.obj Three_Points_Initial_Rough_Cylindrical_Judgment.obj QuanZhanYi_emxutil.obj QuanZhanYi_emxAPI.obj
+OBJS = foot_of_perpendicular_from_a_point_to_a_line_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj foot_of_perpendicular_from_a_point_to_a_line_initialize.obj foot_of_perpendicular_from_a_point_to_a_line_terminate.obj foot_of_perpendicular_from_a_point_to_a_line.obj Generate_multi_layered_measurement_points.obj mean.obj generate_unit_circle_with_normal_vector.obj Three_Points_Initial_Rough_Cylindrical_Judgment.obj foot_of_perpendicular_from_a_point_to_a_line_emxutil.obj foot_of_perpendicular_from_a_point_to_a_line_emxAPI.obj
 
 ALL_OBJS = $(OBJS)
 
@@ -253,7 +253,7 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-%.obj : $(START_DIR)/codegen/lib/QuanZhanYi/%.c
+%.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/%.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
@@ -261,55 +261,55 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-QuanZhanYi_data.obj : $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_data.c
+foot_of_perpendicular_from_a_point_to_a_line_data.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/foot_of_perpendicular_from_a_point_to_a_line_data.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-rt_nonfinite.obj : $(START_DIR)/codegen/lib/QuanZhanYi/rt_nonfinite.c
+rt_nonfinite.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/rt_nonfinite.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-rtGetNaN.obj : $(START_DIR)/codegen/lib/QuanZhanYi/rtGetNaN.c
+rtGetNaN.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/rtGetNaN.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-rtGetInf.obj : $(START_DIR)/codegen/lib/QuanZhanYi/rtGetInf.c
+rtGetInf.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/rtGetInf.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-QuanZhanYi_initialize.obj : $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_initialize.c
+foot_of_perpendicular_from_a_point_to_a_line_initialize.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/foot_of_perpendicular_from_a_point_to_a_line_initialize.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-QuanZhanYi_terminate.obj : $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_terminate.c
+foot_of_perpendicular_from_a_point_to_a_line_terminate.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/foot_of_perpendicular_from_a_point_to_a_line_terminate.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-foot_of_perpendicular_from_a_point_to_a_line.obj : $(START_DIR)/codegen/lib/QuanZhanYi/foot_of_perpendicular_from_a_point_to_a_line.c
+foot_of_perpendicular_from_a_point_to_a_line.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/foot_of_perpendicular_from_a_point_to_a_line.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-Generate_multi_layered_measurement_points.obj : $(START_DIR)/codegen/lib/QuanZhanYi/Generate_multi_layered_measurement_points.c
+Generate_multi_layered_measurement_points.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/Generate_multi_layered_measurement_points.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-mean.obj : $(START_DIR)/codegen/lib/QuanZhanYi/mean.c
+mean.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/mean.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-generate_unit_circle_with_normal_vector.obj : $(START_DIR)/codegen/lib/QuanZhanYi/generate_unit_circle_with_normal_vector.c
+generate_unit_circle_with_normal_vector.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/generate_unit_circle_with_normal_vector.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-Three_Points_Initial_Rough_Cylindrical_Judgment.obj : $(START_DIR)/codegen/lib/QuanZhanYi/Three_Points_Initial_Rough_Cylindrical_Judgment.c
+Three_Points_Initial_Rough_Cylindrical_Judgment.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/Three_Points_Initial_Rough_Cylindrical_Judgment.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-QuanZhanYi_emxutil.obj : $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_emxutil.c
+foot_of_perpendicular_from_a_point_to_a_line_emxutil.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/foot_of_perpendicular_from_a_point_to_a_line_emxutil.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-QuanZhanYi_emxAPI.obj : $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_emxAPI.c
+foot_of_perpendicular_from_a_point_to_a_line_emxAPI.obj : $(START_DIR)/codegen/lib/foot_of_perpendicular_from_a_point_to_a_line/foot_of_perpendicular_from_a_point_to_a_line_emxAPI.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 

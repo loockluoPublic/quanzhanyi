@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 24-Mar-2024 13:55:20
+ * C/C++ source code generated on  : 24-Mar-2024 17:37:00
  */
 
 /*************************************************************************/
@@ -33,11 +33,11 @@
 /* Include Files */
 #include "main.h"
 #include "Generate_multi_layered_measurement_points.h"
-#include "QuanZhanYi_emxAPI.h"
-#include "QuanZhanYi_terminate.h"
-#include "QuanZhanYi_types.h"
 #include "Three_Points_Initial_Rough_Cylindrical_Judgment.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_emxAPI.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_terminate.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line_types.h"
 #include "generate_unit_circle_with_normal_vector.h"
 #include "rt_nonfinite.h"
 
@@ -187,22 +187,22 @@ static void c_main_foot_of_perpendicular_fr(void)
  */
 static void c_main_generate_unit_circle_wit(void)
 {
-  emxArray_real_T *x_circle;
-  emxArray_real_T *y_circle;
-  emxArray_real_T *z_circle;
+  emxArray_real_T *x_circle1;
+  emxArray_real_T *y_circle1;
+  emxArray_real_T *z_circle1;
   double t1_tmp;
-  emxInitArray_real_T(&x_circle, 2);
-  emxInitArray_real_T(&y_circle, 2);
-  emxInitArray_real_T(&z_circle, 2);
+  emxInitArray_real_T(&x_circle1, 2);
+  emxInitArray_real_T(&y_circle1, 2);
+  emxInitArray_real_T(&z_circle1, 2);
   /* Initialize function 'generate_unit_circle_with_normal_vector' input
    * arguments. */
   t1_tmp = argInit_real_T();
   /* Call the entry-point 'generate_unit_circle_with_normal_vector'. */
-  generate_unit_circle_with_normal_vector(t1_tmp, t1_tmp, t1_tmp, x_circle,
-                                          y_circle, z_circle);
-  emxDestroyArray_real_T(z_circle);
-  emxDestroyArray_real_T(y_circle);
-  emxDestroyArray_real_T(x_circle);
+  generate_unit_circle_with_normal_vector(t1_tmp, t1_tmp, t1_tmp, x_circle1,
+                                          y_circle1, z_circle1);
+  emxDestroyArray_real_T(z_circle1);
+  emxDestroyArray_real_T(y_circle1);
+  emxDestroyArray_real_T(x_circle1);
 }
 
 /*
@@ -224,7 +224,7 @@ You can call entry-point functions multiple times. */
   c_main_Three_Points_Initial_Rou();
   /* Terminate the application.
 You do not need to do this more than one time. */
-  QuanZhanYi_terminate();
+  foot_of_perpendicular_from_a_point_to_a_line_terminate();
   return 0;
 }
 
