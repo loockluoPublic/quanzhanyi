@@ -115,5 +115,5 @@ const init = () => {
 
   // x.free();
 };
-
-init();
+setTimeout(init, 500);
+// init();

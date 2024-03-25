@@ -14,14 +14,10 @@
     // 定义一个模块对象，重写print和printErr
     var Module = {
       print: function (text) {
-        // 用于处理标准输出
-        var element = document.getElementById('output');
-        element.innerHTML += text + "<br>";
+        console.log("%c C 代码的日志", "color:#33a5ff", text);
       },
       printErr: function (text) {
-        // 用于处理标准错误输出
-        var element = document.getElementById('output');
-        element.innerHTML += 'Error: ' + text + "<br>";
+        console.error("%c C 代码的日志", "color:#4fff4B", text);
       },
       onRuntimeInitialized: function () {
         console.log("%c Line:27 🥓 onRuntimeInitialized", "color:#33a5ff", Module);
