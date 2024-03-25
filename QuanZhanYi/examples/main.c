@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Mar-2024 17:49:36
+ * C/C++ source code generated on  : 26-Mar-2024 00:13:40
  */
 
 /*************************************************************************/
@@ -32,6 +32,7 @@
 
 /* Include Files */
 #include "main.h"
+#include "Calculate_accurate_cylinders_from_multiple_measurement_points.h"
 #include "Generate_multi_layered_measurement_points.h"
 #include "QuanZhanYi_emxAPI.h"
 #include "QuanZhanYi_terminate.h"
@@ -46,6 +47,8 @@ static void argInit_3x1_real_T(double result[3]);
 static emxArray_real_T *argInit_Unboundedx1_real_T(void);
 
 static double argInit_real_T(void);
+
+static void c_main_Calculate_accurate_cylin(void);
 
 static void c_main_Generate_multi_layered_m(void);
 
@@ -97,6 +100,39 @@ Change this value to the value that the application requires. */
 static double argInit_real_T(void)
 {
   return 0.0;
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+static void c_main_Calculate_accurate_cylin(void)
+{
+  emxArray_real_T *Err_every;
+  emxArray_real_T *x;
+  emxArray_real_T *y;
+  emxArray_real_T *z;
+  double MTaon[3];
+  double Mcenter[3];
+  double Mradial;
+  emxInitArray_real_T(&Err_every, 2);
+  /* Initialize function
+   * 'Calculate_accurate_cylinders_from_multiple_measurement_points' input
+   * arguments. */
+  /* Initialize function input argument 'x'. */
+  x = argInit_Unboundedx1_real_T();
+  /* Initialize function input argument 'y'. */
+  y = argInit_Unboundedx1_real_T();
+  /* Initialize function input argument 'z'. */
+  z = argInit_Unboundedx1_real_T();
+  /* Call the entry-point
+   * 'Calculate_accurate_cylinders_from_multiple_measurement_points'. */
+  Calculate_accurate_cylinders_from_multiple_measurement_points(
+      x, y, z, Mcenter, MTaon, &Mradial, Err_every);
+  emxDestroyArray_real_T(Err_every);
+  emxDestroyArray_real_T(z);
+  emxDestroyArray_real_T(y);
+  emxDestroyArray_real_T(x);
 }
 
 /*
@@ -191,6 +227,7 @@ int main(int argc, char **argv)
    * function. So, a call to initialize is not included here. */
   /* Invoke the entry-point functions.
 You can call entry-point functions multiple times. */
+  c_main_Calculate_accurate_cylin();
   c_main_foot_of_perpendicular_fr();
   c_main_Generate_multi_layered_m();
   c_main_generate_unit_circle_wit();

@@ -1,12 +1,12 @@
 /*
- * File: QuanZhanYi_emxutil.h
+ * File: minOrMax.h
  *
  * MATLAB Coder version            : 5.2
  * C/C++ source code generated on  : 26-Mar-2024 00:13:40
  */
 
-#ifndef QUANZHANYI_EMXUTIL_H
-#define QUANZHANYI_EMXUTIL_H
+#ifndef MINORMAX_H
+#define MINORMAX_H
 
 /* Include Files */
 #include "QuanZhanYi_types.h"
@@ -19,11 +19,11 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel);
+void b_minimum(const emxArray_real_T *x, double *ex, int *idx);
 
-extern void emxFree_real_T(emxArray_real_T **pEmxArray);
+double maximum(const emxArray_real_T *x);
 
-extern void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions);
+double minimum(const emxArray_real_T *x);
 
 #ifdef __cplusplus
 }
@@ -31,7 +31,7 @@ extern void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions);
 
 #endif
 /*
- * File trailer for QuanZhanYi_emxutil.h
+ * File trailer for minOrMax.h
  *
  * [EOF]
  */

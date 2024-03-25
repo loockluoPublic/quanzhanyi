@@ -1,31 +1,34 @@
 /*
- * File: rtGetInf.h
+ * File: xnrm2.h
  *
  * MATLAB Coder version            : 5.2
  * C/C++ source code generated on  : 26-Mar-2024 00:13:40
  */
 
-#ifndef RTGETINF_H
-#define RTGETINF_H
+#ifndef XNRM2_H
+#define XNRM2_H
 
 /* Include Files */
 #include "rtwtypes.h"
+#include <stddef.h>
+#include <stdlib.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-extern real_T rtGetInf(void);
-extern real32_T rtGetInfF(void);
-extern real_T rtGetMinusInf(void);
-extern real32_T rtGetMinusInfF(void);
+/* Function Declarations */
+double b_xnrm2(int n, const double x[7], int ix0);
+
+double xnrm2(int n, const double x[49], int ix0);
 
 #ifdef __cplusplus
 }
 #endif
+
 #endif
 /*
- * File trailer for rtGetInf.h
+ * File trailer for xnrm2.h
  *
  * [EOF]
  */

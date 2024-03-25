@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Mar-2024 17:49:36
+ * C/C++ source code generated on  : 26-Mar-2024 00:13:40
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -22,6 +22,9 @@ MEXFUNCTION_LINKAGE void mexFunction(int32_T nlhs, mxArray *plhs[],
                                      int32_T nrhs, const mxArray *prhs[]);
 
 emlrtCTX mexFunctionCreateRootTLS(void);
+
+void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points_mexFunction(
+    int32_T nlhs, mxArray *plhs[4], int32_T nrhs, const mxArray *prhs[3]);
 
 void unsafe_Generate_multi_layered_measurement_points_mexFunction(
     int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[7]);

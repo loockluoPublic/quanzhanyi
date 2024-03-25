@@ -1,31 +1,32 @@
 /*
- * File: rtGetInf.h
+ * File: xrotg.h
  *
  * MATLAB Coder version            : 5.2
  * C/C++ source code generated on  : 26-Mar-2024 00:13:40
  */
 
-#ifndef RTGETINF_H
-#define RTGETINF_H
+#ifndef XROTG_H
+#define XROTG_H
 
 /* Include Files */
 #include "rtwtypes.h"
+#include <stddef.h>
+#include <stdlib.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-extern real_T rtGetInf(void);
-extern real32_T rtGetInfF(void);
-extern real_T rtGetMinusInf(void);
-extern real32_T rtGetMinusInfF(void);
+/* Function Declarations */
+void xrotg(double *a, double *b, double *c, double *s);
 
 #ifdef __cplusplus
 }
 #endif
+
 #endif
 /*
- * File trailer for rtGetInf.h
+ * File trailer for xrotg.h
  *
  * [EOF]
  */
