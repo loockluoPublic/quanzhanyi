@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2024 23:35:55
+ * C/C++ source code generated on  : 25-Mar-2024 17:22:35
  */
 
 /* Include Files */
@@ -20,11 +20,10 @@
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
-  static const char_T *emlrtEntryPoints[4] = {
+  static const char_T *emlrtEntryPoints[3] = {
       "foot_of_perpendicular_from_a_point_to_a_line",
       "Generate_multi_layered_measurement_points",
-      "generate_unit_circle_with_normal_vector",
-      "Three_Points_Initial_Rough_Cylindrical_Judgment"};
+      "generate_unit_circle_with_normal_vector"};
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
@@ -36,7 +35,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   st.tls = emlrtRootTLSGlobal;
   /* Dispatch the entry-point. */
   switch (emlrtGetEntryPointIndexR2016a(
-      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 4)) {
+      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 3)) {
   case 0:
     unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
         nlhs, plhs, nrhs - 1, &prhs[1]);
@@ -47,10 +46,6 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
     break;
   case 2:
     unsafe_generate_unit_circle_with_normal_vector_mexFunction(
-        nlhs, plhs, nrhs - 1, &prhs[1]);
-    break;
-  case 3:
-    unsafe_Three_Points_Initial_Rough_Cylindrical_Judgment_mexFunction(
         nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   }
@@ -99,44 +94,6 @@ void unsafe_Generate_multi_layered_measurement_points_mexFunction(
   c_Generate_multi_layered_measur(prhs, &outputs);
   /* Copy over outputs to the caller. */
   emlrtReturnArrays(1, &plhs[0], &outputs);
-}
-
-/*
- * Arguments    : int32_T nlhs
- *                mxArray *plhs[6]
- *                int32_T nrhs
- *                const mxArray *prhs[3]
- * Return Type  : void
- */
-void unsafe_Three_Points_Initial_Rough_Cylindrical_Judgment_mexFunction(
-    int32_T nlhs, mxArray *plhs[6], int32_T nrhs, const mxArray *prhs[3])
-{
-  emlrtStack st = {
-      NULL, /* site */
-      NULL, /* tls */
-      NULL  /* prev */
-  };
-  const mxArray *outputs[6];
-  int32_T b_nlhs;
-  st.tls = emlrtRootTLSGlobal;
-  /* Check for proper number of arguments. */
-  if (nrhs != 3) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 3, 4,
-                        47, "Three_Points_Initial_Rough_Cylindrical_Judgment");
-  }
-  if (nlhs > 6) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 47,
-                        "Three_Points_Initial_Rough_Cylindrical_Judgment");
-  }
-  /* Call the function. */
-  c_Three_Points_Initial_Rough_Cy(prhs, nlhs, outputs);
-  /* Copy over outputs to the caller. */
-  if (nlhs < 1) {
-    b_nlhs = 1;
-  } else {
-    b_nlhs = nlhs;
-  }
-  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*

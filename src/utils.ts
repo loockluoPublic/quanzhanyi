@@ -53,10 +53,11 @@ const init = () => {
   const p3 = new EmxArray_real_T(p3array[i]);
   const p4 = new EmxArray_real_T(p4array[i]);
   const resultPoints = new EmxArray_real_T(3, 15);
+  const debugRes = new EmxArray_real_T(1,10);
 
   // console.log("%c Line:76 🍫", "color:#7f2b82", resultPoints.toJSON());
 
-  _GenerateMultiLayeredMeasurementPoints(
+ const res = _GenerateMultiLayeredMeasurementPoints(
     x2.ptr,
     y2.ptr,
     z2.ptr,
@@ -64,9 +65,10 @@ const init = () => {
     3,
     p3.arrayPtr,
     p4.arrayPtr,
-    resultPoints.ptr
-  );
-  // console.log("%c Line:55 🍷 res", "color:#ed9ec7", res);
+    resultPoints.ptr,
+    debugRes.arrayPtr
+  )
+  console.log("%c Line:55 🍷 中断变量值：", "color:#ed9ec7",res, debugRes.toJSON());
   // // console.log("%c Line:67 🍊 res", "color:#fca650", res);
   // // const numDimensions = callTest((window as any).Module, a, data, size);
   // // console.log("%c Line:64 🥤 numDimensions", "color:#ffdd4d", numDimensions);

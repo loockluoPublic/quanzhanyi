@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2024 23:35:55
+ * C/C++ source code generated on  : 25-Mar-2024 17:22:35
  */
 
 /*************************************************************************/
@@ -36,7 +36,6 @@
 #include "QuanZhanYi_emxAPI.h"
 #include "QuanZhanYi_terminate.h"
 #include "QuanZhanYi_types.h"
-#include "Three_Points_Initial_Rough_Cylindrical_Judgment.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
 #include "generate_unit_circle_with_normal_vector.h"
 #include "rt_nonfinite.h"
@@ -49,8 +48,6 @@ static emxArray_real_T *argInit_Unboundedx1_real_T(void);
 static double argInit_real_T(void);
 
 static void c_main_Generate_multi_layered_m(void);
-
-static void c_main_Three_Points_Initial_Rou(void);
 
 static void c_main_foot_of_perpendicular_fr(void);
 
@@ -140,30 +137,6 @@ static void c_main_Generate_multi_layered_m(void)
  * Arguments    : void
  * Return Type  : void
  */
-static void c_main_Three_Points_Initial_Rou(void)
-{
-  double x_tmp[3];
-  double S1;
-  double S2;
-  double S3;
-  double b_y0;
-  double x0;
-  double z0;
-  /* Initialize function 'Three_Points_Initial_Rough_Cylindrical_Judgment' input
-   * arguments. */
-  /* Initialize function input argument 'x'. */
-  argInit_3x1_real_T(x_tmp);
-  /* Initialize function input argument 'y'. */
-  /* Initialize function input argument 'z'. */
-  /* Call the entry-point 'Three_Points_Initial_Rough_Cylindrical_Judgment'. */
-  Three_Points_Initial_Rough_Cylindrical_Judgment(x_tmp, x_tmp, x_tmp, &S1, &S2,
-                                                  &S3, &x0, &b_y0, &z0);
-}
-
-/*
- * Arguments    : void
- * Return Type  : void
- */
 static void c_main_foot_of_perpendicular_fr(void)
 {
   double P_outer_tmp[3];
@@ -221,7 +194,6 @@ You can call entry-point functions multiple times. */
   c_main_foot_of_perpendicular_fr();
   c_main_Generate_multi_layered_m();
   c_main_generate_unit_circle_wit();
-  c_main_Three_Points_Initial_Rou();
   /* Terminate the application.
 You do not need to do this more than one time. */
   QuanZhanYi_terminate();

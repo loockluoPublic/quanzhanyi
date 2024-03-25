@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2024 23:35:55
+ * C/C++ source code generated on  : 25-Mar-2024 17:22:35
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -52,17 +52,8 @@ void QuanZhanYi_xil_shutdown(void);
 
 void QuanZhanYi_xil_terminate(void);
 
-void Three_Points_Initial_Rough_Cylindrical_Judgment(real_T x[3], real_T y[3],
-                                                     real_T z[3], real_T *S1,
-                                                     real_T *S2, real_T *S3,
-                                                     real_T *x0, real_T *b_y0,
-                                                     real_T *z0);
-
 void c_Generate_multi_layered_measur(const mxArray *const prhs[7],
                                      const mxArray **plhs);
-
-void c_Three_Points_Initial_Rough_Cy(const mxArray *const prhs[3], int32_T nlhs,
-                                     const mxArray *plhs[6]);
 
 void c_foot_of_perpendicular_from_a_(const mxArray *const prhs[3], int32_T nlhs,
                                      const mxArray *plhs[3]);

@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2024 23:35:55
+ * C/C++ source code generated on  : 25-Mar-2024 17:22:35
  */
 
 /* Include Files */
@@ -453,56 +453,6 @@ void c_Generate_multi_layered_measur(const mxArray *const prhs[7],
   emxFree_real_T(&y);
   emxFree_real_T(&x);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
-}
-
-/*
- * Arguments    : const mxArray * const prhs[3]
- *                int32_T nlhs
- *                const mxArray *plhs[6]
- * Return Type  : void
- */
-void c_Three_Points_Initial_Rough_Cy(const mxArray *const prhs[3], int32_T nlhs,
-                                     const mxArray *plhs[6])
-{
-  emlrtStack st = {
-      NULL, /* site */
-      NULL, /* tls */
-      NULL  /* prev */
-  };
-  real_T(*x)[3];
-  real_T(*y)[3];
-  real_T(*z)[3];
-  real_T S1;
-  real_T S2;
-  real_T S3;
-  real_T b_y0;
-  real_T x0;
-  real_T z0;
-  st.tls = emlrtRootTLSGlobal;
-  /* Marshall function inputs */
-  x = emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "x");
-  y = emlrt_marshallIn(&st, emlrtAlias(prhs[1]), "y");
-  z = emlrt_marshallIn(&st, emlrtAlias(prhs[2]), "z");
-  /* Invoke the target function */
-  Three_Points_Initial_Rough_Cylindrical_Judgment(*x, *y, *z, &S1, &S2, &S3,
-                                                  &x0, &b_y0, &z0);
-  /* Marshall function outputs */
-  plhs[0] = emlrt_marshallOut(S1);
-  if (nlhs > 1) {
-    plhs[1] = emlrt_marshallOut(S2);
-  }
-  if (nlhs > 2) {
-    plhs[2] = emlrt_marshallOut(S3);
-  }
-  if (nlhs > 3) {
-    plhs[3] = emlrt_marshallOut(x0);
-  }
-  if (nlhs > 4) {
-    plhs[4] = emlrt_marshallOut(b_y0);
-  }
-  if (nlhs > 5) {
-    plhs[5] = emlrt_marshallOut(z0);
-  }
 }
 
 /*

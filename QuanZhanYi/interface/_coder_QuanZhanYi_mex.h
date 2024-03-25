@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2024 23:35:55
+ * C/C++ source code generated on  : 25-Mar-2024 17:22:35
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -25,9 +25,6 @@ emlrtCTX mexFunctionCreateRootTLS(void);
 
 void unsafe_Generate_multi_layered_measurement_points_mexFunction(
     int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[7]);
-
-void unsafe_Three_Points_Initial_Rough_Cylindrical_Judgment_mexFunction(
-    int32_T nlhs, mxArray *plhs[6], int32_T nrhs, const mxArray *prhs[3]);
 
 void unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
     int32_T nlhs, mxArray *plhs[3], int32_T nrhs, const mxArray *prhs[3]);

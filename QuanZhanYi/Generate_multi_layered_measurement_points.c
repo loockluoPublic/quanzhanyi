@@ -2,7 +2,7 @@
  * File: Generate_multi_layered_measurement_points.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 24-Mar-2024 23:35:55
+ * C/C++ source code generated on  : 25-Mar-2024 17:22:35
  */
 
 /* Include Files */
@@ -13,8 +13,6 @@
 #include "QuanZhanYi_types.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
 #include "generate_unit_circle_with_normal_vector.h"
-#include "mean.h"
-#include "nchoosek.h"
 #include "rt_nonfinite.h"
 #include "rt_defines.h"
 #include "rt_nonfinite.h"
@@ -63,7 +61,10 @@ static double rt_atan2d_snf(double u0, double u1)
 }
 
 /*
- * --------------------------3点组合抽样------------------------------
+ * -----------------------平均轴向量、圆心-----------------------
+ *  xxx = x(1:3);
+ *  yyy = y(1:3);
+ *  zzz = z(1:3);
  *
  * Arguments    : const emxArray_real_T *x
  *                const emxArray_real_T *y
@@ -80,472 +81,388 @@ void Generate_multi_layered_measurement_points(
     const emxArray_real_T *z, double num, double laynum, const double P3[3],
     const double P4[3], emxArray_real_T *Point_test)
 {
+  emxArray_real_T *Dist;
   emxArray_real_T *Layer;
-  emxArray_real_T *S;
-  emxArray_real_T *XCenter;
-  emxArray_real_T *YCenter;
+  emxArray_real_T *Point_testx;
+  emxArray_real_T *Point_testy;
+  emxArray_real_T *Point_testz;
   emxArray_real_T *Ylay0;
-  emxArray_real_T *ZCenter;
   emxArray_real_T *Zlay0;
-  emxArray_real_T *order;
-  emxArray_real_T *temp;
-  double P2[3];
+  double p23f[3];
   double p3[3];
-  double d;
+  double Radius;
+  double S_idx_0;
+  double absxk;
+  double p12f_idx_0;
   double p12f_idx_1;
-  double p1_idx_0;
-  double p1_idx_1;
-  double p1_idx_2;
   double p23_idx_0;
+  double p23_idx_1;
   double p23_idx_2;
-  double p23f_idx_0;
-  double p23f_idx_1;
-  double p23f_idx_2;
   double p2_idx_0;
   double p2_idx_1;
   double p2_idx_2;
   double pf_idx_0;
   double pf_idx_1;
   double pf_idx_2;
-  int comb[3];
-  int b_loop_ub;
-  int c_loop_ub;
-  int combj;
-  int i;
-  int icomb;
-  int loop_ub;
+  double scale;
+  double t;
+  int firstBlockLength;
+  int hi;
+  int ib;
+  int k;
+  int lastBlockLength;
   int nblocks;
-  int nmkpi;
-  int nrows;
-  int row;
-  unsigned int u;
   if (!isInitialized_QuanZhanYi) {
     QuanZhanYi_initialize();
   }
-  emxInit_real_T(&temp, 2);
-  if (x->size[0] < 1) {
-    temp->size[0] = 1;
-    temp->size[1] = 0;
+  /*  [s1,s2,s3,xcenter,ycenter,zcenter] =
+   * Three_Points_Initial_Rough_Cylindrical_Judgment(xxx,yyy,zzz); */
+  /* %%%%%%%%%%%%%%%%%%%% */
+  /*  两条线段的重点，之后需要求中垂线 */
+  p12f_idx_1 = x->data[0] - x->data[1];
+  p23f[0] = x->data[0] - x->data[2];
+  p12f_idx_0 = y->data[0] - y->data[1];
+  p23f[1] = y->data[0] - y->data[2];
+  p2_idx_2 = z->data[0] - z->data[1];
+  p23f[2] = z->data[0] - z->data[2];
+  pf_idx_0 = p12f_idx_0 * p23f[2] - p23f[1] * p2_idx_2;
+  pf_idx_1 = p23f[0] * p2_idx_2 - p12f_idx_1 * p23f[2];
+  pf_idx_2 = p12f_idx_1 * p23f[1] - p23f[0] * p12f_idx_0;
+  /*  求两条线的中垂线 */
+  p12f_idx_0 = pf_idx_1 * p2_idx_2 - p12f_idx_0 * pf_idx_2;
+  p12f_idx_1 = p12f_idx_1 * pf_idx_2 - pf_idx_0 * p2_idx_2;
+  p23_idx_0 = (x->data[1] + x->data[2]) / 2.0;
+  p2_idx_0 = x->data[1] - x->data[2];
+  p23_idx_1 = (y->data[1] + y->data[2]) / 2.0;
+  p2_idx_1 = y->data[1] - y->data[2];
+  p2_idx_2 = z->data[1] - z->data[2];
+  p23f[0] = pf_idx_1 * p2_idx_2 - p2_idx_1 * pf_idx_2;
+  p23f[1] = p2_idx_0 * pf_idx_2 - pf_idx_0 * p2_idx_2;
+  /*  求在中垂线上投影的大小 */
+  p12f_idx_1 = (((y->data[0] + y->data[1]) / 2.0 - p23_idx_1) * p12f_idx_0 -
+                ((x->data[0] + x->data[1]) / 2.0 - p23_idx_0) * p12f_idx_1) /
+               (p12f_idx_0 * p23f[1] - p23f[0] * p12f_idx_1);
+  /*  得出距离 */
+  /*  radius = sqrt((x(1)-p(1)).^2+(y(1)-p(2)).^2+(z(1)-p(3)).^2); */
+  scale = 3.3121686421112381E-170;
+  p23_idx_0 += p23f[0] * p12f_idx_1;
+  absxk = fabs(pf_idx_0);
+  if (absxk > 3.3121686421112381E-170) {
+    p2_idx_2 = 1.0;
+    scale = absxk;
   } else {
-    i = temp->size[0] * temp->size[1];
-    temp->size[0] = 1;
-    temp->size[1] = x->size[0];
-    emxEnsureCapacity_real_T(temp, i);
-    icomb = x->size[0] - 1;
-    for (i = 0; i <= icomb; i++) {
-      temp->data[i] = (double)i + 1.0;
-    }
+    t = absxk / 3.3121686421112381E-170;
+    p2_idx_2 = t * t;
   }
-  emxInit_real_T(&order, 2);
-  if (temp->size[1] == 1) {
-    u = (unsigned int)temp->data[0];
-    if (3U <= u) {
-      i = order->size[0] * order->size[1];
-      order->size[0] = 1;
-      order->size[1] = 1;
-      emxEnsureCapacity_real_T(order, i);
-      order->data[0] = nCk(u, 3.0);
-    }
-  } else if (3 > temp->size[1]) {
-    order->size[0] = 0;
-    order->size[1] = 3;
+  p23_idx_1 += p23f[1] * p12f_idx_1;
+  absxk = fabs(pf_idx_1);
+  if (absxk > scale) {
+    t = scale / absxk;
+    p2_idx_2 = p2_idx_2 * t * t + 1.0;
+    scale = absxk;
   } else {
-    nrows = (int)floor(nCk(temp->size[1], 3.0));
-    i = order->size[0] * order->size[1];
-    order->size[0] = nrows;
-    order->size[1] = 3;
-    emxEnsureCapacity_real_T(order, i);
-    comb[0] = 1;
-    comb[1] = 2;
-    comb[2] = 3;
-    icomb = 2;
-    nmkpi = temp->size[1];
-    for (row = 0; row < nrows; row++) {
-      order->data[row] = (unsigned int)temp->data[comb[0] - 1];
-      order->data[row + order->size[0]] = (unsigned int)temp->data[comb[1] - 1];
-      order->data[row + order->size[0] * 2] =
-          (unsigned int)temp->data[comb[2] - 1];
-      if (icomb + 1 > 0) {
-        nblocks = comb[icomb];
-        combj = comb[icomb] + 1;
-        comb[icomb]++;
-        if (nblocks + 1 < nmkpi) {
-          i = icomb + 2;
-          for (icomb = i; icomb < 4; icomb++) {
-            combj++;
-            comb[icomb - 1] = combj;
-          }
-          icomb = 2;
-          nmkpi = temp->size[1];
-        } else {
-          icomb--;
-          nmkpi--;
-        }
-      }
-    }
+    t = absxk / scale;
+    p2_idx_2 += t * t;
   }
-  emxInit_real_T(&S, 2);
-  /*  -----------------------平均轴向量、圆心----------------------- */
-  i = S->size[0] * S->size[1];
-  S->size[0] = 3;
-  S->size[1] = order->size[0];
-  emxEnsureCapacity_real_T(S, i);
-  icomb = 3 * order->size[0];
-  for (i = 0; i < icomb; i++) {
-    S->data[i] = 0.0;
+  p23_idx_2 = (z->data[1] + z->data[2]) / 2.0 +
+              (pf_idx_0 * p2_idx_1 - p2_idx_0 * pf_idx_1) * p12f_idx_1;
+  absxk = fabs(pf_idx_2);
+  if (absxk > scale) {
+    t = scale / absxk;
+    p2_idx_2 = p2_idx_2 * t * t + 1.0;
+    scale = absxk;
+  } else {
+    t = absxk / scale;
+    p2_idx_2 += t * t;
   }
-  emxInit_real_T(&XCenter, 1);
-  emxInit_real_T(&YCenter, 1);
-  emxInit_real_T(&ZCenter, 1);
-  i = order->size[0];
-  icomb = XCenter->size[0];
-  XCenter->size[0] = order->size[0];
-  emxEnsureCapacity_real_T(XCenter, icomb);
-  icomb = YCenter->size[0];
-  YCenter->size[0] = order->size[0];
-  emxEnsureCapacity_real_T(YCenter, icomb);
-  icomb = ZCenter->size[0];
-  ZCenter->size[0] = order->size[0];
-  emxEnsureCapacity_real_T(ZCenter, icomb);
-  for (nmkpi = 0; nmkpi < i; nmkpi++) {
-    d = order->data[nmkpi];
-    p1_idx_0 = x->data[(int)d - 1];
-    p1_idx_1 = y->data[(int)d - 1];
-    p1_idx_2 = z->data[(int)d - 1];
-    d = order->data[nmkpi + order->size[0]];
-    p2_idx_0 = x->data[(int)d - 1];
-    p2_idx_1 = y->data[(int)d - 1];
-    p2_idx_2 = z->data[(int)d - 1];
-    d = order->data[nmkpi + order->size[0] * 2];
-    p3[0] = x->data[(int)d - 1];
-    p3[1] = y->data[(int)d - 1];
-    p3[2] = z->data[(int)d - 1];
-    /*  if any(pf == 0) */
-    /*      error('三个点不能共线！！'); */
-    /*  end */
-    /*  两条线段的重点，之后需要求中垂线 */
-    P2[0] = p1_idx_0 - p2_idx_0;
-    p23f_idx_0 = p1_idx_0 - p3[0];
-    p1_idx_0 = (p1_idx_0 + p2_idx_0) / 2.0;
-    P2[1] = p1_idx_1 - p2_idx_1;
-    p23f_idx_1 = p1_idx_1 - p3[1];
-    p1_idx_1 = (p1_idx_1 + p2_idx_1) / 2.0;
-    P2[2] = p1_idx_2 - p2_idx_2;
-    p23f_idx_2 = p1_idx_2 - p3[2];
-    pf_idx_0 = P2[1] * p23f_idx_2 - p23f_idx_1 * P2[2];
-    pf_idx_1 = p23f_idx_0 * P2[2] - P2[0] * p23f_idx_2;
-    pf_idx_2 = P2[0] * p23f_idx_1 - p23f_idx_0 * P2[1];
-    /*  求两条线的中垂线 */
-    p1_idx_2 = pf_idx_1 * P2[2] - P2[1] * pf_idx_2;
-    p12f_idx_1 = P2[0] * pf_idx_2 - pf_idx_0 * P2[2];
-    p23_idx_0 = (p2_idx_0 + p3[0]) / 2.0;
-    p2_idx_0 -= p3[0];
-    p23f_idx_2 = (p2_idx_1 + p3[1]) / 2.0;
-    p2_idx_1 -= p3[1];
-    p23_idx_2 = (p2_idx_2 + p3[2]) / 2.0;
-    p2_idx_2 -= p3[2];
-    p23f_idx_0 = pf_idx_1 * p2_idx_2 - p2_idx_1 * pf_idx_2;
-    p23f_idx_1 = p2_idx_0 * pf_idx_2 - pf_idx_0 * p2_idx_2;
-    /*  求在中垂线上投影的大小 */
-    p1_idx_2 = ((p1_idx_1 - p23f_idx_2) * p1_idx_2 -
-                (p1_idx_0 - p23_idx_0) * p12f_idx_1) /
-               (p1_idx_2 * p23f_idx_1 - p23f_idx_0 * p12f_idx_1);
-    /*  得出距离 */
-    p23_idx_0 += p23f_idx_0 * p1_idx_2;
-    p23f_idx_2 += p23f_idx_1 * p1_idx_2;
-    p23_idx_2 += (pf_idx_0 * p2_idx_1 - p2_idx_0 * pf_idx_1) * p1_idx_2;
-    /*  radius = sqrt((x(1)-p(1)).^2+(y(1)-p(2)).^2+(z(1)-p(3)).^2); */
-    XCenter->data[nmkpi] = p23_idx_0;
-    YCenter->data[nmkpi] = p23f_idx_2;
-    ZCenter->data[nmkpi] = p23_idx_2;
-    S->data[3 * nmkpi] = pf_idx_0;
-    S->data[3 * nmkpi + 1] = pf_idx_1;
-    S->data[3 * nmkpi + 2] = pf_idx_2;
-  }
-  emxFree_real_T(&order);
-  p1_idx_1 = mean(XCenter);
-  p2_idx_2 = mean(YCenter);
-  p2_idx_0 = mean(ZCenter);
-  b_mean(S, P2);
-  p23f_idx_0 = P2[0];
-  p23f_idx_1 = P2[1];
-  p23f_idx_2 = P2[2];
+  emxInit_real_T(&Dist, 2);
+  p2_idx_2 = scale * sqrt(p2_idx_2);
+  pf_idx_0 /= p2_idx_2;
+  pf_idx_1 /= p2_idx_2;
+  pf_idx_2 /= p2_idx_2;
+  /* %%%%%%%%%%%%%%%%%%% */
   /*  -----------------------------计算参数------------------------------- */
-  i = temp->size[0] * temp->size[1];
-  temp->size[0] = 1;
-  temp->size[1] = x->size[0];
-  emxEnsureCapacity_real_T(temp, i);
-  icomb = x->size[0];
-  emxFree_real_T(&S);
-  for (i = 0; i < icomb; i++) {
-    temp->data[i] = 0.0;
+  ib = Dist->size[0] * Dist->size[1];
+  Dist->size[0] = 1;
+  Dist->size[1] = x->size[0];
+  emxEnsureCapacity_real_T(Dist, ib);
+  firstBlockLength = x->size[0];
+  for (ib = 0; ib < firstBlockLength; ib++) {
+    Dist->data[ib] = 0.0;
   }
-  i = x->size[0];
-  for (nmkpi = 0; nmkpi < i; nmkpi++) {
-    p12f_idx_1 = x->data[nmkpi] - p1_idx_1;
-    p1_idx_2 = y->data[nmkpi] - p2_idx_2;
-    pf_idx_1 = z->data[nmkpi] - p2_idx_0;
-    temp->data[nmkpi] = sqrt((p12f_idx_1 * p12f_idx_1 + p1_idx_2 * p1_idx_2) +
-                             pf_idx_1 * pf_idx_1);
+  ib = x->size[0];
+  for (nblocks = 0; nblocks < ib; nblocks++) {
+    p12f_idx_1 = x->data[nblocks] - p23_idx_0;
+    p2_idx_2 = y->data[nblocks] - p23_idx_1;
+    p12f_idx_0 = z->data[nblocks] - p23_idx_2;
+    Dist->data[nblocks] = sqrt((p12f_idx_1 * p12f_idx_1 + p2_idx_2 * p2_idx_2) +
+                               p12f_idx_0 * p12f_idx_0);
   }
   /* %%%%%%%           圆柱参数          %%%%%%%%%%% */
-  if (temp->size[1] == 0) {
-    p12f_idx_1 = 0.0;
+  if (Dist->size[1] == 0) {
+    p2_idx_2 = 0.0;
   } else {
-    if (temp->size[1] <= 1024) {
-      icomb = temp->size[1];
-      nrows = 0;
+    if (Dist->size[1] <= 1024) {
+      firstBlockLength = Dist->size[1];
+      lastBlockLength = 0;
       nblocks = 1;
     } else {
-      icomb = 1024;
-      nblocks = temp->size[1] / 1024;
-      nrows = temp->size[1] - (nblocks << 10);
-      if (nrows > 0) {
+      firstBlockLength = 1024;
+      nblocks = Dist->size[1] / 1024;
+      lastBlockLength = Dist->size[1] - (nblocks << 10);
+      if (lastBlockLength > 0) {
         nblocks++;
       } else {
-        nrows = 1024;
+        lastBlockLength = 1024;
       }
     }
-    p12f_idx_1 = temp->data[0];
-    for (row = 2; row <= icomb; row++) {
-      p12f_idx_1 += temp->data[row - 1];
+    p2_idx_2 = Dist->data[0];
+    for (k = 2; k <= firstBlockLength; k++) {
+      p2_idx_2 += Dist->data[k - 1];
     }
-    for (combj = 2; combj <= nblocks; combj++) {
-      icomb = (combj - 1) << 10;
-      p1_idx_2 = temp->data[icomb];
-      if (combj == nblocks) {
-        nmkpi = nrows;
+    for (ib = 2; ib <= nblocks; ib++) {
+      firstBlockLength = (ib - 1) << 10;
+      p12f_idx_0 = Dist->data[firstBlockLength];
+      if (ib == nblocks) {
+        hi = lastBlockLength;
       } else {
-        nmkpi = 1024;
+        hi = 1024;
       }
-      for (row = 2; row <= nmkpi; row++) {
-        p1_idx_2 += temp->data[(icomb + row) - 1];
+      for (k = 2; k <= hi; k++) {
+        p12f_idx_0 += Dist->data[(firstBlockLength + k) - 1];
       }
-      p12f_idx_1 += p1_idx_2;
+      p2_idx_2 += p12f_idx_0;
     }
   }
-  p1_idx_0 = p12f_idx_1 / (double)temp->size[1];
-  pf_idx_1 = 3.3121686421112381E-170;
-  pf_idx_2 = fabs(P2[0]);
-  if (pf_idx_2 > 3.3121686421112381E-170) {
-    p12f_idx_1 = 1.0;
-    pf_idx_1 = pf_idx_2;
+  Radius = p2_idx_2 / (double)Dist->size[1];
+  scale = 3.3121686421112381E-170;
+  absxk = fabs(pf_idx_0);
+  if (absxk > 3.3121686421112381E-170) {
+    p2_idx_2 = 1.0;
+    scale = absxk;
   } else {
-    p23_idx_0 = pf_idx_2 / 3.3121686421112381E-170;
-    p12f_idx_1 = p23_idx_0 * p23_idx_0;
+    t = absxk / 3.3121686421112381E-170;
+    p2_idx_2 = t * t;
   }
-  pf_idx_2 = fabs(P2[1]);
-  if (pf_idx_2 > pf_idx_1) {
-    p23_idx_0 = pf_idx_1 / pf_idx_2;
-    p12f_idx_1 = p12f_idx_1 * p23_idx_0 * p23_idx_0 + 1.0;
-    pf_idx_1 = pf_idx_2;
+  absxk = fabs(pf_idx_1);
+  if (absxk > scale) {
+    t = scale / absxk;
+    p2_idx_2 = p2_idx_2 * t * t + 1.0;
+    scale = absxk;
   } else {
-    p23_idx_0 = pf_idx_2 / pf_idx_1;
-    p12f_idx_1 += p23_idx_0 * p23_idx_0;
+    t = absxk / scale;
+    p2_idx_2 += t * t;
   }
-  pf_idx_2 = fabs(P2[2]);
-  if (pf_idx_2 > pf_idx_1) {
-    p23_idx_0 = pf_idx_1 / pf_idx_2;
-    p12f_idx_1 = p12f_idx_1 * p23_idx_0 * p23_idx_0 + 1.0;
-    pf_idx_1 = pf_idx_2;
+  absxk = fabs(pf_idx_2);
+  if (absxk > scale) {
+    t = scale / absxk;
+    p2_idx_2 = p2_idx_2 * t * t + 1.0;
+    scale = absxk;
   } else {
-    p23_idx_0 = pf_idx_2 / pf_idx_1;
-    p12f_idx_1 += p23_idx_0 * p23_idx_0;
+    t = absxk / scale;
+    p2_idx_2 += t * t;
   }
-  p12f_idx_1 = pf_idx_1 * sqrt(p12f_idx_1);
-  p3[0] = p1_idx_1;
-  p3[1] = p2_idx_2;
-  p3[2] = p2_idx_0;
+  p2_idx_2 = scale * sqrt(p2_idx_2);
+  p3[0] = p23_idx_0;
+  p3[1] = p23_idx_1;
+  p3[2] = p23_idx_2;
   /* -------------------------管路确定范围（轴线端点）---------------------- */
-  d = p23f_idx_0 / p12f_idx_1;
-  p23f_idx_0 = d;
-  P2[0] = p1_idx_1 + d;
-  d = p23f_idx_1 / p12f_idx_1;
-  p23f_idx_1 = d;
-  P2[1] = p2_idx_2 + d;
-  d = p23f_idx_2 / p12f_idx_1;
-  P2[2] = p2_idx_0 + d;
-  foot_of_perpendicular_from_a_point_to_a_line(P4, p3, P2, &p23f_idx_2,
-                                               &p23_idx_2, &pf_idx_0);
-  foot_of_perpendicular_from_a_point_to_a_line(P3, p3, P2, &p1_idx_2,
-                                               &p12f_idx_1, &pf_idx_1);
-  pf_idx_1 = 3.3121686421112381E-170;
-  pf_idx_2 = fabs(P2[0] - p1_idx_1);
-  if (pf_idx_2 > 3.3121686421112381E-170) {
-    p1_idx_2 = 1.0;
-    pf_idx_1 = pf_idx_2;
+  pf_idx_0 /= p2_idx_2;
+  S_idx_0 = pf_idx_0;
+  p23f[0] = p23_idx_0 + pf_idx_0;
+  pf_idx_0 = pf_idx_1 / p2_idx_2;
+  p23_idx_0 = pf_idx_0;
+  p23f[1] = p23_idx_1 + pf_idx_0;
+  pf_idx_0 = pf_idx_2 / p2_idx_2;
+  p23f[2] = p23_idx_2 + pf_idx_0;
+  foot_of_perpendicular_from_a_point_to_a_line(P4, p3, p23f, &p12f_idx_1,
+                                               &p2_idx_2, &p2_idx_0);
+  foot_of_perpendicular_from_a_point_to_a_line(P3, p3, p23f, &p12f_idx_0,
+                                               &p2_idx_1, &p23_idx_2);
+  scale = 3.3121686421112381E-170;
+  absxk = fabs(p12f_idx_0 - p12f_idx_1);
+  if (absxk > 3.3121686421112381E-170) {
+    p12f_idx_0 = 1.0;
+    scale = absxk;
   } else {
-    p23_idx_0 = pf_idx_2 / 3.3121686421112381E-170;
-    p1_idx_2 = p23_idx_0 * p23_idx_0;
+    t = absxk / 3.3121686421112381E-170;
+    p12f_idx_0 = t * t;
   }
-  pf_idx_2 = fabs(P2[1] - p2_idx_2);
-  if (pf_idx_2 > pf_idx_1) {
-    p23_idx_0 = pf_idx_1 / pf_idx_2;
-    p1_idx_2 = p1_idx_2 * p23_idx_0 * p23_idx_0 + 1.0;
-    pf_idx_1 = pf_idx_2;
+  absxk = fabs(p2_idx_1 - p2_idx_2);
+  if (absxk > scale) {
+    t = scale / absxk;
+    p12f_idx_0 = p12f_idx_0 * t * t + 1.0;
+    scale = absxk;
   } else {
-    p23_idx_0 = pf_idx_2 / pf_idx_1;
-    p1_idx_2 += p23_idx_0 * p23_idx_0;
+    t = absxk / scale;
+    p12f_idx_0 += t * t;
   }
-  pf_idx_2 = fabs(P2[2] - p2_idx_0);
-  if (pf_idx_2 > pf_idx_1) {
-    p23_idx_0 = pf_idx_1 / pf_idx_2;
-    p1_idx_2 = p1_idx_2 * p23_idx_0 * p23_idx_0 + 1.0;
-    pf_idx_1 = pf_idx_2;
+  absxk = fabs(p23_idx_2 - p2_idx_0);
+  if (absxk > scale) {
+    t = scale / absxk;
+    p12f_idx_0 = p12f_idx_0 * t * t + 1.0;
+    scale = absxk;
   } else {
-    p23_idx_0 = pf_idx_2 / pf_idx_1;
-    p1_idx_2 += p23_idx_0 * p23_idx_0;
+    t = absxk / scale;
+    p12f_idx_0 += t * t;
   }
   emxInit_real_T(&Ylay0, 2);
   emxInit_real_T(&Zlay0, 2);
-  p1_idx_2 = pf_idx_1 * sqrt(p1_idx_2);
+  p12f_idx_0 = scale * sqrt(p12f_idx_0);
   /*  -----------------------------生成抽样点------------------------------- */
   generate_unit_circle_with_normal_vector(
-      rt_atan2d_snf(d, sqrt(p23f_idx_0 * p23f_idx_0 + p23f_idx_1 * p23f_idx_1)),
-      rt_atan2d_snf(p23f_idx_1, p23f_idx_0), num, temp, Ylay0, Zlay0);
+      rt_atan2d_snf(pf_idx_0, sqrt(S_idx_0 * S_idx_0 + p23_idx_0 * p23_idx_0)),
+      rt_atan2d_snf(p23_idx_0, S_idx_0), num, Dist, Ylay0, Zlay0);
   /*  ----------------------------移动到原点------------------------------- */
-  i = temp->size[0] * temp->size[1];
-  temp->size[0] = 1;
-  emxEnsureCapacity_real_T(temp, i);
-  icomb = temp->size[1] - 1;
-  for (i = 0; i <= icomb; i++) {
-    temp->data[i] = temp->data[i] * p1_idx_0 + p23f_idx_2;
+  ib = Dist->size[0] * Dist->size[1];
+  Dist->size[0] = 1;
+  emxEnsureCapacity_real_T(Dist, ib);
+  firstBlockLength = Dist->size[1] - 1;
+  for (ib = 0; ib <= firstBlockLength; ib++) {
+    Dist->data[ib] = Dist->data[ib] * Radius + p12f_idx_1;
   }
-  i = Ylay0->size[0] * Ylay0->size[1];
+  ib = Ylay0->size[0] * Ylay0->size[1];
   Ylay0->size[0] = 1;
-  emxEnsureCapacity_real_T(Ylay0, i);
-  icomb = Ylay0->size[1] - 1;
-  for (i = 0; i <= icomb; i++) {
-    Ylay0->data[i] = Ylay0->data[i] * p1_idx_0 + p23_idx_2;
+  emxEnsureCapacity_real_T(Ylay0, ib);
+  firstBlockLength = Ylay0->size[1] - 1;
+  for (ib = 0; ib <= firstBlockLength; ib++) {
+    Ylay0->data[ib] = Ylay0->data[ib] * Radius + p2_idx_2;
   }
-  i = Zlay0->size[0] * Zlay0->size[1];
+  ib = Zlay0->size[0] * Zlay0->size[1];
   Zlay0->size[0] = 1;
-  emxEnsureCapacity_real_T(Zlay0, i);
-  icomb = Zlay0->size[1] - 1;
-  for (i = 0; i <= icomb; i++) {
-    Zlay0->data[i] = Zlay0->data[i] * p1_idx_0 + pf_idx_0;
+  emxEnsureCapacity_real_T(Zlay0, ib);
+  firstBlockLength = Zlay0->size[1] - 1;
+  for (ib = 0; ib <= firstBlockLength; ib++) {
+    Zlay0->data[ib] = Zlay0->data[ib] * Radius + p2_idx_0;
   }
   /*  -----------------------------生成多层测点-------------------------------
    */
   /*  阈值  */
-  p12f_idx_1 = 0.2 * p1_idx_2;
-  p1_idx_2 *= 0.8;
+  p12f_idx_1 = 0.2 * p12f_idx_0;
+  p12f_idx_0 *= 0.8;
   emxInit_real_T(&Layer, 2);
   if (!(laynum >= 0.0)) {
     Layer->size[0] = 1;
     Layer->size[1] = 0;
   } else {
-    pf_idx_1 = floor(laynum);
-    i = Layer->size[0] * Layer->size[1];
+    p2_idx_2 = floor(laynum);
+    ib = Layer->size[0] * Layer->size[1];
     Layer->size[0] = 1;
-    Layer->size[1] = (int)pf_idx_1;
-    emxEnsureCapacity_real_T(Layer, i);
-    if ((int)pf_idx_1 >= 1) {
-      icomb = (int)pf_idx_1 - 1;
-      Layer->data[(int)floor(laynum) - 1] = p1_idx_2;
+    Layer->size[1] = (int)p2_idx_2;
+    emxEnsureCapacity_real_T(Layer, ib);
+    if ((int)p2_idx_2 >= 1) {
+      firstBlockLength = (int)p2_idx_2 - 1;
+      Layer->data[(int)floor(laynum) - 1] = p12f_idx_0;
       if (Layer->size[1] >= 2) {
         Layer->data[0] = p12f_idx_1;
         if (Layer->size[1] >= 3) {
-          if ((p12f_idx_1 == -p1_idx_2) && ((int)pf_idx_1 > 2)) {
-            p1_idx_2 /= (double)(int)pf_idx_1 - 1.0;
-            for (row = 2; row <= icomb; row++) {
-              Layer->data[row - 1] =
-                  (double)(((row << 1) - (int)pf_idx_1) - 1) * p1_idx_2;
+          if ((p12f_idx_1 == -p12f_idx_0) && ((int)p2_idx_2 > 2)) {
+            p12f_idx_0 /= (double)(int)p2_idx_2 - 1.0;
+            for (k = 2; k <= firstBlockLength; k++) {
+              Layer->data[k - 1] =
+                  (double)(((k << 1) - (int)p2_idx_2) - 1) * p12f_idx_0;
             }
-            if (((int)pf_idx_1 & 1) == 1) {
-              Layer->data[(int)pf_idx_1 >> 1] = 0.0;
+            if (((int)p2_idx_2 & 1) == 1) {
+              Layer->data[(int)p2_idx_2 >> 1] = 0.0;
             }
           } else {
-            p1_idx_2 = (p1_idx_2 - p12f_idx_1) / ((double)Layer->size[1] - 1.0);
-            i = Layer->size[1];
-            for (row = 0; row <= i - 3; row++) {
-              Layer->data[row + 1] =
-                  p12f_idx_1 + ((double)row + 1.0) * p1_idx_2;
+            p12f_idx_0 =
+                (p12f_idx_0 - p12f_idx_1) / ((double)Layer->size[1] - 1.0);
+            ib = Layer->size[1];
+            for (k = 0; k <= ib - 3; k++) {
+              Layer->data[k + 1] = p12f_idx_1 + ((double)k + 1.0) * p12f_idx_0;
             }
           }
         }
       }
     }
   }
-  icomb = (int)(laynum * num);
-  i = XCenter->size[0];
-  XCenter->size[0] = icomb;
-  emxEnsureCapacity_real_T(XCenter, i);
-  for (i = 0; i < icomb; i++) {
-    XCenter->data[i] = 0.0;
+  emxInit_real_T(&Point_testx, 1);
+  firstBlockLength = (int)(laynum * num);
+  ib = Point_testx->size[0];
+  Point_testx->size[0] = firstBlockLength;
+  emxEnsureCapacity_real_T(Point_testx, ib);
+  for (ib = 0; ib < firstBlockLength; ib++) {
+    Point_testx->data[ib] = 0.0;
   }
-  i = YCenter->size[0];
-  YCenter->size[0] = icomb;
-  emxEnsureCapacity_real_T(YCenter, i);
-  for (i = 0; i < icomb; i++) {
-    YCenter->data[i] = 0.0;
+  emxInit_real_T(&Point_testy, 1);
+  ib = Point_testy->size[0];
+  Point_testy->size[0] = firstBlockLength;
+  emxEnsureCapacity_real_T(Point_testy, ib);
+  for (ib = 0; ib < firstBlockLength; ib++) {
+    Point_testy->data[ib] = 0.0;
   }
-  i = ZCenter->size[0];
-  ZCenter->size[0] = icomb;
-  emxEnsureCapacity_real_T(ZCenter, i);
-  for (i = 0; i < icomb; i++) {
-    ZCenter->data[i] = 0.0;
+  emxInit_real_T(&Point_testz, 1);
+  ib = Point_testz->size[0];
+  Point_testz->size[0] = firstBlockLength;
+  emxEnsureCapacity_real_T(Point_testz, ib);
+  for (ib = 0; ib < firstBlockLength; ib++) {
+    Point_testz->data[ib] = 0.0;
   }
-  i = (int)laynum;
-  if (0 <= (int)laynum - 1) {
-    loop_ub = temp->size[1];
-    b_loop_ub = Ylay0->size[1];
-    c_loop_ub = Zlay0->size[1];
-  }
-  for (nmkpi = 0; nmkpi < i; nmkpi++) {
-    pf_idx_1 = (((double)nmkpi + 1.0) - 1.0) * num + 1.0;
-    p1_idx_2 = ((double)nmkpi + 1.0) * num;
-    if (pf_idx_1 > p1_idx_2) {
-      icomb = 1;
+  ib = (int)laynum;
+  for (nblocks = 0; nblocks < ib; nblocks++) {
+    p2_idx_2 = (((double)nblocks + 1.0) - 1.0) * num + 1.0;
+    p12f_idx_0 = ((double)nblocks + 1.0) * num;
+    if (p2_idx_2 > p12f_idx_0) {
+      hi = 1;
     } else {
-      icomb = (int)pf_idx_1;
+      hi = (int)p2_idx_2;
     }
-    p12f_idx_1 = Layer->data[nmkpi] * p23f_idx_0;
-    for (nblocks = 0; nblocks < loop_ub; nblocks++) {
-      XCenter->data[(icomb + nblocks) - 1] = temp->data[nblocks] - p12f_idx_1;
+    p12f_idx_1 = Layer->data[nblocks] * S_idx_0;
+    firstBlockLength = Dist->size[1];
+    for (lastBlockLength = 0; lastBlockLength < firstBlockLength;
+         lastBlockLength++) {
+      Point_testx->data[(hi + lastBlockLength) - 1] =
+          Dist->data[lastBlockLength] - p12f_idx_1;
     }
-    if (pf_idx_1 > p1_idx_2) {
-      icomb = 1;
+    if (p2_idx_2 > p12f_idx_0) {
+      hi = 1;
     } else {
-      icomb = (int)pf_idx_1;
+      hi = (int)p2_idx_2;
     }
-    p12f_idx_1 = Layer->data[nmkpi] * p23f_idx_1;
-    for (nblocks = 0; nblocks < b_loop_ub; nblocks++) {
-      YCenter->data[(icomb + nblocks) - 1] = Ylay0->data[nblocks] - p12f_idx_1;
+    p12f_idx_1 = Layer->data[nblocks] * p23_idx_0;
+    firstBlockLength = Ylay0->size[1];
+    for (lastBlockLength = 0; lastBlockLength < firstBlockLength;
+         lastBlockLength++) {
+      Point_testy->data[(hi + lastBlockLength) - 1] =
+          Ylay0->data[lastBlockLength] - p12f_idx_1;
     }
-    if (pf_idx_1 > p1_idx_2) {
-      icomb = 1;
+    if (p2_idx_2 > p12f_idx_0) {
+      hi = 1;
     } else {
-      icomb = (int)pf_idx_1;
+      hi = (int)p2_idx_2;
     }
-    p12f_idx_1 = Layer->data[nmkpi] * d;
-    for (nblocks = 0; nblocks < c_loop_ub; nblocks++) {
-      ZCenter->data[(icomb + nblocks) - 1] = Zlay0->data[nblocks] - p12f_idx_1;
+    p12f_idx_1 = Layer->data[nblocks] * pf_idx_0;
+    firstBlockLength = Zlay0->size[1];
+    for (lastBlockLength = 0; lastBlockLength < firstBlockLength;
+         lastBlockLength++) {
+      Point_testz->data[(hi + lastBlockLength) - 1] =
+          Zlay0->data[lastBlockLength] - p12f_idx_1;
     }
   }
   emxFree_real_T(&Layer);
   emxFree_real_T(&Zlay0);
   emxFree_real_T(&Ylay0);
-  emxFree_real_T(&temp);
-  i = Point_test->size[0] * Point_test->size[1];
-  Point_test->size[0] = XCenter->size[0];
+  emxFree_real_T(&Dist);
+  ib = Point_test->size[0] * Point_test->size[1];
+  Point_test->size[0] = Point_testx->size[0];
   Point_test->size[1] = 3;
-  emxEnsureCapacity_real_T(Point_test, i);
-  icomb = XCenter->size[0];
-  for (i = 0; i < icomb; i++) {
-    Point_test->data[i] = XCenter->data[i];
+  emxEnsureCapacity_real_T(Point_test, ib);
+  firstBlockLength = Point_testx->size[0];
+  for (ib = 0; ib < firstBlockLength; ib++) {
+    Point_test->data[ib] = Point_testx->data[ib];
   }
-  emxFree_real_T(&XCenter);
-  icomb = YCenter->size[0];
-  for (i = 0; i < icomb; i++) {
-    Point_test->data[i + Point_test->size[0]] = YCenter->data[i];
+  emxFree_real_T(&Point_testx);
+  firstBlockLength = Point_testy->size[0];
+  for (ib = 0; ib < firstBlockLength; ib++) {
+    Point_test->data[ib + Point_test->size[0]] = Point_testy->data[ib];
   }
-  emxFree_real_T(&YCenter);
-  icomb = ZCenter->size[0];
-  for (i = 0; i < icomb; i++) {
-    Point_test->data[i + Point_test->size[0] * 2] = ZCenter->data[i];
+  emxFree_real_T(&Point_testy);
+  firstBlockLength = Point_testz->size[0];
+  for (ib = 0; ib < firstBlockLength; ib++) {
+    Point_test->data[ib + Point_test->size[0] * 2] = Point_testz->data[ib];
   }
-  emxFree_real_T(&ZCenter);
+  emxFree_real_T(&Point_testz);
 }
 
 /*

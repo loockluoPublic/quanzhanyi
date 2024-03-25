@@ -2,7 +2,7 @@
 ## Makefile generated for component 'QuanZhanYi'. 
 ## 
 ## Makefile     : QuanZhanYi_rtw.mk
-## Generated on : Sun Mar 24 23:36:07 2024
+## Generated on : Mon Mar 25 17:22:56 2024
 ## Final product: ./QuanZhanYi.lib
 ## Product type : static-library
 ## 
@@ -23,7 +23,7 @@ MAKEFILE                  = QuanZhanYi_rtw.mk
 MATLAB_ROOT               = E:/SystemInstallation/Matlab
 MATLAB_BIN                = E:/SystemInstallation/Matlab/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = C:/Users/XWT/Desktop/guncgenerate/codegen/lib/QuanZhanYi
+START_DIR                 = C:/Users/XWT/Desktop/test1/codegen/lib/QuanZhanYi
 TGT_FCN_LIB               = None
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
@@ -137,7 +137,7 @@ BUILD_TYPE = "Static Library"
 ## INCLUDE PATHS
 ###########################################################################
 
-INCLUDES_BUILDINFO = -I$(START_DIR) -IC:/Users/XWT/Desktop/GUNCGE~1 -I$(MATLAB_ROOT)/extern/include
+INCLUDES_BUILDINFO = -I$(START_DIR) -IC:/Users/XWT/Desktop/test1 -I$(MATLAB_ROOT)/extern/include
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 
@@ -154,7 +154,7 @@ DEFINES = $(DEFINES_CUSTOM) $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/QuanZhanYi_data.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c $(START_DIR)/QuanZhanYi_initialize.c $(START_DIR)/QuanZhanYi_terminate.c $(START_DIR)/foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)/Generate_multi_layered_measurement_points.c $(START_DIR)/nchoosek.c $(START_DIR)/mean.c $(START_DIR)/generate_unit_circle_with_normal_vector.c $(START_DIR)/Three_Points_Initial_Rough_Cylindrical_Judgment.c $(START_DIR)/QuanZhanYi_emxutil.c $(START_DIR)/QuanZhanYi_emxAPI.c
+SRCS = $(START_DIR)/QuanZhanYi_data.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c $(START_DIR)/QuanZhanYi_initialize.c $(START_DIR)/QuanZhanYi_terminate.c $(START_DIR)/foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)/Generate_multi_layered_measurement_points.c $(START_DIR)/generate_unit_circle_with_normal_vector.c $(START_DIR)/QuanZhanYi_emxutil.c $(START_DIR)/QuanZhanYi_emxAPI.c
 
 ALL_SRCS = $(SRCS)
 
@@ -162,7 +162,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = QuanZhanYi_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj QuanZhanYi_initialize.obj QuanZhanYi_terminate.obj foot_of_perpendicular_from_a_point_to_a_line.obj Generate_multi_layered_measurement_points.obj nchoosek.obj mean.obj generate_unit_circle_with_normal_vector.obj Three_Points_Initial_Rough_Cylindrical_Judgment.obj QuanZhanYi_emxutil.obj QuanZhanYi_emxAPI.obj
+OBJS = QuanZhanYi_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj QuanZhanYi_initialize.obj QuanZhanYi_terminate.obj foot_of_perpendicular_from_a_point_to_a_line.obj Generate_multi_layered_measurement_points.obj generate_unit_circle_with_normal_vector.obj QuanZhanYi_emxutil.obj QuanZhanYi_emxAPI.obj
 
 ALL_OBJS = $(OBJS)
 
@@ -257,7 +257,7 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-%.obj : C:/Users/XWT/Desktop/guncgenerate/%.c
+%.obj : C:/Users/XWT/Desktop/test1/%.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
@@ -293,19 +293,7 @@ Generate_multi_layered_measurement_points.obj : $(START_DIR)/Generate_multi_laye
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-nchoosek.obj : $(START_DIR)/nchoosek.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
-
-
-mean.obj : $(START_DIR)/mean.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
-
-
 generate_unit_circle_with_normal_vector.obj : $(START_DIR)/generate_unit_circle_with_normal_vector.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
-
-
-Three_Points_Initial_Rough_Cylindrical_Judgment.obj : $(START_DIR)/Three_Points_Initial_Rough_Cylindrical_Judgment.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 

@@ -1337,8 +1337,6 @@ var wasmImports = {
 };
 var wasmExports = createWasm();
 var ___wasm_call_ctors = createExportWrapper('__wasm_call_ctors');
-var _Generate_multi_layered_measurement_points = Module['_Generate_multi_layered_measurement_points'] = createExportWrapper('Generate_multi_layered_measurement_points');
-var _generate_unit_circle_with_normal_vector = Module['_generate_unit_circle_with_normal_vector'] = createExportWrapper('generate_unit_circle_with_normal_vector');
 var _free = Module['_free'] = createExportWrapper('free');
 var _malloc = Module['_malloc'] = createExportWrapper('malloc');
 var _generateUnitCircleWithNormalVector = Module['_generateUnitCircleWithNormalVector'] = createExportWrapper('generateUnitCircleWithNormalVector');
