@@ -2,7 +2,7 @@
  * File: Generate_multi_layered_measurement_points.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Mar-2024 17:28:48
+ * C/C++ source code generated on  : 25-Mar-2024 17:49:36
  */
 
 /* Include Files */
@@ -445,22 +445,22 @@ void Generate_multi_layered_measurement_points(
   emxFree_real_T(&Ylay0);
   emxFree_real_T(&Dist);
   ib = Point_test->size[0] * Point_test->size[1];
-  Point_test->size[0] = Point_testx->size[0];
-  Point_test->size[1] = 3;
+  Point_test->size[0] = 3;
+  Point_test->size[1] = Point_testx->size[0];
   emxEnsureCapacity_real_T(Point_test, ib);
   firstBlockLength = Point_testx->size[0];
   for (ib = 0; ib < firstBlockLength; ib++) {
-    Point_test->data[ib] = Point_testx->data[ib];
+    Point_test->data[3 * ib] = Point_testx->data[ib];
   }
   emxFree_real_T(&Point_testx);
   firstBlockLength = Point_testy->size[0];
   for (ib = 0; ib < firstBlockLength; ib++) {
-    Point_test->data[ib + Point_test->size[0]] = Point_testy->data[ib];
+    Point_test->data[3 * ib + 1] = Point_testy->data[ib];
   }
   emxFree_real_T(&Point_testy);
   firstBlockLength = Point_testz->size[0];
   for (ib = 0; ib < firstBlockLength; ib++) {
-    Point_test->data[ib + Point_test->size[0] * 2] = Point_testz->data[ib];
+    Point_test->data[3 * ib + 2] = Point_testz->data[ib];
   }
   emxFree_real_T(&Point_testz);
 }
