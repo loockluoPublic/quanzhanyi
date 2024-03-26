@@ -72,11 +72,13 @@ export default class EmxArray_real_T {
   }
 
   #init() {
-    //  为一个结构体分配线性内存空间，一个结构体为大小 8(指针)+8(指针)+4（int + 1(bool) =
+    //  为一个结构体分配线性内存空间，一个结构体为大小 8(指针)+8(指针)+4（int + 4(bool) =
+
     var emxArrayPtr = emModule._malloc(24);
 
     // 设置线性内存的数据
     const arrayF64 = new Float64Array(this.#arrayFlat);
+
     this.arrayPtr = emModule._malloc(
       arrayF64.length * Float64Array.BYTES_PER_ELEMENT
     );
@@ -97,40 +99,40 @@ export default class EmxArray_real_T {
     // 设置一个可移动的指针，让他等于初始地址
     let dynamicPtr = emxArrayPtr;
     // this.#dataPtr  是一个指针，占据8个字节（8*8=64位）。
+    // double *data;
     emModule.setValue(dynamicPtr, this.arrayPtr, "*");
 
     // 64 位电脑占用  指针所占用的内存大小为 64 bit 即 8 bytes
-    dynamicPtr += Float64Array.BYTES_PER_ELEMENT;
+    //  int *size;
+    dynamicPtr += Int32Array.BYTES_PER_ELEMENT;
     emModule.setValue(dynamicPtr, this.sizePtr, "*");
 
     // 设置数组长度
-    dynamicPtr += Float64Array.BYTES_PER_ELEMENT;
+    // int allocatedSize;
+    dynamicPtr += Int32Array.BYTES_PER_ELEMENT;
     emModule.setValue(dynamicPtr, arrayF64.length, "i32");
 
     // 设置维度
+    // int numDimensions;
     dynamicPtr += Int32Array.BYTES_PER_ELEMENT;
     emModule.setValue(dynamicPtr, 2, "i32");
 
     // 设置是否可以被释放内存，0为否
+    // boolean_T canFreeData;
     dynamicPtr += Int32Array.BYTES_PER_ELEMENT;
     emModule.setValue(dynamicPtr, 0, "i8");
 
     // 读取size指针
     const sizePtr = emModule.getValue(emxArrayPtr + 8, "i32");
-    console.log(
-      "%c Line:120 🥃 sizePtr",
-      "color:#42b983",
-      sizePtr,
-      this.sizePtr
-    );
+
     const numDimensions = 2;
     const sizeArray = new Int32Array(numDimensions);
     for (let i = 0; i < numDimensions; i++) {
-      sizeArray[i] = emModule.HEAP32[sizePtr / 8 + i];
+      sizeArray[i] = emModule.HEAP32[sizePtr / 4 + i];
     }
-    console.log("%c Line:130 🥖 sizeArray", "color:#4fff4B", sizeArray);
 
     this.ptr = emxArrayPtr;
+
     return this;
   }
 
@@ -144,7 +146,7 @@ export default class EmxArray_real_T {
     var allocatedSize = emModule.getValue(this.ptr + 16, "i32");
 
     const a = Array.from(
-      new Int32Array(emModule.HEAP32.buffer, this.sizePtr, 8)
+      new Int32Array(emModule.HEAP32.buffer, this.sizePtr, 2)
     );
     console.log("%c Line:129 🥑 size", "color:#42b983", size, allocatedSize, a);
   }
@@ -153,7 +155,7 @@ export default class EmxArray_real_T {
     var dataPtr = emModule.getValue(this.ptr, "*");
 
     // 从结构体中获取allocatedSize（即数组长度）
-    var allocatedSize = emModule.getValue(this.ptr + 16, "i32");
+    var allocatedSize = emModule.getValue(this.ptr + 8, "i32");
 
     // 创建一个Float64Array视图来读取data数组的值
     var data = Array.from(

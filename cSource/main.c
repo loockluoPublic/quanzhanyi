@@ -6,6 +6,15 @@
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points.h"
 
 EMSCRIPTEN_KEEPALIVE
+void test(emxArray_real_T *Point_out)
+{
+    int *ptr;
+    printf("The size of the pointer is: %zu bytes\n", sizeof(ptr));
+    printf("Point_out->numDimensions = %d, Point_out size=%d,Point_out data=%d, Point_out size[0]=%d, size[1]=%d, Point_out->data[0]=%f \n ", Point_out->numDimensions, Point_out->size, Point_out->data, Point_out->size[0], Point_out->size[1], Point_out->data[0]);
+    printf("Point_out->numDimensions = %d \n", Point_out->numDimensions);
+}
+
+EMSCRIPTEN_KEEPALIVE
 void generateUnitCircleWithNormalVector(double azimuth, double elevation, double num, emxArray_real_T *Point_out)
 {
     generate_unit_circle_with_normal_vector(azimuth, elevation, num, Point_out);
