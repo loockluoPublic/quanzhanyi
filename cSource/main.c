@@ -3,36 +3,40 @@
 #include "QuanZhanYi_types.h"
 #include "generate_unit_circle_with_normal_vector.h"
 #include "Generate_multi_layered_measurement_points.h"
+#include "Calculate_accurate_cylinders_from_multiple_measurement_points.h"
 
 EMSCRIPTEN_KEEPALIVE
-void generateUnitCircleWithNormalVector(double t1, double t2, double num,
-                                        emxArray_real_T *x_circle1,
-                                        emxArray_real_T *y_circle1,
-                                        emxArray_real_T *z_circle1)
+void generateUnitCircleWithNormalVector(double azimuth, double elevation, double num, emxArray_real_T *Point_out)
 {
-    generate_unit_circle_with_normal_vector(t1, t2, num, x_circle1, y_circle1, z_circle1);
+    generate_unit_circle_with_normal_vector(azimuth, elevation, num, Point_out);
 }
 
 EMSCRIPTEN_KEEPALIVE
 void GenerateMultiLayeredMeasurementPoints(
-    const emxArray_real_T *x, const emxArray_real_T *y,
-    const emxArray_real_T *z, double num, double laynum, const double P3[3],
-    const double P4[3], emxArray_real_T *Point_test, double debugRes[10])
+    const emxArray_real_T *Point_out,
+    double num,
+    double laynum,
+    const double P3[3],
+    const double P4[3],
+    emxArray_real_T *Point_test)
 {
-    printf("daas %f \n", num);
-    Generate_multi_layered_measurement_points(x, y, z, num, laynum, P3, P4, Point_test);
+    Generate_multi_layered_measurement_points(Point_out, num, laynum, P3, P4, Point_test);
 }
 
 EMSCRIPTEN_KEEPALIVE
-void test(int i)
+void CalculateAccurateCylindersFromMultipleMeasurementPoints(
+    const emxArray_real_T *Point_in,
+    double azimuth,
+    double elevation,
+    const double P_bound1[3],
+    const double P_bound2[3],
+    double Mcenter[3],
+    double MTaon[3],
+    double *Mradial,
+    emxArray_real_T *Err_every,
+    double Bottom_round_center1[3],
+    double Bottom_round_center2[3])
 {
-    printf("测试 %d \n", i);
-}
-
-int main()
-{
-    printf("run main \n");
-    test(1);
-
-    return 0;
+    Calculate_accurate_cylinders_from_multiple_measurement_points(
+        Point_in, azimuth, elevation, P_bound1, P_bound2, Mcenter, MTaon, Mradial, Err_every, Bottom_round_center1, Bottom_round_center2);
 }

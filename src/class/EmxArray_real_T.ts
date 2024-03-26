@@ -7,7 +7,7 @@ struct emxArray_real_T {
     boolean_T canFreeData;
 };
 */
-
+import { Vector3 } from "three";
 const emModule = (window as any).Module;
 export default class EmxArray_real_T {
   /**
@@ -33,10 +33,18 @@ export default class EmxArray_real_T {
    * @param n 一维数组的长度
    * @memberof EmxArray_real_T
    */
-  constructor(m: number[][] | number[] | number, n: number = 1) {
+  constructor(
+    m: number[][] | number[] | number | Vector3 | Vector3[],
+    n: number = 1
+  ) {
+    console.log("%c Line:38 🍯 m", "color:#ea7e5c", m);
     if (typeof m === "number") {
       this.#arrayFlat = new Array(m * n).fill(0);
       this.#initSize(m, n);
+      return this.#init();
+    } else if (m instanceof Vector3) {
+      this.#arrayFlat = m.toArray();
+      this.#initSize(3, 1);
       return this.#init();
     } else if (Array.isArray(m)) {
       if (Array.isArray(m[0])) {
@@ -47,6 +55,13 @@ export default class EmxArray_real_T {
           this.#arrayFlat.push(...row);
         }
         this.#initSize(m[0].length, m.length);
+      } else if (m[0] instanceof Vector3) {
+        this.#arrayFlat = [];
+        for (const row of m) {
+          //@ts-ignore
+          this.#arrayFlat.push(...(row as Vector3).toArray());
+        }
+        this.#initSize(3, m.length);
       } else {
         // 1 * n 的矩阵
         this.#arrayFlat = m as unknown as number[];
@@ -92,7 +107,7 @@ export default class EmxArray_real_T {
 
     // 设置维度
     dynamicPtr += Int32Array.BYTES_PER_ELEMENT;
-    emModule.setValue(dynamicPtr, this.#size[0], "i32");
+    emModule.setValue(dynamicPtr, 2, "i32");
 
     // 设置是否可以被释放内存，0为否
     dynamicPtr += Int32Array.BYTES_PER_ELEMENT;
@@ -143,6 +158,26 @@ export default class EmxArray_real_T {
 
   valueOf() {
     return this.toJSON();
+  }
+  /**
+   * 转换为 Threejs的 Vector3
+   * @returns Vector3[]
+   */
+  toVector3() {
+    if (this.#size[0] === 3) {
+      return this.toJSON().map((row) => {
+        return new Vector3(...row);
+      });
+    }
+    return [];
+  }
+
+  getDebugInfo() {
+    return {
+      size: this.#size,
+      sizePtr: this.#sizePtr,
+      arrayFlat: this.#arrayFlat,
+    };
   }
 
   free() {

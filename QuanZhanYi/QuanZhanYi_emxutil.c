@@ -9,9 +9,9 @@
 #include "QuanZhanYi_emxutil.h"
 #include "QuanZhanYi_types.h"
 #include "rt_nonfinite.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 /* Function Definitions */
 /*
  * Arguments    : emxArray_real_T *emxArray
@@ -27,6 +27,7 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
     oldNumel = 0;
   }
   newNumel = 1;
+  printf("numDimensions = %d \n", emxArray->numDimensions);
   for (i = 0; i < emxArray->numDimensions; i++) {
     newNumel *= emxArray->size[i];
   }
@@ -35,6 +36,7 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
     if (i < 16) {
       i = 16;
     }
+    printf("newNumel = %d \n", newNumel);
     while (i < newNumel) {
       if (i > 1073741823) {
         i = MAX_int32_T;

@@ -14,11 +14,10 @@
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
 #include "generate_unit_circle_with_normal_vector.h"
 #include "mean.h"
-#include "rt_nonfinite.h"
 #include "rt_defines.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-
+#include <stdio.h>
 /* Function Declarations */
 static double rt_atan2d_snf(double u0, double u1);
 
@@ -78,6 +77,9 @@ void Generate_multi_layered_measurement_points(const emxArray_real_T *Point_out,
                                                const double P4[3],
                                                emxArray_real_T *Point_test)
 {
+  printf("num = %f \n laynum = %f \n P3 = %f \n P4 = %f \n ", num, laynum,
+         P3[0], P4[0]);
+  printf(" Point_out->size[1] = %d \n", Point_out->size[1]);
   emxArray_real_T *Dist;
   emxArray_real_T *Layer;
   emxArray_real_T *Point_out1;
@@ -211,6 +213,8 @@ void Generate_multi_layered_measurement_points(const emxArray_real_T *Point_out,
   }
   i = Point_out->size[1] - 1;
   for (b_i = 0; b_i <= i; b_i++) {
+    printf("i=%d,b_i = %d, Point_out_data[3 * b_i] = %f, p23_idx_0 = %f \n", i,
+           b_i, Point_out_data[3 * b_i], p23_idx_0);
     p12f_idx_0 = Point_out_data[3 * b_i] - p23_idx_0;
     p1_idx_2 = Point_out_data[3 * b_i + 1] - p23_idx_1;
     pf_tmp_idx_0 = Point_out_data[3 * b_i + 2] - p23_idx_2;

@@ -13,6 +13,7 @@
 #include "QuanZhanYi_types.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <stdio.h>
 
 /* Function Declarations */
 static void b_binary_expand_op(emxArray_real_T *in1, const double in2[3],
@@ -492,6 +493,9 @@ void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
   } else {
     loop_ub = z_circle->size[1];
   }
+  printf("azimuth = %f, elevation = %f, num = %f \n", azimuth, elevation, num);
+  printf("Point_out->size[0] = %d \n", Point_out->size[0]);
+  printf("Point_out->size[1] = %d \n", Point_out->size[1]);
   i = Point_out->size[0] * Point_out->size[1];
   Point_out->size[0] = 3;
   Point_out->size[1] = nx;
