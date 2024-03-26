@@ -79,7 +79,11 @@ void Generate_multi_layered_measurement_points(const emxArray_real_T *Point_out,
 {
   printf("num = %f \n laynum = %f \n P3 = %f \n P4 = %f \n ", num, laynum,
          P3[0], P4[0]);
+  printf(" Point_out->data[0] = %f \n", Point_out->data[9]);
+  printf(" Point_out->size[0] = %d \n", Point_out->size[0]);
   printf(" Point_out->size[1] = %d \n", Point_out->size[1]);
+  printf(" Point_test->size[0] = %d \n", Point_test->size[0]);
+  printf(" Point_test->size[1] = %d \n", Point_test->size[1]);
   emxArray_real_T *Dist;
   emxArray_real_T *Layer;
   emxArray_real_T *Point_out1;

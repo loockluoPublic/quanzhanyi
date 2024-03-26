@@ -30,21 +30,45 @@ const GenerateMultiLayeredMeasurementPoints = (
   const points = new EmxArray_real_T(Points);
   const p3 = new EmxArray_real_T(P3);
   const p4 = new EmxArray_real_T(P4);
-  const resultPoints = new EmxArray_real_T(3, num * laynum);
+  // const resultPoints = new EmxArray_real_T(3, num * laynum);
+  const resultPoints = new EmxArray_real_T([
+    [1, 2, 4, 5],
+    [1, 2, 4, 5],
+    [1, 2, 4, 5],
+  ]);
+
   console.log(
-    "%c Line:31 🍌 points",
-    "color:#93c0a4",
-    points.getDebugInfo(),
+    "%c Line:44 🥑 points.getSize()",
+    "color:#fca650",
+    points.getSize()
+  );
+
+  console.log(
+    "%c Line:38 🍇 points.getDebugInfo().size",
+    "color:#e41a6a",
+    points.getDebugInfo().size,
+    points.getDebugInfo()
+  );
+  console.log(
+    "%c Line:39 🥖 resultPoints.getDebugInfo().size",
+    "color:#6ec1c2",
+    resultPoints.getDebugInfo().size,
     resultPoints.getDebugInfo()
   );
-  _GenerateMultiLayeredMeasurementPoints(
+  console.log(
+    "%c Line:47 🥟 points.ptr",
+    "color:#ed9ec7",
     points.ptr,
-    num,
-    laynum,
-    p3.arrayPtr,
-    p4.arrayPtr,
     resultPoints.ptr
   );
+  // _GenerateMultiLayeredMeasurementPoints(
+  //   points.ptr,
+  //   num,
+  //   laynum,
+  //   p3.arrayPtr,
+  //   p4.arrayPtr,
+  //   resultPoints.ptr
+  // );
   const resoult = resultPoints.toVector3();
   points.free();
   resultPoints.free();
@@ -103,7 +127,6 @@ const init = () => {
   //   "color:#6ec1c2",
   //   res
   // );
-
   const i = 0;
   const v = data[i].map((item) => {
     return new Vector3(...item);
