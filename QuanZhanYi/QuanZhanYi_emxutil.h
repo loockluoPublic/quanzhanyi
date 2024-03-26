@@ -1,8 +1,8 @@
 /*
  * File: QuanZhanYi_emxutil.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2024 00:13:40
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 26-Mar-2024 15:14:21
  */
 
 #ifndef QUANZHANYI_EMXUTIL_H

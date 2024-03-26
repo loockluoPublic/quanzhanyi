@@ -1,8 +1,8 @@
 /*
  * File: mean.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2024 00:13:40
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 26-Mar-2024 15:14:21
  */
 
 /* Include Files */
@@ -17,6 +17,7 @@
  */
 double mean(const emxArray_real_T *x)
 {
+  const double *x_data;
   double bsum;
   double y;
   int firstBlockLength;
@@ -25,6 +26,7 @@ double mean(const emxArray_real_T *x)
   int k;
   int lastBlockLength;
   int nblocks;
+  x_data = x->data;
   if (x->size[1] == 0) {
     y = 0.0;
   } else {
@@ -42,20 +44,20 @@ double mean(const emxArray_real_T *x)
         lastBlockLength = 1024;
       }
     }
-    y = x->data[0];
+    y = x_data[0];
     for (k = 2; k <= firstBlockLength; k++) {
-      y += x->data[k - 1];
+      y += x_data[k - 1];
     }
     for (ib = 2; ib <= nblocks; ib++) {
       firstBlockLength = (ib - 1) << 10;
-      bsum = x->data[firstBlockLength];
+      bsum = x_data[firstBlockLength];
       if (ib == nblocks) {
         hi = lastBlockLength;
       } else {
         hi = 1024;
       }
       for (k = 2; k <= hi; k++) {
-        bsum += x->data[(firstBlockLength + k) - 1];
+        bsum += x_data[(firstBlockLength + k) - 1];
       }
       y += bsum;
     }

@@ -1,12 +1,12 @@
 /*
- * File: mldivide.h
+ * File: norm.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 26-Mar-2024 15:14:21
  */
 
-#ifndef MLDIVIDE_H
-#define MLDIVIDE_H
+#ifndef NORM_H
+#define NORM_H
 
 /* Include Files */
 #include "rtwtypes.h"
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void mldivide(const double A[9], const double B[3], double Y[3]);
+double b_norm(const double x[3]);
 
 #ifdef __cplusplus
 }
@@ -26,7 +26,7 @@ void mldivide(const double A[9], const double B[3], double Y[3]);
 
 #endif
 /*
- * File trailer for mldivide.h
+ * File trailer for norm.h
  *
  * [EOF]
  */

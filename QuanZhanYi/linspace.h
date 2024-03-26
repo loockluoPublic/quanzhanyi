@@ -1,12 +1,12 @@
 /*
- * File: mldivide.h
+ * File: linspace.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 26-Mar-2024 15:14:21
  */
 
-#ifndef MLDIVIDE_H
-#define MLDIVIDE_H
+#ifndef LINSPACE_H
+#define LINSPACE_H
 
 /* Include Files */
 #include "rtwtypes.h"
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void mldivide(const double A[9], const double B[3], double Y[3]);
+void linspace(double d1, double d2, double y[60]);
 
 #ifdef __cplusplus
 }
@@ -26,7 +26,7 @@ void mldivide(const double A[9], const double B[3], double Y[3]);
 
 #endif
 /*
- * File trailer for mldivide.h
+ * File trailer for linspace.h
  *
  * [EOF]
  */

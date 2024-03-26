@@ -1,8 +1,8 @@
 /*
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2024 00:13:40
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 26-Mar-2024 15:14:21
  */
 
 #ifndef CALCULATE_ACCURATE_CYLINDERS_FROM_MULTIPLE_MEASUREMENT_POINTS_H
@@ -20,9 +20,10 @@ extern "C" {
 
 /* Function Declarations */
 extern void Calculate_accurate_cylinders_from_multiple_measurement_points(
-    const emxArray_real_T *x, const emxArray_real_T *y,
-    const emxArray_real_T *z, double Mcenter[3], double MTaon[3],
-    double *Mradial, emxArray_real_T *Err_every);
+    const emxArray_real_T *Point_in, double azimuth, double elevation,
+    const double P_bound1[3], const double P_bound2[3], double Mcenter[3],
+    double MTaon[3], double *Mradial, emxArray_real_T *Err_every,
+    double Bottom_round_center1[3], double Bottom_round_center2[3]);
 
 #ifdef __cplusplus
 }

@@ -1,8 +1,8 @@
 /*
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2024 00:13:40
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 26-Mar-2024 15:14:21
  */
 
 /* Include Files */
@@ -11,41 +11,89 @@
 #include "QuanZhanYi_emxutil.h"
 #include "QuanZhanYi_initialize.h"
 #include "QuanZhanYi_types.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line.h"
+#include "linspace.h"
 #include "mean.h"
 #include "minOrMax.h"
 #include "mldivide.h"
+#include "norm.h"
 #include "pinv.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Function Declarations */
+static void binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in3,
+                             const emxArray_real_T *in4);
+
 /* Function Definitions */
 /*
- * Arguments    : const emxArray_real_T *x
- *                const emxArray_real_T *y
- *                const emxArray_real_T *z
+ * Arguments    : emxArray_real_T *in1
+ *                const emxArray_real_T *in3
+ *                const emxArray_real_T *in4
+ * Return Type  : void
+ */
+static void binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in3,
+                             const emxArray_real_T *in4)
+{
+  const double *in3_data;
+  const double *in4_data;
+  double *in1_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  in4_data = in4->data;
+  in3_data = in3->data;
+  in1_data = in1->data;
+  stride_0_0 = (in3->size[0] != 1);
+  stride_1_0 = (in4->size[0] != 1);
+  if (in4->size[0] == 1) {
+    loop_ub = in3->size[0];
+  } else {
+    loop_ub = in4->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    in1_data[i] = in3_data[i * stride_0_0] + in4_data[i * stride_1_0];
+  }
+}
+
+/*
+ * Arguments    : const emxArray_real_T *Point_in
+ *                double azimuth
+ *                double elevation
+ *                const double P_bound1[3]
+ *                const double P_bound2[3]
  *                double Mcenter[3]
  *                double MTaon[3]
  *                double *Mradial
  *                emxArray_real_T *Err_every
+ *                double Bottom_round_center1[3]
+ *                double Bottom_round_center2[3]
  * Return Type  : void
  */
 void Calculate_accurate_cylinders_from_multiple_measurement_points(
-    const emxArray_real_T *x, const emxArray_real_T *y,
-    const emxArray_real_T *z, double Mcenter[3], double MTaon[3],
-    double *Mradial, emxArray_real_T *Err_every)
+    const emxArray_real_T *Point_in, double azimuth, double elevation,
+    const double P_bound1[3], const double P_bound2[3], double Mcenter[3],
+    double MTaon[3], double *Mradial, emxArray_real_T *Err_every,
+    double Bottom_round_center1[3], double Bottom_round_center2[3])
 {
   emxArray_real_T *B;
   emxArray_real_T *Bn;
   emxArray_real_T *L;
   emxArray_real_T *Xnn;
   emxArray_real_T *YuanDu;
-  emxArray_real_T *b_y;
-  emxArray_real_T *c_y;
+  emxArray_real_T *b_ptCloud;
   emxArray_real_T *circleCloud;
-  emxArray_real_T *d_y;
   emxArray_real_T *dis;
   emxArray_real_T *ptCloud;
-  double mm[180];
+  emxArray_real_T *r;
+  emxArray_real_T *x;
+  emxArray_real_T *y;
+  emxArray_real_T *z;
+  double mm[120];
+  double nn[120];
+  double dv[60];
+  double dv1[60];
   double a[49];
   double b_C[49];
   double C[9];
@@ -55,8 +103,9 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
   double c_C[7];
   double deltX[7];
   double angles[3];
-  double dv[3];
+  double cang[3];
   double ttt[3];
+  const double *Point_in_data;
   double a0;
   double absxk;
   double b0;
@@ -71,12 +120,22 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
   double scale;
   double t;
   double x1;
+  double *B_data;
+  double *L_data;
+  double *Xnn_data;
+  double *b_ptCloud_data;
+  double *ptCloud_data;
+  double *r1;
+  double *x_data;
+  double *y_data;
+  double *z_data;
   int b_loop_ub;
   int boffset;
   int c_loop_ub;
   int coffset;
   int count;
   int d_loop_ub;
+  int e_loop_ub;
   int i;
   int ii;
   int iindx;
@@ -87,37 +146,77 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
   int loop_ub;
   int m;
   int n;
-  int nx;
   boolean_T exitg1;
   if (!isInitialized_QuanZhanYi) {
     QuanZhanYi_initialize();
   }
+  Point_in_data = Point_in->data;
+  emxInit_real_T(&x, 1);
+  loop_ub = Point_in->size[1];
+  coffset = x->size[0];
+  x->size[0] = Point_in->size[1];
+  emxEnsureCapacity_real_T(x, coffset);
+  x_data = x->data;
+  for (coffset = 0; coffset < loop_ub; coffset++) {
+    x_data[coffset] = Point_in_data[3 * coffset];
+  }
+  emxInit_real_T(&y, 1);
+  loop_ub = Point_in->size[1];
+  coffset = y->size[0];
+  y->size[0] = Point_in->size[1];
+  emxEnsureCapacity_real_T(y, coffset);
+  y_data = y->data;
+  for (coffset = 0; coffset < loop_ub; coffset++) {
+    y_data[coffset] = Point_in_data[3 * coffset + 1];
+  }
+  emxInit_real_T(&z, 1);
+  loop_ub = Point_in->size[1];
+  coffset = z->size[0];
+  z->size[0] = Point_in->size[1];
+  emxEnsureCapacity_real_T(z, coffset);
+  z_data = z->data;
+  for (coffset = 0; coffset < loop_ub; coffset++) {
+    z_data[coffset] = Point_in_data[3 * coffset + 2];
+  }
   emxInit_real_T(&ptCloud, 2);
-  boffset = ptCloud->size[0] * ptCloud->size[1];
+  coffset = ptCloud->size[0] * ptCloud->size[1];
   ptCloud->size[0] = x->size[0];
   ptCloud->size[1] = 3;
-  emxEnsureCapacity_real_T(ptCloud, boffset);
+  emxEnsureCapacity_real_T(ptCloud, coffset);
+  ptCloud_data = ptCloud->data;
   loop_ub = x->size[0];
-  for (boffset = 0; boffset < loop_ub; boffset++) {
-    ptCloud->data[boffset] = x->data[boffset];
+  for (coffset = 0; coffset < loop_ub; coffset++) {
+    ptCloud_data[coffset] = x_data[coffset];
   }
   loop_ub = y->size[0];
-  for (boffset = 0; boffset < loop_ub; boffset++) {
-    ptCloud->data[boffset + ptCloud->size[0]] = y->data[boffset];
+  for (coffset = 0; coffset < loop_ub; coffset++) {
+    ptCloud_data[coffset + ptCloud->size[0]] = y_data[coffset];
   }
   loop_ub = z->size[0];
-  for (boffset = 0; boffset < loop_ub; boffset++) {
-    ptCloud->data[boffset + ptCloud->size[0] * 2] = z->data[boffset];
+  for (coffset = 0; coffset < loop_ub; coffset++) {
+    ptCloud_data[coffset + ptCloud->size[0] * 2] = z_data[coffset];
   }
   n = x->size[0];
   /* -----------------------------计算点云法向量----------------------------- */
-  mm[179] = 6.2831853071795862;
-  mm[0] = 0.0;
-  for (k = 0; k < 178; k++) {
-    mm[k + 1] = ((double)k + 1.0) * 0.035101593894858021;
+  linspace(elevation - 0.17453292519943295, elevation + 0.17453292519943295,
+           dv);
+  linspace(-elevation - 0.17453292519943295, -elevation + 0.17453292519943295,
+           dv1);
+  for (coffset = 0; coffset < 60; coffset++) {
+    mm[coffset] = dv[coffset];
+    mm[coffset + 60] = dv1[coffset];
+  }
+  linspace(azimuth - 0.17453292519943295, azimuth + 0.17453292519943295, dv);
+  linspace(-azimuth - 0.17453292519943295, -azimuth + 0.17453292519943295, dv1);
+  for (coffset = 0; coffset < 60; coffset++) {
+    nn[coffset] = dv[coffset];
+    nn[coffset + 60] = dv1[coffset];
   }
   emxInit_real_T(&YuanDu, 2);
   emxInit_real_T(&Xnn, 2);
+  Xnn_data = Xnn->data;
+  /*  mm = linspace(0,2*pi,240); */
+  /*  nn = linspace(0,2*pi,240); */
   YuanDu->size[0] = 1;
   YuanDu->size[1] = 0;
   Xnn->size[0] = 7;
@@ -132,111 +231,121 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
   emxInit_real_T(&L, 1);
   emxInit_real_T(&Bn, 2);
   emxInit_real_T(&dis, 2);
-  emxInit_real_T(&b_y, 1);
-  emxInit_real_T(&c_y, 1);
-  emxInit_real_T(&d_y, 2);
-  for (ii = 0; ii < 180; ii++) {
+  emxInit_real_T(&r, 1);
+  emxInit_real_T(&b_ptCloud, 1);
+  for (ii = 0; ii < 120; ii++) {
     b_ii = mm[ii];
-    for (jj = 0; jj < 180; jj++) {
+    for (jj = 0; jj < 120; jj++) {
       /*  rot1旋转矩阵 */
-      bkj = mm[jj];
-      cang_idx_0 = cos(b_ii);
+      t = nn[jj];
+      cang[0] = cos(b_ii);
       angles[0] = sin(b_ii);
-      cang_idx_1 = cos(bkj);
-      angles[1] = sin(bkj);
-      rot1[0] = cang_idx_1;
-      rot1[3] = angles[0] * angles[1] + cang_idx_0 * 0.0;
-      rot1[6] = -cang_idx_0 * angles[1] + angles[0] * 0.0;
-      rot1[1] = -cang_idx_1 * 0.0;
-      rot1[4] = -angles[0] * angles[1] * 0.0 + cang_idx_0;
-      rot1[7] = cang_idx_0 * angles[1] * 0.0 + angles[0];
+      cang[1] = cos(t);
+      angles[1] = sin(t);
+      rot1[0] = cang[1];
+      rot1[3] = angles[0] * angles[1] + cang[0] * 0.0;
+      rot1[6] = -cang[0] * angles[1] + angles[0] * 0.0;
+      rot1[1] = -cang[1] * 0.0;
+      rot1[4] = -angles[0] * angles[1] * 0.0 + cang[0];
+      rot1[7] = cang[0] * angles[1] * 0.0 + angles[0];
       rot1[2] = angles[1];
-      rot1[5] = -angles[0] * cang_idx_1;
-      rot1[8] = cang_idx_0 * cang_idx_1;
-      for (boffset = 0; boffset < 3; boffset++) {
-        ttt[boffset] = rot1[3 * boffset + 2];
+      rot1[5] = -angles[0] * cang[1];
+      rot1[8] = cang[0] * cang[1];
+      for (coffset = 0; coffset < 3; coffset++) {
+        ttt[coffset] = (0.0 * rot1[3 * coffset] + 0.0 * rot1[3 * coffset + 1]) +
+                       rot1[3 * coffset + 2];
       }
       a0 = ttt[0];
       b0 = ttt[1];
       c0 = ttt[2];
       /*  rot2 旋转矩阵 */
-      cang_idx_0 = cos(-b_ii);
+      cang[0] = cos(-b_ii);
       angles[0] = sin(-b_ii);
-      cang_idx_1 = cos(-bkj);
-      angles[1] = sin(-bkj);
-      rot2[0] = cang_idx_1;
-      rot2[3] = angles[0] * angles[1] + cang_idx_0 * 0.0;
-      rot2[6] = -cang_idx_0 * angles[1] + angles[0] * 0.0;
-      rot2[1] = -cang_idx_1 * 0.0;
-      rot2[4] = -angles[0] * angles[1] * 0.0 + cang_idx_0;
-      rot2[7] = cang_idx_0 * angles[1] * 0.0 + angles[0];
+      cang[1] = cos(-t);
+      angles[1] = sin(-t);
+      rot2[0] = cang[1];
+      rot2[3] = angles[0] * angles[1] + cang[0] * 0.0;
+      rot2[6] = -cang[0] * angles[1] + angles[0] * 0.0;
+      rot2[1] = -cang[1] * 0.0;
+      rot2[4] = -angles[0] * angles[1] * 0.0 + cang[0];
+      rot2[7] = cang[0] * angles[1] * 0.0 + angles[0];
       rot2[2] = angles[1];
-      rot2[5] = -angles[0] * cang_idx_1;
-      rot2[8] = cang_idx_0 * cang_idx_1;
-      boffset = circleCloud->size[0] * circleCloud->size[1];
+      rot2[5] = -angles[0] * cang[1];
+      rot2[8] = cang[0] * cang[1];
+      coffset = circleCloud->size[0] * circleCloud->size[1];
       circleCloud->size[0] = ptCloud->size[0];
       circleCloud->size[1] = 3;
-      emxEnsureCapacity_real_T(circleCloud, boffset);
+      emxEnsureCapacity_real_T(circleCloud, coffset);
+      Xnn_data = circleCloud->data;
       for (j = 0; j < 3; j++) {
         coffset = j * m;
         boffset = j * 3;
         for (i = 0; i < m; i++) {
-          circleCloud->data[coffset + i] =
-              (ptCloud->data[i] * rot2[boffset] +
-               ptCloud->data[ptCloud->size[0] + i] * rot2[boffset + 1]) +
-              ptCloud->data[(ptCloud->size[0] << 1) + i] * rot2[boffset + 2];
+          Xnn_data[coffset + i] =
+              (ptCloud_data[i] * rot2[boffset] +
+               ptCloud_data[ptCloud->size[0] + i] * rot2[boffset + 1]) +
+              ptCloud_data[(ptCloud->size[0] << 1) + i] * rot2[boffset + 2];
         }
       }
       /* --------------------------初始化矩阵系数--------------------------------
        */
-      boffset = B->size[0] * B->size[1];
+      coffset = B->size[0] * B->size[1];
       B->size[0] = n;
       B->size[1] = 3;
-      emxEnsureCapacity_real_T(B, boffset);
-      for (boffset = 0; boffset < loop_ub; boffset++) {
-        B->data[boffset] = 1.0;
+      emxEnsureCapacity_real_T(B, coffset);
+      B_data = B->data;
+      for (coffset = 0; coffset < loop_ub; coffset++) {
+        B_data[coffset] = 1.0;
       }
-      boffset = L->size[0];
+      coffset = L->size[0];
       L->size[0] = n;
-      emxEnsureCapacity_real_T(L, boffset);
-      for (boffset = 0; boffset < n; boffset++) {
-        L->data[boffset] = 0.0;
+      emxEnsureCapacity_real_T(L, coffset);
+      L_data = L->data;
+      for (coffset = 0; coffset < n; coffset++) {
+        L_data[coffset] = 0.0;
       }
       /*  系数矩阵L */
       /*  赋值 */
-      coffset = circleCloud->size[0];
-      for (boffset = 0; boffset < coffset; boffset++) {
-        B->data[boffset] = circleCloud->data[boffset] * 2.0;
+      e_loop_ub = circleCloud->size[0];
+      for (coffset = 0; coffset < e_loop_ub; coffset++) {
+        B_data[coffset] = Xnn_data[coffset] * 2.0;
       }
-      coffset = circleCloud->size[0];
-      for (boffset = 0; boffset < coffset; boffset++) {
-        B->data[boffset + B->size[0]] =
-            circleCloud->data[boffset + circleCloud->size[0]] * 2.0;
+      e_loop_ub = circleCloud->size[0];
+      for (coffset = 0; coffset < e_loop_ub; coffset++) {
+        B_data[coffset + B->size[0]] =
+            Xnn_data[coffset + circleCloud->size[0]] * 2.0;
       }
-      boffset = b_y->size[0];
-      b_y->size[0] = circleCloud->size[0];
-      emxEnsureCapacity_real_T(b_y, boffset);
-      nx = circleCloud->size[0];
-      for (k = 0; k < nx; k++) {
-        bkj = circleCloud->data[k];
-        b_y->data[k] = bkj * bkj;
+      e_loop_ub = circleCloud->size[0];
+      coffset = b_ptCloud->size[0];
+      b_ptCloud->size[0] = circleCloud->size[0];
+      emxEnsureCapacity_real_T(b_ptCloud, coffset);
+      b_ptCloud_data = b_ptCloud->data;
+      for (coffset = 0; coffset < e_loop_ub; coffset++) {
+        bkj = Xnn_data[coffset];
+        b_ptCloud_data[coffset] = bkj * bkj;
       }
-      boffset = c_y->size[0];
-      c_y->size[0] = circleCloud->size[0];
-      emxEnsureCapacity_real_T(c_y, boffset);
-      nx = circleCloud->size[0];
-      for (k = 0; k < nx; k++) {
-        bkj = circleCloud->data[k + circleCloud->size[0]];
-        c_y->data[k] = bkj * bkj;
+      e_loop_ub = circleCloud->size[0];
+      coffset = r->size[0];
+      r->size[0] = circleCloud->size[0];
+      emxEnsureCapacity_real_T(r, coffset);
+      r1 = r->data;
+      for (coffset = 0; coffset < e_loop_ub; coffset++) {
+        bkj = Xnn_data[coffset + circleCloud->size[0]];
+        r1[coffset] = bkj * bkj;
       }
-      coffset = b_y->size[0];
-      for (boffset = 0; boffset < coffset; boffset++) {
-        L->data[boffset] = b_y->data[boffset] + c_y->data[boffset];
+      if (b_ptCloud->size[0] == r->size[0]) {
+        e_loop_ub = b_ptCloud->size[0];
+        for (coffset = 0; coffset < e_loop_ub; coffset++) {
+          L_data[coffset] = b_ptCloud_data[coffset] + r1[coffset];
+        }
+      } else {
+        binary_expand_op(L, b_ptCloud, r);
+        L_data = L->data;
       }
       /*  间接平差求解 */
       /*  参数求解 */
       inner = B->size[0];
-      nx = B->size[0];
+      e_loop_ub = B->size[0];
       for (j = 0; j < 3; j++) {
         coffset = j * 3;
         boffset = j * B->size[0];
@@ -244,57 +353,61 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
         C[coffset + 1] = 0.0;
         C[coffset + 2] = 0.0;
         for (k = 0; k < inner; k++) {
-          bkj = B->data[boffset + k];
-          C[coffset] += B->data[k] * bkj;
-          C[coffset + 1] += B->data[B->size[0] + k] * bkj;
-          C[coffset + 2] += B->data[(B->size[0] << 1) + k] * bkj;
+          bkj = B_data[boffset + k];
+          C[coffset] += B_data[k] * bkj;
+          C[coffset + 1] += B_data[B->size[0] + k] * bkj;
+          C[coffset + 2] += B_data[(B->size[0] << 1) + k] * bkj;
         }
         angles[j] = 0.0;
       }
-      for (k = 0; k < nx; k++) {
-        angles[0] += B->data[k] * L->data[k];
-        angles[1] += B->data[B->size[0] + k] * L->data[k];
-        angles[2] += B->data[(B->size[0] << 1) + k] * L->data[k];
+      for (k = 0; k < e_loop_ub; k++) {
+        angles[0] += B_data[k] * L_data[k];
+        angles[1] += B_data[B->size[0] + k] * L_data[k];
+        angles[2] += B_data[(B->size[0] << 1) + k] * L_data[k];
       }
-      mldivide(C, angles, dv);
-      cang_idx_0 = dv[0];
-      cang_idx_1 = dv[1];
-      r0 = sqrt((dv[0] * dv[0] + dv[1] * dv[1]) + dv[2]);
-      for (boffset = 0; boffset < 3; boffset++) {
-        angles[boffset] = (cang_idx_0 * rot2[3 * boffset] +
-                           cang_idx_1 * rot2[3 * boffset + 1]) +
-                          0.0 * rot2[3 * boffset + 2];
+      mldivide(C, angles, cang);
+      r0 = sqrt((cang[0] * cang[0] + cang[1] * cang[1]) + cang[2]);
+      cang_idx_0 = cang[0];
+      cang_idx_1 = cang[1];
+      for (coffset = 0; coffset < 3; coffset++) {
+        angles[coffset] = (cang_idx_0 * rot2[3 * coffset] +
+                           cang_idx_1 * rot2[3 * coffset + 1]) +
+                          0.0 * rot2[3 * coffset + 2];
       }
       /*  旋转矩阵的逆与转置相等 */
       x1 = angles[0];
       b_y1 = angles[1];
-      boffset = L->size[0];
+      coffset = L->size[0];
       L->size[0] = b_loop_ub;
-      emxEnsureCapacity_real_T(L, boffset);
-      boffset = b_y->size[0];
-      b_y->size[0] = ptCloud->size[0];
-      emxEnsureCapacity_real_T(b_y, boffset);
-      for (boffset = 0; boffset < b_loop_ub; boffset++) {
-        bkj = ptCloud->data[boffset + ptCloud->size[0] * 2];
-        L->data[boffset] = bkj;
-        b_y->data[boffset] = bkj;
+      emxEnsureCapacity_real_T(L, coffset);
+      L_data = L->data;
+      coffset = b_ptCloud->size[0];
+      b_ptCloud->size[0] = ptCloud->size[0];
+      emxEnsureCapacity_real_T(b_ptCloud, coffset);
+      b_ptCloud_data = b_ptCloud->data;
+      for (coffset = 0; coffset < b_loop_ub; coffset++) {
+        t = ptCloud_data[coffset + ptCloud->size[0] * 2];
+        L_data[coffset] = t;
+        b_ptCloud_data[coffset] = t;
       }
       /*  计算点云z坐标最值 */
-      bkj = (minimum(L) + maximum(b_y)) * 0.5;
+      bkj = (minimum(L) + maximum(b_ptCloud)) * 0.5;
       /* ------------------------------最小二乘迭代---------------------------
        */
-      boffset = Bn->size[0] * Bn->size[1];
+      coffset = Bn->size[0] * Bn->size[1];
       Bn->size[0] = n;
       Bn->size[1] = 7;
-      emxEnsureCapacity_real_T(Bn, boffset);
-      for (boffset = 0; boffset < c_loop_ub; boffset++) {
-        Bn->data[boffset] = 1.0;
+      emxEnsureCapacity_real_T(Bn, coffset);
+      B_data = Bn->data;
+      for (coffset = 0; coffset < c_loop_ub; coffset++) {
+        B_data[coffset] = 1.0;
       }
-      boffset = L->size[0];
+      coffset = L->size[0];
       L->size[0] = n;
-      emxEnsureCapacity_real_T(L, boffset);
-      for (boffset = 0; boffset < n; boffset++) {
-        L->data[boffset] = 1.0;
+      emxEnsureCapacity_real_T(L, coffset);
+      L_data = L->data;
+      for (coffset = 0; coffset < n; coffset++) {
+        L_data[coffset] = 1.0;
       }
       Xn[0] = angles[0];
       Xn[1] = angles[1];
@@ -307,23 +420,23 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
       exitg1 = false;
       while ((!exitg1) && (r0 > 0.0001)) {
         for (i = 0; i < n; i++) {
-          scale = x->data[i] - x1;
-          b_scale = y->data[i] - b_y1;
-          absxk = z->data[i] - bkj;
+          scale = x_data[i] - x1;
+          b_scale = y_data[i] - b_y1;
+          absxk = z_data[i] - bkj;
           t = (a0 * scale + b0 * b_scale) + c0 * absxk;
-          Bn->data[i] = (2.0 * x1 - x->data[i] * 2.0) + 2.0 * a0 * t;
-          coffset = Bn->size[0];
-          for (boffset = 0; boffset < coffset; boffset++) {
-            Bn->data[boffset + Bn->size[0]] =
-                (2.0 * b_y1 - 2.0 * y->data[i]) + 2.0 * b0 * t;
+          B_data[i] = (2.0 * x1 - x_data[i] * 2.0) + 2.0 * a0 * t;
+          e_loop_ub = Bn->size[0];
+          for (coffset = 0; coffset < e_loop_ub; coffset++) {
+            B_data[coffset + Bn->size[0]] =
+                (2.0 * b_y1 - 2.0 * y_data[i]) + 2.0 * b0 * t;
           }
-          Bn->data[i + Bn->size[0] * 2] =
-              (2.0 * bkj - 2.0 * z->data[i]) + 2.0 * c0 * t;
-          Bn->data[i + Bn->size[0] * 3] = -2.0 * scale * t;
-          Bn->data[i + Bn->size[0] * 4] = -2.0 * b_scale * t;
-          Bn->data[i + Bn->size[0] * 5] = -2.0 * absxk * t;
-          Bn->data[i + Bn->size[0] * 6] = -2.0 * r0;
-          L->data[i] = -(
+          B_data[i + Bn->size[0] * 2] =
+              (2.0 * bkj - 2.0 * z_data[i]) + 2.0 * c0 * t;
+          B_data[i + Bn->size[0] * 3] = -2.0 * scale * t;
+          B_data[i + Bn->size[0] * 4] = -2.0 * b_scale * t;
+          B_data[i + Bn->size[0] * 5] = -2.0 * absxk * t;
+          B_data[i + Bn->size[0] * 6] = -2.0 * r0;
+          L_data[i] = -(
               (((scale * scale + b_scale * b_scale) + absxk * absxk) - t * t) -
               r0 * r0);
         }
@@ -336,10 +449,10 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
             b_C[coffset + i] = 0.0;
           }
           for (k = 0; k < inner; k++) {
-            bkj = Bn->data[boffset + k];
+            bkj = B_data[boffset + k];
             for (i = 0; i < 7; i++) {
-              nx = coffset + i;
-              b_C[nx] += Bn->data[i * Bn->size[0] + k] * bkj;
+              e_loop_ub = coffset + i;
+              b_C[e_loop_ub] += B_data[i * Bn->size[0] + k] * bkj;
             }
           }
         }
@@ -350,16 +463,16 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
         }
         for (k = 0; k < inner; k++) {
           for (i = 0; i < 7; i++) {
-            c_C[i] += Bn->data[i * Bn->size[0] + k] * L->data[k];
+            c_C[i] += B_data[i * Bn->size[0] + k] * L_data[k];
           }
         }
-        for (boffset = 0; boffset < 7; boffset++) {
-          bkj = 0.0;
-          for (nx = 0; nx < 7; nx++) {
-            bkj += a[boffset + 7 * nx] * c_C[nx];
+        for (coffset = 0; coffset < 7; coffset++) {
+          t = 0.0;
+          for (e_loop_ub = 0; e_loop_ub < 7; e_loop_ub++) {
+            t += a[coffset + 7 * e_loop_ub] * c_C[e_loop_ub];
           }
-          deltX[boffset] = bkj;
-          Xn[boffset] += bkj;
+          deltX[coffset] = t;
+          Xn[coffset] += t;
         }
         /*  获取迭代增量 */
         x1 = deltX[0];
@@ -383,22 +496,23 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
       /*  计算两个中心点u1、u2 */
       /* ------------------------------ 圆度计算 --------------------------- */
       /*  计算测点到轴线距离 */
-      boffset = dis->size[0] * dis->size[1];
+      coffset = dis->size[0] * dis->size[1];
       dis->size[0] = 1;
       dis->size[1] = x->size[0];
-      emxEnsureCapacity_real_T(dis, boffset);
-      if (0 <= d_loop_ub - 1) {
-        ttt[0] = (Xn[0] - 2.0 * Xn[3]) - Xn[0];
-        ttt[1] = (Xn[1] - 2.0 * Xn[4]) - Xn[1];
-        ttt[2] = (Xn[2] - 2.0 * Xn[5]) - Xn[2];
+      emxEnsureCapacity_real_T(dis, coffset);
+      B_data = dis->data;
+      if (d_loop_ub - 1 >= 0) {
+        cang[0] = (Xn[0] - 2.0 * Xn[3]) - Xn[0];
+        cang[1] = (Xn[1] - 2.0 * Xn[4]) - Xn[1];
+        cang[2] = (Xn[2] - 2.0 * Xn[5]) - Xn[2];
       }
       for (j = 0; j < d_loop_ub; j++) {
-        cang_idx_0 = x->data[j] - Xn[0];
-        cang_idx_1 = y->data[j] - Xn[1];
-        bkj = z->data[j] - Xn[2];
+        cang_idx_0 = x_data[j] - Xn[0];
+        cang_idx_1 = y_data[j] - Xn[1];
+        bkj = z_data[j] - Xn[2];
         scale = 3.3121686421112381E-170;
         b_scale = 3.3121686421112381E-170;
-        absxk = fabs(cang_idx_1 * ttt[2] - ttt[1] * bkj);
+        absxk = fabs(cang_idx_1 * cang[2] - cang[1] * bkj);
         if (absxk > 3.3121686421112381E-170) {
           x1 = 1.0;
           scale = absxk;
@@ -406,7 +520,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
           t = absxk / 3.3121686421112381E-170;
           x1 = t * t;
         }
-        absxk = fabs(ttt[0]);
+        absxk = fabs(cang[0]);
         if (absxk > 3.3121686421112381E-170) {
           b_y1 = 1.0;
           b_scale = absxk;
@@ -414,7 +528,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
           t = absxk / 3.3121686421112381E-170;
           b_y1 = t * t;
         }
-        absxk = fabs(ttt[0] * bkj - cang_idx_0 * ttt[2]);
+        absxk = fabs(cang[0] * bkj - cang_idx_0 * cang[2]);
         if (absxk > scale) {
           t = scale / absxk;
           x1 = x1 * t * t + 1.0;
@@ -423,7 +537,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
           t = absxk / scale;
           x1 += t * t;
         }
-        absxk = fabs(ttt[1]);
+        absxk = fabs(cang[1]);
         if (absxk > b_scale) {
           t = b_scale / absxk;
           b_y1 = b_y1 * t * t + 1.0;
@@ -432,7 +546,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
           t = absxk / b_scale;
           b_y1 += t * t;
         }
-        absxk = fabs(cang_idx_0 * ttt[1] - ttt[0] * cang_idx_1);
+        absxk = fabs(cang_idx_0 * cang[1] - cang[0] * cang_idx_1);
         if (absxk > scale) {
           t = scale / absxk;
           x1 = x1 * t * t + 1.0;
@@ -441,7 +555,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
           t = absxk / scale;
           x1 += t * t;
         }
-        absxk = fabs(ttt[2]);
+        absxk = fabs(cang[2]);
         if (absxk > b_scale) {
           t = b_scale / absxk;
           b_y1 = b_y1 * t * t + 1.0;
@@ -452,95 +566,94 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
         }
         x1 = scale * sqrt(x1);
         b_y1 = b_scale * sqrt(b_y1);
-        dis->data[j] = x1 / b_y1;
+        B_data[j] = x1 / b_y1;
       }
       /*  比较与半径的差值（圆度） */
       /*  单个点误差 */
-      boffset = dis->size[0] * dis->size[1];
+      coffset = dis->size[0] * dis->size[1];
       dis->size[0] = 1;
-      emxEnsureCapacity_real_T(dis, boffset);
-      coffset = dis->size[1] - 1;
-      for (boffset = 0; boffset <= coffset; boffset++) {
-        dis->data[boffset] -= Xn[6];
+      emxEnsureCapacity_real_T(dis, coffset);
+      B_data = dis->data;
+      e_loop_ub = dis->size[1] - 1;
+      for (coffset = 0; coffset <= e_loop_ub; coffset++) {
+        bkj = B_data[coffset] - Xn[6];
+        B_data[coffset] = bkj * bkj;
       }
-      boffset = d_y->size[0] * d_y->size[1];
-      d_y->size[0] = 1;
-      d_y->size[1] = dis->size[1];
-      emxEnsureCapacity_real_T(d_y, boffset);
-      nx = dis->size[1];
-      for (k = 0; k < nx; k++) {
-        bkj = dis->data[k];
-        d_y->data[k] = bkj * bkj;
-      }
-      boffset = YuanDu->size[1];
-      nx = YuanDu->size[0] * YuanDu->size[1];
+      coffset = YuanDu->size[1];
+      e_loop_ub = YuanDu->size[0] * YuanDu->size[1];
       YuanDu->size[0] = 1;
       YuanDu->size[1]++;
-      emxEnsureCapacity_real_T(YuanDu, nx);
-      YuanDu->data[boffset] = mean(d_y);
+      emxEnsureCapacity_real_T(YuanDu, e_loop_ub);
+      B_data = YuanDu->data;
+      B_data[coffset] = mean(dis);
       /*  总体圆度 */
-      boffset = Xnn->size[1];
-      nx = Xnn->size[0] * Xnn->size[1];
+      coffset = Xnn->size[1];
+      e_loop_ub = Xnn->size[0] * Xnn->size[1];
       Xnn->size[0] = 7;
       Xnn->size[1]++;
-      emxEnsureCapacity_real_T(Xnn, nx);
-      for (nx = 0; nx < 7; nx++) {
-        Xnn->data[nx + 7 * boffset] = Xn[nx];
+      emxEnsureCapacity_real_T(Xnn, e_loop_ub);
+      Xnn_data = Xnn->data;
+      for (e_loop_ub = 0; e_loop_ub < 7; e_loop_ub++) {
+        Xnn_data[e_loop_ub + 7 * coffset] = Xn[e_loop_ub];
       }
     }
   }
-  emxFree_real_T(&d_y);
-  emxFree_real_T(&c_y);
-  emxFree_real_T(&b_y);
+  emxFree_real_T(&b_ptCloud);
+  emxFree_real_T(&r);
   emxFree_real_T(&dis);
   emxFree_real_T(&Bn);
   emxFree_real_T(&L);
   emxFree_real_T(&B);
   emxFree_real_T(&circleCloud);
   emxFree_real_T(&ptCloud);
-  b_minimum(YuanDu, &bkj, &coffset);
+  b_minimum(YuanDu, &bkj, &e_loop_ub);
   /* ------------------------------可视化对比--------------------------- */
   /*  列出所有参数 */
   /* 圆心 */
   /* 法向量 */
-  nx = 7 * (coffset - 1);
-  r0 = Xnn->data[nx + 6];
+  coffset = 7 * (e_loop_ub - 1);
+  t = b_norm(*(double(*)[3]) & (*(double(*)[7]) & Xnn_data[coffset])[3]);
+  r0 = Xnn_data[coffset + 6];
   /* 半径 */
-  bkj = Xnn->data[nx];
+  bkj = Xnn_data[coffset];
   Mcenter[0] = bkj;
-  scale = Xnn->data[nx + 3];
-  MTaon[0] = scale;
-  b_scale = Xnn->data[nx + 1];
-  Mcenter[1] = b_scale;
-  absxk = Xnn->data[nx + 4];
+  absxk = Xnn_data[coffset + 3] / t;
+  MTaon[0] = absxk;
+  angles[0] = bkj - 2.0 * absxk;
+  scale = Xnn_data[coffset + 1];
+  Mcenter[1] = scale;
+  absxk = Xnn_data[coffset + 4] / t;
   MTaon[1] = absxk;
-  t = Xnn->data[nx + 2];
-  Mcenter[2] = t;
-  x1 = Xnn->data[nx + 5];
-  MTaon[2] = x1;
-  boffset = Err_every->size[0] * Err_every->size[1];
+  angles[1] = scale - 2.0 * absxk;
+  b_scale = Xnn_data[coffset + 2];
+  Mcenter[2] = b_scale;
+  absxk = Xnn_data[coffset + 5] / t;
+  MTaon[2] = absxk;
+  angles[2] = b_scale - 2.0 * absxk;
+  coffset = Err_every->size[0] * Err_every->size[1];
   Err_every->size[0] = 1;
   Err_every->size[1] = x->size[0];
-  emxEnsureCapacity_real_T(Err_every, boffset);
+  emxEnsureCapacity_real_T(Err_every, coffset);
+  B_data = Err_every->data;
   loop_ub = x->size[0];
   emxFree_real_T(&YuanDu);
-  for (boffset = 0; boffset < loop_ub; boffset++) {
-    Err_every->data[boffset] = 0.0;
+  for (coffset = 0; coffset < loop_ub; coffset++) {
+    B_data[coffset] = 0.0;
   }
-  boffset = x->size[0];
-  if (0 <= x->size[0] - 1) {
-    iindx = coffset;
-    ttt[0] = (bkj - 2.0 * scale) - bkj;
-    ttt[1] = (b_scale - 2.0 * absxk) - b_scale;
-    ttt[2] = (t - 2.0 * x1) - t;
+  coffset = x->size[0];
+  if (x->size[0] - 1 >= 0) {
+    cang[0] = angles[0] - bkj;
+    cang[1] = angles[1] - scale;
+    cang[2] = angles[2] - b_scale;
+    iindx = e_loop_ub;
   }
-  for (j = 0; j < boffset; j++) {
-    cang_idx_0 = x->data[j] - Xnn->data[7 * (iindx - 1)];
-    cang_idx_1 = y->data[j] - Xnn->data[7 * (iindx - 1) + 1];
-    bkj = z->data[j] - Xnn->data[7 * (iindx - 1) + 2];
+  for (j = 0; j < coffset; j++) {
+    cang_idx_0 = x_data[j] - Xnn_data[7 * (iindx - 1)];
+    cang_idx_1 = y_data[j] - Xnn_data[7 * (iindx - 1) + 1];
+    bkj = z_data[j] - Xnn_data[7 * (iindx - 1) + 2];
     scale = 3.3121686421112381E-170;
     b_scale = 3.3121686421112381E-170;
-    absxk = fabs(cang_idx_1 * ttt[2] - ttt[1] * bkj);
+    absxk = fabs(cang_idx_1 * cang[2] - cang[1] * bkj);
     if (absxk > 3.3121686421112381E-170) {
       x1 = 1.0;
       scale = absxk;
@@ -548,7 +661,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
       t = absxk / 3.3121686421112381E-170;
       x1 = t * t;
     }
-    absxk = fabs(ttt[0]);
+    absxk = fabs(cang[0]);
     if (absxk > 3.3121686421112381E-170) {
       b_y1 = 1.0;
       b_scale = absxk;
@@ -556,7 +669,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
       t = absxk / 3.3121686421112381E-170;
       b_y1 = t * t;
     }
-    absxk = fabs(ttt[0] * bkj - cang_idx_0 * ttt[2]);
+    absxk = fabs(cang[0] * bkj - cang_idx_0 * cang[2]);
     if (absxk > scale) {
       t = scale / absxk;
       x1 = x1 * t * t + 1.0;
@@ -565,7 +678,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
       t = absxk / scale;
       x1 += t * t;
     }
-    absxk = fabs(ttt[1]);
+    absxk = fabs(cang[1]);
     if (absxk > b_scale) {
       t = b_scale / absxk;
       b_y1 = b_y1 * t * t + 1.0;
@@ -574,7 +687,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
       t = absxk / b_scale;
       b_y1 += t * t;
     }
-    absxk = fabs(cang_idx_0 * ttt[1] - ttt[0] * cang_idx_1);
+    absxk = fabs(cang_idx_0 * cang[1] - cang[0] * cang_idx_1);
     if (absxk > scale) {
       t = scale / absxk;
       x1 = x1 * t * t + 1.0;
@@ -583,7 +696,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
       t = absxk / scale;
       x1 += t * t;
     }
-    absxk = fabs(ttt[2]);
+    absxk = fabs(cang[2]);
     if (absxk > b_scale) {
       t = b_scale / absxk;
       b_y1 = b_y1 * t * t + 1.0;
@@ -594,19 +707,37 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
     }
     x1 = scale * sqrt(x1);
     b_y1 = b_scale * sqrt(b_y1);
-    Err_every->data[j] = x1 / b_y1;
+    B_data[j] = x1 / b_y1;
   }
-  emxFree_real_T(&Xnn);
+  emxFree_real_T(&z);
+  emxFree_real_T(&y);
+  emxFree_real_T(&x);
   /*  比较与半径的差值（圆度） */
-  boffset = Err_every->size[0] * Err_every->size[1];
+  coffset = Err_every->size[0] * Err_every->size[1];
   Err_every->size[0] = 1;
-  emxEnsureCapacity_real_T(Err_every, boffset);
+  emxEnsureCapacity_real_T(Err_every, coffset);
+  B_data = Err_every->data;
   loop_ub = Err_every->size[1] - 1;
-  for (boffset = 0; boffset <= loop_ub; boffset++) {
-    Err_every->data[boffset] -= r0;
+  for (coffset = 0; coffset <= loop_ub; coffset++) {
+    B_data[coffset] -= r0;
   }
   /*  单个点误差 */
+  foot_of_perpendicular_from_a_point_to_a_line(
+      P_bound1,
+      *(double(*)[3]) & (*(double(*)[7]) & Xnn_data[7 * (e_loop_ub - 1)])[0],
+      angles, &bkj, &absxk, &scale);
+  foot_of_perpendicular_from_a_point_to_a_line(
+      P_bound2,
+      *(double(*)[3]) & (*(double(*)[7]) & Xnn_data[7 * (e_loop_ub - 1)])[0],
+      angles, &b_scale, &t, &x1);
+  Bottom_round_center1[0] = bkj;
+  Bottom_round_center1[1] = absxk;
+  Bottom_round_center1[2] = scale;
+  Bottom_round_center2[0] = b_scale;
+  Bottom_round_center2[1] = t;
+  Bottom_round_center2[2] = x1;
   *Mradial = r0;
+  emxFree_real_T(&Xnn);
 }
 
 /*

@@ -1,8 +1,8 @@
 /*
  * File: Generate_multi_layered_measurement_points.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2024 00:13:40
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 26-Mar-2024 15:14:21
  */
 
 #ifndef GENERATE_MULTI_LAYERED_MEASUREMENT_POINTS_H
@@ -20,9 +20,8 @@ extern "C" {
 
 /* Function Declarations */
 extern void Generate_multi_layered_measurement_points(
-    const emxArray_real_T *x, const emxArray_real_T *y,
-    const emxArray_real_T *z, double num, double laynum, const double P3[3],
-    const double P4[3], emxArray_real_T *Point_test);
+    const emxArray_real_T *Point_out, double num, double laynum,
+    const double P3[3], const double P4[3], emxArray_real_T *Point_test);
 
 #ifdef __cplusplus
 }

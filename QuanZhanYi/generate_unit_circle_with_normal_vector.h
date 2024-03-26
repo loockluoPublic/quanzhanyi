@@ -1,8 +1,8 @@
 /*
  * File: generate_unit_circle_with_normal_vector.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2024 00:13:40
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 26-Mar-2024 15:14:21
  */
 
 #ifndef GENERATE_UNIT_CIRCLE_WITH_NORMAL_VECTOR_H
@@ -19,11 +19,10 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void generate_unit_circle_with_normal_vector(double t1, double t2,
+extern void generate_unit_circle_with_normal_vector(double azimuth,
+                                                    double elevation,
                                                     double num,
-                                                    emxArray_real_T *x_circle1,
-                                                    emxArray_real_T *y_circle1,
-                                                    emxArray_real_T *z_circle1);
+                                                    emxArray_real_T *Point_out);
 
 #ifdef __cplusplus
 }

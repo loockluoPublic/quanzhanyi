@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_mex.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2024 00:13:40
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 26-Mar-2024 15:14:21
  */
 
 /* Include Files */
@@ -64,36 +64,36 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
  */
 emlrtCTX mexFunctionCreateRootTLS(void)
 {
-  emlrtCreateRootTLSR2021a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
-                           NULL);
+  emlrtCreateRootTLSR2022a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
+                           NULL, (const char_T *)"GBK", true);
   return emlrtRootTLSGlobal;
 }
 
 /*
  * Arguments    : int32_T nlhs
- *                mxArray *plhs[4]
+ *                mxArray *plhs[6]
  *                int32_T nrhs
- *                const mxArray *prhs[3]
+ *                const mxArray *prhs[5]
  * Return Type  : void
  */
 void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points_mexFunction(
-    int32_T nlhs, mxArray *plhs[4], int32_T nrhs, const mxArray *prhs[3])
+    int32_T nlhs, mxArray *plhs[6], int32_T nrhs, const mxArray *prhs[5])
 {
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *outputs[4];
+  const mxArray *outputs[6];
   int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 3) {
+  if (nrhs != 5) {
     emlrtErrMsgIdAndTxt(
-        &st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 3, 4, 61,
+        &st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 5, 4, 61,
         "Calculate_accurate_cylinders_from_multiple_measurement_points");
   }
-  if (nlhs > 4) {
+  if (nlhs > 6) {
     emlrtErrMsgIdAndTxt(
         &st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 61,
         "Calculate_accurate_cylinders_from_multiple_measurement_points");
@@ -113,11 +113,11 @@ void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points_mexFun
  * Arguments    : int32_T nlhs
  *                mxArray *plhs[1]
  *                int32_T nrhs
- *                const mxArray *prhs[7]
+ *                const mxArray *prhs[5]
  * Return Type  : void
  */
 void unsafe_Generate_multi_layered_measurement_points_mexFunction(
-    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[7])
+    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[5])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -127,8 +127,8 @@ void unsafe_Generate_multi_layered_measurement_points_mexFunction(
   const mxArray *outputs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 7) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 7, 4,
+  if (nrhs != 5) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 5, 4,
                         41, "Generate_multi_layered_measurement_points");
   }
   if (nlhs > 1) {
@@ -181,40 +181,34 @@ void unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
 
 /*
  * Arguments    : int32_T nlhs
- *                mxArray *plhs[3]
+ *                mxArray *plhs[1]
  *                int32_T nrhs
  *                const mxArray *prhs[3]
  * Return Type  : void
  */
 void unsafe_generate_unit_circle_with_normal_vector_mexFunction(
-    int32_T nlhs, mxArray *plhs[3], int32_T nrhs, const mxArray *prhs[3])
+    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[3])
 {
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *outputs[3];
-  int32_T b_nlhs;
+  const mxArray *outputs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 3) {
     emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 3, 4,
                         39, "generate_unit_circle_with_normal_vector");
   }
-  if (nlhs > 3) {
+  if (nlhs > 1) {
     emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 39,
                         "generate_unit_circle_with_normal_vector");
   }
   /* Call the function. */
-  c_generate_unit_circle_with_nor(prhs, nlhs, outputs);
+  c_generate_unit_circle_with_nor(prhs, &outputs);
   /* Copy over outputs to the caller. */
-  if (nlhs < 1) {
-    b_nlhs = 1;
-  } else {
-    b_nlhs = nlhs;
-  }
-  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(1, &plhs[0], &outputs);
 }
 
 /*

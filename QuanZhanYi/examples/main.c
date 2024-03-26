@@ -1,8 +1,8 @@
 /*
  * File: main.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 26-Mar-2024 00:13:40
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 26-Mar-2024 15:14:21
  */
 
 /*************************************************************************/
@@ -44,7 +44,7 @@
 /* Function Declarations */
 static void argInit_3x1_real_T(double result[3]);
 
-static emxArray_real_T *argInit_Unboundedx1_real_T(void);
+static emxArray_real_T *argInit_3xUnbounded_real_T(void);
 
 static double argInit_real_T(void);
 
@@ -76,19 +76,23 @@ Change this value to the value that the application requires. */
  * Arguments    : void
  * Return Type  : emxArray_real_T *
  */
-static emxArray_real_T *argInit_Unboundedx1_real_T(void)
+static emxArray_real_T *argInit_3xUnbounded_real_T(void)
 {
   emxArray_real_T *result;
-  const int i = 2;
+  double *result_data;
   int idx0;
+  int idx1;
   /* Set the size of the array.
 Change this size to the value that the application requires. */
-  result = emxCreateND_real_T(1, &i);
+  result = emxCreate_real_T(3, 2);
+  result_data = result->data;
   /* Loop over the array to initialize each element. */
-  for (idx0 = 0; idx0 < result->size[0U]; idx0++) {
-    /* Set the value of the array element.
+  for (idx0 = 0; idx0 < 3; idx0++) {
+    for (idx1 = 0; idx1 < result->size[1U]; idx1++) {
+      /* Set the value of the array element.
 Change this value to the value that the application requires. */
-    result->data[idx0] = argInit_real_T();
+      result_data[idx0 + 3 * idx1] = argInit_real_T();
+    }
   }
   return result;
 }
@@ -109,30 +113,31 @@ static double argInit_real_T(void)
 static void c_main_Calculate_accurate_cylin(void)
 {
   emxArray_real_T *Err_every;
-  emxArray_real_T *x;
-  emxArray_real_T *y;
-  emxArray_real_T *z;
+  emxArray_real_T *Point_in;
+  double Bottom_round_center1[3];
+  double Bottom_round_center2[3];
   double MTaon[3];
   double Mcenter[3];
+  double P_bound1_tmp[3];
   double Mradial;
+  double azimuth_tmp;
   emxInitArray_real_T(&Err_every, 2);
   /* Initialize function
    * 'Calculate_accurate_cylinders_from_multiple_measurement_points' input
    * arguments. */
-  /* Initialize function input argument 'x'. */
-  x = argInit_Unboundedx1_real_T();
-  /* Initialize function input argument 'y'. */
-  y = argInit_Unboundedx1_real_T();
-  /* Initialize function input argument 'z'. */
-  z = argInit_Unboundedx1_real_T();
+  /* Initialize function input argument 'Point_in'. */
+  Point_in = argInit_3xUnbounded_real_T();
+  azimuth_tmp = argInit_real_T();
+  /* Initialize function input argument 'P_bound1'. */
+  argInit_3x1_real_T(P_bound1_tmp);
+  /* Initialize function input argument 'P_bound2'. */
   /* Call the entry-point
    * 'Calculate_accurate_cylinders_from_multiple_measurement_points'. */
   Calculate_accurate_cylinders_from_multiple_measurement_points(
-      x, y, z, Mcenter, MTaon, &Mradial, Err_every);
+      Point_in, azimuth_tmp, azimuth_tmp, P_bound1_tmp, P_bound1_tmp, Mcenter,
+      MTaon, &Mradial, Err_every, Bottom_round_center1, Bottom_round_center2);
   emxDestroyArray_real_T(Err_every);
-  emxDestroyArray_real_T(z);
-  emxDestroyArray_real_T(y);
-  emxDestroyArray_real_T(x);
+  emxDestroyArray_real_T(Point_in);
 }
 
 /*
@@ -141,32 +146,24 @@ static void c_main_Calculate_accurate_cylin(void)
  */
 static void c_main_Generate_multi_layered_m(void)
 {
+  emxArray_real_T *Point_out;
   emxArray_real_T *Point_test;
-  emxArray_real_T *x;
-  emxArray_real_T *y;
-  emxArray_real_T *z;
   double P3_tmp[3];
   double num_tmp;
   emxInitArray_real_T(&Point_test, 2);
   /* Initialize function 'Generate_multi_layered_measurement_points' input
    * arguments. */
-  /* Initialize function input argument 'x'. */
-  x = argInit_Unboundedx1_real_T();
-  /* Initialize function input argument 'y'. */
-  y = argInit_Unboundedx1_real_T();
-  /* Initialize function input argument 'z'. */
-  z = argInit_Unboundedx1_real_T();
+  /* Initialize function input argument 'Point_out'. */
+  Point_out = argInit_3xUnbounded_real_T();
   num_tmp = argInit_real_T();
   /* Initialize function input argument 'P3'. */
   argInit_3x1_real_T(P3_tmp);
   /* Initialize function input argument 'P4'. */
   /* Call the entry-point 'Generate_multi_layered_measurement_points'. */
-  Generate_multi_layered_measurement_points(x, y, z, num_tmp, num_tmp, P3_tmp,
+  Generate_multi_layered_measurement_points(Point_out, num_tmp, num_tmp, P3_tmp,
                                             P3_tmp, Point_test);
   emxDestroyArray_real_T(Point_test);
-  emxDestroyArray_real_T(z);
-  emxDestroyArray_real_T(y);
-  emxDestroyArray_real_T(x);
+  emxDestroyArray_real_T(Point_out);
 }
 
 /*
@@ -196,22 +193,16 @@ static void c_main_foot_of_perpendicular_fr(void)
  */
 static void c_main_generate_unit_circle_wit(void)
 {
-  emxArray_real_T *x_circle1;
-  emxArray_real_T *y_circle1;
-  emxArray_real_T *z_circle1;
-  double t1_tmp;
-  emxInitArray_real_T(&x_circle1, 2);
-  emxInitArray_real_T(&y_circle1, 2);
-  emxInitArray_real_T(&z_circle1, 2);
+  emxArray_real_T *Point_out;
+  double azimuth_tmp;
+  emxInitArray_real_T(&Point_out, 2);
   /* Initialize function 'generate_unit_circle_with_normal_vector' input
    * arguments. */
-  t1_tmp = argInit_real_T();
+  azimuth_tmp = argInit_real_T();
   /* Call the entry-point 'generate_unit_circle_with_normal_vector'. */
-  generate_unit_circle_with_normal_vector(t1_tmp, t1_tmp, t1_tmp, x_circle1,
-                                          y_circle1, z_circle1);
-  emxDestroyArray_real_T(z_circle1);
-  emxDestroyArray_real_T(y_circle1);
-  emxDestroyArray_real_T(x_circle1);
+  generate_unit_circle_with_normal_vector(azimuth_tmp, azimuth_tmp, azimuth_tmp,
+                                          Point_out);
+  emxDestroyArray_real_T(Point_out);
 }
 
 /*
