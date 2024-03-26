@@ -2,7 +2,7 @@
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 26-Mar-2024 15:14:21
+ * C/C++ source code generated on  : 26-Mar-2024 20:09:07
  */
 
 /* Include Files */
@@ -90,10 +90,10 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
   emxArray_real_T *x;
   emxArray_real_T *y;
   emxArray_real_T *z;
-  double mm[120];
-  double nn[120];
-  double dv[60];
-  double dv1[60];
+  double mm[180];
+  double nn[180];
+  double dv[90];
+  double dv1[90];
   double a[49];
   double b_C[49];
   double C[9];
@@ -202,15 +202,15 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
            dv);
   linspace(-elevation - 0.17453292519943295, -elevation + 0.17453292519943295,
            dv1);
-  for (coffset = 0; coffset < 60; coffset++) {
+  for (coffset = 0; coffset < 90; coffset++) {
     mm[coffset] = dv[coffset];
-    mm[coffset + 60] = dv1[coffset];
+    mm[coffset + 90] = dv1[coffset];
   }
   linspace(azimuth - 0.17453292519943295, azimuth + 0.17453292519943295, dv);
   linspace(-azimuth - 0.17453292519943295, -azimuth + 0.17453292519943295, dv1);
-  for (coffset = 0; coffset < 60; coffset++) {
+  for (coffset = 0; coffset < 90; coffset++) {
     nn[coffset] = dv[coffset];
-    nn[coffset + 60] = dv1[coffset];
+    nn[coffset + 90] = dv1[coffset];
   }
   emxInit_real_T(&YuanDu, 2);
   emxInit_real_T(&Xnn, 2);
@@ -233,9 +233,9 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
   emxInit_real_T(&dis, 2);
   emxInit_real_T(&r, 1);
   emxInit_real_T(&b_ptCloud, 1);
-  for (ii = 0; ii < 120; ii++) {
+  for (ii = 0; ii < 180; ii++) {
     b_ii = mm[ii];
-    for (jj = 0; jj < 120; jj++) {
+    for (jj = 0; jj < 180; jj++) {
       /*  rot1旋转矩阵 */
       t = nn[jj];
       cang[0] = cos(b_ii);
@@ -488,7 +488,6 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
           exitg1 = true;
         }
       }
-      /* ------------------------------可视化对比--------------------------- */
       /*  列出所有参数 */
       /* 圆心 */
       /* 法向量 */
@@ -607,7 +606,6 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points(
   emxFree_real_T(&circleCloud);
   emxFree_real_T(&ptCloud);
   b_minimum(YuanDu, &bkj, &e_loop_ub);
-  /* ------------------------------可视化对比--------------------------- */
   /*  列出所有参数 */
   /* 圆心 */
   /* 法向量 */

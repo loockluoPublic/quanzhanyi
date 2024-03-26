@@ -2,7 +2,7 @@
  * File: linspace.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 26-Mar-2024 15:14:21
+ * C/C++ source code generated on  : 26-Mar-2024 20:09:07
  */
 
 #ifndef LINSPACE_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void linspace(double d1, double d2, double y[60]);
+void linspace(double d1, double d2, double y[90]);
 
 #ifdef __cplusplus
 }
