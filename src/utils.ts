@@ -53,12 +53,10 @@ const GenerateMultiLayeredMeasurementPoints = (
     points.toJSON()
   );
   const resoult = resultPoints.toVector3();
-  console.log("%c Line:56 🥃 resultPoints", "color:#2eafb0", resultPoints);
-  console.log("%c Line:56 🍉 resoult", "color:#42b983", resoult);
-  // points.free();
-  // resultPoints.free();
-  // p3.free();
-  // p4.free();
+  points.free();
+  resultPoints.free();
+  p3.free();
+  p4.free();
   return resoult;
 };
 
@@ -106,21 +104,56 @@ const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
 const init = () => {
   const azimuth = Math.PI / 3;
   const elevation = Math.PI / 4;
+  let start = performance.now();
   const res = generateUnitCircleWithNormalVector(azimuth, elevation, 5);
+  console.log(
+    "%c Line:108 🍌 start",
+    "color:#4fff4B",
+    performance.now() - start
+  );
   console.log(
     "%c Line:90 🥪 generateUnitCircleWithNormalVector",
     "color:#6ec1c2",
     res
   );
-  const i = 0;
+
+  let i = 0;
   const v = data[i].map((item) => {
     return new Vector3(...item);
   });
   const p3 = new Vector3(...p3array[i]);
   const p4 = new Vector3(...p4array[i]);
   console.log("%c Line:103 🥛 p3", "color:#e41a6a", p3, p4);
+  start = performance.now();
   const res2 = GenerateMultiLayeredMeasurementPoints(v, 3, 5, p3, p4);
-  console.log("%c Line:128 🥖 res2", "color:#2eafb0");
+  console.log(
+    "%c Line:108 🍌 start",
+    "color:#4fff4B",
+    performance.now() - start
+  );
+  console.log("%c Line:128 🥖 res2", "color:#2eafb0", res2);
+
+  const pointsFlat = [];
+  for (const dataIndex of data) {
+    dataIndex.forEach((item) => {
+      pointsFlat.push(new Vector3(...item));
+    });
+  }
+  console.log("%c Line:125 🍧 pointsFlat", "color:#ea7e5c", pointsFlat);
+  start = performance.now();
+  const res3 = CalculateAccurateCylindersFromMultipleMeasurementPoints(
+    pointsFlat,
+    1,
+    2,
+    pointsFlat[0],
+    pointsFlat[24]
+  );
+  console.log(
+    "%c Line:108 🍌 start",
+    "color:#4fff4B",
+    performance.now() - start
+  );
+  console.log("%c Line:132 🍭 res3", "color:#b03734", res3);
 
   // const resultPoints = new EmxArray_real_T([
   //   [1, 2, 4, 5],
