@@ -7,7 +7,7 @@ struct emxArray_real_T {
     boolean_T canFreeData;
 };
 */
-
+import { Vector3 } from "three";
 const emModule = (window as any).Module;
 export default class EmxArray_real_T {
   /**
@@ -24,8 +24,8 @@ export default class EmxArray_real_T {
   arrayPtr: number;
 
   // n*m维度的 矩阵
-  #size: [number, number];
-  #sizePtr: number;
+  size: [number, number];
+  sizePtr: number;
 
   /**
    * 创建对象
@@ -33,10 +33,17 @@ export default class EmxArray_real_T {
    * @param n 一维数组的长度
    * @memberof EmxArray_real_T
    */
-  constructor(m: number[][] | number[] | number, n: number = 1) {
+  constructor(
+    m: number[][] | number[] | number | Vector3 | Vector3[],
+    n: number = 1
+  ) {
     if (typeof m === "number") {
       this.#arrayFlat = new Array(m * n).fill(0);
-      this.#initSize(m, n);
+      this.#setSize(m, n);
+      return this.#init();
+    } else if (m instanceof Vector3) {
+      this.#arrayFlat = m.toArray();
+      this.#setSize(3, 1);
       return this.#init();
     } else if (Array.isArray(m)) {
       if (Array.isArray(m[0])) {
@@ -46,11 +53,18 @@ export default class EmxArray_real_T {
           //@ts-ignore
           this.#arrayFlat.push(...row);
         }
-        this.#initSize(m[0].length, m.length);
+        this.#setSize(m[0].length, m.length);
+      } else if (m[0] instanceof Vector3) {
+        this.#arrayFlat = [];
+        for (const row of m) {
+          //@ts-ignore
+          this.#arrayFlat.push(...(row as Vector3).toArray());
+        }
+        this.#setSize(3, m.length);
       } else {
         // 1 * n 的矩阵
         this.#arrayFlat = m as unknown as number[];
-        this.#initSize(1, m.length);
+        this.#setSize(1, m.length);
       }
       return this.#init();
     }
@@ -58,71 +72,97 @@ export default class EmxArray_real_T {
   }
 
   #init() {
-    const arrayF64 = new Float64Array(this.#arrayFlat);
-    //  为一个结构体分配线性内存空间，一个结构体为大小 8(指针)+8(指针)+4（int + 1(bool) =
+    //  为一个结构体分配线性内存空间，一个结构体为大小 8(指针)+8(指针)+4（int + 4(bool) =
+
     var emxArrayPtr = emModule._malloc(24);
 
-    // Allocate and set data pointer
+    // 设置线性内存的数据
+    const arrayF64 = new Float64Array(this.#arrayFlat);
+
     this.arrayPtr = emModule._malloc(
       arrayF64.length * Float64Array.BYTES_PER_ELEMENT
-    ); // 8 bytes per double
-
+    );
+    // emModule.setValue(this.arrayPtr, arrayF64, "double");
     emModule.HEAPF64.set(
       arrayF64,
       this.arrayPtr / Float64Array.BYTES_PER_ELEMENT
     );
 
-    emModule.HEAP32.set(
-      this.#size[0] * this.#size[1],
-      this.#sizePtr / Int32Array.BYTES_PER_ELEMENT
+    // 设置结构体 size 的数据
+    const sizeI32 = new Int32Array(this.size);
+    this.sizePtr = emModule._malloc(
+      sizeI32.length * Int32Array.BYTES_PER_ELEMENT
     );
+
+    emModule.HEAP32.set(sizeI32, this.sizePtr / Int32Array.BYTES_PER_ELEMENT);
 
     // 设置一个可移动的指针，让他等于初始地址
     let dynamicPtr = emxArrayPtr;
     // this.#dataPtr  是一个指针，占据8个字节（8*8=64位）。
+    // double *data;
     emModule.setValue(dynamicPtr, this.arrayPtr, "*");
 
     // 64 位电脑占用  指针所占用的内存大小为 64 bit 即 8 bytes
-    dynamicPtr += Float64Array.BYTES_PER_ELEMENT;
-    emModule.setValue(dynamicPtr, this.#sizePtr, "*");
+    //  int *size;
+    dynamicPtr += Int32Array.BYTES_PER_ELEMENT;
+    emModule.setValue(dynamicPtr, this.sizePtr, "*");
 
     // 设置数组长度
-    dynamicPtr += Float64Array.BYTES_PER_ELEMENT;
+    // int allocatedSize;
+    dynamicPtr += Int32Array.BYTES_PER_ELEMENT;
     emModule.setValue(dynamicPtr, arrayF64.length, "i32");
 
     // 设置维度
+    // int numDimensions;
     dynamicPtr += Int32Array.BYTES_PER_ELEMENT;
-    emModule.setValue(dynamicPtr, this.#size[0], "i32");
+    emModule.setValue(dynamicPtr, 2, "i32");
 
     // 设置是否可以被释放内存，0为否
+    // boolean_T canFreeData;
     dynamicPtr += Int32Array.BYTES_PER_ELEMENT;
     emModule.setValue(dynamicPtr, 0, "i8");
+
+    // 读取size指针
+    const sizePtr = emModule.getValue(emxArrayPtr + 8, "i32");
+
+    const numDimensions = 2;
+    const sizeArray = new Int32Array(numDimensions);
+    for (let i = 0; i < numDimensions; i++) {
+      sizeArray[i] = emModule.HEAP32[sizePtr / 4 + i];
+    }
+
     this.ptr = emxArrayPtr;
+
     return this;
   }
 
-  #initSize(m: number, n: number) {
-    this.#size = [m, n];
-    const size = new Int32Array([m, n]);
-
-    this.#sizePtr = emModule._malloc(
-      size.length * Int32Array.BYTES_PER_ELEMENT
-    );
+  #setSize(m: number, n: number) {
+    this.size = [m, n];
   }
 
+  getSize() {
+    // 从结构体中获取allocatedSize（即数组长度）
+    var size = emModule.getValue(this.ptr + 8, "i32");
+    var allocatedSize = emModule.getValue(this.ptr + 16, "i32");
+
+    const a = Array.from(
+      new Int32Array(emModule.HEAP32.buffer, this.sizePtr, 2)
+    );
+    console.log("%c Line:129 🥑 size", "color:#42b983", size, allocatedSize, a);
+  }
   toJSON() {
     if (!this.ptr) return null;
     var dataPtr = emModule.getValue(this.ptr, "*");
 
     // 从结构体中获取allocatedSize（即数组长度）
-    var allocatedSize = emModule.getValue(this.ptr + 16, "i32");
+    var allocatedSize = emModule.getValue(this.ptr + 8, "i32");
 
     // 创建一个Float64Array视图来读取data数组的值
     var data = Array.from(
       new Float64Array(emModule.HEAPF64.buffer, dataPtr, allocatedSize)
     );
 
-    const [m, n] = this.#size;
+    const [m, n] = this.size;
 
     if (m > 1 && n > 1) {
       const res = [];
@@ -144,13 +184,33 @@ export default class EmxArray_real_T {
   valueOf() {
     return this.toJSON();
   }
+  /**
+   * 转换为 Threejs的 Vector3
+   * @returns Vector3[]
+   */
+  toVector3() {
+    if (this.size[0] === 3) {
+      return this.toJSON().map((row) => {
+        return new Vector3(...row);
+      });
+    }
+    return [];
+  }
+
+  getDebugInfo() {
+    return {
+      size: this.size,
+      sizePtr: this.sizePtr,
+      arrayFlat: this.#arrayFlat,
+    };
+  }
 
   free() {
     // 首先，释放data数组的内存
     emModule._free(this.arrayPtr);
 
     // 然后，释放size数组的内存
-    emModule._free(this.#sizePtr);
+    emModule._free(this.sizePtr);
 
     // 最后，释放结构体本身的内存
     emModule._free(this.ptr);
@@ -158,7 +218,7 @@ export default class EmxArray_real_T {
     // 清理类实例中的指针，以防止悬挂指针（虽然这不是必需的，但是是个好习惯）
     this.ptr = null;
     this.arrayPtr = null;
-    this.#sizePtr = null;
+    this.sizePtr = null;
   }
 }
 

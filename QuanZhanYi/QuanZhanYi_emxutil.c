@@ -9,9 +9,9 @@
 #include "QuanZhanYi_emxutil.h"
 #include "QuanZhanYi_types.h"
 #include "rt_nonfinite.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 /* Function Definitions */
 /*
  * Arguments    : emxArray_real_T *emxArray

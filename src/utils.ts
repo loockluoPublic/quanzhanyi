@@ -1,119 +1,179 @@
+import { Vector3 } from "three";
 import EmxArray_real_T, { pickCol } from "./class/EmxArray_real_T";
-import { data, ev, p3array, p4array } from "./mockData";
+import { data, p3array, p4array } from "./mockData";
 
 const {
+  _test,
   _generateUnitCircleWithNormalVector,
   _GenerateMultiLayeredMeasurementPoints,
+  _CalculateAccurateCylindersFromMultipleMeasurementPoints,
 } = (window as any).Module;
 
-const init = () => {
-  // const de = new EmxArray_real_T([
-  //   [1, 2, 3],
-  //   [4, 5, 6],
-  // ]);
-  // const de2 = new EmxArray_real_T([1, 2, 3]);
-  // const de23 = new EmxArray_real_T([[1, 2, 3]]);
-  // const de1 = new EmxArray_real_T(3, 2);
-  // const de11 = new EmxArray_real_T(1, 20);
-  // const de12 = new EmxArray_real_T(10, 1);
-  // console.log(
-  //   "%c Line:157 🥕 3,2",
-  //   "color:#42b983",
-  //   de.toJSON(),
-  //   de2.toJSON(),
-  //   de23.toJSON(),
-  //   de1.toJSON(),
-  //   de11.toJSON(),
-  //   de12.toJSON()
-  // );
-  const x = new EmxArray_real_T(1, 9);
-  const y = new EmxArray_real_T(1, 9);
-  const z = new EmxArray_real_T(1, 9);
-  _generateUnitCircleWithNormalVector(
-    Math.PI / 3,
-    Math.PI / 4,
-    6,
-    x.ptr,
-    y.ptr,
-    z.ptr
-  );
+const generateUnitCircleWithNormalVector = (
+  azimuth: number,
+  elevation: number,
+  num: number
+) => {
+  const points = new EmxArray_real_T(3, num);
+  _generateUnitCircleWithNormalVector(azimuth, elevation, num, points.ptr);
+  const res = points.toVector3();
+  points.free();
+  return res;
+};
 
+const GenerateMultiLayeredMeasurementPoints = (
+  Points: Vector3[],
+  num: number,
+  laynum: number,
+  P3: Vector3,
+  P4: Vector3
+) => {
+  const points = new EmxArray_real_T(Points);
+  const p3 = new EmxArray_real_T(P3);
+  const p4 = new EmxArray_real_T(P4);
+  const resultPoints = new EmxArray_real_T(3, num * laynum);
   console.log(
-    "%c Line:50 🍤 _generate_unit_circle_with_normal_vector-x",
-    "color:#b03734",
-    x.toJSON()
+    "%c Line:35 🥪 resultPoints",
+    "color:#4fff4B",
+    resultPoints.toVector3()
   );
 
-  const i = 0;
-
-  const x2 = new EmxArray_real_T(pickCol(data[i], 0));
-  const y2 = new EmxArray_real_T(pickCol(data[i], 1));
-  const z2 = new EmxArray_real_T(pickCol(data[i], 2));
-
-  const p3 = new EmxArray_real_T(p3array[i]);
-  const p4 = new EmxArray_real_T(p4array[i]);
-  const resultPoints = new EmxArray_real_T(3, 15);
-  const debugRes = new EmxArray_real_T(1,10);
-
-  // console.log("%c Line:76 🍫", "color:#7f2b82", resultPoints.toJSON());
-
- const res = _GenerateMultiLayeredMeasurementPoints(
-    x2.ptr,
-    y2.ptr,
-    z2.ptr,
-    5,
-    3,
+  _GenerateMultiLayeredMeasurementPoints(
+    points.ptr,
+    num,
+    laynum,
     p3.arrayPtr,
     p4.arrayPtr,
-    resultPoints.ptr,
-    debugRes.arrayPtr
-  )
-  console.log("%c Line:55 🍷 中断变量值：", "color:#ed9ec7",res, debugRes.toJSON());
-  // // console.log("%c Line:67 🍊 res", "color:#fca650", res);
-  // // const numDimensions = callTest((window as any).Module, a, data, size);
-  // // console.log("%c Line:64 🥤 numDimensions", "color:#ffdd4d", numDimensions);
-  // const de112 = new EmxArray_real_T(3, 5);
-  // _generate_unit_circle_with_normal_vector(
-  //   Math.PI / 3,
-  //   Math.PI / 4,
-  //   5,
-  //   de112.ptr
+    resultPoints.ptr
+  );
+  console.log(
+    "%c Line:45 🥥 resultPoints",
+    "color:#ea7e5c",
+    resultPoints,
+    points.toJSON()
+  );
+  const resoult = resultPoints.toVector3();
+  points.free();
+  resultPoints.free();
+  p3.free();
+  p4.free();
+  return resoult;
+};
+
+const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
+  Points: Vector3[],
+  azimuth: number,
+  elevation: number,
+  P_bound1: Vector3,
+  P_bound2: Vector3
+) => {
+  const points = new EmxArray_real_T(Points);
+  const p1 = new EmxArray_real_T(P_bound1);
+  const p2 = new EmxArray_real_T(P_bound2);
+  const center = new EmxArray_real_T(3, 1);
+  const mTaon = new EmxArray_real_T(3, 1);
+  const Mradial = new EmxArray_real_T(1, 1);
+  const Err_every = new EmxArray_real_T(1, Points.length);
+  const Bottom_round_center1 = new EmxArray_real_T(3, 2);
+  _CalculateAccurateCylindersFromMultipleMeasurementPoints(
+    points.ptr,
+    azimuth,
+    elevation,
+    p1.arrayPtr,
+    p2.arrayPtr,
+    center.arrayPtr,
+    mTaon.arrayPtr,
+    Mradial.arrayPtr,
+    Err_every.ptr,
+    Bottom_round_center1.arrayPtr,
+    Bottom_round_center1.arrayPtr + Float64Array.BYTES_PER_ELEMENT * 3
+  );
+  const result = {
+    center: center.toVector3(),
+    Err_every: Err_every.toJSON(),
+    Bottom_round_center: Bottom_round_center1.toVector3(),
+  };
+  center.free();
+  mTaon.free();
+  Mradial.free();
+  Err_every.free();
+  p1.free();
+  p2.free();
+  return result;
+};
+const init = () => {
+  const azimuth = Math.PI / 3;
+  const elevation = Math.PI / 4;
+  let start = performance.now();
+  const res = generateUnitCircleWithNormalVector(azimuth, elevation, 5);
+  console.log(
+    "%c Line:108 🍌 start",
+    "color:#4fff4B",
+    performance.now() - start
+  );
+  console.log(
+    "%c Line:90 🥪 generateUnitCircleWithNormalVector",
+    "color:#6ec1c2",
+    res
+  );
+
+  let i = 0;
+  const v = data[i].map((item) => {
+    return new Vector3(...item);
+  });
+  const p3 = new Vector3(...p3array[i]);
+  const p4 = new Vector3(...p4array[i]);
+  console.log("%c Line:103 🥛 p3", "color:#e41a6a", p3, p4);
+  start = performance.now();
+  const res2 = GenerateMultiLayeredMeasurementPoints(v, 3, 5, p3, p4);
+  console.log(
+    "%c Line:108 🍌 start",
+    "color:#4fff4B",
+    performance.now() - start
+  );
+  console.log("%c Line:128 🥖 res2", "color:#2eafb0", res2);
+
+  const pointsFlat = [];
+  for (const dataIndex of data) {
+    dataIndex.forEach((item) => {
+      pointsFlat.push(new Vector3(...item));
+    });
+  }
+  console.log("%c Line:125 🍧 pointsFlat", "color:#ea7e5c", pointsFlat);
+  start = performance.now();
+  const res3 = CalculateAccurateCylindersFromMultipleMeasurementPoints(
+    pointsFlat,
+    1,
+    2,
+    pointsFlat[0],
+    pointsFlat[24]
+  );
+  console.log(
+    "%c Line:108 🍌 start",
+    "color:#4fff4B",
+    performance.now() - start
+  );
+  console.log("%c Line:132 🍭 res3", "color:#b03734", res3);
+
+  // const resultPoints = new EmxArray_real_T([
+  //   [1, 2, 4, 5],
+  //   [1, 2, 4, 5],
+  //   [1, 2, 4, 5],
+  // ]);
+  // _test(resultPoints.ptr);
+  // console.log(
+  //   "%c Line:44 🥑 points.getSize()",
+  //   "color:#fca650",
+  //   resultPoints,
+  //   resultPoints.getSize(),
+  //   resultPoints.toJSON()
   // );
-  // console.log("%c Line:51 🥪 de112", "color:#ffdd4d", res);
 
-  console.log("x,y,z:");
-  console.table([x2.toJSON(), y2.toJSON(), z2.toJSON()]);
-
-  console.log("p3,p4:");
-  console.table([p3.toJSON(), p4.toJSON()]);
-  console.log("num,laynum:", 5, 3);
-
-  console.log("%c Line:76 🍫 结果：", "color:#7f2b82");
-  console.table(resultPoints.toJSON());
-
-  // const x22 = new EmxArray_real_T(pickCol(data[i], 0).slice(0, 3));
-  // const y22 = new EmxArray_real_T(pickCol(data[i], 1).slice(0, 3));
-  // const z22 = new EmxArray_real_T(pickCol(data[i], 2).slice(0, 3));
-  // const ss = new EmxArray_real_T(1, 3);
-  // const zzzz = new EmxArray_real_T(1, 10);
-
-  // _Three_Points_Initial_Rough_Cylindrical_Judgment(
-  //   x22.arrayPtr,
-  //   y22.arrayPtr,
-  //   z22.arrayPtr,
-  //   ss.arrayPtr,
-  //   zzzz.arrayPtr,
-  //   zzzz.arrayPtr + Float64Array.BYTES_PER_ELEMENT,
-  //   zzzz.arrayPtr + 2 * Float64Array.BYTES_PER_ELEMENT
+  // console.log(
+  //   "%c Line:105 🍯 GenerateMultiLayeredMeasurementPoints",
+  //   "color:#b03734",
+  //   res2
   // );
-
-  // console.log("%c Line:91 🥪 x22", "color:#fca650", x22.toJSON());
-  // console.log("%c Line:91 🥪 y22", "color:#fca650", y22.toJSON());
-  // console.log("%c Line:91 🥪 z22", "color:#fca650", z22.toJSON());
-  // console.log("%c Line:99 🍑 ss", "color:#e41a6a", ss.toJSON());
-  // console.log("%c Line:99 🍑 xyz", "color:#e41a6a", zzzz.toJSON());
-
-  // x.free();
 };
 setTimeout(init, 500);
 // init();

@@ -14,11 +14,10 @@
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
 #include "generate_unit_circle_with_normal_vector.h"
 #include "mean.h"
-#include "rt_nonfinite.h"
 #include "rt_defines.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-
+#include <stdio.h>
 /* Function Declarations */
 static double rt_atan2d_snf(double u0, double u1);
 
@@ -78,6 +77,13 @@ void Generate_multi_layered_measurement_points(const emxArray_real_T *Point_out,
                                                const double P4[3],
                                                emxArray_real_T *Point_test)
 {
+
+  printf("Point_out->numDimensions = %d, Point_out size=%d,Point_out data=%d, "
+         "Point_out size[0]=%d, size[1]=%d, Point_out->data[0]=%f \n ",
+         Point_out->numDimensions, Point_out->size, Point_out->data,
+         Point_out->size[0], Point_out->size[1], Point_out->data[0]);
+  printf("Point_out->numDimensions = %d \n", Point_out->numDimensions);
+  printf("Point_out->canFreeData = %d \n", Point_out->canFreeData);
   emxArray_real_T *Dist;
   emxArray_real_T *Layer;
   emxArray_real_T *Point_out1;
