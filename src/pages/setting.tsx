@@ -2,12 +2,13 @@ import { Button, Form, Steps } from "antd";
 import { useState } from "react";
 import Module3D from "./module3D";
 import Connect from "../components/ConnectDevice";
-import { getPoint } from "../components/commond";
+import { getLine, getPoint } from "../utils/commond";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import BaseInfo from "./BaseInfo";
-import { GetPoints } from "./GetPoints";
+import GetPoints from "./GetPoints";
 import { Module3DPoint } from "./Module3DPoint";
+import { CustomVector3 } from "../class/CustomVector3";
 
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
@@ -15,12 +16,24 @@ export default function Setting() {
 
   const [form] = Form.useForm();
 
-  const pickPoint = (key: string, field: any) => {
+  const pickPoint = (key: string, field?: any) => {
     const arr = form.getFieldValue(key);
 
-    getPoint().then((res) => {
-      arr[field.key] = res;
-      form.setFieldValue(key, [...arr]);
+    return getPoint().then((res) => {
+      console.log("%c Line:22 🍩 res", "color:#fca650", res, field);
+      if (field) {
+        arr[field.key] = res;
+        form.setFieldValue(key, [...arr]);
+      } else {
+        form.setFieldValue(key, res);
+      }
+      return res;
+    });
+  };
+
+  const getDirect = (key: string) => {
+    getLine().then((res) => {
+      form.setFieldValue(key, res);
     });
   };
 
@@ -28,13 +41,7 @@ export default function Setting() {
     setStep(value);
   };
 
-  const next = () => {
-    const formValues = form.getFieldsValue();
-    setData({ ...data, ...formValues });
-    setStep(step + 1);
-  };
-
-  const getFromPoints = () => {
+  const getFromPoints = (): CustomVector3[] => {
     const { firstPoints, points } = form.getFieldsValue() ?? {};
     return [...(firstPoints ?? []), ...(points ?? [])];
   };
@@ -50,11 +57,12 @@ export default function Setting() {
     },
     {
       title: "手动采点",
-      conponents: <GetPoints pickPoint={pickPoint} />,
+      conponents: <GetPoints pickPoint={pickPoint} getDirect={getDirect} />,
+      // onNext: GetPoints,
     },
     {
       title: "拟合",
-      conponents: <Module3DPoint getFromPoints={getFromPoints} />,
+      conponents: <Module3DPoint />,
     },
     {
       title: "标记",
@@ -63,6 +71,13 @@ export default function Setting() {
       ),
     },
   ];
+
+  const next = () => {
+    const formValues = form.getFieldsValue();
+    setData({ ...data, ...formValues });
+    setStep(step + 1);
+  };
+
   return (
     <>
       <Steps

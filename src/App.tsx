@@ -1,4 +1,4 @@
-import "./utils";
+import "./utils/utils";
 import { Route } from "react-router-dom";
 
 import Layout from "./Layout";

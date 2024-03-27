@@ -2,9 +2,10 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Html } from "@react-three/drei";
 import * as THREE from "three";
 import "./index.css";
-import "../utils";
+import "../utils/utils";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
+import { CustomVector3 } from "../class/CustomVector3";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
@@ -70,11 +71,12 @@ function Box(props) {
 // ]);
 
 function PointsLabel(props: {
-  points: { label: string; position: THREE.Vector3 }[];
+  points: { label: string; position: CustomVector3 }[];
 }) {
   return props?.points?.map((item) => {
+    console.log("%c Line:79 🍪 item.position", "color:#7f2b82", item.position);
     return (
-      <Html position={item.position}>
+      <Html position={item.position.toVector3()}>
         <div className="q-w-20 relative">{item.label}</div>
       </Html>
     );
@@ -83,37 +85,6 @@ function PointsLabel(props: {
 
 export default function Index(props: { className?: string; height: string }) {
   const [data, setData] = useRecoilState(Data);
-  console.log("%c Line:86 🍪 setData", "color:#4fff4B", setData);
-  // const value = useControls({
-  //   // aNumber: 0,
-
-  //   a指令: "%R1Q,9027:1.5,1.5,0,0,0",
-  //   // bluetooth: false,
-  //   打开串口: button(connectSerial),
-  //   关闭串口: button(() => {
-  //     serial.disconnect();
-  //   }),
-  //   // vector: { v: 0, h: 0 },
-  //   发送: button((get) => {
-  //     console.log(
-  //       "%c Line:135 🍏 发送指令",
-  //       "color:#ea7e5c",
-  //       `${get("a指令")}`
-  //     );
-  //     serial.send(`${get("a指令")}\r\n`);
-  //   }),
-  //   读取: button(() => {
-  //     console.log(
-  //       "%c Line:135 🍏 发送读取指令",
-  //       "color:#ea7e5c",
-  //       `%R1Q,2107:2`
-  //     );
-  //     serial.send(`%R1Q,2107:2\r\n`);
-  //   }),
-  // });
-  // console.log("%c Line:78 🥛 value", "color:#6ec1c2", value);
-
-  // return <div>测试</div>;
 
   const points = [...(data?.firstPoints ?? []), ...(data?.points ?? [])]?.map?.(
     (p, i) => {
@@ -123,6 +94,8 @@ export default function Index(props: { className?: string; height: string }) {
       };
     }
   );
+
+  if (data) return null;
 
   return (
     <>
@@ -140,9 +113,6 @@ export default function Index(props: { className?: string; height: string }) {
           decay={0}
           intensity={Math.PI}
         />
-        {/* <Html position={new THREE.Vector3(1, 0, 0)}>
-          <div className="q-w-20">第一个点</div>
-        </Html> */}
         <Box position={[0, 0, 0]} />
         <PointsLabel points={points} />
         <OrbitControls />
