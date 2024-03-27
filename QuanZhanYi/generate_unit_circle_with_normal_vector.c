@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 26-Mar-2024 20:09:07
+ * C/C++ source code generated on  : 27-Mar-2024 15:44:04
  */
 
 /* Include Files */
@@ -18,10 +18,10 @@
 static void b_binary_expand_op(emxArray_real_T *in1, const double in2[3],
                                const emxArray_real_T *in3, const double in4[3]);
 
-static void c_binary_expand_op(emxArray_real_T *in1, const double in2[3],
-                               const emxArray_real_T *in3, const double in4[3]);
+static void binary_expand_op(emxArray_real_T *in1, const double in2[3],
+                             const emxArray_real_T *in3, const double in4[3]);
 
-static void d_binary_expand_op(emxArray_real_T *in1, const double in2[3],
+static void c_binary_expand_op(emxArray_real_T *in1, const double in2[3],
                                const emxArray_real_T *in3, const double in4[3]);
 
 /* Function Definitions */
@@ -33,63 +33,6 @@ static void d_binary_expand_op(emxArray_real_T *in1, const double in2[3],
  * Return Type  : void
  */
 static void b_binary_expand_op(emxArray_real_T *in1, const double in2[3],
-                               const emxArray_real_T *in3, const double in4[3])
-{
-  emxArray_real_T *b_in1;
-  const double *in3_data;
-  double b_in2;
-  double b_in4;
-  double *b_in1_data;
-  double *in1_data;
-  int i;
-  int loop_ub;
-  int stride_0_1;
-  int stride_1_1;
-  in3_data = in3->data;
-  in1_data = in1->data;
-  emxInit_real_T(&b_in1, 2);
-  b_in2 = in2[2];
-  b_in4 = in4[2];
-  i = b_in1->size[0] * b_in1->size[1];
-  b_in1->size[0] = 1;
-  if (in3->size[1] == 1) {
-    b_in1->size[1] = in1->size[1];
-  } else {
-    b_in1->size[1] = in3->size[1];
-  }
-  emxEnsureCapacity_real_T(b_in1, i);
-  b_in1_data = b_in1->data;
-  stride_0_1 = (in1->size[1] != 1);
-  stride_1_1 = (in3->size[1] != 1);
-  if (in3->size[1] == 1) {
-    loop_ub = in1->size[1];
-  } else {
-    loop_ub = in3->size[1];
-  }
-  for (i = 0; i < loop_ub; i++) {
-    b_in1_data[i] =
-        in1_data[i * stride_0_1] * b_in2 + in3_data[i * stride_1_1] * b_in4;
-  }
-  i = in1->size[0] * in1->size[1];
-  in1->size[0] = 1;
-  in1->size[1] = b_in1->size[1];
-  emxEnsureCapacity_real_T(in1, i);
-  in1_data = in1->data;
-  loop_ub = b_in1->size[1];
-  for (i = 0; i < loop_ub; i++) {
-    in1_data[i] = b_in1_data[i];
-  }
-  emxFree_real_T(&b_in1);
-}
-
-/*
- * Arguments    : emxArray_real_T *in1
- *                const double in2[3]
- *                const emxArray_real_T *in3
- *                const double in4[3]
- * Return Type  : void
- */
-static void c_binary_expand_op(emxArray_real_T *in1, const double in2[3],
                                const emxArray_real_T *in3, const double in4[3])
 {
   emxArray_real_T *b_in1;
@@ -146,7 +89,64 @@ static void c_binary_expand_op(emxArray_real_T *in1, const double in2[3],
  *                const double in4[3]
  * Return Type  : void
  */
-static void d_binary_expand_op(emxArray_real_T *in1, const double in2[3],
+static void binary_expand_op(emxArray_real_T *in1, const double in2[3],
+                             const emxArray_real_T *in3, const double in4[3])
+{
+  emxArray_real_T *b_in1;
+  const double *in3_data;
+  double b_in2;
+  double b_in4;
+  double *b_in1_data;
+  double *in1_data;
+  int i;
+  int loop_ub;
+  int stride_0_1;
+  int stride_1_1;
+  in3_data = in3->data;
+  in1_data = in1->data;
+  emxInit_real_T(&b_in1, 2);
+  b_in2 = in2[2];
+  b_in4 = in4[2];
+  i = b_in1->size[0] * b_in1->size[1];
+  b_in1->size[0] = 1;
+  if (in3->size[1] == 1) {
+    b_in1->size[1] = in1->size[1];
+  } else {
+    b_in1->size[1] = in3->size[1];
+  }
+  emxEnsureCapacity_real_T(b_in1, i);
+  b_in1_data = b_in1->data;
+  stride_0_1 = (in1->size[1] != 1);
+  stride_1_1 = (in3->size[1] != 1);
+  if (in3->size[1] == 1) {
+    loop_ub = in1->size[1];
+  } else {
+    loop_ub = in3->size[1];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    b_in1_data[i] =
+        in1_data[i * stride_0_1] * b_in2 + in3_data[i * stride_1_1] * b_in4;
+  }
+  i = in1->size[0] * in1->size[1];
+  in1->size[0] = 1;
+  in1->size[1] = b_in1->size[1];
+  emxEnsureCapacity_real_T(in1, i);
+  in1_data = in1->data;
+  loop_ub = b_in1->size[1];
+  for (i = 0; i < loop_ub; i++) {
+    in1_data[i] = b_in1_data[i];
+  }
+  emxFree_real_T(&b_in1);
+}
+
+/*
+ * Arguments    : emxArray_real_T *in1
+ *                const double in2[3]
+ *                const emxArray_real_T *in3
+ *                const double in4[3]
+ * Return Type  : void
+ */
+static void c_binary_expand_op(emxArray_real_T *in1, const double in2[3],
                                const emxArray_real_T *in3, const double in4[3])
 {
   emxArray_real_T *b_in1;
@@ -403,7 +403,7 @@ void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
       x_circle_data[i] = x_circle_data[i] * v[0] + z_circle_data[i] * u[0];
     }
   } else {
-    d_binary_expand_op(x_circle, v, z_circle, u);
+    c_binary_expand_op(x_circle, v, z_circle, u);
     x_circle_data = x_circle->data;
   }
   emxInit_real_T(&y_circle, 2);
@@ -443,7 +443,7 @@ void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
       y_circle_data[i] = y_circle_data[i] * v[1] + z_circle_data[i] * u[1];
     }
   } else {
-    c_binary_expand_op(y_circle, v, z_circle, u);
+    b_binary_expand_op(y_circle, v, z_circle, u);
     y_circle_data = y_circle->data;
   }
   i = z_circle->size[0] * z_circle->size[1];
@@ -473,7 +473,7 @@ void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
       z_circle_data[i] = z_circle_data[i] * v[2] + theta_data[i] * u[2];
     }
   } else {
-    b_binary_expand_op(z_circle, v, theta, u);
+    binary_expand_op(z_circle, v, theta, u);
     z_circle_data = z_circle->data;
   }
   emxFree_real_T(&theta);

@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 26-Mar-2024 20:09:07
+ * C/C++ source code generated on  : 27-Mar-2024 15:44:04
  */
 
 /*************************************************************************/
@@ -113,31 +113,29 @@ static double argInit_real_T(void)
 static void c_main_Calculate_accurate_cylin(void)
 {
   emxArray_real_T *Err_every;
-  emxArray_real_T *Point_in;
+  emxArray_real_T *points;
   double Bottom_round_center1[3];
   double Bottom_round_center2[3];
   double MTaon[3];
   double Mcenter[3];
   double P_bound1_tmp[3];
   double Mradial;
-  double azimuth_tmp;
   emxInitArray_real_T(&Err_every, 2);
   /* Initialize function
    * 'Calculate_accurate_cylinders_from_multiple_measurement_points' input
    * arguments. */
-  /* Initialize function input argument 'Point_in'. */
-  Point_in = argInit_3xUnbounded_real_T();
-  azimuth_tmp = argInit_real_T();
+  /* Initialize function input argument 'points'. */
+  points = argInit_3xUnbounded_real_T();
   /* Initialize function input argument 'P_bound1'. */
   argInit_3x1_real_T(P_bound1_tmp);
   /* Initialize function input argument 'P_bound2'. */
   /* Call the entry-point
    * 'Calculate_accurate_cylinders_from_multiple_measurement_points'. */
   Calculate_accurate_cylinders_from_multiple_measurement_points(
-      Point_in, azimuth_tmp, azimuth_tmp, P_bound1_tmp, P_bound1_tmp, Mcenter,
-      MTaon, &Mradial, Err_every, Bottom_round_center1, Bottom_round_center2);
+      points, P_bound1_tmp, P_bound1_tmp, Mcenter, MTaon, &Mradial, Err_every,
+      Bottom_round_center1, Bottom_round_center2);
   emxDestroyArray_real_T(Err_every);
-  emxDestroyArray_real_T(Point_in);
+  emxDestroyArray_real_T(points);
 }
 
 /*

@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 26-Mar-2024 20:09:07
+ * C/C++ source code generated on  : 27-Mar-2024 15:44:04
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -39,9 +39,9 @@ extern "C" {
 
 /* Function Declarations */
 void Calculate_accurate_cylinders_from_multiple_measurement_points(
-    emxArray_real_T *Point_in, real_T azimuth, real_T elevation,
-    real_T P_bound1[3], real_T P_bound2[3], real_T Mcenter[3], real_T MTaon[3],
-    real_T *Mradial, emxArray_real_T *Err_every, real_T Bottom_round_center1[3],
+    emxArray_real_T *points, real_T P_bound1[3], real_T P_bound2[3],
+    real_T Mcenter[3], real_T MTaon[3], real_T *Mradial,
+    emxArray_real_T *Err_every, real_T Bottom_round_center1[3],
     real_T Bottom_round_center2[3]);
 
 void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
@@ -59,7 +59,7 @@ void QuanZhanYi_xil_shutdown(void);
 
 void QuanZhanYi_xil_terminate(void);
 
-void c_Calculate_accurate_cylinders_(const mxArray *const prhs[5], int32_T nlhs,
+void c_Calculate_accurate_cylinders_(const mxArray *const prhs[3], int32_T nlhs,
                                      const mxArray *plhs[6]);
 
 void c_Generate_multi_layered_measur(const mxArray *const prhs[5],

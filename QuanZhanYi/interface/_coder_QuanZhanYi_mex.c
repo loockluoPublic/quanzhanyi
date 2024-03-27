@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 26-Mar-2024 20:09:07
+ * C/C++ source code generated on  : 27-Mar-2024 15:44:04
  */
 
 /* Include Files */
@@ -73,11 +73,11 @@ emlrtCTX mexFunctionCreateRootTLS(void)
  * Arguments    : int32_T nlhs
  *                mxArray *plhs[6]
  *                int32_T nrhs
- *                const mxArray *prhs[5]
+ *                const mxArray *prhs[3]
  * Return Type  : void
  */
 void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points_mexFunction(
-    int32_T nlhs, mxArray *plhs[6], int32_T nrhs, const mxArray *prhs[5])
+    int32_T nlhs, mxArray *plhs[6], int32_T nrhs, const mxArray *prhs[3])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -88,9 +88,9 @@ void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points_mexFun
   int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 5) {
+  if (nrhs != 3) {
     emlrtErrMsgIdAndTxt(
-        &st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 5, 4, 61,
+        &st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 3, 4, 61,
         "Calculate_accurate_cylinders_from_multiple_measurement_points");
   }
   if (nlhs > 6) {
