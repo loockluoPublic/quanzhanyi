@@ -1,4 +1,4 @@
-import { Form, InputNumber } from "antd";
+import { Form, InputNumber, message } from "antd";
 import Module3D from "./module3D";
 import PointsVector3 from "../components/PointVector3";
 import { CustomVector3 } from "../class/CustomVector3";
@@ -8,6 +8,7 @@ import { useMount } from "ahooks";
 import { generateUnitCircleWithNormalVector } from "../utils/utils";
 import useMeasure from "../utils/useMeasure";
 import { useEffect, useRef } from "react";
+import { pointToAndMeasure } from "../utils/commond";
 const { Item } = Form;
 
 export function Module3DPoint() {
@@ -81,7 +82,15 @@ export function Module3DPoint() {
         <div className=" q-overflow-y-scroll">
           {points?.map((value, i) => {
             return (
-              <div key={`${i}-${value.x}`}>
+              <div
+                className=" q-cursor-pointer"
+                key={`${i}-${value.x}`}
+                onClick={() => {
+                  pointToAndMeasure(value).then((res) => {
+                    message.success(JSON.stringify(res), 5);
+                  });
+                }}
+              >
                 <PointsVector3 value={value} />
               </div>
             );
