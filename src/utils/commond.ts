@@ -174,5 +174,5 @@ export const getLine = (): Promise<number[]> =>
  */
 export const pointToAndMeasure = (v: CustomVector3) => {
   const s = v.toSpherical();
-  return goTo(s.phi, s.theta).then(getPoint);
+  return goTo(s.theta, s.phi).then(getPoint);
 };
