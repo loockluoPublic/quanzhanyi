@@ -18,4 +18,15 @@ export class CustomVector3 extends Vector3 {
   toVector3() {
     return new Vector3(this.x, this.y, this.z);
   }
+
+  toCArray() {
+    return [this.y, this.z, this.x];
+  }
+
+  fromCArray(arr: [number, number, number]) {
+    this.x = arr[2];
+    this.y = arr[0];
+    this.z = arr[1];
+    return this;
+  }
 }

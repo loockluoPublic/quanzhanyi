@@ -43,7 +43,7 @@ export default class EmxArray_real_T {
       this.#setSize(m, n);
       return this.#init();
     } else if (m instanceof CustomVector3) {
-      this.#arrayFlat = m.toArray();
+      this.#arrayFlat = m.toCArray();
       this.#setSize(3, 1);
       return this.#init();
     } else if (Array.isArray(m)) {
@@ -59,7 +59,7 @@ export default class EmxArray_real_T {
         this.#arrayFlat = [];
         for (const row of m) {
           //@ts-ignore
-          this.#arrayFlat.push(...(row as CustomVector3).toArray());
+          this.#arrayFlat.push(...(row as CustomVector3).toCArray());
         }
         this.#setSize(3, m.length);
       } else {
@@ -192,7 +192,7 @@ export default class EmxArray_real_T {
   toVector3() {
     if (this.size[0] === 3) {
       return this.toJSON().map((row) => {
-        return new CustomVector3(...row);
+        return new CustomVector3().fromCArray(row);
       });
     }
     return [];

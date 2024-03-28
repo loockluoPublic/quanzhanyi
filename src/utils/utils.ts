@@ -99,10 +99,33 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
   return result;
 };
 const init = () => {
-  const azimuth = Math.PI / 3;
-  const elevation = Math.PI / 4;
+  let v1 = new CustomVector3(1, 2, 3);
+  const points = new EmxArray_real_T(v1);
+  console.log("%c Line:105 🍤 points", "color:#b03734", points);
+
+  console.log(
+    "%c Line:105 🍤 points",
+    "color:#f5ce50",
+    v1,
+    v1.toSpherical(),
+    points.toJSON(),
+    points.toVector3()
+  );
+  v1 = new CustomVector3(0, 1, 0);
+
+  console.log("%c Line:103 🍇 1", "color:#f5ce50", v1, v1.toSpherical());
+  v1 = new CustomVector3(1, 0, 0);
+
+  console.log("%c Line:103 🍇 1", "color:#f5ce50", v1, v1.toSpherical());
+
+  const azimuth = Math.PI / 2;
+  const elevation = Math.PI / 2;
   let start = performance.now();
+  console.log("%c Line:122 🍅 方向", "color:#3f7cff", azimuth, elevation);
   const res = generateUnitCircleWithNormalVector(azimuth, elevation, 5);
+  console.table(res);
+  console.table(res.map((t) => t.toSpherical()));
+
   console.log(
     "%c Line:108 🍌 start",
     "color:#4fff4B",
