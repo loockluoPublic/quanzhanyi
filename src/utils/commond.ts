@@ -32,6 +32,7 @@ export const sendText = (text): Promise<string> => {
     }, 12000);
     const handleSerialEvent = (event) => {
       console.log(
+        `发送 ：%R1Q,${text}`,
         "%c Line:11 🍪 接收到的原始数据 event.detail：",
         "color:#f5ce50",
         event.detail
