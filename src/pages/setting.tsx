@@ -8,7 +8,6 @@ import { Data } from "../atom/globalState";
 import BaseInfo from "./BaseInfo";
 import GetPoints from "./GetPoints";
 import { Module3DPoint } from "./Module3DPoint";
-import { CustomVector3 } from "../class/CustomVector3";
 import { Module3DPointsMeasure } from "./Module3DPointsMeasure";
 
 export default function Setting() {
@@ -40,11 +39,6 @@ export default function Setting() {
 
   const onChange = (value: number) => {
     setStep(value);
-  };
-
-  const getFromPoints = (): CustomVector3[] => {
-    const { firstPoints, points } = form.getFieldsValue() ?? {};
-    return [...(firstPoints ?? []), ...(points ?? [])];
   };
 
   const steps = [

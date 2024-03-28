@@ -1,10 +1,8 @@
 import { Form, InputNumber, message } from "antd";
 import Module3D from "./module3D";
 import PointsVector3 from "../components/PointVector3";
-import { CustomVector3 } from "../class/CustomVector3";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
-import { useMount } from "ahooks";
 import { generateUnitCircleWithNormalVector } from "../utils/utils";
 import useMeasure from "../utils/useMeasure";
 import { useEffect, useRef } from "react";

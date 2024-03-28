@@ -1,18 +1,7 @@
-import { Form, InputNumber, message } from "antd";
-import Module3D from "./module3D";
-import PointsVector3 from "../components/PointVector3";
-import { CustomVector3 } from "../class/CustomVector3";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
-import { useMount } from "ahooks";
-import {
-  CalculateAccurateCylindersFromMultipleMeasurementPoints,
-  generateUnitCircleWithNormalVector,
-} from "../utils/utils";
-import useMeasure from "../utils/useMeasure";
+import { CalculateAccurateCylindersFromMultipleMeasurementPoints } from "../utils/utils";
 import { useEffect, useRef } from "react";
-import { pointToAndMeasure } from "../utils/commond";
-const { Item } = Form;
 
 export function Module3DPointsMeasure() {
   const [data, setData] = useRecoilState(Data);

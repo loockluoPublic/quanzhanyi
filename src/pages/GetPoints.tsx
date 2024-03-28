@@ -1,4 +1,4 @@
-import { Button, Form, Input, InputNumber } from "antd";
+import { Button, Form, InputNumber } from "antd";
 import PointsVector3 from "../components/PointVector3";
 import PointsVector2 from "../components/PointVector2";
 

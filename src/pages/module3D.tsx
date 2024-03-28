@@ -1,11 +1,10 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Html } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import "./index.css";
 import "../utils/utils";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
-import { CustomVector3 } from "../class/CustomVector3";
 import useMeasure from "../utils/useMeasure";
 import { useEffect, useRef } from "react";
 import { GenerateMultiLayeredMeasurementPoints } from "../utils/utils";
@@ -76,18 +75,18 @@ function Box(props) {
 //   1.0, // v5
 // ]);
 
-function PointsLabel(props: {
-  points: { label: string; position: CustomVector3 }[];
-}) {
-  return props?.points?.map((item) => {
-    console.log("%c Line:79 🍪 item.position", "color:#7f2b82", item.position);
-    return (
-      <Html position={item.position.toVector3()}>
-        <div className="q-w-20 relative">{item.label}</div>
-      </Html>
-    );
-  });
-}
+// function PointsLabel(props: {
+//   points: { label: string; position: CustomVector3 }[];
+// }) {
+//   return props?.points?.map((item) => {
+//     console.log("%c Line:79 🍪 item.position", "color:#7f2b82", item.position);
+//     return (
+//       <Html position={item.position.toVector3()}>
+//         <div className="q-w-20 relative">{item.label}</div>
+//       </Html>
+//     );
+//   });
+// }
 
 export default function Index(props: { className?: string; height: string }) {
   // const [data, setData] = useRecoilState(Data);
