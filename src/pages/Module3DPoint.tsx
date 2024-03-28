@@ -19,10 +19,22 @@ export function Module3DPoint() {
   useEffect(() => {
     if (flag.current) {
       flag.current = false;
+      console.log(
+        "%c Line:24 🍉 data?.direct[0]",
+        "color:#4fff4B",
+        data?.direct[0],
+        data?.direct[1],
+        data.numPerLay
+      );
       const waitingPoints = generateUnitCircleWithNormalVector(
         data?.direct[0],
         data?.direct[1],
         data.numPerLay
+      );
+      console.log(
+        "%c Line:30 🥛 waitingPoints",
+        "color:#f5ce50",
+        waitingPoints
       );
       setData({
         ...data,

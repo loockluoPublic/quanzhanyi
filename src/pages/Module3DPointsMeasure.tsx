@@ -10,6 +10,13 @@ export function Module3DPointsMeasure() {
   useEffect(() => {
     if (flag.current) {
       flag.current = false;
+      console.log(
+        "%c Line:17 🥚 CalculateAccurateCylindersFromMultipleMeasurementPoints",
+        "color:#ed9ec7",
+        data.mdPoints,
+        data.firstPoints[0],
+        data.firstPoints[1]
+      );
       const res = CalculateAccurateCylindersFromMultipleMeasurementPoints(
         data.mdPoints,
         data.firstPoints[0],

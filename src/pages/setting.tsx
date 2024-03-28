@@ -13,6 +13,7 @@ import { Module3DPointsMeasure } from "./Module3DPointsMeasure";
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
   const [step, setStep] = useState(0);
+  console.log("%c Line:15 🍔 data", "color:#42b983", data);
 
   const [form] = Form.useForm();
 
