@@ -81,11 +81,13 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
     Mradial.arrayPtr,
     Err_every.ptr,
     Bottom_round_center1.arrayPtr,
-    Bottom_round_center1.arrayPtr + Float64Array.BYTES_PER_ELEMENT * 3
+    Bottom_round_center1.arrayPtr + 8 * 3
   );
   const result = {
-    center: center.toVector3(),
+    center: center.toVector3()[0],
     Err_every: Err_every.toJSON(),
+    mTaon: mTaon.toJSON()[0],
+    Mradial: Mradial.toJSON()[0],
     Bottom_round_center: Bottom_round_center1.toVector3(),
   };
   center.free();

@@ -9,6 +9,7 @@ import BaseInfo from "./BaseInfo";
 import GetPoints from "./GetPoints";
 import { Module3DPoint } from "./Module3DPoint";
 import { CustomVector3 } from "../class/CustomVector3";
+import { Module3DPointsMeasure } from "./Module3DPointsMeasure";
 
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
@@ -61,14 +62,19 @@ export default function Setting() {
       // onNext: GetPoints,
     },
     {
-      title: "拟合",
+      title: "自动圆面点采集",
       conponents: <Module3DPoint />,
     },
     {
-      title: "标记",
+      title: "自动圆柱点采集",
       conponents: (
         <Module3D className="q-mb-4" height={"calc( 100vh - 268px - 1em )"} />
       ),
+    },
+
+    {
+      title: "圆柱拟合",
+      conponents: <Module3DPointsMeasure />,
     },
   ];
 

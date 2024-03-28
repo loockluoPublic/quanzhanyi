@@ -6,6 +6,12 @@ import "../utils/utils";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import { CustomVector3 } from "../class/CustomVector3";
+import useMeasure from "../utils/useMeasure";
+import { useEffect, useRef } from "react";
+import { GenerateMultiLayeredMeasurementPoints } from "../utils/utils";
+import PointsVector3 from "../components/PointVector3";
+import { pointToAndMeasure } from "../utils/commond";
+import { message } from "antd";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
@@ -84,18 +90,85 @@ function PointsLabel(props: {
 }
 
 export default function Index(props: { className?: string; height: string }) {
+  // const [data, setData] = useRecoilState(Data);
+
+  // const points = [...(data?.firstPoints ?? []), ...(data?.points ?? [])]?.map?.(
+  //   (p, i) => {
+  //     return {
+  //       label: `第${i + 1}个点`,
+  //       position: p,
+  //     };
+  //   }
+  // );
+
   const [data, setData] = useRecoilState(Data);
+  console.log("%c Line:15 🥔 data", "color:#ed9ec7", data);
 
-  const points = [...(data?.firstPoints ?? []), ...(data?.points ?? [])]?.map?.(
-    (p, i) => {
-      return {
-        label: `第${i + 1}个点`,
-        position: p,
-      };
+  const { measure, loading, points } = useMeasure();
+
+  const flag = useRef(true);
+  useEffect(() => {
+    if (flag.current) {
+      flag.current = false;
+      const waitingPoints2 = GenerateMultiLayeredMeasurementPoints(
+        data.mdPoints,
+        data.layNum,
+        data.numPerLay,
+        data.firstPoints[0],
+        data.firstPoints[1]
+      );
+      setData({
+        ...data,
+        waitingPoints2,
+      });
+      measure(waitingPoints2);
     }
-  );
+  }, []);
 
-  if (data) return null;
+  useEffect(() => {
+    if (!loading && points.length > 0) {
+      setData({
+        ...data,
+        mPoints2: points,
+      });
+    }
+  }, [loading, points]);
+
+  if (data)
+    return (
+      <>
+        {" "}
+        {loading ? "测量中。。。。" : "测量完成"}
+        <h3>待测量方向点</h3>
+        <div className="q-overflow-y-scroll">
+          {data?.waitingPoints?.map((value, i) => {
+            return (
+              <div key={`${i}-${value.x}`}>
+                <PointsVector3 value={value} />
+              </div>
+            );
+          })}
+        </div>
+        <h3>已经测量数据</h3>
+        <div className=" q-overflow-y-scroll">
+          {points?.map((value, i) => {
+            return (
+              <div
+                className=" q-cursor-pointer"
+                key={`${i}-${value.x}`}
+                onClick={() => {
+                  pointToAndMeasure(value).then((res) => {
+                    message.success(JSON.stringify(res), 5);
+                  });
+                }}
+              >
+                <PointsVector3 value={value} />
+              </div>
+            );
+          })}
+        </div>
+      </>
+    );
 
   return (
     <>
@@ -114,7 +187,7 @@ export default function Index(props: { className?: string; height: string }) {
           intensity={Math.PI}
         />
         <Box position={[0, 0, 0]} />
-        <PointsLabel points={points} />
+        {/* <PointsLabel points={points} /> */}
         <OrbitControls />
       </Canvas>
     </>

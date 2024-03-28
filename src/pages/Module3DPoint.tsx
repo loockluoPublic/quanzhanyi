@@ -38,7 +38,7 @@ export function Module3DPoint() {
     if (!loading && points.length > 0) {
       setData({
         ...data,
-        mPoints: points,
+        mdPoints: points,
       });
     }
   }, [loading, points]);
