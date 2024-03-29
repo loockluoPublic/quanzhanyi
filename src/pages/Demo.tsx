@@ -114,7 +114,7 @@ export default function Index(props: { className?: string; height?: string }) {
 
   setTimeout(() => {
     setP(
-      window.s.map((i) => {
+      (window as any).s.map((i) => {
         return { label: `.`, position: i };
       })
     );
