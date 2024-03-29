@@ -55,10 +55,10 @@ export function Module3DPoint() {
 
   return (
     <div className="q-flex">
-      <Module3D
+      {/* <Module3D
         className="q-mb-4 q-grow"
         height={"calc( 100vh - 268px - 1em )"}
-      />
+      /> */}
       <div className="q-w-[400px]  q-ml-3 q-pl-2 ">
         <Item
           label="算法生成测点数量"
