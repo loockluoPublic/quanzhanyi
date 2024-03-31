@@ -155,7 +155,7 @@ export const setMode = () =>
 export const getPoint = () =>
   sendText(`2116:300,1`).then((res) => {
     const d = res.split(",")?.map((i) => Number(i));
-    if (d?.length === 3) return new CustomVector3(d[1], d[2], d[3]);
+    if (d?.length === 3) return new CustomVector3(d[1], d[2], d[0]);
   });
 
 /**

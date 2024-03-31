@@ -32,9 +32,9 @@ export function Module3DPointsMeasure() {
 
   return (
     <div>
-      <div>center： {JSON.stringify(data.calulateRes.center)}</div>
-      <div>圆心： {JSON.stringify(data.calulateRes.Mradial)}</div>
-      <div>{JSON.stringify(data.calulateRes)}</div>
+      <div>center： {JSON.stringify(data?.calulateRes?.center)}</div>
+      <div>圆心： {JSON.stringify(data?.calulateRes?.Mradial)}</div>
+      <div>{JSON.stringify(data?.calulateRes)}</div>
     </div>
   );
 }
