@@ -1,8 +1,27 @@
 import { Vector3, Spherical } from "three";
 
 export class CustomVector3 extends Vector3 {
-  constructor(x?: number, y?: number, z?: number) {
+  static count = 0;
+  public key: number;
+  public label?: string;
+  enable: boolean;
+
+  constructor(
+    x?: number,
+    y?: number,
+    z?: number,
+    label?: string,
+    key?: number
+  ) {
     super(x, y, z);
+    CustomVector3.count++;
+    this.key = key ?? CustomVector3.count;
+    this.label = label;
+    this.enable = true;
+  }
+
+  setEnable(e: boolean) {
+    this.enable = e;
   }
 
   // 添加toSpherical方法
@@ -28,5 +47,11 @@ export class CustomVector3 extends Vector3 {
     this.y = arr[0];
     this.z = arr[1];
     return this;
+  }
+
+  fromCustomVector3(cv3 = this) {
+    const newCV3 = new CustomVector3(cv3.x, cv3.y, cv3.z, cv3.label, cv3.key);
+    newCV3.enable = cv3.enable;
+    return newCV3;
   }
 }

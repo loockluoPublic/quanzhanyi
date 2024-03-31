@@ -1,5 +1,5 @@
 import { Form, InputNumber, message } from "antd";
-import Module3D from "./module3D";
+// import Module3D from "./module3D";
 import PointsVector3 from "../components/PointVector3";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
@@ -7,6 +7,7 @@ import { generateUnitCircleWithNormalVector } from "../utils/utils";
 import useMeasure from "../utils/useMeasure";
 import { useEffect, useRef } from "react";
 import { pointToAndMeasure } from "../utils/commond";
+import Module3D from "../components/Module3D";
 const { Item } = Form;
 
 export function Module3DPoint() {
@@ -17,7 +18,7 @@ export function Module3DPoint() {
 
   const flag = useRef(true);
   useEffect(() => {
-    if (flag.current) {
+    if (flag.current && !data.waitingPoints) {
       flag.current = false;
       console.log(
         "%c Line:24 🍉 data?.direct[0]",
@@ -34,6 +35,7 @@ export function Module3DPoint() {
       console.log(
         "%c Line:30 🥛 waitingPoints",
         "color:#f5ce50",
+        new Date(),
         waitingPoints
       );
       setData({
@@ -52,6 +54,10 @@ export function Module3DPoint() {
       });
     }
   }, [loading, points]);
+
+  if (data) {
+    return <Module3D points={data?.waitingPoints ?? []} height="500px" />;
+  }
 
   return (
     <div className="q-flex">
@@ -80,13 +86,14 @@ export function Module3DPoint() {
         {loading ? "测量中。。。。" : "测量完成"}
         <h3>待测量方向点</h3>
         <div className="q-overflow-y-scroll">
-          {data?.waitingPoints?.map((value, i) => {
+          {/* {data?.waitingPoints?.map((value, i) => {
             return (
               <div key={`${i}-${value.x}`}>
                 <PointsVector3 value={value} />
               </div>
             );
-          })}
+          })} */}
+          <Module3D points={data?.waitingPoints ?? []} height="500px" />
         </div>
         <h3>已经测量数据</h3>
         <div className=" q-overflow-y-scroll">

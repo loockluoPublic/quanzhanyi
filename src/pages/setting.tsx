@@ -5,8 +5,8 @@ import Connect from "../components/ConnectDevice";
 import { getLine, getPoint } from "../utils/commond";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
-import BaseInfo from "./BaseInfo";
-import GetPoints from "./GetPoints";
+import BaseInfo from "../components/BaseInfo";
+import GetPoints from "../components/GetPoints";
 import { Module3DPoint } from "./Module3DPoint";
 import { Module3DPointsMeasure } from "./Module3DPointsMeasure";
 

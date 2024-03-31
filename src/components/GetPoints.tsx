@@ -1,6 +1,6 @@
 import { Button, Form, InputNumber } from "antd";
-import PointsVector3 from "../components/PointVector3";
-import PointsVector2 from "../components/PointVector2";
+import PointsVector3 from "./PointVector3";
+import PointsVector2 from "./PointVector2";
 
 function GetPoints(props: {
   pickPoint: (key: string, field?: any) => void;
