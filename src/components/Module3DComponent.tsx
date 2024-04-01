@@ -60,7 +60,8 @@ function PointsLabel(props: { points: CustomVector3[] }) {
     return (
       <Html position={item.toVector3()} key={item.key}>
         <div className="q-w-20 relative">
-          {item.key}-{item.label}
+          {item.key}
+          {item.label || ""}
         </div>
       </Html>
     );
@@ -122,7 +123,7 @@ export default function Index(props: {
         <PointsLabel points={showPoints.filter((p) => p.enable)} />
         <OrbitControls />
       </Canvas>
-      <div className=" q-w-[300px]">
+      <div className=" q-w-[400px]">
         <Tree
           checkable
           checkedKeys={selectedKeys}

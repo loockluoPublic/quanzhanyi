@@ -6,6 +6,7 @@ export default function PointsVector3(props: {
 }) {
   return (
     <span style={props.style}>
+      <span>{`ID:${props.value.key} ${props.value.label || ""}`}</span>
       <span>x:</span>
       <span>{props?.value?.x?.toFixed(3)}</span>
       <span> y:</span>
