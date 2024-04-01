@@ -24,7 +24,7 @@ export const sendText = (text): Promise<string> => {
       };
       setTimeout(() => {
         resolve(mockData[text]);
-      }, 2000);
+      }, 500);
       return;
     }
     const flag = setTimeout(() => {

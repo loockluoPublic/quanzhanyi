@@ -7,7 +7,7 @@ import { generateUnitCircleWithNormalVector } from "../utils/utils";
 import useMeasure from "../utils/useMeasure";
 import { useEffect, useRef } from "react";
 import { pointToAndMeasure } from "../utils/commond";
-import Module3D from "../components/Module3D";
+import Module3D from "../components/Module3DComponent";
 const { Item } = Form;
 
 export function Module3DPoint() {
@@ -15,7 +15,7 @@ export function Module3DPoint() {
   console.log("%c Line:15 🥔 data", "color:#ed9ec7", data);
 
   const { measure, loading, points } = useMeasure();
-
+  console.log("%c Line:108 80 🥑 ", "color:#6ec1c2", points);
   const flag = useRef(true);
   useEffect(() => {
     if (flag.current && !data.waitingPoints) {
@@ -55,8 +55,23 @@ export function Module3DPoint() {
     }
   }, [loading, points]);
 
+  const setMData = (md: typeof points) => {
+    setData({
+      ...data,
+      mPoints: md,
+    });
+  };
+
   if (data) {
-    return <Module3D points={data?.waitingPoints ?? []} height="500px" />;
+    console.log("%c Line:60 🥑 points", "color:#2eafb0", points);
+    return (
+      <Module3D
+        loading={loading}
+        setData={setMData}
+        points={points ?? []}
+        height="500px"
+      />
+    );
   }
 
   return (
@@ -86,13 +101,6 @@ export function Module3DPoint() {
         {loading ? "测量中。。。。" : "测量完成"}
         <h3>待测量方向点</h3>
         <div className="q-overflow-y-scroll">
-          {/* {data?.waitingPoints?.map((value, i) => {
-            return (
-              <div key={`${i}-${value.x}`}>
-                <PointsVector3 value={value} />
-              </div>
-            );
-          })} */}
           <Module3D points={data?.waitingPoints ?? []} height="500px" />
         </div>
         <h3>已经测量数据</h3>

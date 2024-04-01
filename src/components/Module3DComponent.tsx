@@ -12,6 +12,7 @@ import PointsVector3 from "./PointVector3";
 import { pointToAndMeasure } from "../utils/commond";
 import { Tree, message } from "antd";
 import { CustomVector3 } from "../class/CustomVector3";
+import { Line } from "@react-three/drei";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
@@ -70,12 +71,28 @@ export default function Index(props: {
   className?: string;
   height: string;
   points: CustomVector3[];
+  loading?: boolean;
+  setData?: (md: CustomVector3[]) => void;
 }) {
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<number[]>([]);
 
+  const getShowPoints = () => {
+    return showPoints
+      .filter((p) => p.enable)
+      ?.map((p) => p.fromCustomVector3());
+  };
+
   useEffect(() => {
+    if (!props.loading) {
+      props?.setData?.(getShowPoints());
+    }
+  }, [props.loading]);
+
+  useEffect(() => {
+    // props 不允许更改，必须重新创建对象
     setPoints(props.points.map((p) => p.fromCustomVector3()));
+    console.log("%c Line:94 🍺 props.points", "color:#6ec1c2", props.points);
   }, [props.points]);
 
   useEffect(() => {
@@ -118,6 +135,7 @@ export default function Index(props: {
             showPoints.forEach((p) => {
               p.setEnable((sk as any).includes(p.key));
             });
+            props?.setData?.(getShowPoints());
             setPoints([...showPoints]);
           }}
         />

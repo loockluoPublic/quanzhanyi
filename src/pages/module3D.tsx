@@ -11,7 +11,7 @@ import { GenerateMultiLayeredMeasurementPoints } from "../utils/utils";
 import PointsVector3 from "../components/PointVector3";
 import { pointToAndMeasure } from "../utils/commond";
 import { message } from "antd";
-import Module3D from "../components/Module3D";
+import Module3D from "../components/Module3DComponent";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
@@ -105,6 +105,7 @@ export default function Index(props: { className?: string; height: string }) {
   console.log("%c Line:15 🥔 data", "color:#ed9ec7", data);
 
   const { measure, loading, points } = useMeasure();
+  console.log("%c Line:108 80 🥑 ", "color:#6ec1c2", points);
 
   const flag = useRef(true);
   useEffect(() => {
@@ -134,8 +135,22 @@ export default function Index(props: { className?: string; height: string }) {
     }
   }, [loading, points]);
 
+  const setMData = (md: typeof points) => {
+    setData({
+      ...data,
+      mPoints2: md,
+    });
+  };
+
   if (data) {
-    return <Module3D points={data?.waitingPoints2 ?? []} height="500px" />;
+    return (
+      <Module3D
+        loading={loading}
+        setData={setMData}
+        points={points ?? []}
+        height="500px"
+      />
+    );
   }
 
   if (data)
