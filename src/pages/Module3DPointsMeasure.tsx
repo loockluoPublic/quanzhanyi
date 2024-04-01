@@ -18,7 +18,7 @@ export function Module3DPointsMeasure() {
         data.firstPoints[1]
       );
       const res = CalculateAccurateCylindersFromMultipleMeasurementPoints(
-        data.mdPoints,
+        data.mdPoints2,
         data.firstPoints[0],
         data.firstPoints[1]
       );

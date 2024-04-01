@@ -31,12 +31,17 @@ export const GenerateMultiLayeredMeasurementPoints = (
   const p3 = new EmxArray_real_T(P3);
   const p4 = new EmxArray_real_T(P4);
   const resultPoints = new EmxArray_real_T(3, num * laynum);
-  console.log(
-    "%c Line:35 🥪 resultPoints",
-    "color:#4fff4B",
-    resultPoints.toVector3()
-  );
+  console.group("GenerateMultiLayeredMeasurementPoints");
+  console.log("%c Line:35 🥪 points", "color:#4fff4B", points.toVector3());
 
+  console.log(
+    "%c Line:40 🥪 num",
+    "color:#93c0a4",
+    num,
+    laynum,
+    p3.toVector3(),
+    p3.toVector3()
+  );
   _GenerateMultiLayeredMeasurementPoints(
     points.ptr,
     num,
@@ -46,11 +51,11 @@ export const GenerateMultiLayeredMeasurementPoints = (
     resultPoints.ptr
   );
   console.log(
-    "%c Line:45 🥥 resultPoints",
+    "%c Line:45 🥥 GenerateMultiLayeredMeasurementPoints resultPoints",
     "color:#ea7e5c",
-    resultPoints,
-    points.toJSON()
+    resultPoints.toVector3()
   );
+  console.groupEnd();
   const resoult = resultPoints.toVector3();
   points.free();
   resultPoints.free();
@@ -72,6 +77,11 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
   const Mradial = new EmxArray_real_T(1, 1);
   const Err_every = new EmxArray_real_T(1, Points.length);
   const Bottom_round_center1 = new EmxArray_real_T(3, 2);
+  console.group("GenerateMultiLayeredMeasurementPoints");
+  console.log("%c Line:73 🍤 points", "color:#93c0a4", points.toVector3());
+  console.log("%c Line:74 🍰 p1", "color:#33a5ff", p1.toVector3());
+  console.log("%c Line:75 🥔 p2", "color:#93c0a4", p2.toVector3());
+
   _CalculateAccurateCylindersFromMultipleMeasurementPoints(
     points.ptr,
     p1.arrayPtr,
@@ -90,6 +100,9 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
     Mradial: Mradial.toJSON()[0],
     Bottom_round_center: Bottom_round_center1.toVector3(),
   };
+  console.log("%c Line:93 🍿 result", "color:#ea7e5c", result);
+
+  console.groupEnd();
   center.free();
   mTaon.free();
   Mradial.free();
