@@ -109,7 +109,7 @@ export default function Index(props: { className?: string; height: string }) {
 
   const flag = useRef(true);
   useEffect(() => {
-    if (flag.current && !data.waitingPoints2) {
+    if (flag.current) {
       flag.current = false;
       const waitingPoints2 = GenerateMultiLayeredMeasurementPoints(
         data.mdPoints,

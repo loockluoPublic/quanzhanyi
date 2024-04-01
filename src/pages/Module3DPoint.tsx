@@ -18,7 +18,7 @@ export function Module3DPoint() {
   console.log("%c Line:108 80 🥑 ", "color:#6ec1c2", points);
   const flag = useRef(true);
   useEffect(() => {
-    if (flag.current && !data.waitingPoints) {
+    if (flag.current) {
       flag.current = false;
       console.log(
         "%c Line:24 🍉 data?.direct[0]",
