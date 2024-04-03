@@ -1,12 +1,12 @@
 /*
- * File: mean.h
+ * File: linspace.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Mar-2024 15:44:04
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 03-Apr-2024 22:27:47
  */
 
-#ifndef MEAN_H
-#define MEAN_H
+#ifndef LINSPACE_H
+#define LINSPACE_H
 
 /* Include Files */
 #include "QuanZhanYi_types.h"
@@ -19,7 +19,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double mean(const emxArray_real_T *x);
+void linspace(double n, emxArray_real_T *y);
 
 #ifdef __cplusplus
 }
@@ -27,7 +27,7 @@ double mean(const emxArray_real_T *x);
 
 #endif
 /*
- * File trailer for mean.h
+ * File trailer for linspace.h
  *
  * [EOF]
  */

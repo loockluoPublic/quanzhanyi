@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_api.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Mar-2024 15:44:04
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 03-Apr-2024 22:27:47
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -38,7 +38,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void Calculate_accurate_cylinders_from_multiple_measurement_points(
+void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     emxArray_real_T *points, real_T P_bound1[3], real_T P_bound2[3],
     real_T Mcenter[3], real_T MTaon[3], real_T *Mradial,
     emxArray_real_T *Err_every, real_T Bottom_round_center1[3],
@@ -71,6 +71,13 @@ void c_foot_of_perpendicular_from_a_(const mxArray *const prhs[3], int32_T nlhs,
 void c_generate_unit_circle_with_nor(const mxArray *const prhs[3],
                                      const mxArray **plhs);
 
+void d_generate_unit_circle_with_nor(const mxArray *const prhs[5],
+                                     const mxArray **plhs);
+
+void fitcircle(emxArray_real_T *x, real_T z[2], real_T *r, real_T *residual);
+
+void fitcircle_api(const mxArray *prhs, int32_T nlhs, const mxArray *plhs[3]);
+
 void foot_of_perpendicular_from_a_point_to_a_line(real_T P_outer[3],
                                                   real_T P_lines1[3],
                                                   real_T P_lines2[3],
@@ -80,6 +87,15 @@ void foot_of_perpendicular_from_a_point_to_a_line(real_T P_outer[3],
 void generate_unit_circle_with_normal_vector(real_T azimuth, real_T elevation,
                                              real_T num,
                                              emxArray_real_T *Point_out);
+
+void generate_unit_circle_with_normal_vector2(real_T azimuth, real_T elevation,
+                                              real_T num, real_T P1[3],
+                                              real_T P2[3],
+                                              emxArray_real_T *Point_out);
+
+void myvrrotvec2mat(real_T r[4], real_T m[9]);
+
+void myvrrotvec2mat_api(const mxArray *prhs, const mxArray **plhs);
 
 #ifdef __cplusplus
 }

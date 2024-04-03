@@ -1,8 +1,8 @@
 /*
  * File: QuanZhanYi_terminate.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Mar-2024 15:44:04
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 03-Apr-2024 22:27:47
  */
 
 /* Include Files */
@@ -17,6 +17,7 @@
  */
 void QuanZhanYi_terminate(void)
 {
+  /* (no terminate code required) */
   isInitialized_QuanZhanYi = false;
 }
 

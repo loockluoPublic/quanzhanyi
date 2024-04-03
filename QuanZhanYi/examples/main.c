@@ -1,8 +1,8 @@
 /*
  * File: main.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Mar-2024 15:44:04
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 03-Apr-2024 22:27:47
  */
 
 /*************************************************************************/
@@ -32,19 +32,26 @@
 
 /* Include Files */
 #include "main.h"
-#include "Calculate_accurate_cylinders_from_multiple_measurement_points.h"
+#include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
 #include "Generate_multi_layered_measurement_points.h"
 #include "QuanZhanYi_emxAPI.h"
 #include "QuanZhanYi_terminate.h"
 #include "QuanZhanYi_types.h"
+#include "fitcircle.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
 #include "generate_unit_circle_with_normal_vector.h"
+#include "generate_unit_circle_with_normal_vector2.h"
+#include "myvrrotvec2mat.h"
 #include "rt_nonfinite.h"
 
 /* Function Declarations */
+static emxArray_real_T *argInit_2xUnbounded_real_T(void);
+
 static void argInit_3x1_real_T(double result[3]);
 
 static emxArray_real_T *argInit_3xUnbounded_real_T(void);
+
+static void argInit_4x1_real_T(double result[4]);
 
 static double argInit_real_T(void);
 
@@ -56,7 +63,36 @@ static void c_main_foot_of_perpendicular_fr(void);
 
 static void c_main_generate_unit_circle_wit(void);
 
+static void d_main_generate_unit_circle_wit(void);
+
+static void main_fitcircle(void);
+
+static void main_myvrrotvec2mat(void);
+
 /* Function Definitions */
+/*
+ * Arguments    : void
+ * Return Type  : emxArray_real_T *
+ */
+static emxArray_real_T *argInit_2xUnbounded_real_T(void)
+{
+  emxArray_real_T *result;
+  int idx0;
+  int idx1;
+  /* Set the size of the array.
+Change this size to the value that the application requires. */
+  result = emxCreate_real_T(2, 2);
+  /* Loop over the array to initialize each element. */
+  for (idx0 = 0; idx0 < 2; idx0++) {
+    for (idx1 = 0; idx1 < result->size[1U]; idx1++) {
+      /* Set the value of the array element.
+Change this value to the value that the application requires. */
+      result->data[idx0 + 2 * idx1] = argInit_real_T();
+    }
+  }
+  return result;
+}
+
 /*
  * Arguments    : double result[3]
  * Return Type  : void
@@ -79,22 +115,35 @@ Change this value to the value that the application requires. */
 static emxArray_real_T *argInit_3xUnbounded_real_T(void)
 {
   emxArray_real_T *result;
-  double *result_data;
   int idx0;
   int idx1;
   /* Set the size of the array.
 Change this size to the value that the application requires. */
   result = emxCreate_real_T(3, 2);
-  result_data = result->data;
   /* Loop over the array to initialize each element. */
   for (idx0 = 0; idx0 < 3; idx0++) {
     for (idx1 = 0; idx1 < result->size[1U]; idx1++) {
       /* Set the value of the array element.
 Change this value to the value that the application requires. */
-      result_data[idx0 + 3 * idx1] = argInit_real_T();
+      result->data[idx0 + 3 * idx1] = argInit_real_T();
     }
   }
   return result;
+}
+
+/*
+ * Arguments    : double result[4]
+ * Return Type  : void
+ */
+static void argInit_4x1_real_T(double result[4])
+{
+  int idx0;
+  /* Loop over the array to initialize each element. */
+  for (idx0 = 0; idx0 < 4; idx0++) {
+    /* Set the value of the array element.
+Change this value to the value that the application requires. */
+    result[idx0] = argInit_real_T();
+  }
 }
 
 /*
@@ -120,9 +169,9 @@ static void c_main_Calculate_accurate_cylin(void)
   double Mcenter[3];
   double P_bound1_tmp[3];
   double Mradial;
-  emxInitArray_real_T(&Err_every, 2);
+  emxInitArray_real_T(&Err_every, 1);
   /* Initialize function
-   * 'Calculate_accurate_cylinders_from_multiple_measurement_points' input
+   * 'Calculate_accurate_cylinders_from_multiple_measurement_points2' input
    * arguments. */
   /* Initialize function input argument 'points'. */
   points = argInit_3xUnbounded_real_T();
@@ -130,8 +179,8 @@ static void c_main_Calculate_accurate_cylin(void)
   argInit_3x1_real_T(P_bound1_tmp);
   /* Initialize function input argument 'P_bound2'. */
   /* Call the entry-point
-   * 'Calculate_accurate_cylinders_from_multiple_measurement_points'. */
-  Calculate_accurate_cylinders_from_multiple_measurement_points(
+   * 'Calculate_accurate_cylinders_from_multiple_measurement_points2'. */
+  Calculate_accurate_cylinders_from_multiple_measurement_points2(
       points, P_bound1_tmp, P_bound1_tmp, Mcenter, MTaon, &Mradial, Err_every,
       Bottom_round_center1, Bottom_round_center2);
   emxDestroyArray_real_T(Err_every);
@@ -204,6 +253,61 @@ static void c_main_generate_unit_circle_wit(void)
 }
 
 /*
+ * Arguments    : void
+ * Return Type  : void
+ */
+static void d_main_generate_unit_circle_wit(void)
+{
+  emxArray_real_T *Point_out;
+  double P1_tmp[3];
+  double azimuth_tmp;
+  emxInitArray_real_T(&Point_out, 2);
+  /* Initialize function 'generate_unit_circle_with_normal_vector2' input
+   * arguments. */
+  azimuth_tmp = argInit_real_T();
+  /* Initialize function input argument 'P1'. */
+  argInit_3x1_real_T(P1_tmp);
+  /* Initialize function input argument 'P2'. */
+  /* Call the entry-point 'generate_unit_circle_with_normal_vector2'. */
+  generate_unit_circle_with_normal_vector2(
+      azimuth_tmp, azimuth_tmp, azimuth_tmp, P1_tmp, P1_tmp, Point_out);
+  emxDestroyArray_real_T(Point_out);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+static void main_fitcircle(void)
+{
+  emxArray_real_T *x;
+  double z[2];
+  double r;
+  double residual;
+  /* Initialize function 'fitcircle' input arguments. */
+  /* Initialize function input argument 'x'. */
+  x = argInit_2xUnbounded_real_T();
+  /* Call the entry-point 'fitcircle'. */
+  fitcircle(x, z, &r, &residual);
+  emxDestroyArray_real_T(x);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+static void main_myvrrotvec2mat(void)
+{
+  double m[9];
+  double dv[4];
+  /* Initialize function 'myvrrotvec2mat' input arguments. */
+  /* Initialize function input argument 'r'. */
+  /* Call the entry-point 'myvrrotvec2mat'. */
+  argInit_4x1_real_T(dv);
+  myvrrotvec2mat(dv, m);
+}
+
+/*
  * Arguments    : int argc
  *                char **argv
  * Return Type  : int
@@ -217,9 +321,12 @@ int main(int argc, char **argv)
   /* Invoke the entry-point functions.
 You can call entry-point functions multiple times. */
   c_main_Calculate_accurate_cylin();
+  main_fitcircle();
   c_main_foot_of_perpendicular_fr();
   c_main_Generate_multi_layered_m();
   c_main_generate_unit_circle_wit();
+  d_main_generate_unit_circle_wit();
+  main_myvrrotvec2mat();
   /* Terminate the application.
 You do not need to do this more than one time. */
   QuanZhanYi_terminate();

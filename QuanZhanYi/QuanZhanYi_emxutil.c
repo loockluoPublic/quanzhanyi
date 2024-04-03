@@ -1,17 +1,17 @@
 /*
  * File: QuanZhanYi_emxutil.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Mar-2024 15:44:04
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 03-Apr-2024 22:27:47
  */
 
 /* Include Files */
 #include "QuanZhanYi_emxutil.h"
 #include "QuanZhanYi_types.h"
 #include "rt_nonfinite.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 /* Function Definitions */
 /*
  * Arguments    : emxArray_real_T *emxArray
@@ -56,6 +56,15 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
 }
 
 /*
+ * Arguments    : b_captured_var *pStruct
+ * Return Type  : void
+ */
+void emxFreeStruct_captured_var(b_captured_var *pStruct)
+{
+  emxFree_real_T(&pStruct->contents);
+}
+
+/*
  * Arguments    : emxArray_real_T **pEmxArray
  * Return Type  : void
  */
@@ -69,6 +78,24 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
     free(*pEmxArray);
     *pEmxArray = (emxArray_real_T *)NULL;
   }
+}
+
+/*
+ * Arguments    : b_captured_var *pStruct
+ * Return Type  : void
+ */
+void emxInitStruct_captured_var(b_captured_var *pStruct)
+{
+  emxInit_real_T(&pStruct->contents, 2);
+}
+
+/*
+ * Arguments    : b_captured_var *pStruct
+ * Return Type  : void
+ */
+void emxInitStruct_captured_var1(b_captured_var *pStruct)
+{
+  emxInit_real_T(&pStruct->contents, 1);
 }
 
 /*

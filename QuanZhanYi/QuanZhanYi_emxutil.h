@@ -1,8 +1,8 @@
 /*
  * File: QuanZhanYi_emxutil.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Mar-2024 15:44:04
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 03-Apr-2024 22:27:47
  */
 
 #ifndef QUANZHANYI_EMXUTIL_H
@@ -21,7 +21,13 @@ extern "C" {
 /* Function Declarations */
 extern void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel);
 
+extern void emxFreeStruct_captured_var(b_captured_var *pStruct);
+
 extern void emxFree_real_T(emxArray_real_T **pEmxArray);
+
+extern void emxInitStruct_captured_var(b_captured_var *pStruct);
+
+extern void emxInitStruct_captured_var1(b_captured_var *pStruct);
 
 extern void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions);
 
