@@ -1,5 +1,5 @@
-import { serial } from "./ConnectDevice";
-import { Vector3 } from "three";
+import { CustomVector3 } from "../class/CustomVector3";
+import { serial } from "../components/ConnectDevice";
 
 const mock = new URLSearchParams(location.search).has("mock");
 
@@ -20,14 +20,16 @@ export const sendText = (text): Promise<string> => {
           Math.random() * 10 - 5
         }`,
         "1004:0": "0",
-        "2107:2": "1.069995191213058,1.000012316348839",
+        "2107:1": "1.069995191213058,1.000012316348839",
       };
-      resolve(mockData[text]);
+      setTimeout(() => {
+        resolve(mockData[text]);
+      }, 1000);
       return;
     }
     const flag = setTimeout(() => {
       resolve("");
-    }, 5000);
+    }, 12000);
     const handleSerialEvent = (event) => {
       console.log(
         "%c Line:11 🍪 接收到的原始数据 event.detail：",
@@ -77,6 +79,15 @@ export const setOrigin = () =>
     return res;
   });
 
+/**
+ * 获取站点信息,包括东坐标（E0）、北坐标（N0）、高程（H0）和高程增量（Hi）。
+ * @returns
+ */
+export const getDevicePosition = () =>
+  sendText("2009:").then((res) => {
+    console.log("%c Line:51 🍓 2009", "color:#f5ce50", res);
+  });
+
 export const getDeviceInfo = async () => {
   const dInfo = {
     SerialNo: "",
@@ -106,25 +117,11 @@ export const getDeviceInfo = async () => {
   await setOrigin();
 
   // 设置模式，设置后才能采集点
-  await getStation();
+  await setMode();
 
-  // // 获取当前时间
-  // await sendText("5008:").then((res) => {
-  //   console.log("%c Line:41 🧀 5008", "color:#ffdd4d", res);
-  //   dInfo.CurrentTime = res;
-  // });
+  const dp = await getDevicePosition();
+  console.log("%c Line:121 🍰 dp", "color:#e41a6a", dp);
 
-  // // 获取反射器高度
-  // await sendText("2011:").then((res) => {
-  //   console.log("%c Line:56 🍩 2011", "color:#465975", res);
-  //   dInfo.ReflectorHeight = res;
-  // });
-
-  // // 获取棱镜常数
-  // await sendText("2023:").then((res) => {
-  //   console.log("%c Line:61 🍭 2023", "color:#ffdd4d", res);
-  //   dInfo.PrismConstant = res;
-  // });
   return dInfo;
 };
 
@@ -144,9 +141,10 @@ export const goTo = (h, v) =>
  *  测量全站仪坐标
  * @returns
  */
-export const getStation = () =>
+export const setMode = () =>
   sendText(`2008:1,1`).then((res) => {
     console.log("%c Line:71 🥛 2008", "color:#2eafb0", res);
+    return res;
   });
 
 /**
@@ -156,23 +154,25 @@ export const getStation = () =>
 export const getPoint = () =>
   sendText(`2116:300,1`).then((res) => {
     const d = res.split(",")?.map((i) => Number(i));
-    if (d?.length === 3) return new Vector3(...d);
+    if (d?.length === 3) return new CustomVector3(...d);
   });
 
 /**
  * 测量方向
  * @returns
  */
-export const getLine = () =>
+export const getLine = (): Promise<number[]> =>
   sendText(`2107:1`).then((res) => {
     console.log("%c Line:71 🥛 2107", "color:#2eafb0", res);
+    return res.split(",").map((s) => Number(s));
   });
 
 /**
- * 获取站点信息,包括东坐标（E0）、北坐标（N0）、高程（H0）和高程增量（Hi）。
- * @returns
+ * 指向点的方向，并测量
+ * @param v
+ * @returns Promise<CustomVector3>
  */
-export const getDevicePosition = () =>
-  sendText("2009:").then((res) => {
-    console.log("%c Line:51 🍓 2009", "color:#f5ce50", res);
-  });
+export const pointToAndMeasure = (v: CustomVector3) => {
+  const s = v.toSpherical();
+  return goTo(s.phi, s.theta).then(getPoint);
+};

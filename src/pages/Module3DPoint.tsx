@@ -1,9 +1,47 @@
 import { Form, InputNumber } from "antd";
 import Module3D from "./module3D";
 import PointsVector3 from "../components/PointVector3";
+import { CustomVector3 } from "../class/CustomVector3";
+import { useRecoilState } from "recoil";
+import { Data } from "../atom/globalState";
+import { useMount } from "ahooks";
+import { generateUnitCircleWithNormalVector } from "../utils/utils";
+import useMeasure from "../utils/useMeasure";
+import { useEffect, useRef } from "react";
 const { Item } = Form;
 
-export function Module3DPoint(props: { getFromPoints: () => any[] }) {
+export function Module3DPoint() {
+  const [data, setData] = useRecoilState(Data);
+  console.log("%c Line:15 🥔 data", "color:#ed9ec7", data);
+
+  const { measure, loading, points } = useMeasure();
+
+  const flag = useRef(true);
+  useEffect(() => {
+    if (flag.current) {
+      flag.current = false;
+      const waitingPoints = generateUnitCircleWithNormalVector(
+        data?.direct[0],
+        data?.direct[1],
+        data.numPerLay
+      );
+      setData({
+        ...data,
+        waitingPoints,
+      });
+      measure(waitingPoints);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!loading && points.length > 0) {
+      setData({
+        ...data,
+        mPoints: points,
+      });
+    }
+  }, [loading, points]);
+
   return (
     <div className="q-flex">
       <Module3D
@@ -28,10 +66,22 @@ export function Module3DPoint(props: { getFromPoints: () => any[] }) {
         >
           <InputNumber min={0} />
         </Item>
-        <div className="q-h-[600px] q-overflow-y-scroll">
-          {props.getFromPoints().map((value, i) => {
+        {loading ? "测量中。。。。" : "测量完成"}
+        <h3>待测量方向点</h3>
+        <div className="q-overflow-y-scroll">
+          {data?.waitingPoints?.map((value, i) => {
             return (
-              <div key={i}>
+              <div key={`${i}-${value.x}`}>
+                <PointsVector3 value={value} />
+              </div>
+            );
+          })}
+        </div>
+        <h3>已经测量数据</h3>
+        <div className=" q-overflow-y-scroll">
+          {points?.map((value, i) => {
+            return (
+              <div key={`${i}-${value.x}`}>
                 <PointsVector3 value={value} />
               </div>
             );

@@ -2,8 +2,8 @@ import SerialMonitor from "@ridge18/web-serial-monitor";
 import { Button } from "antd";
 import { useRecoilState } from "recoil";
 import { deviceInfo } from "../atom/globalState";
-import * as commond from "./commond";
-import { getDeviceInfo } from "./commond";
+import * as commond from "../utils/commond";
+import { getDeviceInfo } from "../utils/commond";
 (window as any).commond = commond;
 export const serial = new SerialMonitor({ mode: "text", parseLines: true });
 

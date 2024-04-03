@@ -1,3 +1,5 @@
+import { CustomVector3 } from "./CustomVector3";
+
 /**
 struct emxArray_real_T {
     double *data;
@@ -7,7 +9,6 @@ struct emxArray_real_T {
     boolean_T canFreeData;
 };
 */
-import { Vector3 } from "three";
 const emModule = (window as any).Module;
 export default class EmxArray_real_T {
   /**
@@ -34,14 +35,14 @@ export default class EmxArray_real_T {
    * @memberof EmxArray_real_T
    */
   constructor(
-    m: number[][] | number[] | number | Vector3 | Vector3[],
+    m: number[][] | number[] | number | CustomVector3 | CustomVector3[],
     n: number = 1
   ) {
     if (typeof m === "number") {
       this.#arrayFlat = new Array(m * n).fill(0);
       this.#setSize(m, n);
       return this.#init();
-    } else if (m instanceof Vector3) {
+    } else if (m instanceof CustomVector3) {
       this.#arrayFlat = m.toArray();
       this.#setSize(3, 1);
       return this.#init();
@@ -54,11 +55,11 @@ export default class EmxArray_real_T {
           this.#arrayFlat.push(...row);
         }
         this.#setSize(m[0].length, m.length);
-      } else if (m[0] instanceof Vector3) {
+      } else if (m[0] instanceof CustomVector3) {
         this.#arrayFlat = [];
         for (const row of m) {
           //@ts-ignore
-          this.#arrayFlat.push(...(row as Vector3).toArray());
+          this.#arrayFlat.push(...(row as CustomVector3).toArray());
         }
         this.#setSize(3, m.length);
       } else {
@@ -191,7 +192,7 @@ export default class EmxArray_real_T {
   toVector3() {
     if (this.size[0] === 3) {
       return this.toJSON().map((row) => {
-        return new Vector3(...row);
+        return new CustomVector3(...row);
       });
     }
     return [];

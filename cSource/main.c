@@ -19,7 +19,6 @@ void generateUnitCircleWithNormalVector(double azimuth, double elevation, double
 {
     generate_unit_circle_with_normal_vector(azimuth, elevation, num, Point_out);
 }
-
 EMSCRIPTEN_KEEPALIVE
 void GenerateMultiLayeredMeasurementPoints(
     const emxArray_real_T *Point_out,
@@ -34,9 +33,7 @@ void GenerateMultiLayeredMeasurementPoints(
 
 EMSCRIPTEN_KEEPALIVE
 void CalculateAccurateCylindersFromMultipleMeasurementPoints(
-    const emxArray_real_T *Point_in,
-    double azimuth,
-    double elevation,
+    const emxArray_real_T *points,
     const double P_bound1[3],
     const double P_bound2[3],
     double Mcenter[3],
@@ -47,5 +44,5 @@ void CalculateAccurateCylindersFromMultipleMeasurementPoints(
     double Bottom_round_center2[3])
 {
     Calculate_accurate_cylinders_from_multiple_measurement_points(
-        Point_in, azimuth, elevation, P_bound1, P_bound2, Mcenter, MTaon, Mradial, Err_every, Bottom_round_center1, Bottom_round_center2);
+        points, P_bound1, P_bound2, Mcenter, MTaon, Mradial, Err_every, Bottom_round_center1, Bottom_round_center2);
 }

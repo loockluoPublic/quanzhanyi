@@ -1,7 +1,7 @@
-import { Vector3 } from "three";
+import { CustomVector3 } from "../class/CustomVector3";
 
 export default function PointsVector3(props: {
-  value?: Vector3;
+  value?: CustomVector3;
   style?: React.CSSProperties;
 }) {
   return (

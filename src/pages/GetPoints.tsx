@@ -1,9 +1,10 @@
-import { MinusCircleOutlined } from "@ant-design/icons";
-import { Button, Form, InputNumber } from "antd";
+import { Button, Form, Input, InputNumber } from "antd";
 import PointsVector3 from "../components/PointVector3";
+import PointsVector2 from "../components/PointVector2";
 
-export function GetPoints(props: {
-  pickPoint: (key: string, field: any) => void;
+function GetPoints(props: {
+  pickPoint: (key: string, field?: any) => void;
+  getDirect: (key: string) => void;
 }) {
   return (
     <div className="q-w-[500px]">
@@ -21,13 +22,34 @@ export function GetPoints(props: {
         name="numPerLay"
         rules={[{ required: true }]}
         wrapperCol={{ span: 3 }}
-        initialValue={3}
+        initialValue={5}
       >
         <InputNumber min={3} max={7} />
       </Form.Item>
-      <h3>定位点</h3>
+      <Form.Item label="管道轴线方向" required={true}>
+        <Form.Item
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+          name={"direct"}
+          noStyle
+        >
+          <PointsVector2 />
+        </Form.Item>
+        <Button
+          style={{ marginLeft: "10px" }}
+          type="primary"
+          onClick={() => props.getDirect("direct")}
+        >
+          采集
+        </Button>
+      </Form.Item>
+      {/* <h3>定位点</h3> */}
       <Form.List name="firstPoints" initialValue={["", ""]}>
         {(fields) => {
+          console.log("%c Line:50 🍋 fields", "color:#b03734", fields);
           return (
             <>
               {fields.map((field, index) => (
@@ -115,3 +137,5 @@ export function GetPoints(props: {
     </div>
   );
 }
+
+export default GetPoints;
