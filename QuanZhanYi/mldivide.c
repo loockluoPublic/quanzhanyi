@@ -2,62 +2,78 @@
  * File: mldivide.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Apr-2024 21:38:53
+ * C/C++ source code generated on  : 03-Apr-2024 22:27:47
  */
 
 /* Include Files */
 #include "mldivide.h"
+#include "QuanZhanYi_types.h"
+#include "qrsolve.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 
 /* Function Definitions */
 /*
- * Arguments    : const double A[3]
- *                double B
+ * Arguments    : const emxArray_real_T *A
+ *                const emxArray_real_T *B
  *                double Y[3]
  * Return Type  : void
  */
-void mldivide(const double A[3], double B, double Y[3])
+void mldivide(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3])
 {
-  double b_A[3];
-  double vn1_idx_0;
-  double vn1_idx_1;
-  int j;
-  int pvt;
-  signed char jpvt[3];
-  b_A[0] = A[0];
-  jpvt[0] = 1;
-  vn1_idx_0 = fabs(A[0]);
-  b_A[1] = A[1];
-  jpvt[1] = 2;
-  vn1_idx_1 = fabs(A[1]);
-  b_A[2] = A[2];
-  jpvt[2] = 3;
-  pvt = 0;
-  if (vn1_idx_1 > vn1_idx_0) {
-    pvt = 1;
-    vn1_idx_0 = vn1_idx_1;
-  }
-  if (fabs(A[2]) > vn1_idx_0) {
-    pvt = 2;
-  }
-  if (pvt + 1 != 1) {
-    b_A[0] = b_A[pvt];
-    jpvt[0] = jpvt[pvt];
-  }
-  pvt = 0;
-  vn1_idx_0 = fabs(b_A[0]);
-  if (!(vn1_idx_0 <= 6.6613381477509392E-15 * vn1_idx_0)) {
-    pvt = 1;
-  }
-  Y[0] = 0.0;
-  Y[1] = 0.0;
-  Y[2] = 0.0;
-  if (0 <= pvt - 1) {
-    Y[jpvt[0] - 1] = B;
-  }
-  for (j = pvt; j >= 1; j--) {
-    Y[jpvt[0] - 1] /= b_A[0];
+  double A_data[9];
+  double a21;
+  double maxval;
+  int r1;
+  int r2;
+  int r3;
+  int rtemp;
+  if ((A->size[0] == 0) || (B->size[0] == 0)) {
+    Y[0] = 0.0;
+    Y[1] = 0.0;
+    Y[2] = 0.0;
+  } else if (A->size[0] == 3) {
+    for (r1 = 0; r1 < 9; r1++) {
+      A_data[r1] = A->data[r1];
+    }
+    r1 = 0;
+    r2 = 1;
+    r3 = 2;
+    maxval = fabs(A->data[0]);
+    a21 = fabs(A->data[1]);
+    if (a21 > maxval) {
+      maxval = a21;
+      r1 = 1;
+      r2 = 0;
+    }
+    if (fabs(A->data[2]) > maxval) {
+      r1 = 2;
+      r2 = 1;
+      r3 = 0;
+    }
+    A_data[r2] = A->data[r2] / A->data[r1];
+    A_data[r3] /= A_data[r1];
+    A_data[r2 + 3] -= A_data[r2] * A_data[r1 + 3];
+    A_data[r3 + 3] -= A_data[r3] * A_data[r1 + 3];
+    A_data[r2 + 6] -= A_data[r2] * A_data[r1 + 6];
+    A_data[r3 + 6] -= A_data[r3] * A_data[r1 + 6];
+    if (fabs(A_data[r3 + 3]) > fabs(A_data[r2 + 3])) {
+      rtemp = r2;
+      r2 = r3;
+      r3 = rtemp;
+    }
+    A_data[r3 + 3] /= A_data[r2 + 3];
+    A_data[r3 + 6] -= A_data[r3 + 3] * A_data[r2 + 6];
+    Y[1] = B->data[r2] - B->data[r1] * A_data[r2];
+    Y[2] = (B->data[r3] - B->data[r1] * A_data[r3]) - Y[1] * A_data[r3 + 3];
+    Y[2] /= A_data[r3 + 6];
+    Y[0] = B->data[r1] - Y[2] * A_data[r1 + 6];
+    Y[1] -= Y[2] * A_data[r2 + 6];
+    Y[1] /= A_data[r2 + 3];
+    Y[0] -= Y[1] * A_data[r1 + 3];
+    Y[0] /= A_data[r1];
+  } else {
+    qrsolve(A, B, Y);
   }
 }
 

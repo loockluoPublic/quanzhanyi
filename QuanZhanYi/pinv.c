@@ -2,13 +2,13 @@
  * File: pinv.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Apr-2024 21:38:53
+ * C/C++ source code generated on  : 03-Apr-2024 22:27:47
  */
 
 /* Include Files */
 #include "pinv.h"
 #include "rt_nonfinite.h"
-#include "svd.h"
+#include "svd1.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 #include <string.h>
@@ -47,7 +47,7 @@ void pinv(const double A[9], double X[9])
       X[i] = rtNaN;
     }
   } else {
-    b_svd(A, U, s, V);
+    c_svd(A, U, s, V);
     absx = fabs(s[0]);
     if ((!rtIsInf(absx)) && (!rtIsNaN(absx))) {
       if (absx <= 2.2250738585072014E-308) {

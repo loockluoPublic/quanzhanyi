@@ -1,12 +1,12 @@
 /*
- * File: myvrrotvec2mat.h
+ * File: norm.h
  *
  * MATLAB Coder version            : 5.2
  * C/C++ source code generated on  : 03-Apr-2024 22:27:47
  */
 
-#ifndef MYVRROTVEC2MAT_H
-#define MYVRROTVEC2MAT_H
+#ifndef NORM_H
+#define NORM_H
 
 /* Include Files */
 #include "rtwtypes.h"
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void myvrrotvec2mat(const double r[4], double m[9]);
+double b_norm(const double x[3]);
 
 #ifdef __cplusplus
 }
@@ -26,7 +26,7 @@ extern void myvrrotvec2mat(const double r[4], double m[9]);
 
 #endif
 /*
- * File trailer for myvrrotvec2mat.h
+ * File trailer for norm.h
  *
  * [EOF]
  */

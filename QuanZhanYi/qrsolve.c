@@ -2,7 +2,7 @@
  * File: qrsolve.c
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Apr-2024 21:38:53
+ * C/C++ source code generated on  : 03-Apr-2024 22:27:47
  */
 
 /* Include Files */
@@ -81,17 +81,17 @@ void qrsolve(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3])
     }
     jpvt[0] = 1;
     work[0] = 0.0;
-    d = c_xnrm2(A->size[0], A, 1);
+    d = xnrm2(A->size[0], A, 1);
     vn1[0] = d;
     vn2[0] = d;
     jpvt[1] = 2;
     work[1] = 0.0;
-    d = c_xnrm2(A->size[0], A, A->size[0] + 1);
+    d = xnrm2(A->size[0], A, A->size[0] + 1);
     vn1[1] = d;
     vn2[1] = d;
     jpvt[2] = 3;
     work[2] = 0.0;
-    d = c_xnrm2(A->size[0], A, (A->size[0] << 1) + 1);
+    d = xnrm2(A->size[0], A, (A->size[0] << 1) + 1);
     vn1[2] = d;
     vn2[2] = d;
     for (b_i = 0; b_i < minmn; b_i++) {
@@ -132,7 +132,7 @@ void qrsolve(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3])
         minmana = ii + 2;
         tau_data[b_i] = 0.0;
         if (mmi > 0) {
-          smax = c_xnrm2(mmi - 1, b_A, ii + 2);
+          smax = xnrm2(mmi - 1, b_A, ii + 2);
           if (smax != 0.0) {
             s = rt_hypotd_snf(b_A->data[ii], smax);
             if (b_A->data[ii] >= 0.0) {
@@ -149,7 +149,7 @@ void qrsolve(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3])
                 s *= 9.9792015476736E+291;
                 atmp *= 9.9792015476736E+291;
               } while (!(fabs(s) >= 1.0020841800044864E-292));
-              s = rt_hypotd_snf(atmp, c_xnrm2(mmi - 1, b_A, ii + 2));
+              s = rt_hypotd_snf(atmp, xnrm2(mmi - 1, b_A, ii + 2));
               if (atmp >= 0.0) {
                 s = -s;
               }
@@ -261,7 +261,7 @@ void qrsolve(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3])
           s = smax * (s * s);
           if (s <= 1.4901161193847656E-8) {
             if (b_i + 1 < m) {
-              d = c_xnrm2(mmi - 1, b_A, minmana + 2);
+              d = xnrm2(mmi - 1, b_A, minmana + 2);
               vn1[ia - 1] = d;
               vn2[ia - 1] = d;
             } else {

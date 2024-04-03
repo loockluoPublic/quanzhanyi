@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 03-Apr-2024 21:38:53
+ * C/C++ source code generated on  : 03-Apr-2024 22:27:47
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -39,9 +39,10 @@ extern "C" {
 
 /* Function Declarations */
 void Calculate_accurate_cylinders_from_multiple_measurement_points2(
-    real_T points[3], real_T P_bound1[3], real_T P_bound2[3], real_T Mcenter[3],
-    real_T MTaon[3], real_T *Mradial, real_T *Err_every,
-    real_T Bottom_round_center1[3], real_T Bottom_round_center2[3]);
+    emxArray_real_T *points, real_T P_bound1[3], real_T P_bound2[3],
+    real_T Mcenter[3], real_T MTaon[3], real_T *Mradial,
+    emxArray_real_T *Err_every, real_T Bottom_round_center1[3],
+    real_T Bottom_round_center2[3]);
 
 void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
                                                real_T num, real_T laynum,

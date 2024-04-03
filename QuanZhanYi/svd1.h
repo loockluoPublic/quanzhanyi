@@ -1,14 +1,15 @@
 /*
- * File: myvrrotvec2mat.h
+ * File: svd1.h
  *
  * MATLAB Coder version            : 5.2
  * C/C++ source code generated on  : 03-Apr-2024 22:27:47
  */
 
-#ifndef MYVRROTVEC2MAT_H
-#define MYVRROTVEC2MAT_H
+#ifndef SVD1_H
+#define SVD1_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,7 +19,10 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void myvrrotvec2mat(const double r[4], double m[9]);
+void b_svd(const emxArray_real_T *A, emxArray_real_T *U, double s_data[],
+           int *s_size, double V[16]);
+
+void c_svd(const double A[9], double U[9], double s[3], double V[9]);
 
 #ifdef __cplusplus
 }
@@ -26,7 +30,7 @@ extern void myvrrotvec2mat(const double r[4], double m[9]);
 
 #endif
 /*
- * File trailer for myvrrotvec2mat.h
+ * File trailer for svd1.h
  *
  * [EOF]
  */
