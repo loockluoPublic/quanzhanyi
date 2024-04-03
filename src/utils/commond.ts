@@ -3,6 +3,10 @@ import { serial } from "../components/ConnectDevice";
 
 const mock = new URLSearchParams(location.search).has("mock");
 
+const floatToFixed = (n: number, f = 4) => {
+  return Number(n.toFixed(f));
+};
+
 export const sendText = (text): Promise<string> => {
   return new Promise((resolve) => {
     if (import.meta.env.DEV || mock) {
@@ -42,7 +46,7 @@ export const sendText = (text): Promise<string> => {
       serial.removeEventListener("serial-data", handleSerialEvent);
     };
     serial.addEventListener("serial-data", handleSerialEvent);
-    serial.send(`%R1Q,${text}\r\n`);
+    serial.send(`\n%R1Q,${text}\r\n`);
   });
 };
 
@@ -71,10 +75,10 @@ export const sendText = (text): Promise<string> => {
 // %R1Q,2107:2 ==> %R1P,0,0:0,1.069995191213058,1.000012316348839
 
 /**
- * 设置当前为原点
+ * 设置仪器的站坐标
  * @returns
  */
-export const setOrigin = () =>
+export const setStation = () =>
   sendText(`2010:0,0,0,0`).then((res) => {
     console.log("%c Line:67 🍖 9027", "color:#7f2b82", res);
     return res;
@@ -115,10 +119,7 @@ export const getDeviceInfo = async () => {
   });
 
   // 设置当前位置为原点
-  await setOrigin();
-
-  // 设置模式，设置后才能采集点
-  await setMode();
+  await setStation();
 
   const dp = await getDevicePosition();
   console.log("%c Line:121 🍰 dp", "color:#e41a6a", dp);
@@ -139,24 +140,31 @@ export const goTo = (h, v) =>
   });
 
 /**
- *  测量全站仪坐标
+ *  测量测量点坐标
  * @returns
  */
-export const setMode = () =>
+export const measure = () =>
   sendText(`2008:1,1`).then((res) => {
     console.log("%c Line:71 🥛 2008", "color:#2eafb0", res);
     return res;
   });
 
 /**
- * 测量点坐标
+ * 获取笛卡尔坐标
  * @returns
  */
-export const getPoint = () =>
-  sendText(`2116:300,1`).then((res) => {
-    const d = res.split(",")?.map((i) => Number(i));
-    if (d?.length === 3) return new CustomVector3(d[1], d[2], d[0]);
-  });
+export const getSimpleCoord = () =>
+  measure().then(() =>
+    sendText(`2116:300,1`).then((res) => {
+      const d = res.split(",")?.map((i) => Number(i));
+      if (d?.length === 3)
+        return new CustomVector3(
+          floatToFixed(d[1]),
+          floatToFixed(d[2]),
+          floatToFixed(d[0])
+        );
+    })
+  );
 
 /**
  * 测量方向
@@ -175,5 +183,5 @@ export const getLine = (): Promise<number[]> =>
  */
 export const pointToAndMeasure = (v: CustomVector3) => {
   const s = v.toSpherical();
-  return goTo(s.theta, s.phi).then(getPoint);
+  return goTo(s.theta, s.phi).then(getSimpleCoord);
 };
