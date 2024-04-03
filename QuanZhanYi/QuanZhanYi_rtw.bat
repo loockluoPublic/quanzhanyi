@@ -1,10 +1,10 @@
 @echo off
 
-set MATLAB=E:\matlab2022a
+set MATLAB=E:\SystemInstallation\Matlab
 
 cd .
 
-if "%1"=="" ("E:\matlab2022a\bin\win64\gmake"  -f QuanZhanYi_rtw.mk all) else ("E:\matlab2022a\bin\win64\gmake"  -f QuanZhanYi_rtw.mk %1)
+if "%1"=="" ("E:\SystemInstallation\Matlab\bin\win64\gmake"  -f QuanZhanYi_rtw.mk all) else ("E:\SystemInstallation\Matlab\bin\win64\gmake"  -f QuanZhanYi_rtw.mk %1)
 @if errorlevel 1 goto error_exit
 
 exit /B 0

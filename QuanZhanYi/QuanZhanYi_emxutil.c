@@ -1,17 +1,17 @@
 /*
  * File: QuanZhanYi_emxutil.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Mar-2024 15:44:04
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 03-Apr-2024 21:38:53
  */
 
 /* Include Files */
 #include "QuanZhanYi_emxutil.h"
 #include "QuanZhanYi_types.h"
 #include "rt_nonfinite.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 /* Function Definitions */
 /*
  * Arguments    : emxArray_real_T *emxArray

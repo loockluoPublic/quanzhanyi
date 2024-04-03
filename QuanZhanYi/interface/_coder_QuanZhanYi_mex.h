@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_mex.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Mar-2024 15:44:04
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 03-Apr-2024 21:38:53
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -23,17 +23,26 @@ MEXFUNCTION_LINKAGE void mexFunction(int32_T nlhs, mxArray *plhs[],
 
 emlrtCTX mexFunctionCreateRootTLS(void);
 
-void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points_mexFunction(
+void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points2_mexFunction(
     int32_T nlhs, mxArray *plhs[6], int32_T nrhs, const mxArray *prhs[3]);
 
 void unsafe_Generate_multi_layered_measurement_points_mexFunction(
     int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[5]);
 
+void unsafe_fitcircle_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
+                                  const mxArray *prhs[1]);
+
 void unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
     int32_T nlhs, mxArray *plhs[3], int32_T nrhs, const mxArray *prhs[3]);
 
+void unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
+    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[5]);
+
 void unsafe_generate_unit_circle_with_normal_vector_mexFunction(
     int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[3]);
+
+void unsafe_myvrrotvec2mat_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                       int32_T nrhs, const mxArray *prhs[1]);
 
 #ifdef __cplusplus
 }

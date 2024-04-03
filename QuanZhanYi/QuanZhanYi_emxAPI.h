@@ -1,8 +1,8 @@
 /*
  * File: QuanZhanYi_emxAPI.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Mar-2024 15:44:04
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 03-Apr-2024 21:38:53
  */
 
 #ifndef QUANZHANYI_EMXAPI_H
