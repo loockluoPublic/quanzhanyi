@@ -153,16 +153,13 @@ export const measure = () =>
  * 获取笛卡尔坐标
  * @returns
  */
+parseFloat;
 export const getSimpleCoord = () =>
   measure().then(() =>
     sendText(`2116:300,1`).then((res) => {
-      const d = res.split(",")?.map((i) => Number(i));
-      if (d?.length === 3)
-        return new CustomVector3(
-          floatToFixed(d[1]),
-          floatToFixed(d[2]),
-          floatToFixed(d[0])
-        );
+      const d = res.split(",")?.map((i) => parseFloat(i));
+      // ?.map((i) => parseFloat(parseFloat(i).toFixed(4)));
+      if (d?.length === 3) return new CustomVector3(d[1], d[2], d[0]);
     })
   );
 
@@ -173,7 +170,7 @@ export const getSimpleCoord = () =>
 export const getLine = (): Promise<number[]> =>
   sendText(`2107:1`).then((res) => {
     console.log("%c Line:71 🥛 2107", "color:#2eafb0", res);
-    return res.split(",").map((s) => Number(s));
+    return res.split(",").map((s) => parseFloat(parseFloat(s).toFixed(6)));
   });
 
 /**

@@ -11,11 +11,33 @@ const {
 export const generateUnitCircleWithNormalVector = (
   azimuth: number,
   elevation: number,
-  num: number
+  num: number,
+  P3: CustomVector3,
+  P4: CustomVector3
 ) => {
   const points = new EmxArray_real_T(3, num);
-  _generateUnitCircleWithNormalVector(azimuth, elevation, num, points.ptr);
+  const p3 = new EmxArray_real_T(P3);
+  const p4 = new EmxArray_real_T(P4);
+  _generateUnitCircleWithNormalVector(
+    azimuth,
+    elevation,
+    num,
+    p3.arrayPtr,
+    p4.arrayPtr,
+    points.ptr
+  );
   const res = points.toVector3();
+  console.log(
+    "%c Line:22 🥝 _generateUnitCircleWithNormalVector",
+    "color:#93c0a4",
+    azimuth,
+    elevation,
+    num,
+    P3,
+    P4,
+    res
+  );
+  console.table(res);
   points.free();
   return res;
 };
@@ -96,8 +118,8 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
   const result = {
     center: center.toVector3()[0],
     Err_every: Err_every.toJSON(),
-    mTaon: mTaon.toJSON()[0],
-    Mradial: Mradial.toJSON()[0],
+    mTaon: mTaon.toJSON()?.[0],
+    Mradial: Mradial.toJSON()?.[0],
     Bottom_round_center: Bottom_round_center1.toVector3(),
   };
   console.log("%c Line:93 🍿 result", "color:#ea7e5c", result);
@@ -129,13 +151,18 @@ const init = () => {
   console.log("%c Line:103 🍇 1", "color:#f5ce50", v1, v1.toSpherical());
   v1 = new CustomVector3(1, 0, 0);
 
-  console.log("%c Line:103 🍇 1", "color:#f5ce50", v1, v1.toSpherical());
+  let i = 0;
+  const v = data[i].map((item) => {
+    return new CustomVector3(...item);
+  });
+  const p3 = new CustomVector3(...p3array[i]);
+  const p4 = new CustomVector3(...p4array[i]);
 
   const azimuth = Math.PI / 2;
   const elevation = Math.PI / 2;
   let start = performance.now();
   console.log("%c Line:122 🍅 方向", "color:#3f7cff", azimuth, elevation);
-  const res = generateUnitCircleWithNormalVector(azimuth, elevation, 5);
+  const res = generateUnitCircleWithNormalVector(azimuth, elevation, 5, p3, p4);
   console.table(res);
   console.table(res.map((t) => t.toSpherical()));
 
@@ -150,12 +177,6 @@ const init = () => {
     res
   );
 
-  let i = 0;
-  const v = data[i].map((item) => {
-    return new CustomVector3(...item);
-  });
-  const p3 = new CustomVector3(...p3array[i]);
-  const p4 = new CustomVector3(...p4array[i]);
   console.log("%c Line:103 🥛 p3", "color:#e41a6a", p3, p4);
   start = performance.now();
   const res2 = GenerateMultiLayeredMeasurementPoints(v, 3, 5, p3, p4);
@@ -166,7 +187,7 @@ const init = () => {
   );
   console.log("%c Line:128 🥖 res2", "color:#2eafb0", res2);
 
-  const pointsFlat = [];
+  const pointsFlat: any[] = [];
   for (const dataIndex of data) {
     dataIndex.forEach((item) => {
       pointsFlat.push(new CustomVector3(...item));

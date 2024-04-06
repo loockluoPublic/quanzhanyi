@@ -1,6 +1,6 @@
 import { Button, Form, Steps } from "antd";
 import { useState } from "react";
-import Module3D from "./module3D";
+import Module3D from "./module3DPoints";
 import Connect from "../components/ConnectDevice";
 import { getLine, getSimpleCoord } from "../utils/commond";
 import { useRecoilState } from "recoil";

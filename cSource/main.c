@@ -11,8 +11,11 @@ void generateUnitCircleWithNormalVector(double azimuth, double elevation,
                                         const double P2[3],
                                         emxArray_real_T *Point_out)
 {
+    printf("generateUnitCircleWithNormalVector %f %f %f", azimuth, elevation, num);
+    printf("P3: %f,%f,%f", P1[0], P1[1], P1[2]);
     generate_unit_circle_with_normal_vector2(azimuth, elevation, num, P1, P2, Point_out);
 }
+
 EMSCRIPTEN_KEEPALIVE
 void GenerateMultiLayeredMeasurementPoints(
     const emxArray_real_T *Point_out,
@@ -26,7 +29,7 @@ void GenerateMultiLayeredMeasurementPoints(
 }
 
 EMSCRIPTEN_KEEPALIVE
-void CalculateAccurateCylindersFromMultipleMeasurementPoints2(
+void CalculateAccurateCylindersFromMultipleMeasurementPoints(
     const emxArray_real_T *points,
     const double P_bound1[3],
     const double P_bound2[3],

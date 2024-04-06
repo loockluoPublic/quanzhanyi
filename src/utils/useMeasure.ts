@@ -15,7 +15,7 @@ export default function useMeasure() {
     setTrue();
     for await (const p of ps) {
       const np = await pointToAndMeasure(p);
-      addPoint(np);
+      np && addPoint(np);
     }
     setFalse();
   };

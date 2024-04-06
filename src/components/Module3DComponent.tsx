@@ -119,7 +119,7 @@ export default function Index(props: {
           decay={0}
           intensity={Math.PI}
         />
-        <Box position={[0, 0, 0]} />
+        {/* <Box position={[0, 0, 0]} /> */}
         <PointsLabel points={showPoints.filter((p) => p.enable)} />
         <OrbitControls />
       </Canvas>

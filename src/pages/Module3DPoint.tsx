@@ -30,7 +30,9 @@ export function Module3DPoint() {
       const waitingPoints = generateUnitCircleWithNormalVector(
         data?.direct[0],
         data?.direct[1],
-        data.numPerLay
+        data.numPerLay,
+        data?.firstPoints[0],
+        data?.firstPoints[1]
       );
       console.log(
         "%c Line:30 🥛 waitingPoints",
