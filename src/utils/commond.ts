@@ -9,7 +9,7 @@ const floatToFixed = (n: number, f = 4) => {
 
 export const sendText = (text): Promise<string> => {
   return new Promise((resolve) => {
-    if (!import.meta.env.DEV || mock) {
+    if (mock) {
       const mockData = {
         "2023:": "0",
         "5003:": "3216936",
