@@ -2,7 +2,7 @@ import { Button, Form, Steps } from "antd";
 import { useState } from "react";
 import Module3D from "./module3DPoints";
 import Connect from "../components/ConnectDevice";
-import { getLine, getSimpleCoord } from "../utils/commond";
+import { getLine, measureAndGetSimpleCoord } from "../utils/commond";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import BaseInfo from "../components/BaseInfo";
@@ -20,7 +20,7 @@ export default function Setting() {
   const pickPoint = (key: string, field?: any) => {
     const arr = form.getFieldValue(key);
 
-    return getSimpleCoord().then((res) => {
+    return measureAndGetSimpleCoord().then((res) => {
       console.log("%c Line:22 🍩 res", "color:#fca650", res, field);
       if (field) {
         arr[field.key] = res;
