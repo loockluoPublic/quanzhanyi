@@ -21,10 +21,10 @@ export function Module3DPointsMeasure() {
       );
 
       const res = CalculateAccurateCylindersFromMultipleMeasurementPoints(
-        // data.mdPoints2,
-        p18.map((item) => {
-          return new CustomVector3().fromArray(item);
-        }),
+        data.mdPoints2,
+        // p18.map((item) => {
+        //   return new CustomVector3().fromArray(item);
+        // }),
         data.firstPoints[0],
         data.firstPoints[1]
       );

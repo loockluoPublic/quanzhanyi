@@ -111,18 +111,18 @@ export default function Index(props: { className?: string; height: string }) {
   useEffect(() => {
     if (flag.current) {
       flag.current = false;
-      // const waitingPoints2 = GenerateMultiLayeredMeasurementPoints(
-      //   data.mdPoints,
-      //   data.layNum,
-      //   data.numPerLay,
-      //   data.firstPoints[0],
-      //   data.firstPoints[1]
-      // );
+      const waitingPoints2 = GenerateMultiLayeredMeasurementPoints(
+        data.mdPoints,
+        data.layNum,
+        data.numPerLay,
+        data.firstPoints[0],
+        data.firstPoints[1]
+      );
       setData({
         ...data,
-        // waitingPoints2,
+        waitingPoints2,
       });
-      // measure(waitingPoints2);
+      measure(waitingPoints2);
     }
   }, []);
 
@@ -156,7 +156,6 @@ export default function Index(props: { className?: string; height: string }) {
   if (data)
     return (
       <>
-        {" "}
         {loading ? "测量中。。。。" : "测量完成"}
         <h3>待测量方向点</h3>
         <div className="q-overflow-y-scroll">

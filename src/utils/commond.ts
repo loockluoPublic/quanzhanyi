@@ -9,7 +9,7 @@ const floatToFixed = (n: number, f = 4) => {
 
 export const sendText = (text): Promise<string> => {
   return new Promise((resolve) => {
-    if (import.meta.env.DEV || mock) {
+    if (!import.meta.env.DEV || mock) {
       const mockData = {
         "2023:": "0",
         "5003:": "3216936",
@@ -46,7 +46,7 @@ export const sendText = (text): Promise<string> => {
       serial.removeEventListener("serial-data", handleSerialEvent);
     };
     serial.addEventListener("serial-data", handleSerialEvent);
-    serial.send(`\n%R1Q,${text}\r\n`);
+    serial.send(`%R1Q,${text}\r\n`);
   });
 };
 
@@ -118,6 +118,12 @@ export const getDeviceInfo = async () => {
     dInfo.SoftwareVersion = res.replace(/,/g, ".");
   });
 
+  // 设置 EDM 测量模式
+  await sendText("2020:5");
+
+  // 打开/关闭激光指针
+  await sendText("1004:1");
+
   // 设置当前位置为原点
   await setStation();
 
@@ -146,22 +152,32 @@ export const goTo = (h, v) =>
 export const measure = () =>
   sendText(`2008:1,1`).then((res) => {
     console.log("%c Line:71 🥛 2008", "color:#2eafb0", res);
-    return res;
+    return new Promise((reslove) => {
+      setTimeout(() => {
+        reslove(res);
+      }, 300);
+    });
   });
 
 /**
  * 获取笛卡尔坐标
  * @returns
  */
-parseFloat;
+
 export const getSimpleCoord = () =>
-  measure().then(() =>
-    sendText(`2116:300,1`).then((res) => {
+  sendText(`2116:1500,1`)
+    .then((res) => {
+      if (res.startsWith("%R1P,0,0:")) {
+        throw new Error("获取笛卡尔坐标失败");
+      }
       const d = res.split(",")?.map((i) => parseFloat(i));
       // ?.map((i) => parseFloat(parseFloat(i).toFixed(4)));
       if (d?.length === 3) return new CustomVector3(d[1], d[2], d[0]);
     })
-  );
+    .catch((err) => {
+      console.log("%c Line:174 🍕 err", "color:#465975", err);
+      return getSimpleCoord();
+    });
 
 /**
  * 测量方向
@@ -181,4 +197,13 @@ export const getLine = (): Promise<number[]> =>
 export const pointToAndMeasure = (v: CustomVector3) => {
   const s = v.toSpherical();
   return goTo(s.theta, s.phi).then(getSimpleCoord);
+};
+
+/**
+ * 指向点的方向，并测量
+ * @param v
+ * @returns Promise<CustomVector3>
+ */
+export const measureAndGetSimpleCoord = () => {
+  return measure().then(getSimpleCoord);
 };
