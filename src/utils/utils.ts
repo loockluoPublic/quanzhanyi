@@ -44,7 +44,7 @@ export const generateUnitCircleWithNormalVector = (
 
 export const GenerateMultiLayeredMeasurementPoints = (
   Points: CustomVector3[],
-  num: number,
+  numPerLay: number,
   laynum: number,
   P3: CustomVector3,
   P4: CustomVector3
@@ -52,21 +52,21 @@ export const GenerateMultiLayeredMeasurementPoints = (
   const points = new EmxArray_real_T(Points);
   const p3 = new EmxArray_real_T(P3);
   const p4 = new EmxArray_real_T(P4);
-  const resultPoints = new EmxArray_real_T(3, num * laynum);
+  const resultPoints = new EmxArray_real_T(3, numPerLay * laynum);
   console.group("GenerateMultiLayeredMeasurementPoints");
   console.log("%c Line:35 🥪 points", "color:#4fff4B", points.toVector3());
 
   console.log(
     "%c Line:40 🥪 num",
     "color:#93c0a4",
-    num,
+    numPerLay,
     laynum,
     p3.toVector3(),
-    p3.toVector3()
+    p4.toVector3()
   );
   _GenerateMultiLayeredMeasurementPoints(
     points.ptr,
-    num,
+    numPerLay,
     laynum,
     p3.arrayPtr,
     p4.arrayPtr,
@@ -207,5 +207,5 @@ const init = () => {
   );
   console.log("%c Line:132 🍭 res3", "color:#b03734", res3);
 };
-setTimeout(init, 500);
+// setTimeout(init, 500);
 // init();

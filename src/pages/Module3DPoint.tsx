@@ -34,12 +34,7 @@ export function Module3DPoint() {
         data?.firstPoints[0],
         data?.firstPoints[1]
       );
-      console.log(
-        "%c Line:30 🥛 waitingPoints",
-        "color:#f5ce50",
-        new Date(),
-        waitingPoints
-      );
+
       setData({
         ...data,
         waitingPoints,
@@ -52,7 +47,7 @@ export function Module3DPoint() {
     if (!loading && points.length > 0) {
       setData({
         ...data,
-        mdPoints: points,
+        mPoints: points,
       });
     }
   }, [loading, points]);

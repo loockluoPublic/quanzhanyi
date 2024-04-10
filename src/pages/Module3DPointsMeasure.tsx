@@ -2,8 +2,6 @@ import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import { CalculateAccurateCylindersFromMultipleMeasurementPoints } from "../utils/utils";
 import { useEffect, useRef } from "react";
-import { p18 } from "../utils/mockData";
-import { CustomVector3 } from "../class/CustomVector3";
 
 export function Module3DPointsMeasure() {
   const [data, setData] = useRecoilState(Data);
@@ -15,16 +13,13 @@ export function Module3DPointsMeasure() {
       console.log(
         "%c Line:17 🥚 CalculateAccurateCylindersFromMultipleMeasurementPoints",
         "color:#ed9ec7",
-        data.mdPoints,
+        data.mPoints2,
         data.firstPoints[0],
         data.firstPoints[1]
       );
 
       const res = CalculateAccurateCylindersFromMultipleMeasurementPoints(
-        data.mdPoints2,
-        // p18.map((item) => {
-        //   return new CustomVector3().fromArray(item);
-        // }),
+        data.mPoints2,
         data.firstPoints[0],
         data.firstPoints[1]
       );

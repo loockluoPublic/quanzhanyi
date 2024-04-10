@@ -112,9 +112,9 @@ export default function Index(props: { className?: string; height: string }) {
     if (flag.current) {
       flag.current = false;
       const waitingPoints2 = GenerateMultiLayeredMeasurementPoints(
-        data.mdPoints,
-        data.layNum,
+        data.mPoints,
         data.numPerLay,
+        data.layNum,
         data.firstPoints[0],
         data.firstPoints[1]
       );

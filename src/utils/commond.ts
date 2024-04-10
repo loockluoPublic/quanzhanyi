@@ -3,10 +3,6 @@ import { serial } from "../components/ConnectDevice";
 
 const mock = new URLSearchParams(location.search).has("mock");
 
-const floatToFixed = (n: number, f = 4) => {
-  return Number(n.toFixed(f));
-};
-
 export const sendText = (text): Promise<string> => {
   return new Promise((resolve) => {
     if (mock) {
