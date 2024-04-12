@@ -2,7 +2,7 @@
 ## Makefile generated for component 'QuanZhanYi'. 
 ## 
 ## Makefile     : QuanZhanYi_rtw.mk
-## Generated on : Wed Apr 03 22:27:57 2024
+## Generated on : Fri Apr 12 14:11:56 2024
 ## Final product: ./QuanZhanYi.lib
 ## Product type : static-library
 ## 
@@ -23,7 +23,7 @@ MAKEFILE                  = QuanZhanYi_rtw.mk
 MATLAB_ROOT               = E:/SystemInstallation/Matlab
 MATLAB_BIN                = E:/SystemInstallation/Matlab/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = C:/Users/XWT/Desktop/test3/codegen/lib/QuanZhanYi
+START_DIR                 = C:/Users/XWT/Desktop/test4/codegen/lib/QuanZhanYi
 TGT_FCN_LIB               = None
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
@@ -137,7 +137,7 @@ BUILD_TYPE = "Static Library"
 ## INCLUDE PATHS
 ###########################################################################
 
-INCLUDES_BUILDINFO = -I$(START_DIR) -IC:/Users/XWT/Desktop/test3 -I$(MATLAB_ROOT)/extern/include
+INCLUDES_BUILDINFO = -I$(START_DIR) -IC:/Users/XWT/Desktop/test4 -I$(MATLAB_ROOT)/extern/include
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 
@@ -154,7 +154,7 @@ DEFINES = $(DEFINES_CUSTOM) $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/QuanZhanYi_data.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c $(START_DIR)/QuanZhanYi_initialize.c $(START_DIR)/QuanZhanYi_terminate.c $(START_DIR)/Calculate_accurate_cylinders_from_multiple_measurement_points2.c $(START_DIR)/norm.c $(START_DIR)/svd.c $(START_DIR)/svd1.c $(START_DIR)/xnrm2.c $(START_DIR)/xdotc.c $(START_DIR)/fitcircle.c $(START_DIR)/mldivide.c $(START_DIR)/qrsolve.c $(START_DIR)/pinv.c $(START_DIR)/foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)/Generate_multi_layered_measurement_points.c $(START_DIR)/generate_unit_circle_with_normal_vector.c $(START_DIR)/linspace.c $(START_DIR)/generate_unit_circle_with_normal_vector2.c $(START_DIR)/myvrrotvec2mat.c $(START_DIR)/xaxpy.c $(START_DIR)/xrotg.c $(START_DIR)/xrot.c $(START_DIR)/xswap.c $(START_DIR)/QuanZhanYi_emxutil.c $(START_DIR)/QuanZhanYi_emxAPI.c $(START_DIR)/QuanZhanYi_rtwutil.c
+SRCS = $(START_DIR)/QuanZhanYi_data.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c $(START_DIR)/QuanZhanYi_initialize.c $(START_DIR)/QuanZhanYi_terminate.c $(START_DIR)/Calculate_accurate_cylinders_from_multiple_measurement_points2.c $(START_DIR)/norm.c $(START_DIR)/svd.c $(START_DIR)/svd1.c $(START_DIR)/xnrm2.c $(START_DIR)/xdotc.c $(START_DIR)/fitcircle.c $(START_DIR)/mldivide.c $(START_DIR)/qrsolve.c $(START_DIR)/pinv.c $(START_DIR)/foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)/Generate_multi_layered_measurement_points.c $(START_DIR)/generate_unit_circle_with_normal_vector.c $(START_DIR)/generate_unit_circle_with_normal_vector2.c $(START_DIR)/myvrrotvec2mat.c $(START_DIR)/xaxpy.c $(START_DIR)/xrotg.c $(START_DIR)/xrot.c $(START_DIR)/xswap.c $(START_DIR)/QuanZhanYi_emxutil.c $(START_DIR)/QuanZhanYi_emxAPI.c $(START_DIR)/QuanZhanYi_rtwutil.c
 
 ALL_SRCS = $(SRCS)
 
@@ -162,7 +162,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = QuanZhanYi_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj QuanZhanYi_initialize.obj QuanZhanYi_terminate.obj Calculate_accurate_cylinders_from_multiple_measurement_points2.obj norm.obj svd.obj svd1.obj xnrm2.obj xdotc.obj fitcircle.obj mldivide.obj qrsolve.obj pinv.obj foot_of_perpendicular_from_a_point_to_a_line.obj Generate_multi_layered_measurement_points.obj generate_unit_circle_with_normal_vector.obj linspace.obj generate_unit_circle_with_normal_vector2.obj myvrrotvec2mat.obj xaxpy.obj xrotg.obj xrot.obj xswap.obj QuanZhanYi_emxutil.obj QuanZhanYi_emxAPI.obj QuanZhanYi_rtwutil.obj
+OBJS = QuanZhanYi_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj QuanZhanYi_initialize.obj QuanZhanYi_terminate.obj Calculate_accurate_cylinders_from_multiple_measurement_points2.obj norm.obj svd.obj svd1.obj xnrm2.obj xdotc.obj fitcircle.obj mldivide.obj qrsolve.obj pinv.obj foot_of_perpendicular_from_a_point_to_a_line.obj Generate_multi_layered_measurement_points.obj generate_unit_circle_with_normal_vector.obj generate_unit_circle_with_normal_vector2.obj myvrrotvec2mat.obj xaxpy.obj xrotg.obj xrot.obj xswap.obj QuanZhanYi_emxutil.obj QuanZhanYi_emxAPI.obj QuanZhanYi_rtwutil.obj
 
 ALL_OBJS = $(OBJS)
 
@@ -257,7 +257,7 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-%.obj : C:/Users/XWT/Desktop/test3/%.c
+%.obj : C:/Users/XWT/Desktop/test4/%.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
@@ -334,10 +334,6 @@ Generate_multi_layered_measurement_points.obj : $(START_DIR)/Generate_multi_laye
 
 
 generate_unit_circle_with_normal_vector.obj : $(START_DIR)/generate_unit_circle_with_normal_vector.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
-
-
-linspace.obj : $(START_DIR)/linspace.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
