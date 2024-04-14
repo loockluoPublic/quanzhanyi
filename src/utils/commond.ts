@@ -192,7 +192,7 @@ export const getLine = (): Promise<number[]> =>
  */
 export const pointToAndMeasure = (v: CustomVector3) => {
   const s = v.toSpherical();
-  return goTo(s.theta, s.phi).then(getSimpleCoord);
+  return goTo(s.theta, s.phi).then(measureAndGetSimpleCoord);
 };
 
 /**
