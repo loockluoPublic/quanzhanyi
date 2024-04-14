@@ -118,6 +118,11 @@ export default function Index(props: { className?: string; height: string }) {
         data.firstPoints[0],
         data.firstPoints[1]
       );
+      console.log(
+        "%c Line:115 🌽 waitingPoints2",
+        "color:#6ec1c2",
+        waitingPoints2
+      );
       setData({
         ...data,
         waitingPoints2,

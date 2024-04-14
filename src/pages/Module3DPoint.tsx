@@ -35,6 +35,11 @@ export function Module3DPoint() {
         data?.firstPoints[1]
       );
 
+      console.log(
+        "%c Line:41 🍰 waitingPoints",
+        "color:#b03734",
+        waitingPoints
+      );
       setData({
         ...data,
         waitingPoints,
