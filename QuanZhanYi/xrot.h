@@ -1,8 +1,8 @@
 /*
  * File: xrot.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 #ifndef XROT_H
@@ -19,6 +19,8 @@ extern "C" {
 
 /* Function Declarations */
 void b_xrot(double x[9], int ix0, int iy0, double c, double s);
+
+void c_xrot(double x[4], int ix0, int iy0, double c, double s);
 
 void xrot(double x[16], int ix0, int iy0, double c, double s);
 

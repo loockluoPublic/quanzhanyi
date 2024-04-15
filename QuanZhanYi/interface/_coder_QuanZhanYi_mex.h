@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_mex.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -36,7 +36,7 @@ void unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
     int32_T nlhs, mxArray *plhs[3], int32_T nrhs, const mxArray *prhs[3]);
 
 void unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
-    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[5]);
+    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[6]);
 
 void unsafe_generate_unit_circle_with_normal_vector_mexFunction(
     int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[3]);

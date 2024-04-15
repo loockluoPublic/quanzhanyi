@@ -1,8 +1,8 @@
 /*
  * File: xdotc.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 #ifndef XDOTC_H
@@ -19,6 +19,10 @@ extern "C" {
 
 /* Function Declarations */
 double b_xdotc(int n, const double x[9], int ix0, const double y[9], int iy0);
+
+double c_xdotc(int n, const double x[8], int ix0, const double y[8], int iy0);
+
+double d_xdotc(const double x[4], const double y[4]);
 
 double xdotc(int n, const double x[16], int ix0, const double y[16], int iy0);
 

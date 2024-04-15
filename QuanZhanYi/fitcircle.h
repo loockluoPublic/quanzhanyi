@@ -1,8 +1,8 @@
 /*
  * File: fitcircle.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 #ifndef FITCIRCLE_H
@@ -19,12 +19,15 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+void binary_expand_op(double in1[3], const double in2[3],
+                      const emxArray_real_T *in3, const emxArray_real_T *in4,
+                      const emxArray_real_T *in5, const int in6[2],
+                      const emxArray_real_T *in7);
+
 extern void fitcircle(const emxArray_real_T *x, double z[2], double *r,
                       double *residual);
 
-void sys(const captured_var *m, const b_captured_var *x,
-         const b_captured_var *x1, const b_captured_var *x2, const double u[3],
-         emxArray_real_T *f, emxArray_real_T *J);
+void plus(emxArray_real_T *in1, const emxArray_real_T *in2);
 
 #ifdef __cplusplus
 }

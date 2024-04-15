@@ -1,8 +1,8 @@
 /*
  * File: main.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 /*************************************************************************/
@@ -45,13 +45,13 @@
 #include "rt_nonfinite.h"
 
 /* Function Declarations */
-static emxArray_real_T *argInit_2xUnbounded_real_T(void);
-
 static void argInit_3x1_real_T(double result[3]);
 
 static emxArray_real_T *argInit_3xUnbounded_real_T(void);
 
 static void argInit_4x1_real_T(double result[4]);
+
+static emxArray_real_T *argInit_Unboundedx2_real_T(void);
 
 static double argInit_real_T(void);
 
@@ -70,29 +70,6 @@ static void main_fitcircle(void);
 static void main_myvrrotvec2mat(void);
 
 /* Function Definitions */
-/*
- * Arguments    : void
- * Return Type  : emxArray_real_T *
- */
-static emxArray_real_T *argInit_2xUnbounded_real_T(void)
-{
-  emxArray_real_T *result;
-  int idx0;
-  int idx1;
-  /* Set the size of the array.
-Change this size to the value that the application requires. */
-  result = emxCreate_real_T(2, 2);
-  /* Loop over the array to initialize each element. */
-  for (idx0 = 0; idx0 < 2; idx0++) {
-    for (idx1 = 0; idx1 < result->size[1U]; idx1++) {
-      /* Set the value of the array element.
-Change this value to the value that the application requires. */
-      result->data[idx0 + 2 * idx1] = argInit_real_T();
-    }
-  }
-  return result;
-}
-
 /*
  * Arguments    : double result[3]
  * Return Type  : void
@@ -115,17 +92,19 @@ Change this value to the value that the application requires. */
 static emxArray_real_T *argInit_3xUnbounded_real_T(void)
 {
   emxArray_real_T *result;
+  double *result_data;
   int idx0;
   int idx1;
   /* Set the size of the array.
 Change this size to the value that the application requires. */
   result = emxCreate_real_T(3, 2);
+  result_data = result->data;
   /* Loop over the array to initialize each element. */
   for (idx0 = 0; idx0 < 3; idx0++) {
     for (idx1 = 0; idx1 < result->size[1U]; idx1++) {
       /* Set the value of the array element.
 Change this value to the value that the application requires. */
-      result->data[idx0 + 3 * idx1] = argInit_real_T();
+      result_data[idx0 + 3 * idx1] = argInit_real_T();
     }
   }
   return result;
@@ -144,6 +123,31 @@ static void argInit_4x1_real_T(double result[4])
 Change this value to the value that the application requires. */
     result[idx0] = argInit_real_T();
   }
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : emxArray_real_T *
+ */
+static emxArray_real_T *argInit_Unboundedx2_real_T(void)
+{
+  emxArray_real_T *result;
+  double *result_data;
+  int idx0;
+  int idx1;
+  /* Set the size of the array.
+Change this size to the value that the application requires. */
+  result = emxCreate_real_T(2, 2);
+  result_data = result->data;
+  /* Loop over the array to initialize each element. */
+  for (idx0 = 0; idx0 < result->size[0U]; idx0++) {
+    for (idx1 = 0; idx1 < 2; idx1++) {
+      /* Set the value of the array element.
+Change this value to the value that the application requires. */
+      result_data[idx0 + result->size[0] * idx1] = argInit_real_T();
+    }
+  }
+  return result;
 }
 
 /*
@@ -269,8 +273,9 @@ static void d_main_generate_unit_circle_wit(void)
   argInit_3x1_real_T(P1_tmp);
   /* Initialize function input argument 'P2'. */
   /* Call the entry-point 'generate_unit_circle_with_normal_vector2'. */
-  generate_unit_circle_with_normal_vector2(
-      azimuth_tmp, azimuth_tmp, azimuth_tmp, P1_tmp, P1_tmp, Point_out);
+  generate_unit_circle_with_normal_vector2(azimuth_tmp, azimuth_tmp,
+                                           azimuth_tmp, azimuth_tmp, P1_tmp,
+                                           P1_tmp, Point_out);
   emxDestroyArray_real_T(Point_out);
 }
 
@@ -286,7 +291,7 @@ static void main_fitcircle(void)
   double residual;
   /* Initialize function 'fitcircle' input arguments. */
   /* Initialize function input argument 'x'. */
-  x = argInit_2xUnbounded_real_T();
+  x = argInit_Unboundedx2_real_T();
   /* Call the entry-point 'fitcircle'. */
   fitcircle(x, z, &r, &residual);
   emxDestroyArray_real_T(x);

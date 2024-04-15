@@ -1,8 +1,8 @@
 /*
  * File: xnrm2.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 #ifndef XNRM2_H
@@ -23,7 +23,11 @@ double b_xnrm2(int n, const double x[4], int ix0);
 
 double c_xnrm2(int n, const double x[9], int ix0);
 
-double d_xnrm2(const double x[3], int ix0);
+double d_xnrm2(const double x[3]);
+
+double e_xnrm2(const double x[8], int ix0);
+
+double f_xnrm2(const double x[6], int ix0);
 
 double xnrm2(int n, const emxArray_real_T *x, int ix0);
 

@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_api.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -71,7 +71,7 @@ void c_foot_of_perpendicular_from_a_(const mxArray *const prhs[3], int32_T nlhs,
 void c_generate_unit_circle_with_nor(const mxArray *const prhs[3],
                                      const mxArray **plhs);
 
-void d_generate_unit_circle_with_nor(const mxArray *const prhs[5],
+void d_generate_unit_circle_with_nor(const mxArray *const prhs[6],
                                      const mxArray **plhs);
 
 void fitcircle(emxArray_real_T *x, real_T z[2], real_T *r, real_T *residual);
@@ -89,8 +89,8 @@ void generate_unit_circle_with_normal_vector(real_T azimuth, real_T elevation,
                                              emxArray_real_T *Point_out);
 
 void generate_unit_circle_with_normal_vector2(real_T azimuth, real_T elevation,
-                                              real_T num, real_T P1[3],
-                                              real_T P2[3],
+                                              real_T num, real_T laynum,
+                                              real_T P1[3], real_T P2[3],
                                               emxArray_real_T *Point_out);
 
 void myvrrotvec2mat(real_T r[4], real_T m[9]);

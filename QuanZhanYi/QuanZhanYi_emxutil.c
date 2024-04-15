@@ -1,8 +1,8 @@
 /*
  * File: QuanZhanYi_emxutil.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 /* Include Files */
@@ -56,15 +56,6 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
 }
 
 /*
- * Arguments    : b_captured_var *pStruct
- * Return Type  : void
- */
-void emxFreeStruct_captured_var(b_captured_var *pStruct)
-{
-  emxFree_real_T(&pStruct->contents);
-}
-
-/*
  * Arguments    : emxArray_real_T **pEmxArray
  * Return Type  : void
  */
@@ -78,24 +69,6 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
     free(*pEmxArray);
     *pEmxArray = (emxArray_real_T *)NULL;
   }
-}
-
-/*
- * Arguments    : b_captured_var *pStruct
- * Return Type  : void
- */
-void emxInitStruct_captured_var(b_captured_var *pStruct)
-{
-  emxInit_real_T(&pStruct->contents, 2);
-}
-
-/*
- * Arguments    : b_captured_var *pStruct
- * Return Type  : void
- */
-void emxInitStruct_captured_var1(b_captured_var *pStruct)
-{
-  emxInit_real_T(&pStruct->contents, 1);
 }
 
 /*

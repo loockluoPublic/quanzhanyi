@@ -1,14 +1,15 @@
 /*
- * File: QuanZhanYi_terminate.h
+ * File: cat.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
-#ifndef QUANZHANYI_TERMINATE_H
-#define QUANZHANYI_TERMINATE_H
+#ifndef CAT_H
+#define CAT_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,7 +19,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void QuanZhanYi_terminate(void);
+void c_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
+                        const emxArray_real_T *in3, const emxArray_real_T *in4);
 
 #ifdef __cplusplus
 }
@@ -26,7 +28,7 @@ extern void QuanZhanYi_terminate(void);
 
 #endif
 /*
- * File trailer for QuanZhanYi_terminate.h
+ * File trailer for cat.h
  *
  * [EOF]
  */

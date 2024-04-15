@@ -1,8 +1,8 @@
 /*
  * File: QuanZhanYi_rtwutil.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 /* Include Files */
@@ -21,11 +21,11 @@
 double rt_atan2d_snf(double u0, double u1)
 {
   double y;
-  int b_u0;
-  int b_u1;
   if (rtIsNaN(u0) || rtIsNaN(u1)) {
     y = rtNaN;
   } else if (rtIsInf(u0) && rtIsInf(u1)) {
+    int b_u0;
+    int b_u1;
     if (u0 > 0.0) {
       b_u0 = 1;
     } else {

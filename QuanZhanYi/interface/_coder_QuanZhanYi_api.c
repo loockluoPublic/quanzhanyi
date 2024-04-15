@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_api.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 /* Include Files */
@@ -15,7 +15,7 @@ emlrtCTX emlrtRootTLSGlobal = NULL;
 emlrtContext emlrtContextGlobal = {
     true,                                                 /* bFirstTime */
     false,                                                /* bInitialized */
-    131610U,                                              /* fVersionInfo */
+    131626U,                                              /* fVersionInfo */
     NULL,                                                 /* fErrorFunction */
     "QuanZhanYi",                                         /* fFunctionName */
     NULL,                                                 /* fRTCallStack */
@@ -55,10 +55,10 @@ static const mxArray *emlrt_marshallOut(const real_T u[3]);
 static void emxEnsureCapacity_real_T(emxArray_real_T *emxArray,
                                      int32_T oldNumel);
 
-static void emxFree_real_T(emxArray_real_T **pEmxArray);
+static void emxFree_real_T(const emlrtStack *sp, emxArray_real_T **pEmxArray);
 
 static void emxInit_real_T(const emlrtStack *sp, emxArray_real_T **pEmxArray,
-                           int32_T numDimensions, boolean_T doPush);
+                           int32_T numDimensions);
 
 static void f_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                const emlrtMsgIdentifier *parentId,
@@ -154,9 +154,11 @@ static const mxArray *c_emlrt_marshallOut(const emxArray_real_T *u)
   static const int32_T i = 0;
   const mxArray *m;
   const mxArray *y;
+  const real_T *u_data;
+  u_data = u->data;
   y = NULL;
   m = emlrtCreateNumericArray(1, (const void *)&i, mxDOUBLE_CLASS, mxREAL);
-  emlrtMxSetData((mxArray *)m, &u->data[0]);
+  emlrtMxSetData((mxArray *)m, (void *)&u_data[0]);
   emlrtSetDimensions((mxArray *)m, &u->size[0], 1);
   emlrtAssign(&y, m);
   return y;
@@ -222,9 +224,11 @@ static const mxArray *e_emlrt_marshallOut(const emxArray_real_T *u)
   static const int32_T iv[2] = {0, 0};
   const mxArray *m;
   const mxArray *y;
+  const real_T *u_data;
+  u_data = u->data;
   y = NULL;
   m = emlrtCreateNumericArray(2, (const void *)&iv[0], mxDOUBLE_CLASS, mxREAL);
-  emlrtMxSetData((mxArray *)m, &u->data[0]);
+  emlrtMxSetData((mxArray *)m, (void *)&u_data[0]);
   emlrtSetDimensions((mxArray *)m, &u->size[0], 2);
   emlrtAssign(&y, m);
   return y;
@@ -310,17 +314,19 @@ static void emxEnsureCapacity_real_T(emxArray_real_T *emxArray,
 }
 
 /*
- * Arguments    : emxArray_real_T **pEmxArray
+ * Arguments    : const emlrtStack *sp
+ *                emxArray_real_T **pEmxArray
  * Return Type  : void
  */
-static void emxFree_real_T(emxArray_real_T **pEmxArray)
+static void emxFree_real_T(const emlrtStack *sp, emxArray_real_T **pEmxArray)
 {
   if (*pEmxArray != (emxArray_real_T *)NULL) {
     if (((*pEmxArray)->data != (real_T *)NULL) && (*pEmxArray)->canFreeData) {
       emlrtFreeMex((*pEmxArray)->data);
     }
     emlrtFreeMex((*pEmxArray)->size);
-    emlrtFreeMex(*pEmxArray);
+    emlrtRemoveHeapReference((emlrtCTX)sp, (void *)pEmxArray);
+    emlrtFreeEmxArray(*pEmxArray);
     *pEmxArray = (emxArray_real_T *)NULL;
   }
 }
@@ -329,20 +335,17 @@ static void emxFree_real_T(emxArray_real_T **pEmxArray)
  * Arguments    : const emlrtStack *sp
  *                emxArray_real_T **pEmxArray
  *                int32_T numDimensions
- *                boolean_T doPush
  * Return Type  : void
  */
 static void emxInit_real_T(const emlrtStack *sp, emxArray_real_T **pEmxArray,
-                           int32_T numDimensions, boolean_T doPush)
+                           int32_T numDimensions)
 {
   emxArray_real_T *emxArray;
   int32_T i;
-  *pEmxArray = (emxArray_real_T *)emlrtMallocMex(sizeof(emxArray_real_T));
-  if (doPush) {
-    emlrtPushHeapReferenceStackR2021a((emlrtCTX)sp, false, (void *)pEmxArray,
+  *pEmxArray = (emxArray_real_T *)emlrtMallocEmxArray(sizeof(emxArray_real_T));
+  emlrtPushHeapReferenceStackEmxArray((emlrtCTX)sp, true, (void *)pEmxArray,
                                       (void *)&emxFree_real_T, NULL, NULL,
                                       NULL);
-  }
   emxArray = *pEmxArray;
   emxArray->data = (real_T *)NULL;
   emxArray->numDimensions = numDimensions;
@@ -511,10 +514,10 @@ static void m_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                                const emlrtMsgIdentifier *msgId,
                                emxArray_real_T *ret)
 {
-  static const int32_T dims[2] = {2, -1};
+  static const int32_T dims[2] = {-1, 2};
   int32_T iv[2];
   int32_T i;
-  const boolean_T bv[2] = {false, true};
+  const boolean_T bv[2] = {true, false};
   emlrtCheckVsBuiltInR2012b((emlrtCTX)sp, msgId, src, (const char_T *)"double",
                             false, 2U, (void *)&dims[0], &bv[0], &iv[0]);
   ret->allocatedSize = iv[0] * iv[1];
@@ -647,8 +650,8 @@ void c_Calculate_accurate_cylinders_(const mxArray *const prhs[3], int32_T nlhs,
   Bottom_round_center1 = (real_T(*)[3])mxMalloc(sizeof(real_T[3]));
   Bottom_round_center2 = (real_T(*)[3])mxMalloc(sizeof(real_T[3]));
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T(&st, &points, 2, true);
-  emxInit_real_T(&st, &Err_every, 1, true);
+  emxInit_real_T(&st, &points, 2);
+  emxInit_real_T(&st, &Err_every, 1);
   /* Marshall function inputs */
   points->canFreeData = false;
   emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "points", points);
@@ -660,7 +663,7 @@ void c_Calculate_accurate_cylinders_(const mxArray *const prhs[3], int32_T nlhs,
       *Bottom_round_center1, *Bottom_round_center2);
   /* Marshall function outputs */
   plhs[0] = emlrt_marshallOut(*Mcenter);
-  emxFree_real_T(&points);
+  emxFree_real_T(&st, &points);
   if (nlhs > 1) {
     plhs[1] = emlrt_marshallOut(*MTaon);
   }
@@ -671,7 +674,7 @@ void c_Calculate_accurate_cylinders_(const mxArray *const prhs[3], int32_T nlhs,
     Err_every->canFreeData = false;
     plhs[3] = c_emlrt_marshallOut(Err_every);
   }
-  emxFree_real_T(&Err_every);
+  emxFree_real_T(&st, &Err_every);
   if (nlhs > 4) {
     plhs[4] = emlrt_marshallOut(*Bottom_round_center1);
   }
@@ -702,8 +705,8 @@ void c_Generate_multi_layered_measur(const mxArray *const prhs[5],
   real_T num;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T(&st, &Point_out, 2, true);
-  emxInit_real_T(&st, &Point_test, 2, true);
+  emxInit_real_T(&st, &Point_out, 2);
+  emxInit_real_T(&st, &Point_test, 2);
   /* Marshall function inputs */
   Point_out->canFreeData = false;
   emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "Point_out", Point_out);
@@ -717,8 +720,8 @@ void c_Generate_multi_layered_measur(const mxArray *const prhs[5],
   /* Marshall function outputs */
   Point_test->canFreeData = false;
   *plhs = e_emlrt_marshallOut(Point_test);
-  emxFree_real_T(&Point_test);
-  emxFree_real_T(&Point_out);
+  emxFree_real_T(&st, &Point_test);
+  emxFree_real_T(&st, &Point_out);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 
@@ -779,7 +782,7 @@ void c_generate_unit_circle_with_nor(const mxArray *const prhs[3],
   real_T num;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T(&st, &Point_out, 2, true);
+  emxInit_real_T(&st, &Point_out, 2);
   /* Marshall function inputs */
   azimuth = g_emlrt_marshallIn(&st, emlrtAliasP(prhs[0]), "azimuth");
   elevation = g_emlrt_marshallIn(&st, emlrtAliasP(prhs[1]), "elevation");
@@ -789,16 +792,16 @@ void c_generate_unit_circle_with_nor(const mxArray *const prhs[3],
   /* Marshall function outputs */
   Point_out->canFreeData = false;
   *plhs = e_emlrt_marshallOut(Point_out);
-  emxFree_real_T(&Point_out);
+  emxFree_real_T(&st, &Point_out);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 
 /*
- * Arguments    : const mxArray * const prhs[5]
+ * Arguments    : const mxArray * const prhs[6]
  *                const mxArray **plhs
  * Return Type  : void
  */
-void d_generate_unit_circle_with_nor(const mxArray *const prhs[5],
+void d_generate_unit_circle_with_nor(const mxArray *const prhs[6],
                                      const mxArray **plhs)
 {
   emlrtStack st = {
@@ -811,23 +814,25 @@ void d_generate_unit_circle_with_nor(const mxArray *const prhs[5],
   real_T(*P2)[3];
   real_T azimuth;
   real_T elevation;
+  real_T laynum;
   real_T num;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T(&st, &Point_out, 2, true);
+  emxInit_real_T(&st, &Point_out, 2);
   /* Marshall function inputs */
   azimuth = g_emlrt_marshallIn(&st, emlrtAliasP(prhs[0]), "azimuth");
   elevation = g_emlrt_marshallIn(&st, emlrtAliasP(prhs[1]), "elevation");
   num = g_emlrt_marshallIn(&st, emlrtAliasP(prhs[2]), "num");
-  P1 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "P1");
-  P2 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[4]), "P2");
+  laynum = g_emlrt_marshallIn(&st, emlrtAliasP(prhs[3]), "laynum");
+  P1 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[4]), "P1");
+  P2 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[5]), "P2");
   /* Invoke the target function */
-  generate_unit_circle_with_normal_vector2(azimuth, elevation, num, *P1, *P2,
-                                           Point_out);
+  generate_unit_circle_with_normal_vector2(azimuth, elevation, num, laynum, *P1,
+                                           *P2, Point_out);
   /* Marshall function outputs */
   Point_out->canFreeData = false;
   *plhs = e_emlrt_marshallOut(Point_out);
-  emxFree_real_T(&Point_out);
+  emxFree_real_T(&st, &Point_out);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 
@@ -851,7 +856,7 @@ void fitcircle_api(const mxArray *prhs, int32_T nlhs, const mxArray *plhs[3])
   st.tls = emlrtRootTLSGlobal;
   z = (real_T(*)[2])mxMalloc(sizeof(real_T[2]));
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T(&st, &x, 2, true);
+  emxInit_real_T(&st, &x, 2);
   /* Marshall function inputs */
   x->canFreeData = false;
   e_emlrt_marshallIn(&st, emlrtAlias(prhs), "x", x);
@@ -859,7 +864,7 @@ void fitcircle_api(const mxArray *prhs, int32_T nlhs, const mxArray *plhs[3])
   fitcircle(x, *z, &r, &residual);
   /* Marshall function outputs */
   plhs[0] = d_emlrt_marshallOut(*z);
-  emxFree_real_T(&x);
+  emxFree_real_T(&st, &x);
   if (nlhs > 1) {
     plhs[1] = b_emlrt_marshallOut(r);
   }
