@@ -31,6 +31,7 @@ export function Module3DPoint() {
         data?.direct[0],
         data?.direct[1],
         data.numPerLay,
+        data.layNum,
         data?.firstPoints[0],
         data?.firstPoints[1]
       );
@@ -72,6 +73,7 @@ export function Module3DPoint() {
         setData={setMData}
         points={points ?? []}
         height="500px"
+        // direct={data?.direct}
       />
     );
   }

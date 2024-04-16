@@ -60,12 +60,12 @@ export default function Setting() {
       title: "自动圆面点采集",
       conponents: <Module3DPoint />,
     },
-    {
-      title: "自动圆柱点采集",
-      conponents: (
-        <Module3D className="q-mb-4" height={"calc( 100vh - 268px - 1em )"} />
-      ),
-    },
+    // {
+    //   title: "自动圆柱点采集",
+    //   conponents: (
+    //     <Module3D className="q-mb-4" height={"calc( 100vh - 268px - 1em )"} />
+    //   ),
+    // },
 
     {
       title: "圆柱拟合",

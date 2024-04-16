@@ -13,13 +13,13 @@ export function Module3DPointsMeasure() {
       console.log(
         "%c Line:17 🥚 CalculateAccurateCylindersFromMultipleMeasurementPoints",
         "color:#ed9ec7",
-        data.mPoints2,
+        data.mPoints,
         data.firstPoints[0],
         data.firstPoints[1]
       );
 
       const res = CalculateAccurateCylindersFromMultipleMeasurementPoints(
-        data.mPoints2,
+        data.mPoints,
         data.firstPoints[0],
         data.firstPoints[1]
       );

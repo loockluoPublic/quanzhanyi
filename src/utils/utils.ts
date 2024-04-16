@@ -11,17 +11,19 @@ const {
 export const generateUnitCircleWithNormalVector = (
   azimuth: number,
   elevation: number,
-  num: number,
+  numPerLay: number,
+  laynum: number,
   P3: CustomVector3,
   P4: CustomVector3
 ) => {
-  const points = new EmxArray_real_T(3, num);
+  const points = new EmxArray_real_T(3, numPerLay * laynum);
   const p3 = new EmxArray_real_T(P3);
   const p4 = new EmxArray_real_T(P4);
   _generateUnitCircleWithNormalVector(
     azimuth,
     elevation,
-    num,
+    numPerLay,
+    laynum,
     p3.arrayPtr,
     p4.arrayPtr,
     points.ptr
@@ -32,7 +34,8 @@ export const generateUnitCircleWithNormalVector = (
     "color:#93c0a4",
     azimuth,
     elevation,
-    num,
+    numPerLay,
+    laynum,
     P3,
     P4,
     res
@@ -162,7 +165,14 @@ const init = () => {
   const elevation = Math.PI / 2;
   let start = performance.now();
   console.log("%c Line:122 🍅 方向", "color:#3f7cff", azimuth, elevation);
-  const res = generateUnitCircleWithNormalVector(azimuth, elevation, 5, p3, p4);
+  const res = generateUnitCircleWithNormalVector(
+    azimuth,
+    elevation,
+    5,
+    3,
+    p3,
+    p4
+  );
   console.table(res);
   console.table(res.map((t) => t.toSpherical()));
 

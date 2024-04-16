@@ -74,6 +74,7 @@ export default function Index(props: {
   points: CustomVector3[];
   loading?: boolean;
   setData?: (md: CustomVector3[]) => void;
+  direct?: number[];
 }) {
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<number[]>([]);
@@ -121,6 +122,19 @@ export default function Index(props: {
         />
         {/* <Box position={[0, 0, 0]} /> */}
         <PointsLabel points={showPoints.filter((p) => p.enable)} />
+        {props.direct.length > 0 && (
+          <Line
+            points={[
+              new THREE.Vector3().setFromSpherical(
+                new THREE.Spherical(1, props.direct[1], props.direct[0])
+              ),
+              new THREE.Vector3().setFromSpherical(
+                new THREE.Spherical(-1, props.direct[1], props.direct[0])
+              ),
+            ]}
+          />
+        )}
+
         <OrbitControls />
       </Canvas>
       <div className=" q-w-[400px]">
