@@ -1,8 +1,8 @@
 /*
  * File: xswap.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 /* Include Files */
@@ -28,6 +28,21 @@ void b_xswap(double x[9], int ix0, int iy0)
   temp = x[ix0 + 1];
   x[ix0 + 1] = x[iy0 + 1];
   x[iy0 + 1] = temp;
+}
+
+/*
+ * Arguments    : double x[4]
+ * Return Type  : void
+ */
+void c_xswap(double x[4])
+{
+  double temp;
+  temp = x[0];
+  x[0] = x[2];
+  x[2] = temp;
+  temp = x[1];
+  x[1] = x[3];
+  x[3] = temp;
 }
 
 /*

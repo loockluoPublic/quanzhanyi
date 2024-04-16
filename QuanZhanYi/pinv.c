@@ -1,14 +1,14 @@
 /*
  * File: pinv.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 /* Include Files */
 #include "pinv.h"
 #include "rt_nonfinite.h"
-#include "svd1.h"
+#include "svd.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 #include <string.h>
@@ -21,18 +21,11 @@
  */
 void pinv(const double A[9], double X[9])
 {
-  double U[9];
-  double V[9];
-  double s[3];
-  double absx;
-  int ar;
   int br;
   int i;
-  int i1;
   int ib;
   int ic;
   int j;
-  int r;
   int vcol;
   boolean_T p;
   p = true;
@@ -47,7 +40,12 @@ void pinv(const double A[9], double X[9])
       X[i] = rtNaN;
     }
   } else {
-    c_svd(A, U, s, V);
+    double U[9];
+    double V[9];
+    double s[3];
+    double absx;
+    int r;
+    b_svd(A, U, s, V);
     absx = fabs(s[0]);
     if ((!rtIsInf(absx)) && (!rtIsNaN(absx))) {
       if (absx <= 2.2250738585072014E-308) {
@@ -85,10 +83,12 @@ void pinv(const double A[9], double X[9])
       }
       br = 0;
       for (vcol = 0; vcol <= 6; vcol += 3) {
+        int ar;
         ar = -1;
         br++;
         i = br + 3 * r;
         for (ib = br; ib <= i; ib += 3) {
+          int i1;
           j = vcol + 1;
           i1 = vcol + 3;
           for (ic = j; ic <= i1; ic++) {

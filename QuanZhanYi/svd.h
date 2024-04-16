@@ -1,8 +1,8 @@
 /*
  * File: svd.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 #ifndef SVD_H
@@ -19,8 +19,12 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *S,
-         double V[16]);
+void b_svd(const double A[9], double U[9], double s[3], double V[9]);
+
+void c_svd(const double A[8], double U[4], double s[2], double V[16]);
+
+void svd(const emxArray_real_T *A, emxArray_real_T *U, double s_data[],
+         int *s_size, double V[16]);
 
 #ifdef __cplusplus
 }

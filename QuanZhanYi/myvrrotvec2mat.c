@@ -1,14 +1,12 @@
 /*
  * File: myvrrotvec2mat.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 /* Include Files */
 #include "myvrrotvec2mat.h"
-#include "QuanZhanYi_data.h"
-#include "QuanZhanYi_initialize.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 
@@ -29,9 +27,6 @@ void myvrrotvec2mat(const double r[4], double m[9])
   double s;
   double scale;
   double t;
-  if (!isInitialized_QuanZhanYi) {
-    QuanZhanYi_initialize();
-  }
   s = sin(r[3]);
   c = cos(r[3]);
   /* SL3DNORMALIZE Normalize a vector. */

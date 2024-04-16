@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_mex.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 /* Include Files */
@@ -77,8 +77,8 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
  */
 emlrtCTX mexFunctionCreateRootTLS(void)
 {
-  emlrtCreateRootTLSR2021a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
-                           NULL);
+  emlrtCreateRootTLSR2022a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
+                           NULL, (const char_T *)"GBK", true);
   return emlrtRootTLSGlobal;
 }
 
@@ -234,11 +234,11 @@ void unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
  * Arguments    : int32_T nlhs
  *                mxArray *plhs[1]
  *                int32_T nrhs
- *                const mxArray *prhs[5]
+ *                const mxArray *prhs[6]
  * Return Type  : void
  */
 void unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
-    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[5])
+    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[6])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -248,8 +248,8 @@ void unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
   const mxArray *outputs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 5) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 5, 4,
+  if (nrhs != 6) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 6, 4,
                         40, "generate_unit_circle_with_normal_vector2");
   }
   if (nlhs > 1) {

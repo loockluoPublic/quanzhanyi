@@ -1,14 +1,15 @@
 /*
- * File: QuanZhanYi_terminate.h
+ * File: ixfun.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
-#ifndef QUANZHANYI_TERMINATE_H
-#define QUANZHANYI_TERMINATE_H
+#ifndef IXFUN_H
+#define IXFUN_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,7 +19,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void QuanZhanYi_terminate(void);
+void expand_hypot(const emxArray_real_T *a, const emxArray_real_T *b,
+                  emxArray_real_T *c);
 
 #ifdef __cplusplus
 }
@@ -26,7 +28,7 @@ extern void QuanZhanYi_terminate(void);
 
 #endif
 /*
- * File trailer for QuanZhanYi_terminate.h
+ * File trailer for ixfun.h
  *
  * [EOF]
  */

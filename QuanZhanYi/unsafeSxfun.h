@@ -1,14 +1,15 @@
 /*
- * File: QuanZhanYi_terminate.h
+ * File: unsafeSxfun.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
-#ifndef QUANZHANYI_TERMINATE_H
-#define QUANZHANYI_TERMINATE_H
+#ifndef UNSAFESXFUN_H
+#define UNSAFESXFUN_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,7 +19,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void QuanZhanYi_terminate(void);
+void b_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in3);
 
 #ifdef __cplusplus
 }
@@ -26,7 +27,7 @@ extern void QuanZhanYi_terminate(void);
 
 #endif
 /*
- * File trailer for QuanZhanYi_terminate.h
+ * File trailer for unsafeSxfun.h
  *
  * [EOF]
  */

@@ -1,13 +1,12 @@
 /*
  * File: QuanZhanYi_initialize.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 12-Apr-2024 14:11:28
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 15-Apr-2024 22:57:09
  */
 
 /* Include Files */
 #include "QuanZhanYi_initialize.h"
-#include "QuanZhanYi_data.h"
 #include "rt_nonfinite.h"
 
 /* Function Definitions */
@@ -17,8 +16,6 @@
  */
 void QuanZhanYi_initialize(void)
 {
-  rt_InitInfAndNaN();
-  isInitialized_QuanZhanYi = true;
 }
 
 /*

@@ -1,9 +1,9 @@
-###########################################################################
+﻿###########################################################################
 ## Makefile generated for component 'QuanZhanYi'. 
 ## 
 ## Makefile     : QuanZhanYi_rtw.mk
-## Generated on : Fri Apr 12 14:11:56 2024
-## Final product: ./QuanZhanYi.lib
+## Generated on : Mon Apr 15 22:57:29 2024
+## Final product: .\QuanZhanYi.lib
 ## Product type : static-library
 ## 
 ###########################################################################
@@ -15,46 +15,61 @@
 # Macro Descriptions:
 # PRODUCT_NAME            Name of the system to build
 # MAKEFILE                Name of this makefile
+# COMPILER_COMMAND_FILE   Compiler command listing model reference header paths
 # CMD_FILE                Command file
 # MODELLIB                Static library target
 
 PRODUCT_NAME              = QuanZhanYi
 MAKEFILE                  = QuanZhanYi_rtw.mk
-MATLAB_ROOT               = E:/SystemInstallation/Matlab
-MATLAB_BIN                = E:/SystemInstallation/Matlab/bin
-MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = C:/Users/XWT/Desktop/test4/codegen/lib/QuanZhanYi
-TGT_FCN_LIB               = None
+MATLAB_ROOT               = D:\Program Files\MATLAB\R2022a
+MATLAB_BIN                = D:\Program Files\MATLAB\R2022a\bin
+MATLAB_ARCH_BIN           = $(MATLAB_BIN)\win64
+START_DIR                 = C:\Users\DELLPC\Desktop\test3
+TGT_FCN_LIB               = ISO_C
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
 MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 
-RELATIVE_PATH_TO_ANCHOR   = .
+RELATIVE_PATH_TO_ANCHOR   = ..\..\..
+COMPILER_COMMAND_FILE     = QuanZhanYi_rtw_comp.rsp
 CMD_FILE                  = QuanZhanYi_rtw.rsp
 C_STANDARD_OPTS           = 
 CPP_STANDARD_OPTS         = 
+NODEBUG                   = 1
 MODELLIB                  = QuanZhanYi.lib
 
 ###########################################################################
 ## TOOLCHAIN SPECIFICATIONS
 ###########################################################################
 
-# Toolchain Name:          LCC-win64 v2.4.1 | gmake (64-bit Windows)
-# Supported Version(s):    2.4.1
-# ToolchainInfo Version:   2021a
+# Toolchain Name:          Microsoft Visual C++ 2022 v17.0 | nmake (64-bit Windows)
+# Supported Version(s):    17.0
+# ToolchainInfo Version:   2022a
 # Specification Revision:  1.0
 # 
+#-------------------------------------------
+# Macros assumed to be defined elsewhere
+#-------------------------------------------
+
+# NODEBUG
+# cvarsdll
+# cvarsmt
+# conlibsmt
+# ldebug
+# conflags
+# cflags
 
 #-----------
 # MACROS
 #-----------
 
-SHELL              = cmd
-LCC_ROOT           = $(MATLAB_ROOT)/sys/lcc64/lcc64
-LCC_BUILDLIB       = $(LCC_ROOT)/bin/buildlib
-LCC_LIB            = $(LCC_ROOT)/lib64
-MW_EXTERNLIB_DIR   = $(MATLAB_ROOT)/extern/lib/win64/microsoft
-MW_LIB_DIR         = $(MATLAB_ROOT)/lib/win64
-TOOLCHAIN_INCLUDES = -I$(LCC_ROOT)/include64
+MW_EXTERNLIB_DIR    = $(MATLAB_ROOT)\extern\lib\win64\microsoft
+MW_LIB_DIR          = $(MATLAB_ROOT)\lib\win64
+CPU                 = AMD64
+APPVER              = 5.02
+CVARSFLAG           = $(cvarsmt)
+CFLAGS_ADDITIONAL   = -D_CRT_SECURE_NO_WARNINGS
+CPPFLAGS_ADDITIONAL = -EHs -D_CRT_SECURE_NO_WARNINGS /wd4251 /Zc:__cplusplus
+LIBS_TOOLCHAIN      = $(conlibs)
 
 TOOLCHAIN_SRCS = 
 TOOLCHAIN_INCS = 
@@ -64,21 +79,24 @@ TOOLCHAIN_LIBS =
 # BUILD TOOL COMMANDS
 #------------------------
 
-# C Compiler: Lcc-win64 C Compiler
-CC_PATH = $(LCC_ROOT)/bin
-CC = "$(CC_PATH)/lcc64"
+# C Compiler: Microsoft Visual C Compiler
+CC = cl
 
-# Linker: Lcc-win64 Linker
-LD_PATH = $(LCC_ROOT)/bin
-LD = "$(LD_PATH)/lcclnk64"
+# Linker: Microsoft Visual C Linker
+LD = link
 
-# Archiver: Lcc-win64 Archiver
-AR_PATH = $(LCC_ROOT)/bin
-AR = "$(AR_PATH)/lcclib64"
+# C++ Compiler: Microsoft Visual C++ Compiler
+CPP = cl
+
+# C++ Linker: Microsoft Visual C++ Linker
+CPP_LD = link
+
+# Archiver: Microsoft Visual C/C++ Archiver
+AR = lib
 
 # MEX Tool: MEX Tool
 MEX_PATH = $(MATLAB_ARCH_BIN)
-MEX = "$(MEX_PATH)/mex"
+MEX = "$(MEX_PATH)\mex"
 
 # Download: Download
 DOWNLOAD =
@@ -86,42 +104,52 @@ DOWNLOAD =
 # Execute: Execute
 EXECUTE = $(PRODUCT)
 
-# Builder: GMAKE Utility
-MAKE_PATH = %MATLAB%\bin\win64
-MAKE = "$(MAKE_PATH)/gmake"
+# Builder: NMAKE Utility
+MAKE = nmake
 
 
 #-------------------------
 # Directives/Utilities
 #-------------------------
 
-CDEBUG              = -g
+CDEBUG              = -Zi
 C_OUTPUT_FLAG       = -Fo
-LDDEBUG             =
-OUTPUT_FLAG         = -o
+LDDEBUG             = /DEBUG
+OUTPUT_FLAG         = -out:
+CPPDEBUG            = -Zi
+CPP_OUTPUT_FLAG     = -Fo
+CPPLDDEBUG          = /DEBUG
+OUTPUT_FLAG         = -out:
 ARDEBUG             =
-STATICLIB_OUTPUT_FLAG = /out:
+STATICLIB_OUTPUT_FLAG = -out:
 MEX_DEBUG           = -g
-RM                  = @del /F
+RM                  = @del
 ECHO                = @echo
-MV                  = @move
-RUN                 =
+MV                  = @ren
+RUN                 = @cmd /C
 
 #--------------------------------------
 # "Faster Runs" Build Configuration
 #--------------------------------------
 
-ARFLAGS              =
-CFLAGS               = -c -w -noregistrylookup -nodeclspec -I$(LCC_ROOT)/include64
+ARFLAGS              = /nologo
+CFLAGS               = $(cflags) $(CVARSFLAG) $(CFLAGS_ADDITIONAL) \
+                       /O2 /Oy-
+CPPFLAGS             = /TP $(cflags) $(CVARSFLAG) $(CPPFLAGS_ADDITIONAL) \
+                       /O2 /Oy-
+CPP_LDFLAGS          = $(ldebug) $(conflags) $(LIBS_TOOLCHAIN)
+CPP_SHAREDLIB_LDFLAGS  = $(ldebug) $(conflags) $(LIBS_TOOLCHAIN) \
+                         -dll -def:$(DEF_FILE)
 DOWNLOAD_FLAGS       =
 EXECUTE_FLAGS        =
-LDFLAGS              = -s -L$(LCC_LIB) $(LDFLAGS_ADDITIONAL)
+LDFLAGS              = $(ldebug) $(conflags) $(LIBS_TOOLCHAIN)
 MEX_CPPFLAGS         =
 MEX_CPPLDFLAGS       =
 MEX_CFLAGS           =
 MEX_LDFLAGS          =
 MAKE_FLAGS           = -f $(MAKEFILE)
-SHAREDLIB_LDFLAGS    = -dll -entry LibMain -s -L$(LCC_LIB) $(LDFLAGS_ADDITIONAL) $(DEF_FILE)
+SHAREDLIB_LDFLAGS    = $(ldebug) $(conflags) $(LIBS_TOOLCHAIN) \
+                       -dll -def:$(DEF_FILE)
 
 
 
@@ -129,7 +157,7 @@ SHAREDLIB_LDFLAGS    = -dll -entry LibMain -s -L$(LCC_LIB) $(LDFLAGS_ADDITIONAL)
 ## OUTPUT INFO
 ###########################################################################
 
-PRODUCT = ./QuanZhanYi.lib
+PRODUCT = .\QuanZhanYi.lib
 PRODUCT_TYPE = "static-library"
 BUILD_TYPE = "Static Library"
 
@@ -137,7 +165,7 @@ BUILD_TYPE = "Static Library"
 ## INCLUDE PATHS
 ###########################################################################
 
-INCLUDES_BUILDINFO = -I$(START_DIR) -IC:/Users/XWT/Desktop/test4 -I$(MATLAB_ROOT)/extern/include
+INCLUDES_BUILDINFO = 
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 
@@ -154,7 +182,7 @@ DEFINES = $(DEFINES_CUSTOM) $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/QuanZhanYi_data.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c $(START_DIR)/QuanZhanYi_initialize.c $(START_DIR)/QuanZhanYi_terminate.c $(START_DIR)/Calculate_accurate_cylinders_from_multiple_measurement_points2.c $(START_DIR)/norm.c $(START_DIR)/svd.c $(START_DIR)/svd1.c $(START_DIR)/xnrm2.c $(START_DIR)/xdotc.c $(START_DIR)/fitcircle.c $(START_DIR)/mldivide.c $(START_DIR)/qrsolve.c $(START_DIR)/pinv.c $(START_DIR)/foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)/Generate_multi_layered_measurement_points.c $(START_DIR)/generate_unit_circle_with_normal_vector.c $(START_DIR)/generate_unit_circle_with_normal_vector2.c $(START_DIR)/myvrrotvec2mat.c $(START_DIR)/xaxpy.c $(START_DIR)/xrotg.c $(START_DIR)/xrot.c $(START_DIR)/xswap.c $(START_DIR)/QuanZhanYi_emxutil.c $(START_DIR)/QuanZhanYi_emxAPI.c $(START_DIR)/QuanZhanYi_rtwutil.c
+SRCS = $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_data.c $(START_DIR)\codegen\lib\QuanZhanYi\rt_nonfinite.c $(START_DIR)\codegen\lib\QuanZhanYi\rtGetNaN.c $(START_DIR)\codegen\lib\QuanZhanYi\rtGetInf.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_initialize.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_terminate.c $(START_DIR)\codegen\lib\QuanZhanYi\Calculate_accurate_cylinders_from_multiple_measurement_points2.c $(START_DIR)\codegen\lib\QuanZhanYi\svd.c $(START_DIR)\codegen\lib\QuanZhanYi\xnrm2.c $(START_DIR)\codegen\lib\QuanZhanYi\xdotc.c $(START_DIR)\codegen\lib\QuanZhanYi\mldivide.c $(START_DIR)\codegen\lib\QuanZhanYi\qrsolve.c $(START_DIR)\codegen\lib\QuanZhanYi\ixfun.c $(START_DIR)\codegen\lib\QuanZhanYi\mean.c $(START_DIR)\codegen\lib\QuanZhanYi\pinv.c $(START_DIR)\codegen\lib\QuanZhanYi\fitcircle.c $(START_DIR)\codegen\lib\QuanZhanYi\foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)\codegen\lib\QuanZhanYi\Generate_multi_layered_measurement_points.c $(START_DIR)\codegen\lib\QuanZhanYi\generate_unit_circle_with_normal_vector.c $(START_DIR)\codegen\lib\QuanZhanYi\generate_unit_circle_with_normal_vector2.c $(START_DIR)\codegen\lib\QuanZhanYi\myvrrotvec2mat.c $(START_DIR)\codegen\lib\QuanZhanYi\xaxpy.c $(START_DIR)\codegen\lib\QuanZhanYi\xrotg.c $(START_DIR)\codegen\lib\QuanZhanYi\xrot.c $(START_DIR)\codegen\lib\QuanZhanYi\xswap.c $(START_DIR)\codegen\lib\QuanZhanYi\unsafeSxfun.c $(START_DIR)\codegen\lib\QuanZhanYi\cat.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_emxutil.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_emxAPI.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_rtwutil.c
 
 ALL_SRCS = $(SRCS)
 
@@ -162,7 +190,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = QuanZhanYi_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj QuanZhanYi_initialize.obj QuanZhanYi_terminate.obj Calculate_accurate_cylinders_from_multiple_measurement_points2.obj norm.obj svd.obj svd1.obj xnrm2.obj xdotc.obj fitcircle.obj mldivide.obj qrsolve.obj pinv.obj foot_of_perpendicular_from_a_point_to_a_line.obj Generate_multi_layered_measurement_points.obj generate_unit_circle_with_normal_vector.obj generate_unit_circle_with_normal_vector2.obj myvrrotvec2mat.obj xaxpy.obj xrotg.obj xrot.obj xswap.obj QuanZhanYi_emxutil.obj QuanZhanYi_emxAPI.obj QuanZhanYi_rtwutil.obj
+OBJS = QuanZhanYi_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj QuanZhanYi_initialize.obj QuanZhanYi_terminate.obj Calculate_accurate_cylinders_from_multiple_measurement_points2.obj svd.obj xnrm2.obj xdotc.obj mldivide.obj qrsolve.obj ixfun.obj mean.obj pinv.obj fitcircle.obj foot_of_perpendicular_from_a_point_to_a_line.obj Generate_multi_layered_measurement_points.obj generate_unit_circle_with_normal_vector.obj generate_unit_circle_with_normal_vector2.obj myvrrotvec2mat.obj xaxpy.obj xrotg.obj xrot.obj xswap.obj unsafeSxfun.obj cat.obj QuanZhanYi_emxutil.obj QuanZhanYi_emxAPI.obj QuanZhanYi_rtwutil.obj
 
 ALL_OBJS = $(OBJS)
 
@@ -192,26 +220,40 @@ SYSTEM_LIBS =
 # C Compiler
 #---------------
 
-CFLAGS_BASIC = $(DEFINES) $(INCLUDES)
+CFLAGS_ = /source-charset:utf-8
+CFLAGS_BASIC = $(DEFINES) @$(COMPILER_COMMAND_FILE)
 
-CFLAGS += $(CFLAGS_BASIC)
+CFLAGS = $(CFLAGS) $(CFLAGS_) $(CFLAGS_BASIC)
+
+#-----------------
+# C++ Compiler
+#-----------------
+
+CPPFLAGS_ = /source-charset:utf-8
+CPPFLAGS_BASIC = $(DEFINES) @$(COMPILER_COMMAND_FILE)
+
+CPPFLAGS = $(CPPFLAGS) $(CPPFLAGS_) $(CPPFLAGS_BASIC)
 
 ###########################################################################
 ## INLINED COMMANDS
 ###########################################################################
 
+
+!include $(MATLAB_ROOT)\rtw\c\tools\vcdefs.mak
+
+
 ###########################################################################
 ## PHONY TARGETS
 ###########################################################################
 
-.PHONY : all build clean info prebuild download execute
+.PHONY : all build clean info prebuild download execute set_environment_variables
 
 
 all : build
-	@echo "### Successfully generated all binary outputs."
+	@cmd /C "@echo ### Successfully generated all binary outputs."
 
 
-build : prebuild $(PRODUCT)
+build : set_environment_variables prebuild $(PRODUCT)
 
 
 prebuild : 
@@ -223,6 +265,11 @@ download : $(PRODUCT)
 execute : download
 
 
+set_environment_variables : 
+	@set INCLUDE=$(INCLUDES);$(INCLUDE)
+	@set LIB=$(LIB)
+
+
 ###########################################################################
 ## FINAL TARGET
 ###########################################################################
@@ -232,9 +279,9 @@ execute : download
 #---------------------------------
 
 $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
-	@echo "### Creating static library "$(PRODUCT)" ..."
-	$(AR) $(ARFLAGS) /out:$(PRODUCT) @$(CMD_FILE)
-	@echo "### Created: $(PRODUCT)"
+	@cmd /C "@echo ### Creating static library "$(PRODUCT)" ..."
+	$(AR) $(ARFLAGS) -out:$(PRODUCT) @$(CMD_FILE)
+	@cmd /C "@echo ### Created: $(PRODUCT)"
 
 
 ###########################################################################
@@ -245,139 +292,163 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 # SOURCE-TO-OBJECT
 #---------------------
 
-%.obj : %.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+.c.obj :
+	$(CC) $(CFLAGS) -Fo"$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+.cpp.obj :
+	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
 
 
-%.obj : $(START_DIR)/%.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+{$(RELATIVE_PATH_TO_ANCHOR)}.c.obj :
+	$(CC) $(CFLAGS) -Fo"$@" "$<"
 
 
-%.obj : C:/Users/XWT/Desktop/test4/%.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+{$(RELATIVE_PATH_TO_ANCHOR)}.cpp.obj :
+	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
 
 
-QuanZhanYi_data.obj : $(START_DIR)/QuanZhanYi_data.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+{$(START_DIR)\codegen\lib\QuanZhanYi}.c.obj :
+	$(CC) $(CFLAGS) -Fo"$@" "$<"
 
 
-rt_nonfinite.obj : $(START_DIR)/rt_nonfinite.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+{$(START_DIR)\codegen\lib\QuanZhanYi}.cpp.obj :
+	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
 
 
-rtGetNaN.obj : $(START_DIR)/rtGetNaN.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+{$(START_DIR)}.c.obj :
+	$(CC) $(CFLAGS) -Fo"$@" "$<"
 
 
-rtGetInf.obj : $(START_DIR)/rtGetInf.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+{$(START_DIR)}.cpp.obj :
+	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
 
 
-QuanZhanYi_initialize.obj : $(START_DIR)/QuanZhanYi_initialize.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+QuanZhanYi_data.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_data.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_data.c"
 
 
-QuanZhanYi_terminate.obj : $(START_DIR)/QuanZhanYi_terminate.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+rt_nonfinite.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\rt_nonfinite.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\rt_nonfinite.c"
 
 
-Calculate_accurate_cylinders_from_multiple_measurement_points2.obj : $(START_DIR)/Calculate_accurate_cylinders_from_multiple_measurement_points2.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+rtGetNaN.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\rtGetNaN.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\rtGetNaN.c"
 
 
-norm.obj : $(START_DIR)/norm.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+rtGetInf.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\rtGetInf.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\rtGetInf.c"
 
 
-svd.obj : $(START_DIR)/svd.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+QuanZhanYi_initialize.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_initialize.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_initialize.c"
 
 
-svd1.obj : $(START_DIR)/svd1.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+QuanZhanYi_terminate.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_terminate.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_terminate.c"
 
 
-xnrm2.obj : $(START_DIR)/xnrm2.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+Calculate_accurate_cylinders_from_multiple_measurement_points2.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\Calculate_accurate_cylinders_from_multiple_measurement_points2.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\Calculate_accurate_cylinders_from_multiple_measurement_points2.c"
 
 
-xdotc.obj : $(START_DIR)/xdotc.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+svd.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\svd.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\svd.c"
 
 
-fitcircle.obj : $(START_DIR)/fitcircle.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+xnrm2.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\xnrm2.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\xnrm2.c"
 
 
-mldivide.obj : $(START_DIR)/mldivide.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+xdotc.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\xdotc.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\xdotc.c"
 
 
-qrsolve.obj : $(START_DIR)/qrsolve.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+mldivide.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\mldivide.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\mldivide.c"
 
 
-pinv.obj : $(START_DIR)/pinv.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+qrsolve.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\qrsolve.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\qrsolve.c"
 
 
-foot_of_perpendicular_from_a_point_to_a_line.obj : $(START_DIR)/foot_of_perpendicular_from_a_point_to_a_line.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+ixfun.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\ixfun.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\ixfun.c"
 
 
-Generate_multi_layered_measurement_points.obj : $(START_DIR)/Generate_multi_layered_measurement_points.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+mean.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\mean.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\mean.c"
 
 
-generate_unit_circle_with_normal_vector.obj : $(START_DIR)/generate_unit_circle_with_normal_vector.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+pinv.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\pinv.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\pinv.c"
 
 
-generate_unit_circle_with_normal_vector2.obj : $(START_DIR)/generate_unit_circle_with_normal_vector2.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+fitcircle.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\fitcircle.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\fitcircle.c"
 
 
-myvrrotvec2mat.obj : $(START_DIR)/myvrrotvec2mat.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+foot_of_perpendicular_from_a_point_to_a_line.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\foot_of_perpendicular_from_a_point_to_a_line.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\foot_of_perpendicular_from_a_point_to_a_line.c"
 
 
-xaxpy.obj : $(START_DIR)/xaxpy.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+Generate_multi_layered_measurement_points.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\Generate_multi_layered_measurement_points.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\Generate_multi_layered_measurement_points.c"
 
 
-xrotg.obj : $(START_DIR)/xrotg.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+generate_unit_circle_with_normal_vector.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\generate_unit_circle_with_normal_vector.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\generate_unit_circle_with_normal_vector.c"
 
 
-xrot.obj : $(START_DIR)/xrot.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+generate_unit_circle_with_normal_vector2.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\generate_unit_circle_with_normal_vector2.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\generate_unit_circle_with_normal_vector2.c"
 
 
-xswap.obj : $(START_DIR)/xswap.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+myvrrotvec2mat.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\myvrrotvec2mat.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\myvrrotvec2mat.c"
 
 
-QuanZhanYi_emxutil.obj : $(START_DIR)/QuanZhanYi_emxutil.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+xaxpy.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\xaxpy.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\xaxpy.c"
 
 
-QuanZhanYi_emxAPI.obj : $(START_DIR)/QuanZhanYi_emxAPI.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+xrotg.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\xrotg.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\xrotg.c"
 
 
-QuanZhanYi_rtwutil.obj : $(START_DIR)/QuanZhanYi_rtwutil.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+xrot.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\xrot.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\xrot.c"
+
+
+xswap.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\xswap.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\xswap.c"
+
+
+unsafeSxfun.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\unsafeSxfun.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\unsafeSxfun.c"
+
+
+cat.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\cat.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\cat.c"
+
+
+QuanZhanYi_emxutil.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_emxutil.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_emxutil.c"
+
+
+QuanZhanYi_emxAPI.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_emxAPI.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_emxAPI.c"
+
+
+QuanZhanYi_rtwutil.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_rtwutil.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_rtwutil.c"
 
 
 ###########################################################################
 ## DEPENDENCIES
 ###########################################################################
 
-$(ALL_OBJS) : rtw_proj.tmw $(MAKEFILE)
+$(ALL_OBJS) : rtw_proj.tmw $(COMPILER_COMMAND_FILE) $(MAKEFILE)
 
 
 ###########################################################################
@@ -385,34 +456,37 @@ $(ALL_OBJS) : rtw_proj.tmw $(MAKEFILE)
 ###########################################################################
 
 info : 
-	@echo "### PRODUCT = $(PRODUCT)"
-	@echo "### PRODUCT_TYPE = $(PRODUCT_TYPE)"
-	@echo "### BUILD_TYPE = $(BUILD_TYPE)"
-	@echo "### INCLUDES = $(INCLUDES)"
-	@echo "### DEFINES = $(DEFINES)"
-	@echo "### ALL_SRCS = $(ALL_SRCS)"
-	@echo "### ALL_OBJS = $(ALL_OBJS)"
-	@echo "### LIBS = $(LIBS)"
-	@echo "### MODELREF_LIBS = $(MODELREF_LIBS)"
-	@echo "### SYSTEM_LIBS = $(SYSTEM_LIBS)"
-	@echo "### TOOLCHAIN_LIBS = $(TOOLCHAIN_LIBS)"
-	@echo "### CFLAGS = $(CFLAGS)"
-	@echo "### LDFLAGS = $(LDFLAGS)"
-	@echo "### SHAREDLIB_LDFLAGS = $(SHAREDLIB_LDFLAGS)"
-	@echo "### ARFLAGS = $(ARFLAGS)"
-	@echo "### MEX_CFLAGS = $(MEX_CFLAGS)"
-	@echo "### MEX_CPPFLAGS = $(MEX_CPPFLAGS)"
-	@echo "### MEX_LDFLAGS = $(MEX_LDFLAGS)"
-	@echo "### MEX_CPPLDFLAGS = $(MEX_CPPLDFLAGS)"
-	@echo "### DOWNLOAD_FLAGS = $(DOWNLOAD_FLAGS)"
-	@echo "### EXECUTE_FLAGS = $(EXECUTE_FLAGS)"
-	@echo "### MAKE_FLAGS = $(MAKE_FLAGS)"
+	@cmd /C "@echo ### PRODUCT = $(PRODUCT)"
+	@cmd /C "@echo ### PRODUCT_TYPE = $(PRODUCT_TYPE)"
+	@cmd /C "@echo ### BUILD_TYPE = $(BUILD_TYPE)"
+	@cmd /C "@echo ### INCLUDES = $(INCLUDES)"
+	@cmd /C "@echo ### DEFINES = $(DEFINES)"
+	@cmd /C "@echo ### ALL_SRCS = $(ALL_SRCS)"
+	@cmd /C "@echo ### ALL_OBJS = $(ALL_OBJS)"
+	@cmd /C "@echo ### LIBS = $(LIBS)"
+	@cmd /C "@echo ### MODELREF_LIBS = $(MODELREF_LIBS)"
+	@cmd /C "@echo ### SYSTEM_LIBS = $(SYSTEM_LIBS)"
+	@cmd /C "@echo ### TOOLCHAIN_LIBS = $(TOOLCHAIN_LIBS)"
+	@cmd /C "@echo ### CFLAGS = $(CFLAGS)"
+	@cmd /C "@echo ### LDFLAGS = $(LDFLAGS)"
+	@cmd /C "@echo ### SHAREDLIB_LDFLAGS = $(SHAREDLIB_LDFLAGS)"
+	@cmd /C "@echo ### CPPFLAGS = $(CPPFLAGS)"
+	@cmd /C "@echo ### CPP_LDFLAGS = $(CPP_LDFLAGS)"
+	@cmd /C "@echo ### CPP_SHAREDLIB_LDFLAGS = $(CPP_SHAREDLIB_LDFLAGS)"
+	@cmd /C "@echo ### ARFLAGS = $(ARFLAGS)"
+	@cmd /C "@echo ### MEX_CFLAGS = $(MEX_CFLAGS)"
+	@cmd /C "@echo ### MEX_CPPFLAGS = $(MEX_CPPFLAGS)"
+	@cmd /C "@echo ### MEX_LDFLAGS = $(MEX_LDFLAGS)"
+	@cmd /C "@echo ### MEX_CPPLDFLAGS = $(MEX_CPPLDFLAGS)"
+	@cmd /C "@echo ### DOWNLOAD_FLAGS = $(DOWNLOAD_FLAGS)"
+	@cmd /C "@echo ### EXECUTE_FLAGS = $(EXECUTE_FLAGS)"
+	@cmd /C "@echo ### MAKE_FLAGS = $(MAKE_FLAGS)"
 
 
 clean : 
 	$(ECHO) "### Deleting all derived files..."
-	$(RM) $(subst /,\,$(PRODUCT))
-	$(RM) $(subst /,\,$(ALL_OBJS))
+	@if exist $(PRODUCT) $(RM) $(PRODUCT)
+	$(RM) $(ALL_OBJS)
 	$(ECHO) "### Deleted all derived files."
 
 
