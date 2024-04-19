@@ -141,6 +141,12 @@ export const goTo = (h, v) =>
     return res;
   });
 
+export const goToCV = (x, y, z) => {
+  const vector3 = new CustomVector3(x, y, z);
+  const s = vector3.toSpherical();
+  console.log("%c Line:146 🍔 vector3", "color:#e41a6a", vector3, s);
+  goTo(s.theta, s.phi);
+};
 /**
  *  测量测量点坐标
  * @returns
