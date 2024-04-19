@@ -122,7 +122,7 @@ export default function Index(props: {
         />
         {/* <Box position={[0, 0, 0]} /> */}
         <PointsLabel points={showPoints.filter((p) => p.enable)} />
-        {props.direct.length > 0 && (
+        {props?.direct?.length > 0 && (
           <Line
             points={[
               new THREE.Vector3().setFromSpherical(
