@@ -174,7 +174,7 @@ export const getSimpleCoord = () =>
       }
       const d = res.split(",")?.map((i) => parseFloat(i));
       // ?.map((i) => parseFloat(parseFloat(i).toFixed(4)));
-      if (d?.length === 3) return new CustomVector3(d[1], d[2], d[0]);
+      if (d?.length === 3) return new CustomVector3(d[0], d[2], d[1]);
     })
     .catch((err) => {
       console.log("%c Line:174 🍕 err", "color:#465975", err);
