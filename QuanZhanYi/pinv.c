@@ -2,7 +2,7 @@
  * File: pinv.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 15-Apr-2024 22:57:09
+ * C/C++ source code generated on  : 27-Apr-2024 00:13:24
  */
 
 /* Include Files */
@@ -45,7 +45,7 @@ void pinv(const double A[9], double X[9])
     double s[3];
     double absx;
     int r;
-    b_svd(A, U, s, V);
+    svd(A, U, s, V);
     absx = fabs(s[0]);
     if ((!rtIsInf(absx)) && (!rtIsNaN(absx))) {
       if (absx <= 2.2250738585072014E-308) {

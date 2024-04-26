@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 15-Apr-2024 22:57:09
+ * C/C++ source code generated on  : 27-Apr-2024 00:13:24
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -38,6 +38,15 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+void Calculat_A_and_B_Points(
+    real_T MTaon[3], real_T Mcenter[3], real_T Bottom_round_center1[3],
+    real_T Bottom_round_center2[3], real_T testP[3], real_T numShengLu,
+    real_T phi, real_T PointTable_A_data[], int32_T PointTable_A_size[2],
+    real_T PointTable_B_data[], int32_T PointTable_B_size[2]);
+
+void Calculat_A_and_B_Points_api(const mxArray *const prhs[7], int32_T nlhs,
+                                 const mxArray *plhs[2]);
+
 void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     emxArray_real_T *points, real_T P_bound1[3], real_T P_bound2[3],
     real_T Mcenter[3], real_T MTaon[3], real_T *Mradial,
@@ -58,6 +67,12 @@ void QuanZhanYi_terminate(void);
 void QuanZhanYi_xil_shutdown(void);
 
 void QuanZhanYi_xil_terminate(void);
+
+void angle2point(real_T ANG, real_T a, real_T b, real_T c, real_T d, real_T *x,
+                 real_T *y, real_T *z);
+
+void angle2point_api(const mxArray *const prhs[5], int32_T nlhs,
+                     const mxArray *plhs[3]);
 
 void c_Calculate_accurate_cylinders_(const mxArray *const prhs[3], int32_T nlhs,
                                      const mxArray *plhs[6]);

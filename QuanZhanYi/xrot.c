@@ -2,7 +2,7 @@
  * File: xrot.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 15-Apr-2024 22:57:09
+ * C/C++ source code generated on  : 27-Apr-2024 00:13:24
  */
 
 /* Include Files */
@@ -11,14 +11,14 @@
 
 /* Function Definitions */
 /*
- * Arguments    : double x[9]
+ * Arguments    : double x[16]
  *                int ix0
  *                int iy0
  *                double c
  *                double s
  * Return Type  : void
  */
-void b_xrot(double x[9], int ix0, int iy0, double c, double s)
+void b_xrot(double x[16], int ix0, int iy0, double c, double s)
 {
   double temp;
   double temp_tmp;
@@ -33,6 +33,10 @@ void b_xrot(double x[9], int ix0, int iy0, double c, double s)
   temp_tmp = x[ix0 + 1];
   x[iy0 + 1] = c * temp - s * temp_tmp;
   x[ix0 + 1] = c * temp_tmp + s * temp;
+  temp = x[iy0 + 2];
+  temp_tmp = x[ix0 + 2];
+  x[iy0 + 2] = c * temp - s * temp_tmp;
+  x[ix0 + 2] = c * temp_tmp + s * temp;
 }
 
 /*
@@ -57,14 +61,14 @@ void c_xrot(double x[4], int ix0, int iy0, double c, double s)
 }
 
 /*
- * Arguments    : double x[16]
+ * Arguments    : double x[9]
  *                int ix0
  *                int iy0
  *                double c
  *                double s
  * Return Type  : void
  */
-void xrot(double x[16], int ix0, int iy0, double c, double s)
+void xrot(double x[9], int ix0, int iy0, double c, double s)
 {
   double temp;
   double temp_tmp;
@@ -79,10 +83,6 @@ void xrot(double x[16], int ix0, int iy0, double c, double s)
   temp_tmp = x[ix0 + 1];
   x[iy0 + 1] = c * temp - s * temp_tmp;
   x[ix0 + 1] = c * temp_tmp + s * temp;
-  temp = x[iy0 + 2];
-  temp_tmp = x[ix0 + 2];
-  x[iy0 + 2] = c * temp - s * temp_tmp;
-  x[ix0 + 2] = c * temp_tmp + s * temp;
 }
 
 /*

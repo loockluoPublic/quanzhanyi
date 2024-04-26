@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 15-Apr-2024 22:57:09
+ * C/C++ source code generated on  : 27-Apr-2024 00:13:24
  */
 
 /*************************************************************************/
@@ -32,11 +32,13 @@
 
 /* Include Files */
 #include "main.h"
+#include "Calculat_A_and_B_Points.h"
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
 #include "Generate_multi_layered_measurement_points.h"
 #include "QuanZhanYi_emxAPI.h"
 #include "QuanZhanYi_terminate.h"
 #include "QuanZhanYi_types.h"
+#include "angle2point.h"
 #include "fitcircle.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
 #include "generate_unit_circle_with_normal_vector.h"
@@ -64,6 +66,10 @@ static void c_main_foot_of_perpendicular_fr(void);
 static void c_main_generate_unit_circle_wit(void);
 
 static void d_main_generate_unit_circle_wit(void);
+
+static void main_Calculat_A_and_B_Points(void);
+
+static void main_angle2point(void);
 
 static void main_fitcircle(void);
 
@@ -283,6 +289,49 @@ static void d_main_generate_unit_circle_wit(void)
  * Arguments    : void
  * Return Type  : void
  */
+static void main_Calculat_A_and_B_Points(void)
+{
+  double PointTable_A_data[60];
+  double PointTable_B_data[60];
+  double MTaon_tmp[3];
+  double numShengLu_tmp;
+  int PointTable_A_size[2];
+  int PointTable_B_size[2];
+  /* Initialize function 'Calculat_A_and_B_Points' input arguments. */
+  /* Initialize function input argument 'MTaon'. */
+  argInit_3x1_real_T(MTaon_tmp);
+  /* Initialize function input argument 'Mcenter'. */
+  /* Initialize function input argument 'Bottom_round_center1'. */
+  /* Initialize function input argument 'Bottom_round_center2'. */
+  /* Initialize function input argument 'testP'. */
+  numShengLu_tmp = argInit_real_T();
+  /* Call the entry-point 'Calculat_A_and_B_Points'. */
+  Calculat_A_and_B_Points(MTaon_tmp, MTaon_tmp, MTaon_tmp, MTaon_tmp, MTaon_tmp,
+                          numShengLu_tmp, numShengLu_tmp, PointTable_A_data,
+                          PointTable_A_size, PointTable_B_data,
+                          PointTable_B_size);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+static void main_angle2point(void)
+{
+  double ANG_tmp;
+  double x;
+  double y;
+  double z;
+  /* Initialize function 'angle2point' input arguments. */
+  ANG_tmp = argInit_real_T();
+  /* Call the entry-point 'angle2point'. */
+  angle2point(ANG_tmp, ANG_tmp, ANG_tmp, ANG_tmp, ANG_tmp, &x, &y, &z);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_fitcircle(void)
 {
   emxArray_real_T *x;
@@ -325,6 +374,8 @@ int main(int argc, char **argv)
    * function. So, a call to initialize is not included here. */
   /* Invoke the entry-point functions.
 You can call entry-point functions multiple times. */
+  main_angle2point();
+  main_Calculat_A_and_B_Points();
   c_main_Calculate_accurate_cylin();
   main_fitcircle();
   c_main_foot_of_perpendicular_fr();
