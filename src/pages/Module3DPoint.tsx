@@ -12,11 +12,11 @@ const { Item } = Form;
 
 export function Module3DPoint() {
   const [data, setData] = useRecoilState(Data);
-  console.log("%c Line:15 🥔 data", "color:#ed9ec7", data);
+  console.log("%c Line:15 🌽 data", "color:#33a5ff", data);
 
   const { measure, loading, points } = useMeasure();
-  console.log("%c Line:108 80 🥑 ", "color:#6ec1c2", points);
-  const flag = useRef(true);
+
+  const flag = useRef(false);
   useEffect(() => {
     if (flag.current) {
       flag.current = false;
@@ -36,33 +36,29 @@ export function Module3DPoint() {
         data?.firstPoints[1]
       );
 
-      console.log(
-        "%c Line:41 🍰 waitingPoints",
-        "color:#b03734",
-        waitingPoints
-      );
       setData({
         ...data,
         waitingPoints,
       });
-      measure(waitingPoints);
+      // measure(waitingPoints);
     }
   }, []);
 
-  useEffect(() => {
-    if (!loading && points.length > 0) {
-      setData({
-        ...data,
-        mPoints: points,
-      });
-    }
-  }, [loading, points]);
+  // useEffect(() => {
+  //   if (!loading && points.length > 0) {
+  //     setData({
+  //       ...data,
+  //       mPoints: points,
+  //     });
+  //   }
+  // }, [loading, points]);
 
   const setMData = (md: typeof points) => {
-    setData({
-      ...data,
-      mPoints: md,
-    });
+    console.log("%c Line:57 🥑 md", "color:#93c0a4", md);
+    // setData({
+    //   ...data,
+    //   mPoints: md,
+    // });
   };
 
   if (data) {
@@ -71,7 +67,7 @@ export function Module3DPoint() {
       <Module3D
         loading={loading}
         setData={setMData}
-        points={points ?? []}
+        points={data.mPoints ?? []}
         height="500px"
         // direct={data?.direct}
       />
@@ -80,10 +76,6 @@ export function Module3DPoint() {
 
   return (
     <div className="q-flex">
-      {/* <Module3D
-        className="q-mb-4 q-grow"
-        height={"calc( 100vh - 268px - 1em )"}
-      /> */}
       <div className="q-w-[400px]  q-ml-3 q-pl-2 ">
         <Item
           label="算法生成测点数量"

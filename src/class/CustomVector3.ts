@@ -4,20 +4,37 @@ export class CustomVector3 extends Vector3 {
   static count = 0;
   public key: number;
   public label?: string;
-  enable: boolean;
+  public color?: string;
+  public enable: boolean;
 
   constructor(
     x?: number,
     y?: number,
     z?: number,
-    label?: string,
+    label?:
+      | string
+      | {
+          label?: string;
+          key?: number;
+          color?: string;
+          enable?: boolean;
+        },
     key?: number
   ) {
     super(x, y, z);
-    CustomVector3.count++;
-    this.key = key ?? CustomVector3.count;
-    this.label = label;
-    this.enable = true;
+    if ((label as any)?.label) {
+      this.label = (label as any)?.label;
+      this.key = (label as any)?.key ?? ++CustomVector3.count;
+      this.color = (label as any)?.color;
+      this.enable = (label as any)?.enable ?? true;
+    } else if (typeof label === "string") {
+      this.key = key ?? ++CustomVector3.count;
+      this.label = label as string;
+      this.enable = true;
+    } else {
+      this.key = key ?? ++CustomVector3.count;
+      this.enable = true;
+    }
   }
 
   setEnable(e: boolean) {
@@ -50,8 +67,19 @@ export class CustomVector3 extends Vector3 {
   }
 
   fromCustomVector3(cv3 = this) {
-    const newCV3 = new CustomVector3(cv3.x, cv3.y, cv3.z, cv3.label, cv3.key);
-    newCV3.enable = cv3.enable;
+    const newCV3 = new CustomVector3(cv3.x, cv3.y, cv3.z, {
+      key: cv3.key,
+      label: cv3.label,
+      color: cv3.color,
+      enable: cv3.enable,
+    });
+
     return newCV3;
+  }
+
+  fromJSONArray(arr: any[]) {
+    return arr.map(({ x, y, z, ...style }) => {
+      return new CustomVector3(x, y, z, style);
+    });
   }
 }
