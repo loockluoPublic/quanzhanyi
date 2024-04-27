@@ -2,12 +2,14 @@
  * File: Calculat_A_and_B_Points.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Apr-2024 00:13:24
+ * C/C++ source code generated on  : 27-Apr-2024 15:10:40
  */
 
 /* Include Files */
 #include "Calculat_A_and_B_Points.h"
+#include "QuanZhanYi_emxutil.h"
 #include "QuanZhanYi_rtwutil.h"
+#include "QuanZhanYi_types.h"
 #include "angle2point.h"
 #include "pinv.h"
 #include "rt_nonfinite.h"
@@ -23,20 +25,16 @@
  *                const double testP[3]
  *                double numShengLu
  *                double phi
- *                double PointTable_A_data[]
- *                int PointTable_A_size[2]
- *                double PointTable_B_data[]
- *                int PointTable_B_size[2]
+ *                emxArray_real_T *PointTable_A
+ *                emxArray_real_T *PointTable_B
  * Return Type  : void
  */
 void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
                              const double Bottom_round_center1[3],
                              const double Bottom_round_center2[3],
                              const double testP[3], double numShengLu,
-                             double phi, double PointTable_A_data[],
-                             int PointTable_A_size[2],
-                             double PointTable_B_data[],
-                             int PointTable_B_size[2])
+                             double phi, emxArray_real_T *PointTable_A,
+                             emxArray_real_T *PointTable_B)
 {
   double PointTable2DT_A_data[60];
   double b_PointTable2DT_A_data[60];
@@ -80,7 +78,7 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
   double xN1;
   double yN1;
   double zN1;
-  int boffset;
+  double *PointTable_A_data;
   int coffset;
   int ibmat;
   int itilerow;
@@ -324,28 +322,28 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
   Prot[14] = zN1 + E_idx_2;
   /*  起始点 （测点半圆的中点） */
   /*  旋转至【0，0，1】的点集合 */
-  for (boffset = 0; boffset < 5; boffset++) {
-    A4z = Prot[3 * boffset];
-    dd = Prot[3 * boffset + 1];
-    Ang1 = Prot[3 * boffset + 2];
-    for (ibmat = 0; ibmat < 3; ibmat++) {
-      P2D[boffset + 5 * ibmat] =
-          (A4z * rot1[3 * ibmat] + dd * rot1[3 * ibmat + 1]) +
-          Ang1 * rot1[3 * ibmat + 2];
+  for (ibmat = 0; ibmat < 5; ibmat++) {
+    A4z = Prot[3 * ibmat];
+    dd = Prot[3 * ibmat + 1];
+    Ang1 = Prot[3 * ibmat + 2];
+    for (coffset = 0; coffset < 3; coffset++) {
+      P2D[ibmat + 5 * coffset] =
+          (A4z * rot1[3 * coffset] + dd * rot1[3 * coffset + 1]) +
+          Ang1 * rot1[3 * coffset + 2];
     }
   }
   /*  plotcylinder(P2D(3,:),P2D(4,:),'b',Mradial,0.2) */
   C[0] = P2D[0];
   C[1] = P2D[5];
   C[2] = 0.0;
-  for (boffset = 0; boffset < 3; boffset++) {
-    ibmat = boffset * 5;
+  for (coffset = 0; coffset < 3; coffset++) {
+    ibmat = coffset * 5;
     for (itilerow = 0; itilerow < 5; itilerow++) {
-      Prot[ibmat + itilerow] = C[boffset];
+      Prot[ibmat + itilerow] = C[coffset];
     }
   }
-  for (boffset = 0; boffset < 15; boffset++) {
-    Prot[boffset] = P2D[boffset] - Prot[boffset];
+  for (ibmat = 0; ibmat < 15; ibmat++) {
+    Prot[ibmat] = P2D[ibmat] - Prot[ibmat];
   }
   /*  旋转、平移后 法向量 */
   C[0] = Prot[1] - Prot[0];
@@ -518,16 +516,15 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
   A4z = 2.0 * Prot[0];
   dd = 2.0 * Prot[5];
   Ang1 = 2.0 * Prot[10];
-  for (boffset = 0; boffset < 3; boffset++) {
-    memcpy(&b_PointTable2DT_A_data[boffset * 20],
-           &PointTable2DT_A_data[boffset * 10], 10U * sizeof(double));
+  for (ibmat = 0; ibmat < 3; ibmat++) {
+    memcpy(&b_PointTable2DT_A_data[ibmat * 20],
+           &PointTable2DT_A_data[ibmat * 10], 10U * sizeof(double));
   }
-  for (boffset = 0; boffset < 10; boffset++) {
-    b_PointTable2DT_A_data[boffset + 10] = A4z - PointTable2DT_A_data[boffset];
-    b_PointTable2DT_A_data[boffset + 30] =
-        dd - PointTable2DT_A_data[boffset + 10];
-    b_PointTable2DT_A_data[boffset + 50] =
-        Ang1 - PointTable2DT_A_data[boffset + 20];
+  for (ibmat = 0; ibmat < 10; ibmat++) {
+    b_PointTable2DT_A_data[ibmat + 10] = A4z - PointTable2DT_A_data[ibmat];
+    b_PointTable2DT_A_data[ibmat + 30] = dd - PointTable2DT_A_data[ibmat + 10];
+    b_PointTable2DT_A_data[ibmat + 50] =
+        Ang1 - PointTable2DT_A_data[ibmat + 20];
   }
   memcpy(&PointTable2DT_A_data[0], &b_PointTable2DT_A_data[0],
          60U * sizeof(double));
@@ -538,59 +535,61 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
   C[0] = P2D[0];
   C[1] = P2D[5];
   C[2] = 0.0;
-  for (boffset = 0; boffset < 3; boffset++) {
-    ibmat = boffset * 20;
+  for (coffset = 0; coffset < 3; coffset++) {
+    ibmat = coffset * 20;
     for (itilerow = 0; itilerow < 20; itilerow++) {
-      b_data[ibmat + itilerow] = C[boffset];
+      b_data[ibmat + itilerow] = C[coffset];
     }
   }
-  for (boffset = 0; boffset < 60; boffset++) {
-    b_data[boffset] += PointTable2DT_A_data[boffset];
+  for (ibmat = 0; ibmat < 60; ibmat++) {
+    b_data[ibmat] += PointTable2DT_A_data[ibmat];
   }
   for (itilerow = 0; itilerow < 3; itilerow++) {
     coffset = itilerow * 20;
-    boffset = itilerow * 3;
-    A4z = b[boffset];
-    dd = b[boffset + 1];
-    norm_vec = b[boffset + 2];
+    ibmat = itilerow * 3;
+    A4z = b[ibmat];
+    dd = b[ibmat + 1];
+    norm_vec = b[ibmat + 2];
     for (ibmat = 0; ibmat < 20; ibmat++) {
       b_PointTable2DT_A_data[coffset + ibmat] =
           (b_data[ibmat] * A4z + b_data[ibmat + 20] * dd) +
           b_data[ibmat + 40] * norm_vec;
     }
   }
-  PointTable_A_size[0] = 3;
-  PointTable_A_size[1] = 20;
-  for (boffset = 0; boffset < 20; boffset++) {
-    PointTable_A_data[3 * boffset] = b_PointTable2DT_A_data[boffset];
-    PointTable_A_data[3 * boffset + 1] = b_PointTable2DT_A_data[boffset + 20];
-    PointTable_A_data[3 * boffset + 2] = b_PointTable2DT_A_data[boffset + 40];
+  ibmat = PointTable_A->size[0] * PointTable_A->size[1];
+  PointTable_A->size[0] = 3;
+  PointTable_A->size[1] = 20;
+  emxEnsureCapacity_real_T(PointTable_A, ibmat);
+  PointTable_A_data = PointTable_A->data;
+  for (ibmat = 0; ibmat < 20; ibmat++) {
+    PointTable_A_data[3 * ibmat] = b_PointTable2DT_A_data[ibmat];
+    PointTable_A_data[3 * ibmat + 1] = b_PointTable2DT_A_data[ibmat + 20];
+    PointTable_A_data[3 * ibmat + 2] = b_PointTable2DT_A_data[ibmat + 40];
   }
   C[0] = P2D[0];
   C[1] = P2D[5];
   C[2] = 0.0;
-  for (boffset = 0; boffset < 3; boffset++) {
-    ibmat = boffset * 20;
+  for (coffset = 0; coffset < 3; coffset++) {
+    ibmat = coffset * 20;
     for (itilerow = 0; itilerow < 20; itilerow++) {
-      b_data[ibmat + itilerow] = C[boffset];
+      b_data[ibmat + itilerow] = C[coffset];
     }
   }
-  for (boffset = 0; boffset < 20; boffset++) {
-    b_PointTable2DT_A_data[boffset] = PointTable2DT_A_data[boffset];
-    b_PointTable2DT_A_data[boffset + 20] = PointTable2DT_A_data[boffset + 20];
-    b_PointTable2DT_A_data[boffset + 40] =
-        Ang1 - PointTable2DT_A_data[boffset + 40];
+  for (ibmat = 0; ibmat < 20; ibmat++) {
+    b_PointTable2DT_A_data[ibmat] = PointTable2DT_A_data[ibmat];
+    b_PointTable2DT_A_data[ibmat + 20] = PointTable2DT_A_data[ibmat + 20];
+    b_PointTable2DT_A_data[ibmat + 40] =
+        Ang1 - PointTable2DT_A_data[ibmat + 40];
   }
-  for (boffset = 0; boffset < 60; boffset++) {
-    PointTable2DT_A_data[boffset] =
-        b_PointTable2DT_A_data[boffset] + b_data[boffset];
+  for (ibmat = 0; ibmat < 60; ibmat++) {
+    PointTable2DT_A_data[ibmat] = b_PointTable2DT_A_data[ibmat] + b_data[ibmat];
   }
   for (itilerow = 0; itilerow < 3; itilerow++) {
     coffset = itilerow * 20;
-    boffset = itilerow * 3;
-    A4z = b_b[boffset];
-    dd = b_b[boffset + 1];
-    Ang1 = b_b[boffset + 2];
+    ibmat = itilerow * 3;
+    A4z = b_b[ibmat];
+    dd = b_b[ibmat + 1];
+    Ang1 = b_b[ibmat + 2];
     for (ibmat = 0; ibmat < 20; ibmat++) {
       b_PointTable2DT_A_data[coffset + ibmat] =
           (PointTable2DT_A_data[ibmat] * A4z +
@@ -598,12 +597,15 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
           PointTable2DT_A_data[ibmat + 40] * Ang1;
     }
   }
-  PointTable_B_size[0] = 3;
-  PointTable_B_size[1] = 20;
-  for (boffset = 0; boffset < 20; boffset++) {
-    PointTable_B_data[3 * boffset] = b_PointTable2DT_A_data[boffset];
-    PointTable_B_data[3 * boffset + 1] = b_PointTable2DT_A_data[boffset + 20];
-    PointTable_B_data[3 * boffset + 2] = b_PointTable2DT_A_data[boffset + 40];
+  ibmat = PointTable_B->size[0] * PointTable_B->size[1];
+  PointTable_B->size[0] = 3;
+  PointTable_B->size[1] = 20;
+  emxEnsureCapacity_real_T(PointTable_B, ibmat);
+  PointTable_A_data = PointTable_B->data;
+  for (ibmat = 0; ibmat < 20; ibmat++) {
+    PointTable_A_data[3 * ibmat] = b_PointTable2DT_A_data[ibmat];
+    PointTable_A_data[3 * ibmat + 1] = b_PointTable2DT_A_data[ibmat + 20];
+    PointTable_A_data[3 * ibmat + 2] = b_PointTable2DT_A_data[ibmat + 40];
   }
 }
 
