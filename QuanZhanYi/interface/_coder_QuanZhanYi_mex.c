@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Apr-2024 15:10:40
+ * C/C++ source code generated on  : 27-Apr-2024 22:32:35
  */
 
 /* Include Files */
@@ -94,12 +94,12 @@ emlrtCTX mexFunctionCreateRootTLS(void)
  * Arguments    : int32_T nlhs
  *                mxArray *plhs[2]
  *                int32_T nrhs
- *                const mxArray *prhs[7]
+ *                const mxArray *prhs[8]
  * Return Type  : void
  */
 void unsafe_Calculat_A_and_B_Points_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                                 int32_T nrhs,
-                                                const mxArray *prhs[7])
+                                                const mxArray *prhs[8])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -110,8 +110,8 @@ void unsafe_Calculat_A_and_B_Points_mexFunction(int32_T nlhs, mxArray *plhs[2],
   int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 7) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 7, 4,
+  if (nrhs != 8) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 8, 4,
                         23, "Calculat_A_and_B_Points");
   }
   if (nlhs > 2) {
@@ -205,11 +205,11 @@ void unsafe_Generate_multi_layered_measurement_points_mexFunction(
  * Arguments    : int32_T nlhs
  *                mxArray *plhs[3]
  *                int32_T nrhs
- *                const mxArray *prhs[5]
+ *                const mxArray *prhs[6]
  * Return Type  : void
  */
 void unsafe_angle2point_mexFunction(int32_T nlhs, mxArray *plhs[3],
-                                    int32_T nrhs, const mxArray *prhs[5])
+                                    int32_T nrhs, const mxArray *prhs[6])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -220,8 +220,8 @@ void unsafe_angle2point_mexFunction(int32_T nlhs, mxArray *plhs[3],
   int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 5) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 5, 4,
+  if (nrhs != 6) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 6, 4,
                         11, "angle2point");
   }
   if (nlhs > 3) {

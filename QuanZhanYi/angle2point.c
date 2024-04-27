@@ -2,7 +2,7 @@
  * File: angle2point.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Apr-2024 15:10:40
+ * C/C++ source code generated on  : 27-Apr-2024 22:32:35
  */
 
 /* Include Files */
@@ -17,16 +17,17 @@
  *                double b
  *                double c
  *                double d
+ *                double Mradial
  *                double *x
  *                double *y
  *                double *z
  * Return Type  : void
  */
-void angle2point(double ANG, double a, double b, double c, double d, double *x,
-                 double *y, double *z)
+void angle2point(double ANG, double a, double b, double c, double d,
+                 double Mradial, double *x, double *y, double *z)
 {
-  *x = cos(ANG);
-  *y = sin(ANG);
+  *x = Mradial * cos(ANG);
+  *y = Mradial * sin(ANG);
   *z = -((d + a * *x) + b * *y) / c;
 }
 
