@@ -141,6 +141,7 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
 export const CalculatAAndBPoints = (
   MTaon: CustomVector3,
   Mcenter: CustomVector3,
+  r: number,
   Bottom_round_center1: CustomVector3,
   Bottom_round_center2: CustomVector3,
   testP: CustomVector3,
@@ -156,6 +157,7 @@ export const CalculatAAndBPoints = (
   _CalculatAAndBPoints(
     mTaon.arrayPtr,
     mCenter.arrayPtr,
+    r,
     bottom_round_center1.arrayPtr,
     bottom_round_center2.arrayPtr,
     _testP.arrayPtr,

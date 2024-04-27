@@ -46,13 +46,14 @@ void CalculateAccurateCylindersFromMultipleMeasurementPoints(
 
 EMSCRIPTEN_KEEPALIVE
 void CalculatAAndBPoints(const double MTaon[3], const double Mcenter[3],
+                         double Mradial,
                          const double Bottom_round_center1[3],
                          const double Bottom_round_center2[3],
-                         const double testP[3], double numShengLu, double phi,
-                         emxArray_real_T *PointTable_A,
+                         const double testP[3], double numShengLu,
+                         double phi, emxArray_real_T *PointTable_A,
                          emxArray_real_T *PointTable_B)
 {
-    Calculat_A_and_B_Points(MTaon, Mcenter,
+    Calculat_A_and_B_Points(MTaon, Mcenter, Mradial,
                             Bottom_round_center1,
                             Bottom_round_center2,
                             testP, numShengLu, phi,
