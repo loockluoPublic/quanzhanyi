@@ -2,7 +2,7 @@
  * File: QuanZhanYi_types.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Apr-2024 00:13:24
+ * C/C++ source code generated on  : 27-Apr-2024 15:10:40
  */
 
 #ifndef QUANZHANYI_TYPES_H

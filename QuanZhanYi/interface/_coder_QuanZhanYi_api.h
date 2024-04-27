@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Apr-2024 00:13:24
+ * C/C++ source code generated on  : 27-Apr-2024 15:10:40
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -38,11 +38,12 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void Calculat_A_and_B_Points(
-    real_T MTaon[3], real_T Mcenter[3], real_T Bottom_round_center1[3],
-    real_T Bottom_round_center2[3], real_T testP[3], real_T numShengLu,
-    real_T phi, real_T PointTable_A_data[], int32_T PointTable_A_size[2],
-    real_T PointTable_B_data[], int32_T PointTable_B_size[2]);
+void Calculat_A_and_B_Points(real_T MTaon[3], real_T Mcenter[3],
+                             real_T Bottom_round_center1[3],
+                             real_T Bottom_round_center2[3], real_T testP[3],
+                             real_T numShengLu, real_T phi,
+                             emxArray_real_T *PointTable_A,
+                             emxArray_real_T *PointTable_B);
 
 void Calculat_A_and_B_Points_api(const mxArray *const prhs[7], int32_T nlhs,
                                  const mxArray *plhs[2]);

@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Apr-2024 00:13:24
+ * C/C++ source code generated on  : 27-Apr-2024 15:10:40
  */
 
 /*************************************************************************/
@@ -291,12 +291,12 @@ static void d_main_generate_unit_circle_wit(void)
  */
 static void main_Calculat_A_and_B_Points(void)
 {
-  double PointTable_A_data[60];
-  double PointTable_B_data[60];
+  emxArray_real_T *PointTable_A;
+  emxArray_real_T *PointTable_B;
   double MTaon_tmp[3];
   double numShengLu_tmp;
-  int PointTable_A_size[2];
-  int PointTable_B_size[2];
+  emxInitArray_real_T(&PointTable_A, 2);
+  emxInitArray_real_T(&PointTable_B, 2);
   /* Initialize function 'Calculat_A_and_B_Points' input arguments. */
   /* Initialize function input argument 'MTaon'. */
   argInit_3x1_real_T(MTaon_tmp);
@@ -307,9 +307,10 @@ static void main_Calculat_A_and_B_Points(void)
   numShengLu_tmp = argInit_real_T();
   /* Call the entry-point 'Calculat_A_and_B_Points'. */
   Calculat_A_and_B_Points(MTaon_tmp, MTaon_tmp, MTaon_tmp, MTaon_tmp, MTaon_tmp,
-                          numShengLu_tmp, numShengLu_tmp, PointTable_A_data,
-                          PointTable_A_size, PointTable_B_data,
-                          PointTable_B_size);
+                          numShengLu_tmp, numShengLu_tmp, PointTable_A,
+                          PointTable_B);
+  emxDestroyArray_real_T(PointTable_B);
+  emxDestroyArray_real_T(PointTable_A);
 }
 
 /*
