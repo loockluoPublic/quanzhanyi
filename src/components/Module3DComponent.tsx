@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
-// import "./index.css";
+import "./Module3DComponent.css";
 import "../utils/utils";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
@@ -13,6 +13,7 @@ import { pointToAndMeasure } from "../utils/commond";
 import { Tree, message } from "antd";
 import { CustomVector3 } from "../class/CustomVector3";
 import { Line } from "@react-three/drei";
+import PerspectiveCamera from "./PerspectiveCamera";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
@@ -68,6 +69,15 @@ function PointsLabel(props: { points: CustomVector3[] }) {
   });
 }
 
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+camera.matrixAutoUpdate = false;
+// camera.applyMatrix(new THREE.Matrix4().makeScale(1, 1, -1));
+
 export default function Index(props: {
   className?: string;
   height: string;
@@ -107,10 +117,12 @@ export default function Index(props: {
   return (
     <div className=" q-flex q-w-full">
       <Canvas
+        camera={camera}
         dpr={window.devicePixelRatio}
         className={`${props.className} q-grow`}
         style={{ height: props.height }}
       >
+        <PerspectiveCamera />
         <ambientLight intensity={Math.PI / 2} />
         <axesHelper args={[10]} />
         <spotLight

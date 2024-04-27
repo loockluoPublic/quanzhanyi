@@ -36,7 +36,7 @@ function GetPoints(props: {
           ]}
           name={"direct"}
           noStyle
-          initialValue={[3.441138, 1.48993]}
+          initialValue={[2.766493, 1.556305]}
         >
           <PointsVector2 />
         </Form.Item>

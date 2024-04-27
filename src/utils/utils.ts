@@ -6,6 +6,7 @@ const {
   _generateUnitCircleWithNormalVector,
   _GenerateMultiLayeredMeasurementPoints,
   _CalculateAccurateCylindersFromMultipleMeasurementPoints,
+  _CalculatAAndBPoints,
 } = (window as any).Module;
 
 export const generateUnitCircleWithNormalVector = (
@@ -135,4 +136,35 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
   p1.free();
   p2.free();
   return result;
+};
+
+export const CalculatAAndBPoints = (
+  MTaon: CustomVector3,
+  Mcenter: CustomVector3,
+  Bottom_round_center1: CustomVector3,
+  Bottom_round_center2: CustomVector3,
+  testP: CustomVector3,
+  numShengLu: number,
+  phi: number
+) => {
+  const mTaon = new EmxArray_real_T(MTaon);
+  const mCenter = new EmxArray_real_T(Mcenter);
+  const bottom_round_center1 = new EmxArray_real_T(Bottom_round_center1);
+  const bottom_round_center2 = new EmxArray_real_T(Bottom_round_center2);
+  const _testP = new EmxArray_real_T(testP);
+
+  _CalculatAAndBPoints(
+    mTaon.arrayPtr,
+    mCenter.arrayPtr,
+    bottom_round_center1.arrayPtr,
+    bottom_round_center2.arrayPtr,
+    _testP.arrayPtr,
+    numShengLu,
+    phi
+  );
+
+  return {
+    bottomA: bottom_round_center1.toVector3(),
+    bottomB: bottom_round_center2.toVector3(),
+  };
 };

@@ -69,7 +69,7 @@ export function Module3DPoint() {
         setData={setMData}
         points={data.mPoints ?? []}
         height="500px"
-        // direct={data?.direct}
+        direct={data?.direct}
       />
     );
   }
