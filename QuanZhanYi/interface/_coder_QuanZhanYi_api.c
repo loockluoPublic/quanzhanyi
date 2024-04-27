@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Apr-2024 15:10:40
+ * C/C++ source code generated on  : 27-Apr-2024 22:32:35
  */
 
 /* Include Files */
@@ -565,12 +565,12 @@ static real_T (*o_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
 }
 
 /*
- * Arguments    : const mxArray * const prhs[7]
+ * Arguments    : const mxArray * const prhs[8]
  *                int32_T nlhs
  *                const mxArray *plhs[2]
  * Return Type  : void
  */
-void Calculat_A_and_B_Points_api(const mxArray *const prhs[7], int32_T nlhs,
+void Calculat_A_and_B_Points_api(const mxArray *const prhs[8], int32_T nlhs,
                                  const mxArray *plhs[2])
 {
   emlrtStack st = {
@@ -585,6 +585,7 @@ void Calculat_A_and_B_Points_api(const mxArray *const prhs[7], int32_T nlhs,
   real_T(*MTaon)[3];
   real_T(*Mcenter)[3];
   real_T(*testP)[3];
+  real_T Mradial;
   real_T numShengLu;
   real_T phi;
   st.tls = emlrtRootTLSGlobal;
@@ -594,15 +595,16 @@ void Calculat_A_and_B_Points_api(const mxArray *const prhs[7], int32_T nlhs,
   /* Marshall function inputs */
   MTaon = c_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "MTaon");
   Mcenter = c_emlrt_marshallIn(&st, emlrtAlias(prhs[1]), "Mcenter");
+  Mradial = emlrt_marshallIn(&st, emlrtAliasP(prhs[2]), "Mradial");
   Bottom_round_center1 =
-      c_emlrt_marshallIn(&st, emlrtAlias(prhs[2]), "Bottom_round_center1");
+      c_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "Bottom_round_center1");
   Bottom_round_center2 =
-      c_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "Bottom_round_center2");
-  testP = c_emlrt_marshallIn(&st, emlrtAlias(prhs[4]), "testP");
-  numShengLu = emlrt_marshallIn(&st, emlrtAliasP(prhs[5]), "numShengLu");
-  phi = emlrt_marshallIn(&st, emlrtAliasP(prhs[6]), "phi");
+      c_emlrt_marshallIn(&st, emlrtAlias(prhs[4]), "Bottom_round_center2");
+  testP = c_emlrt_marshallIn(&st, emlrtAlias(prhs[5]), "testP");
+  numShengLu = emlrt_marshallIn(&st, emlrtAliasP(prhs[6]), "numShengLu");
+  phi = emlrt_marshallIn(&st, emlrtAliasP(prhs[7]), "phi");
   /* Invoke the target function */
-  Calculat_A_and_B_Points(*MTaon, *Mcenter, *Bottom_round_center1,
+  Calculat_A_and_B_Points(*MTaon, *Mcenter, Mradial, *Bottom_round_center1,
                           *Bottom_round_center2, *testP, numShengLu, phi,
                           PointTable_A, PointTable_B);
   /* Marshall function outputs */
@@ -673,12 +675,12 @@ void QuanZhanYi_terminate(void)
 }
 
 /*
- * Arguments    : const mxArray * const prhs[5]
+ * Arguments    : const mxArray * const prhs[6]
  *                int32_T nlhs
  *                const mxArray *plhs[3]
  * Return Type  : void
  */
-void angle2point_api(const mxArray *const prhs[5], int32_T nlhs,
+void angle2point_api(const mxArray *const prhs[6], int32_T nlhs,
                      const mxArray *plhs[3])
 {
   emlrtStack st = {
@@ -687,6 +689,7 @@ void angle2point_api(const mxArray *const prhs[5], int32_T nlhs,
       NULL  /* prev */
   };
   real_T ANG;
+  real_T Mradial;
   real_T a;
   real_T b;
   real_T c;
@@ -701,8 +704,9 @@ void angle2point_api(const mxArray *const prhs[5], int32_T nlhs,
   b = emlrt_marshallIn(&st, emlrtAliasP(prhs[2]), "b");
   c = emlrt_marshallIn(&st, emlrtAliasP(prhs[3]), "c");
   d = emlrt_marshallIn(&st, emlrtAliasP(prhs[4]), "d");
+  Mradial = emlrt_marshallIn(&st, emlrtAliasP(prhs[5]), "Mradial");
   /* Invoke the target function */
-  angle2point(ANG, a, b, c, d, &x, &y, &z);
+  angle2point(ANG, a, b, c, d, Mradial, &x, &y, &z);
   /* Marshall function outputs */
   plhs[0] = emlrt_marshallOut(x);
   if (nlhs > 1) {

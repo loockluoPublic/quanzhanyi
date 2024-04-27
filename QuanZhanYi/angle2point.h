@@ -2,7 +2,7 @@
  * File: angle2point.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Apr-2024 15:10:40
+ * C/C++ source code generated on  : 27-Apr-2024 22:32:35
  */
 
 #ifndef ANGLE2POINT_H
@@ -19,7 +19,7 @@ extern "C" {
 
 /* Function Declarations */
 extern void angle2point(double ANG, double a, double b, double c, double d,
-                        double *x, double *y, double *z);
+                        double Mradial, double *x, double *y, double *z);
 
 #ifdef __cplusplus
 }
