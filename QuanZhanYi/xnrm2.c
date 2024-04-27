@@ -2,7 +2,7 @@
  * File: xnrm2.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 15-Apr-2024 22:57:09
+ * C/C++ source code generated on  : 27-Apr-2024 00:13:24
  */
 
 /* Include Files */
@@ -14,43 +14,52 @@
 /* Function Definitions */
 /*
  * Arguments    : int n
- *                const double x[4]
+ *                const emxArray_real_T *x
  *                int ix0
  * Return Type  : double
  */
-double b_xnrm2(int n, const double x[4], int ix0)
+double b_xnrm2(int n, const emxArray_real_T *x, int ix0)
 {
-  double scale;
+  const double *x_data;
   double y;
   int k;
-  int kend;
+  x_data = x->data;
   y = 0.0;
-  scale = 3.3121686421112381E-170;
-  kend = (ix0 + n) - 1;
-  for (k = ix0; k <= kend; k++) {
-    double absxk;
-    absxk = fabs(x[k - 1]);
-    if (absxk > scale) {
-      double t;
-      t = scale / absxk;
-      y = y * t * t + 1.0;
-      scale = absxk;
+  if (n >= 1) {
+    if (n == 1) {
+      y = fabs(x_data[ix0 - 1]);
     } else {
-      double t;
-      t = absxk / scale;
-      y += t * t;
+      double scale;
+      int kend;
+      scale = 3.3121686421112381E-170;
+      kend = (ix0 + n) - 1;
+      for (k = ix0; k <= kend; k++) {
+        double absxk;
+        absxk = fabs(x_data[k - 1]);
+        if (absxk > scale) {
+          double t;
+          t = scale / absxk;
+          y = y * t * t + 1.0;
+          scale = absxk;
+        } else {
+          double t;
+          t = absxk / scale;
+          y += t * t;
+        }
+      }
+      y = scale * sqrt(y);
     }
   }
-  return scale * sqrt(y);
+  return y;
 }
 
 /*
  * Arguments    : int n
- *                const double x[9]
+ *                const double x[4]
  *                int ix0
  * Return Type  : double
  */
-double c_xnrm2(int n, const double x[9], int ix0)
+double c_xnrm2(int n, const double x[4], int ix0)
 {
   double scale;
   double y;
@@ -147,43 +156,34 @@ double f_xnrm2(const double x[6], int ix0)
 
 /*
  * Arguments    : int n
- *                const emxArray_real_T *x
+ *                const double x[9]
  *                int ix0
  * Return Type  : double
  */
-double xnrm2(int n, const emxArray_real_T *x, int ix0)
+double xnrm2(int n, const double x[9], int ix0)
 {
-  const double *x_data;
+  double scale;
   double y;
   int k;
-  x_data = x->data;
+  int kend;
   y = 0.0;
-  if (n >= 1) {
-    if (n == 1) {
-      y = fabs(x_data[ix0 - 1]);
+  scale = 3.3121686421112381E-170;
+  kend = (ix0 + n) - 1;
+  for (k = ix0; k <= kend; k++) {
+    double absxk;
+    absxk = fabs(x[k - 1]);
+    if (absxk > scale) {
+      double t;
+      t = scale / absxk;
+      y = y * t * t + 1.0;
+      scale = absxk;
     } else {
-      double scale;
-      int kend;
-      scale = 3.3121686421112381E-170;
-      kend = (ix0 + n) - 1;
-      for (k = ix0; k <= kend; k++) {
-        double absxk;
-        absxk = fabs(x_data[k - 1]);
-        if (absxk > scale) {
-          double t;
-          t = scale / absxk;
-          y = y * t * t + 1.0;
-          scale = absxk;
-        } else {
-          double t;
-          t = absxk / scale;
-          y += t * t;
-        }
-      }
-      y = scale * sqrt(y);
+      double t;
+      t = absxk / scale;
+      y += t * t;
     }
   }
-  return y;
+  return scale * sqrt(y);
 }
 
 /*

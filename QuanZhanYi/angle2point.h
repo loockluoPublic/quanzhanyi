@@ -1,15 +1,14 @@
 /*
- * File: ixfun.h
+ * File: angle2point.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 27-Apr-2024 00:13:24
  */
 
-#ifndef IXFUN_H
-#define IXFUN_H
+#ifndef ANGLE2POINT_H
+#define ANGLE2POINT_H
 
 /* Include Files */
-#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -19,8 +18,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void expand_hypot(const emxArray_real_T *a, const emxArray_real_T *b,
-                  emxArray_real_T *c);
+extern void angle2point(double ANG, double a, double b, double c, double d,
+                        double *x, double *y, double *z);
 
 #ifdef __cplusplus
 }
@@ -28,7 +27,7 @@ void expand_hypot(const emxArray_real_T *a, const emxArray_real_T *b,
 
 #endif
 /*
- * File trailer for ixfun.h
+ * File trailer for angle2point.h
  *
  * [EOF]
  */

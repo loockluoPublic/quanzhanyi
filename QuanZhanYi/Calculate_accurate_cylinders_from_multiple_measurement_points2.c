@@ -2,7 +2,7 @@
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points2.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 15-Apr-2024 22:57:09
+ * C/C++ source code generated on  : 27-Apr-2024 00:13:24
  */
 
 /* Include Files */
@@ -327,7 +327,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         }
       }
       if (p) {
-        svd(A, U, s_data, &coffset, V);
+        b_svd(A, U, s_data, &coffset, V);
       } else {
         for (i = 0; i < 16; i++) {
           V[i] = rtNaN;

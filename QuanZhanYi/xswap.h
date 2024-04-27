@@ -2,7 +2,7 @@
  * File: xswap.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 15-Apr-2024 22:57:09
+ * C/C++ source code generated on  : 27-Apr-2024 00:13:24
  */
 
 #ifndef XSWAP_H
@@ -18,11 +18,11 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void b_xswap(double x[9], int ix0, int iy0);
+void b_xswap(double x[16], int ix0, int iy0);
 
 void c_xswap(double x[4]);
 
-void xswap(double x[16], int ix0, int iy0);
+void xswap(double x[9], int ix0, int iy0);
 
 #ifdef __cplusplus
 }

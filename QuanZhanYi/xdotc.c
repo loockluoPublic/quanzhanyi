@@ -2,7 +2,7 @@
  * File: xdotc.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 15-Apr-2024 22:57:09
+ * C/C++ source code generated on  : 27-Apr-2024 00:13:24
  */
 
 /* Include Files */
@@ -12,13 +12,13 @@
 /* Function Definitions */
 /*
  * Arguments    : int n
- *                const double x[9]
+ *                const double x[16]
  *                int ix0
- *                const double y[9]
+ *                const double y[16]
  *                int iy0
  * Return Type  : double
  */
-double b_xdotc(int n, const double x[9], int ix0, const double y[9], int iy0)
+double b_xdotc(int n, const double x[16], int ix0, const double y[16], int iy0)
 {
   double d;
   int k;
@@ -60,13 +60,13 @@ double d_xdotc(const double x[4], const double y[4])
 
 /*
  * Arguments    : int n
- *                const double x[16]
+ *                const double x[9]
  *                int ix0
- *                const double y[16]
+ *                const double y[9]
  *                int iy0
  * Return Type  : double
  */
-double xdotc(int n, const double x[16], int ix0, const double y[16], int iy0)
+double xdotc(int n, const double x[9], int ix0, const double y[9], int iy0)
 {
   double d;
   int k;

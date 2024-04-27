@@ -2,7 +2,7 @@
  * File: xswap.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 15-Apr-2024 22:57:09
+ * C/C++ source code generated on  : 27-Apr-2024 00:13:24
  */
 
 /* Include Files */
@@ -11,12 +11,12 @@
 
 /* Function Definitions */
 /*
- * Arguments    : double x[9]
+ * Arguments    : double x[16]
  *                int ix0
  *                int iy0
  * Return Type  : void
  */
-void b_xswap(double x[9], int ix0, int iy0)
+void b_xswap(double x[16], int ix0, int iy0)
 {
   double temp;
   temp = x[ix0 - 1];
@@ -28,6 +28,9 @@ void b_xswap(double x[9], int ix0, int iy0)
   temp = x[ix0 + 1];
   x[ix0 + 1] = x[iy0 + 1];
   x[iy0 + 1] = temp;
+  temp = x[ix0 + 2];
+  x[ix0 + 2] = x[iy0 + 2];
+  x[iy0 + 2] = temp;
 }
 
 /*
@@ -46,12 +49,12 @@ void c_xswap(double x[4])
 }
 
 /*
- * Arguments    : double x[16]
+ * Arguments    : double x[9]
  *                int ix0
  *                int iy0
  * Return Type  : void
  */
-void xswap(double x[16], int ix0, int iy0)
+void xswap(double x[9], int ix0, int iy0)
 {
   double temp;
   temp = x[ix0 - 1];
@@ -63,9 +66,6 @@ void xswap(double x[16], int ix0, int iy0)
   temp = x[ix0 + 1];
   x[ix0 + 1] = x[iy0 + 1];
   x[iy0 + 1] = temp;
-  temp = x[ix0 + 2];
-  x[ix0 + 2] = x[iy0 + 2];
-  x[iy0 + 2] = temp;
 }
 
 /*

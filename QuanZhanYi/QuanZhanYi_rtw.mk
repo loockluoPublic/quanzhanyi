@@ -2,7 +2,7 @@
 ## Makefile generated for component 'QuanZhanYi'. 
 ## 
 ## Makefile     : QuanZhanYi_rtw.mk
-## Generated on : Mon Apr 15 22:57:29 2024
+## Generated on : Sat Apr 27 00:14:04 2024
 ## Final product: .\QuanZhanYi.lib
 ## Product type : static-library
 ## 
@@ -182,7 +182,7 @@ DEFINES = $(DEFINES_CUSTOM) $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_data.c $(START_DIR)\codegen\lib\QuanZhanYi\rt_nonfinite.c $(START_DIR)\codegen\lib\QuanZhanYi\rtGetNaN.c $(START_DIR)\codegen\lib\QuanZhanYi\rtGetInf.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_initialize.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_terminate.c $(START_DIR)\codegen\lib\QuanZhanYi\Calculate_accurate_cylinders_from_multiple_measurement_points2.c $(START_DIR)\codegen\lib\QuanZhanYi\svd.c $(START_DIR)\codegen\lib\QuanZhanYi\xnrm2.c $(START_DIR)\codegen\lib\QuanZhanYi\xdotc.c $(START_DIR)\codegen\lib\QuanZhanYi\mldivide.c $(START_DIR)\codegen\lib\QuanZhanYi\qrsolve.c $(START_DIR)\codegen\lib\QuanZhanYi\ixfun.c $(START_DIR)\codegen\lib\QuanZhanYi\mean.c $(START_DIR)\codegen\lib\QuanZhanYi\pinv.c $(START_DIR)\codegen\lib\QuanZhanYi\fitcircle.c $(START_DIR)\codegen\lib\QuanZhanYi\foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)\codegen\lib\QuanZhanYi\Generate_multi_layered_measurement_points.c $(START_DIR)\codegen\lib\QuanZhanYi\generate_unit_circle_with_normal_vector.c $(START_DIR)\codegen\lib\QuanZhanYi\generate_unit_circle_with_normal_vector2.c $(START_DIR)\codegen\lib\QuanZhanYi\myvrrotvec2mat.c $(START_DIR)\codegen\lib\QuanZhanYi\xaxpy.c $(START_DIR)\codegen\lib\QuanZhanYi\xrotg.c $(START_DIR)\codegen\lib\QuanZhanYi\xrot.c $(START_DIR)\codegen\lib\QuanZhanYi\xswap.c $(START_DIR)\codegen\lib\QuanZhanYi\unsafeSxfun.c $(START_DIR)\codegen\lib\QuanZhanYi\cat.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_emxutil.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_emxAPI.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_rtwutil.c
+SRCS = $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_data.c $(START_DIR)\codegen\lib\QuanZhanYi\rt_nonfinite.c $(START_DIR)\codegen\lib\QuanZhanYi\rtGetNaN.c $(START_DIR)\codegen\lib\QuanZhanYi\rtGetInf.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_initialize.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_terminate.c $(START_DIR)\codegen\lib\QuanZhanYi\angle2point.c $(START_DIR)\codegen\lib\QuanZhanYi\Calculat_A_and_B_Points.c $(START_DIR)\codegen\lib\QuanZhanYi\pinv.c $(START_DIR)\codegen\lib\QuanZhanYi\svd.c $(START_DIR)\codegen\lib\QuanZhanYi\xnrm2.c $(START_DIR)\codegen\lib\QuanZhanYi\xdotc.c $(START_DIR)\codegen\lib\QuanZhanYi\Calculate_accurate_cylinders_from_multiple_measurement_points2.c $(START_DIR)\codegen\lib\QuanZhanYi\mldivide.c $(START_DIR)\codegen\lib\QuanZhanYi\qrsolve.c $(START_DIR)\codegen\lib\QuanZhanYi\ixfun.c $(START_DIR)\codegen\lib\QuanZhanYi\mean.c $(START_DIR)\codegen\lib\QuanZhanYi\fitcircle.c $(START_DIR)\codegen\lib\QuanZhanYi\foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)\codegen\lib\QuanZhanYi\Generate_multi_layered_measurement_points.c $(START_DIR)\codegen\lib\QuanZhanYi\generate_unit_circle_with_normal_vector.c $(START_DIR)\codegen\lib\QuanZhanYi\generate_unit_circle_with_normal_vector2.c $(START_DIR)\codegen\lib\QuanZhanYi\myvrrotvec2mat.c $(START_DIR)\codegen\lib\QuanZhanYi\xaxpy.c $(START_DIR)\codegen\lib\QuanZhanYi\xrotg.c $(START_DIR)\codegen\lib\QuanZhanYi\xrot.c $(START_DIR)\codegen\lib\QuanZhanYi\xswap.c $(START_DIR)\codegen\lib\QuanZhanYi\unsafeSxfun.c $(START_DIR)\codegen\lib\QuanZhanYi\cat.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_emxutil.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_emxAPI.c $(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_rtwutil.c
 
 ALL_SRCS = $(SRCS)
 
@@ -190,7 +190,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = QuanZhanYi_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj QuanZhanYi_initialize.obj QuanZhanYi_terminate.obj Calculate_accurate_cylinders_from_multiple_measurement_points2.obj svd.obj xnrm2.obj xdotc.obj mldivide.obj qrsolve.obj ixfun.obj mean.obj pinv.obj fitcircle.obj foot_of_perpendicular_from_a_point_to_a_line.obj Generate_multi_layered_measurement_points.obj generate_unit_circle_with_normal_vector.obj generate_unit_circle_with_normal_vector2.obj myvrrotvec2mat.obj xaxpy.obj xrotg.obj xrot.obj xswap.obj unsafeSxfun.obj cat.obj QuanZhanYi_emxutil.obj QuanZhanYi_emxAPI.obj QuanZhanYi_rtwutil.obj
+OBJS = QuanZhanYi_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj QuanZhanYi_initialize.obj QuanZhanYi_terminate.obj angle2point.obj Calculat_A_and_B_Points.obj pinv.obj svd.obj xnrm2.obj xdotc.obj Calculate_accurate_cylinders_from_multiple_measurement_points2.obj mldivide.obj qrsolve.obj ixfun.obj mean.obj fitcircle.obj foot_of_perpendicular_from_a_point_to_a_line.obj Generate_multi_layered_measurement_points.obj generate_unit_circle_with_normal_vector.obj generate_unit_circle_with_normal_vector2.obj myvrrotvec2mat.obj xaxpy.obj xrotg.obj xrot.obj xswap.obj unsafeSxfun.obj cat.obj QuanZhanYi_emxutil.obj QuanZhanYi_emxAPI.obj QuanZhanYi_rtwutil.obj
 
 ALL_OBJS = $(OBJS)
 
@@ -348,8 +348,16 @@ QuanZhanYi_terminate.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_termi
 	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\QuanZhanYi_terminate.c"
 
 
-Calculate_accurate_cylinders_from_multiple_measurement_points2.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\Calculate_accurate_cylinders_from_multiple_measurement_points2.c"
-	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\Calculate_accurate_cylinders_from_multiple_measurement_points2.c"
+angle2point.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\angle2point.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\angle2point.c"
+
+
+Calculat_A_and_B_Points.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\Calculat_A_and_B_Points.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\Calculat_A_and_B_Points.c"
+
+
+pinv.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\pinv.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\pinv.c"
 
 
 svd.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\svd.c"
@@ -362,6 +370,10 @@ xnrm2.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\xnrm2.c"
 
 xdotc.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\xdotc.c"
 	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\xdotc.c"
+
+
+Calculate_accurate_cylinders_from_multiple_measurement_points2.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\Calculate_accurate_cylinders_from_multiple_measurement_points2.c"
+	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\Calculate_accurate_cylinders_from_multiple_measurement_points2.c"
 
 
 mldivide.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\mldivide.c"
@@ -378,10 +390,6 @@ ixfun.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\ixfun.c"
 
 mean.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\mean.c"
 	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\mean.c"
-
-
-pinv.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\pinv.c"
-	$(CC) $(CFLAGS) -Fo"$@" "$(START_DIR)\codegen\lib\QuanZhanYi\pinv.c"
 
 
 fitcircle.obj : "$(START_DIR)\codegen\lib\QuanZhanYi\fitcircle.c"

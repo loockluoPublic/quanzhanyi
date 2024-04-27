@@ -2,7 +2,7 @@
  * File: xaxpy.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 15-Apr-2024 22:57:09
+ * C/C++ source code generated on  : 27-Apr-2024 00:13:24
  */
 
 #ifndef XAXPY_H
@@ -19,12 +19,12 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void b_xaxpy(int n, double a, const emxArray_real_T *x, int ix0,
+void b_xaxpy(int n, double a, int ix0, emxArray_real_T *y, int iy0);
+
+void c_xaxpy(int n, double a, const emxArray_real_T *x, int ix0,
              emxArray_real_T *y, int iy0);
 
-void c_xaxpy(int n, double a, int ix0, double y[16], int iy0);
-
-void d_xaxpy(int n, double a, int ix0, double y[9], int iy0);
+void d_xaxpy(int n, double a, int ix0, double y[16], int iy0);
 
 void e_xaxpy(int n, double a, int ix0, double y[8], int iy0);
 
@@ -38,7 +38,7 @@ void i_xaxpy(double a, const double x[9], int ix0, double y[3]);
 
 void j_xaxpy(double a, const double x[3], double y[9], int iy0);
 
-void xaxpy(int n, double a, int ix0, emxArray_real_T *y, int iy0);
+void xaxpy(int n, double a, int ix0, double y[9], int iy0);
 
 #ifdef __cplusplus
 }

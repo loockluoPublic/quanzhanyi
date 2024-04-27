@@ -2,7 +2,7 @@
  * File: xaxpy.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 15-Apr-2024 22:57:09
+ * C/C++ source code generated on  : 27-Apr-2024 00:13:24
  */
 
 /* Include Files */
@@ -14,13 +14,37 @@
 /*
  * Arguments    : int n
  *                double a
+ *                int ix0
+ *                emxArray_real_T *y
+ *                int iy0
+ * Return Type  : void
+ */
+void b_xaxpy(int n, double a, int ix0, emxArray_real_T *y, int iy0)
+{
+  double *y_data;
+  int k;
+  y_data = y->data;
+  if ((n >= 1) && (!(a == 0.0))) {
+    int i;
+    i = n - 1;
+    for (k = 0; k <= i; k++) {
+      int i1;
+      i1 = (iy0 + k) - 1;
+      y_data[i1] += a * y_data[(ix0 + k) - 1];
+    }
+  }
+}
+
+/*
+ * Arguments    : int n
+ *                double a
  *                const emxArray_real_T *x
  *                int ix0
  *                emxArray_real_T *y
  *                int iy0
  * Return Type  : void
  */
-void b_xaxpy(int n, double a, const emxArray_real_T *x, int ix0,
+void c_xaxpy(int n, double a, const emxArray_real_T *x, int ix0,
              emxArray_real_T *y, int iy0)
 {
   const double *x_data;
@@ -47,29 +71,7 @@ void b_xaxpy(int n, double a, const emxArray_real_T *x, int ix0,
  *                int iy0
  * Return Type  : void
  */
-void c_xaxpy(int n, double a, int ix0, double y[16], int iy0)
-{
-  int k;
-  if (!(a == 0.0)) {
-    int i;
-    i = n - 1;
-    for (k = 0; k <= i; k++) {
-      int i1;
-      i1 = (iy0 + k) - 1;
-      y[i1] += a * y[(ix0 + k) - 1];
-    }
-  }
-}
-
-/*
- * Arguments    : int n
- *                double a
- *                int ix0
- *                double y[9]
- *                int iy0
- * Return Type  : void
- */
-void d_xaxpy(int n, double a, int ix0, double y[9], int iy0)
+void d_xaxpy(int n, double a, int ix0, double y[16], int iy0)
 {
   int k;
   if (!(a == 0.0)) {
@@ -188,22 +190,20 @@ void j_xaxpy(double a, const double x[3], double y[9], int iy0)
  * Arguments    : int n
  *                double a
  *                int ix0
- *                emxArray_real_T *y
+ *                double y[9]
  *                int iy0
  * Return Type  : void
  */
-void xaxpy(int n, double a, int ix0, emxArray_real_T *y, int iy0)
+void xaxpy(int n, double a, int ix0, double y[9], int iy0)
 {
-  double *y_data;
   int k;
-  y_data = y->data;
-  if ((n >= 1) && (!(a == 0.0))) {
+  if (!(a == 0.0)) {
     int i;
     i = n - 1;
     for (k = 0; k <= i; k++) {
       int i1;
       i1 = (iy0 + k) - 1;
-      y_data[i1] += a * y_data[(ix0 + k) - 1];
+      y[i1] += a * y[(ix0 + k) - 1];
     }
   }
 }
