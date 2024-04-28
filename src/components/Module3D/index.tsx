@@ -1,19 +1,20 @@
 import { Canvas } from "@react-three/fiber";
-import { Html, OrbitControls } from "@react-three/drei";
+import { Cylinder, Html, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
-import "./Module3DComponent.css";
-import "../utils/utils";
+import "./index.css";
+import "../../utils/utils";
 import { useRecoilState } from "recoil";
-import { Data } from "../atom/globalState";
-import useMeasure from "../utils/useMeasure";
+import { Data } from "../../atom/globalState";
+import useMeasure from "../../utils/useMeasure";
 import { useEffect, useRef, useState } from "react";
-import { GenerateMultiLayeredMeasurementPoints } from "../utils/utils";
-import PointsVector3 from "./PointVector3";
-import { pointToAndMeasure } from "../utils/commond";
+import { GenerateMultiLayeredMeasurementPoints } from "../../utils/utils";
+import PointsVector3 from "../PointVector3";
+import { pointToAndMeasure } from "../../utils/commond";
 import { Tree, message } from "antd";
-import { CustomVector3 } from "../class/CustomVector3";
+import { CustomVector3 } from "../../class/CustomVector3";
 import { Line } from "@react-three/drei";
 import PerspectiveCamera from "./PerspectiveCamera";
+import MyCylinder from "./MyCylinder";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
@@ -56,11 +57,18 @@ function Box(props) {
   );
 }
 
-function PointsLabel(props: { points: CustomVector3[] }) {
+function PointsLabel(props: {
+  points: CustomVector3[];
+  style?: React.CSSProperties;
+  color?: string;
+}) {
   return props?.points?.map((item) => {
     return (
       <Html position={item.toVector3()} key={item.key}>
-        <div className="q-w-20 relative">
+        <div
+          className="q-w-20 relative"
+          style={{ "--point-color": props.color }}
+        >
           {item.key}
           {item.label || ""}
         </div>
@@ -69,15 +77,6 @@ function PointsLabel(props: { points: CustomVector3[] }) {
   });
 }
 
-const camera = new THREE.PerspectiveCamera(
-  75,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  1000
-);
-camera.matrixAutoUpdate = false;
-// camera.applyMatrix(new THREE.Matrix4().makeScale(1, 1, -1));
-
 export default function Index(props: {
   className?: string;
   height: string;
@@ -85,7 +84,9 @@ export default function Index(props: {
   loading?: boolean;
   setData?: (md: CustomVector3[]) => void;
   direct?: number[];
+  [k: string]: any;
 }) {
+  console.log("%c Line:83 🥥 props", "color:#ea7e5c", props);
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<number[]>([]);
 
@@ -114,10 +115,15 @@ export default function Index(props: {
     setSelectedKeys(keys);
   }, [showPoints]);
 
+  console.log(
+    "%c Line:136 🥐 props?.calulateRes",
+    "color:#ea7e5c",
+    props,
+    props?.calulateRes
+  );
   return (
     <div className=" q-flex q-w-full">
       <Canvas
-        camera={camera}
         dpr={window.devicePixelRatio}
         className={`${props.className} q-grow`}
         style={{ height: props.height }}
@@ -132,9 +138,13 @@ export default function Index(props: {
           decay={0}
           intensity={Math.PI}
         />
+        <MyCylinder {...props?.calulateRes} />
         {/* <Box position={[0, 0, 0]} /> */}
-        <PointsLabel points={showPoints.filter((p) => p.enable)} />
-        {props?.direct?.length > 0 && (
+        <PointsLabel points={showPoints.filter((p) => p.enable)} color="#000" />
+
+        <PointsLabel points={props?.AB?.bottomA} color="green" />
+        <PointsLabel points={props?.AB?.bottomB} color="red" />
+        {/* {props?.direct?.length > 0 && (
           <Line
             points={[
               new THREE.Vector3().setFromSpherical(
@@ -145,7 +155,7 @@ export default function Index(props: {
               ),
             ]}
           />
-        )}
+        )} */}
 
         <OrbitControls />
       </Canvas>

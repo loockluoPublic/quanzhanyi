@@ -122,8 +122,8 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
   const result = {
     center: center.toVector3()[0],
     Err_every: Err_every.toJSON(),
-    mTaon: mTaon.toJSON()?.[0],
-    Mradial: Mradial.toJSON()?.[0],
+    mTaon: mTaon.toVector3()[0],
+    R: Mradial.toJSON()?.[0],
     Bottom_round_center: Bottom_round_center1.toVector3(),
   };
   console.log("%c Line:93 🍿 result", "color:#ea7e5c", result);
@@ -148,12 +148,14 @@ export const CalculatAAndBPoints = (
   numShengLu: number,
   phi: number
 ) => {
+  console.log("%c Line:149 🌰 numShengLu", "color:#93c0a4", numShengLu);
   const mTaon = new EmxArray_real_T(MTaon);
   const mCenter = new EmxArray_real_T(Mcenter);
   const bottom_round_center1 = new EmxArray_real_T(Bottom_round_center1);
   const bottom_round_center2 = new EmxArray_real_T(Bottom_round_center2);
   const _testP = new EmxArray_real_T(testP);
-
+  const A = new EmxArray_real_T(3, numShengLu * 2);
+  const B = new EmxArray_real_T(3, numShengLu * 2);
   _CalculatAAndBPoints(
     mTaon.arrayPtr,
     mCenter.arrayPtr,
@@ -162,11 +164,18 @@ export const CalculatAAndBPoints = (
     bottom_round_center2.arrayPtr,
     _testP.arrayPtr,
     numShengLu,
-    phi
+    phi,
+    A.ptr,
+    B.ptr
   );
 
-  return {
-    bottomA: bottom_round_center1.toVector3(),
-    bottomB: bottom_round_center2.toVector3(),
+  const res = {
+    bottomA: A.toVector3(),
+    bottomB: B.toVector3(),
   };
+
+  console.log("%c Line:173 🥓 res", "color:#465975", res);
+  A.free();
+  B.free();
+  return res;
 };

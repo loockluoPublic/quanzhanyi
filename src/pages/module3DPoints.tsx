@@ -11,7 +11,7 @@ import { GenerateMultiLayeredMeasurementPoints } from "../utils/utils";
 import PointsVector3 from "../components/PointVector3";
 import { pointToAndMeasure } from "../utils/commond";
 import { message } from "antd";
-import Module3D from "../components/Module3DComponent";
+import Module3D from "../components/Module3D";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx

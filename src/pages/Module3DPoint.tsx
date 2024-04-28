@@ -7,7 +7,7 @@ import { generateUnitCircleWithNormalVector } from "../utils/utils";
 import useMeasure from "../utils/useMeasure";
 import { useEffect, useRef } from "react";
 import { pointToAndMeasure } from "../utils/commond";
-import Module3D from "../components/Module3DComponent";
+import Module3D from "../components/Module3D";
 const { Item } = Form;
 
 export function Module3DPoint() {

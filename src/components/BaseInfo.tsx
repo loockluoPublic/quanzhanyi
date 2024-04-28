@@ -34,7 +34,7 @@ export default function BaseInfo() {
         name="sdfb"
         rules={[{ required: true }]}
         wrapperCol={{ span: 3 }}
-        initialValue={1}
+        initialValue={4}
       >
         <Select className=" !q-w-32" options={SDFBOptions} />
       </Item>

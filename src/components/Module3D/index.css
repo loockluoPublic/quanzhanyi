@@ -3,7 +3,7 @@
     display: block;
     width: 6px;
     height: 6px;
-    background-color: red;
+    background-color: var(--point-color, red);
     position: absolute;
     transform: translate(-3px, -3px);
     border-radius: 50%;
