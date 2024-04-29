@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Apr-2024 22:32:35
+ * C/C++ source code generated on  : 30-Apr-2024 00:52:42
  */
 
 /* Include Files */
@@ -117,7 +117,7 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
   t = b_C_tmp / scale;
   c += t * t;
   c = scale * sqrt(c);
-  A1z = tan(phi);
+  A1z = tan(1.5707963267948966 - phi);
   scale = 3.3121686421112381E-170;
   A8z = s / c;
   C[0] = A8z;
