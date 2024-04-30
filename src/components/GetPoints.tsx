@@ -125,7 +125,7 @@ function GetPoints(props: {
           console.log("%c Line:50 🍋 fields", "color:#b03734", fields);
           return (
             <>
-              {fields.map((field, index) => (
+              {fields.map((field) => (
                 <Form.Item label="AB面交点" required={true} key={field.key}>
                   <Form.Item
                     {...field}
