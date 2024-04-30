@@ -107,7 +107,7 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
   console.log("%c Line:73 🍤 points", "color:#93c0a4", points.toVector3());
   console.log("%c Line:74 🍰 p1", "color:#33a5ff", p1.toVector3());
   console.log("%c Line:75 🥔 p2", "color:#93c0a4", p2.toVector3());
-
+  console.log("%c Line:93 🍿 result before", "color:#ea7e5c", Err_every.size);
   _CalculateAccurateCylindersFromMultipleMeasurementPoints(
     points.ptr,
     p1.arrayPtr,
@@ -126,13 +126,18 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
     R: Mradial.toJSON()?.[0],
     Bottom_round_center: Bottom_round_center1.toVector3(),
   };
-  console.log("%c Line:93 🍿 result", "color:#ea7e5c", result);
+  console.log(
+    "%c Line:93 🍿 result",
+    "color:#ea7e5c",
+    Err_every.size,
+    Err_every
+  );
 
   console.groupEnd();
   center.free();
   mTaon.free();
   Mradial.free();
-  Err_every.free();
+  // Err_every.free();
   p1.free();
   p2.free();
   return result;

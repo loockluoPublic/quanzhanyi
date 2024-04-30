@@ -157,6 +157,7 @@ export default class EmxArray_real_T {
 
     // 从结构体中获取allocatedSize（即数组长度）
     var allocatedSize = emModule.getValue(this.ptr + 8, "i32");
+    console.log("%c Line:160 🍺 allocatedSize", "color:#b03734", allocatedSize);
 
     // 创建一个Float64Array视图来读取data数组的值
     var data = Array.from(

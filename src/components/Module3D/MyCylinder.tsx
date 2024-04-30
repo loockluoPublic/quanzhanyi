@@ -7,12 +7,6 @@ import { CustomVector3 } from "../../class/CustomVector3";
 const MyCylinder = (props: any) => {
   console.log("%c Line:7 🍪 props", "color:#33a5ff", props);
 
-  const vector1 = new THREE.Vector3(1, 2, 3);
-  const vector2 = new THREE.Vector3(4, 5, 6);
-  const midpoint = new THREE.Vector3();
-  const midpoint2 = new THREE.Vector3();
-  midpoint.addVectors(vector1, vector2).multiplyScalar(0.5);
-
   if (!props?.Bottom_round_center) return null;
   //   console.log(
   //     "%c Line:16 🥝 midpoint2",
@@ -23,17 +17,29 @@ const MyCylinder = (props: any) => {
   //     )
   //     // props?.mTaon?.normalize?.()
   //   );
+  const midpoint = new CustomVector3();
+
+  midpoint.addVectors(
+    props?.Bottom_round_center?.[0]?.toVector3(),
+    props?.Bottom_round_center?.[1]?.toVector3()
+  );
 
   const height = (props?.Bottom_round_center?.[0] as CustomVector3).distanceTo(
     props?.Bottom_round_center?.[1]
   );
 
+  console.log(
+    "%c Line:37 🍰 props?.mTaon",
+    "color:#ed9ec7",
+    props?.mTaon?.toVector3()?.normalize(),
+    midpoint?.toVector3()?.normalize()
+  );
   return (
     <>
       <Cylinder
         args={[props.R, props.R, 2, 32, 1, true]}
         position={props?.center?.toVector3() || []} // 设置位置
-        rotation={props?.mTaon?.calcRotation()} // 设置旋转
+        rotation={midpoint?.calcRotation()} // 设置旋转
       >
         <meshStandardMaterial
           color={"#00aec7"}
