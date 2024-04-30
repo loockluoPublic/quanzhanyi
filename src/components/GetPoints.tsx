@@ -36,7 +36,7 @@ function GetPoints(props: {
           ]}
           name={"direct"}
           noStyle
-          initialValue={[2.766493, 1.556305]}
+          initialValue={[1.654804, 4.74411]}
         >
           <PointsVector2 />
         </Form.Item>
@@ -52,25 +52,15 @@ function GetPoints(props: {
       <Form.List
         name="firstPoints"
         initialValue={[
-          new CustomVector3(
-            -0.341093743186077,
-            0.927299124911336,
-            0.026927152664845,
-            {
-              color: "#3498db",
-              label: "P1",
-            }
-          ),
+          new CustomVector3(-0.714, 0.941, 0.06, {
+            color: "#3498db",
+            label: "P1",
+          }),
 
-          new CustomVector3(
-            0.097045225405323,
-            0.944103573604515,
-            -0.00768900617704,
-            {
-              color: "#3498db",
-              label: "P2",
-            }
-          ),
+          new CustomVector3(0.481, -0.25, -0.041, {
+            color: "#3498db",
+            label: "P2",
+          }),
         ]}
       >
         {(fields) => {
@@ -110,15 +100,10 @@ function GetPoints(props: {
       <Form.List
         name="centerPoint"
         initialValue={[
-          new CustomVector3(
-            -0.341093743186077,
-            0.927299124911336,
-            0.026927152664845,
-            {
-              color: "#3498db",
-              label: "P1",
-            }
-          ),
+          new CustomVector3(-0.162, -0.156, -0.273, {
+            color: "#3498db",
+            label: "P1",
+          }),
         ]}
       >
         {(fields) => {

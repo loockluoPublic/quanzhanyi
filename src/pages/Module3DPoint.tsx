@@ -18,7 +18,7 @@ export function Module3DPoint() {
 
   const { measure, loading, points } = useMeasure();
 
-  const flag = useRef(false);
+  const flag = useRef(true);
   useEffect(() => {
     if (flag.current) {
       flag.current = false;
@@ -42,7 +42,8 @@ export function Module3DPoint() {
         ...data,
         waitingPoints,
       });
-      if (!mock) measure(waitingPoints);
+
+      measure(waitingPoints);
     }
   }, []);
 
@@ -57,12 +58,10 @@ export function Module3DPoint() {
 
   const setMData = (md: typeof points) => {
     console.log("%c Line:57 🥑 md", "color:#93c0a4", md);
-    if (!mock) {
-      setData({
-        ...data,
-        mPoints: md,
-      });
-    }
+    setData({
+      ...data,
+      mPoints: md,
+    });
   };
 
   if (data) {
