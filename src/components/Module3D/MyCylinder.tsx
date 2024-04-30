@@ -39,7 +39,7 @@ const MyCylinder = (props: any) => {
       <Cylinder
         args={[props.R, props.R, 2, 32, 1, true]}
         position={props?.center?.toVector3() || []} // 设置位置
-        rotation={midpoint?.calcRotation()} // 设置旋转
+        rotation={midpoint?.calcRotation() as any} // 设置旋转
       >
         <meshStandardMaterial
           color={"#00aec7"}

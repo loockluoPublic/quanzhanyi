@@ -15,12 +15,13 @@ import { CustomVector3 } from "../../class/CustomVector3";
 import { Line } from "@react-three/drei";
 import PerspectiveCamera from "./PerspectiveCamera";
 import MyCylinder from "./MyCylinder";
+import React from "react";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
 // import { button, useControls } from "leva";
 
-const pointsData = [];
+const pointsData: any = [];
 for (let i = 0; i < 10; i++) {
   pointsData.push(new THREE.Vector2(Math.sin(i * 0.2) * 3 + 5, (i - 5) * 2));
 }
@@ -67,7 +68,7 @@ function PointsLabel(props: {
       <Html position={item.toVector3()} key={item.key}>
         <div
           className="q-w-20 relative"
-          style={{ "--point-color": props.color }}
+          style={{ "--point-color": props.color } as any}
         >
           {item.key}
           {item.label || ""}
