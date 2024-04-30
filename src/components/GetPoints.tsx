@@ -107,7 +107,50 @@ function GetPoints(props: {
           );
         }}
       </Form.List>
-
+      <Form.List
+        name="centerPoint"
+        initialValue={[
+          new CustomVector3(
+            -0.341093743186077,
+            0.927299124911336,
+            0.026927152664845,
+            {
+              color: "#3498db",
+              label: "P1",
+            }
+          ),
+        ]}
+      >
+        {(fields) => {
+          console.log("%c Line:50 🍋 fields", "color:#b03734", fields);
+          return (
+            <>
+              {fields.map((field, index) => (
+                <Form.Item label="AB面交点" required={true} key={field.key}>
+                  <Form.Item
+                    {...field}
+                    rules={[
+                      {
+                        required: true,
+                      },
+                    ]}
+                    noStyle
+                  >
+                    <PointsVector3 style={{ width: "70%" }} />
+                  </Form.Item>
+                  <Button
+                    style={{ marginLeft: "10px" }}
+                    type="primary"
+                    onClick={() => props.pickPoint("centerPoint", field)}
+                  >
+                    采集
+                  </Button>
+                </Form.Item>
+              ))}
+            </>
+          );
+        }}
+      </Form.List>
       {/* <h3>初始拟合点</h3>
       <Form.List name="points" initialValue={["", "", "", "", ""]}>
         {(fields, { add, remove }) => {

@@ -10,6 +10,8 @@ import { pointToAndMeasure } from "../utils/commond";
 import Module3D from "../components/Module3D";
 const { Item } = Form;
 
+const mock = new URLSearchParams(location.search).has("mock");
+
 export function Module3DPoint() {
   const [data, setData] = useRecoilState(Data);
   console.log("%c Line:15 🌽 data", "color:#33a5ff", data);
@@ -40,25 +42,27 @@ export function Module3DPoint() {
         ...data,
         waitingPoints,
       });
-      // measure(waitingPoints);
+      if (!mock) measure(waitingPoints);
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (!loading && points.length > 0) {
-  //     setData({
-  //       ...data,
-  //       mPoints: points,
-  //     });
-  //   }
-  // }, [loading, points]);
+  useEffect(() => {
+    if (!mock && !loading && points.length > 0) {
+      setData({
+        ...data,
+        mPoints: points,
+      });
+    }
+  }, [loading, points]);
 
   const setMData = (md: typeof points) => {
     console.log("%c Line:57 🥑 md", "color:#93c0a4", md);
-    // setData({
-    //   ...data,
-    //   mPoints: md,
-    // });
+    if (!mock) {
+      setData({
+        ...data,
+        mPoints: md,
+      });
+    }
   };
 
   if (data) {

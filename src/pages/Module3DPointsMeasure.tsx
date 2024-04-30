@@ -21,7 +21,7 @@ export function Module3DPointsMeasure() {
         data.firstPoints[0],
         data.firstPoints[1]
       );
-      console.log("%c Line:25 🥤 res", "color:#f5ce50", res);
+      console.log("%c Line:25 🥤 res", "color:#f5ce50", res, data);
 
       const AB = CalculatAAndBPoints(
         res.mTaon,
@@ -29,9 +29,9 @@ export function Module3DPointsMeasure() {
         res.R,
         res.Bottom_round_center[0],
         res.Bottom_round_center[1],
-        res.Bottom_round_center[1],
+        data.centerPoint[0],
         data.sdfb,
-        0.6
+        data.sdj
       );
       setData({
         ...data,

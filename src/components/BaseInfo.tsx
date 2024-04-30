@@ -1,4 +1,4 @@
-import { Checkbox, Radio, Select, Form } from "antd";
+import { Checkbox, Radio, Select, Form, InputNumber } from "antd";
 import { DefaultOptionType } from "antd/es/select";
 
 const SDFBOptions = (() => {
@@ -46,6 +46,14 @@ export default function BaseInfo() {
         initialValue={["A"]}
       >
         <Checkbox.Group options={sdmOptions}></Checkbox.Group>
+      </Item>
+      <Item
+        label="声道角"
+        name="sdj"
+        rules={[{ required: true }]}
+        initialValue={0.6}
+      >
+        <InputNumber />
       </Item>
     </>
   );
