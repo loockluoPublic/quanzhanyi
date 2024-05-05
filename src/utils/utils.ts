@@ -9,17 +9,27 @@ const {
   _CalculatAAndBPoints,
 } = (window as any).Module;
 
+/**
+ * @description 根据轴线方向和范围生成测点
+ * @param azimuth
+ * @param elevation
+ * @param numPerLay 每层采样点数
+ * @param laynum  采样层数
+ * @param P1 圆面顶面
+ * @param P2 圆面底面
+ * @returns CustomVector3[] 算法坐标待测量点
+ */
 export const generateUnitCircleWithNormalVector = (
   azimuth: number,
   elevation: number,
   numPerLay: number,
   laynum: number,
-  P3: CustomVector3,
-  P4: CustomVector3
-) => {
+  P1: CustomVector3,
+  P2: CustomVector3
+): CustomVector3[] => {
   const points = new EmxArray_real_T(3, numPerLay * laynum);
-  const p3 = new EmxArray_real_T(P3);
-  const p4 = new EmxArray_real_T(P4);
+  const p3 = new EmxArray_real_T(P1);
+  const p4 = new EmxArray_real_T(P2);
   _generateUnitCircleWithNormalVector(
     azimuth,
     elevation,
@@ -37,8 +47,8 @@ export const generateUnitCircleWithNormalVector = (
     elevation,
     numPerLay,
     laynum,
-    P3,
-    P4,
+    P1,
+    P2,
     res
   );
   console.table(res);
@@ -50,15 +60,14 @@ export const GenerateMultiLayeredMeasurementPoints = (
   Points: CustomVector3[],
   numPerLay: number,
   laynum: number,
-  P3: CustomVector3,
-  P4: CustomVector3
+  P1: CustomVector3,
+  P2: CustomVector3
 ) => {
   const points = new EmxArray_real_T(Points);
-  const p3 = new EmxArray_real_T(P3);
-  const p4 = new EmxArray_real_T(P4);
+  const p3 = new EmxArray_real_T(P1);
+  const p4 = new EmxArray_real_T(P2);
   const resultPoints = new EmxArray_real_T(3, numPerLay * laynum);
   console.group("GenerateMultiLayeredMeasurementPoints");
-  console.log("%c Line:35 🥪 points", "color:#4fff4B", points.toVector3());
 
   console.log(
     "%c Line:40 🥪 num",
@@ -90,24 +99,27 @@ export const GenerateMultiLayeredMeasurementPoints = (
   return resoult;
 };
 
+/**
+ *
+ * @param Points 测量点
+ * @param P1 圆面顶面
+ * @param P2 圆面底面
+ * @returns
+ */
 export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
   Points: CustomVector3[],
-  P_bound1: CustomVector3,
-  P_bound2: CustomVector3
+  P1: CustomVector3,
+  P2: CustomVector3
 ) => {
   const points = new EmxArray_real_T(Points);
-  const p1 = new EmxArray_real_T(P_bound1);
-  const p2 = new EmxArray_real_T(P_bound2);
+  const p1 = new EmxArray_real_T(P1);
+  const p2 = new EmxArray_real_T(P2);
   const center = new EmxArray_real_T(3, 1);
   const mTaon = new EmxArray_real_T(3, 1);
   const Mradial = new EmxArray_real_T(1, 1);
   const Err_every = new EmxArray_real_T(1, Points.length);
   const Bottom_round_center1 = new EmxArray_real_T(3, 2);
-  console.group("GenerateMultiLayeredMeasurementPoints");
-  console.log("%c Line:73 🍤 points", "color:#93c0a4", points.toVector3());
-  console.log("%c Line:74 🍰 p1", "color:#33a5ff", p1.toVector3());
-  console.log("%c Line:75 🥔 p2", "color:#93c0a4", p2.toVector3());
-  console.log("%c Line:93 🍿 result before", "color:#ea7e5c", Err_every.size);
+
   _CalculateAccurateCylindersFromMultipleMeasurementPoints(
     points.ptr,
     p1.arrayPtr,
@@ -126,23 +138,28 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
     R: Mradial.toJSON()?.[0],
     Bottom_round_center: Bottom_round_center1.toVector3(),
   };
-  console.log(
-    "%c Line:93 🍿 result",
-    "color:#ea7e5c",
-    Err_every.size,
-    Err_every
-  );
 
-  console.groupEnd();
   center.free();
   mTaon.free();
   Mradial.free();
-  // Err_every.free();
+  Err_every.free();
   p1.free();
   p2.free();
   return result;
 };
 
+/**
+ *
+ * @param MTaon 圆柱轴线方向向量
+ * @param Mcenter 圆柱中心点
+ * @param r 圆半径
+ * @param Bottom_round_center1 圆柱顶面
+ * @param Bottom_round_center2 圆柱地面
+ * @param testP AB面交点垂直面所在点
+ * @param numShengLu 声道数量
+ * @param phi 声路角
+ * @returns
+ */
 export const CalculatAAndBPoints = (
   MTaon: CustomVector3,
   Mcenter: CustomVector3,
@@ -153,7 +170,6 @@ export const CalculatAAndBPoints = (
   numShengLu: number,
   phi: number
 ) => {
-  console.log("%c Line:149 🌰 numShengLu", "color:#93c0a4", numShengLu);
   const mTaon = new EmxArray_real_T(MTaon);
   const mCenter = new EmxArray_real_T(Mcenter);
   const bottom_round_center1 = new EmxArray_real_T(Bottom_round_center1);
@@ -179,7 +195,6 @@ export const CalculatAAndBPoints = (
     bottomB: B.toVector3(),
   };
 
-  console.log("%c Line:173 🥓 res", "color:#465975", res);
   A.free();
   B.free();
   return res;

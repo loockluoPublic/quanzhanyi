@@ -12,7 +12,7 @@ const { Item } = Form;
 
 const mock = new URLSearchParams(location.search).has("mock");
 
-export function Module3DPoint() {
+export function MeasurePoints() {
   const [data, setData] = useRecoilState(Data);
   console.log("%c Line:15 🌽 data", "color:#33a5ff", data);
 

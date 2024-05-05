@@ -1,14 +1,13 @@
 import { Button, Form, Steps } from "antd";
 import { useState } from "react";
-import Module3D from "./module3DPoints";
 import Connect from "../components/ConnectDevice";
 import { getLine, measureAndGetSimpleCoord } from "../utils/commond";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import BaseInfo from "../components/BaseInfo";
 import GetPoints from "../components/GetPoints";
-import { Module3DPoint } from "./Module3DPoint";
-import { Module3DPointsMeasure } from "./Module3DPointsMeasure";
+import { MeasurePoints } from "./MeasurePoints";
+import { CalculateAccurateCylinders } from "./CalculateAccurateCylinders";
 
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
@@ -54,22 +53,14 @@ export default function Setting() {
     {
       title: "手动采点",
       conponents: <GetPoints pickPoint={pickPoint} getDirect={getDirect} />,
-      // onNext: GetPoints,
     },
     {
       title: "自动圆面点采集",
-      conponents: <Module3DPoint />,
+      conponents: <MeasurePoints />,
     },
-    // {
-    //   title: "自动圆柱点采集",
-    //   conponents: (
-    //     <Module3D className="q-mb-4" height={"calc( 100vh - 268px - 1em )"} />
-    //   ),
-    // },
-
     {
       title: "圆柱拟合",
-      conponents: <Module3DPointsMeasure />,
+      conponents: <CalculateAccurateCylinders />,
     },
   ];
 

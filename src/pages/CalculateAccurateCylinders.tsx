@@ -7,7 +7,7 @@ import {
 import { useEffect, useRef } from "react";
 import Module3D from "../components/Module3D";
 
-export function Module3DPointsMeasure() {
+export function CalculateAccurateCylinders() {
   const [data, setData] = useRecoilState(Data);
   console.log("%c Line:12 🍷 data", "color:#b03734", data);
 
