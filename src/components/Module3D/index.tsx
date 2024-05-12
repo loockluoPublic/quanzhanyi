@@ -6,7 +6,7 @@ import "../../utils/utils";
 import { useRecoilState } from "recoil";
 import { Data } from "../../atom/globalState";
 import useMeasure from "../../utils/useMeasure";
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { GenerateMultiLayeredMeasurementPoints } from "../../utils/utils";
 import PointsVector3 from "../PointVector3";
 import { pointToAndMeasure } from "../../utils/commond";
@@ -85,9 +85,9 @@ export default function Index(props: {
   loading?: boolean;
   setData?: (md: CustomVector3[]) => void;
   direct?: number[];
+  component?: ReactNode;
   [k: string]: any;
 }) {
-  console.log("%c Line:83 🥥 props", "color:#ea7e5c", props);
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<number[]>([]);
 
@@ -161,6 +161,7 @@ export default function Index(props: {
         <OrbitControls />
       </Canvas>
       <div className=" q-w-[400px]">
+        {props?.component}
         <Tree
           checkable
           checkedKeys={selectedKeys}

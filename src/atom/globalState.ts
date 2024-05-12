@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { mockData } from "../utils/mockData";
+import mockData from "../utils/mockData";
 import { CustomVector3 } from "../class/CustomVector3";
 
 export const connectState = atom({

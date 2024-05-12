@@ -90,4 +90,11 @@ export class CustomVector3 extends Vector3 {
       Math.atan2(this.x, this.y),
     ];
   }
+
+  toAngles() {
+    return [
+      (this.toSpherical().theta * 180) / Math.PI,
+      (this.toSpherical().phi * 180) / Math.PI,
+    ];
+  }
 }

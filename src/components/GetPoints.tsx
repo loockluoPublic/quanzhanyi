@@ -2,6 +2,7 @@ import { Button, Form, InputNumber } from "antd";
 import PointsVector3 from "./PointVector3";
 import PointsVector2 from "./PointVector2";
 import { CustomVector3 } from "../class/CustomVector3";
+import initData from "../utils/mockData";
 
 function GetPoints(props: {
   pickPoint: (key: string, field?: any) => void;
@@ -36,7 +37,7 @@ function GetPoints(props: {
           ]}
           name={"direct"}
           noStyle
-          initialValue={[1.654804, 4.74411]}
+          initialValue={initData.direct}
         >
           <PointsVector2 />
         </Form.Item>
@@ -52,15 +53,25 @@ function GetPoints(props: {
       <Form.List
         name="firstPoints"
         initialValue={[
-          new CustomVector3(-0.714, 0.941, 0.06, {
-            color: "#3498db",
-            label: "P1",
-          }),
+          new CustomVector3(
+            initData.firstPoints[0].x,
+            initData.firstPoints[0].y,
+            initData.firstPoints[0].z,
+            {
+              color: "#3498db",
+              label: "P1",
+            }
+          ),
 
-          new CustomVector3(0.481, -0.25, -0.041, {
-            color: "#3498db",
-            label: "P2",
-          }),
+          new CustomVector3(
+            initData.firstPoints[1].x,
+            initData.firstPoints[1].y,
+            initData.firstPoints[1].z,
+            {
+              color: "#3498db",
+              label: "P2",
+            }
+          ),
         ]}
       >
         {(fields) => {

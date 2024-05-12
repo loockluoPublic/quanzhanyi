@@ -1,3 +1,5 @@
+import { CustomVector3 } from "../class/CustomVector3";
+
 export const ev = [
   [Math.PI / 8, Math.PI / 3],
   [Math.PI / 3, Math.PI / 5],
@@ -555,3 +557,14 @@ export const mockData = {
     ],
   },
 };
+
+export default mockData;
+
+const res2 = mockData.mPoints.map(
+  (item) => new CustomVector3(item.x, item.y, item.z).toAngles()[0]
+);
+console.log("%c Line:855 🥟 res2", "color:#f5ce50", res2);
+const res3 = mockData.waitingPoints.map(
+  (item) => new CustomVector3(item.x, item.y, item.z).toAngles()[0]
+);
+console.log("%c Line:855 🥟 res2", "color:#f5ce50", res3);

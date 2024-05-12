@@ -11,22 +11,22 @@ const {
 
 /**
  * @description 根据轴线方向和范围生成测点
- * @param azimuth
- * @param elevation
+ * @param azimuth 极角
+ * @param elevation 赤道角
  * @param numPerLay 每层采样点数
  * @param laynum  采样层数
  * @param P1 圆面顶面
  * @param P2 圆面底面
  * @returns CustomVector3[] 算法坐标待测量点
  */
-export const generateUnitCircleWithNormalVector = (
+export const generateUnitCircleWithNormalVector = async (
   azimuth: number,
   elevation: number,
   numPerLay: number,
   laynum: number,
   P1: CustomVector3,
   P2: CustomVector3
-): CustomVector3[] => {
+): Promise<CustomVector3[]> => {
   const points = new EmxArray_real_T(3, numPerLay * laynum);
   const p3 = new EmxArray_real_T(P1);
   const p4 = new EmxArray_real_T(P2);
@@ -100,13 +100,13 @@ export const GenerateMultiLayeredMeasurementPoints = (
 };
 
 /**
- *
+ * @description 圆柱拟合
  * @param Points 测量点
  * @param P1 圆面顶面
  * @param P2 圆面底面
  * @returns
  */
-export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
+export const CalculateAccurateCylindersFromMultipleMeasurementPoints = async (
   Points: CustomVector3[],
   P1: CustomVector3,
   P2: CustomVector3
@@ -149,7 +149,7 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
 };
 
 /**
- *
+ * @description 计算AB面点
  * @param MTaon 圆柱轴线方向向量
  * @param Mcenter 圆柱中心点
  * @param r 圆半径
@@ -160,7 +160,7 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
  * @param phi 声路角
  * @returns
  */
-export const CalculatAAndBPoints = (
+export const CalculatAAndBPoints = async (
   MTaon: CustomVector3,
   Mcenter: CustomVector3,
   r: number,
