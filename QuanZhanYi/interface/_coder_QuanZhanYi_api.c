@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 30-Apr-2024 00:52:42
+ * C/C++ source code generated on  : 17-May-2024 11:16:59
  */
 
 /* Include Files */
@@ -715,6 +715,65 @@ void angle2point_api(const mxArray *const prhs[6], int32_T nlhs,
   if (nlhs > 2) {
     plhs[2] = emlrt_marshallOut(z);
   }
+}
+
+/*
+ * Arguments    : const mxArray * const prhs[10]
+ *                int32_T nlhs
+ *                const mxArray *plhs[2]
+ * Return Type  : void
+ */
+void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[10],
+                                     int32_T nlhs, const mxArray *plhs[2])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  emxArray_real_T *PointTable_A_off;
+  emxArray_real_T *PointTable_B_off;
+  real_T(*Bottom_round_center1)[3];
+  real_T(*Bottom_round_center2)[3];
+  real_T(*MTaon)[3];
+  real_T(*Mcenter)[3];
+  real_T(*testP)[3];
+  real_T Mradial;
+  real_T numShengLu;
+  real_T phi;
+  real_T roff;
+  real_T toff;
+  st.tls = emlrtRootTLSGlobal;
+  emlrtHeapReferenceStackEnterFcnR2012b(&st);
+  emxInit_real_T(&st, &PointTable_A_off, 2);
+  emxInit_real_T(&st, &PointTable_B_off, 2);
+  /* Marshall function inputs */
+  MTaon = c_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "MTaon");
+  Mcenter = c_emlrt_marshallIn(&st, emlrtAlias(prhs[1]), "Mcenter");
+  Mradial = emlrt_marshallIn(&st, emlrtAliasP(prhs[2]), "Mradial");
+  Bottom_round_center1 =
+      c_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "Bottom_round_center1");
+  Bottom_round_center2 =
+      c_emlrt_marshallIn(&st, emlrtAlias(prhs[4]), "Bottom_round_center2");
+  testP = c_emlrt_marshallIn(&st, emlrtAlias(prhs[5]), "testP");
+  numShengLu = emlrt_marshallIn(&st, emlrtAliasP(prhs[6]), "numShengLu");
+  phi = emlrt_marshallIn(&st, emlrtAliasP(prhs[7]), "phi");
+  toff = emlrt_marshallIn(&st, emlrtAliasP(prhs[8]), "toff");
+  roff = emlrt_marshallIn(&st, emlrtAliasP(prhs[9]), "roff");
+  /* Invoke the target function */
+  Calculat_A_and_B_Points_after_Offest(
+      *MTaon, *Mcenter, Mradial, *Bottom_round_center1, *Bottom_round_center2,
+      *testP, numShengLu, phi, toff, roff, PointTable_A_off, PointTable_B_off);
+  /* Marshall function outputs */
+  PointTable_A_off->canFreeData = false;
+  plhs[0] = b_emlrt_marshallOut(PointTable_A_off);
+  emxFree_real_T(&st, &PointTable_A_off);
+  if (nlhs > 1) {
+    PointTable_B_off->canFreeData = false;
+    plhs[1] = b_emlrt_marshallOut(PointTable_B_off);
+  }
+  emxFree_real_T(&st, &PointTable_B_off);
+  emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 
 /*

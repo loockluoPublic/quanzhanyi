@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 30-Apr-2024 00:52:42
+ * C/C++ source code generated on  : 17-May-2024 11:16:59
  */
 
 /* Include Files */
@@ -637,25 +637,25 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     /*          PointTable2DT_A(10,:) = []; */
     break;
   case 10:
-    angle2point((D_idx_2 - 1.5707963267948966) + 0.31415926535897931, C[0],
+    angle2point((D_idx_2 - 1.5707963267948966) + 0.28559933214452665, C[0],
                 C[1], C[2], E_idx_1, Mradial, &E_idx_0, &D_idx_0, &D_idx_1);
-    angle2point((D_idx_2 - 1.5707963267948966) + 0.62831853071795862, C[0],
-                C[1], C[2], E_idx_1, Mradial, &A3x, &A3y, &A3z);
-    angle2point((D_idx_2 - 1.5707963267948966) + 0.94247779607693793, C[0],
-                C[1], C[2], E_idx_1, Mradial, &A4x, &A4y, &A4z);
-    angle2point((D_idx_2 - 1.5707963267948966) + 1.2566370614359172, C[0], C[1],
+    angle2point((D_idx_2 - 1.5707963267948966) + 0.5711986642890533, C[0], C[1],
+                C[2], E_idx_1, Mradial, &A3x, &A3y, &A3z);
+    angle2point((D_idx_2 - 1.5707963267948966) + 0.8567979964335799, C[0], C[1],
+                C[2], E_idx_1, Mradial, &A4x, &A4y, &A4z);
+    angle2point((D_idx_2 - 1.5707963267948966) + 1.1423973285781066, C[0], C[1],
                 C[2], E_idx_1, Mradial, &A5x, &A5y, &A5z);
-    angle2point((D_idx_2 - 1.5707963267948966) + 1.5707963267948966, C[0], C[1],
+    angle2point((D_idx_2 - 1.5707963267948966) + 1.4279966607226333, C[0], C[1],
                 C[2], E_idx_1, Mradial, &K, &A1x, &A1y);
-    angle2point((D_idx_2 - 1.5707963267948966) + 1.8849555921538759, C[0], C[1],
+    angle2point((D_idx_2 - 1.5707963267948966) + 1.7135959928671598, C[0], C[1],
                 C[2], E_idx_1, Mradial, &A1z, &c, &s);
-    angle2point((D_idx_2 - 1.5707963267948966) + 2.1991148575128552, C[0], C[1],
+    angle2point((D_idx_2 - 1.5707963267948966) + 1.9991953250116865, C[0], C[1],
                 C[2], E_idx_1, Mradial, &scale, &t, &A8z);
-    angle2point((D_idx_2 - 1.5707963267948966) + 2.5132741228718345, C[0], C[1],
+    angle2point((D_idx_2 - 1.5707963267948966) + 2.2847946571562132, C[0], C[1],
                 C[2], E_idx_1, Mradial, &absxk, &absxk_tmp, &b_absxk_tmp);
-    angle2point((D_idx_2 - 1.5707963267948966) + 2.8274333882308138, C[0], C[1],
+    angle2point((D_idx_2 - 1.5707963267948966) + 2.5703939893007397, C[0], C[1],
                 C[2], E_idx_1, Mradial, &C_tmp, &zN1, &b_C_tmp);
-    angle2point((D_idx_2 - 1.5707963267948966) + 3.1415926535897931, C[0], C[1],
+    angle2point((D_idx_2 - 1.5707963267948966) + 2.8559933214452666, C[0], C[1],
                 C[2], E_idx_1, Mradial, &yN1, &xN1, &E_idx_2);
     i_A2x[0] = E_idx_0;
     i_A2x[10] = D_idx_0;

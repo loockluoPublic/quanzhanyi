@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 30-Apr-2024 00:52:42
+ * C/C++ source code generated on  : 17-May-2024 11:16:59
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -22,6 +22,9 @@ MEXFUNCTION_LINKAGE void mexFunction(int32_T nlhs, mxArray *plhs[],
                                      int32_T nrhs, const mxArray *prhs[]);
 
 emlrtCTX mexFunctionCreateRootTLS(void);
+
+void unsafe_Calculat_A_and_B_Points_after_Offest_mexFunction(
+    int32_T nlhs, mxArray *plhs[2], int32_T nrhs, const mxArray *prhs[10]);
 
 void unsafe_Calculat_A_and_B_Points_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                                 int32_T nrhs,

@@ -1,15 +1,14 @@
 /*
- * File: mean.h
+ * File: norm.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 17-May-2024 11:16:59
  */
 
-#ifndef MEAN_H
-#define MEAN_H
+#ifndef NORM_H
+#define NORM_H
 
 /* Include Files */
-#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -19,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double mean(const emxArray_real_T *x);
+double b_norm(const double x[3]);
 
 #ifdef __cplusplus
 }
@@ -27,7 +26,7 @@ double mean(const emxArray_real_T *x);
 
 #endif
 /*
- * File trailer for mean.h
+ * File trailer for norm.h
  *
  * [EOF]
  */
