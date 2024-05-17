@@ -6,23 +6,49 @@ const {
   _generateUnitCircleWithNormalVector,
   _GenerateMultiLayeredMeasurementPoints,
   _CalculateAccurateCylindersFromMultipleMeasurementPoints,
+  _CalculatAAndBPoints,
 } = (window as any).Module;
 
 export const generateUnitCircleWithNormalVector = (
   azimuth: number,
   elevation: number,
-  num: number
+  numPerLay: number,
+  laynum: number,
+  P3: CustomVector3,
+  P4: CustomVector3
 ) => {
-  const points = new EmxArray_real_T(3, num);
-  _generateUnitCircleWithNormalVector(azimuth, elevation, num, points.ptr);
+  const points = new EmxArray_real_T(3, numPerLay * laynum);
+  const p3 = new EmxArray_real_T(P3);
+  const p4 = new EmxArray_real_T(P4);
+  _generateUnitCircleWithNormalVector(
+    azimuth,
+    elevation,
+    numPerLay,
+    laynum,
+    p3.arrayPtr,
+    p4.arrayPtr,
+    points.ptr
+  );
   const res = points.toVector3();
+  console.log(
+    "%c Line:22 🥝 _generateUnitCircleWithNormalVector",
+    "color:#93c0a4",
+    azimuth,
+    elevation,
+    numPerLay,
+    laynum,
+    P3,
+    P4,
+    res
+  );
+  console.table(res);
   points.free();
   return res;
 };
 
 export const GenerateMultiLayeredMeasurementPoints = (
   Points: CustomVector3[],
-  num: number,
+  numPerLay: number,
   laynum: number,
   P3: CustomVector3,
   P4: CustomVector3
@@ -30,27 +56,32 @@ export const GenerateMultiLayeredMeasurementPoints = (
   const points = new EmxArray_real_T(Points);
   const p3 = new EmxArray_real_T(P3);
   const p4 = new EmxArray_real_T(P4);
-  const resultPoints = new EmxArray_real_T(3, num * laynum);
-  console.log(
-    "%c Line:35 🥪 resultPoints",
-    "color:#4fff4B",
-    resultPoints.toVector3()
-  );
+  const resultPoints = new EmxArray_real_T(3, numPerLay * laynum);
+  console.group("GenerateMultiLayeredMeasurementPoints");
+  console.log("%c Line:35 🥪 points", "color:#4fff4B", points.toVector3());
 
+  console.log(
+    "%c Line:40 🥪 num",
+    "color:#93c0a4",
+    numPerLay,
+    laynum,
+    p3.toVector3(),
+    p4.toVector3()
+  );
   _GenerateMultiLayeredMeasurementPoints(
     points.ptr,
-    num,
+    numPerLay,
     laynum,
     p3.arrayPtr,
     p4.arrayPtr,
     resultPoints.ptr
   );
   console.log(
-    "%c Line:45 🥥 resultPoints",
+    "%c Line:45 🥥 GenerateMultiLayeredMeasurementPoints resultPoints",
     "color:#ea7e5c",
-    resultPoints,
-    points.toJSON()
+    resultPoints.toVector3()
   );
+  console.groupEnd();
   const resoult = resultPoints.toVector3();
   points.free();
   resultPoints.free();
@@ -72,6 +103,11 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
   const Mradial = new EmxArray_real_T(1, 1);
   const Err_every = new EmxArray_real_T(1, Points.length);
   const Bottom_round_center1 = new EmxArray_real_T(3, 2);
+  console.group("GenerateMultiLayeredMeasurementPoints");
+  console.log("%c Line:73 🍤 points", "color:#93c0a4", points.toVector3());
+  console.log("%c Line:74 🍰 p1", "color:#33a5ff", p1.toVector3());
+  console.log("%c Line:75 🥔 p2", "color:#93c0a4", p2.toVector3());
+  console.log("%c Line:93 🍿 result before", "color:#ea7e5c", Err_every.size);
   _CalculateAccurateCylindersFromMultipleMeasurementPoints(
     points.ptr,
     p1.arrayPtr,
@@ -81,72 +117,70 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = (
     Mradial.arrayPtr,
     Err_every.ptr,
     Bottom_round_center1.arrayPtr,
-    Bottom_round_center1.arrayPtr + Float64Array.BYTES_PER_ELEMENT * 3
+    Bottom_round_center1.arrayPtr + 8 * 3
   );
   const result = {
-    center: center.toVector3(),
+    center: center.toVector3()[0],
     Err_every: Err_every.toJSON(),
+    mTaon: mTaon.toVector3()[0],
+    R: Mradial.toJSON()?.[0],
     Bottom_round_center: Bottom_round_center1.toVector3(),
   };
+  console.log(
+    "%c Line:93 🍿 result",
+    "color:#ea7e5c",
+    Err_every.size,
+    Err_every
+  );
+
+  console.groupEnd();
   center.free();
   mTaon.free();
   Mradial.free();
-  Err_every.free();
+  // Err_every.free();
   p1.free();
   p2.free();
   return result;
 };
-const init = () => {
-  const azimuth = Math.PI / 3;
-  const elevation = Math.PI / 4;
-  let start = performance.now();
-  const res = generateUnitCircleWithNormalVector(azimuth, elevation, 5);
-  console.log(
-    "%c Line:108 🍌 start",
-    "color:#4fff4B",
-    performance.now() - start
-  );
-  console.log(
-    "%c Line:90 🥪 generateUnitCircleWithNormalVector",
-    "color:#6ec1c2",
-    res
+
+export const CalculatAAndBPoints = (
+  MTaon: CustomVector3,
+  Mcenter: CustomVector3,
+  r: number,
+  Bottom_round_center1: CustomVector3,
+  Bottom_round_center2: CustomVector3,
+  testP: CustomVector3,
+  numShengLu: number,
+  phi: number
+) => {
+  console.log("%c Line:149 🌰 numShengLu", "color:#93c0a4", numShengLu);
+  const mTaon = new EmxArray_real_T(MTaon);
+  const mCenter = new EmxArray_real_T(Mcenter);
+  const bottom_round_center1 = new EmxArray_real_T(Bottom_round_center1);
+  const bottom_round_center2 = new EmxArray_real_T(Bottom_round_center2);
+  const _testP = new EmxArray_real_T(testP);
+  const A = new EmxArray_real_T(3, numShengLu * 2);
+  const B = new EmxArray_real_T(3, numShengLu * 2);
+  _CalculatAAndBPoints(
+    mTaon.arrayPtr,
+    mCenter.arrayPtr,
+    r,
+    bottom_round_center1.arrayPtr,
+    bottom_round_center2.arrayPtr,
+    _testP.arrayPtr,
+    numShengLu,
+    phi,
+    A.ptr,
+    B.ptr
   );
 
-  let i = 0;
-  const v = data[i].map((item) => {
-    return new CustomVector3(...item);
-  });
-  const p3 = new CustomVector3(...p3array[i]);
-  const p4 = new CustomVector3(...p4array[i]);
-  console.log("%c Line:103 🥛 p3", "color:#e41a6a", p3, p4);
-  start = performance.now();
-  const res2 = GenerateMultiLayeredMeasurementPoints(v, 3, 5, p3, p4);
-  console.log(
-    "%c Line:108 🍌 start",
-    "color:#4fff4B",
-    performance.now() - start
-  );
-  console.log("%c Line:128 🥖 res2", "color:#2eafb0", res2);
+  const res = {
+    bottomA: A.toVector3(),
+    bottomB: B.toVector3(),
+  };
 
-  const pointsFlat = [];
-  for (const dataIndex of data) {
-    dataIndex.forEach((item) => {
-      pointsFlat.push(new CustomVector3(...item));
-    });
-  }
-  console.log("%c Line:125 🍧 pointsFlat", "color:#ea7e5c", pointsFlat);
-  start = performance.now();
-  const res3 = CalculateAccurateCylindersFromMultipleMeasurementPoints(
-    pointsFlat,
-    pointsFlat[0],
-    pointsFlat[24]
-  );
-  console.log(
-    "%c Line:108 🍌 start",
-    "color:#4fff4B",
-    performance.now() - start
-  );
-  console.log("%c Line:132 🍭 res3", "color:#b03734", res3);
+  console.log("%c Line:173 🥓 res", "color:#465975", res);
+  A.free();
+  B.free();
+  return res;
 };
-setTimeout(init, 500);
-// init();

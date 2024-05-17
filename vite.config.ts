@@ -7,4 +7,5 @@ import topLevelAwait from "vite-plugin-top-level-await";
 export default defineConfig({
   base: "./",
   plugins: [react(), wasm(), topLevelAwait()],
+  build: { sourcemap: true },
 });

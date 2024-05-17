@@ -1,25 +1,26 @@
 import { Button, Form, Steps } from "antd";
 import { useState } from "react";
-import Module3D from "./module3D";
+import Module3D from "./module3DPoints";
 import Connect from "../components/ConnectDevice";
-import { getLine, getPoint } from "../utils/commond";
+import { getLine, measureAndGetSimpleCoord } from "../utils/commond";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
-import BaseInfo from "./BaseInfo";
-import GetPoints from "./GetPoints";
+import BaseInfo from "../components/BaseInfo";
+import GetPoints from "../components/GetPoints";
 import { Module3DPoint } from "./Module3DPoint";
-import { CustomVector3 } from "../class/CustomVector3";
+import { Module3DPointsMeasure } from "./Module3DPointsMeasure";
 
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
   const [step, setStep] = useState(0);
+  console.log("%c Line:15 🍔 data", "color:#42b983", data);
 
   const [form] = Form.useForm();
 
   const pickPoint = (key: string, field?: any) => {
     const arr = form.getFieldValue(key);
 
-    return getPoint().then((res) => {
+    return measureAndGetSimpleCoord().then((res) => {
       console.log("%c Line:22 🍩 res", "color:#fca650", res, field);
       if (field) {
         arr[field.key] = res;
@@ -41,11 +42,6 @@ export default function Setting() {
     setStep(value);
   };
 
-  const getFromPoints = (): CustomVector3[] => {
-    const { firstPoints, points } = form.getFieldsValue() ?? {};
-    return [...(firstPoints ?? []), ...(points ?? [])];
-  };
-
   const steps = [
     {
       title: "设备连接",
@@ -61,14 +57,19 @@ export default function Setting() {
       // onNext: GetPoints,
     },
     {
-      title: "拟合",
+      title: "自动圆面点采集",
       conponents: <Module3DPoint />,
     },
+    // {
+    //   title: "自动圆柱点采集",
+    //   conponents: (
+    //     <Module3D className="q-mb-4" height={"calc( 100vh - 268px - 1em )"} />
+    //   ),
+    // },
+
     {
-      title: "标记",
-      conponents: (
-        <Module3D className="q-mb-4" height={"calc( 100vh - 268px - 1em )"} />
-      ),
+      title: "圆柱拟合",
+      conponents: <Module3DPointsMeasure />,
     },
   ];
 

@@ -4,15 +4,19 @@
 #include "generate_unit_circle_with_normal_vector2.h"
 #include "Generate_multi_layered_measurement_points.h"
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
+#include "Calculat_A_and_B_Points.h"
 
 EMSCRIPTEN_KEEPALIVE
 void generateUnitCircleWithNormalVector(double azimuth, double elevation,
-                                        double num, const double P1[3],
+                                        double num, double laynum, const double P1[3],
                                         const double P2[3],
                                         emxArray_real_T *Point_out)
 {
-    generate_unit_circle_with_normal_vector2(azimuth, elevation, num, P1, P2, Point_out);
+    printf("generateUnitCircleWithNormalVector %f %f %f", azimuth, elevation, num);
+    printf("P3: %f,%f,%f", P1[0], P1[1], P1[2]);
+    generate_unit_circle_with_normal_vector2(azimuth, elevation, num, laynum, P1, P2, Point_out);
 }
+
 EMSCRIPTEN_KEEPALIVE
 void GenerateMultiLayeredMeasurementPoints(
     const emxArray_real_T *Point_out,
@@ -26,7 +30,7 @@ void GenerateMultiLayeredMeasurementPoints(
 }
 
 EMSCRIPTEN_KEEPALIVE
-void CalculateAccurateCylindersFromMultipleMeasurementPoints2(
+void CalculateAccurateCylindersFromMultipleMeasurementPoints(
     const emxArray_real_T *points,
     const double P_bound1[3],
     const double P_bound2[3],
@@ -38,4 +42,20 @@ void CalculateAccurateCylindersFromMultipleMeasurementPoints2(
     double Bottom_round_center2[3])
 {
     Calculate_accurate_cylinders_from_multiple_measurement_points2(points, P_bound1, P_bound2, Mcenter, MTaon, Mradial, Err_every, Bottom_round_center1, Bottom_round_center2);
+}
+
+EMSCRIPTEN_KEEPALIVE
+void CalculatAAndBPoints(const double MTaon[3], const double Mcenter[3],
+                         double Mradial,
+                         const double Bottom_round_center1[3],
+                         const double Bottom_round_center2[3],
+                         const double testP[3], double numShengLu,
+                         double phi, emxArray_real_T *PointTable_A,
+                         emxArray_real_T *PointTable_B)
+{
+    Calculat_A_and_B_Points(MTaon, Mcenter, Mradial,
+                            Bottom_round_center1,
+                            Bottom_round_center2,
+                            testP, numShengLu, phi,
+                            PointTable_A, PointTable_B);
 }

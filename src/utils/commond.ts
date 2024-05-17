@@ -5,7 +5,7 @@ const mock = new URLSearchParams(location.search).has("mock");
 
 export const sendText = (text): Promise<string> => {
   return new Promise((resolve) => {
-    if (import.meta.env.DEV || mock) {
+    if (mock) {
       const mockData = {
         "2023:": "0",
         "5003:": "3216936",
@@ -24,7 +24,7 @@ export const sendText = (text): Promise<string> => {
       };
       setTimeout(() => {
         resolve(mockData[text]);
-      }, 1000);
+      }, 500);
       return;
     }
     const flag = setTimeout(() => {
@@ -32,6 +32,7 @@ export const sendText = (text): Promise<string> => {
     }, 12000);
     const handleSerialEvent = (event) => {
       console.log(
+        `发送 ：%R1Q,${text}`,
         "%c Line:11 🍪 接收到的原始数据 event.detail：",
         "color:#f5ce50",
         event.detail
@@ -70,10 +71,10 @@ export const sendText = (text): Promise<string> => {
 // %R1Q,2107:2 ==> %R1P,0,0:0,1.069995191213058,1.000012316348839
 
 /**
- * 设置当前为原点
+ * 设置仪器的站坐标
  * @returns
  */
-export const setOrigin = () =>
+export const setStation = () =>
   sendText(`2010:0,0,0,0`).then((res) => {
     console.log("%c Line:67 🍖 9027", "color:#7f2b82", res);
     return res;
@@ -113,11 +114,14 @@ export const getDeviceInfo = async () => {
     dInfo.SoftwareVersion = res.replace(/,/g, ".");
   });
 
-  // 设置当前位置为原点
-  await setOrigin();
+  // 设置 EDM 测量模式
+  await sendText("2020:5");
 
-  // 设置模式，设置后才能采集点
-  await setMode();
+  // 打开/关闭激光指针
+  await sendText("1004:1");
+
+  // 设置当前位置为原点
+  await setStation();
 
   const dp = await getDevicePosition();
   console.log("%c Line:121 🍰 dp", "color:#e41a6a", dp);
@@ -137,25 +141,45 @@ export const goTo = (h, v) =>
     return res;
   });
 
+export const goToCV = (x, y, z) => {
+  const vector3 = new CustomVector3(x, y, z);
+  const s = vector3.toSpherical();
+  console.log("%c Line:146 🍔 vector3", "color:#e41a6a", vector3, s);
+  return goTo(s.theta, s.phi);
+};
 /**
- *  测量全站仪坐标
+ *  测量测量点坐标
  * @returns
  */
-export const setMode = () =>
+export const measure = () =>
   sendText(`2008:1,1`).then((res) => {
     console.log("%c Line:71 🥛 2008", "color:#2eafb0", res);
-    return res;
+    return new Promise((reslove) => {
+      setTimeout(() => {
+        reslove(res);
+      }, 300);
+    });
   });
 
 /**
- * 测量点坐标
+ * 获取笛卡尔坐标
  * @returns
  */
-export const getPoint = () =>
-  sendText(`2116:300,1`).then((res) => {
-    const d = res.split(",")?.map((i) => Number(i));
-    if (d?.length === 3) return new CustomVector3(...d);
-  });
+
+export const getSimpleCoord = (): Promise<CustomVector3> =>
+  sendText(`2116:1500,1`)
+    .then((res) => {
+      if (res.startsWith("%R1P,0,0:")) {
+        throw new Error("获取笛卡尔坐标失败");
+      }
+      const d = res.split(",")?.map((i) => parseFloat(i));
+      // ?.map((i) => parseFloat(parseFloat(i).toFixed(4)));
+      if (d?.length === 3) return new CustomVector3(d[0], d[2], d[1]);
+    })
+    .catch((err) => {
+      console.log("%c Line:174 🍕 err", "color:#465975", err);
+      return getSimpleCoord();
+    });
 
 /**
  * 测量方向
@@ -164,7 +188,7 @@ export const getPoint = () =>
 export const getLine = (): Promise<number[]> =>
   sendText(`2107:1`).then((res) => {
     console.log("%c Line:71 🥛 2107", "color:#2eafb0", res);
-    return res.split(",").map((s) => Number(s));
+    return res.split(",").map((s) => parseFloat(parseFloat(s).toFixed(6)));
   });
 
 /**
@@ -174,5 +198,14 @@ export const getLine = (): Promise<number[]> =>
  */
 export const pointToAndMeasure = (v: CustomVector3) => {
   const s = v.toSpherical();
-  return goTo(s.phi, s.theta).then(getPoint);
+  return goTo(s.theta, s.phi).then(measureAndGetSimpleCoord);
+};
+
+/**
+ * 指向点的方向，并测量
+ * @param v
+ * @returns Promise<CustomVector3>
+ */
+export const measureAndGetSimpleCoord = () => {
+  return measure().then(getSimpleCoord);
 };

@@ -43,7 +43,7 @@ export default class EmxArray_real_T {
       this.#setSize(m, n);
       return this.#init();
     } else if (m instanceof CustomVector3) {
-      this.#arrayFlat = m.toArray();
+      this.#arrayFlat = m.toCArray();
       this.#setSize(3, 1);
       return this.#init();
     } else if (Array.isArray(m)) {
@@ -59,7 +59,7 @@ export default class EmxArray_real_T {
         this.#arrayFlat = [];
         for (const row of m) {
           //@ts-ignore
-          this.#arrayFlat.push(...(row as CustomVector3).toArray());
+          this.#arrayFlat.push(...(row as CustomVector3).toCArray());
         }
         this.#setSize(3, m.length);
       } else {
@@ -157,6 +157,7 @@ export default class EmxArray_real_T {
 
     // 从结构体中获取allocatedSize（即数组长度）
     var allocatedSize = emModule.getValue(this.ptr + 8, "i32");
+    console.log("%c Line:160 🍺 allocatedSize", "color:#b03734", allocatedSize);
 
     // 创建一个Float64Array视图来读取data数组的值
     var data = Array.from(
@@ -192,7 +193,7 @@ export default class EmxArray_real_T {
   toVector3() {
     if (this.size[0] === 3) {
       return this.toJSON().map((row) => {
-        return new CustomVector3(...row);
+        return new CustomVector3().fromCArray(row);
       });
     }
     return [];

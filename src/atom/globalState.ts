@@ -1,4 +1,6 @@
 import { atom } from "recoil";
+import { mockData } from "../utils/mockData";
+import { CustomVector3 } from "../class/CustomVector3";
 
 export const connectState = atom({
   key: "connectState", // 唯一标识这个状态
@@ -12,5 +14,9 @@ export const deviceInfo = atom({
 
 export const Data = atom<Record<string, any>>({
   key: "data", // 唯一标识这个状态
-  default: {}, // 默认值
+  default: {
+    mPoints: mockData.mPoints.map((item) => {
+      return new CustomVector3(item.x, item.y, item.z);
+    }),
+  }, // 默认值
 });
