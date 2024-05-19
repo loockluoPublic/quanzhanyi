@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 30-Apr-2024 00:52:42
+ * C/C++ source code generated on  : 17-May-2024 11:16:59
  */
 
 /*************************************************************************/
@@ -33,6 +33,7 @@
 /* Include Files */
 #include "main.h"
 #include "Calculat_A_and_B_Points.h"
+#include "Calculat_A_and_B_Points_after_Offest.h"
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
 #include "Generate_multi_layered_measurement_points.h"
 #include "QuanZhanYi_emxAPI.h"
@@ -56,6 +57,8 @@ static void argInit_4x1_real_T(double result[4]);
 static emxArray_real_T *argInit_Unboundedx2_real_T(void);
 
 static double argInit_real_T(void);
+
+static void c_main_Calculat_A_and_B_Points_(void);
 
 static void c_main_Calculate_accurate_cylin(void);
 
@@ -163,6 +166,36 @@ Change this value to the value that the application requires. */
 static double argInit_real_T(void)
 {
   return 0.0;
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+static void c_main_Calculat_A_and_B_Points_(void)
+{
+  emxArray_real_T *PointTable_A_off;
+  emxArray_real_T *PointTable_B_off;
+  double MTaon_tmp[3];
+  double Mradial_tmp;
+  emxInitArray_real_T(&PointTable_A_off, 2);
+  emxInitArray_real_T(&PointTable_B_off, 2);
+  /* Initialize function 'Calculat_A_and_B_Points_after_Offest' input arguments.
+   */
+  /* Initialize function input argument 'MTaon'. */
+  argInit_3x1_real_T(MTaon_tmp);
+  /* Initialize function input argument 'Mcenter'. */
+  Mradial_tmp = argInit_real_T();
+  /* Initialize function input argument 'Bottom_round_center1'. */
+  /* Initialize function input argument 'Bottom_round_center2'. */
+  /* Initialize function input argument 'testP'. */
+  /* Call the entry-point 'Calculat_A_and_B_Points_after_Offest'. */
+  Calculat_A_and_B_Points_after_Offest(
+      MTaon_tmp, MTaon_tmp, Mradial_tmp, MTaon_tmp, MTaon_tmp, MTaon_tmp,
+      Mradial_tmp, Mradial_tmp, Mradial_tmp, Mradial_tmp, PointTable_A_off,
+      PointTable_B_off);
+  emxDestroyArray_real_T(PointTable_B_off);
+  emxDestroyArray_real_T(PointTable_A_off);
 }
 
 /*
@@ -377,6 +410,7 @@ int main(int argc, char **argv)
 You can call entry-point functions multiple times. */
   main_angle2point();
   main_Calculat_A_and_B_Points();
+  c_main_Calculat_A_and_B_Points_();
   c_main_Calculate_accurate_cylin();
   main_fitcircle();
   c_main_foot_of_perpendicular_fr();
