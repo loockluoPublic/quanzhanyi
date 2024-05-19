@@ -7,9 +7,11 @@ import {
 import { useEffect, useRef, useState } from "react";
 import Module3D from "../components/Module3D";
 import { Button } from "antd";
+import BaseInfo from "../components/BaseInfo";
 
 export function CalculateAccurateCylinders() {
   const [data, setData] = useRecoilState(Data);
+  console.log("%c Line:14 🍌 data", "color:#3f7cff", data);
   const [loading, setLoading] = useState(false);
 
   const run = () => {
@@ -57,6 +59,9 @@ export function CalculateAccurateCylinders() {
           <Button loading={loading} onClick={run}>
             运行
           </Button>
+          <div>
+            <BaseInfo />
+          </div>
         </>
       }
     ></Module3D>

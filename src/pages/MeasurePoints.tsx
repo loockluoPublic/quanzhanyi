@@ -16,6 +16,7 @@ const mock = new URLSearchParams(location.search).has("mock");
 
 export function MeasurePoints() {
   const [data, setData] = useRecoilState(Data);
+  console.log("%c Line:19 🥒 data", "color:#465975", data);
 
   const { measure, loading, points } = useMeasure();
 

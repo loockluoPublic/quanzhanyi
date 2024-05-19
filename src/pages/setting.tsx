@@ -63,11 +63,16 @@ export default function Setting() {
       conponents: <CalculateAccurateCylinders />,
     },
   ];
-
-  const next = () => {
+  const updateFormData = () => {
     const formValues = form.getFieldsValue();
+    console.log("%c Line:68 🍬 formValues", "color:#ed9ec7", formValues);
     setData({ ...data, ...formValues });
-    setStep(step + 1);
+  };
+  const next = () => {
+    updateFormData();
+    if (step < steps.length) {
+      setStep(step + 1);
+    }
   };
 
   return (
@@ -85,6 +90,7 @@ export default function Setting() {
           onFinish={next}
           className={step > 2 ? " q-w-full" : ""}
           form={form}
+          onChange={updateFormData}
         >
           {steps[step].conponents}
           <div className=" q-text-center">
