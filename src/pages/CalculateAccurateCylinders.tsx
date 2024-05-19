@@ -35,7 +35,9 @@ export function CalculateAccurateCylinders() {
             res.Bottom_round_center[1],
             data.centerPoint[0],
             data.sdfb,
-            data.sdj
+            data.sdj,
+            data.tOff,
+            data.rOff
           );
         })
         .then((AB) => {

@@ -55,6 +55,22 @@ export default function BaseInfo() {
       >
         <InputNumber />
       </Item>
+      <Item
+        label="轴向偏移"
+        name="tOff"
+        rules={[{ required: true }]}
+        initialValue={0.1}
+      >
+        <InputNumber />
+      </Item>
+      <Item
+        label="径向偏移"
+        name="rOff"
+        rules={[{ required: true }]}
+        initialValue={0.2}
+      >
+        <InputNumber />
+      </Item>
     </>
   );
 }

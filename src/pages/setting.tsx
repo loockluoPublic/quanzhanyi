@@ -93,11 +93,13 @@ export default function Setting() {
           onChange={updateFormData}
         >
           {steps[step].conponents}
-          <div className=" q-text-center">
-            <Button type="primary" htmlType="submit">
-              下一步
-            </Button>
-          </div>
+          {steps.length - 1 > step && (
+            <div className=" q-text-center">
+              <Button type="primary" htmlType="submit">
+                下一步
+              </Button>
+            </div>
+          )}
         </Form>
       </div>
     </>

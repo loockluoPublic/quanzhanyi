@@ -168,7 +168,9 @@ export const CalculatAAndBPoints = async (
   Bottom_round_center2: CustomVector3,
   testP: CustomVector3,
   numShengLu: number,
-  phi: number
+  phi: number,
+  tOff: number,
+  rOff: number
 ) => {
   const mTaon = new EmxArray_real_T(MTaon);
   const mCenter = new EmxArray_real_T(Mcenter);
@@ -186,6 +188,8 @@ export const CalculatAAndBPoints = async (
     _testP.arrayPtr,
     numShengLu,
     phi,
+    tOff,
+    rOff,
     A.ptr,
     B.ptr
   );

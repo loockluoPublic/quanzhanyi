@@ -4,7 +4,7 @@
 #include "generate_unit_circle_with_normal_vector2.h"
 #include "Generate_multi_layered_measurement_points.h"
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
-#include "Calculat_A_and_B_Points.h"
+#include "Calculat_A_and_B_Points_after_Offest.h"
 
 EMSCRIPTEN_KEEPALIVE
 void generateUnitCircleWithNormalVector(double azimuth, double elevation,
@@ -50,12 +50,17 @@ void CalculatAAndBPoints(const double MTaon[3], const double Mcenter[3],
                          const double Bottom_round_center1[3],
                          const double Bottom_round_center2[3],
                          const double testP[3], double numShengLu,
-                         double phi, emxArray_real_T *PointTable_A,
+                         double phi, double toff,
+                         double roff, emxArray_real_T *PointTable_A,
                          emxArray_real_T *PointTable_B)
 {
-    Calculat_A_and_B_Points(MTaon, Mcenter, Mradial,
-                            Bottom_round_center1,
-                            Bottom_round_center2,
-                            testP, numShengLu, phi,
-                            PointTable_A, PointTable_B);
+    Calculat_A_and_B_Points_after_Offest(MTaon, Mcenter, Mradial,
+                                         Bottom_round_center1,
+                                         Bottom_round_center2,
+                                         testP,
+                                         numShengLu,
+                                         phi,
+                                         toff,
+                                         roff,
+                                         PointTable_A, PointTable_B);
 }

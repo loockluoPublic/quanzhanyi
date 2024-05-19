@@ -88,6 +88,7 @@ export default function Index(props: {
   component?: ReactNode;
   [k: string]: any;
 }) {
+  console.log("%c Line:82 🥚 props", "color:#b03734", props);
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<number[]>([]);
 
@@ -143,8 +144,14 @@ export default function Index(props: {
         {/* <Box position={[0, 0, 0]} /> */}
         <PointsLabel points={showPoints.filter((p) => p.enable)} color="#000" />
 
-        <PointsLabel points={props?.AB?.bottomA} color="green" />
-        <PointsLabel points={props?.AB?.bottomB} color="red" />
+        {props?.sdm?.includes("A") && (
+          <PointsLabel points={props?.AB?.bottomA} color="green" />
+        )}
+
+        {props?.sdm?.includes("B") && (
+          <PointsLabel points={props?.AB?.bottomB} color="red" />
+        )}
+
         {/* {props?.direct?.length > 0 && (
           <Line
             points={[
