@@ -8,18 +8,10 @@ const MyCylinder = (props: any) => {
   console.log("%c Line:7 🍪 props", "color:#33a5ff", props);
 
   if (!props?.Bottom_round_center) return null;
-  //   console.log(
-  //     "%c Line:16 🥝 midpoint2",
-  //     "color:#fca650",
-  //     midpoint2.subVectors(
-  //       props?.Bottom_round_center?.[0],
-  //       props?.Bottom_round_center?.[1]
-  //     )
-  //     // props?.mTaon?.normalize?.()
-  //   );
+
   const midpoint = new CustomVector3();
 
-  midpoint.addVectors(
+  midpoint.subVectors(
     props?.Bottom_round_center?.[0]?.toVector3(),
     props?.Bottom_round_center?.[1]?.toVector3()
   );
@@ -28,16 +20,10 @@ const MyCylinder = (props: any) => {
     props?.Bottom_round_center?.[1]
   );
 
-  console.log(
-    "%c Line:37 🍰 props?.mTaon",
-    "color:#ed9ec7",
-    props?.mTaon?.toVector3()?.normalize(),
-    midpoint?.toVector3()?.normalize()
-  );
   return (
     <>
       <Cylinder
-        args={[props.R, props.R, 2, 32, 1, true]}
+        args={[props.R, props.R, height * 1.2, 32, 1, true]}
         position={props?.center?.toVector3() || []} // 设置位置
         rotation={midpoint?.calcRotation() as any} // 设置旋转
       >
