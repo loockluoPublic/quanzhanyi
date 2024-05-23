@@ -117,12 +117,6 @@ export default function Index(props: {
     setSelectedKeys(keys);
   }, [showPoints]);
 
-  console.log(
-    "%c Line:136 🥐 props?.calulateRes",
-    "color:#ea7e5c",
-    props,
-    props?.calulateRes
-  );
   return (
     <div className=" q-flex q-w-full">
       <Canvas

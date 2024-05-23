@@ -16,37 +16,33 @@ export function CalculateAccurateCylinders() {
 
   const run = () => {
     setLoading(true);
-    setTimeout(() => {
-      CalculateAccurateCylindersFromMultipleMeasurementPoints(
-        data.mPoints,
-        data.firstPoints[0],
-        data.firstPoints[1]
-      )
-        .then((res) => {
-          setData({
-            ...data,
-            calulateRes: res,
-          });
-          return CalculatAAndBPoints(
-            res.mTaon,
-            res.center,
-            res.R,
-            res.Bottom_round_center[0],
-            res.Bottom_round_center[1],
-            data.centerPoint[0],
-            data.sdfb,
-            data.sdj,
-            data.tOff,
-            data.rOff
-          );
-        })
-        .then((AB) => {
-          setLoading(false);
-          setData({
-            ...data,
-            AB,
-          });
+    setTimeout(async () => {
+      const calulateRes =
+        await CalculateAccurateCylindersFromMultipleMeasurementPoints(
+          data.mPoints,
+          data.firstPoints[0],
+          data.firstPoints[1]
+        );
+
+      CalculatAAndBPoints(
+        calulateRes.mTaon,
+        calulateRes.center,
+        calulateRes.R,
+        calulateRes.Bottom_round_center[0],
+        calulateRes.Bottom_round_center[1],
+        data.centerPoint[0],
+        data.sdfb,
+        data.sdj,
+        data.tOff,
+        data.rOff
+      ).then((AB) => {
+        setLoading(false);
+        setData({
+          ...data,
+          AB,
+          calulateRes,
         });
+      });
     }, 200);
   };
   return (

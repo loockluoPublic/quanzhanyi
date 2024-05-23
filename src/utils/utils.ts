@@ -117,7 +117,7 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = async (
   const center = new EmxArray_real_T(3, 1);
   const mTaon = new EmxArray_real_T(3, 1);
   const Mradial = new EmxArray_real_T(1, 1);
-  const Err_every = new EmxArray_real_T(1, Points.length);
+  const Err_every = new EmxArray_real_T(Points.length, 1);
   const Bottom_round_center1 = new EmxArray_real_T(3, 2);
 
   _CalculateAccurateCylindersFromMultipleMeasurementPoints(
