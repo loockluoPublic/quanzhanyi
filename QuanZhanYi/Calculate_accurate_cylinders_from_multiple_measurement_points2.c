@@ -2,7 +2,7 @@
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points2.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 23-May-2024 21:58:05
+ * C/C++ source code generated on  : 26-May-2024 21:56:17
  */
 
 /* Include Files */
@@ -44,6 +44,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     double Bottom_round_center2[3])
 {
   emxArray_real_T *A;
+  emxArray_real_T *OptAllErr;
   emxArray_real_T *P;
   emxArray_real_T *U;
   emxArray_real_T *b_y;
@@ -81,6 +82,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   double theta_tmp;
   double *A_data;
   double *Err_every_data;
+  double *OptAllErr_data;
   double *P_data;
   double *denom_data;
   double *err_data;
@@ -98,19 +100,20 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   int j;
   int m;
   points_data = points->data;
+  emxInit_real_T(&OptAllErr, 1);
   OptErr = 99999.0;
   OptAngle_idx_0 = 0.0;
   OptAngle_idx_1 = 0.0;
   OptPara_idx_0 = 0.0;
   OptPara_idx_1 = 0.0;
   *Mradial = 0.0;
-  i = Err_every->size[0];
-  Err_every->size[0] = points->size[1];
-  emxEnsureCapacity_real_T(Err_every, i);
-  Err_every_data = Err_every->data;
+  i = OptAllErr->size[0];
+  OptAllErr->size[0] = points->size[1];
+  emxEnsureCapacity_real_T(OptAllErr, i);
+  OptAllErr_data = OptAllErr->data;
   aoffset = points->size[1];
   for (i = 0; i < aoffset; i++) {
-    Err_every_data[i] = 0.0;
+    OptAllErr_data[i] = 0.0;
   }
   m = points->size[1];
   emxInit_real_T(&P, 2);
@@ -581,13 +584,13 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         OptPara_idx_0 = b_n[0];
         OptPara_idx_1 = b_n[1];
         *Mradial = b_n[2];
-        i = Err_every->size[0];
-        Err_every->size[0] = err->size[0];
-        emxEnsureCapacity_real_T(Err_every, i);
-        Err_every_data = Err_every->data;
+        i = OptAllErr->size[0];
+        OptAllErr->size[0] = err->size[0];
+        emxEnsureCapacity_real_T(OptAllErr, i);
+        OptAllErr_data = OptAllErr->data;
         aoffset = err->size[0];
         for (i = 0; i < aoffset; i++) {
-          Err_every_data[i] = err_data[i];
+          OptAllErr_data[i] = err_data[i];
         }
         OptAngle_idx_0 = d;
         OptAngle_idx_1 = rcoselev_tmp;
@@ -699,6 +702,16 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         (OptPara_idx_0 * rot2[3 * i] + OptPara_idx_1 * rot2[3 * i + 1]) +
         0.0 * rot2[3 * i + 2];
   }
+  i = Err_every->size[0] * Err_every->size[1];
+  Err_every->size[0] = 1;
+  Err_every->size[1] = OptAllErr->size[0];
+  emxEnsureCapacity_real_T(Err_every, i);
+  Err_every_data = Err_every->data;
+  aoffset = OptAllErr->size[0];
+  for (i = 0; i < aoffset; i++) {
+    Err_every_data[i] = OptAllErr_data[i];
+  }
+  emxFree_real_T(&OptAllErr);
   /*  三个点定义 */
   /*  斜率计算 */
   theta_tmp = (Mcenter[0] + MTaon[0]) - Mcenter[0];

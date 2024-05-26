@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 23-May-2024 21:58:05
+ * C/C++ source code generated on  : 26-May-2024 21:56:17
  */
 
 /*************************************************************************/
@@ -212,7 +212,7 @@ static void c_main_Calculate_accurate_cylin(void)
   double Mcenter[3];
   double P_bound1_tmp[3];
   double Mradial;
-  emxInitArray_real_T(&Err_every, 1);
+  emxInitArray_real_T(&Err_every, 2);
   /* Initialize function
    * 'Calculate_accurate_cylinders_from_multiple_measurement_points2' input
    * arguments. */
