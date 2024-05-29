@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 26-May-2024 21:56:17
+ * C/C++ source code generated on  : 29-May-2024 09:37:13
  */
 
 /* Include Files */
@@ -379,7 +379,6 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     PointTable2DT_A_data[0] = A1x;
     PointTable2DT_A_data[1] = A1y;
     PointTable2DT_A_data[2] = A1z;
-    /*          PointTable2DT_A(2:10,:) = []; */
     break;
   case 2: {
     double A2x[6];
@@ -397,7 +396,6 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     for (itilerow = 0; itilerow < 6; itilerow++) {
       PointTable2DT_A_data[itilerow] = A2x[itilerow];
     }
-    /*          PointTable2DT_A(3:10,:) = []; */
   } break;
   case 3:
     angle2point(D_idx_2 - 0.78539816339744828, C[0], C[1], C[2], E_idx_1,
@@ -415,7 +413,6 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     b_A2x[8] = A3z;
     PointTable2DT_A_size_idx_0 = 3;
     memcpy(&PointTable2DT_A_data[0], &b_A2x[0], 9U * sizeof(double));
-    /*          PointTable2DT_A(4:10,:) = []; */
     break;
   case 4:
     angle2point(D_idx_2 - 0.94247779607693793, C[0], C[1], C[2], E_idx_1,
@@ -440,7 +437,6 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     c_A2x[11] = A5z;
     PointTable2DT_A_size_idx_0 = 4;
     memcpy(&PointTable2DT_A_data[0], &c_A2x[0], 12U * sizeof(double));
-    /*          PointTable2DT_A(5:10,:) = []; */
     break;
   case 5:
     angle2point(D_idx_2 - 1.0471975511965976, C[0], C[1], C[2], E_idx_1,
@@ -468,7 +464,6 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     d_A2x[14] = A5z;
     PointTable2DT_A_size_idx_0 = 5;
     memcpy(&PointTable2DT_A_data[0], &d_A2x[0], 15U * sizeof(double));
-    /*          PointTable2DT_A(6:10,:) = []; */
     break;
   case 6:
     angle2point((D_idx_2 - 1.5707963267948966) + 0.44879895051282759, C[0],
@@ -503,7 +498,6 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     e_A2x[17] = s;
     PointTable2DT_A_size_idx_0 = 6;
     memcpy(&PointTable2DT_A_data[0], &e_A2x[0], 18U * sizeof(double));
-    /*          PointTable2DT_A(7:10,:) = []; */
     break;
   case 7:
     angle2point((D_idx_2 - 1.5707963267948966) + 0.39269908169872414, C[0],
@@ -543,7 +537,6 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     f_A2x[20] = A8z;
     PointTable2DT_A_size_idx_0 = 7;
     memcpy(&PointTable2DT_A_data[0], &f_A2x[0], 21U * sizeof(double));
-    /*          PointTable2DT_A(8:10,:) = []; */
     break;
   case 8:
     angle2point((D_idx_2 - 1.5707963267948966) + 0.3490658503988659, C[0], C[1],
@@ -588,7 +581,6 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     g_A2x[23] = b_absxk_tmp;
     PointTable2DT_A_size_idx_0 = 8;
     memcpy(&PointTable2DT_A_data[0], &g_A2x[0], 24U * sizeof(double));
-    /*          PointTable2DT_A(9:10,:) = []; */
     break;
   case 9:
     angle2point((D_idx_2 - 1.5707963267948966) + 0.31415926535897931, C[0],
@@ -638,7 +630,6 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     h_A2x[26] = b_C_tmp;
     PointTable2DT_A_size_idx_0 = 9;
     memcpy(&PointTable2DT_A_data[0], &h_A2x[0], 27U * sizeof(double));
-    /*          PointTable2DT_A(10,:) = []; */
     break;
   case 10:
     angle2point((D_idx_2 - 1.5707963267948966) + 0.28559933214452665, C[0],

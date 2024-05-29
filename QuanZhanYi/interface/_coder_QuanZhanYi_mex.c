@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 26-May-2024 21:56:17
+ * C/C++ source code generated on  : 29-May-2024 09:37:13
  */
 
 /* Include Files */
@@ -20,7 +20,7 @@
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
-  static const char_T *emlrtEntryPoints[10] = {
+  static const char_T *emlrtEntryPoints[11] = {
       "angle2point",
       "Calculat_A_and_B_Points",
       "Calculat_A_and_B_Points_after_Offest",
@@ -30,7 +30,8 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
       "Generate_multi_layered_measurement_points",
       "generate_unit_circle_with_normal_vector",
       "generate_unit_circle_with_normal_vector2",
-      "myvrrotvec2mat"};
+      "myvrrotvec2mat",
+      "RepeatSurvey"};
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
@@ -42,7 +43,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   st.tls = emlrtRootTLSGlobal;
   /* Dispatch the entry-point. */
   switch (emlrtGetEntryPointIndexR2016a(
-      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 10)) {
+      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 11)) {
   case 0:
     unsafe_angle2point_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
@@ -78,6 +79,9 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
     break;
   case 9:
     unsafe_myvrrotvec2mat_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 10:
+    unsafe_RepeatSurvey_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   }
   /* Module termination. */
@@ -242,6 +246,44 @@ void unsafe_Generate_multi_layered_measurement_points_mexFunction(
   c_Generate_multi_layered_measur(prhs, &outputs);
   /* Copy over outputs to the caller. */
   emlrtReturnArrays(1, &plhs[0], &outputs);
+}
+
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[2]
+ *                int32_T nrhs
+ *                const mxArray *prhs[4]
+ * Return Type  : void
+ */
+void unsafe_RepeatSurvey_mexFunction(int32_T nlhs, mxArray *plhs[2],
+                                     int32_T nrhs, const mxArray *prhs[4])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *outputs[2];
+  int32_T b_nlhs;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 4) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 4, 4,
+                        12, "RepeatSurvey");
+  }
+  if (nlhs > 2) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 12,
+                        "RepeatSurvey");
+  }
+  /* Call the function. */
+  RepeatSurvey_api(prhs, nlhs, outputs);
+  /* Copy over outputs to the caller. */
+  if (nlhs < 1) {
+    b_nlhs = 1;
+  } else {
+    b_nlhs = nlhs;
+  }
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
