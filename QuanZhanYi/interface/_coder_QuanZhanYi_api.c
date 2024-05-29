@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 26-May-2024 21:56:17
+ * C/C++ source code generated on  : 29-May-2024 09:37:13
  */
 
 /* Include Files */
@@ -648,6 +648,44 @@ void QuanZhanYi_terminate(void)
   st.tls = emlrtRootTLSGlobal;
   emlrtLeaveRtStackR2012b(&st);
   emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
+}
+
+/*
+ * Arguments    : const mxArray * const prhs[4]
+ *                int32_T nlhs
+ *                const mxArray *plhs[2]
+ * Return Type  : void
+ */
+void RepeatSurvey_api(const mxArray *const prhs[4], int32_T nlhs,
+                      const mxArray *plhs[2])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  real_T(*Bottom_round_center1)[3];
+  real_T(*Bottom_round_center2)[3];
+  real_T(*SoundPoint1)[3];
+  real_T(*SoundPoint2)[3];
+  real_T SoundAngle;
+  real_T SoundLength;
+  st.tls = emlrtRootTLSGlobal;
+  /* Marshall function inputs */
+  SoundPoint1 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "SoundPoint1");
+  SoundPoint2 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[1]), "SoundPoint2");
+  Bottom_round_center1 =
+      c_emlrt_marshallIn(&st, emlrtAlias(prhs[2]), "Bottom_round_center1");
+  Bottom_round_center2 =
+      c_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "Bottom_round_center2");
+  /* Invoke the target function */
+  RepeatSurvey(*SoundPoint1, *SoundPoint2, *Bottom_round_center1,
+               *Bottom_round_center2, &SoundAngle, &SoundLength);
+  /* Marshall function outputs */
+  plhs[0] = emlrt_marshallOut(SoundAngle);
+  if (nlhs > 1) {
+    plhs[1] = emlrt_marshallOut(SoundLength);
+  }
 }
 
 /*

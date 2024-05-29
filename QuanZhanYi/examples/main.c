@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 26-May-2024 21:56:17
+ * C/C++ source code generated on  : 29-May-2024 09:37:13
  */
 
 /*************************************************************************/
@@ -39,6 +39,7 @@
 #include "QuanZhanYi_emxAPI.h"
 #include "QuanZhanYi_terminate.h"
 #include "QuanZhanYi_types.h"
+#include "RepeatSurvey.h"
 #include "angle2point.h"
 #include "fitcircle.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
@@ -71,6 +72,8 @@ static void c_main_generate_unit_circle_wit(void);
 static void d_main_generate_unit_circle_wit(void);
 
 static void main_Calculat_A_and_B_Points(void);
+
+static void main_RepeatSurvey(void);
 
 static void main_angle2point(void);
 
@@ -350,6 +353,26 @@ static void main_Calculat_A_and_B_Points(void)
  * Arguments    : void
  * Return Type  : void
  */
+static void main_RepeatSurvey(void)
+{
+  double SoundPoint1_tmp[3];
+  double SoundAngle;
+  double SoundLength;
+  /* Initialize function 'RepeatSurvey' input arguments. */
+  /* Initialize function input argument 'SoundPoint1'. */
+  argInit_3x1_real_T(SoundPoint1_tmp);
+  /* Initialize function input argument 'SoundPoint2'. */
+  /* Initialize function input argument 'Bottom_round_center1'. */
+  /* Initialize function input argument 'Bottom_round_center2'. */
+  /* Call the entry-point 'RepeatSurvey'. */
+  RepeatSurvey(SoundPoint1_tmp, SoundPoint1_tmp, SoundPoint1_tmp,
+               SoundPoint1_tmp, &SoundAngle, &SoundLength);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_angle2point(void)
 {
   double ANG_tmp;
@@ -418,6 +441,7 @@ You can call entry-point functions multiple times. */
   c_main_generate_unit_circle_wit();
   d_main_generate_unit_circle_wit();
   main_myvrrotvec2mat();
+  main_RepeatSurvey();
   /* Terminate the application.
 You do not need to do this more than one time. */
   QuanZhanYi_terminate();

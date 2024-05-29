@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 26-May-2024 21:56:17
+ * C/C++ source code generated on  : 29-May-2024 09:37:13
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -35,6 +35,9 @@ void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points2_mexFu
 
 void unsafe_Generate_multi_layered_measurement_points_mexFunction(
     int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[5]);
+
+void unsafe_RepeatSurvey_mexFunction(int32_T nlhs, mxArray *plhs[2],
+                                     int32_T nrhs, const mxArray *prhs[4]);
 
 void unsafe_angle2point_mexFunction(int32_T nlhs, mxArray *plhs[3],
                                     int32_T nrhs, const mxArray *prhs[6]);
