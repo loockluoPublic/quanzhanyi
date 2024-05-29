@@ -12,7 +12,11 @@ export const deviceInfo = atom({
   default: undefined, // 默认值
 });
 
-export const Data = atom<Record<string, any>>({
+interface GlobalData {
+  mPoints: CustomVector3[];
+  [k: string]: any;
+}
+export const Data = atom<GlobalData>({
   key: "data", // 唯一标识这个状态
   default: {
     mPoints: mockData.mPoints.map((item) => {

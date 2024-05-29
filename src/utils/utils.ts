@@ -203,3 +203,39 @@ export const CalculatAAndBPoints = async (
   B.free();
   return res;
 };
+
+/**
+ *  计算标准差
+ * @param arr
+ * @returns
+ */
+export const calculateStandardDeviation = (arr: number[]) => {
+  const mean =
+    arr.reduce((acc, cur) => {
+      return acc + cur;
+    }, 0) / arr.length;
+
+  const squaredDifferences = arr.map((item) => Math.pow(item - mean, 2));
+  const totalSquaredDifference = squaredDifferences.reduce(
+    (acc, val) => acc + val,
+    0
+  );
+  const variance = totalSquaredDifference / arr.length;
+  return Math.sqrt(variance);
+};
+
+/**
+ * 过滤指定偏移的数据，返回需要去除的数据的数组序号
+ * @param arr
+ * @param variance
+ * @returns
+ */
+export const filterIndex = (arr: number[], variance) => {
+  const disableIndex = [];
+  arr.forEach((item, i) => {
+    if (Math.abs(item) > variance) {
+      disableIndex.push(i);
+    }
+  });
+  return disableIndex;
+};

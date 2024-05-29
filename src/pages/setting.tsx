@@ -8,6 +8,7 @@ import BaseInfo from "../components/BaseInfo";
 import GetPoints from "../components/GetPoints";
 import { MeasurePoints } from "./MeasurePoints";
 import { CalculateAccurateCylinders } from "./CalculateAccurateCylinders";
+import { CalculateResultPoints } from "./CalculateResultPoints";
 
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
@@ -61,6 +62,10 @@ export default function Setting() {
     {
       title: "圆柱拟合",
       conponents: <CalculateAccurateCylinders />,
+    },
+    {
+      title: "计算安装位",
+      conponents: <CalculateResultPoints />,
     },
   ];
   const updateFormData = () => {
