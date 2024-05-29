@@ -1410,6 +1410,7 @@ var _generateUnitCircleWithNormalVector = Module['_generateUnitCircleWithNormalV
 var _GenerateMultiLayeredMeasurementPoints = Module['_GenerateMultiLayeredMeasurementPoints'] = createExportWrapper('GenerateMultiLayeredMeasurementPoints');
 var _CalculateAccurateCylindersFromMultipleMeasurementPoints = Module['_CalculateAccurateCylindersFromMultipleMeasurementPoints'] = createExportWrapper('CalculateAccurateCylindersFromMultipleMeasurementPoints');
 var _CalculatAAndBPoints = Module['_CalculatAAndBPoints'] = createExportWrapper('CalculatAAndBPoints');
+var _Repeat_Survey = Module['_Repeat_Survey'] = createExportWrapper('Repeat_Survey');
 var _fflush = createExportWrapper('fflush');
 var _emscripten_stack_init = () => (_emscripten_stack_init = wasmExports['emscripten_stack_init'])();
 var _emscripten_stack_get_free = () => (_emscripten_stack_get_free = wasmExports['emscripten_stack_get_free'])();

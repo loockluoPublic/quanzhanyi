@@ -5,6 +5,7 @@
 #include "Generate_multi_layered_measurement_points.h"
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
 #include "Calculat_A_and_B_Points_after_Offest.h"
+#include "RepeatSurvey.h"
 
 EMSCRIPTEN_KEEPALIVE
 void generateUnitCircleWithNormalVector(double azimuth, double elevation,
@@ -63,4 +64,13 @@ void CalculatAAndBPoints(const double MTaon[3], const double Mcenter[3],
                                          toff,
                                          roff,
                                          PointTable_A, PointTable_B);
+}
+
+EMSCRIPTEN_KEEPALIVE
+void Repeat_Survey(const double SoundPoint1[3], const double SoundPoint2[3],
+                   const double Bottom_round_center1[3],
+                   const double Bottom_round_center2[3], double *SoundAngle,
+                   double *SoundLength)
+{
+    RepeatSurvey(SoundPoint1, SoundPoint2, Bottom_round_center1, Bottom_round_center2, SoundAngle, SoundLength);
 }
