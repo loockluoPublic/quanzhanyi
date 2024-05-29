@@ -7,6 +7,7 @@ const {
   _GenerateMultiLayeredMeasurementPoints,
   _CalculateAccurateCylindersFromMultipleMeasurementPoints,
   _CalculatAAndBPoints,
+  _Repeat_Survey,
 } = (window as any).Module;
 
 /**
