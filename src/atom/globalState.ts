@@ -24,3 +24,12 @@ export const Data = atom<GlobalData>({
     }),
   }, // 默认值
 });
+
+export enum TMode {
+  first = "first",
+  second = "second",
+}
+export const Mode = atom<TMode>({
+  key: "mode", // 唯一标识这个状态
+  default: TMode.first, // 默认值
+});

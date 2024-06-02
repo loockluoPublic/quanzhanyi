@@ -1,9 +1,9 @@
 import { Button, Form, Steps } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Connect from "../components/ConnectDevice";
 import { getLine, measureAndGetSimpleCoord } from "../utils/commond";
 import { useRecoilState } from "recoil";
-import { Data } from "../atom/globalState";
+import { Data, Mode, TMode } from "../atom/globalState";
 import BaseInfo from "../components/BaseInfo";
 import GetPoints from "../components/GetPoints";
 import { MeasurePoints } from "./MeasurePoints";
@@ -14,7 +14,11 @@ import ResultTable from "./Result";
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
   const [step, setStep] = useState(0);
-  console.log("%c Line:15 🍔 data", "color:#42b983", data);
+  const [mode] = useRecoilState(Mode);
+
+  useEffect(() => {
+    setStep(0);
+  }, [mode]);
 
   const [form] = Form.useForm();
 
@@ -22,7 +26,6 @@ export default function Setting() {
     const arr = form.getFieldValue(key);
 
     return measureAndGetSimpleCoord().then((res) => {
-      console.log("%c Line:22 🍩 res", "color:#fca650", res, field);
       if (field) {
         arr[field.key] = res;
         form.setFieldValue(key, [...arr]);
@@ -40,8 +43,7 @@ export default function Setting() {
   };
 
   const onChange = (value: number) => {
-    console.log("%c Line:42 🍿 value", "color:#b03734", value);
-    setStep(value);
+    if (value <= step + 1) setStep(value);
   };
 
   const steps = [
@@ -68,12 +70,14 @@ export default function Setting() {
     {
       title: "计算安装位",
       conponents: <CalculateResultPoints />,
+      hideType: TMode.second,
     },
     {
       title: "结果",
       conponents: <ResultTable />,
+      hideType: TMode.second,
     },
-  ];
+  ].filter((item) => item.hideType !== mode);
   const updateFormData = () => {
     const formValues = form.getFieldsValue();
     console.log("%c Line:68 🍬 formValues", "color:#ed9ec7", formValues);
