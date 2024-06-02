@@ -127,13 +127,10 @@ export function CalculateAccurateCylinders() {
                   <div
                     className=" q-cursor-pointer"
                     onClick={() => {
-                      reRun(
-                        {
-                          ...data,
-                          standardDeviation: customStandardDeviation,
-                        },
-                        customStandardDeviation
-                      );
+                      reRun({
+                        ...data,
+                        standardDeviation: customStandardDeviation,
+                      });
                     }}
                   >
                     计算
