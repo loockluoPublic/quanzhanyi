@@ -277,6 +277,6 @@ export const calculateStandardDeviation = (points: CustomVector3[]) => {
  */
 export const getDataFromTable = (sdfb: number, index: number) => {
   return tableData.find((item) => {
-    return item.N === sdfb && item.i === index;
+    return item.N === sdfb && item.i === index + 1;
   });
 };
