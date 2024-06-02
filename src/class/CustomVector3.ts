@@ -6,6 +6,7 @@ export class CustomVector3 extends Vector3 {
   public label?: string;
   public color?: string;
   public enable: boolean;
+  difference?: number;
 
   constructor(
     x?: number,
@@ -18,15 +19,17 @@ export class CustomVector3 extends Vector3 {
           key?: number;
           color?: string;
           enable?: boolean;
+          difference?: number;
         },
     key?: number
   ) {
     super(x, y, z);
-    if ((label as any)?.label) {
+    if ((label as any)?.key) {
       this.label = (label as any)?.label;
       this.key = (label as any)?.key ?? ++CustomVector3.count;
       this.color = (label as any)?.color;
       this.enable = (label as any)?.enable ?? true;
+      this.difference = (label as any)?.difference;
     } else if (typeof label === "string") {
       this.key = key ?? ++CustomVector3.count;
       this.label = label as string;
@@ -37,8 +40,19 @@ export class CustomVector3 extends Vector3 {
     }
   }
 
+  cloneCustomVector3() {
+    return new CustomVector3(this.x, this.y, this.z, {
+      key: this.key,
+      label: this.label,
+      enable: this.enable,
+      color: this.color,
+      difference: this.difference,
+    });
+  }
+
   setEnable(e: boolean) {
     this.enable = e;
+    return this;
   }
 
   // 添加toSpherical方法
@@ -67,11 +81,13 @@ export class CustomVector3 extends Vector3 {
   }
 
   fromCustomVector3(cv3 = this) {
+    console.log("%c Line:84 🥟 cv3", "color:#7f2b82", cv3);
     const newCV3 = new CustomVector3(cv3.x, cv3.y, cv3.z, {
       key: cv3.key,
       label: cv3.label,
       color: cv3.color,
       enable: cv3.enable,
+      difference: cv3.difference,
     });
 
     return newCV3;

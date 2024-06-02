@@ -3,7 +3,7 @@ import { DefaultOptionType } from "antd/es/select";
 
 const SDFBOptions = (() => {
   const options: DefaultOptionType[] = [];
-  for (let index = 1; index <= 10; index++) {
+  for (let index = 2; index <= 10; index++) {
     options.push({ value: index, label: `${index}声道` });
   }
   return options;
@@ -43,7 +43,7 @@ export default function BaseInfo() {
         label="声道面"
         name="sdm"
         rules={[{ required: true }]}
-        initialValue={["A"]}
+        initialValue={["A", "B"]}
       >
         <Checkbox.Group options={sdmOptions}></Checkbox.Group>
       </Item>

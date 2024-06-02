@@ -81,13 +81,15 @@ function PointsLabel(props: {
 export default function Index(props: {
   className?: string;
   height: string;
-  points: CustomVector3[];
+  mPoints: CustomVector3[];
   loading?: boolean;
   setData?: (md: CustomVector3[]) => void;
   direct?: number[];
   component?: ReactNode;
+  pointsShowType?: "points" | "table" | false;
   [k: string]: any;
 }) {
+  const pointsShowType = props.pointsShowType || false;
   console.log("%c Line:82 🥚 props", "color:#b03734", props);
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<number[]>([]);
@@ -106,17 +108,51 @@ export default function Index(props: {
 
   useEffect(() => {
     // props 不允许更改，必须重新创建对象
-    setPoints(props.points.map((p) => p.fromCustomVector3()));
+    setPoints(props.mPoints.map((p) => p.fromCustomVector3()));
     console.log("%c Line:94 🍺 props.points", "color:#6ec1c2", props.points);
-  }, [props.points]);
+  }, [props.mPoints]);
 
   useEffect(() => {
     const keys = showPoints
       .map((p) => (p.enable ? p.key : null))
       .filter((p) => !!p);
     setSelectedKeys(keys);
+    console.log("%c Line:119 🥚 showPoints", "color:#3f7cff", showPoints);
   }, [showPoints]);
 
+  const showPointsDom = () => {
+    switch (pointsShowType) {
+      case false:
+        return null;
+
+      case "points":
+        return (
+          <Tree
+            checkable
+            checkedKeys={selectedKeys}
+            multiple={true}
+            titleRender={(nodeData) => {
+              return <PointsVector3 key={nodeData.key} value={nodeData} />;
+            }}
+            treeData={showPoints}
+            onCheck={(sk) => {
+              showPoints.forEach((p) => {
+                p.setEnable((sk as any).includes(p.key));
+              });
+              props?.setData?.(getShowPoints());
+              setPoints([...showPoints]);
+            }}
+          />
+        );
+
+      case "table":
+        return <div></div>;
+
+      default:
+        break;
+    }
+    return;
+  };
   return (
     <div className=" q-flex q-w-full">
       <Canvas
@@ -163,22 +199,8 @@ export default function Index(props: {
       </Canvas>
       <div className=" q-w-[400px]">
         {props?.component}
-        <Tree
-          checkable
-          checkedKeys={selectedKeys}
-          multiple={true}
-          titleRender={(nodeData) => {
-            return <PointsVector3 key={nodeData.key} value={nodeData} />;
-          }}
-          treeData={showPoints}
-          onCheck={(sk) => {
-            showPoints.forEach((p) => {
-              p.setEnable((sk as any).includes(p.key));
-            });
-            props?.setData?.(getShowPoints());
-            setPoints([...showPoints]);
-          }}
-        />
+
+        {showPointsDom()}
       </div>
     </div>
   );

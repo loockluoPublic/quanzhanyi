@@ -12,7 +12,7 @@ export const deviceInfo = atom({
   default: undefined, // 默认值
 });
 
-interface GlobalData {
+export interface GlobalData {
   mPoints: CustomVector3[];
   [k: string]: any;
 }

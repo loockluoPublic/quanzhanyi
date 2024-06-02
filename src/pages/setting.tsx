@@ -9,6 +9,7 @@ import GetPoints from "../components/GetPoints";
 import { MeasurePoints } from "./MeasurePoints";
 import { CalculateAccurateCylinders } from "./CalculateAccurateCylinders";
 import { CalculateResultPoints } from "./CalculateResultPoints";
+import ResultTable from "./Result";
 
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
@@ -39,6 +40,7 @@ export default function Setting() {
   };
 
   const onChange = (value: number) => {
+    console.log("%c Line:42 🍿 value", "color:#b03734", value);
     setStep(value);
   };
 
@@ -66,6 +68,10 @@ export default function Setting() {
     {
       title: "计算安装位",
       conponents: <CalculateResultPoints />,
+    },
+    {
+      title: "结果",
+      conponents: <ResultTable />,
     },
   ];
   const updateFormData = () => {

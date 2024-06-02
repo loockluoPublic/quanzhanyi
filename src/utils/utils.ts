@@ -1,6 +1,7 @@
 import EmxArray_real_T from "../class/EmxArray_real_T";
 import { CustomVector3 } from "../class/CustomVector3";
 import { data, p3array, p4array } from "./mockData";
+import { tableData } from "./config";
 
 const {
   _generateUnitCircleWithNormalVector,
@@ -206,37 +207,76 @@ export const CalculatAAndBPoints = async (
 };
 
 /**
+ * 复测计算声路角和生路长
+ */
+export const repeatSurvey = (
+  point1: CustomVector3,
+  point2: CustomVector3,
+  Bottom_round_center1: CustomVector3,
+  Bottom_round_center2: CustomVector3
+) => {
+  const bottom_round_center1 = new EmxArray_real_T(Bottom_round_center1);
+  const bottom_round_center2 = new EmxArray_real_T(Bottom_round_center2);
+  const P1 = new EmxArray_real_T(point1);
+  const P2 = new EmxArray_real_T(point2);
+  const SoundAngle = new EmxArray_real_T(1, 1);
+  const SoundLength = new EmxArray_real_T(1, 1);
+
+  _Repeat_Survey(
+    P1.ptr,
+    P2.ptr,
+    bottom_round_center1.ptr,
+    bottom_round_center2.ptr,
+    SoundAngle.arrayPtr,
+    SoundLength.arrayPtr
+  );
+  const res = {
+    soundLength: SoundLength.toJSON()?.[0],
+    soundAngle: SoundAngle.toJSON()?.[0],
+  };
+
+  bottom_round_center1.free();
+  bottom_round_center2.free();
+  P1.free();
+  P2.free();
+  SoundAngle.free();
+  SoundLength.free();
+  return res;
+};
+
+/**
  *  计算标准差
- * @param arr
+ * @param points
  * @returns
  */
-export const calculateStandardDeviation = (arr: number[]) => {
+export const calculateStandardDeviation = (points: CustomVector3[]) => {
+  console.log("%c Line:214 🥒 points", "color:#f5ce50", points);
   const mean =
-    arr.reduce((acc, cur) => {
-      return acc + cur;
-    }, 0) / arr.length;
+    points.reduce((acc, cur) => {
+      return acc + cur.difference;
+    }, 0) / points.length;
 
-  const squaredDifferences = arr.map((item) => Math.pow(item - mean, 2));
+  const squaredDifferences = points.map((item) =>
+    Math.pow(item.difference - mean, 2)
+  );
+
   const totalSquaredDifference = squaredDifferences.reduce(
     (acc, val) => acc + val,
     0
   );
-  const variance = totalSquaredDifference / arr.length;
-  return Math.sqrt(variance);
+
+  const variance = Math.sqrt(totalSquaredDifference / points.length);
+
+  return variance;
 };
 
 /**
- * 过滤指定偏移的数据，返回需要去除的数据的数组序号
- * @param arr
- * @param variance
- * @returns
+ * 从参数表中获得固定参数
+ * @param sdfb
+ * @param index
  */
-export const filterIndex = (arr: number[], variance) => {
-  const disableIndex = [];
-  arr.forEach((item, i) => {
-    if (Math.abs(item) > variance) {
-      disableIndex.push(i);
-    }
+export const getDataFromTable = (sdfb: number, index: number) => {
+  return tableData.find((item) => {
+    return item.N === sdfb && item.i === index;
   });
-  return disableIndex;
 };

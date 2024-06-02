@@ -48,10 +48,10 @@ export function CalculateResultPoints() {
   return (
     <Module3D
       loading={loading}
-      points={data.mPoints ?? []}
       height="500px"
       direct={data?.direct}
       {...data}
+      mPoints={[]}
       component={
         <>
           <Button loading={loading} onClick={run}>

@@ -66,7 +66,7 @@ export function MeasurePoints() {
     <div>
       <Module3D
         loading={loading}
-        points={data.mPoints ?? []}
+        mPoints={data.mPoints ?? []}
         height="500px"
         direct={data?.direct}
         setData={setMData}
