@@ -29,7 +29,7 @@ const columns: any = [
     align: "center",
   },
   {
-    title: "声道长",
+    title: "声道高度",
     dataIndex: "d",
     key: "d",
     align: "left",
@@ -64,8 +64,9 @@ const columns: any = [
 ];
 
 const trasfrom =
-  (type: "A" | "B", sdfb: number, tableData: any[]) => (point, index) => {
-    const d: any = getDataFromTable(sdfb, index % Math.ceil(sdfb / 2)) || {};
+  (type: "A" | "B", sdfb: number, tableData: any[], R: number) =>
+  (point, index) => {
+    const d: any = getDataFromTable(sdfb, index) || {};
     console.log("%c Line:56 🥒 d", "color:#ffdd4d", d);
     tableData.push({
       type,
@@ -73,9 +74,10 @@ const trasfrom =
       y: point.y,
       z: point.z,
       a: d.ai,
-      t: d.ti,
+      t: Math.sin(d.ai).toFixed(6),
       Gy: d.Gy,
       Wy: d.Wy,
+      d: (Math.sin(d.ai) * R).toFixed(6),
     });
   };
 
@@ -83,16 +85,18 @@ export default function ResultTable() {
   const [data] = useRecoilState(Data);
   console.log("%c Line:6 🍢 data", "color:#f5ce50", data);
   const { sdfb, sdm, AB } = data;
+
+  const R = data.calulateRes?.R;
   const dataSource = useMemo(() => {
     const tableData = [];
     sdm?.map((element) => {
       switch (element) {
         case "A":
-          AB?.bottomA?.forEach?.(trasfrom("A", sdfb, tableData));
+          AB?.bottomA?.forEach?.(trasfrom("A", sdfb, tableData, R));
 
           break;
         case "B":
-          AB?.bottomB?.forEach?.(trasfrom("B", sdfb, tableData));
+          AB?.bottomB?.forEach?.(trasfrom("B", sdfb, tableData, R));
           break;
 
         default:

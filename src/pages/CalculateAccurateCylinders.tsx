@@ -111,6 +111,7 @@ export function CalculateAccurateCylinders() {
             <div>半径：{data.calulateRes?.R}</div>
             <PointsTable mPoints={data.mPoints} />
 
+            <div className=" q-mt-6">人工干预</div>
             <div>
               阈值：
               <InputNumber
@@ -118,10 +119,6 @@ export function CalculateAccurateCylinders() {
                 value={customStandardDeviation}
                 onChange={(standardDeviation) => {
                   setStandardDeviation(standardDeviation);
-                  // reRun({
-                  //   ...data,
-                  //   standardDeviation,
-                  // });
                 }}
                 addonAfter={
                   <div
