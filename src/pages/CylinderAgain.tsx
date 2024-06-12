@@ -52,11 +52,9 @@ const SLCPicker = (props) => {
   );
 };
 
-export default function (props: {
-  pickPoint: (key: string, field?: any) => void;
-}) {
-  const [data, setData] = useRecoilState(Data);
-  //   return <div>123</div>;
+export default function () {
+  const [data] = useRecoilState(Data);
+
   const initialValue = Array(data.sdfb || Math.ceil(data.sdfb / 2)).fill([
     1, 2,
   ]);
