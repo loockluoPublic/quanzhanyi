@@ -81,7 +81,7 @@ export default function Setting() {
 
     {
       title: "采集",
-      components: <CylinderAgain pickPoint={pickPoint} />,
+      components: <CylinderAgain />,
       hideType: TMode.first,
     },
   ].filter((item) => item.hideType !== mode);
