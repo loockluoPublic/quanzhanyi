@@ -10,6 +10,7 @@ import { MeasurePoints } from "./MeasurePoints";
 import { CalculateAccurateCylinders } from "./CalculateAccurateCylinders";
 import { CalculateResultPoints } from "./CalculateResultPoints";
 import ResultTable from "./Result";
+import CylinderAgain from "./CylinderAgain";
 
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
@@ -49,35 +50,42 @@ export default function Setting() {
   const steps = [
     {
       title: "设备连接",
-      conponents: <Connect />,
+      components: <Connect />,
     },
     {
       title: "基本参数",
-      conponents: <BaseInfo />,
+      components: <BaseInfo />,
     },
     {
       title: "手动采点",
-      conponents: <GetPoints pickPoint={pickPoint} getDirect={getDirect} />,
+      components: <GetPoints pickPoint={pickPoint} getDirect={getDirect} />,
     },
     {
       title: "自动圆面点采集",
-      conponents: <MeasurePoints />,
+      components: <MeasurePoints />,
     },
     {
       title: "圆柱拟合",
-      conponents: <CalculateAccurateCylinders />,
+      components: <CalculateAccurateCylinders />,
     },
     {
       title: "计算安装位",
-      conponents: <CalculateResultPoints />,
+      components: <CalculateResultPoints />,
       hideType: TMode.second,
     },
     {
       title: "结果",
-      conponents: <ResultTable />,
+      components: <ResultTable />,
       hideType: TMode.second,
     },
+
+    {
+      title: "采集",
+      components: <CylinderAgain pickPoint={pickPoint} />,
+      hideType: TMode.first,
+    },
   ].filter((item) => item.hideType !== mode);
+
   const updateFormData = () => {
     const formValues = form.getFieldsValue();
     console.log("%c Line:68 🍬 formValues", "color:#ed9ec7", formValues);
@@ -89,7 +97,11 @@ export default function Setting() {
       setStep(step + 1);
     }
   };
-
+  console.log(
+    "%c Line:101 🍪 steps?.[step]?.components",
+    "color:#f5ce50",
+    steps?.[step]?.components
+  );
   return (
     <>
       <Steps
@@ -107,7 +119,7 @@ export default function Setting() {
           form={form}
           onChange={updateFormData}
         >
-          {steps[step].conponents}
+          {steps?.[step]?.components}
           {steps.length - 1 > step && (
             <div className=" q-text-center">
               <Button type="primary" htmlType="submit">
