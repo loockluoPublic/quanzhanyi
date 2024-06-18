@@ -11,6 +11,7 @@ import { CalculateAccurateCylinders } from "./CalculateAccurateCylinders";
 import { CalculateResultPoints } from "./CalculateResultPoints";
 import ResultTable from "./Result";
 import CylinderAgain from "./CylinderAgain";
+import Cube from "./Cube";
 
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
@@ -59,6 +60,11 @@ export default function Setting() {
     {
       title: "手动采点",
       components: <GetPoints pickPoint={pickPoint} getDirect={getDirect} />,
+    },
+
+    {
+      title: "手动采点 方涵",
+      components: <Cube />,
     },
     {
       title: "自动圆面点采集",
