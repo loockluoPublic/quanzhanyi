@@ -1,14 +1,15 @@
 /*
- * File: xrotg.h
+ * File: polyfit.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 19-Jun-2024 00:23:09
  */
 
-#ifndef XROTG_H
-#define XROTG_H
+#ifndef POLYFIT_H
+#define POLYFIT_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,7 +19,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void xrotg(double *a, double *b, double *c, double *s);
+void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2]);
 
 #ifdef __cplusplus
 }
@@ -26,7 +27,7 @@ void xrotg(double *a, double *b, double *c, double *s);
 
 #endif
 /*
- * File trailer for xrotg.h
+ * File trailer for polyfit.h
  *
  * [EOF]
  */

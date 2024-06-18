@@ -2,7 +2,7 @@
  * File: xaxpy.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 23-May-2024 23:50:53
+ * C/C++ source code generated on  : 19-Jun-2024 00:23:09
  */
 
 /* Include Files */
@@ -182,6 +182,58 @@ void j_xaxpy(double a, const double x[3], double y[9], int iy0)
       int i;
       i = (iy0 + k) - 1;
       y[i] += a * x[k + 1];
+    }
+  }
+}
+
+/*
+ * Arguments    : int n
+ *                double a
+ *                const emxArray_real_T *x
+ *                int ix0
+ *                emxArray_real_T *y
+ * Return Type  : void
+ */
+void k_xaxpy(int n, double a, const emxArray_real_T *x, int ix0,
+             emxArray_real_T *y)
+{
+  const double *x_data;
+  double *y_data;
+  int k;
+  y_data = y->data;
+  x_data = x->data;
+  if ((n >= 1) && (!(a == 0.0))) {
+    int i;
+    i = n - 1;
+    for (k = 0; k <= i; k++) {
+      y_data[k + 1] += a * x_data[(ix0 + k) - 1];
+    }
+  }
+}
+
+/*
+ * Arguments    : int n
+ *                double a
+ *                const emxArray_real_T *x
+ *                emxArray_real_T *y
+ *                int iy0
+ * Return Type  : void
+ */
+void l_xaxpy(int n, double a, const emxArray_real_T *x, emxArray_real_T *y,
+             int iy0)
+{
+  const double *x_data;
+  double *y_data;
+  int k;
+  y_data = y->data;
+  x_data = x->data;
+  if ((n >= 1) && (!(a == 0.0))) {
+    int i;
+    i = n - 1;
+    for (k = 0; k <= i; k++) {
+      int i1;
+      i1 = (iy0 + k) - 1;
+      y_data[i1] += a * x_data[k + 1];
     }
   }
 }

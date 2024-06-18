@@ -2,7 +2,7 @@
  * File: foot_of_perpendicular_from_a_point_to_a_line.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 23-May-2024 23:50:53
+ * C/C++ source code generated on  : 19-Jun-2024 00:23:09
  */
 
 #ifndef FOOT_OF_PERPENDICULAR_FROM_A_POINT_TO_A_LINE_H

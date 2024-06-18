@@ -1,12 +1,12 @@
 /*
- * File: xrotg.h
+ * File: CrossLine.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 19-Jun-2024 00:23:09
  */
 
-#ifndef XROTG_H
-#define XROTG_H
+#ifndef CROSSLINE_H
+#define CROSSLINE_H
 
 /* Include Files */
 #include "rtwtypes.h"
@@ -18,7 +18,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void xrotg(double *a, double *b, double *c, double *s);
+extern void CrossLine(const double PlanePara1[4], const double PlanePara2[4],
+                      double x_val, double P0[3], double d[3]);
 
 #ifdef __cplusplus
 }
@@ -26,7 +27,7 @@ void xrotg(double *a, double *b, double *c, double *s);
 
 #endif
 /*
- * File trailer for xrotg.h
+ * File trailer for CrossLine.h
  *
  * [EOF]
  */
