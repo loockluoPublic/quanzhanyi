@@ -1,12 +1,12 @@
 /*
- * File: QuanZhanYi_rtwutil.h
+ * File: CrossLine.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 18-Jun-2024 11:44:39
  */
 
-#ifndef QUANZHANYI_RTWUTIL_H
-#define QUANZHANYI_RTWUTIL_H
+#ifndef CROSSLINE_H
+#define CROSSLINE_H
 
 /* Include Files */
 #include "rtwtypes.h"
@@ -18,9 +18,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern double rt_atan2d_snf(double u0, double u1);
-
-extern double rt_hypotd_snf(double u0, double u1);
+extern void CrossLine(const double PlanePara1[4], const double PlanePara2[4],
+                      double x_val, double P0[3], double d[3]);
 
 #ifdef __cplusplus
 }
@@ -28,7 +27,7 @@ extern double rt_hypotd_snf(double u0, double u1);
 
 #endif
 /*
- * File trailer for QuanZhanYi_rtwutil.h
+ * File trailer for CrossLine.h
  *
  * [EOF]
  */

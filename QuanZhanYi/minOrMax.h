@@ -1,14 +1,15 @@
 /*
- * File: QuanZhanYi_rtwutil.h
+ * File: minOrMax.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 18-Jun-2024 11:44:39
  */
 
-#ifndef QUANZHANYI_RTWUTIL_H
-#define QUANZHANYI_RTWUTIL_H
+#ifndef MINORMAX_H
+#define MINORMAX_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,9 +19,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern double rt_atan2d_snf(double u0, double u1);
+double maximum(const emxArray_real_T *x);
 
-extern double rt_hypotd_snf(double u0, double u1);
+double minimum(const emxArray_real_T *x);
 
 #ifdef __cplusplus
 }
@@ -28,7 +29,7 @@ extern double rt_hypotd_snf(double u0, double u1);
 
 #endif
 /*
- * File trailer for QuanZhanYi_rtwutil.h
+ * File trailer for minOrMax.h
  *
  * [EOF]
  */

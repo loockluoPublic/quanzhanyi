@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 29-May-2024 09:37:13
+ * C/C++ source code generated on  : 18-Jun-2024 11:44:39
  */
 
 /*************************************************************************/
@@ -35,6 +35,8 @@
 #include "Calculat_A_and_B_Points.h"
 #include "Calculat_A_and_B_Points_after_Offest.h"
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
+#include "CrossLine.h"
+#include "GenerateTrianglePoints.h"
 #include "Generate_multi_layered_measurement_points.h"
 #include "QuanZhanYi_emxAPI.h"
 #include "QuanZhanYi_terminate.h"
@@ -46,6 +48,7 @@
 #include "generate_unit_circle_with_normal_vector.h"
 #include "generate_unit_circle_with_normal_vector2.h"
 #include "myvrrotvec2mat.h"
+#include "planefit.h"
 #include "rt_nonfinite.h"
 
 /* Function Declarations */
@@ -54,6 +57,8 @@ static void argInit_3x1_real_T(double result[3]);
 static emxArray_real_T *argInit_3xUnbounded_real_T(void);
 
 static void argInit_4x1_real_T(double result[4]);
+
+static emxArray_real_T *argInit_4xUnbounded_real_T(void);
 
 static emxArray_real_T *argInit_Unboundedx2_real_T(void);
 
@@ -73,6 +78,10 @@ static void d_main_generate_unit_circle_wit(void);
 
 static void main_Calculat_A_and_B_Points(void);
 
+static void main_CrossLine(void);
+
+static void main_GenerateTrianglePoints(void);
+
 static void main_RepeatSurvey(void);
 
 static void main_angle2point(void);
@@ -80,6 +89,8 @@ static void main_angle2point(void);
 static void main_fitcircle(void);
 
 static void main_myvrrotvec2mat(void);
+
+static void main_planefit(void);
 
 /* Function Definitions */
 /*
@@ -135,6 +146,31 @@ static void argInit_4x1_real_T(double result[4])
 Change this value to the value that the application requires. */
     result[idx0] = argInit_real_T();
   }
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : emxArray_real_T *
+ */
+static emxArray_real_T *argInit_4xUnbounded_real_T(void)
+{
+  emxArray_real_T *result;
+  double *result_data;
+  int idx0;
+  int idx1;
+  /* Set the size of the array.
+Change this size to the value that the application requires. */
+  result = emxCreate_real_T(4, 2);
+  result_data = result->data;
+  /* Loop over the array to initialize each element. */
+  for (idx0 = 0; idx0 < 4; idx0++) {
+    for (idx1 = 0; idx1 < result->size[1U]; idx1++) {
+      /* Set the value of the array element.
+Change this value to the value that the application requires. */
+      result_data[idx0 + 4 * idx1] = argInit_real_T();
+    }
+  }
+  return result;
 }
 
 /*
@@ -353,6 +389,45 @@ static void main_Calculat_A_and_B_Points(void)
  * Arguments    : void
  * Return Type  : void
  */
+static void main_CrossLine(void)
+{
+  double PlanePara1_tmp[4];
+  double P0[3];
+  double d[3];
+  /* Initialize function 'CrossLine' input arguments. */
+  /* Initialize function input argument 'PlanePara1'. */
+  argInit_4x1_real_T(PlanePara1_tmp);
+  /* Initialize function input argument 'PlanePara2'. */
+  /* Call the entry-point 'CrossLine'. */
+  CrossLine(PlanePara1_tmp, PlanePara1_tmp, argInit_real_T(), P0, d);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+static void main_GenerateTrianglePoints(void)
+{
+  double PointTri[6];
+  double dv[4];
+  double BoundPoint1_tmp[3];
+  double dv1[3];
+  /* Initialize function 'GenerateTrianglePoints' input arguments. */
+  /* Initialize function input argument 'PlaneParaIn'. */
+  /* Initialize function input argument 'BoundPoint1'. */
+  argInit_3x1_real_T(BoundPoint1_tmp);
+  /* Initialize function input argument 'P0'. */
+  /* Initialize function input argument 'Direction'. */
+  /* Call the entry-point 'GenerateTrianglePoints'. */
+  argInit_4x1_real_T(dv);
+  argInit_3x1_real_T(dv1);
+  GenerateTrianglePoints(dv, BoundPoint1_tmp, BoundPoint1_tmp, dv1, PointTri);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_RepeatSurvey(void)
 {
   double SoundPoint1_tmp[3];
@@ -419,6 +494,35 @@ static void main_myvrrotvec2mat(void)
 }
 
 /*
+ * Arguments    : void
+ * Return Type  : void
+ */
+static void main_planefit(void)
+{
+  emxArray_real_T *PlaneParaIn;
+  emxArray_real_T *PlaneParaOut;
+  emxArray_real_T *Points;
+  double TrianglePoints_data[72];
+  double BoundPoint1_tmp[3];
+  int TrianglePoints_size[2];
+  emxInitArray_real_T(&PlaneParaOut, 2);
+  /* Initialize function 'planefit' input arguments. */
+  /* Initialize function input argument 'Points'. */
+  Points = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'PlaneParaIn'. */
+  PlaneParaIn = argInit_4xUnbounded_real_T();
+  /* Initialize function input argument 'BoundPoint1'. */
+  argInit_3x1_real_T(BoundPoint1_tmp);
+  /* Initialize function input argument 'BoundPoint2'. */
+  /* Call the entry-point 'planefit'. */
+  planefit(Points, PlaneParaIn, BoundPoint1_tmp, BoundPoint1_tmp, PlaneParaOut,
+           TrianglePoints_data, TrianglePoints_size);
+  emxDestroyArray_real_T(PlaneParaOut);
+  emxDestroyArray_real_T(PlaneParaIn);
+  emxDestroyArray_real_T(Points);
+}
+
+/*
  * Arguments    : int argc
  *                char **argv
  * Return Type  : int
@@ -435,12 +539,15 @@ You can call entry-point functions multiple times. */
   main_Calculat_A_and_B_Points();
   c_main_Calculat_A_and_B_Points_();
   c_main_Calculate_accurate_cylin();
+  main_CrossLine();
   main_fitcircle();
   c_main_foot_of_perpendicular_fr();
   c_main_Generate_multi_layered_m();
   c_main_generate_unit_circle_wit();
   d_main_generate_unit_circle_wit();
+  main_GenerateTrianglePoints();
   main_myvrrotvec2mat();
+  main_planefit();
   main_RepeatSurvey();
   /* Terminate the application.
 You do not need to do this more than one time. */

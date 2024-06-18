@@ -1,14 +1,15 @@
 /*
- * File: QuanZhanYi_rtwutil.h
+ * File: polyfit.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 18-Jun-2024 11:44:39
  */
 
-#ifndef QUANZHANYI_RTWUTIL_H
-#define QUANZHANYI_RTWUTIL_H
+#ifndef POLYFIT_H
+#define POLYFIT_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,9 +19,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern double rt_atan2d_snf(double u0, double u1);
-
-extern double rt_hypotd_snf(double u0, double u1);
+void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2]);
 
 #ifdef __cplusplus
 }
@@ -28,7 +27,7 @@ extern double rt_hypotd_snf(double u0, double u1);
 
 #endif
 /*
- * File trailer for QuanZhanYi_rtwutil.h
+ * File trailer for polyfit.h
  *
  * [EOF]
  */

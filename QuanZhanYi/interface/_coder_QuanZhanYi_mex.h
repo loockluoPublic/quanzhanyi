@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 29-May-2024 09:37:13
+ * C/C++ source code generated on  : 18-Jun-2024 11:44:39
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -33,6 +33,13 @@ void unsafe_Calculat_A_and_B_Points_mexFunction(int32_T nlhs, mxArray *plhs[2],
 void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points2_mexFunction(
     int32_T nlhs, mxArray *plhs[6], int32_T nrhs, const mxArray *prhs[3]);
 
+void unsafe_CrossLine_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
+                                  const mxArray *prhs[3]);
+
+void unsafe_GenerateTrianglePoints_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                               int32_T nrhs,
+                                               const mxArray *prhs[4]);
+
 void unsafe_Generate_multi_layered_measurement_points_mexFunction(
     int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[5]);
 
@@ -56,6 +63,9 @@ void unsafe_generate_unit_circle_with_normal_vector_mexFunction(
 
 void unsafe_myvrrotvec2mat_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                        int32_T nrhs, const mxArray *prhs[1]);
+
+void unsafe_planefit_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
+                                 const mxArray *prhs[4]);
 
 #ifdef __cplusplus
 }

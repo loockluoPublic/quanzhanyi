@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 29-May-2024 09:37:13
+ * C/C++ source code generated on  : 18-Jun-2024 11:44:39
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -59,6 +59,19 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     real_T Mcenter[3], real_T MTaon[3], real_T *Mradial,
     emxArray_real_T *Err_every, real_T Bottom_round_center1[3],
     real_T Bottom_round_center2[3]);
+
+void CrossLine(real_T PlanePara1[4], real_T PlanePara2[4], real_T x_val,
+               real_T P0[3], real_T d[3]);
+
+void CrossLine_api(const mxArray *const prhs[3], int32_T nlhs,
+                   const mxArray *plhs[2]);
+
+void GenerateTrianglePoints(real_T PlaneParaIn[4], real_T BoundPoint1[3],
+                            real_T P0[3], real_T Direction[3],
+                            real_T PointTri[6]);
+
+void GenerateTrianglePoints_api(const mxArray *const prhs[4],
+                                const mxArray **plhs);
 
 void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
                                                real_T num, real_T laynum,
@@ -129,6 +142,14 @@ void generate_unit_circle_with_normal_vector2(real_T azimuth, real_T elevation,
 void myvrrotvec2mat(real_T r[4], real_T m[9]);
 
 void myvrrotvec2mat_api(const mxArray *prhs, const mxArray **plhs);
+
+void planefit(emxArray_real_T *Points, emxArray_real_T *PlaneParaIn,
+              real_T BoundPoint1[3], real_T BoundPoint2[3],
+              emxArray_real_T *PlaneParaOut, real_T TrianglePoints_data[],
+              int32_T TrianglePoints_size[2]);
+
+void planefit_api(const mxArray *const prhs[4], int32_T nlhs,
+                  const mxArray *plhs[2]);
 
 #ifdef __cplusplus
 }
