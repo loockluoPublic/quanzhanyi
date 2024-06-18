@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 18-Jun-2024 11:44:39
+ * C/C++ source code generated on  : 19-Jun-2024 00:23:09
  */
 
 /* Include Files */
@@ -66,9 +66,6 @@ static const mxArray *f_emlrt_marshallOut(const real_T u[9]);
 static real_T (*g_emlrt_marshallIn(const emlrtStack *sp,
                                    const mxArray *PlanePara1,
                                    const char_T *identifier))[4];
-
-static const mxArray *g_emlrt_marshallOut(const real_T u_data[],
-                                          const int32_T u_size[2]);
 
 static real_T (*h_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                    const emlrtMsgIdentifier *parentId))[4];
@@ -427,25 +424,6 @@ static real_T (*g_emlrt_marshallIn(const emlrtStack *sp,
   thisId.bParentIsCell = false;
   y = h_emlrt_marshallIn(sp, emlrtAlias(PlanePara1), &thisId);
   emlrtDestroyArray(&PlanePara1);
-  return y;
-}
-
-/*
- * Arguments    : const real_T u_data[]
- *                const int32_T u_size[2]
- * Return Type  : const mxArray *
- */
-static const mxArray *g_emlrt_marshallOut(const real_T u_data[],
-                                          const int32_T u_size[2])
-{
-  static const int32_T iv[2] = {0, 0};
-  const mxArray *m;
-  const mxArray *y;
-  y = NULL;
-  m = emlrtCreateNumericArray(2, (const void *)&iv[0], mxDOUBLE_CLASS, mxREAL);
-  emlrtMxSetData((mxArray *)m, (void *)&u_data[0]);
-  emlrtSetDimensions((mxArray *)m, &u_size[0], 2);
-  emlrtAssign(&y, m);
   return y;
 }
 
@@ -1329,16 +1307,15 @@ void planefit_api(const mxArray *const prhs[4], int32_T nlhs,
   emxArray_real_T *PlaneParaIn;
   emxArray_real_T *PlaneParaOut;
   emxArray_real_T *Points;
-  real_T(*TrianglePoints_data)[72];
+  emxArray_real_T *TrianglePoints;
   real_T(*BoundPoint1)[3];
   real_T(*BoundPoint2)[3];
-  int32_T TrianglePoints_size[2];
   st.tls = emlrtRootTLSGlobal;
-  TrianglePoints_data = (real_T(*)[72])mxMalloc(sizeof(real_T[72]));
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   emxInit_real_T(&st, &Points);
   emxInit_real_T(&st, &PlaneParaIn);
   emxInit_real_T(&st, &PlaneParaOut);
+  emxInit_real_T(&st, &TrianglePoints);
   /* Marshall function inputs */
   Points->canFreeData = false;
   e_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "Points", Points);
@@ -1348,7 +1325,7 @@ void planefit_api(const mxArray *const prhs[4], int32_T nlhs,
   BoundPoint2 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "BoundPoint2");
   /* Invoke the target function */
   planefit(Points, PlaneParaIn, *BoundPoint1, *BoundPoint2, PlaneParaOut,
-           *TrianglePoints_data, TrianglePoints_size);
+           TrianglePoints);
   /* Marshall function outputs */
   PlaneParaOut->canFreeData = false;
   plhs[0] = b_emlrt_marshallOut(PlaneParaOut);
@@ -1356,8 +1333,10 @@ void planefit_api(const mxArray *const prhs[4], int32_T nlhs,
   emxFree_real_T(&st, &PlaneParaIn);
   emxFree_real_T(&st, &Points);
   if (nlhs > 1) {
-    plhs[1] = g_emlrt_marshallOut(*TrianglePoints_data, TrianglePoints_size);
+    TrianglePoints->canFreeData = false;
+    plhs[1] = b_emlrt_marshallOut(TrianglePoints);
   }
+  emxFree_real_T(&st, &TrianglePoints);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 
