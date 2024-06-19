@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 18-Jun-2024 11:44:39
+ * C/C++ source code generated on  : 19-Jun-2024 00:23:09
  */
 
 /*************************************************************************/
@@ -502,10 +502,10 @@ static void main_planefit(void)
   emxArray_real_T *PlaneParaIn;
   emxArray_real_T *PlaneParaOut;
   emxArray_real_T *Points;
-  double TrianglePoints_data[72];
+  emxArray_real_T *TrianglePoints;
   double BoundPoint1_tmp[3];
-  int TrianglePoints_size[2];
   emxInitArray_real_T(&PlaneParaOut, 2);
+  emxInitArray_real_T(&TrianglePoints, 2);
   /* Initialize function 'planefit' input arguments. */
   /* Initialize function input argument 'Points'. */
   Points = argInit_3xUnbounded_real_T();
@@ -516,7 +516,8 @@ static void main_planefit(void)
   /* Initialize function input argument 'BoundPoint2'. */
   /* Call the entry-point 'planefit'. */
   planefit(Points, PlaneParaIn, BoundPoint1_tmp, BoundPoint1_tmp, PlaneParaOut,
-           TrianglePoints_data, TrianglePoints_size);
+           TrianglePoints);
+  emxDestroyArray_real_T(TrianglePoints);
   emxDestroyArray_real_T(PlaneParaOut);
   emxDestroyArray_real_T(PlaneParaIn);
   emxDestroyArray_real_T(Points);

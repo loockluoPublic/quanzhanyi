@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 18-Jun-2024 11:44:39
+ * C/C++ source code generated on  : 19-Jun-2024 00:23:09
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -145,8 +145,7 @@ void myvrrotvec2mat_api(const mxArray *prhs, const mxArray **plhs);
 
 void planefit(emxArray_real_T *Points, emxArray_real_T *PlaneParaIn,
               real_T BoundPoint1[3], real_T BoundPoint2[3],
-              emxArray_real_T *PlaneParaOut, real_T TrianglePoints_data[],
-              int32_T TrianglePoints_size[2]);
+              emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints);
 
 void planefit_api(const mxArray *const prhs[4], int32_T nlhs,
                   const mxArray *plhs[2]);
