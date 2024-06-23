@@ -109,14 +109,14 @@ export default function Setting() {
       hideType: TMode.second,
       type: SHOWTYPE.yc,
     },
-
-    /** 圆形-复测 */
     {
       title: "结果",
       components: <ResultTable />,
       hideType: TMode.second,
-      type: SHOWTYPE.yf,
+      type: SHOWTYPE.yc,
     },
+
+    /** 圆形-复测 */
     {
       title: "采集",
       components: <CylinderAgain />,
