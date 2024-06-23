@@ -6,6 +6,7 @@
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
 #include "Calculat_A_and_B_Points_after_Offest.h"
 #include "RepeatSurvey.h"
+#include "planefit.h"
 
 EMSCRIPTEN_KEEPALIVE
 void generateUnitCircleWithNormalVector(double azimuth, double elevation,
@@ -73,4 +74,14 @@ void Repeat_Survey(const double SoundPoint1[3], const double SoundPoint2[3],
                    double *SoundLength)
 {
     RepeatSurvey(SoundPoint1, SoundPoint2, Bottom_round_center1, Bottom_round_center2, SoundAngle, SoundLength);
+}
+
+EMSCRIPTEN_KEEPALIVE
+extern void Planefit(const emxArray_real_T *Points,
+                     const emxArray_real_T *PlaneParaIn,
+                     const double BoundPoint1[3], const double BoundPoint2[3],
+                     emxArray_real_T *PlaneParaOut,
+                     emxArray_real_T *TrianglePoints)
+{
+    planefit(Points, PlaneParaIn, BoundPoint1, BoundPoint2, PlaneParaOut, TrianglePoints);
 }

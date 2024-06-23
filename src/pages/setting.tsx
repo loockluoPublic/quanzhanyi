@@ -12,6 +12,28 @@ import { CalculateResultPoints } from "./CalculateResultPoints";
 import ResultTable from "./Result";
 import CylinderAgain from "./CylinderAgain";
 import Cube from "./Cube";
+import CubePre from "../components/CubePre";
+
+const isVoild = (b) => (b & 0b0011) > 0;
+enum SHOWTYPE {
+  /** 圆柱-复测 */
+  yf = 0b1010,
+  /** 圆柱-测量 */
+  yc = 0b1001,
+  /** 方涵-复测 */
+  ff = 0b0110,
+  /** 方涵-测量 */
+  fc = 0b0101,
+  bf = 0b1110,
+  bc = 0b1101,
+  yb = 0b1011,
+  fb = 0b0111,
+  bb = 0b1111,
+  f = 0b0100,
+  y = 0b1000,
+  c = 0b0001,
+  F = 0b0010,
+}
 
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
@@ -23,7 +45,7 @@ export default function Setting() {
   }, [mode]);
 
   const [form] = Form.useForm();
-
+  (window as any).form = form;
   const pickPoint = (key: string, field?: any) => {
     const arr = form.getFieldValue(key);
 
@@ -48,66 +70,109 @@ export default function Setting() {
     if (value <= step + 1) setStep(value);
   };
 
+  const currentType =
+    (mode !== TMode.first ? SHOWTYPE.F : SHOWTYPE.c) |
+    (data.type === 2 ? SHOWTYPE.f : SHOWTYPE.y);
+
   const steps = [
     {
       title: "设备连接",
       components: <Connect />,
+      type: SHOWTYPE.bb,
     },
     {
       title: "基本参数",
       components: <BaseInfo />,
+      type: SHOWTYPE.bb,
     },
+    /** 圆形 */
     {
       title: "手动采点",
       components: <GetPoints pickPoint={pickPoint} getDirect={getDirect} />,
-    },
-
-    {
-      title: "手动采点 方涵",
-      components: <Cube />,
+      type: SHOWTYPE.yb,
     },
     {
       title: "自动圆面点采集",
       components: <MeasurePoints />,
+      type: SHOWTYPE.yb,
     },
     {
       title: "圆柱拟合",
       components: <CalculateAccurateCylinders />,
+      type: SHOWTYPE.yb,
     },
+
+    /** 圆形-测量 */
     {
       title: "计算安装位",
       components: <CalculateResultPoints />,
       hideType: TMode.second,
+      type: SHOWTYPE.yc,
     },
+
+    /** 圆形-复测 */
     {
       title: "结果",
       components: <ResultTable />,
       hideType: TMode.second,
+      type: SHOWTYPE.yf,
     },
-
     {
       title: "采集",
       components: <CylinderAgain />,
       hideType: TMode.first,
+      type: SHOWTYPE.yf,
     },
-  ].filter((item) => item.hideType !== mode);
+
+    /** 方形 */
+    {
+      title: "矩形范围",
+      components: <CubePre />,
+      type: SHOWTYPE.fb,
+    },
+    {
+      title: "手动采点左侧面",
+      components: <Cube pointsKeys="cubePointsL" />,
+      type: SHOWTYPE.fb,
+    },
+    {
+      title: "手动采点顶面",
+      components: <Cube pointsKeys="cubePointsT" />,
+      type: SHOWTYPE.fb,
+    },
+    {
+      title: "手动采点右侧面",
+      components: <Cube pointsKeys="cubePointsR" />,
+      type: SHOWTYPE.fb,
+    },
+    {
+      title: "手动采点低面",
+      components: <Cube pointsKeys="cubePointsB" />,
+      type: SHOWTYPE.fb,
+    },
+    {
+      title: "计算安装位",
+      components: <Cube pointsKeys="demo" />,
+      type: SHOWTYPE.fb,
+    },
+  ].filter((item) => {
+    const res = currentType & item.type;
+    return isVoild(res) && isVoild(res >> 2);
+  });
 
   const updateFormData = () => {
     const formValues = form.getFieldsValue();
-    console.log("%c Line:68 🍬 formValues", "color:#ed9ec7", formValues);
+
     setData({ ...data, ...formValues });
   };
+
   const next = () => {
     updateFormData();
     if (step < steps.length) {
       setStep(step + 1);
     }
   };
-  console.log(
-    "%c Line:101 🍪 steps?.[step]?.components",
-    "color:#f5ce50",
-    steps?.[step]?.components
-  );
+
   return (
     <>
       <Steps

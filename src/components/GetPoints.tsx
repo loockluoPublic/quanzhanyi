@@ -45,11 +45,12 @@ function GetPoints(props: {
           style={{ marginLeft: "10px" }}
           type="primary"
           onClick={() => props.getDirect("direct")}
+          size="small"
         >
           采集
         </Button>
       </Form.Item>
-      {/* <h3>定位点</h3> */}
+
       <Form.List
         name="firstPoints"
         initialValue={[
@@ -95,13 +96,6 @@ function GetPoints(props: {
                   >
                     <PointsVector3 style={{ width: "70%" }} />
                   </Form.Item>
-                  <Button
-                    style={{ marginLeft: "10px" }}
-                    type="primary"
-                    onClick={() => props.pickPoint("firstPoints", field)}
-                  >
-                    采集
-                  </Button>
                 </Form.Item>
               ))}
             </>
@@ -134,13 +128,13 @@ function GetPoints(props: {
                   >
                     <PointsVector3 style={{ width: "70%" }} />
                   </Form.Item>
-                  <Button
+                  {/* <Button
                     style={{ marginLeft: "10px" }}
                     type="primary"
                     onClick={() => props.pickPoint("centerPoint", field)}
                   >
                     采集
-                  </Button>
+                  </Button> */}
                 </Form.Item>
               ))}
             </>

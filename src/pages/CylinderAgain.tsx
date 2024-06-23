@@ -18,7 +18,11 @@ const SLCPicker = (props) => {
   return (
     <div className=" q-flex q-justify-between q-w-[600px]">
       <div>
-        <PointsVector3 value={value?.[0]} style={{ width: "70%" }} />
+        <PointsVector3
+          value={value?.[0]}
+          style={{ width: "70%" }}
+          showGetPoints={false}
+        />
 
         <Button
           style={{ marginLeft: "10px" }}
@@ -28,15 +32,21 @@ const SLCPicker = (props) => {
               onChange([res, value?.[1]]);
             });
           }}
+          size="small"
         >
           采集
         </Button>
       </div>
 
       <div>
-        <PointsVector3 value={value?.[1]} style={{ width: "70%" }} />
+        <PointsVector3
+          value={value?.[1]}
+          style={{ width: "70%" }}
+          showGetPoints={false}
+        />
 
         <Button
+          size="small"
           style={{ marginLeft: "10px" }}
           type="primary"
           onClick={() => {

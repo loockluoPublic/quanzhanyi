@@ -47,6 +47,7 @@ export default function BaseInfo() {
       >
         <Checkbox.Group options={sdmOptions}></Checkbox.Group>
       </Item>
+
       <Item
         label="声道角"
         name="sdj"
@@ -55,6 +56,7 @@ export default function BaseInfo() {
       >
         <InputNumber />
       </Item>
+
       <Item
         label="轴向偏移"
         name="tOff"
@@ -63,6 +65,7 @@ export default function BaseInfo() {
       >
         <InputNumber />
       </Item>
+
       <Item
         label="径向偏移"
         name="rOff"

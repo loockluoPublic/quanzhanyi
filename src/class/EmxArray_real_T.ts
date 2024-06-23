@@ -143,13 +143,15 @@ export default class EmxArray_real_T {
 
   getSize() {
     // 从结构体中获取allocatedSize（即数组长度）
-    var size = emModule.getValue(this.ptr + 8, "i32");
+    var w = emModule.getValue(this.ptr + 8, "i32");
     var allocatedSize = emModule.getValue(this.ptr + 16, "i32");
 
     const a = Array.from(
       new Int32Array(emModule.HEAP32.buffer, this.sizePtr, 2)
     );
-    console.log("%c Line:129 🥑 size", "color:#42b983", size, allocatedSize, a);
+    console.log("%c Line:129 🥑 size", "color:#42b983", w, allocatedSize, a);
+
+    return a;
   }
   toJSON() {
     if (!this.ptr) return null;
@@ -164,8 +166,8 @@ export default class EmxArray_real_T {
       new Float64Array(emModule.HEAPF64.buffer, dataPtr, allocatedSize)
     );
 
+    // const [m = this.size[0], n = this.size[1]] = this.getSize();
     const [m, n] = this.size;
-
     if (m > 1 && n > 1) {
       const res = [];
       for (let index = 0; index < data.length; index += m) {
