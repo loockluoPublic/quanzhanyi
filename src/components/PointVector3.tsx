@@ -13,13 +13,13 @@ export default function PointsVector3(props: {
   remove?: () => void;
   autoMeasure?: boolean;
 }) {
-  const { showGetPoints = true } = props;
+  const { showGetPoints = true, value } = props;
+
   const [loading, setLoading] = useState(false);
   const getPoints = () => {
     setLoading(true);
     measureAndGetSimpleCoord()
       .then((res) => {
-        console.log("%c Line:12 🍩 res", "color:#ed9ec7", res);
         props.onChange?.(res);
       })
       .finally(() => {
@@ -27,7 +27,7 @@ export default function PointsVector3(props: {
       });
   };
   useEffect(() => {
-    props.autoMeasure && getPoints();
+    !props.value && props.autoMeasure && getPoints();
   }, []);
 
   return (

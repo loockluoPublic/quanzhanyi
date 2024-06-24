@@ -17,7 +17,6 @@ function CubePoints(props: { pointsKeys: string }) {
   console.log("%c Line:17 🍔 data", "color:#3f7cff", data);
 
   const calPlanefit = () => {
-    (window as any).form;
     const points = (window as any).form.getFieldValue(pointsKeys);
     console.log("%c Line:17 🧀 arr", "color:#3f7cff", points);
     Planefit(
@@ -49,6 +48,12 @@ function CubePoints(props: { pointsKeys: string }) {
                 <Button
                   className="q-mx-4"
                   onClick={() => {
+                    console.log(
+                      "%c Line:54 🍞 mockCubeData[pointsKeys]",
+                      "color:#6ec1c2",
+                      pointsKeys,
+                      mockCubeData[pointsKeys]
+                    );
                     (window as any).form.setFieldValue(
                       pointsKeys,
                       mockCubeData[pointsKeys]
