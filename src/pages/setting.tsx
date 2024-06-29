@@ -109,7 +109,7 @@ export default function Setting() {
       type: SHOWTYPE.yc,
     },
     {
-      title: "结果",
+      title: "报表",
       components: <ResultTable />,
       type: SHOWTYPE.yc,
     },

@@ -2,6 +2,7 @@ import { Button, Modal, Table } from "antd";
 import { CustomVector3 } from "../../class/CustomVector3";
 import { useMemo, useState } from "react";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import ResultsTable2 from "../ResultsTable2";
 
 const columns: any = [
   {
@@ -45,6 +46,7 @@ const columns: any = [
     },
   },
 ];
+
 export function PointsTable(props: { mPoints: CustomVector3[] }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -91,11 +93,12 @@ export function PointsTable(props: { mPoints: CustomVector3[] }) {
         footer={null}
         zIndex={9999}
       >
-        <Table
+        {/* <Table
           dataSource={data}
           columns={columns}
           pagination={{ pageSize: 10 }}
-        />
+        /> */}
+        <ResultsTable2 />
       </Modal>
     </div>
   );

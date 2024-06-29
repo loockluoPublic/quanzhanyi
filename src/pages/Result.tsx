@@ -1,8 +1,10 @@
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import { useMemo } from "react";
-import { Button, Table } from "antd";
+import { Button, Table, Tabs, TabsProps } from "antd";
 import { getDataFromTable } from "../utils/utils";
+import ResultsTable2 from "../components/ResultsTable2";
+import Result3 from "../components/Result3";
 
 const columns: any = [
   {
@@ -107,9 +109,28 @@ export default function ResultTable() {
 
     return tableData;
   }, [sdfb, sdm, AB]);
+
+  const items: TabsProps["items"] = [
+    {
+      key: "1",
+      label: "安装参数",
+      children: <Table dataSource={dataSource} columns={columns}></Table>,
+    },
+    {
+      key: "2",
+      label: "测量点",
+      children: <ResultsTable2 />,
+    },
+    {
+      key: "3",
+      label: "圆柱参数",
+      children: <Result3 />,
+    },
+  ];
+
   return (
     <div>
-      <Table dataSource={dataSource} columns={columns}></Table>
+      <Tabs defaultActiveKey="1" items={items} />
     </div>
   );
 }
