@@ -106,13 +106,11 @@ export default function Setting() {
     {
       title: "计算安装位",
       components: <CalculateResultPoints />,
-      hideType: TMode.second,
       type: SHOWTYPE.yc,
     },
     {
       title: "结果",
       components: <ResultTable />,
-      hideType: TMode.second,
       type: SHOWTYPE.yc,
     },
 
@@ -120,7 +118,6 @@ export default function Setting() {
     {
       title: "采集",
       components: <CylinderAgain />,
-      hideType: TMode.first,
       type: SHOWTYPE.yf,
     },
 

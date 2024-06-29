@@ -7,7 +7,7 @@ import initData from "../utils/mockData";
 import { MinusCircleOutlined } from "@ant-design/icons";
 import { measureAndGetSimpleCoord } from "../utils/commond";
 import { Planefit } from "../utils/utils";
-import * as mockCubeData from "../utils/cubeMockData";
+import * as mockCubeData from "../utils/cubeMockData2";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 
@@ -65,6 +65,20 @@ function CubePoints(props: { pointsKeys: string }) {
                 <Button className="q-mx-4" onClick={calPlanefit}>
                   计算
                 </Button>
+                {/* <Button
+                  className="q-mx-4"
+                  onClick={() => {
+                    setData((d) => {
+                      return {
+                        ...d,
+                        cubeBounders: [],
+                        planeParaOut: [],
+                      };
+                    });
+                  }}
+                >
+                  清空
+                </Button> */}
               </Form.Item>
               {fields.map((field, index) => (
                 <Form.Item
