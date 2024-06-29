@@ -195,7 +195,7 @@ export default class EmxArray_real_T {
   toVector3() {
     if (this.size[0] === 3) {
       return this.toJSON().map((row) => {
-        return new CustomVector3().fromCArray(row);
+        return CustomVector3.fromCArray(row);
       });
     }
     return [];

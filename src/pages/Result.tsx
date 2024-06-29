@@ -17,7 +17,7 @@ const columns: any = [
     align: "center",
     key: "x",
     render: (_, item) => {
-      return `( ${item?.x?.toFixed?.(4)}, ${item.y?.toFixed?.(
+      return `${item.id}( ${item?.x?.toFixed?.(4)}, ${item.y?.toFixed?.(
         4
       )}, ${item.z?.toFixed?.(4)} )`;
     },
@@ -70,6 +70,7 @@ const trasfrom =
     console.log("%c Line:56 🥒 d", "color:#ffdd4d", d);
     tableData.push({
       type,
+      id: point.label + point.key,
       x: point.x,
       y: point.y,
       z: point.z,

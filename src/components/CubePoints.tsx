@@ -7,7 +7,7 @@ import initData from "../utils/mockData";
 import { MinusCircleOutlined } from "@ant-design/icons";
 import { measureAndGetSimpleCoord } from "../utils/commond";
 import { Planefit } from "../utils/utils";
-import * as mockCubeData from "../utils/cubeMockData2";
+import * as mockCubeData from "../utils/cubeMockData";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 

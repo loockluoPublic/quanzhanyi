@@ -14,6 +14,7 @@ export default function PointsVector3(props: {
   autoMeasure?: boolean;
 }) {
   const { showGetPoints = true, value } = props;
+  console.log("%c Line:17 🌶 props", "color:#2eafb0", props);
 
   const [loading, setLoading] = useState(false);
   const getPoints = () => {
@@ -33,9 +34,7 @@ export default function PointsVector3(props: {
   return (
     <div className=" ">
       <span style={props.style}>
-        <span>{`ID:${props?.value?.key ?? ""} ${
-          props?.value?.label || ""
-        }`}</span>
+        <span>{`${props?.value?.label || ""}${props?.value?.key ?? ""}`}</span>
         <span>x:</span>
         <span>{props?.value?.x?.toFixed(3)}</span>
         <span> y:</span>

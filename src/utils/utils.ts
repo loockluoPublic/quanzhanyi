@@ -197,9 +197,14 @@ export const CalculatAAndBPoints = async (
     B.ptr
   );
 
+  CustomVector3.setPublicInfo("A", 0);
+  const bottomA = A.toVector3();
+  CustomVector3.setPublicInfo("B", 0);
+  const bottomB = B.toVector3();
+
   const res = {
-    bottomA: A.toVector3(),
-    bottomB: B.toVector3(),
+    bottomA,
+    bottomB,
   };
 
   A.free();

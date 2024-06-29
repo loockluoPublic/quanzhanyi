@@ -52,7 +52,7 @@ export function PointsTable(props: { mPoints: CustomVector3[] }) {
     return {
       diff: item.difference,
       enable: item.enable,
-      key: item.key,
+      key: `${item.label}${item.key}`,
       x: item.x,
       y: item.y,
       z: item.z,

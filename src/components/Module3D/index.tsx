@@ -70,8 +70,8 @@ function PointsLabel(props: {
           className="q-w-20 relative"
           style={{ "--point-color": props.color } as any}
         >
-          {item.key}
           {item.label || ""}
+          {item.key}
         </div>
       </Html>
     );
@@ -125,33 +125,22 @@ export default function Index(props: {
       case false:
         return null;
 
-      case "points":
-        return (
-          <Tree
-            checkable
-            checkedKeys={selectedKeys}
-            multiple={true}
-            titleRender={(nodeData) => {
-              return <PointsVector3 key={nodeData.key} value={nodeData} />;
-            }}
-            treeData={showPoints}
-            onCheck={(sk) => {
-              showPoints.forEach((p) => {
-                p.setEnable((sk as any).includes(p.key));
-              });
-              props?.setData?.(getShowPoints());
-              setPoints([...showPoints]);
-            }}
-          />
-        );
-
-      case "table":
-        return <div></div>;
-
       default:
-        break;
+      case "table":
+        return (
+          <div>
+            {props.mPoints?.map((item) => {
+              return (
+                <PointsVector3
+                  showGetPoints={false}
+                  key={item.key}
+                  value={item}
+                />
+              );
+            })}
+          </div>
+        );
     }
-    return;
   };
   return (
     <div className=" q-flex q-w-full">

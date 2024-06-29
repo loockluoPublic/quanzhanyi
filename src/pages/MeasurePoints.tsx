@@ -21,6 +21,7 @@ export function MeasurePoints() {
   const { measure, loading, points } = useMeasure();
 
   const run = () => {
+    CustomVector3.setPublicInfo("P", 1);
     generateUnitCircleWithNormalVector(
       data?.direct?.[0],
       data?.direct?.[1],
@@ -38,6 +39,7 @@ export function MeasurePoints() {
   };
 
   const setMockData = () => {
+    CustomVector3.setPublicInfo("P", 0);
     setData({
       ...data,
       mPoints: mockData.mPoints.map(
@@ -70,6 +72,7 @@ export function MeasurePoints() {
         height="500px"
         direct={data?.direct}
         setData={setMData}
+        pointsShowType="points"
         component={
           <>
             <Button loading={loading} onClick={run}>

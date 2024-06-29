@@ -11,7 +11,8 @@ import BaseInfo from "../components/BaseInfo";
 
 export function CalculateResultPoints() {
   const [data, setData] = useRecoilState(Data);
-  console.log("%c Line:14 🍌 data", "color:#3f7cff", data);
+  console.log("%c Line:14 🍎 CalculateResultPoints", "color:#ed9ec7", data);
+
   const [loading, setLoading] = useState(false);
 
   const run = () => {

@@ -2,11 +2,17 @@ import { Vector3, Spherical } from "three";
 
 export class CustomVector3 extends Vector3 {
   static count = 0;
+  static publicLable;
   public key: number;
   public label?: string;
   public color?: string;
   public enable: boolean;
   difference?: number;
+
+  static setPublicInfo(newLabel: string, newCount?: number) {
+    CustomVector3.count = newCount ?? 0;
+    CustomVector3.publicLable = newLabel;
+  }
 
   constructor(
     x?: number,
@@ -25,17 +31,18 @@ export class CustomVector3 extends Vector3 {
   ) {
     super(x, y, z);
     if ((label as any)?.key) {
-      this.label = (label as any)?.label;
+      this.label = (label as any)?.label ?? CustomVector3.publicLable;
       this.key = (label as any)?.key ?? ++CustomVector3.count;
       this.color = (label as any)?.color;
       this.enable = (label as any)?.enable ?? true;
       this.difference = (label as any)?.difference;
     } else if (typeof label === "string") {
       this.key = key ?? ++CustomVector3.count;
-      this.label = label as string;
+      this.label = (label as string) ?? CustomVector3.publicLable;
       this.enable = true;
     } else {
       this.key = key ?? ++CustomVector3.count;
+      this.label = CustomVector3.publicLable;
       this.enable = true;
     }
   }
@@ -73,11 +80,8 @@ export class CustomVector3 extends Vector3 {
     return [this.y, this.z, this.x];
   }
 
-  fromCArray(arr: [number, number, number]) {
-    this.x = arr[2];
-    this.y = arr[0];
-    this.z = arr[1];
-    return this;
+  static fromCArray(arr: [number, number, number]) {
+    return new CustomVector3(arr[2], arr[0], arr[1]);
   }
 
   fromCustomVector3(cv3 = this) {
