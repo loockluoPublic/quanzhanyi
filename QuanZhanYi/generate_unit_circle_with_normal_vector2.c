@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector2.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 30-Jun-2024 13:24:04
+ * C/C++ source code generated on  : 30-Jun-2024 13:50:22
  */
 
 /* Include Files */
@@ -13,7 +13,110 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Function Declarations */
+static void g_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
+                               const double in3[3], const emxArray_real_T *in4,
+                               const double in5[3]);
+
+static void h_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
+                               const double in3[3], const emxArray_real_T *in4,
+                               const double in5[3]);
+
 /* Function Definitions */
+/*
+ * Arguments    : emxArray_real_T *in1
+ *                const emxArray_real_T *in2
+ *                const double in3[3]
+ *                const emxArray_real_T *in4
+ *                const double in5[3]
+ * Return Type  : void
+ */
+static void g_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
+                               const double in3[3], const emxArray_real_T *in4,
+                               const double in5[3])
+{
+  const double *in2_data;
+  const double *in4_data;
+  double b_in3;
+  double b_in5;
+  double *in1_data;
+  int i;
+  int loop_ub;
+  int stride_0_1;
+  int stride_1_1;
+  in4_data = in4->data;
+  in2_data = in2->data;
+  b_in3 = in3[1];
+  b_in5 = in5[1];
+  i = in1->size[0] * in1->size[1];
+  in1->size[0] = 1;
+  if (in4->size[1] == 1) {
+    in1->size[1] = in2->size[1];
+  } else {
+    in1->size[1] = in4->size[1];
+  }
+  emxEnsureCapacity_real_T(in1, i);
+  in1_data = in1->data;
+  stride_0_1 = (in2->size[1] != 1);
+  stride_1_1 = (in4->size[1] != 1);
+  if (in4->size[1] == 1) {
+    loop_ub = in2->size[1];
+  } else {
+    loop_ub = in4->size[1];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    in1_data[i] =
+        in2_data[i * stride_0_1] * b_in3 + in4_data[i * stride_1_1] * b_in5;
+  }
+}
+
+/*
+ * Arguments    : emxArray_real_T *in1
+ *                const emxArray_real_T *in2
+ *                const double in3[3]
+ *                const emxArray_real_T *in4
+ *                const double in5[3]
+ * Return Type  : void
+ */
+static void h_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
+                               const double in3[3], const emxArray_real_T *in4,
+                               const double in5[3])
+{
+  const double *in2_data;
+  const double *in4_data;
+  double b_in3;
+  double b_in5;
+  double *in1_data;
+  int i;
+  int loop_ub;
+  int stride_0_1;
+  int stride_1_1;
+  in4_data = in4->data;
+  in2_data = in2->data;
+  b_in3 = in3[0];
+  b_in5 = in5[0];
+  i = in1->size[0] * in1->size[1];
+  in1->size[0] = 1;
+  if (in4->size[1] == 1) {
+    in1->size[1] = in2->size[1];
+  } else {
+    in1->size[1] = in4->size[1];
+  }
+  emxEnsureCapacity_real_T(in1, i);
+  in1_data = in1->data;
+  stride_0_1 = (in2->size[1] != 1);
+  stride_1_1 = (in4->size[1] != 1);
+  if (in4->size[1] == 1) {
+    loop_ub = in2->size[1];
+  } else {
+    loop_ub = in4->size[1];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    in1_data[i] =
+        in2_data[i * stride_0_1] * b_in3 + in4_data[i * stride_1_1] * b_in5;
+  }
+}
+
 /*
  * Arguments    : double azimuth
  *                double elevation
@@ -149,7 +252,44 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   /*  使用参数方程生成单位圆上的点 */
   emxInit_real_T(&theta, 2);
   theta_data = theta->data;
-  if (!(num >= 0.0)) {
+  if (elevation < 3.1415926535897931) {
+    if (!(num >= 0.0)) {
+      theta->size[0] = 1;
+      theta->size[1] = 0;
+    } else {
+      K = floor(num);
+      i = theta->size[0] * theta->size[1];
+      theta->size[0] = 1;
+      theta->size[1] = (int)floor(num);
+      emxEnsureCapacity_real_T(theta, i);
+      theta_data = theta->data;
+      if ((int)K >= 1) {
+        nx = (int)K - 1;
+        theta_data[(int)K - 1] = 2.0943951023931953;
+        if (theta->size[1] >= 2) {
+          theta_data[0] = -2.0943951023931953;
+          if (theta->size[1] >= 3) {
+            if ((int)K > 2) {
+              lamuda = 2.0943951023931953 / ((double)(int)K - 1.0);
+              for (k = 2; k <= nx; k++) {
+                theta_data[k - 1] = (double)(((k << 1) - (int)K) - 1) * lamuda;
+              }
+              if (((int)K & 1) == 1) {
+                theta_data[(int)K >> 1] = 0.0;
+              }
+            } else {
+              scale = 4.1887902047863905 / ((double)theta->size[1] - 1.0);
+              i = theta->size[1];
+              for (k = 0; k <= i - 3; k++) {
+                theta_data[k + 1] =
+                    ((double)k + 1.0) * scale + -2.0943951023931953;
+              }
+            }
+          }
+        }
+      }
+    }
+  } else if (!(num >= 0.0)) {
     theta->size[0] = 1;
     theta->size[1] = 0;
   } else {
@@ -160,26 +300,14 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
     emxEnsureCapacity_real_T(theta, i);
     theta_data = theta->data;
     if ((int)K >= 1) {
-      nx = (int)K - 1;
-      theta_data[(int)floor(num) - 1] = 2.0943951023931953;
+      theta_data[(int)K - 1] = 5.2359877559829888;
       if (theta->size[1] >= 2) {
-        theta_data[0] = -2.0943951023931953;
+        theta_data[0] = 1.0471975511965976;
         if (theta->size[1] >= 3) {
-          if ((int)K > 2) {
-            lamuda = 2.0943951023931953 / ((double)(int)K - 1.0);
-            for (k = 2; k <= nx; k++) {
-              theta_data[k - 1] = (double)(((k << 1) - (int)K) - 1) * lamuda;
-            }
-            if (((int)K & 1) == 1) {
-              theta_data[(int)K >> 1] = 0.0;
-            }
-          } else {
-            scale = 4.1887902047863905 / ((double)theta->size[1] - 1.0);
-            i = theta->size[1];
-            for (k = 0; k <= i - 3; k++) {
-              theta_data[k + 1] =
-                  ((double)k + 1.0) * scale + -2.0943951023931953;
-            }
+          scale = 4.1887902047863914 / ((double)theta->size[1] - 1.0);
+          i = theta->size[1];
+          for (k = 0; k <= i - 3; k++) {
+            theta_data[k + 1] = ((double)k + 1.0) * scale + 1.0471975511965976;
           }
         }
       }
@@ -243,7 +371,7 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
     t = lamuda / scale;
     K += t * t;
   }
-  emxInit_real_T(&x_circle, 2);
+  emxInit_real_T(&z_circle, 2);
   K = scale * sqrt(K);
   v[0] /= K;
   v[1] /= K;
@@ -254,86 +382,6 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   u[2] = v[0] * Pl2_idx_1 - Pl2_idx_0 * v[1];
   /*  创建另一个垂直向量 */
   /*  单位圆的参数方程 */
-  i = x_circle->size[0] * x_circle->size[1];
-  x_circle->size[0] = 1;
-  x_circle->size[1] = theta->size[1];
-  emxEnsureCapacity_real_T(x_circle, i);
-  x_circle_data = x_circle->data;
-  nx = theta->size[1];
-  for (i = 0; i < nx; i++) {
-    x_circle_data[i] = theta_data[i];
-  }
-  nx = theta->size[1];
-  for (k = 0; k < nx; k++) {
-    x_circle_data[k] = cos(x_circle_data[k]);
-  }
-  emxInit_real_T(&z_circle, 2);
-  i = z_circle->size[0] * z_circle->size[1];
-  z_circle->size[0] = 1;
-  z_circle->size[1] = theta->size[1];
-  emxEnsureCapacity_real_T(z_circle, i);
-  z_circle_data = z_circle->data;
-  nx = theta->size[1];
-  for (i = 0; i < nx; i++) {
-    z_circle_data[i] = theta_data[i];
-  }
-  nx = theta->size[1];
-  for (k = 0; k < nx; k++) {
-    z_circle_data[k] = sin(z_circle_data[k]);
-  }
-  if (x_circle->size[1] == z_circle->size[1]) {
-    nx = x_circle->size[1] - 1;
-    i = x_circle->size[0] * x_circle->size[1];
-    x_circle->size[0] = 1;
-    emxEnsureCapacity_real_T(x_circle, i);
-    x_circle_data = x_circle->data;
-    for (i = 0; i <= nx; i++) {
-      x_circle_data[i] = x_circle_data[i] * v[0] + z_circle_data[i] * u[0];
-    }
-  } else {
-    f_binary_expand_op(x_circle, v, z_circle, u);
-    x_circle_data = x_circle->data;
-  }
-  emxInit_real_T(&y_circle, 2);
-  i = y_circle->size[0] * y_circle->size[1];
-  y_circle->size[0] = 1;
-  y_circle->size[1] = theta->size[1];
-  emxEnsureCapacity_real_T(y_circle, i);
-  y_circle_data = y_circle->data;
-  nx = theta->size[1];
-  for (i = 0; i < nx; i++) {
-    y_circle_data[i] = theta_data[i];
-  }
-  nx = theta->size[1];
-  for (k = 0; k < nx; k++) {
-    y_circle_data[k] = cos(y_circle_data[k]);
-  }
-  i = z_circle->size[0] * z_circle->size[1];
-  z_circle->size[0] = 1;
-  z_circle->size[1] = theta->size[1];
-  emxEnsureCapacity_real_T(z_circle, i);
-  z_circle_data = z_circle->data;
-  nx = theta->size[1];
-  for (i = 0; i < nx; i++) {
-    z_circle_data[i] = theta_data[i];
-  }
-  nx = theta->size[1];
-  for (k = 0; k < nx; k++) {
-    z_circle_data[k] = sin(z_circle_data[k]);
-  }
-  if (y_circle->size[1] == z_circle->size[1]) {
-    nx = y_circle->size[1] - 1;
-    i = y_circle->size[0] * y_circle->size[1];
-    y_circle->size[0] = 1;
-    emxEnsureCapacity_real_T(y_circle, i);
-    y_circle_data = y_circle->data;
-    for (i = 0; i <= nx; i++) {
-      y_circle_data[i] = y_circle_data[i] * v[1] + z_circle_data[i] * u[1];
-    }
-  } else {
-    e_binary_expand_op(y_circle, v, z_circle, u);
-    y_circle_data = y_circle->data;
-  }
   i = z_circle->size[0] * z_circle->size[1];
   z_circle->size[0] = 1;
   z_circle->size[1] = theta->size[1];
@@ -350,6 +398,36 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   nx = theta->size[1];
   for (k = 0; k < nx; k++) {
     theta_data[k] = sin(theta_data[k]);
+  }
+  emxInit_real_T(&x_circle, 2);
+  if (z_circle->size[1] == theta->size[1]) {
+    i = x_circle->size[0] * x_circle->size[1];
+    x_circle->size[0] = 1;
+    x_circle->size[1] = z_circle->size[1];
+    emxEnsureCapacity_real_T(x_circle, i);
+    x_circle_data = x_circle->data;
+    nx = z_circle->size[1];
+    for (i = 0; i < nx; i++) {
+      x_circle_data[i] = z_circle_data[i] * v[0] + theta_data[i] * u[0];
+    }
+  } else {
+    h_binary_expand_op(x_circle, z_circle, v, theta, u);
+    x_circle_data = x_circle->data;
+  }
+  emxInit_real_T(&y_circle, 2);
+  if (z_circle->size[1] == theta->size[1]) {
+    i = y_circle->size[0] * y_circle->size[1];
+    y_circle->size[0] = 1;
+    y_circle->size[1] = z_circle->size[1];
+    emxEnsureCapacity_real_T(y_circle, i);
+    y_circle_data = y_circle->data;
+    nx = z_circle->size[1];
+    for (i = 0; i < nx; i++) {
+      y_circle_data[i] = z_circle_data[i] * v[1] + theta_data[i] * u[1];
+    }
+  } else {
+    g_binary_expand_op(y_circle, z_circle, v, theta, u);
+    y_circle_data = y_circle->data;
   }
   if (z_circle->size[1] == theta->size[1]) {
     nx = z_circle->size[1] - 1;
