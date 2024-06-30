@@ -1,12 +1,12 @@
 /*
- * File: qrsolve.h
+ * File: linspace.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 30-Jun-2024 14:10:17
  */
 
-#ifndef QRSOLVE_H
-#define QRSOLVE_H
+#ifndef LINSPACE_H
+#define LINSPACE_H
 
 /* Include Files */
 #include "QuanZhanYi_types.h"
@@ -19,7 +19,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void qrsolve(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3]);
+void b_linspace(double n, emxArray_real_T *y);
+
+void linspace(double n, emxArray_real_T *y);
 
 #ifdef __cplusplus
 }
@@ -27,7 +29,7 @@ void qrsolve(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3]);
 
 #endif
 /*
- * File trailer for qrsolve.h
+ * File trailer for linspace.h
  *
  * [EOF]
  */
