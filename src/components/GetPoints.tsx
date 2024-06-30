@@ -17,7 +17,10 @@ function GetPoints(props: {
         wrapperCol={{ span: 3 }}
         initialValue={5}
       >
-        <InputNumber min={2} max={10} />
+        <InputNumber
+        // min={2}
+        //  max={10}
+        />
       </Form.Item>
       <Form.Item
         label="每层采点数"
@@ -26,7 +29,9 @@ function GetPoints(props: {
         wrapperCol={{ span: 3 }}
         initialValue={5}
       >
-        <InputNumber min={3} max={7} />
+        <InputNumber
+        // min={3} max={7}
+        />
       </Form.Item>
       <Form.Item label="管道轴线方向" required={true}>
         <Form.Item
