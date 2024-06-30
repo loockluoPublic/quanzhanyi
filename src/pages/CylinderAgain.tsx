@@ -63,40 +63,59 @@ const SLCPicker = (props) => {
 };
 
 export default function () {
-  const [data] = useRecoilState(Data);
+  const [data, setData] = useRecoilState(Data);
 
   const initialValue = Array(data.sdfb || Math.ceil(data.sdfb / 2)).fill([
     1, 2,
   ]);
-  console.log("%c Line:13 🍏 initialValue", "color:#2eafb0", initialValue);
+
   return (
-    <Form.List name="cylinderAgain" initialValue={initialValue}>
-      {(fields) => {
-        console.log("%c Line:18 🥥 fields", "color:#42b983", fields);
-        return (
-          <>
-            {fields.map((field) => (
-              <Form.Item
-                label={`声道${field.key + 1}`}
-                required={true}
-                key={field.key}
-              >
+    <div>
+      <Form.List name="cylinderAgain" initialValue={initialValue}>
+        {(fields) => {
+          console.log("%c Line:18 🥥 fields", "color:#42b983", fields);
+          return (
+            <>
+              {fields.map((field) => (
                 <Form.Item
-                  {...field}
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                  noStyle
+                  label={`声道${field.key + 1}`}
+                  required={true}
+                  key={field.key}
                 >
-                  <SLCPicker />
+                  <Form.Item
+                    {...field}
+                    rules={[
+                      {
+                        required: true,
+                      },
+                    ]}
+                    noStyle
+                  >
+                    <SLCPicker />
+                  </Form.Item>
                 </Form.Item>
-              </Form.Item>
-            ))}
-          </>
-        );
-      }}
-    </Form.List>
+              ))}
+            </>
+          );
+        }}
+      </Form.List>
+      <div>
+        <Button
+          onClick={() => {
+            const cylinderAgain = (window as any).form.getFieldValue(
+              "cylinderAgain"
+            );
+            setData((d) => {
+              return {
+                ...d,
+                cylinderAgain,
+              };
+            });
+          }}
+        >
+          保存全局以备导出
+        </Button>
+      </div>
+    </div>
   );
 }
