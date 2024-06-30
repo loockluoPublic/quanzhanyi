@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector2.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 30-Jun-2024 12:40:56
+ * C/C++ source code generated on  : 30-Jun-2024 13:24:04
  */
 
 /* Include Files */
@@ -71,11 +71,11 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   Pl2_idx_1 = scale * sin(elevation);
   /*  三个点定义 */
   /*  斜率计算 */
-  lamuda =
+  scale =
       (Pl2_idx_0 * Pl2_idx_0 + Pl2_idx_1 * Pl2_idx_1) + Pl2_idx_2 * Pl2_idx_2;
   K = -(((0.0 - P1[0]) * Pl2_idx_0 + (0.0 - P1[1]) * Pl2_idx_1) +
         (0.0 - P1[2]) * Pl2_idx_2) /
-      lamuda;
+      scale;
   /*  P1点在轴线上的投影坐标 */
   xN1 = K * Pl2_idx_0;
   yN1 = K * Pl2_idx_1;
@@ -84,7 +84,7 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   /*  斜率计算 */
   K = -(((0.0 - P2[0]) * Pl2_idx_0 + (0.0 - P2[1]) * Pl2_idx_1) +
         (0.0 - P2[2]) * Pl2_idx_2) /
-      lamuda;
+      scale;
   /*  P1点在轴线上的投影坐标 */
   t = K * Pl2_idx_0;
   yN2 = K * Pl2_idx_1;
@@ -160,15 +160,26 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
     emxEnsureCapacity_real_T(theta, i);
     theta_data = theta->data;
     if ((int)K >= 1) {
-      theta_data[(int)K - 1] = 3.9269908169872414;
+      nx = (int)K - 1;
+      theta_data[(int)floor(num) - 1] = 2.0943951023931953;
       if (theta->size[1] >= 2) {
-        theta_data[0] = -0.78539816339744828;
+        theta_data[0] = -2.0943951023931953;
         if (theta->size[1] >= 3) {
-          scale = 4.71238898038469 / ((double)theta->size[1] - 1.0);
-          i = theta->size[1];
-          for (k = 0; k <= i - 3; k++) {
-            theta_data[k + 1] =
-                ((double)k + 1.0) * scale + -0.78539816339744828;
+          if ((int)K > 2) {
+            lamuda = 2.0943951023931953 / ((double)(int)K - 1.0);
+            for (k = 2; k <= nx; k++) {
+              theta_data[k - 1] = (double)(((k << 1) - (int)K) - 1) * lamuda;
+            }
+            if (((int)K & 1) == 1) {
+              theta_data[(int)K >> 1] = 0.0;
+            }
+          } else {
+            scale = 4.1887902047863905 / ((double)theta->size[1] - 1.0);
+            i = theta->size[1];
+            for (k = 0; k <= i - 3; k++) {
+              theta_data[k + 1] =
+                  ((double)k + 1.0) * scale + -2.0943951023931953;
+            }
           }
         }
       }
@@ -372,19 +383,19 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
       i = (int)K - 1;
     }
     scale = deltx_data[j];
-    K = delty_data[j];
-    lamuda = deltz_data[j];
+    lamuda = delty_data[j];
+    K = deltz_data[j];
     nx = x_circle->size[1];
     for (k = 0; k < nx; k++) {
       theta_data[3 * (i + k)] = x_circle_data[k] + scale;
     }
     nx = y_circle->size[1];
     for (k = 0; k < nx; k++) {
-      theta_data[3 * (i + k) + 1] = y_circle_data[k] + K;
+      theta_data[3 * (i + k) + 1] = y_circle_data[k] + lamuda;
     }
     nx = z_circle->size[1];
     for (k = 0; k < nx; k++) {
-      theta_data[3 * (i + k) + 2] = z_circle_data[k] + lamuda;
+      theta_data[3 * (i + k) + 2] = z_circle_data[k] + K;
     }
   }
   emxFree_real_T(&z_circle);
