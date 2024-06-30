@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector2.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 29-Jun-2024 22:59:59
+ * C/C++ source code generated on  : 30-Jun-2024 12:40:56
  */
 
 /* Include Files */
@@ -160,14 +160,15 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
     emxEnsureCapacity_real_T(theta, i);
     theta_data = theta->data;
     if ((int)K >= 1) {
-      theta_data[(int)K - 1] = 5.497787143782138;
+      theta_data[(int)K - 1] = 3.9269908169872414;
       if (theta->size[1] >= 2) {
-        theta_data[0] = 0.78539816339744828;
+        theta_data[0] = -0.78539816339744828;
         if (theta->size[1] >= 3) {
           scale = 4.71238898038469 / ((double)theta->size[1] - 1.0);
           i = theta->size[1];
           for (k = 0; k <= i - 3; k++) {
-            theta_data[k + 1] = ((double)k + 1.0) * scale + 0.78539816339744828;
+            theta_data[k + 1] =
+                ((double)k + 1.0) * scale + -0.78539816339744828;
           }
         }
       }
