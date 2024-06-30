@@ -52,27 +52,27 @@ export default function BaseInfo() {
         label="声道角"
         name="sdj"
         rules={[{ required: true }]}
-        initialValue={0.6}
+        initialValue={45}
       >
-        <InputNumber />
+        <InputNumber addonAfter="度" />
       </Item>
 
       <Item
         label="轴向偏移"
         name="tOff"
         rules={[{ required: true }]}
-        initialValue={0.1}
+        initialValue={0.01}
       >
-        <InputNumber />
+        <InputNumber addonAfter="米" />
       </Item>
 
       <Item
-        label="径向偏移"
+        label="周向偏移"
         name="rOff"
         rules={[{ required: true }]}
-        initialValue={0.2}
+        initialValue={0.02}
       >
-        <InputNumber />
+        <InputNumber addonAfter="米" />
       </Item>
     </>
   );

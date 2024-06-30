@@ -5,6 +5,7 @@ import { Button, Table, Tabs, TabsProps } from "antd";
 import { getDataFromTable } from "../utils/utils";
 import ResultsTable2 from "../components/ResultsTable2";
 import Result3 from "../components/Result3";
+import { goToCV } from "../utils/commond";
 
 const columns: any = [
   {
@@ -59,8 +60,16 @@ const columns: any = [
     dataIndex: "Wy1",
     key: "Wy1",
     align: "center",
-    render: () => {
-      return <Button>指示</Button>;
+    render: (_, row) => {
+      return (
+        <Button
+          onClick={() => {
+            goToCV(row.x, row.y, row.z);
+          }}
+        >
+          指示
+        </Button>
+      );
     },
   },
 ];

@@ -102,7 +102,8 @@ export default function Index(props: {
 
   useEffect(() => {
     if (!props.loading) {
-      props?.setData?.(getShowPoints());
+      const md = getShowPoints();
+      if (md?.length > 0) props?.setData?.(md);
     }
   }, [props.loading]);
 

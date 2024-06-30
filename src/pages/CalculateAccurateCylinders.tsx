@@ -112,8 +112,8 @@ export function CalculateAccurateCylinders() {
             计算标准差
           </Button>
           <div>
-            <div>标准差：{data.standardDeviation}</div>
-            <div>半径：{data.calulateRes?.R}</div>
+            <div>标准差：{data?.standardDeviation?.toFixed(6)} 米</div>
+            <div>半径：{data?.calulateRes?.R?.toFixed(6)} 米</div>
             <PointsTable mPoints={data.mPoints} />
 
             <div className=" q-mt-6">人工干预</div>

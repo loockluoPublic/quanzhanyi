@@ -33,7 +33,7 @@ export function CalculateResultPoints() {
         calulateRes.Bottom_round_center[1],
         data.centerPoint[0],
         data.sdfb,
-        data.sdj,
+        (data.sdj / 180) * Math.PI,
         data.tOff,
         data.rOff
       ).then((AB) => {
