@@ -17,7 +17,7 @@ const SLCPicker = (props) => {
   );
   return (
     <div className=" q-flex q-justify-between q-w-[600px]">
-      <div>
+      <div className="q-flex">
         <PointsVector3
           value={value?.[0]}
           style={{ width: "70%" }}
@@ -38,7 +38,7 @@ const SLCPicker = (props) => {
         </Button>
       </div>
 
-      <div>
+      <div className="q-flex">
         <PointsVector3
           value={value?.[1]}
           style={{ width: "70%" }}
