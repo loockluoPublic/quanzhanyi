@@ -333,3 +333,62 @@ export const getDataFromTable = (sdfb: number, index: number) => {
     return item.N === sdfb && item.i === index + 1;
   });
 };
+
+export const downLoadFile = (data, filename = "data.json") => {
+  // 将JSON对象转换为字符串
+  const jsonString = JSON.stringify(data, null, 2);
+
+  // 创建一个Blob对象
+  const blob = new Blob([jsonString], { type: "application/json" });
+
+  // 创建一个链接元素
+  const link = document.createElement("a");
+
+  // 创建一个URL对象
+  const url = URL.createObjectURL(blob);
+
+  // 将URL对象赋值给链接元素的href属性
+  link.href = url;
+
+  // 设置下载文件的默认名称
+  link.download = filename;
+
+  // 将链接元素添加到DOM中（为了触发点击事件）
+  document.body.appendChild(link);
+
+  // 触发点击事件以下载文件
+  link.click();
+
+  // 移除链接元素
+  document.body.removeChild(link);
+
+  // 释放URL对象
+  URL.revokeObjectURL(url);
+};
+
+export const loadFile = (jsonStr: string) => {
+  return JSON.parse(jsonStr, (k, v) => {
+    console.log(
+      "%c Line:473 🥤 k,v",
+      "color:#f5ce50",
+      k,
+      typeof v,
+      v,
+      Object.prototype.hasOwnProperty.call(v, "x"),
+      Object.prototype.hasOwnProperty.call(v, "y"),
+      Object.prototype.hasOwnProperty.call(v, "z")
+    );
+    if (
+      typeof v === "object" &&
+      Object.prototype.hasOwnProperty.call(v, "x") &&
+      Object.prototype.hasOwnProperty.call(v, "y") &&
+      Object.prototype.hasOwnProperty.call(v, "z")
+    ) {
+      console.log("%c Line:473 🍖 d v", "color:#ea7e5c", v);
+      return new CustomVector3(v.x, v.y, v.z, v);
+    }
+    return v;
+  });
+};
+
+// loadFile("");

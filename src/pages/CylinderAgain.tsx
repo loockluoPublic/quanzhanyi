@@ -77,7 +77,7 @@ export default function () {
           <>
             {fields.map((field) => (
               <Form.Item
-                label={`声路${field.key + 1}`}
+                label={`声道${field.key + 1}`}
                 required={true}
                 key={field.key}
               >

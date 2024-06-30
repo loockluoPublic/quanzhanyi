@@ -10,9 +10,6 @@ import { pointToAndMeasure } from "../utils/commond";
 import Module3D from "../components/Module3D";
 import mockData from "../utils/mockData";
 import { CustomVector3 } from "../class/CustomVector3";
-const { Item } = Form;
-
-const mock = new URLSearchParams(location.search).has("mock");
 
 export function MeasurePoints() {
   const [data, setData] = useRecoilState(Data);
@@ -50,6 +47,7 @@ export function MeasurePoints() {
 
   useEffect(() => {
     if (!loading && points.length > 0) {
+      console.log("%c Line:50 🍷 points", "color:#33a5ff", points);
       setData({
         ...data,
         mPoints: points,
@@ -58,10 +56,11 @@ export function MeasurePoints() {
   }, [loading, points]);
 
   const setMData = (md: typeof points) => {
-    setData({
-      ...data,
-      mPoints: md,
-    });
+    if (md?.length > 0)
+      setData({
+        ...data,
+        mPoints: md,
+      });
   };
 
   return (

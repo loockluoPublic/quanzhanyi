@@ -12,6 +12,11 @@ import { PointsTable } from "../components/Module3D/PointsTable";
 
 export function CalculateAccurateCylinders() {
   const [data, setData] = useRecoilState(Data);
+  console.log(
+    "%c Line:15 🍏 data CalculateAccurateCylinders",
+    "color:#33a5ff",
+    data
+  );
   console.log("%c Line:14 🍌 data", "color:#3f7cff", data);
   const [loading, setLoading] = useState(false);
 

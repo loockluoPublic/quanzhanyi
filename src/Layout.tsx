@@ -2,8 +2,10 @@ import React, { PropsWithChildren } from "react";
 import type { MenuProps } from "antd";
 import { Layout, Menu } from "antd";
 import { BrowserRouter as Router, Routes } from "react-router-dom";
-import { Mode, TMode } from "./atom/globalState";
-import { useRecoilState } from "recoil";
+import { Data, Mode, TMode } from "./atom/globalState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { downLoadFile } from "./utils/utils";
+import UploadFile from "./components/UploadFile";
 const { Header, Content } = Layout;
 
 const items1: MenuProps["items"] = [
@@ -19,11 +21,12 @@ const items1: MenuProps["items"] = [
 
 const App: React.FC<PropsWithChildren> = (props) => {
   const [mode, setMode] = useRecoilState(Mode);
+  const [data, setData] = useRecoilState(Data);
+
   return (
     <Router>
       <Layout>
         <Header style={{ display: "flex", alignItems: "center" }}>
-          <div className="demo-logo" />
           <Menu
             theme="dark"
             mode="horizontal"
@@ -34,7 +37,16 @@ const App: React.FC<PropsWithChildren> = (props) => {
               setMode(key as TMode);
             }}
           />
+          <div
+            className=" q-text-white q-cursor-pointer"
+            onClick={() => downLoadFile(data)}
+          >
+            导出
+          </div>
+
+          <UploadFile />
         </Header>
+
         <Layout>
           <Layout>
             <Content>
