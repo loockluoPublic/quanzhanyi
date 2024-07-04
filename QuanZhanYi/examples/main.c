@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 30-Jun-2024 16:40:59
+ * C/C++ source code generated on  : 04-Jul-2024 12:51:44
  */
 
 /*************************************************************************/
@@ -38,10 +38,12 @@
 #include "CrossLine.h"
 #include "GenerateTrianglePoints.h"
 #include "Generate_multi_layered_measurement_points.h"
+#include "OffsetCalculate.h"
 #include "QuanZhanYi_emxAPI.h"
 #include "QuanZhanYi_terminate.h"
 #include "QuanZhanYi_types.h"
 #include "RepeatSurvey.h"
+#include "ShengLuJiaoJiSuan.h"
 #include "angle2point.h"
 #include "fitcircle.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
@@ -52,6 +54,8 @@
 #include "rt_nonfinite.h"
 
 /* Function Declarations */
+static emxArray_real_T *argInit_1xUnbounded_real_T(void);
+
 static void argInit_3x1_real_T(double result[3]);
 
 static emxArray_real_T *argInit_3xUnbounded_real_T(void);
@@ -82,7 +86,11 @@ static void main_CrossLine(void);
 
 static void main_GenerateTrianglePoints(void);
 
+static void main_OffsetCalculate(void);
+
 static void main_RepeatSurvey(void);
+
+static void main_ShengLuJiaoJiSuan(void);
 
 static void main_angle2point(void);
 
@@ -93,6 +101,31 @@ static void main_myvrrotvec2mat(void);
 static void main_planefit(void);
 
 /* Function Definitions */
+/*
+ * Arguments    : void
+ * Return Type  : emxArray_real_T *
+ */
+static emxArray_real_T *argInit_1xUnbounded_real_T(void)
+{
+  emxArray_real_T *result;
+  double *result_data;
+  int idx0;
+  int idx1;
+  /* Set the size of the array.
+Change this size to the value that the application requires. */
+  result = emxCreate_real_T(1, 2);
+  result_data = result->data;
+  /* Loop over the array to initialize each element. */
+  for (idx0 = 0; idx0 < 1; idx0++) {
+    for (idx1 = 0; idx1 < result->size[1U]; idx1++) {
+      /* Set the value of the array element.
+Change this value to the value that the application requires. */
+      result_data[idx1] = argInit_real_T();
+    }
+  }
+  return result;
+}
+
 /*
  * Arguments    : double result[3]
  * Return Type  : void
@@ -428,6 +461,30 @@ static void main_GenerateTrianglePoints(void)
  * Arguments    : void
  * Return Type  : void
  */
+static void main_OffsetCalculate(void)
+{
+  emxArray_real_T *Ang;
+  emxArray_real_T *OffsetOut;
+  emxArray_real_T *a;
+  double Mradial_tmp;
+  emxInitArray_real_T(&OffsetOut, 2);
+  /* Initialize function 'OffsetCalculate' input arguments. */
+  Mradial_tmp = argInit_real_T();
+  /* Initialize function input argument 'Ang'. */
+  Ang = argInit_1xUnbounded_real_T();
+  /* Initialize function input argument 'a'. */
+  a = argInit_1xUnbounded_real_T();
+  /* Call the entry-point 'OffsetCalculate'. */
+  OffsetCalculate(Mradial_tmp, Mradial_tmp, Ang, a, OffsetOut);
+  emxDestroyArray_real_T(OffsetOut);
+  emxDestroyArray_real_T(a);
+  emxDestroyArray_real_T(Ang);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_RepeatSurvey(void)
 {
   double SoundPoint1_tmp[3];
@@ -442,6 +499,20 @@ static void main_RepeatSurvey(void)
   /* Call the entry-point 'RepeatSurvey'. */
   RepeatSurvey(SoundPoint1_tmp, SoundPoint1_tmp, SoundPoint1_tmp,
                SoundPoint1_tmp, &SoundAngle, &SoundLength);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+static void main_ShengLuJiaoJiSuan(void)
+{
+  emxArray_real_T *Ang;
+  emxInitArray_real_T(&Ang, 2);
+  /* Initialize function 'ShengLuJiaoJiSuan' input arguments. */
+  /* Call the entry-point 'ShengLuJiaoJiSuan'. */
+  ShengLuJiaoJiSuan(argInit_real_T(), Ang);
+  emxDestroyArray_real_T(Ang);
 }
 
 /*
@@ -548,8 +619,10 @@ You can call entry-point functions multiple times. */
   d_main_generate_unit_circle_wit();
   main_GenerateTrianglePoints();
   main_myvrrotvec2mat();
+  main_OffsetCalculate();
   main_planefit();
   main_RepeatSurvey();
+  main_ShengLuJiaoJiSuan();
   /* Terminate the application.
 You do not need to do this more than one time. */
   QuanZhanYi_terminate();

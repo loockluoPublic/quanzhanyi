@@ -1,14 +1,15 @@
 /*
- * File: myvrrotvec2mat.h
+ * File: ShengLuJiaoJiSuan.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 04-Jul-2024 12:51:44
  */
 
-#ifndef MYVRROTVEC2MAT_H
-#define MYVRROTVEC2MAT_H
+#ifndef SHENGLUJIAOJISUAN_H
+#define SHENGLUJIAOJISUAN_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,7 +19,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void myvrrotvec2mat(const double r[4], double m[9]);
+extern void ShengLuJiaoJiSuan(double numShengLu, emxArray_real_T *Ang);
 
 #ifdef __cplusplus
 }
@@ -26,7 +27,7 @@ extern void myvrrotvec2mat(const double r[4], double m[9]);
 
 #endif
 /*
- * File trailer for myvrrotvec2mat.h
+ * File trailer for ShengLuJiaoJiSuan.h
  *
  * [EOF]
  */

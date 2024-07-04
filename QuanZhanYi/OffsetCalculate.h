@@ -1,12 +1,12 @@
 /*
- * File: minOrMax.h
+ * File: OffsetCalculate.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 04-Jul-2024 12:51:44
  */
 
-#ifndef MINORMAX_H
-#define MINORMAX_H
+#ifndef OFFSETCALCULATE_H
+#define OFFSETCALCULATE_H
 
 /* Include Files */
 #include "QuanZhanYi_types.h"
@@ -19,13 +19,10 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double b_maximum(const emxArray_real_T *x);
-
-double b_minimum(const emxArray_real_T *x);
-
-void maximum(const emxArray_real_T *x, double *ex, int *idx);
-
-void minimum(const emxArray_real_T *x, double *ex, int *idx);
+extern void OffsetCalculate(double Mradial, double phi,
+                            const emxArray_real_T *Ang,
+                            const emxArray_real_T *a,
+                            emxArray_real_T *OffsetOut);
 
 #ifdef __cplusplus
 }
@@ -33,7 +30,7 @@ void minimum(const emxArray_real_T *x, double *ex, int *idx);
 
 #endif
 /*
- * File trailer for minOrMax.h
+ * File trailer for OffsetCalculate.h
  *
  * [EOF]
  */

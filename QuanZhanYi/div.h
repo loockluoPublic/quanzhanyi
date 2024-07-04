@@ -1,14 +1,15 @@
 /*
- * File: myvrrotvec2mat.h
+ * File: div.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 04-Jul-2024 12:51:44
  */
 
-#ifndef MYVRROTVEC2MAT_H
-#define MYVRROTVEC2MAT_H
+#ifndef DIV_H
+#define DIV_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,7 +19,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void myvrrotvec2mat(const double r[4], double m[9]);
+void j_binary_expand_op(emxArray_real_T *in1, double in2,
+                        const emxArray_real_T *in3);
 
 #ifdef __cplusplus
 }
@@ -26,7 +28,7 @@ extern void myvrrotvec2mat(const double r[4], double m[9]);
 
 #endif
 /*
- * File trailer for myvrrotvec2mat.h
+ * File trailer for div.h
  *
  * [EOF]
  */
