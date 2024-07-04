@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 01-Jul-2024 15:27:46
+ * C/C++ source code generated on  : 04-Jul-2024 12:51:44
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -78,6 +78,11 @@ void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
                                                real_T P3[3], real_T P4[3],
                                                emxArray_real_T *Point_test);
 
+void OffsetCalculate(real_T Mradial, real_T phi, emxArray_real_T *Ang,
+                     emxArray_real_T *a, emxArray_real_T *OffsetOut);
+
+void OffsetCalculate_api(const mxArray *const prhs[4], const mxArray **plhs);
+
 void QuanZhanYi_atexit(void);
 
 void QuanZhanYi_initialize(void);
@@ -95,6 +100,10 @@ void RepeatSurvey(real_T SoundPoint1[3], real_T SoundPoint2[3],
 
 void RepeatSurvey_api(const mxArray *const prhs[4], int32_T nlhs,
                       const mxArray *plhs[2]);
+
+void ShengLuJiaoJiSuan(real_T numShengLu, emxArray_real_T *Ang);
+
+void ShengLuJiaoJiSuan_api(const mxArray *prhs, const mxArray **plhs);
 
 void angle2point(real_T ANG, real_T a, real_T b, real_T c, real_T d,
                  real_T Mradial, real_T *x, real_T *y, real_T *z);

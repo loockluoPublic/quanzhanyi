@@ -2,7 +2,7 @@
  * File: QuanZhanYi_emxutil.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 01-Jul-2024 15:27:46
+ * C/C++ source code generated on  : 04-Jul-2024 12:51:44
  */
 
 #ifndef QUANZHANYI_EMXUTIL_H
@@ -19,9 +19,22 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+extern void emxEnsureCapacity_boolean_T(emxArray_boolean_T *emxArray,
+                                        int oldNumel);
+
+extern void emxEnsureCapacity_int32_T(emxArray_int32_T *emxArray, int oldNumel);
+
 extern void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel);
 
+extern void emxFree_boolean_T(emxArray_boolean_T **pEmxArray);
+
+extern void emxFree_int32_T(emxArray_int32_T **pEmxArray);
+
 extern void emxFree_real_T(emxArray_real_T **pEmxArray);
+
+extern void emxInit_boolean_T(emxArray_boolean_T **pEmxArray);
+
+extern void emxInit_int32_T(emxArray_int32_T **pEmxArray);
 
 extern void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions);
 
