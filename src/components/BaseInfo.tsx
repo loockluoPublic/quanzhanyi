@@ -57,7 +57,7 @@ export default function BaseInfo() {
         <InputNumber addonAfter="度" />
       </Item>
 
-      <Item
+      {/* <Item
         label="轴向偏移"
         name="tOff"
         rules={[{ required: true }]}
@@ -73,7 +73,7 @@ export default function BaseInfo() {
         initialValue={0.02}
       >
         <InputNumber addonAfter="米" />
-      </Item>
+      </Item> */}
     </>
   );
 }

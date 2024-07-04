@@ -20,7 +20,7 @@ export function CalculateAccurateCylinders() {
   console.log("%c Line:14 🍌 data", "color:#3f7cff", data);
   const [loading, setLoading] = useState(false);
 
-  const [customStandardDeviation, setStandardDeviation] = useState(0);
+  const [customStandardDeviation, setStandardDeviation] = useState(3);
 
   const calculateCylinders = (curData: GlobalData) => {
     const enablePoints = curData.mPoints.filter((item) => item.enable);
@@ -109,10 +109,10 @@ export function CalculateAccurateCylinders() {
       component={
         <>
           <Button loading={loading} onClick={run}>
-            计算标准差
+            圆柱面拟合
           </Button>
           <div>
-            <div>标准差：{data?.standardDeviation?.toFixed(6)} 米</div>
+            <div>标准差δ：{data?.standardDeviation?.toFixed(6)} 米</div>
             <div>半径：{data?.calulateRes?.R?.toFixed(6)} 米</div>
             <PointsTable mPoints={data.mPoints} />
 
@@ -126,16 +126,19 @@ export function CalculateAccurateCylinders() {
                   setStandardDeviation(standardDeviation);
                 }}
                 addonAfter={
-                  <div
-                    className=" q-cursor-pointer"
-                    onClick={() => {
-                      reRun({
-                        ...data,
-                        standardDeviation: customStandardDeviation,
-                      });
-                    }}
-                  >
-                    计算
+                  <div>
+                    <span>δ</span>
+                    <span
+                      className=" q-cursor-pointer q-ml-4"
+                      onClick={() => {
+                        reRun({
+                          ...data,
+                          standardDeviation: customStandardDeviation,
+                        });
+                      }}
+                    >
+                      计算
+                    </span>
                   </div>
                 }
               />

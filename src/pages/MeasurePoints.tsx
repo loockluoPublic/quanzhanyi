@@ -74,10 +74,12 @@ export function MeasurePoints() {
         pointsShowType="points"
         component={
           <>
-            <Button loading={loading} onClick={run}>
+            <Button type="primary" loading={loading} onClick={run}>
               运行
             </Button>
-            <Button onClick={setMockData}>测试数据</Button>
+            <Button className="q-ml-4" onClick={setMockData}>
+              测试数据
+            </Button>
           </>
         }
       ></Module3D>

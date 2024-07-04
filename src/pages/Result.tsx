@@ -6,6 +6,7 @@ import { getDataFromTable } from "../utils/utils";
 import ResultsTable2 from "../components/ResultsTable2";
 import Result3 from "../components/Result3";
 import { goToCV } from "../utils/commond";
+import Module3D from "../components/Module3D";
 
 const columns: any = [
   {
@@ -138,8 +139,16 @@ export default function ResultTable() {
   ];
 
   return (
-    <div>
-      <Tabs defaultActiveKey="1" items={items} />
+    <div className="q-flex">
+      <div className="q-w-[500px]">
+        <Module3D
+          height="500px"
+          direct={data?.direct}
+          {...data}
+          mPoints={[]}
+        ></Module3D>
+      </div>
+      <Tabs className=" q-flex-1" defaultActiveKey="1" items={items} />
     </div>
   );
 }

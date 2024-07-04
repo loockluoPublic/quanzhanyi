@@ -187,11 +187,13 @@ export default function Index(props: {
 
         <OrbitControls />
       </Canvas>
-      <div className=" q-w-[400px]">
-        {props?.component}
+      {props?.component && (
+        <div className=" q-w-[400px]">
+          {props?.component}
 
-        {showPointsDom()}
-      </div>
+          {showPointsDom()}
+        </div>
+      )}
     </div>
   );
 }

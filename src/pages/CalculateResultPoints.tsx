@@ -55,7 +55,7 @@ export function CalculateResultPoints() {
       mPoints={[]}
       component={
         <>
-          <Button loading={loading} onClick={run}>
+          <Button type="primary" loading={loading} onClick={run}>
             运行
           </Button>
           <div>
