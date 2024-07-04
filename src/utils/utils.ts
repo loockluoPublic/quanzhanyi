@@ -10,6 +10,8 @@ const {
   _CalculatAAndBPoints,
   _Repeat_Survey,
   _Planefit,
+  _offsetCalculate,
+  _shengLuJiaoJiSuan,
 } = (window as any).Module;
 
 /**
@@ -392,3 +394,39 @@ export const loadFile = (jsonStr: string) => {
 };
 
 // loadFile("");
+
+/**
+ * 根据声道数计算角度
+ * @param numSL
+ * @returns
+ */
+export const offsetCalculate = (
+  R: number,
+  phi: number,
+  ang: number[],
+  a: number[]
+) => {
+  const _ang = new EmxArray_real_T(ang);
+  const _a = new EmxArray_real_T(a);
+  const _offset = new EmxArray_real_T(2, a.length);
+  _offsetCalculate(R, phi, _ang.ptr, _a.ptr, _offset.ptr);
+
+  const res = _offset.toJSON();
+  _ang.free();
+  _a.free();
+  _offset.free();
+  return res;
+};
+
+/**
+ * 根据声道数计算角度
+ * @param numSL
+ * @returns
+ */
+export const shengLuJiaoJiSuan = (numSL: number) => {
+  const angs = new EmxArray_real_T(2 * numSL, 1);
+  _shengLuJiaoJiSuan(numSL, angs.ptr);
+  const res = angs.toJSON()?.[0];
+  angs.free();
+  return res;
+};

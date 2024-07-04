@@ -7,6 +7,8 @@
 #include "Calculat_A_and_B_Points_after_Offest.h"
 #include "RepeatSurvey.h"
 #include "planefit.h"
+#include "OffsetCalculate.h"
+#include "ShengLuJiaoJiSuan.h"
 
 EMSCRIPTEN_KEEPALIVE
 void generateUnitCircleWithNormalVector(double azimuth, double elevation,
@@ -77,11 +79,26 @@ void Repeat_Survey(const double SoundPoint1[3], const double SoundPoint2[3],
 }
 
 EMSCRIPTEN_KEEPALIVE
-extern void Planefit(const emxArray_real_T *Points,
-                     const emxArray_real_T *PlaneParaIn,
-                     const double BoundPoint1[3], const double BoundPoint2[3],
-                     emxArray_real_T *PlaneParaOut,
-                     emxArray_real_T *TrianglePoints)
+void Planefit(const emxArray_real_T *Points,
+              const emxArray_real_T *PlaneParaIn,
+              const double BoundPoint1[3], const double BoundPoint2[3],
+              emxArray_real_T *PlaneParaOut,
+              emxArray_real_T *TrianglePoints)
 {
     planefit(Points, PlaneParaIn, BoundPoint1, BoundPoint2, PlaneParaOut, TrianglePoints);
 }
+
+EMSCRIPTEN_KEEPALIVE
+void offsetCalculate(double Mradial, double phi,
+                     const emxArray_real_T *Ang,
+                     const emxArray_real_T *a,
+                     emxArray_real_T *OffsetOut)
+{
+    OffsetCalculate(Mradial, phi, Ang, a, OffsetOut);
+};
+
+EMSCRIPTEN_KEEPALIVE
+void shengLuJiaoJiSuan(double numShengLu, emxArray_real_T *Ang)
+{
+    ShengLuJiaoJiSuan(numShengLu, Ang);
+};
