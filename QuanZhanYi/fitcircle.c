@@ -2,7 +2,7 @@
  * File: fitcircle.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 04-Jul-2024 12:51:44
+ * C/C++ source code generated on  : 05-Jul-2024 14:54:53
  */
 
 /* Include Files */
@@ -44,6 +44,53 @@ static void minus(double in1[4], const emxArray_real_T *in2,
 }
 
 /*
+ * Arguments    : emxArray_real_T *in1
+ *                const emxArray_real_T *in2
+ * Return Type  : void
+ */
+void b_plus(emxArray_real_T *in1, const emxArray_real_T *in2)
+{
+  emxArray_real_T *b_in1;
+  const double *in2_data;
+  double *b_in1_data;
+  double *in1_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  in2_data = in2->data;
+  in1_data = in1->data;
+  emxInit_real_T(&b_in1, 1);
+  i = b_in1->size[0];
+  if (in2->size[0] == 1) {
+    b_in1->size[0] = in1->size[0];
+  } else {
+    b_in1->size[0] = in2->size[0];
+  }
+  emxEnsureCapacity_real_T(b_in1, i);
+  b_in1_data = b_in1->data;
+  stride_0_0 = (in1->size[0] != 1);
+  stride_1_0 = (in2->size[0] != 1);
+  if (in2->size[0] == 1) {
+    loop_ub = in1->size[0];
+  } else {
+    loop_ub = in2->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    b_in1_data[i] = in1_data[i * stride_0_0] + in2_data[i * stride_1_0];
+  }
+  i = in1->size[0];
+  in1->size[0] = b_in1->size[0];
+  emxEnsureCapacity_real_T(in1, i);
+  in1_data = in1->data;
+  loop_ub = b_in1->size[0];
+  for (i = 0; i < loop_ub; i++) {
+    in1_data[i] = b_in1_data[i];
+  }
+  emxFree_real_T(&b_in1);
+}
+
+/*
  * Arguments    : double in1[3]
  *                const double in2[3]
  *                const emxArray_real_T *in3
@@ -53,10 +100,10 @@ static void minus(double in1[4], const emxArray_real_T *in2,
  *                const emxArray_real_T *in7
  * Return Type  : void
  */
-void binary_expand_op(double in1[3], const double in2[3],
-                      const emxArray_real_T *in3, const emxArray_real_T *in4,
-                      const emxArray_real_T *in5, const int in6[2],
-                      const emxArray_real_T *in7)
+void c_binary_expand_op(double in1[3], const double in2[3],
+                        const emxArray_real_T *in3, const emxArray_real_T *in4,
+                        const emxArray_real_T *in5, const int in6[2],
+                        const emxArray_real_T *in7)
 {
   emxArray_real_T *b_in2;
   emxArray_real_T *e_in2;
@@ -382,53 +429,6 @@ void fitcircle(const emxArray_real_T *x, double z[2], double *r,
   /*  sys */
   /*      end % fitcircle_geometric */
   /*  END NESTED FUNCTIONS */
-}
-
-/*
- * Arguments    : emxArray_real_T *in1
- *                const emxArray_real_T *in2
- * Return Type  : void
- */
-void plus(emxArray_real_T *in1, const emxArray_real_T *in2)
-{
-  emxArray_real_T *b_in1;
-  const double *in2_data;
-  double *b_in1_data;
-  double *in1_data;
-  int i;
-  int loop_ub;
-  int stride_0_0;
-  int stride_1_0;
-  in2_data = in2->data;
-  in1_data = in1->data;
-  emxInit_real_T(&b_in1, 1);
-  i = b_in1->size[0];
-  if (in2->size[0] == 1) {
-    b_in1->size[0] = in1->size[0];
-  } else {
-    b_in1->size[0] = in2->size[0];
-  }
-  emxEnsureCapacity_real_T(b_in1, i);
-  b_in1_data = b_in1->data;
-  stride_0_0 = (in1->size[0] != 1);
-  stride_1_0 = (in2->size[0] != 1);
-  if (in2->size[0] == 1) {
-    loop_ub = in1->size[0];
-  } else {
-    loop_ub = in2->size[0];
-  }
-  for (i = 0; i < loop_ub; i++) {
-    b_in1_data[i] = in1_data[i * stride_0_0] + in2_data[i * stride_1_0];
-  }
-  i = in1->size[0];
-  in1->size[0] = b_in1->size[0];
-  emxEnsureCapacity_real_T(in1, i);
-  in1_data = in1->data;
-  loop_ub = b_in1->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    in1_data[i] = b_in1_data[i];
-  }
-  emxFree_real_T(&b_in1);
 }
 
 /*

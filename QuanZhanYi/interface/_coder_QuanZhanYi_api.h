@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 04-Jul-2024 12:51:44
+ * C/C++ source code generated on  : 05-Jul-2024 14:54:53
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -50,6 +50,13 @@ void Calculat_A_and_B_Points_after_Offest(
     real_T Bottom_round_center1[3], real_T Bottom_round_center2[3],
     real_T testP[3], real_T numShengLu, real_T phi, real_T toff, real_T roff,
     emxArray_real_T *PointTable_A_off, emxArray_real_T *PointTable_B_off);
+
+void Calculat_A_and_B_Points_after_Offest2(real_T MTaon[3], real_T Mcenter[3],
+                                           real_T Mradial, real_T PAB[3],
+                                           real_T phi, emxArray_real_T *Ang,
+                                           emxArray_real_T *toff,
+                                           emxArray_real_T *roff,
+                                           emxArray_real_T *PointTable_A_off);
 
 void Calculat_A_and_B_Points_api(const mxArray *const prhs[8], int32_T nlhs,
                                  const mxArray *plhs[2]);
@@ -124,6 +131,9 @@ void c_foot_of_perpendicular_from_a_(const mxArray *const prhs[3], int32_T nlhs,
                                      const mxArray *plhs[3]);
 
 void c_generate_unit_circle_with_nor(const mxArray *const prhs[3],
+                                     const mxArray **plhs);
+
+void d_Calculat_A_and_B_Points_after(const mxArray *const prhs[8],
                                      const mxArray **plhs);
 
 void d_generate_unit_circle_with_nor(const mxArray *const prhs[6],

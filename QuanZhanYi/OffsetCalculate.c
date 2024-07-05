@@ -2,7 +2,7 @@
  * File: OffsetCalculate.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 04-Jul-2024 12:51:44
+ * C/C++ source code generated on  : 05-Jul-2024 14:54:53
  */
 
 /* Include Files */
@@ -18,7 +18,7 @@
 /* Function Declarations */
 static void b_minus(emxArray_real_T *in1, const emxArray_real_T *in2);
 
-static void b_plus(emxArray_real_T *in1, const emxArray_real_T *in2,
+static void c_plus(emxArray_real_T *in1, const emxArray_real_T *in2,
                    const emxArray_real_T *in3);
 
 /* Function Definitions */
@@ -77,7 +77,7 @@ static void b_minus(emxArray_real_T *in1, const emxArray_real_T *in2)
  *                const emxArray_real_T *in3
  * Return Type  : void
  */
-static void b_plus(emxArray_real_T *in1, const emxArray_real_T *in2,
+static void c_plus(emxArray_real_T *in1, const emxArray_real_T *in2,
                    const emxArray_real_T *in3)
 {
   const double *in2_data;
@@ -177,7 +177,7 @@ void OffsetCalculate(double Mradial, double phi, const emxArray_real_T *Ang,
       temp_data[i] = Mradial * temp_data[i] / y_tmp_data[i];
     }
   } else {
-    j_binary_expand_op(temp, Mradial, y_tmp);
+    l_binary_expand_op(temp, Mradial, y_tmp);
     temp_data = temp->data;
   }
   nx = temp->size[1];
@@ -210,7 +210,7 @@ void OffsetCalculate(double Mradial, double phi, const emxArray_real_T *Ang,
       r1[i] = temp_data[i] + Ang_data[i];
     }
   } else {
-    b_plus(r, temp, Ang);
+    c_plus(r, temp, Ang);
     r1 = r->data;
   }
   nx = r->size[1];
@@ -253,7 +253,7 @@ void OffsetCalculate(double Mradial, double phi, const emxArray_real_T *Ang,
           (Mradial * x_data[i] - y_tmp_data[i] * r1[i]) / b_x;
     }
   } else {
-    i_binary_expand_op(OffsetOut, b_a, temp, Mradial, x, y_tmp, r, b_x);
+    k_binary_expand_op(OffsetOut, b_a, temp, Mradial, x, y_tmp, r, b_x);
     OffsetOut_data = OffsetOut->data;
   }
   emxFree_real_T(&y_tmp);

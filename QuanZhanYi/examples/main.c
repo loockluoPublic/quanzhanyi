@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 04-Jul-2024 12:51:44
+ * C/C++ source code generated on  : 05-Jul-2024 14:54:53
  */
 
 /*************************************************************************/
@@ -34,6 +34,7 @@
 #include "main.h"
 #include "Calculat_A_and_B_Points.h"
 #include "Calculat_A_and_B_Points_after_Offest.h"
+#include "Calculat_A_and_B_Points_after_Offest2.h"
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
 #include "CrossLine.h"
 #include "GenerateTrianglePoints.h"
@@ -77,6 +78,8 @@ static void c_main_Generate_multi_layered_m(void);
 static void c_main_foot_of_perpendicular_fr(void);
 
 static void c_main_generate_unit_circle_wit(void);
+
+static void d_main_Calculat_A_and_B_Points_(void);
 
 static void d_main_generate_unit_circle_wit(void);
 
@@ -371,6 +374,42 @@ static void c_main_generate_unit_circle_wit(void)
  * Arguments    : void
  * Return Type  : void
  */
+static void d_main_Calculat_A_and_B_Points_(void)
+{
+  emxArray_real_T *Ang;
+  emxArray_real_T *PointTable_A_off;
+  emxArray_real_T *roff;
+  emxArray_real_T *toff;
+  double MTaon_tmp[3];
+  double Mradial_tmp;
+  emxInitArray_real_T(&PointTable_A_off, 2);
+  /* Initialize function 'Calculat_A_and_B_Points_after_Offest2' input
+   * arguments. */
+  /* Initialize function input argument 'MTaon'. */
+  argInit_3x1_real_T(MTaon_tmp);
+  /* Initialize function input argument 'Mcenter'. */
+  Mradial_tmp = argInit_real_T();
+  /* Initialize function input argument 'PAB'. */
+  /* Initialize function input argument 'Ang'. */
+  Ang = argInit_1xUnbounded_real_T();
+  /* Initialize function input argument 'toff'. */
+  toff = argInit_1xUnbounded_real_T();
+  /* Initialize function input argument 'roff'. */
+  roff = argInit_1xUnbounded_real_T();
+  /* Call the entry-point 'Calculat_A_and_B_Points_after_Offest2'. */
+  Calculat_A_and_B_Points_after_Offest2(MTaon_tmp, MTaon_tmp, Mradial_tmp,
+                                        MTaon_tmp, Mradial_tmp, Ang, toff, roff,
+                                        PointTable_A_off);
+  emxDestroyArray_real_T(PointTable_A_off);
+  emxDestroyArray_real_T(roff);
+  emxDestroyArray_real_T(toff);
+  emxDestroyArray_real_T(Ang);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void d_main_generate_unit_circle_wit(void)
 {
   emxArray_real_T *Point_out;
@@ -610,6 +649,7 @@ You can call entry-point functions multiple times. */
   main_angle2point();
   main_Calculat_A_and_B_Points();
   c_main_Calculat_A_and_B_Points_();
+  d_main_Calculat_A_and_B_Points_();
   c_main_Calculate_accurate_cylin();
   main_CrossLine();
   main_fitcircle();

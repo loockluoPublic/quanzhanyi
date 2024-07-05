@@ -2,7 +2,7 @@
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points2.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 04-Jul-2024 12:51:44
+ * C/C++ source code generated on  : 05-Jul-2024 14:54:53
  */
 
 /* Include Files */
@@ -319,7 +319,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
           A_data[i + A->size[0] * 3] = 1.0;
         }
       } else {
-        c_binary_expand_op(A, y, denom, x_contents);
+        e_binary_expand_op(A, y, denom, x_contents);
         A_data = A->data;
       }
       coffset = A->size[0] << 2;
@@ -413,7 +413,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
             denom_data[i] += Err_every_data[i];
           }
         } else {
-          plus(denom, y);
+          b_plus(denom, y);
           denom_data = denom->data;
         }
         coffset = denom->size[0];
@@ -433,7 +433,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
             Err_every_data[i] = absxk * absxk;
           }
         } else {
-          b_binary_expand_op(x, x_contents);
+          d_binary_expand_op(x, x_contents);
           Err_every_data = x->data;
         }
         if (x->size[1] == 0) {
@@ -485,7 +485,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
           }
           mldivide(n, y, h);
         } else {
-          binary_expand_op(h, b_n, err, denom, x2_contents, outsize, b_y);
+          c_binary_expand_op(h, b_n, err, denom, x2_contents, outsize, b_y);
         }
         /*  Check for convergence */
         Merr = 0.0;

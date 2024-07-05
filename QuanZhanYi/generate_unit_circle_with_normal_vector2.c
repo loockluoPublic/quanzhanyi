@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector2.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 04-Jul-2024 12:51:44
+ * C/C++ source code generated on  : 05-Jul-2024 14:54:53
  */
 
 /* Include Files */
@@ -14,11 +14,11 @@
 #include <math.h>
 
 /* Function Declarations */
-static void g_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
+static void i_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
                                const double in3[3], const emxArray_real_T *in4,
                                const double in5[3]);
 
-static void h_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
+static void j_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
                                const double in3[3], const emxArray_real_T *in4,
                                const double in5[3]);
 
@@ -31,7 +31,7 @@ static void h_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
  *                const double in5[3]
  * Return Type  : void
  */
-static void g_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
+static void i_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
                                const double in3[3], const emxArray_real_T *in4,
                                const double in5[3])
 {
@@ -78,7 +78,7 @@ static void g_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
  *                const double in5[3]
  * Return Type  : void
  */
-static void h_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
+static void j_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
                                const double in3[3], const emxArray_real_T *in4,
                                const double in5[3])
 {
@@ -412,7 +412,7 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
       x_circle_data[i] = z_circle_data[i] * v[0] + theta_data[i] * u[0];
     }
   } else {
-    h_binary_expand_op(x_circle, z_circle, v, theta, u);
+    j_binary_expand_op(x_circle, z_circle, v, theta, u);
     x_circle_data = x_circle->data;
   }
   emxInit_real_T(&y_circle, 2);
@@ -427,7 +427,7 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
       y_circle_data[i] = z_circle_data[i] * v[1] + theta_data[i] * u[1];
     }
   } else {
-    g_binary_expand_op(y_circle, z_circle, v, theta, u);
+    i_binary_expand_op(y_circle, z_circle, v, theta, u);
     y_circle_data = y_circle->data;
   }
   if (z_circle->size[1] == theta->size[1]) {
@@ -440,7 +440,7 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
       z_circle_data[i] = z_circle_data[i] * v[2] + theta_data[i] * u[2];
     }
   } else {
-    d_binary_expand_op(z_circle, v, theta, u);
+    f_binary_expand_op(z_circle, v, theta, u);
     z_circle_data = z_circle->data;
   }
   emxFree_real_T(&theta);
