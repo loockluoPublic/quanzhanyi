@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 04-Jul-2024 12:51:44
+ * C/C++ source code generated on  : 05-Jul-2024 14:54:53
  */
 
 /* Include Files */
@@ -20,10 +20,11 @@
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
-  static const char_T *emlrtEntryPoints[16] = {
+  static const char_T *emlrtEntryPoints[17] = {
       "angle2point",
       "Calculat_A_and_B_Points",
       "Calculat_A_and_B_Points_after_Offest",
+      "Calculat_A_and_B_Points_after_Offest2",
       "Calculate_accurate_cylinders_from_multiple_measurement_points2",
       "CrossLine",
       "fitcircle",
@@ -48,7 +49,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   st.tls = emlrtRootTLSGlobal;
   /* Dispatch the entry-point. */
   switch (emlrtGetEntryPointIndexR2016a(
-      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 16)) {
+      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 17)) {
   case 0:
     unsafe_angle2point_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
@@ -60,47 +61,51 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                                                             nrhs - 1, &prhs[1]);
     break;
   case 3:
-    unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points2_mexFunction(
+    unsafe_Calculat_A_and_B_Points_after_Offest2_mexFunction(
         nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 4:
-    unsafe_CrossLine_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points2_mexFunction(
+        nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 5:
-    unsafe_fitcircle_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_CrossLine_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 6:
+    unsafe_fitcircle_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 7:
     unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
         nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 7:
+  case 8:
     unsafe_Generate_multi_layered_measurement_points_mexFunction(
         nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 8:
+  case 9:
     unsafe_generate_unit_circle_with_normal_vector_mexFunction(
         nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 9:
+  case 10:
     unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
         nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 10:
+  case 11:
     unsafe_GenerateTrianglePoints_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 11:
+  case 12:
     unsafe_myvrrotvec2mat_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 12:
+  case 13:
     unsafe_OffsetCalculate_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 13:
+  case 14:
     unsafe_planefit_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 14:
+  case 15:
     unsafe_RepeatSurvey_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 15:
+  case 16:
     unsafe_ShengLuJiaoJiSuan_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   }
@@ -117,6 +122,38 @@ emlrtCTX mexFunctionCreateRootTLS(void)
   emlrtCreateRootTLSR2022a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
                            NULL, (const char_T *)"GBK", true);
   return emlrtRootTLSGlobal;
+}
+
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[1]
+ *                int32_T nrhs
+ *                const mxArray *prhs[8]
+ * Return Type  : void
+ */
+void unsafe_Calculat_A_and_B_Points_after_Offest2_mexFunction(
+    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[8])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *outputs;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 8) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 8, 4,
+                        37, "Calculat_A_and_B_Points_after_Offest2");
+  }
+  if (nlhs > 1) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 37,
+                        "Calculat_A_and_B_Points_after_Offest2");
+  }
+  /* Call the function. */
+  d_Calculat_A_and_B_Points_after(prhs, &outputs);
+  /* Copy over outputs to the caller. */
+  emlrtReturnArrays(1, &plhs[0], &outputs);
 }
 
 /*
