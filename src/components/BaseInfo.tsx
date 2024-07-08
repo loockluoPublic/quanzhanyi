@@ -14,20 +14,22 @@ const sdmOptions = [
   { label: "声道面B", value: "B" },
 ];
 const { Item } = Form;
-export default function BaseInfo() {
+export default function BaseInfo(props: { hideMode?: boolean }) {
   return (
     <>
-      <Item
-        label="管道类型"
-        name="type"
-        rules={[{ required: true }]}
-        initialValue={1}
-      >
-        <Radio.Group>
-          <Radio value={1}>管道</Radio>
-          <Radio value={2}>方涵</Radio>
-        </Radio.Group>
-      </Item>
+      {!props.hideMode && (
+        <Item
+          label="管道类型"
+          name="type"
+          rules={[{ required: true }]}
+          initialValue={1}
+        >
+          <Radio.Group>
+            <Radio value={1}>管道</Radio>
+            <Radio value={2}>方涵</Radio>
+          </Radio.Group>
+        </Item>
+      )}
 
       <Item
         label="声道分布"

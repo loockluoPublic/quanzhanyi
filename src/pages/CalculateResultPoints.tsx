@@ -9,7 +9,7 @@ import Module3D from "../components/Module3D";
 import { Button } from "antd";
 import BaseInfo from "../components/BaseInfo";
 
-export function CalculateResultPoints() {
+export function CalculateResultPoints(props: { hideMode?: true }) {
   const [data, setData] = useRecoilState(Data);
   console.log("%c Line:14 🍎 CalculateResultPoints", "color:#ed9ec7", data);
 
@@ -54,14 +54,14 @@ export function CalculateResultPoints() {
       {...data}
       mPoints={[]}
       component={
-        <>
+        <div className="q-flex-shrink-0 q-flex-grow-0 q-w-[500px]">
           <Button type="primary" loading={loading} onClick={run}>
             运行
           </Button>
-          <div>
-            <BaseInfo />
+          <div className="q-flex">
+            <BaseInfo hideMode={props.hideMode} />
           </div>
-        </>
+        </div>
       }
     ></Module3D>
   );

@@ -105,7 +105,7 @@ export default function Setting() {
     /** 圆形-测量 */
     {
       title: "计算安装位",
-      components: <CalculateResultPoints />,
+      components: <CalculateResultPoints hideMode={true} />,
       type: SHOWTYPE.yc,
     },
     {

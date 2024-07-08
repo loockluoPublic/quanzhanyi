@@ -129,7 +129,7 @@ export default function Index(props: {
       default:
       case "table":
         return (
-          <div>
+          <div className="cm-w-[400px]">
             {props.mPoints?.map((item) => {
               return (
                 <PointsVector3
@@ -188,7 +188,7 @@ export default function Index(props: {
         <OrbitControls />
       </Canvas>
       {props?.component && (
-        <div className=" q-w-[400px]">
+        <div>
           {props?.component}
 
           {showPointsDom()}

@@ -430,3 +430,14 @@ export const shengLuJiaoJiSuan = (numSL: number) => {
   angs.free();
   return res;
 };
+
+console.log(
+  "%c Line:427 🍭 shengLuJiaoJiSuan",
+  "color:#fca650",
+  offsetCalculate(
+    0.6,
+    Math.PI / 4,
+    shengLuJiaoJiSuan(5),
+    [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015]
+  )
+);
