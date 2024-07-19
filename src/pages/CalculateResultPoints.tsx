@@ -25,25 +25,23 @@ export function CalculateResultPoints(props: { hideMode?: true }) {
           data.firstPoints[1]
         );
 
-      CalculatAAndBPoints(
-        calulateRes.mTaon,
-        calulateRes.center,
-        calulateRes.R,
-        calulateRes.Bottom_round_center[0],
-        calulateRes.Bottom_round_center[1],
-        data.centerPoint[0],
-        data.sdfb,
-        (data.sdj / 180) * Math.PI,
-        data.tOff,
-        data.rOff
-      ).then((AB) => {
-        setLoading(false);
-        setData({
-          ...data,
-          AB,
-          calulateRes,
-        });
-      });
+      // CalculatAAndBPoints(
+      //   calulateRes.mTaon,
+      //   calulateRes.center,
+      //   calulateRes.R,
+      //   data.centerPoint[0],
+      //   data.sdfb,
+      //   (data.sdj / 180) * Math.PI,
+      //   data.tOff,
+      //   data.rOff
+      // ).then((AB) => {
+      //   setLoading(false);
+      //   setData({
+      //     ...data,
+      //     AB,
+      //     calulateRes,
+      //   });
+      // });
     }, 200);
   };
   return (

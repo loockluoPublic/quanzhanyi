@@ -7,6 +7,7 @@
     "dev": "vite --host",
     "matlab2wasm": "emcc sign.c -s WASM=1 -o ss.js ",
     "build": "tsc && vite build",
+    "tauri:dev": "pnpm tauri dev",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "preview": "vite preview"
   },
@@ -27,6 +28,7 @@
     "three": "^0.161.0"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^1.6.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",

@@ -157,10 +157,10 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = async (
  * @description 计算AB面点
  * @param MTaon 圆柱轴线方向向量
  * @param Mcenter 圆柱中心点
- * @param r 圆半径
+ * @param R 圆半径
  * @param Bottom_round_center1 圆柱顶面
  * @param Bottom_round_center2 圆柱地面
- * @param testP AB面交点垂直面所在点
+ * @param PAB AB面交点垂直面所在点
  * @param numShengLu 声道数量
  * @param phi 声路角
  * @returns
@@ -168,49 +168,45 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = async (
 export const CalculatAAndBPoints = async (
   MTaon: CustomVector3,
   Mcenter: CustomVector3,
-  r: number,
-  Bottom_round_center1: CustomVector3,
-  Bottom_round_center2: CustomVector3,
-  testP: CustomVector3,
-  numShengLu: number,
+  R: number,
+  PAB: CustomVector3,
   phi: number,
-  tOff: number,
-  rOff: number
+  ang: number[],
+  tOff: number[],
+  rOff: number[]
 ) => {
   const mTaon = new EmxArray_real_T(MTaon);
   const mCenter = new EmxArray_real_T(Mcenter);
-  const bottom_round_center1 = new EmxArray_real_T(Bottom_round_center1);
-  const bottom_round_center2 = new EmxArray_real_T(Bottom_round_center2);
-  const _testP = new EmxArray_real_T(testP);
-  const A = new EmxArray_real_T(3, numShengLu * 2);
-  const B = new EmxArray_real_T(3, numShengLu * 2);
+  const _PAB = new EmxArray_real_T(PAB);
+  const _ang = new EmxArray_real_T(ang);
+  const _tOff = new EmxArray_real_T(tOff);
+  const _rOff = new EmxArray_real_T(rOff);
+  const A = new EmxArray_real_T(3, ang.length);
   _CalculatAAndBPoints(
     mTaon.arrayPtr,
     mCenter.arrayPtr,
-    r,
-    bottom_round_center1.arrayPtr,
-    bottom_round_center2.arrayPtr,
-    _testP.arrayPtr,
-    numShengLu,
+    R,
+    _PAB.arrayPtr,
     phi,
-    tOff,
-    rOff,
-    A.ptr,
-    B.ptr
+    _ang.ptr,
+    _tOff.ptr,
+    _rOff.ptr,
+    A.ptr
   );
 
   CustomVector3.setPublicInfo("A", 0);
   const bottomA = A.toVector3();
-  CustomVector3.setPublicInfo("B", 0);
-  const bottomB = B.toVector3();
 
   const res = {
     bottomA,
-    bottomB,
   };
-
+  mTaon.free();
+  mCenter.free();
+  _PAB.free();
+  _ang.free();
+  _tOff.free();
+  _rOff.free();
   A.free();
-  B.free();
   return res;
 };
 
