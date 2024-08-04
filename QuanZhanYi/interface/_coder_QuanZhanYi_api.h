@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:21:22
+ * C/C++ source code generated on  : 05-Aug-2024 00:57:42
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -57,7 +57,7 @@ void Calculat_A_and_B_Points_after_Offest2(real_T MTaon[3], real_T Mcenter[3],
                                            real_T phi, emxArray_real_T *Ang,
                                            emxArray_real_T *toff,
                                            emxArray_real_T *roff,
-                                           int32_T PointTable_A_off_size[2]);
+                                           emxArray_real_T *PointTable_A_off);
 
 void Calculat_A_and_B_Points_api(const mxArray *const prhs[8], int32_T nlhs,
                                  const mxArray *plhs[2]);
