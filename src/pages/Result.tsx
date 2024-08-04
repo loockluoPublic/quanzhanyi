@@ -79,7 +79,6 @@ const trasfrom =
   (type: "A" | "B", sdfb: number, tableData: any[], R: number) =>
   (point, index) => {
     const d: any = getDataFromTable(sdfb, index) || {};
-    console.log("%c Line:56 🥒 d", "color:#ffdd4d", d);
     tableData.push({
       type,
       id: point.label + point.key,
@@ -96,7 +95,6 @@ const trasfrom =
 
 export default function ResultTable() {
   const [data] = useRecoilState(Data);
-  console.log("%c Line:6 🍢 data", "color:#f5ce50", data);
   const { sdfb, sdm, AB } = data;
 
   const R = data.calulateRes?.R;

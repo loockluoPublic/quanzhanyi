@@ -39,6 +39,7 @@ export default function Setting() {
   const [data, setData] = useRecoilState(Data);
   const [step, setStep] = useState(0);
   const [mode] = useRecoilState(Mode);
+  console.log("%c Line:40 🍩 data", "color:#4fff4B", data);
 
   useEffect(() => {
     setStep(0);
@@ -182,10 +183,12 @@ export default function Setting() {
       />
       <div className=" q-flex q-justify-center q-bg-white q-m-4 q-p-8 q-rounded-xl">
         <Form
+          key={step}
           onFinish={next}
           className={step > 2 ? " q-w-full" : ""}
           form={form}
-          onChange={updateFormData}
+          onValuesChange={updateFormData}
+          initialValues={data}
         >
           {steps?.[step]?.components}
           {steps.length - 1 > step && (

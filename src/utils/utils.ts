@@ -158,11 +158,12 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = async (
  * @param MTaon 圆柱轴线方向向量
  * @param Mcenter 圆柱中心点
  * @param R 圆半径
- * @param Bottom_round_center1 圆柱顶面
- * @param Bottom_round_center2 圆柱地面
  * @param PAB AB面交点垂直面所在点
- * @param numShengLu 声道数量
  * @param phi 声路角
+ * 下面是三个1*2n的参数
+ * @param ang   手动修正角度
+ * @param tOff  轴向位移
+ * @param rOff  径向位移
  * @returns
  */
 export const CalculatAAndBPoints = async (
@@ -182,12 +183,23 @@ export const CalculatAAndBPoints = async (
   const _tOff = new EmxArray_real_T(tOff);
   const _rOff = new EmxArray_real_T(rOff);
   const A = new EmxArray_real_T(3, ang.length);
+
+  console.log("%c Line:188 🍞 CalculatAAndBPoints", "color:#6ec1c2", {
+    MTaon,
+    Mcenter,
+    R,
+    PAB,
+    phi: ang2rad(phi),
+    ang,
+    tOff,
+    rOff,
+  });
   _CalculatAAndBPoints(
     mTaon.arrayPtr,
     mCenter.arrayPtr,
     R,
     _PAB.arrayPtr,
-    phi,
+    ang2rad(phi),
     _ang.ptr,
     _tOff.ptr,
     _rOff.ptr,
@@ -393,21 +405,26 @@ export const loadFile = (jsonStr: string) => {
 
 /**
  * 根据声道数计算角度
- * @param numSL
- * @returns
+ * @param R
+ * @param phi
+ * @param ang
+ * @param a
+ * @returns  [roff (径向),toff(轴向）][]
  */
 export const offsetCalculate = (
   R: number,
-  phi: number,
-  ang: number[],
+  phi: number, // 声道角
+  ang: number[], // 每个点的角度
   a: number[]
 ) => {
-  const _ang = new EmxArray_real_T(ang);
+  const _ang = new EmxArray_real_T(ang.map(ang2rad));
   const _a = new EmxArray_real_T(a);
   const _offset = new EmxArray_real_T(2, a.length);
-  _offsetCalculate(R, phi, _ang.ptr, _a.ptr, _offset.ptr);
+  _offsetCalculate(R, ang2rad(phi), _ang.ptr, _a.ptr, _offset.ptr);
 
-  const res = _offset.toJSON();
+  const res = _offset
+    .toJSON()
+    ?.map((row) => row.map((v) => Number(v.toFixed(6))));
   _ang.free();
   _a.free();
   _offset.free();
@@ -415,25 +432,30 @@ export const offsetCalculate = (
 };
 
 /**
- * 根据声道数计算角度
+ * 根据声道数计算角度 ang
  * @param numSL
  * @returns
  */
-export const shengLuJiaoJiSuan = (numSL: number) => {
+export const shengLuJiao2Ang = (numSL: number) => {
   const angs = new EmxArray_real_T(2 * numSL, 1);
   _shengLuJiaoJiSuan(numSL, angs.ptr);
-  const res = angs.toJSON()?.[0];
+  const res = angs.toJSON()?.[0]?.map((v) => {
+    return Number(rad2ang(v).toFixed(6));
+  });
   angs.free();
   return res;
 };
 
-console.log(
-  "%c Line:427 🍭 shengLuJiaoJiSuan",
-  "color:#fca650",
-  offsetCalculate(
-    0.6,
-    Math.PI / 4,
-    shengLuJiaoJiSuan(5),
-    [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015]
-  )
-);
+/**
+ * 角度转弧度
+ * @param ang 角度
+ * @returns
+ */
+export const ang2rad = (ang: number) => ang * (Math.PI / 180);
+
+/**
+ * 弧度转角度
+ * @param rad 弧度
+ * @returns
+ */
+export const rad2ang = (rad: number) => rad * (180 / Math.PI);
