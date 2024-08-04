@@ -3,10 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "全站仪",
+  "author": "程曦",
+  "license": "MIT",
   "scripts": {
     "dev": "vite --host",
-    "matlab2wasm": "emcc sign.c -s WASM=1 -o ss.js ",
     "build": "tsc && vite build",
+    "electron": "electron .",
     "tauri:dev": "pnpm tauri dev",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "preview": "vite preview"
@@ -35,6 +38,7 @@
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.18",
+    "electron": "^31.3.1",
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
