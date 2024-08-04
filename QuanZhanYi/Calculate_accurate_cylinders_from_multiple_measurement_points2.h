@@ -1,8 +1,8 @@
 /*
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points2.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 #ifndef CALCULATE_ACCURATE_CYLINDERS_FROM_MULTIPLE_MEASUREMENT_POINTS2_H

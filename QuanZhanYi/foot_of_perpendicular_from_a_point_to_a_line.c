@@ -1,12 +1,14 @@
 /*
  * File: foot_of_perpendicular_from_a_point_to_a_line.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 /* Include Files */
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
+#include "QuanZhanYi_data.h"
+#include "QuanZhanYi_initialize.h"
 #include "rt_nonfinite.h"
 
 /* Function Definitions */
@@ -31,6 +33,9 @@ void foot_of_perpendicular_from_a_point_to_a_line(const double P_outer[3],
   double a_tmp;
   double b_a_tmp;
   double c_a_tmp;
+  if (!isInitialized_QuanZhanYi) {
+    QuanZhanYi_initialize();
+  }
   /*  斜率计算 */
   a_tmp = P_lines2[0] - P_lines1[0];
   b_a_tmp = P_lines2[1] - P_lines1[1];

@@ -1,12 +1,14 @@
 /*
  * File: RepeatSurvey.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 /* Include Files */
 #include "RepeatSurvey.h"
+#include "QuanZhanYi_data.h"
+#include "QuanZhanYi_initialize.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 
@@ -33,6 +35,9 @@ void RepeatSurvey(const double SoundPoint1[3], const double SoundPoint2[3],
   double scale;
   double t;
   double y;
+  if (!isInitialized_QuanZhanYi) {
+    QuanZhanYi_initialize();
+  }
   scale = 3.3121686421112381E-170;
   b_scale = 3.3121686421112381E-170;
   d = Bottom_round_center2[0] - Bottom_round_center1[0];

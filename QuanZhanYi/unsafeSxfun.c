@@ -1,8 +1,8 @@
 /*
  * File: unsafeSxfun.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 /* Include Files */
@@ -17,10 +17,11 @@
  *                const emxArray_real_T *in3
  * Return Type  : void
  */
-void d_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in3)
+void binary_expand_op_1(emxArray_real_T *in1, const emxArray_real_T *in3)
 {
   emxArray_real_T *b_in1;
   const double *in3_data;
+  double varargin_1;
   double *b_in1_data;
   double *in1_data;
   int aux_0_1;
@@ -35,21 +36,17 @@ void d_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in3)
   i = b_in1->size[0] * b_in1->size[1];
   b_in1->size[0] = 2;
   if (in3->size[1] == 1) {
-    b_in1->size[1] = in1->size[1];
+    loop_ub = in1->size[1];
   } else {
-    b_in1->size[1] = in3->size[1];
+    loop_ub = in3->size[1];
   }
+  b_in1->size[1] = loop_ub;
   emxEnsureCapacity_real_T(b_in1, i);
   b_in1_data = b_in1->data;
   stride_0_1 = (in1->size[1] != 1);
   stride_1_1 = (in3->size[1] != 1);
   aux_0_1 = 0;
   aux_1_1 = 0;
-  if (in3->size[1] == 1) {
-    loop_ub = in1->size[1];
-  } else {
-    loop_ub = in3->size[1];
-  }
   for (i = 0; i < loop_ub; i++) {
     b_in1_data[2 * i] = in1_data[2 * aux_0_1] - in3_data[2 * aux_1_1];
     b_in1_data[2 * i + 1] =
@@ -75,7 +72,6 @@ void d_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in3)
   in1_data = in1->data;
   loop_ub = in1->size[1];
   for (i = 0; i < loop_ub; i++) {
-    double varargin_1;
     varargin_1 = in1_data[2 * i];
     in1_data[2 * i] = varargin_1 * varargin_1;
     stride_0_1 = 2 * i + 1;

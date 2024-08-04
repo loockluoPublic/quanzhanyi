@@ -1,8 +1,8 @@
 /*
  * File: ixfun.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 /* Include Files */
@@ -25,46 +25,35 @@ void expand_hypot(const emxArray_real_T *a, const emxArray_real_T *b,
   const double *a_data;
   const double *b_data;
   double *c_data;
-  int acoef;
-  int bcoef;
   int csz_idx_0;
-  int i;
+  int u1;
+  boolean_T b1;
+  boolean_T b_b;
   b_data = b->data;
   a_data = a->data;
-  acoef = a->size[0];
-  bcoef = b->size[0];
-  if (acoef <= bcoef) {
-    bcoef = acoef;
+  csz_idx_0 = a->size[0];
+  u1 = b->size[0];
+  if (csz_idx_0 <= u1) {
+    u1 = csz_idx_0;
   }
   if (b->size[0] == 1) {
     csz_idx_0 = a->size[0];
   } else if (a->size[0] == 1) {
     csz_idx_0 = b->size[0];
   } else {
-    csz_idx_0 = bcoef;
+    csz_idx_0 = u1;
   }
-  i = c->size[0];
-  acoef = a->size[0];
-  bcoef = b->size[0];
-  if (acoef <= bcoef) {
-    bcoef = acoef;
-  }
-  if (b->size[0] == 1) {
-    c->size[0] = a->size[0];
-  } else if (a->size[0] == 1) {
-    c->size[0] = b->size[0];
-  } else {
-    c->size[0] = bcoef;
-  }
-  emxEnsureCapacity_real_T(c, i);
+  u1 = c->size[0];
+  c->size[0] = csz_idx_0;
+  emxEnsureCapacity_real_T(c, u1);
   c_data = c->data;
   if (csz_idx_0 != 0) {
-    acoef = (a->size[0] != 1);
-    bcoef = (b->size[0] != 1);
-    i = csz_idx_0 - 1;
-    for (csz_idx_0 = 0; csz_idx_0 <= i; csz_idx_0++) {
+    b_b = (a->size[0] != 1);
+    b1 = (b->size[0] != 1);
+    u1 = csz_idx_0 - 1;
+    for (csz_idx_0 = 0; csz_idx_0 <= u1; csz_idx_0++) {
       c_data[csz_idx_0] =
-          rt_hypotd_snf(a_data[acoef * csz_idx_0], b_data[bcoef * csz_idx_0]);
+          rt_hypotd_snf(a_data[b_b * csz_idx_0], b_data[b1 * csz_idx_0]);
     }
   }
 }

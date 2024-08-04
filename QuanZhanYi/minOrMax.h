@@ -1,8 +1,8 @@
 /*
  * File: minOrMax.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 #ifndef MINORMAX_H
@@ -19,13 +19,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double b_maximum(const emxArray_real_T *x);
+double maximum(const emxArray_real_T *x);
 
-double b_minimum(const emxArray_real_T *x);
-
-void maximum(const emxArray_real_T *x, double *ex, int *idx);
-
-void minimum(const emxArray_real_T *x, double *ex, int *idx);
+double minimum(const emxArray_real_T *x);
 
 #ifdef __cplusplus
 }

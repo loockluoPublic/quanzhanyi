@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_api.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -10,6 +10,7 @@
 
 /* Include Files */
 #include "emlrt.h"
+#include "mex.h"
 #include "tmwtypes.h"
 #include <string.h>
 
@@ -56,7 +57,7 @@ void Calculat_A_and_B_Points_after_Offest2(real_T MTaon[3], real_T Mcenter[3],
                                            real_T phi, emxArray_real_T *Ang,
                                            emxArray_real_T *toff,
                                            emxArray_real_T *roff,
-                                           emxArray_real_T *PointTable_A_off);
+                                           int32_T PointTable_A_off_size[2]);
 
 void Calculat_A_and_B_Points_api(const mxArray *const prhs[8], int32_T nlhs,
                                  const mxArray *plhs[2]);
@@ -85,11 +86,6 @@ void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
                                                real_T P3[3], real_T P4[3],
                                                emxArray_real_T *Point_test);
 
-void OffsetCalculate(real_T Mradial, real_T phi, emxArray_real_T *Ang,
-                     emxArray_real_T *a, emxArray_real_T *OffsetOut);
-
-void OffsetCalculate_api(const mxArray *const prhs[4], const mxArray **plhs);
-
 void QuanZhanYi_atexit(void);
 
 void QuanZhanYi_initialize(void);
@@ -107,10 +103,6 @@ void RepeatSurvey(real_T SoundPoint1[3], real_T SoundPoint2[3],
 
 void RepeatSurvey_api(const mxArray *const prhs[4], int32_T nlhs,
                       const mxArray *plhs[2]);
-
-void ShengLuJiaoJiSuan(real_T numShengLu, emxArray_real_T *Ang);
-
-void ShengLuJiaoJiSuan_api(const mxArray *prhs, const mxArray **plhs);
 
 void angle2point(real_T ANG, real_T a, real_T b, real_T c, real_T d,
                  real_T Mradial, real_T *x, real_T *y, real_T *z);

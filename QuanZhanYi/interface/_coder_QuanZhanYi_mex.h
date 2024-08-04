@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_mex.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -46,14 +46,8 @@ void unsafe_GenerateTrianglePoints_mexFunction(int32_T nlhs, mxArray *plhs[1],
 void unsafe_Generate_multi_layered_measurement_points_mexFunction(
     int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[5]);
 
-void unsafe_OffsetCalculate_mexFunction(int32_T nlhs, mxArray *plhs[1],
-                                        int32_T nrhs, const mxArray *prhs[4]);
-
 void unsafe_RepeatSurvey_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                      int32_T nrhs, const mxArray *prhs[4]);
-
-void unsafe_ShengLuJiaoJiSuan_mexFunction(int32_T nlhs, mxArray *plhs[1],
-                                          int32_T nrhs, const mxArray *prhs[1]);
 
 void unsafe_angle2point_mexFunction(int32_T nlhs, mxArray *plhs[3],
                                     int32_T nrhs, const mxArray *prhs[6]);

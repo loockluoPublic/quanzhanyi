@@ -1,8 +1,8 @@
 /*
  * File: main.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 /*************************************************************************/
@@ -44,6 +44,37 @@ extern "C" {
 
 /* Function Declarations */
 extern int main(int argc, char **argv);
+
+extern void main_Calculat_A_and_B_Points(void);
+
+extern void main_Calculat_A_and_B_Points_after_Offest(void);
+
+extern void main_Calculat_A_and_B_Points_after_Offest2(void);
+
+extern void
+main_Calculate_accurate_cylinders_from_multiple_measurement_points2(void);
+
+extern void main_CrossLine(void);
+
+extern void main_GenerateTrianglePoints(void);
+
+extern void main_Generate_multi_layered_measurement_points(void);
+
+extern void main_RepeatSurvey(void);
+
+extern void main_angle2point(void);
+
+extern void main_fitcircle(void);
+
+extern void main_foot_of_perpendicular_from_a_point_to_a_line(void);
+
+extern void main_generate_unit_circle_with_normal_vector(void);
+
+extern void main_generate_unit_circle_with_normal_vector2(void);
+
+extern void main_myvrrotvec2mat(void);
+
+extern void main_planefit(void);
 
 #ifdef __cplusplus
 }

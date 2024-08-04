@@ -1,12 +1,14 @@
 /*
  * File: CrossLine.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 /* Include Files */
 #include "CrossLine.h"
+#include "QuanZhanYi_data.h"
+#include "QuanZhanYi_initialize.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 
@@ -30,6 +32,9 @@ void CrossLine(const double PlanePara1[4], const double PlanePara2[4],
   double yz_idx_1_tmp;
   int r1;
   int r2;
+  if (!isInitialized_QuanZhanYi) {
+    QuanZhanYi_initialize();
+  }
   /*  定义平面2的系数 */
   /*  计算法向量的叉乘得到交线的方向向量 */
   d[0] = PlanePara1[1] * PlanePara2[2] - PlanePara2[1] * PlanePara1[2];

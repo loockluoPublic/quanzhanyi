@@ -1,12 +1,14 @@
 /*
  * File: GenerateTrianglePoints.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 /* Include Files */
 #include "GenerateTrianglePoints.h"
+#include "QuanZhanYi_data.h"
+#include "QuanZhanYi_initialize.h"
 #include "QuanZhanYi_types.h"
 #include "rt_nonfinite.h"
 #include <math.h>
@@ -32,10 +34,14 @@ void GenerateTrianglePoints(const double PlaneParaIn[4],
   double t1;
   double v1_idx_0;
   double v1_idx_1;
+  double v1_idx_1_tmp;
   double xfit_idx_0;
   double y;
   double yfit_idx_0;
   double zfit_idx_0;
+  if (!isInitialized_QuanZhanYi) {
+    QuanZhanYi_initialize();
+  }
   t1 = -(((-((Direction[0] * BoundPoint1[0] + Direction[1] * BoundPoint1[1]) +
              Direction[2] * BoundPoint1[2]) +
            Direction[0] * P0[0]) +
@@ -49,7 +55,8 @@ void GenerateTrianglePoints(const double PlaneParaIn[4],
   if (PlaneParaIn[2] != 0.0) {
     t1 = -PlaneParaIn[3] / PlaneParaIn[2] - zfit_idx_0;
     v1_idx_0 = Direction[1] * t1 - (0.0 - yfit_idx_0) * Direction[2];
-    v1_idx_1 = (0.0 - xfit_idx_0) * Direction[2] - Direction[0] * t1;
+    v1_idx_1_tmp = (0.0 - xfit_idx_0) * Direction[2];
+    v1_idx_1 = v1_idx_1_tmp - Direction[0] * t1;
     t1 = (0.0 - xfit_idx_0) * Direction[1];
     dir1_idx_1 = Direction[0] * (0.0 - yfit_idx_0) - t1;
     scale = 3.3121686421112381E-170;
@@ -84,12 +91,10 @@ void GenerateTrianglePoints(const double PlaneParaIn[4],
       /*  如果法向量与 [0, 0, 1] 平行，则选择另一个向量 */
       dir1_idx_1 = -PlaneParaIn[3] / PlaneParaIn[1] - yfit_idx_0;
       v1_idx_0 = Direction[1] * (0.0 - zfit_idx_0) - dir1_idx_1 * Direction[2];
-      v1_idx_1 =
-          (0.0 - xfit_idx_0) * Direction[2] - Direction[0] * (0.0 - zfit_idx_0);
+      v1_idx_1 = v1_idx_1_tmp - Direction[0] * (0.0 - zfit_idx_0);
       dir1_idx_1 = Direction[0] * dir1_idx_1 - t1;
     }
   } else {
-    double v1_idx_1_tmp;
     dir1_idx_1 = -PlaneParaIn[3] / PlaneParaIn[1] - yfit_idx_0;
     t1 = Direction[1] * (0.0 - zfit_idx_0);
     v1_idx_0 = t1 - dir1_idx_1 * Direction[2];
@@ -196,6 +201,7 @@ void b_GenerateTrianglePoints(const emxArray_real_T *PlaneParaIn,
   double t1;
   double v1_idx_0;
   double v1_idx_1;
+  double v1_idx_1_tmp;
   double xfit_idx_0;
   double y;
   double yfit_idx_0;
@@ -214,7 +220,8 @@ void b_GenerateTrianglePoints(const emxArray_real_T *PlaneParaIn,
   if (PlaneParaIn_data[2] != 0.0) {
     t1 = -PlaneParaIn_data[3] / PlaneParaIn_data[2] - zfit_idx_0;
     v1_idx_0 = Direction[1] * t1 - (0.0 - yfit_idx_0) * Direction[2];
-    v1_idx_1 = (0.0 - xfit_idx_0) * Direction[2] - Direction[0] * t1;
+    v1_idx_1_tmp = (0.0 - xfit_idx_0) * Direction[2];
+    v1_idx_1 = v1_idx_1_tmp - Direction[0] * t1;
     t1 = (0.0 - xfit_idx_0) * Direction[1];
     dir1_idx_1 = Direction[0] * (0.0 - yfit_idx_0) - t1;
     scale = 3.3121686421112381E-170;
@@ -249,12 +256,10 @@ void b_GenerateTrianglePoints(const emxArray_real_T *PlaneParaIn,
       /*  如果法向量与 [0, 0, 1] 平行，则选择另一个向量 */
       dir1_idx_1 = -PlaneParaIn_data[3] / PlaneParaIn_data[1] - yfit_idx_0;
       v1_idx_0 = Direction[1] * (0.0 - zfit_idx_0) - dir1_idx_1 * Direction[2];
-      v1_idx_1 =
-          (0.0 - xfit_idx_0) * Direction[2] - Direction[0] * (0.0 - zfit_idx_0);
+      v1_idx_1 = v1_idx_1_tmp - Direction[0] * (0.0 - zfit_idx_0);
       dir1_idx_1 = Direction[0] * dir1_idx_1 - t1;
     }
   } else {
-    double v1_idx_1_tmp;
     dir1_idx_1 = -PlaneParaIn_data[3] / PlaneParaIn_data[1] - yfit_idx_0;
     t1 = Direction[1] * (0.0 - zfit_idx_0);
     v1_idx_0 = t1 - dir1_idx_1 * Direction[2];
@@ -360,6 +365,7 @@ void c_GenerateTrianglePoints(const double PlaneParaIn[4],
   double t1;
   double v1_idx_0;
   double v1_idx_1;
+  double v1_idx_1_tmp;
   double xfit_idx_0;
   double y;
   double yfit_idx_0;
@@ -377,7 +383,8 @@ void c_GenerateTrianglePoints(const double PlaneParaIn[4],
   if (PlaneParaIn[2] != 0.0) {
     t1 = PlaneParaIn[3] - zfit_idx_0;
     v1_idx_0 = Direction[1] * t1 - (0.0 - yfit_idx_0) * Direction[2];
-    v1_idx_1 = (0.0 - xfit_idx_0) * Direction[2] - Direction[0] * t1;
+    v1_idx_1_tmp = (0.0 - xfit_idx_0) * Direction[2];
+    v1_idx_1 = v1_idx_1_tmp - Direction[0] * t1;
     t1 = (0.0 - xfit_idx_0) * Direction[1];
     dir1_idx_1 = Direction[0] * (0.0 - yfit_idx_0) - t1;
     scale = 3.3121686421112381E-170;
@@ -412,12 +419,10 @@ void c_GenerateTrianglePoints(const double PlaneParaIn[4],
       /*  如果法向量与 [0, 0, 1] 平行，则选择另一个向量 */
       dir1_idx_1 = -PlaneParaIn[3] / PlaneParaIn[1] - yfit_idx_0;
       v1_idx_0 = Direction[1] * (0.0 - zfit_idx_0) - dir1_idx_1 * Direction[2];
-      v1_idx_1 =
-          (0.0 - xfit_idx_0) * Direction[2] - Direction[0] * (0.0 - zfit_idx_0);
+      v1_idx_1 = v1_idx_1_tmp - Direction[0] * (0.0 - zfit_idx_0);
       dir1_idx_1 = Direction[0] * dir1_idx_1 - t1;
     }
   } else {
-    double v1_idx_1_tmp;
     dir1_idx_1 = -PlaneParaIn[3] / PlaneParaIn[1] - yfit_idx_0;
     t1 = Direction[1] * (0.0 - zfit_idx_0);
     v1_idx_0 = t1 - dir1_idx_1 * Direction[2];
@@ -523,6 +528,7 @@ void d_GenerateTrianglePoints(const double PlaneParaIn[4],
   double t1;
   double v1_idx_0;
   double v1_idx_1;
+  double v1_idx_1_tmp;
   double xfit_idx_0;
   double y;
   double yfit_idx_0;
@@ -540,7 +546,8 @@ void d_GenerateTrianglePoints(const double PlaneParaIn[4],
   if (PlaneParaIn[2] != 0.0) {
     t1 = -PlaneParaIn[3] / PlaneParaIn[2] - zfit_idx_0;
     v1_idx_0 = Direction[1] * t1 - (0.0 - yfit_idx_0) * Direction[2];
-    v1_idx_1 = (0.0 - xfit_idx_0) * Direction[2] - Direction[0] * t1;
+    v1_idx_1_tmp = (0.0 - xfit_idx_0) * Direction[2];
+    v1_idx_1 = v1_idx_1_tmp - Direction[0] * t1;
     t1 = (0.0 - xfit_idx_0) * Direction[1];
     dir1_idx_1 = Direction[0] * (0.0 - yfit_idx_0) - t1;
     scale = 3.3121686421112381E-170;
@@ -575,12 +582,10 @@ void d_GenerateTrianglePoints(const double PlaneParaIn[4],
       /*  如果法向量与 [0, 0, 1] 平行，则选择另一个向量 */
       dir1_idx_1 = -PlaneParaIn[3] / PlaneParaIn[1] - yfit_idx_0;
       v1_idx_0 = Direction[1] * (0.0 - zfit_idx_0) - dir1_idx_1 * Direction[2];
-      v1_idx_1 =
-          (0.0 - xfit_idx_0) * Direction[2] - Direction[0] * (0.0 - zfit_idx_0);
+      v1_idx_1 = v1_idx_1_tmp - Direction[0] * (0.0 - zfit_idx_0);
       dir1_idx_1 = Direction[0] * dir1_idx_1 - t1;
     }
   } else {
-    double v1_idx_1_tmp;
     dir1_idx_1 = -PlaneParaIn[3] / PlaneParaIn[1] - yfit_idx_0;
     t1 = Direction[1] * (0.0 - zfit_idx_0);
     v1_idx_0 = t1 - dir1_idx_1 * Direction[2];
