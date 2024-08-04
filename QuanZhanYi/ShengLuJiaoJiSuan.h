@@ -2,13 +2,14 @@
  * File: ShengLuJiaoJiSuan.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:10:26
+ * C/C++ source code generated on  : 05-Aug-2024 00:21:22
  */
 
 #ifndef SHENGLUJIAOJISUAN_H
 #define SHENGLUJIAOJISUAN_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,8 +19,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void ShengLuJiaoJiSuan(double numShengLu, double Ang_data[],
-                              int Ang_size[2]);
+extern void ShengLuJiaoJiSuan(double numShengLu, emxArray_real_T *Ang);
 
 #ifdef __cplusplus
 }

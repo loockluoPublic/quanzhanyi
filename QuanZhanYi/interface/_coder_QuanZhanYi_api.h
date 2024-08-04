@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:10:26
+ * C/C++ source code generated on  : 05-Aug-2024 00:21:22
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -109,8 +109,7 @@ void RepeatSurvey(real_T SoundPoint1[3], real_T SoundPoint2[3],
 void RepeatSurvey_api(const mxArray *const prhs[4], int32_T nlhs,
                       const mxArray *plhs[2]);
 
-void ShengLuJiaoJiSuan(real_T numShengLu, real_T Ang_data[],
-                       int32_T Ang_size[2]);
+void ShengLuJiaoJiSuan(real_T numShengLu, emxArray_real_T *Ang);
 
 void ShengLuJiaoJiSuan_api(const mxArray *prhs, const mxArray **plhs);
 

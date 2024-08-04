@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:10:26
+ * C/C++ source code generated on  : 05-Aug-2024 00:21:22
  */
 
 /*************************************************************************/
@@ -484,11 +484,12 @@ void main_RepeatSurvey(void)
  */
 void main_ShengLuJiaoJiSuan(void)
 {
-  double Ang_data[20];
-  int Ang_size[2];
+  emxArray_real_T *Ang;
   /* Initialize function 'ShengLuJiaoJiSuan' input arguments. */
   /* Call the entry-point 'ShengLuJiaoJiSuan'. */
-  ShengLuJiaoJiSuan(argInit_real_T(), Ang_data, Ang_size);
+  emxInitArray_real_T(&Ang, 2);
+  ShengLuJiaoJiSuan(argInit_real_T(), Ang);
+  emxDestroyArray_real_T(Ang);
 }
 
 /*
