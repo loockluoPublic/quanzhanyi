@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:10:26
+ * C/C++ source code generated on  : 05-Aug-2024 00:21:22
  */
 
 /* Include Files */
@@ -71,9 +71,6 @@ static const mxArray *g_emlrt_marshallOut(const real_T u[9]);
 static void h_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                const emlrtMsgIdentifier *parentId,
                                emxArray_real_T *y);
-
-static const mxArray *h_emlrt_marshallOut(const real_T u_data[],
-                                          const int32_T u_size[2]);
 
 static real_T (*i_emlrt_marshallIn(const emlrtStack *sp, const mxArray *nullptr,
                                    const char_T *identifier))[4];
@@ -469,25 +466,6 @@ static void h_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
 {
   t_emlrt_marshallIn(sp, emlrtAlias(u), parentId, y);
   emlrtDestroyArray(&u);
-}
-
-/*
- * Arguments    : const real_T u_data[]
- *                const int32_T u_size[2]
- * Return Type  : const mxArray *
- */
-static const mxArray *h_emlrt_marshallOut(const real_T u_data[],
-                                          const int32_T u_size[2])
-{
-  static const int32_T iv[2] = {0, 0};
-  const mxArray *m;
-  const mxArray *y;
-  y = NULL;
-  m = emlrtCreateNumericArray(2, (const void *)&iv[0], mxDOUBLE_CLASS, mxREAL);
-  emlrtMxSetData((mxArray *)m, (void *)&u_data[0]);
-  emlrtSetDimensions((mxArray *)m, &u_size[0], 2);
-  emlrtAssign(&y, m);
-  return y;
 }
 
 /*
@@ -1069,17 +1047,20 @@ void ShengLuJiaoJiSuan_api(const mxArray *prhs, const mxArray **plhs)
       NULL, /* tls */
       NULL  /* prev */
   };
-  real_T(*Ang_data)[20];
+  emxArray_real_T *Ang;
   real_T numShengLu;
-  int32_T Ang_size[2];
   st.tls = emlrtRootTLSGlobal;
-  Ang_data = (real_T(*)[20])mxMalloc(sizeof(real_T[20]));
+  emlrtHeapReferenceStackEnterFcnR2012b(&st);
   /* Marshall function inputs */
   numShengLu = emlrt_marshallIn(&st, emlrtAliasP(prhs), "numShengLu");
   /* Invoke the target function */
-  ShengLuJiaoJiSuan(numShengLu, *Ang_data, Ang_size);
+  emxInit_real_T(&st, &Ang);
+  ShengLuJiaoJiSuan(numShengLu, Ang);
   /* Marshall function outputs */
-  *plhs = h_emlrt_marshallOut(*Ang_data, Ang_size);
+  Ang->canFreeData = false;
+  *plhs = b_emlrt_marshallOut(Ang);
+  emxFree_real_T(&st, &Ang);
+  emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 
 /*
