@@ -1,12 +1,14 @@
 /*
  * File: angle2point.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 /* Include Files */
 #include "angle2point.h"
+#include "QuanZhanYi_data.h"
+#include "QuanZhanYi_initialize.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 
@@ -26,6 +28,9 @@
 void angle2point(double ANG, double a, double b, double c, double d,
                  double Mradial, double *x, double *y, double *z)
 {
+  if (!isInitialized_QuanZhanYi) {
+    QuanZhanYi_initialize();
+  }
   *x = Mradial * cos(ANG);
   *y = Mradial * sin(ANG);
   *z = -((d + a * *x) + b * *y) / c;

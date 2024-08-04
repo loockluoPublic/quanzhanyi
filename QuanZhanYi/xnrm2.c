@@ -1,8 +1,8 @@
 /*
  * File: xnrm2.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 /* Include Files */
@@ -21,28 +21,27 @@
 double b_xnrm2(int n, const emxArray_real_T *x, int ix0)
 {
   const double *x_data;
+  double absxk;
+  double scale;
+  double t;
   double y;
   int k;
+  int kend;
   x_data = x->data;
   y = 0.0;
   if (n >= 1) {
     if (n == 1) {
       y = fabs(x_data[ix0 - 1]);
     } else {
-      double scale;
-      int kend;
       scale = 3.3121686421112381E-170;
       kend = (ix0 + n) - 1;
       for (k = ix0; k <= kend; k++) {
-        double absxk;
         absxk = fabs(x_data[k - 1]);
         if (absxk > scale) {
-          double t;
           t = scale / absxk;
           y = y * t * t + 1.0;
           scale = absxk;
         } else {
-          double t;
           t = absxk / scale;
           y += t * t;
         }
@@ -61,7 +60,9 @@ double b_xnrm2(int n, const emxArray_real_T *x, int ix0)
  */
 double c_xnrm2(int n, const double x[4], int ix0)
 {
+  double absxk;
   double scale;
+  double t;
   double y;
   int k;
   int kend;
@@ -69,15 +70,12 @@ double c_xnrm2(int n, const double x[4], int ix0)
   scale = 3.3121686421112381E-170;
   kend = (ix0 + n) - 1;
   for (k = ix0; k <= kend; k++) {
-    double absxk;
     absxk = fabs(x[k - 1]);
     if (absxk > scale) {
-      double t;
       t = scale / absxk;
       y = y * t * t + 1.0;
       scale = absxk;
     } else {
-      double t;
       t = absxk / scale;
       y += t * t;
     }
@@ -91,21 +89,20 @@ double c_xnrm2(int n, const double x[4], int ix0)
  */
 double d_xnrm2(const double x[3])
 {
+  double absxk;
   double scale;
+  double t;
   double y;
   int k;
   y = 0.0;
   scale = 3.3121686421112381E-170;
   for (k = 2; k < 4; k++) {
-    double absxk;
     absxk = fabs(x[k - 1]);
     if (absxk > scale) {
-      double t;
       t = scale / absxk;
       y = y * t * t + 1.0;
       scale = absxk;
     } else {
-      double t;
       t = absxk / scale;
       y += t * t;
     }
@@ -120,7 +117,9 @@ double d_xnrm2(const double x[3])
  */
 double e_xnrm2(const double x[8], int ix0)
 {
+  double absxk;
   double scale;
+  double t;
   double y;
   int k;
   int kend;
@@ -128,15 +127,12 @@ double e_xnrm2(const double x[8], int ix0)
   scale = 3.3121686421112381E-170;
   kend = ix0 + 1;
   for (k = ix0; k <= kend; k++) {
-    double absxk;
     absxk = fabs(x[k - 1]);
     if (absxk > scale) {
-      double t;
       t = scale / absxk;
       y = y * t * t + 1.0;
       scale = absxk;
     } else {
-      double t;
       t = absxk / scale;
       y += t * t;
     }
@@ -162,7 +158,9 @@ double f_xnrm2(const double x[6], int ix0)
  */
 double xnrm2(int n, const double x[9], int ix0)
 {
+  double absxk;
   double scale;
+  double t;
   double y;
   int k;
   int kend;
@@ -170,15 +168,12 @@ double xnrm2(int n, const double x[9], int ix0)
   scale = 3.3121686421112381E-170;
   kend = (ix0 + n) - 1;
   for (k = ix0; k <= kend; k++) {
-    double absxk;
     absxk = fabs(x[k - 1]);
     if (absxk > scale) {
-      double t;
       t = scale / absxk;
       y = y * t * t + 1.0;
       scale = absxk;
     } else {
-      double t;
       t = absxk / scale;
       y += t * t;
     }

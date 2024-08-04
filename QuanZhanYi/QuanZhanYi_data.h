@@ -1,8 +1,8 @@
 /*
  * File: QuanZhanYi_data.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 #ifndef QUANZHANYI_DATA_H
@@ -12,6 +12,9 @@
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
+
+/* Variable Declarations */
+extern boolean_T isInitialized_QuanZhanYi;
 
 #endif
 /*

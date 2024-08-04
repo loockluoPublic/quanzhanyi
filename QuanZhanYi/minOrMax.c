@@ -1,8 +1,8 @@
 /*
  * File: minOrMax.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 /* Include Files */
@@ -16,29 +16,30 @@
  * Arguments    : const emxArray_real_T *x
  * Return Type  : double
  */
-double b_maximum(const emxArray_real_T *x)
+double maximum(const emxArray_real_T *x)
 {
   const double *x_data;
+  double d;
   double ex;
+  int idx;
   int k;
   int last;
+  boolean_T exitg1;
   x_data = x->data;
   last = x->size[0];
   if (x->size[0] <= 2) {
     if (x->size[0] == 1) {
       ex = x_data[0];
-    } else if ((x_data[0] < x_data[x->size[0] - 1]) ||
-               (rtIsNaN(x_data[0]) && (!rtIsNaN(x_data[x->size[0] - 1])))) {
-      ex = x_data[x->size[0] - 1];
     } else {
-      ex = x_data[0];
+      ex = x_data[x->size[0] - 1];
+      if ((!(x_data[0] < ex)) && ((!rtIsNaN(x_data[0])) || rtIsNaN(ex))) {
+        ex = x_data[0];
+      }
     }
   } else {
-    int idx;
     if (!rtIsNaN(x_data[0])) {
       idx = 1;
     } else {
-      boolean_T exitg1;
       idx = 0;
       k = 2;
       exitg1 = false;
@@ -57,7 +58,6 @@ double b_maximum(const emxArray_real_T *x)
       ex = x_data[idx - 1];
       idx++;
       for (k = idx; k <= last; k++) {
-        double d;
         d = x_data[k - 1];
         if (ex < d) {
           ex = d;
@@ -72,29 +72,30 @@ double b_maximum(const emxArray_real_T *x)
  * Arguments    : const emxArray_real_T *x
  * Return Type  : double
  */
-double b_minimum(const emxArray_real_T *x)
+double minimum(const emxArray_real_T *x)
 {
   const double *x_data;
+  double d;
   double ex;
+  int idx;
   int k;
   int last;
+  boolean_T exitg1;
   x_data = x->data;
   last = x->size[0];
   if (x->size[0] <= 2) {
     if (x->size[0] == 1) {
       ex = x_data[0];
-    } else if ((x_data[0] > x_data[x->size[0] - 1]) ||
-               (rtIsNaN(x_data[0]) && (!rtIsNaN(x_data[x->size[0] - 1])))) {
-      ex = x_data[x->size[0] - 1];
     } else {
-      ex = x_data[0];
+      ex = x_data[x->size[0] - 1];
+      if ((!(x_data[0] > ex)) && ((!rtIsNaN(x_data[0])) || rtIsNaN(ex))) {
+        ex = x_data[0];
+      }
     }
   } else {
-    int idx;
     if (!rtIsNaN(x_data[0])) {
       idx = 1;
     } else {
-      boolean_T exitg1;
       idx = 0;
       k = 2;
       exitg1 = false;
@@ -113,7 +114,6 @@ double b_minimum(const emxArray_real_T *x)
       ex = x_data[idx - 1];
       idx++;
       for (k = idx; k <= last; k++) {
-        double d;
         d = x_data[k - 1];
         if (ex > d) {
           ex = d;
@@ -122,128 +122,6 @@ double b_minimum(const emxArray_real_T *x)
     }
   }
   return ex;
-}
-
-/*
- * Arguments    : const emxArray_real_T *x
- *                double *ex
- *                int *idx
- * Return Type  : void
- */
-void maximum(const emxArray_real_T *x, double *ex, int *idx)
-{
-  const double *x_data;
-  int k;
-  int last;
-  x_data = x->data;
-  last = x->size[0];
-  if (x->size[0] <= 2) {
-    if (x->size[0] == 1) {
-      *ex = x_data[0];
-      *idx = 1;
-    } else if ((x_data[0] < x_data[x->size[0] - 1]) ||
-               (rtIsNaN(x_data[0]) && (!rtIsNaN(x_data[x->size[0] - 1])))) {
-      *ex = x_data[x->size[0] - 1];
-      *idx = x->size[0];
-    } else {
-      *ex = x_data[0];
-      *idx = 1;
-    }
-  } else {
-    if (!rtIsNaN(x_data[0])) {
-      *idx = 1;
-    } else {
-      boolean_T exitg1;
-      *idx = 0;
-      k = 2;
-      exitg1 = false;
-      while ((!exitg1) && (k <= last)) {
-        if (!rtIsNaN(x_data[k - 1])) {
-          *idx = k;
-          exitg1 = true;
-        } else {
-          k++;
-        }
-      }
-    }
-    if (*idx == 0) {
-      *ex = x_data[0];
-      *idx = 1;
-    } else {
-      int i;
-      *ex = x_data[*idx - 1];
-      i = *idx + 1;
-      for (k = i; k <= last; k++) {
-        double d;
-        d = x_data[k - 1];
-        if (*ex < d) {
-          *ex = d;
-          *idx = k;
-        }
-      }
-    }
-  }
-}
-
-/*
- * Arguments    : const emxArray_real_T *x
- *                double *ex
- *                int *idx
- * Return Type  : void
- */
-void minimum(const emxArray_real_T *x, double *ex, int *idx)
-{
-  const double *x_data;
-  int k;
-  int last;
-  x_data = x->data;
-  last = x->size[0];
-  if (x->size[0] <= 2) {
-    if (x->size[0] == 1) {
-      *ex = x_data[0];
-      *idx = 1;
-    } else if ((x_data[0] > x_data[x->size[0] - 1]) ||
-               (rtIsNaN(x_data[0]) && (!rtIsNaN(x_data[x->size[0] - 1])))) {
-      *ex = x_data[x->size[0] - 1];
-      *idx = x->size[0];
-    } else {
-      *ex = x_data[0];
-      *idx = 1;
-    }
-  } else {
-    if (!rtIsNaN(x_data[0])) {
-      *idx = 1;
-    } else {
-      boolean_T exitg1;
-      *idx = 0;
-      k = 2;
-      exitg1 = false;
-      while ((!exitg1) && (k <= last)) {
-        if (!rtIsNaN(x_data[k - 1])) {
-          *idx = k;
-          exitg1 = true;
-        } else {
-          k++;
-        }
-      }
-    }
-    if (*idx == 0) {
-      *ex = x_data[0];
-      *idx = 1;
-    } else {
-      int i;
-      *ex = x_data[*idx - 1];
-      i = *idx + 1;
-      for (k = i; k <= last; k++) {
-        double d;
-        d = x_data[k - 1];
-        if (*ex > d) {
-          *ex = d;
-          *idx = k;
-        }
-      }
-    }
-  }
 }
 
 /*

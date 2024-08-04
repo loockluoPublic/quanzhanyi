@@ -1,8 +1,8 @@
 /*
  * File: xaxpy.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 /* Include Files */
@@ -22,13 +22,13 @@
 void b_xaxpy(int n, double a, int ix0, emxArray_real_T *y, int iy0)
 {
   double *y_data;
+  int i;
+  int i1;
   int k;
   y_data = y->data;
   if ((n >= 1) && (!(a == 0.0))) {
-    int i;
     i = n - 1;
     for (k = 0; k <= i; k++) {
-      int i1;
       i1 = (iy0 + k) - 1;
       y_data[i1] += a * y_data[(ix0 + k) - 1];
     }
@@ -49,14 +49,14 @@ void c_xaxpy(int n, double a, const emxArray_real_T *x, int ix0,
 {
   const double *x_data;
   double *y_data;
+  int i;
+  int i1;
   int k;
   y_data = y->data;
   x_data = x->data;
   if ((n >= 1) && (!(a == 0.0))) {
-    int i;
     i = n - 1;
     for (k = 0; k <= i; k++) {
-      int i1;
       i1 = (iy0 + k) - 1;
       y_data[i1] += a * x_data[(ix0 + k) - 1];
     }
@@ -73,12 +73,12 @@ void c_xaxpy(int n, double a, const emxArray_real_T *x, int ix0,
  */
 void d_xaxpy(int n, double a, int ix0, double y[16], int iy0)
 {
+  int i;
+  int i1;
   int k;
   if (!(a == 0.0)) {
-    int i;
     i = n - 1;
     for (k = 0; k <= i; k++) {
-      int i1;
       i1 = (iy0 + k) - 1;
       y[i1] += a * y[(ix0 + k) - 1];
     }
@@ -95,12 +95,12 @@ void d_xaxpy(int n, double a, int ix0, double y[16], int iy0)
  */
 void e_xaxpy(int n, double a, int ix0, double y[8], int iy0)
 {
+  int i;
+  int i1;
   int k;
   if (!(a == 0.0)) {
-    int i;
     i = n - 1;
     for (k = 0; k <= i; k++) {
-      int i1;
       i1 = (iy0 + k) - 1;
       y[i1] += a * y[(ix0 + k) - 1];
     }
@@ -176,10 +176,10 @@ void i_xaxpy(double a, const double x[9], int ix0, double y[3])
  */
 void j_xaxpy(double a, const double x[3], double y[9], int iy0)
 {
+  int i;
   int k;
   if (!(a == 0.0)) {
     for (k = 0; k < 2; k++) {
-      int i;
       i = (iy0 + k) - 1;
       y[i] += a * x[k + 1];
     }
@@ -199,11 +199,11 @@ void k_xaxpy(int n, double a, const emxArray_real_T *x, int ix0,
 {
   const double *x_data;
   double *y_data;
+  int i;
   int k;
   y_data = y->data;
   x_data = x->data;
   if ((n >= 1) && (!(a == 0.0))) {
-    int i;
     i = n - 1;
     for (k = 0; k <= i; k++) {
       y_data[k + 1] += a * x_data[(ix0 + k) - 1];
@@ -224,14 +224,14 @@ void l_xaxpy(int n, double a, const emxArray_real_T *x, emxArray_real_T *y,
 {
   const double *x_data;
   double *y_data;
+  int i;
+  int i1;
   int k;
   y_data = y->data;
   x_data = x->data;
   if ((n >= 1) && (!(a == 0.0))) {
-    int i;
     i = n - 1;
     for (k = 0; k <= i; k++) {
-      int i1;
       i1 = (iy0 + k) - 1;
       y_data[i1] += a * x_data[k + 1];
     }
@@ -248,12 +248,12 @@ void l_xaxpy(int n, double a, const emxArray_real_T *x, emxArray_real_T *y,
  */
 void xaxpy(int n, double a, int ix0, double y[9], int iy0)
 {
+  int i;
+  int i1;
   int k;
   if (!(a == 0.0)) {
-    int i;
     i = n - 1;
     for (k = 0; k <= i; k++) {
-      int i1;
       i1 = (iy0 + k) - 1;
       y[i1] += a * y[(ix0 + k) - 1];
     }

@@ -1,8 +1,8 @@
 /*
  * File: Calculat_A_and_B_Points_after_Offest2.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Jul-2024 14:54:53
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 04-Aug-2024 23:47:58
  */
 
 #ifndef CALCULAT_A_AND_B_POINTS_AFTER_OFFEST2_H
@@ -21,9 +21,9 @@ extern "C" {
 /* Function Declarations */
 extern void Calculat_A_and_B_Points_after_Offest2(
     const double MTaon[3], const double Mcenter[3], double Mradial,
-    const double PAB[3], double phi, emxArray_real_T *Ang,
+    const double PAB[3], double phi, const emxArray_real_T *Ang,
     const emxArray_real_T *toff, const emxArray_real_T *roff,
-    emxArray_real_T *PointTable_A_off);
+    const int PointTable_A_off_size[2]);
 
 #ifdef __cplusplus
 }
