@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Aug-2024 23:47:58
+ * C/C++ source code generated on  : 05-Aug-2024 00:10:26
  */
 
 /*************************************************************************/
@@ -39,10 +39,12 @@
 #include "CrossLine.h"
 #include "GenerateTrianglePoints.h"
 #include "Generate_multi_layered_measurement_points.h"
+#include "OffsetCalculate.h"
 #include "QuanZhanYi_emxAPI.h"
 #include "QuanZhanYi_terminate.h"
 #include "QuanZhanYi_types.h"
 #include "RepeatSurvey.h"
+#include "ShengLuJiaoJiSuan.h"
 #include "angle2point.h"
 #include "fitcircle.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
@@ -233,8 +235,10 @@ You can call entry-point functions multiple times. */
   main_generate_unit_circle_with_normal_vector2();
   main_GenerateTrianglePoints();
   main_myvrrotvec2mat();
+  main_OffsetCalculate();
   main_planefit();
   main_RepeatSurvey();
+  main_ShengLuJiaoJiSuan();
   /* Terminate the application.
 You do not need to do this more than one time. */
   QuanZhanYi_terminate();
@@ -434,6 +438,30 @@ void main_Generate_multi_layered_measurement_points(void)
  * Arguments    : void
  * Return Type  : void
  */
+void main_OffsetCalculate(void)
+{
+  emxArray_real_T *Ang;
+  emxArray_real_T *OffsetOut;
+  emxArray_real_T *a;
+  double Mradial_tmp;
+  /* Initialize function 'OffsetCalculate' input arguments. */
+  Mradial_tmp = argInit_real_T();
+  /* Initialize function input argument 'Ang'. */
+  Ang = argInit_1xUnbounded_real_T();
+  /* Initialize function input argument 'a'. */
+  a = argInit_1xUnbounded_real_T();
+  /* Call the entry-point 'OffsetCalculate'. */
+  emxInitArray_real_T(&OffsetOut, 2);
+  OffsetCalculate(Mradial_tmp, Mradial_tmp, Ang, a, OffsetOut);
+  emxDestroyArray_real_T(a);
+  emxDestroyArray_real_T(Ang);
+  emxDestroyArray_real_T(OffsetOut);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 void main_RepeatSurvey(void)
 {
   double SoundPoint1_tmp[3];
@@ -448,6 +476,19 @@ void main_RepeatSurvey(void)
   /* Call the entry-point 'RepeatSurvey'. */
   RepeatSurvey(SoundPoint1_tmp, SoundPoint1_tmp, SoundPoint1_tmp,
                SoundPoint1_tmp, &SoundAngle, &SoundLength);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+void main_ShengLuJiaoJiSuan(void)
+{
+  double Ang_data[20];
+  int Ang_size[2];
+  /* Initialize function 'ShengLuJiaoJiSuan' input arguments. */
+  /* Call the entry-point 'ShengLuJiaoJiSuan'. */
+  ShengLuJiaoJiSuan(argInit_real_T(), Ang_data, Ang_size);
 }
 
 /*

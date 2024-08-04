@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Aug-2024 23:47:58
+ * C/C++ source code generated on  : 05-Aug-2024 00:10:26
  */
 
 /* Include Files */
@@ -20,7 +20,7 @@
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
-  static const char_T *emlrtEntryPoints[15] = {
+  static const char_T *emlrtEntryPoints[17] = {
       "angle2point",
       "Calculat_A_and_B_Points",
       "Calculat_A_and_B_Points_after_Offest",
@@ -34,8 +34,10 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
       "generate_unit_circle_with_normal_vector2",
       "GenerateTrianglePoints",
       "myvrrotvec2mat",
+      "OffsetCalculate",
       "planefit",
-      "RepeatSurvey"};
+      "RepeatSurvey",
+      "ShengLuJiaoJiSuan"};
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
@@ -47,7 +49,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   st.tls = emlrtRootTLSGlobal;
   /* Dispatch the entry-point. */
   switch (emlrtGetEntryPointIndexR2016a(
-      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 15)) {
+      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 17)) {
   case 0:
     unsafe_angle2point_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
@@ -95,10 +97,16 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
     unsafe_myvrrotvec2mat_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 13:
-    unsafe_planefit_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_OffsetCalculate_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 14:
+    unsafe_planefit_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 15:
     unsafe_RepeatSurvey_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 16:
+    unsafe_ShengLuJiaoJiSuan_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   }
   /* Module termination. */
@@ -403,6 +411,43 @@ void unsafe_Generate_multi_layered_measurement_points_mexFunction(
 
 /*
  * Arguments    : int32_T nlhs
+ *                mxArray *plhs[1]
+ *                int32_T nrhs
+ *                const mxArray *prhs[4]
+ * Return Type  : void
+ */
+void unsafe_OffsetCalculate_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                        int32_T nrhs, const mxArray *prhs[4])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *b_prhs[4];
+  const mxArray *outputs;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 4) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 4, 4,
+                        15, "OffsetCalculate");
+  }
+  if (nlhs > 1) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 15,
+                        "OffsetCalculate");
+  }
+  /* Call the function. */
+  b_prhs[0] = prhs[0];
+  b_prhs[1] = prhs[1];
+  b_prhs[2] = prhs[2];
+  b_prhs[3] = prhs[3];
+  OffsetCalculate_api(b_prhs, &outputs);
+  /* Copy over outputs to the caller. */
+  emlrtReturnArrays(1, &plhs[0], &outputs);
+}
+
+/*
+ * Arguments    : int32_T nlhs
  *                mxArray *plhs[2]
  *                int32_T nrhs
  *                const mxArray *prhs[4]
@@ -442,6 +487,38 @@ void unsafe_RepeatSurvey_mexFunction(int32_T nlhs, mxArray *plhs[2],
     i = nlhs;
   }
   emlrtReturnArrays(i, &plhs[0], &outputs[0]);
+}
+
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[1]
+ *                int32_T nrhs
+ *                const mxArray *prhs[1]
+ * Return Type  : void
+ */
+void unsafe_ShengLuJiaoJiSuan_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                          int32_T nrhs, const mxArray *prhs[1])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *outputs;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 1) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 1, 4,
+                        17, "ShengLuJiaoJiSuan");
+  }
+  if (nlhs > 1) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 17,
+                        "ShengLuJiaoJiSuan");
+  }
+  /* Call the function. */
+  ShengLuJiaoJiSuan_api(prhs[0], &outputs);
+  /* Copy over outputs to the caller. */
+  emlrtReturnArrays(1, &plhs[0], &outputs);
 }
 
 /*

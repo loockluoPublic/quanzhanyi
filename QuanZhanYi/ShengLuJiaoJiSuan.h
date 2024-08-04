@@ -1,15 +1,14 @@
 /*
- * File: unsafeSxfun.h
+ * File: ShengLuJiaoJiSuan.h
  *
  * MATLAB Coder version            : 23.2
  * C/C++ source code generated on  : 05-Aug-2024 00:10:26
  */
 
-#ifndef UNSAFESXFUN_H
-#define UNSAFESXFUN_H
+#ifndef SHENGLUJIAOJISUAN_H
+#define SHENGLUJIAOJISUAN_H
 
 /* Include Files */
-#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -19,7 +18,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void binary_expand_op_1(emxArray_real_T *in1, const emxArray_real_T *in3);
+extern void ShengLuJiaoJiSuan(double numShengLu, double Ang_data[],
+                              int Ang_size[2]);
 
 #ifdef __cplusplus
 }
@@ -27,7 +27,7 @@ void binary_expand_op_1(emxArray_real_T *in1, const emxArray_real_T *in3);
 
 #endif
 /*
- * File trailer for unsafeSxfun.h
+ * File trailer for ShengLuJiaoJiSuan.h
  *
  * [EOF]
  */

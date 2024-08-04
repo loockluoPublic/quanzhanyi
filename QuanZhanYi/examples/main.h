@@ -2,7 +2,7 @@
  * File: main.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Aug-2024 23:47:58
+ * C/C++ source code generated on  : 05-Aug-2024 00:10:26
  */
 
 /*************************************************************************/
@@ -60,7 +60,11 @@ extern void main_GenerateTrianglePoints(void);
 
 extern void main_Generate_multi_layered_measurement_points(void);
 
+extern void main_OffsetCalculate(void);
+
 extern void main_RepeatSurvey(void);
+
+extern void main_ShengLuJiaoJiSuan(void);
 
 extern void main_angle2point(void);
 

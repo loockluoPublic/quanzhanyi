@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Aug-2024 23:47:58
+ * C/C++ source code generated on  : 05-Aug-2024 00:10:26
  */
 
 /* Include Files */
@@ -87,7 +87,7 @@ mxArray *emlrtMexFcnProperties(void)
       "Name",     "NumberOfInputs", "NumberOfOutputs", "ConstantInputs",
       "FullPath", "TimeStamp",      "Constructor",     "Visible"};
   xEntryPoints =
-      emlrtCreateStructMatrix(1, 15, 8, (const char_T **)&epFieldName[0]);
+      emlrtCreateStructMatrix(1, 17, 8, (const char_T **)&epFieldName[0]);
   xInputs = emlrtCreateLogicalMatrix(1, 6);
   emlrtSetField(xEntryPoints, 0, "Name", emlrtMxCreateString("angle2point"));
   emlrtSetField(xEntryPoints, 0, "NumberOfInputs",
@@ -302,22 +302,23 @@ mxArray *emlrtMexFcnProperties(void)
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 12, "Visible", emlrtMxCreateLogicalScalar(true));
   xInputs = emlrtCreateLogicalMatrix(1, 4);
-  emlrtSetField(xEntryPoints, 13, "Name", emlrtMxCreateString("planefit"));
+  emlrtSetField(xEntryPoints, 13, "Name",
+                emlrtMxCreateString("OffsetCalculate"));
   emlrtSetField(xEntryPoints, 13, "NumberOfInputs",
                 emlrtMxCreateDoubleScalar(4.0));
   emlrtSetField(xEntryPoints, 13, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(2.0));
+                emlrtMxCreateDoubleScalar(1.0));
   emlrtSetField(xEntryPoints, 13, "ConstantInputs", xInputs);
   emlrtSetField(
       xEntryPoints, 13, "FullPath",
-      emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\planefit.m"));
+      emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\OffsetCalculate.m"));
   emlrtSetField(xEntryPoints, 13, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
+                emlrtMxCreateDoubleScalar(739437.51668981486));
   emlrtSetField(xEntryPoints, 13, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 13, "Visible", emlrtMxCreateLogicalScalar(true));
   xInputs = emlrtCreateLogicalMatrix(1, 4);
-  emlrtSetField(xEntryPoints, 14, "Name", emlrtMxCreateString("RepeatSurvey"));
+  emlrtSetField(xEntryPoints, 14, "Name", emlrtMxCreateString("planefit"));
   emlrtSetField(xEntryPoints, 14, "NumberOfInputs",
                 emlrtMxCreateDoubleScalar(4.0));
   emlrtSetField(xEntryPoints, 14, "NumberOfOutputs",
@@ -325,12 +326,43 @@ mxArray *emlrtMexFcnProperties(void)
   emlrtSetField(xEntryPoints, 14, "ConstantInputs", xInputs);
   emlrtSetField(
       xEntryPoints, 14, "FullPath",
-      emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\RepeatSurvey.m"));
+      emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\planefit.m"));
   emlrtSetField(xEntryPoints, 14, "TimeStamp",
                 emlrtMxCreateDoubleScalar(739432.90363425924));
   emlrtSetField(xEntryPoints, 14, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 14, "Visible", emlrtMxCreateLogicalScalar(true));
+  xInputs = emlrtCreateLogicalMatrix(1, 4);
+  emlrtSetField(xEntryPoints, 15, "Name", emlrtMxCreateString("RepeatSurvey"));
+  emlrtSetField(xEntryPoints, 15, "NumberOfInputs",
+                emlrtMxCreateDoubleScalar(4.0));
+  emlrtSetField(xEntryPoints, 15, "NumberOfOutputs",
+                emlrtMxCreateDoubleScalar(2.0));
+  emlrtSetField(xEntryPoints, 15, "ConstantInputs", xInputs);
+  emlrtSetField(
+      xEntryPoints, 15, "FullPath",
+      emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\RepeatSurvey.m"));
+  emlrtSetField(xEntryPoints, 15, "TimeStamp",
+                emlrtMxCreateDoubleScalar(739432.90363425924));
+  emlrtSetField(xEntryPoints, 15, "Constructor",
+                emlrtMxCreateLogicalScalar(false));
+  emlrtSetField(xEntryPoints, 15, "Visible", emlrtMxCreateLogicalScalar(true));
+  xInputs = emlrtCreateLogicalMatrix(1, 1);
+  emlrtSetField(xEntryPoints, 16, "Name",
+                emlrtMxCreateString("ShengLuJiaoJiSuan"));
+  emlrtSetField(xEntryPoints, 16, "NumberOfInputs",
+                emlrtMxCreateDoubleScalar(1.0));
+  emlrtSetField(xEntryPoints, 16, "NumberOfOutputs",
+                emlrtMxCreateDoubleScalar(1.0));
+  emlrtSetField(xEntryPoints, 16, "ConstantInputs", xInputs);
+  emlrtSetField(xEntryPoints, 16, "FullPath",
+                emlrtMxCreateString(
+                    "C:\\Users\\XWT\\Desktop\\test3\\ShengLuJiaoJiSuan.m"));
+  emlrtSetField(xEntryPoints, 16, "TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.00723379629));
+  emlrtSetField(xEntryPoints, 16, "Constructor",
+                emlrtMxCreateLogicalScalar(false));
+  emlrtSetField(xEntryPoints, 16, "Visible", emlrtMxCreateLogicalScalar(true));
   xResult =
       emlrtCreateStructMatrix(1, 1, 9, (const char_T **)&propFieldName[0]);
   emlrtSetField(xResult, 0, "Version",

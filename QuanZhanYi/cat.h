@@ -1,12 +1,12 @@
 /*
- * File: unsafeSxfun.h
+ * File: cat.h
  *
  * MATLAB Coder version            : 23.2
  * C/C++ source code generated on  : 05-Aug-2024 00:10:26
  */
 
-#ifndef UNSAFESXFUN_H
-#define UNSAFESXFUN_H
+#ifndef CAT_H
+#define CAT_H
 
 /* Include Files */
 #include "QuanZhanYi_types.h"
@@ -19,7 +19,10 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void binary_expand_op_1(emxArray_real_T *in1, const emxArray_real_T *in3);
+void binary_expand_op_10(emxArray_real_T *in1, double in2,
+                         const emxArray_real_T *in3, double in4,
+                         const emxArray_real_T *in5, const emxArray_real_T *in6,
+                         const emxArray_real_T *in7, double in8);
 
 #ifdef __cplusplus
 }
@@ -27,7 +30,7 @@ void binary_expand_op_1(emxArray_real_T *in1, const emxArray_real_T *in3);
 
 #endif
 /*
- * File trailer for unsafeSxfun.h
+ * File trailer for cat.h
  *
  * [EOF]
  */
