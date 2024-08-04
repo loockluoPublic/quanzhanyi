@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Aug-2024 23:47:58
+ * C/C++ source code generated on  : 05-Aug-2024 00:10:26
  */
 
 /* Include Files */
@@ -71,6 +71,9 @@ static const mxArray *g_emlrt_marshallOut(const real_T u[9]);
 static void h_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                const emlrtMsgIdentifier *parentId,
                                emxArray_real_T *y);
+
+static const mxArray *h_emlrt_marshallOut(const real_T u_data[],
+                                          const int32_T u_size[2]);
 
 static real_T (*i_emlrt_marshallIn(const emlrtStack *sp, const mxArray *nullptr,
                                    const char_T *identifier))[4];
@@ -466,6 +469,25 @@ static void h_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
 {
   t_emlrt_marshallIn(sp, emlrtAlias(u), parentId, y);
   emlrtDestroyArray(&u);
+}
+
+/*
+ * Arguments    : const real_T u_data[]
+ *                const int32_T u_size[2]
+ * Return Type  : const mxArray *
+ */
+static const mxArray *h_emlrt_marshallOut(const real_T u_data[],
+                                          const int32_T u_size[2])
+{
+  static const int32_T iv[2] = {0, 0};
+  const mxArray *m;
+  const mxArray *y;
+  y = NULL;
+  m = emlrtCreateNumericArray(2, (const void *)&iv[0], mxDOUBLE_CLASS, mxREAL);
+  emlrtMxSetData((mxArray *)m, (void *)&u_data[0]);
+  emlrtSetDimensions((mxArray *)m, &u_size[0], 2);
+  emlrtAssign(&y, m);
+  return y;
 }
 
 /*
@@ -911,6 +933,46 @@ void GenerateTrianglePoints_api(const mxArray *const prhs[4],
 }
 
 /*
+ * Arguments    : const mxArray * const prhs[4]
+ *                const mxArray **plhs
+ * Return Type  : void
+ */
+void OffsetCalculate_api(const mxArray *const prhs[4], const mxArray **plhs)
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  emxArray_real_T *Ang;
+  emxArray_real_T *OffsetOut;
+  emxArray_real_T *a;
+  real_T Mradial;
+  real_T phi;
+  st.tls = emlrtRootTLSGlobal;
+  emlrtHeapReferenceStackEnterFcnR2012b(&st);
+  /* Marshall function inputs */
+  Mradial = emlrt_marshallIn(&st, emlrtAliasP(prhs[0]), "Mradial");
+  phi = emlrt_marshallIn(&st, emlrtAliasP(prhs[1]), "phi");
+  emxInit_real_T(&st, &Ang);
+  Ang->canFreeData = false;
+  e_emlrt_marshallIn(&st, emlrtAlias(prhs[2]), "Ang", Ang);
+  emxInit_real_T(&st, &a);
+  a->canFreeData = false;
+  e_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "a", a);
+  /* Invoke the target function */
+  emxInit_real_T(&st, &OffsetOut);
+  OffsetCalculate(Mradial, phi, Ang, a, OffsetOut);
+  emxFree_real_T(&st, &a);
+  emxFree_real_T(&st, &Ang);
+  /* Marshall function outputs */
+  OffsetOut->canFreeData = false;
+  *plhs = b_emlrt_marshallOut(OffsetOut);
+  emxFree_real_T(&st, &OffsetOut);
+  emlrtHeapReferenceStackLeaveFcnR2012b(&st);
+}
+
+/*
  * Arguments    : void
  * Return Type  : void
  */
@@ -993,6 +1055,31 @@ void RepeatSurvey_api(const mxArray *const prhs[4], int32_T nlhs,
   if (nlhs > 1) {
     plhs[1] = emlrt_marshallOut(SoundLength);
   }
+}
+
+/*
+ * Arguments    : const mxArray *prhs
+ *                const mxArray **plhs
+ * Return Type  : void
+ */
+void ShengLuJiaoJiSuan_api(const mxArray *prhs, const mxArray **plhs)
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  real_T(*Ang_data)[20];
+  real_T numShengLu;
+  int32_T Ang_size[2];
+  st.tls = emlrtRootTLSGlobal;
+  Ang_data = (real_T(*)[20])mxMalloc(sizeof(real_T[20]));
+  /* Marshall function inputs */
+  numShengLu = emlrt_marshallIn(&st, emlrtAliasP(prhs), "numShengLu");
+  /* Invoke the target function */
+  ShengLuJiaoJiSuan(numShengLu, *Ang_data, Ang_size);
+  /* Marshall function outputs */
+  *plhs = h_emlrt_marshallOut(*Ang_data, Ang_size);
 }
 
 /*
