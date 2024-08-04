@@ -12,7 +12,6 @@ import { Button, Form, InputNumber, Table, Tooltip } from "antd";
 import BaseInfo from "../components/BaseInfo";
 import { goToCV } from "../utils/commond";
 import { SettingOutlined } from "@ant-design/icons";
-import { div } from "three/examples/jsm/nodes/Nodes.js";
 const { Item } = Form;
 /**
  * shengLuJiaoJiSuan(声道数)  ==>  10个角度
