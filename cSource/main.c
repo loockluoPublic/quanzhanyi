@@ -16,8 +16,8 @@ void generateUnitCircleWithNormalVector(double azimuth, double elevation,
                                         const double P2[3],
                                         emxArray_real_T *Point_out)
 {
-    printf("generateUnitCircleWithNormalVector %f %f %f", azimuth, elevation, num);
-    printf("P3: %f,%f,%f", P1[0], P1[1], P1[2]);
+    printf("generateUnitCircleWithNormalVector %f %f %f \n", azimuth, elevation, num);
+    printf("P3: %f,%f,%f \n", P1[0], P1[1], P1[2]);
     generate_unit_circle_with_normal_vector2(azimuth, elevation, num, laynum, P1, P2, Point_out);
 }
 

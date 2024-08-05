@@ -16,6 +16,7 @@
 #include "pinv.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <stdio.h>
 
 /* Function Declarations */
 static void b_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
@@ -151,6 +152,14 @@ void Calculat_A_and_B_Points_after_Offest2(const double MTaon[3],
                                            const emxArray_real_T *roff,
                                            emxArray_real_T *PointTable_A_off)
 {
+
+  printf("CalculatOffset:  MTaon(%f,%f,%f) \n", MTaon[0], MTaon[1], MTaon[2]);
+  printf("CalculatOffset:  Mcenter(%f,%f,%fc) \n", Mcenter[0], Mcenter[1],
+         Mcenter[2]);
+  printf("CalculatOffset:  PAB(%f,%f,%f)\n", PAB[0], PAB[1], PAB[2]);
+  printf("CalculatOffset:  phi: %f\n", phi);
+  printf("CalculatOffset:  toff: %f\n", toff->data[0]);
+  printf("CalculatOffset:  roff: %f\n", roff->data[0]);
   emxArray_real_T *AngProcess;
   emxArray_real_T *PointTable2DT_A;
   emxArray_real_T *b_PointTable2DT_A;
