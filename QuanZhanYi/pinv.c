@@ -1,8 +1,8 @@
 /*
  * File: pinv.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:57:42
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 05-Aug-2024 16:15:51
  */
 
 /* Include Files */
@@ -38,12 +38,7 @@ void pinv(const double A[9], double X[9])
   p = true;
   for (br = 0; br < 9; br++) {
     X[br] = 0.0;
-    if (p) {
-      absx = A[br];
-      if (rtIsInf(absx) || rtIsNaN(absx)) {
-        p = false;
-      }
-    } else {
+    if ((!p) || (rtIsInf(A[br]) || rtIsNaN(A[br]))) {
       p = false;
     }
   }
@@ -54,13 +49,15 @@ void pinv(const double A[9], double X[9])
   } else {
     svd(A, U, s, V);
     absx = fabs(s[0]);
-    if (rtIsInf(absx) || rtIsNaN(absx)) {
-      absx = rtNaN;
-    } else if (absx < 4.4501477170144028E-308) {
-      absx = 4.94065645841247E-324;
+    if ((!rtIsInf(absx)) && (!rtIsNaN(absx))) {
+      if (absx <= 2.2250738585072014E-308) {
+        absx = 4.94065645841247E-324;
+      } else {
+        frexp(absx, &vcol);
+        absx = ldexp(1.0, vcol - 53);
+      }
     } else {
-      frexp(absx, &vcol);
-      absx = ldexp(1.0, vcol - 53);
+      absx = rtNaN;
     }
     absx *= 3.0;
     r = -1;
@@ -83,7 +80,7 @@ void pinv(const double A[9], double X[9])
         i = vcol + 1;
         j = vcol + 3;
         if (i <= j) {
-          memset(&X[i + -1], 0, (unsigned int)((j - i) + 1) * sizeof(double));
+          memset(&X[i + -1], 0, ((j - i) + 1) * sizeof(double));
         }
       }
       br = 0;

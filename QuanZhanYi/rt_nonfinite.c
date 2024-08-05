@@ -1,8 +1,8 @@
 /*
  * File: rt_nonfinite.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:57:42
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 05-Aug-2024 16:15:51
  */
 
 /*
@@ -28,7 +28,7 @@ real32_T rtNaNF;
  *  Initialize the rtInf, rtMinusInf, and rtNaN needed by the
  * generated code. NaN is initialized as non-signaling. Assumes IEEE.
  */
-void rt_InitInfAndNaN(void)
+void rt_InitInfAndNaN()
 {
   rtNaN = rtGetNaN();
   rtNaNF = rtGetNaNF();

@@ -1,8 +1,8 @@
 /*
  * File: cat.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:57:42
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 05-Aug-2024 16:15:51
  */
 
 /* Include Files */
@@ -14,6 +14,142 @@
 /* Function Definitions */
 /*
  * Arguments    : emxArray_real_T *in1
+ *                const emxArray_real_T *in2
+ *                const emxArray_real_T *in3
+ *                double in4
+ *                const double in5[3]
+ * Return Type  : void
+ */
+void binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
+                      const emxArray_real_T *in3, double in4,
+                      const double in5[3])
+{
+  emxArray_real_T *b_in4;
+  const double *in2_data;
+  const double *in3_data;
+  double b_in5;
+  double c_in5;
+  double d_in5;
+  double *in1_data;
+  double *in4_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  in3_data = in3->data;
+  in2_data = in2->data;
+  emxInit_real_T(&b_in4, 1);
+  b_in5 = in5[0];
+  c_in5 = in5[1];
+  d_in5 = in5[2];
+  i = b_in4->size[0];
+  if (in3->size[1] == 1) {
+    b_in4->size[0] = in2->size[1];
+  } else {
+    b_in4->size[0] = in3->size[1];
+  }
+  emxEnsureCapacity_real_T(b_in4, i);
+  in4_data = b_in4->data;
+  stride_0_0 = (in2->size[1] != 1);
+  stride_1_0 = (in3->size[1] != 1);
+  if (in3->size[1] == 1) {
+    loop_ub = in2->size[1];
+  } else {
+    loop_ub = in3->size[1];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    in4_data[i] = -((in4 + b_in5 * in2_data[i * stride_0_0]) +
+                    c_in5 * in3_data[i * stride_1_0]) /
+                  d_in5;
+  }
+  i = in1->size[0] * in1->size[1];
+  in1->size[0] = in2->size[1];
+  in1->size[1] = 3;
+  emxEnsureCapacity_real_T(in1, i);
+  in1_data = in1->data;
+  loop_ub = in2->size[1];
+  for (i = 0; i < loop_ub; i++) {
+    in1_data[i] = in2_data[i];
+  }
+  loop_ub = in3->size[1];
+  for (i = 0; i < loop_ub; i++) {
+    in1_data[i + in1->size[0]] = in3_data[i];
+  }
+  loop_ub = b_in4->size[0];
+  for (i = 0; i < loop_ub; i++) {
+    in1_data[i + in1->size[0] * 2] = in4_data[i];
+  }
+  emxFree_real_T(&b_in4);
+}
+
+/*
+ * Arguments    : emxArray_real_T *in1
+ *                const emxArray_real_T *in2
+ *                const emxArray_real_T *in3
+ *                const emxArray_real_T *in4
+ * Return Type  : void
+ */
+void e_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
+                        const emxArray_real_T *in3, const emxArray_real_T *in4)
+{
+  emxArray_real_T *b_in2;
+  const double *in2_data;
+  const double *in3_data;
+  const double *in4_data;
+  double *b_in2_data;
+  double *in1_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  in4_data = in4->data;
+  in3_data = in3->data;
+  in2_data = in2->data;
+  emxInit_real_T(&b_in2, 1);
+  i = b_in2->size[0];
+  if (in3->size[0] == 1) {
+    b_in2->size[0] = in2->size[0];
+  } else {
+    b_in2->size[0] = in3->size[0];
+  }
+  emxEnsureCapacity_real_T(b_in2, i);
+  b_in2_data = b_in2->data;
+  stride_0_0 = (in2->size[0] != 1);
+  stride_1_0 = (in3->size[0] != 1);
+  if (in3->size[0] == 1) {
+    loop_ub = in2->size[0];
+  } else {
+    loop_ub = in3->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    b_in2_data[i] = in2_data[i * stride_0_0] + in3_data[i * stride_1_0];
+  }
+  loop_ub = in4->size[1];
+  stride_0_0 = in4->size[1];
+  i = in1->size[0] * in1->size[1];
+  in1->size[0] = b_in2->size[0];
+  in1->size[1] = 4;
+  emxEnsureCapacity_real_T(in1, i);
+  in1_data = in1->data;
+  stride_1_0 = b_in2->size[0];
+  for (i = 0; i < stride_1_0; i++) {
+    in1_data[i] = b_in2_data[i];
+  }
+  emxFree_real_T(&b_in2);
+  for (i = 0; i < loop_ub; i++) {
+    in1_data[i + in1->size[0]] = in4_data[2 * i];
+  }
+  for (i = 0; i < stride_0_0; i++) {
+    in1_data[i + in1->size[0] * 2] = in4_data[2 * i + 1];
+  }
+  loop_ub = in4->size[1];
+  for (i = 0; i < loop_ub; i++) {
+    in1_data[i + in1->size[0] * 3] = 1.0;
+  }
+}
+
+/*
+ * Arguments    : emxArray_real_T *in1
  *                double in2
  *                const emxArray_real_T *in3
  *                double in4
@@ -23,10 +159,10 @@
  *                double in8
  * Return Type  : void
  */
-void binary_expand_op_10(emxArray_real_T *in1, double in2,
-                         const emxArray_real_T *in3, double in4,
-                         const emxArray_real_T *in5, const emxArray_real_T *in6,
-                         const emxArray_real_T *in7, double in8)
+void i_binary_expand_op(emxArray_real_T *in1, double in2,
+                        const emxArray_real_T *in3, double in4,
+                        const emxArray_real_T *in5, const emxArray_real_T *in6,
+                        const emxArray_real_T *in7, double in8)
 {
   emxArray_real_T *b_in4;
   const double *in3_data;
@@ -35,8 +171,8 @@ void binary_expand_op_10(emxArray_real_T *in1, double in2,
   const double *in7_data;
   double *in1_data;
   double *in4_data;
+  int b_in7;
   int i;
-  int loop_ub;
   int stride_0_1;
   int stride_1_1;
   int stride_2_1;
@@ -48,20 +184,35 @@ void binary_expand_op_10(emxArray_real_T *in1, double in2,
   i = b_in4->size[0] * b_in4->size[1];
   b_in4->size[0] = 1;
   if (in7->size[1] == 1) {
-    loop_ub = in6->size[1];
+    b_in7 = in6->size[1];
   } else {
-    loop_ub = in7->size[1];
+    b_in7 = in7->size[1];
   }
-  if (loop_ub == 1) {
-    loop_ub = in5->size[1];
+  if (b_in7 == 1) {
+    b_in4->size[1] = in5->size[1];
+  } else if (in7->size[1] == 1) {
+    b_in4->size[1] = in6->size[1];
+  } else {
+    b_in4->size[1] = in7->size[1];
   }
-  b_in4->size[1] = loop_ub;
   emxEnsureCapacity_real_T(b_in4, i);
   in4_data = b_in4->data;
   stride_0_1 = (in5->size[1] != 1);
   stride_1_1 = (in6->size[1] != 1);
   stride_2_1 = (in7->size[1] != 1);
-  for (i = 0; i < loop_ub; i++) {
+  if (in7->size[1] == 1) {
+    b_in7 = in6->size[1];
+  } else {
+    b_in7 = in7->size[1];
+  }
+  if (b_in7 == 1) {
+    b_in7 = in5->size[1];
+  } else if (in7->size[1] == 1) {
+    b_in7 = in6->size[1];
+  } else {
+    b_in7 = in7->size[1];
+  }
+  for (i = 0; i < b_in7; i++) {
     in4_data[i] = (in4 * in5_data[i * stride_0_1] -
                    in6_data[i * stride_1_1] * in7_data[i * stride_2_1]) /
                   in8;
@@ -71,12 +222,12 @@ void binary_expand_op_10(emxArray_real_T *in1, double in2,
   in1->size[1] = in3->size[1];
   emxEnsureCapacity_real_T(in1, i);
   in1_data = in1->data;
-  loop_ub = in3->size[1];
-  for (i = 0; i < loop_ub; i++) {
+  b_in7 = in3->size[1];
+  for (i = 0; i < b_in7; i++) {
     in1_data[2 * i] = in2 * in3_data[i] / 3.1415926535897931 * 180.0;
   }
-  loop_ub = b_in4->size[1];
-  for (i = 0; i < loop_ub; i++) {
+  b_in7 = b_in4->size[1];
+  for (i = 0; i < b_in7; i++) {
     in1_data[2 * i + 1] = in4_data[i];
   }
   emxFree_real_T(&b_in4);

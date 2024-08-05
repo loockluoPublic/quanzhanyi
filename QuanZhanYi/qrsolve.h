@@ -1,14 +1,15 @@
 /*
- * File: QuanZhanYi_terminate.h
+ * File: qrsolve.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 05-Aug-2024 16:15:51
  */
 
-#ifndef QUANZHANYI_TERMINATE_H
-#define QUANZHANYI_TERMINATE_H
+#ifndef QRSOLVE_H
+#define QRSOLVE_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,7 +19,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void QuanZhanYi_terminate(void);
+void qrsolve(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3]);
 
 #ifdef __cplusplus
 }
@@ -26,7 +27,7 @@ extern void QuanZhanYi_terminate(void);
 
 #endif
 /*
- * File trailer for QuanZhanYi_terminate.h
+ * File trailer for qrsolve.h
  *
  * [EOF]
  */
