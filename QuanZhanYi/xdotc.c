@@ -1,8 +1,8 @@
 /*
  * File: xdotc.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:57:42
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 05-Aug-2024 16:15:51
  */
 
 /* Include Files */
@@ -21,11 +21,9 @@
 double b_xdotc(int n, const double x[16], int ix0, const double y[16], int iy0)
 {
   double d;
-  int i;
   int k;
   d = 0.0;
-  i = (unsigned char)n;
-  for (k = 0; k < i; k++) {
+  for (k = 0; k < n; k++) {
     d += x[(ix0 + k) - 1] * y[(iy0 + k) - 1];
   }
   return d;
@@ -42,11 +40,9 @@ double b_xdotc(int n, const double x[16], int ix0, const double y[16], int iy0)
 double c_xdotc(int n, const double x[8], int ix0, const double y[8], int iy0)
 {
   double d;
-  int i;
   int k;
   d = 0.0;
-  i = (unsigned char)n;
-  for (k = 0; k < i; k++) {
+  for (k = 0; k < n; k++) {
     d += x[(ix0 + k) - 1] * y[(iy0 + k) - 1];
   }
   return d;
@@ -73,11 +69,9 @@ double d_xdotc(const double x[4], const double y[4])
 double xdotc(int n, const double x[9], int ix0, const double y[9], int iy0)
 {
   double d;
-  int i;
   int k;
   d = 0.0;
-  i = (unsigned char)n;
-  for (k = 0; k < i; k++) {
+  for (k = 0; k < n; k++) {
     d += x[(ix0 + k) - 1] * y[(iy0 + k) - 1];
   }
   return d;

@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_info.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:57:42
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 05-Aug-2024 16:15:51
  */
 
 /* Include Files */
@@ -11,57 +11,55 @@
 #include "tmwtypes.h"
 
 /* Function Declarations */
-static const mxArray *c_emlrtMexFcnResolvedFunctionsI(void);
+static const mxArray *emlrtMexFcnResolvedFunctionsInfo(void);
 
 /* Function Definitions */
 /*
  * Arguments    : void
  * Return Type  : const mxArray *
  */
-static const mxArray *c_emlrtMexFcnResolvedFunctionsI(void)
+static const mxArray *emlrtMexFcnResolvedFunctionsInfo(void)
 {
   const mxArray *nameCaptureInfo;
-  const char_T *data[11] = {
-      "789ced9ccd72e34410c795ad8582a2584415f00a7c56ca6b6f965d6e6bc7f1e6d371d961"
-      "9360989d9546f6ecea2ba391bda6e0ce0d8e3c02471e61cf144fc089"
-      "17e0ce115b63d996c858120a49e4745fe4a996fadf1e797e69f5d851d6b6f7d71445b9a3"
-      "08fbbb2b8e6f4fc7eaf4784b895adcbf363dbe1b1b87f69a723b725d",
-      "e8ff717ad41c9b93975c0c6c6c91d995ba63511bdbbc337289c288e79803a2071e839aa4"
-      "432dd25e1c1c4c46d6d6826b3698b826af6b7da2bd68fb96c2fade3c"
-      "437371309b8f9f25eff776caf9f85c321f6accff55fdebda17dd238f30af7bfca4d3dd24"
-      "de0beeb85d4e3c5ee9d6b0a9f926e6e811c2b68eaae8d0a136f7d6ad",
-      "599e3fe5ccf3b3843c43bfe1381c390672097389add3495a0c19ccb11046ee242bc49df1"
-      "4b93dac12d0cf37b9a33bfd7a5f9098feef8cf4c32d7fb35a7de9e54"
-      "2fea5f7edfb2ccd6f8662ac9f3f54ecafce3c7f9f96f04c74f7efb63ed32f5fe7ceffb5b"
-      "97a917da55e9bd94c44bfbf9fb40a2a7c6fc1ac51bad7bf551c9289d",
-      "9ede3d6d345b95a3e6d63c8fc3049da43c14c9f8b2e21785bf6ece3cefc4c6f13c43bf35"
-      "1a30e6f001d1ca16e657c7d7bc7f6fd6a57a51fff2fb129d8d094181"
-      "9f17a317daaaf3b354a647d5dd272d9d925ae9de97fb437ba7bfd5007e168d9f6f25e419"
-      "fab1dd33493928bd827151f9f9a9542fea5f7e5f166643949f2bcbcf",
-      "dffffa0ef8a9a4ff7cbd2fd15363fec333c66adb8f764bc78f4f0f4a0fab838716de5056"
-      "879fbf48ae4f3b8f9b92f86accff9ff889b0c109434dc3189f157d7e"
-      "847e00f40316f3bd6e3c867a5618f403b2c52f2a8fa13f904d0ffa03d9f480a7c2a03f90"
-      "2dfe4de529f40ba2e741bf20aa07fd0261d02fc8163f2f4feb92f86a",
-      "cc9f9fa7e5600543bf00fa05e7e57fdd780cf5ad30e817648b5f541e43bf209b1ef40bb2"
-      "e9014f8541bf205bfc9bca53e81744cf837e41540ffa05c2a05f902d"
-      "fe2bc9f569e7f11b497c35e64fc75382b0a6f96cf2421b8d1f2af5f1e9e271d3f24d4e5d"
-      "93208b60cf67c422e367cf60617be5c53a09ead66c7a50b766d383ba",
-      "5518d4add9e2bf925c7f5339fb66c2fb09fd06e51a659a19fe1eafa89cfd58aa17f527f4"
-      "63c3d99856b3c059e0acb0b49cc5f5b35ebf37dc7b7638b076ee77fc"
-      "bbfab70dbc099cbdae9ccdcb1dd8178bc6877db18bd5034e0b837db16cf1f3aee36d497c"
-      "35e65fbe8e1bc426019d031c23138f0823fa394cfe57bd055c062e2f",
-      "e60b5c16065c5eae93948722190397d371f9879cf97f98907fe8ef8519fa36e5483c94a3"
-      "21e57d643bccc2261a108d3becca789c779fb421d58bfa97dfc794b3"
-      "b4f03beca792bc80c3e9f4422b2a87d3eecb558ddd363ee9ed564e7c8d575bdb1b15da6f"
-      "2babc3e1bcebf7b124be1af35fc8fa2daf5b5017435d7c5efec06361",
-      "45e531d4c5c2f2d6951f49e2ab31fff275ec9ad82606e573deba39f34abb0f57638ee7ed"
-      "4d61aadcf47db8d96cc03edc05eb85b6eabc6c3d7ff0e068c7b50e9a"
-      "fbdec13e196ee976d3aa032fff6f5e5ed6fd0d3b181d46832fa18a2f085f1d37f3fe1fb6"
-      "fb52bda83f5d5f273a2bf07d31e067d6f5d519340767bc42b5b65ddf",
-      "6b8e74edf9f1c9b0567c7efe035c92971b",
+  const char_T *data[10] = {
+      "789ced9b4173da4614c745276dd3e934e5d27c855c3a19027127e9cd10706c6c6306dcc6"
+      "94ce7a2dad6013ad24af5610d22fd09e928f91638ffd083df6dc536e"
+      "edc72842ac2d69bc41cc523330ef5dc4fa49fb7fef2dfacdfa491885fda3826118f78cd8"
+      "de1dc4c7afe6e3e2fcf88991b6acbf90f97b217dbaf1a971e746ffdb",
+      "f9d1f45c415e8b78e06246aeaeb43c465dec8aeec427062781e78c8835f3d8d4215dca48"
+      "2739388e46ac91705d0d2257f4b93624e6ab4ec80c3e0cae23749283"
+      "ab7afca1c8f74ece7a7415f52866fc3fd57fae7ddf3f0d080ffabbd634631a088e85c7fb"
+      "cf48f04a787eff8de70edabdb3be2081a8f44dcf22a16f6141fa35ec",
+      "98a18305da45d8b550159d78d415c14396cce39d661edf2ec843fa6dcf13c8b3914fb84f"
+      "5c8b46917164738f218cfc283024bce94787ba2419dfb9667c9f29e3"
+      "8b3d96175e38e45aef2f4d3daad44bfb35d6759952c68b6d2caee7d739f3cb1eafcfbf3b"
+      "3b7efecfdf85dbd4f3fd7f7fbb4d3d69ebd27bad982feff7f3be42af",
+      "98f19b14efb41fd72725bbd4eb3deaedb5da95d356e33a8e93053a8be23014e3db9a7f5b"
+      "f8ed6be6712f33cee621fd6c32e2dc132362961916ebe3f3ef9a7a4d"
+      "a55edaafb16ee952cd090cfc5d8d9eb46de76fa94c4fabcd1fdb1625b5d2e31f8ec6eec1"
+      "b0b107fcdd36fe7eb9200fe9c7eec021e5d9eece48ea9f6bea2fcbdf",
+      "f79a7acf957a69bfc6ba254af5906d2b77cff781bb91e5fdde7da3d02b66fc27979cd7f6"
+      "779ba517cf7bc7a5a7d5d15386778cede1ee9f8aebf3d6f142317f31"
+      "e35f3d7711b605e1a865dbd30bcaf21f5be863401f2319d7a6f21cf6d1b1411f63b9f9b7"
+      "95e7d0d7584e0ffa1aabd5031ec7067d8de5e6ffa0b83e6f1d7f51cc",
+      "5fccf857c06382b069863cfa604ea69b2c6b3a57bcfd62a123a8ef10c4080e424e1899ee"
+      "c5663bb2a09cb9ef81d3cbe901a757ab079c8e0d38bddcfc1f14d703"
+      "a76fcef78b05f94abf4d8549b9e9c8f77436b54fdd50eaa5fd3afd0f59aa68a980cfabd1"
+      "93b6ed7cc6f5cbc170303ebc3819b183efbae123ebcd1e7e067cde54",
+      "3e43ff1afad79101e7f3e949db76ce43fffae3f3db8af98b19bfc67dbe475c32a3fb0ce7"
+      "c8c113c2897503d393fb38e039f03c32e0793e3d69c0f38feb2c8ac3"
+      "508c81e77a3cff5533af070bf292fe810c2e74a940717f008da91822d7e30c3b6844cc69"
+      "966be3b8eefa5a4abdb45f637d739630fd1ee7b9226ee0773e3d699b",
+      "caefbcef0756ed66079f0d9a95b3d014d5f6fe4e850e3b06f05bce47326323739ef4ffff"
+      "f777dc6181fd38ecc7937101cff3e949db549ec37e3c36dde76075c5"
+      "fcc58c5fe33ef71dec129b8a14af7dcdb8f33eafac712f080ee73036d6c7e30d785e7955"
+      "2a785e099c5d96b3ed974f9e9c1ef8ecb875141c1f9171c3725bac0e",
+      "9c5d37676f6bfd65d3a5cbe9ecf779f13be0ebe3adeeef4f3b4abdb47f057daa74c9e07d"
+      "be95ea49db76fe7647add1a5a850b3e3d60f5b13cb7cf9e26c5cdb7c"
+      "fefe0702f4acb9",
       ""};
   nameCaptureInfo = NULL;
-  emlrtNameCaptureMxArrayR2016a(&data[0], 23824U, &nameCaptureInfo);
+  emlrtNameCaptureMxArrayR2016a(&data[0], 19112U, &nameCaptureInfo);
   return nameCaptureInfo;
 }
 
@@ -74,304 +72,268 @@ mxArray *emlrtMexFcnProperties(void)
   mxArray *xEntryPoints;
   mxArray *xInputs;
   mxArray *xResult;
-  const char_T *propFieldName[9] = {"Version",
-                                    "ResolvedFunctions",
-                                    "Checksum",
-                                    "EntryPoints",
-                                    "CoverageInfo",
-                                    "IsPolymorphic",
-                                    "PropertyList",
-                                    "UUID",
-                                    "ClassEntryPointIsHandle"};
-  const char_T *epFieldName[8] = {
-      "Name",     "NumberOfInputs", "NumberOfOutputs", "ConstantInputs",
-      "FullPath", "TimeStamp",      "Constructor",     "Visible"};
+  const char_T *epFieldName[6] = {
+      "Name",           "NumberOfInputs", "NumberOfOutputs",
+      "ConstantInputs", "FullPath",       "TimeStamp"};
+  const char_T *propFieldName[6] = {"Version",      "ResolvedFunctions",
+                                    "Checksum",     "EntryPoints",
+                                    "CoverageInfo", "IsPolymorphic"};
   xEntryPoints =
-      emlrtCreateStructMatrix(1, 17, 8, (const char_T **)&epFieldName[0]);
-  xInputs = emlrtCreateLogicalMatrix(1, 6);
-  emlrtSetField(xEntryPoints, 0, "Name", emlrtMxCreateString("angle2point"));
-  emlrtSetField(xEntryPoints, 0, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(6.0));
-  emlrtSetField(xEntryPoints, 0, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(3.0));
-  emlrtSetField(xEntryPoints, 0, "ConstantInputs", xInputs);
-  emlrtSetField(
-      xEntryPoints, 0, "FullPath",
-      emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\angle2point.m"));
-  emlrtSetField(xEntryPoints, 0, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 0, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 0, "Visible", emlrtMxCreateLogicalScalar(true));
+      emlrtCreateStructMatrix(1, 15, 6, (const char_T **)&epFieldName[0]);
   xInputs = emlrtCreateLogicalMatrix(1, 8);
-  emlrtSetField(xEntryPoints, 1, "Name",
-                emlrtMxCreateString("Calculat_A_and_B_Points"));
-  emlrtSetField(xEntryPoints, 1, "NumberOfInputs",
+  emlrtSetField(xEntryPoints, 0, (const char_T *)"Name",
+                emlrtMxCreateString((const char_T *)"Calculat_A_and_B_Points"));
+  emlrtSetField(xEntryPoints, 0, (const char_T *)"NumberOfInputs",
                 emlrtMxCreateDoubleScalar(8.0));
-  emlrtSetField(xEntryPoints, 1, "NumberOfOutputs",
+  emlrtSetField(xEntryPoints, 0, (const char_T *)"NumberOfOutputs",
                 emlrtMxCreateDoubleScalar(2.0));
-  emlrtSetField(xEntryPoints, 1, "ConstantInputs", xInputs);
+  emlrtSetField(xEntryPoints, 0, (const char_T *)"ConstantInputs", xInputs);
   emlrtSetField(
-      xEntryPoints, 1, "FullPath",
+      xEntryPoints, 0, (const char_T *)"FullPath",
       emlrtMxCreateString(
-          "C:\\Users\\XWT\\Desktop\\test3\\Calculat_A_and_B_Points.m"));
-  emlrtSetField(xEntryPoints, 1, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 1, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 1, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 10);
-  emlrtSetField(xEntryPoints, 2, "Name",
-                emlrtMxCreateString("Calculat_A_and_B_Points_after_Offest"));
-  emlrtSetField(xEntryPoints, 2, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(10.0));
-  emlrtSetField(xEntryPoints, 2, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(2.0));
-  emlrtSetField(xEntryPoints, 2, "ConstantInputs", xInputs);
-  emlrtSetField(xEntryPoints, 2, "FullPath",
-                emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\Calculat_"
-                                    "A_and_B_Points_after_Offest.m"));
-  emlrtSetField(xEntryPoints, 2, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 2, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 2, "Visible", emlrtMxCreateLogicalScalar(true));
+          (const char_T *)"C:"
+                          "\\Users\\Administrator\\Desktop\\zongQZY\\test3\\cod"
+                          "eupdate\\Calculat_A_and_B_Points.m"));
+  emlrtSetField(xEntryPoints, 0, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
   xInputs = emlrtCreateLogicalMatrix(1, 8);
-  emlrtSetField(xEntryPoints, 3, "Name",
-                emlrtMxCreateString("Calculat_A_and_B_Points_after_Offest2"));
-  emlrtSetField(xEntryPoints, 3, "NumberOfInputs",
+  emlrtSetField(xEntryPoints, 1, (const char_T *)"Name",
+                emlrtMxCreateString(
+                    (const char_T *)"Calculat_A_and_B_Points_after_Offest2"));
+  emlrtSetField(xEntryPoints, 1, (const char_T *)"NumberOfInputs",
                 emlrtMxCreateDoubleScalar(8.0));
-  emlrtSetField(xEntryPoints, 3, "NumberOfOutputs",
+  emlrtSetField(xEntryPoints, 1, (const char_T *)"NumberOfOutputs",
                 emlrtMxCreateDoubleScalar(1.0));
-  emlrtSetField(xEntryPoints, 3, "ConstantInputs", xInputs);
-  emlrtSetField(xEntryPoints, 3, "FullPath",
-                emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\Calculat_"
-                                    "A_and_B_Points_after_Offest2.m"));
-  emlrtSetField(xEntryPoints, 3, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739469.03990740736));
-  emlrtSetField(xEntryPoints, 3, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 3, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 3);
+  emlrtSetField(xEntryPoints, 1, (const char_T *)"ConstantInputs", xInputs);
   emlrtSetField(
-      xEntryPoints, 4, "Name",
+      xEntryPoints, 1, (const char_T *)"FullPath",
       emlrtMxCreateString(
-          "Calculate_accurate_cylinders_from_multiple_measurement_points2"));
-  emlrtSetField(xEntryPoints, 4, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(3.0));
-  emlrtSetField(xEntryPoints, 4, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(6.0));
-  emlrtSetField(xEntryPoints, 4, "ConstantInputs", xInputs);
-  emlrtSetField(
-      xEntryPoints, 4, "FullPath",
-      emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\Calculate_accurate_"
-                          "cylinders_from_multiple_measurement_points2.m"));
-  emlrtSetField(xEntryPoints, 4, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 4, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 4, "Visible", emlrtMxCreateLogicalScalar(true));
+          (const char_T *)"C:"
+                          "\\Users\\Administrator\\Desktop\\zongQZY\\test3\\cod"
+                          "eupdate\\Calculat_A_and_B_Points_after_Offest2.m"));
+  emlrtSetField(xEntryPoints, 1, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.67753472226));
   xInputs = emlrtCreateLogicalMatrix(1, 3);
-  emlrtSetField(xEntryPoints, 5, "Name", emlrtMxCreateString("CrossLine"));
-  emlrtSetField(xEntryPoints, 5, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(3.0));
-  emlrtSetField(xEntryPoints, 5, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(2.0));
-  emlrtSetField(xEntryPoints, 5, "ConstantInputs", xInputs);
   emlrtSetField(
-      xEntryPoints, 5, "FullPath",
-      emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\CrossLine.m"));
-  emlrtSetField(xEntryPoints, 5, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 5, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 5, "Visible", emlrtMxCreateLogicalScalar(true));
+      xEntryPoints, 2, (const char_T *)"Name",
+      emlrtMxCreateString((const char_T *)"Calculate_accurate_cylinders_from_"
+                                          "multiple_measurement_points2"));
+  emlrtSetField(xEntryPoints, 2, (const char_T *)"NumberOfInputs",
+                emlrtMxCreateDoubleScalar(3.0));
+  emlrtSetField(xEntryPoints, 2, (const char_T *)"NumberOfOutputs",
+                emlrtMxCreateDoubleScalar(6.0));
+  emlrtSetField(xEntryPoints, 2, (const char_T *)"ConstantInputs", xInputs);
+  emlrtSetField(
+      xEntryPoints, 2, (const char_T *)"FullPath",
+      emlrtMxCreateString(
+          (const char_T *)"C:"
+                          "\\Users\\Administrator\\Desktop\\zongQZY\\test3\\cod"
+                          "eupdate\\Calculate_accurate_cylinders_from_multiple_"
+                          "measurement_points2.m"));
+  emlrtSetField(xEntryPoints, 2, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
+  xInputs = emlrtCreateLogicalMatrix(1, 3);
+  emlrtSetField(xEntryPoints, 3, (const char_T *)"Name",
+                emlrtMxCreateString((const char_T *)"CrossLine"));
+  emlrtSetField(xEntryPoints, 3, (const char_T *)"NumberOfInputs",
+                emlrtMxCreateDoubleScalar(3.0));
+  emlrtSetField(xEntryPoints, 3, (const char_T *)"NumberOfOutputs",
+                emlrtMxCreateDoubleScalar(2.0));
+  emlrtSetField(xEntryPoints, 3, (const char_T *)"ConstantInputs", xInputs);
+  emlrtSetField(xEntryPoints, 3, (const char_T *)"FullPath",
+                emlrtMxCreateString(
+                    (const char_T *)"C:"
+                                    "\\Users\\Administrator\\Desktop\\zongQZY\\"
+                                    "test3\\codeupdate\\CrossLine.m"));
+  emlrtSetField(xEntryPoints, 3, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
   xInputs = emlrtCreateLogicalMatrix(1, 1);
-  emlrtSetField(xEntryPoints, 6, "Name", emlrtMxCreateString("fitcircle"));
-  emlrtSetField(xEntryPoints, 6, "NumberOfInputs",
+  emlrtSetField(xEntryPoints, 4, (const char_T *)"Name",
+                emlrtMxCreateString((const char_T *)"fitcircle"));
+  emlrtSetField(xEntryPoints, 4, (const char_T *)"NumberOfInputs",
                 emlrtMxCreateDoubleScalar(1.0));
-  emlrtSetField(xEntryPoints, 6, "NumberOfOutputs",
+  emlrtSetField(xEntryPoints, 4, (const char_T *)"NumberOfOutputs",
                 emlrtMxCreateDoubleScalar(3.0));
-  emlrtSetField(xEntryPoints, 6, "ConstantInputs", xInputs);
-  emlrtSetField(
-      xEntryPoints, 6, "FullPath",
-      emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\fitcircle.m"));
-  emlrtSetField(xEntryPoints, 6, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 6, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 6, "Visible", emlrtMxCreateLogicalScalar(true));
+  emlrtSetField(xEntryPoints, 4, (const char_T *)"ConstantInputs", xInputs);
+  emlrtSetField(xEntryPoints, 4, (const char_T *)"FullPath",
+                emlrtMxCreateString(
+                    (const char_T *)"C:"
+                                    "\\Users\\Administrator\\Desktop\\zongQZY\\"
+                                    "test3\\codeupdate\\fitcircle.m"));
+  emlrtSetField(xEntryPoints, 4, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
   xInputs = emlrtCreateLogicalMatrix(1, 3);
   emlrtSetField(
-      xEntryPoints, 7, "Name",
-      emlrtMxCreateString("foot_of_perpendicular_from_a_point_to_a_line"));
-  emlrtSetField(xEntryPoints, 7, "NumberOfInputs",
+      xEntryPoints, 5, (const char_T *)"Name",
+      emlrtMxCreateString(
+          (const char_T *)"foot_of_perpendicular_from_a_point_to_a_line"));
+  emlrtSetField(xEntryPoints, 5, (const char_T *)"NumberOfInputs",
                 emlrtMxCreateDoubleScalar(3.0));
-  emlrtSetField(xEntryPoints, 7, "NumberOfOutputs",
+  emlrtSetField(xEntryPoints, 5, (const char_T *)"NumberOfOutputs",
                 emlrtMxCreateDoubleScalar(3.0));
-  emlrtSetField(xEntryPoints, 7, "ConstantInputs", xInputs);
-  emlrtSetField(xEntryPoints, 7, "FullPath",
-                emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\foot_of_"
-                                    "perpendicular_from_a_point_to_a_line.m"));
-  emlrtSetField(xEntryPoints, 7, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 7, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 7, "Visible", emlrtMxCreateLogicalScalar(true));
+  emlrtSetField(xEntryPoints, 5, (const char_T *)"ConstantInputs", xInputs);
+  emlrtSetField(
+      xEntryPoints, 5, (const char_T *)"FullPath",
+      emlrtMxCreateString(
+          (const char_T
+               *)"C:"
+                 "\\Users\\Administrator\\Desktop\\zongQZY\\test3\\codeupdate\\"
+                 "foot_of_perpendicular_from_a_point_to_a_line.m"));
+  emlrtSetField(xEntryPoints, 5, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
   xInputs = emlrtCreateLogicalMatrix(1, 5);
   emlrtSetField(
-      xEntryPoints, 8, "Name",
-      emlrtMxCreateString("Generate_multi_layered_measurement_points"));
-  emlrtSetField(xEntryPoints, 8, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(5.0));
-  emlrtSetField(xEntryPoints, 8, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(1.0));
-  emlrtSetField(xEntryPoints, 8, "ConstantInputs", xInputs);
-  emlrtSetField(xEntryPoints, 8, "FullPath",
-                emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\Generate_"
-                                    "multi_layered_measurement_points.m"));
-  emlrtSetField(xEntryPoints, 8, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 8, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 8, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 3);
-  emlrtSetField(xEntryPoints, 9, "Name",
-                emlrtMxCreateString("generate_unit_circle_with_normal_vector"));
-  emlrtSetField(xEntryPoints, 9, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(3.0));
-  emlrtSetField(xEntryPoints, 9, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(1.0));
-  emlrtSetField(xEntryPoints, 9, "ConstantInputs", xInputs);
-  emlrtSetField(xEntryPoints, 9, "FullPath",
-                emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\generate_"
-                                    "unit_circle_with_normal_vector.m"));
-  emlrtSetField(xEntryPoints, 9, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 9, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 9, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 6);
-  emlrtSetField(
-      xEntryPoints, 10, "Name",
-      emlrtMxCreateString("generate_unit_circle_with_normal_vector2"));
-  emlrtSetField(xEntryPoints, 10, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(6.0));
-  emlrtSetField(xEntryPoints, 10, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(1.0));
-  emlrtSetField(xEntryPoints, 10, "ConstantInputs", xInputs);
-  emlrtSetField(xEntryPoints, 10, "FullPath",
-                emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\generate_"
-                                    "unit_circle_with_normal_vector2.m"));
-  emlrtSetField(xEntryPoints, 10, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 10, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 10, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 4);
-  emlrtSetField(xEntryPoints, 11, "Name",
-                emlrtMxCreateString("GenerateTrianglePoints"));
-  emlrtSetField(xEntryPoints, 11, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(4.0));
-  emlrtSetField(xEntryPoints, 11, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(1.0));
-  emlrtSetField(xEntryPoints, 11, "ConstantInputs", xInputs);
-  emlrtSetField(
-      xEntryPoints, 11, "FullPath",
+      xEntryPoints, 6, (const char_T *)"Name",
       emlrtMxCreateString(
-          "C:\\Users\\XWT\\Desktop\\test3\\GenerateTrianglePoints.m"));
-  emlrtSetField(xEntryPoints, 11, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 11, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 11, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 1);
-  emlrtSetField(xEntryPoints, 12, "Name",
-                emlrtMxCreateString("myvrrotvec2mat"));
-  emlrtSetField(xEntryPoints, 12, "NumberOfInputs",
+          (const char_T *)"Generate_multi_layered_measurement_points"));
+  emlrtSetField(xEntryPoints, 6, (const char_T *)"NumberOfInputs",
+                emlrtMxCreateDoubleScalar(5.0));
+  emlrtSetField(xEntryPoints, 6, (const char_T *)"NumberOfOutputs",
                 emlrtMxCreateDoubleScalar(1.0));
-  emlrtSetField(xEntryPoints, 12, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(1.0));
-  emlrtSetField(xEntryPoints, 12, "ConstantInputs", xInputs);
+  emlrtSetField(xEntryPoints, 6, (const char_T *)"ConstantInputs", xInputs);
   emlrtSetField(
-      xEntryPoints, 12, "FullPath",
-      emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\myvrrotvec2mat.m"));
-  emlrtSetField(xEntryPoints, 12, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 12, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 12, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 4);
-  emlrtSetField(xEntryPoints, 13, "Name",
-                emlrtMxCreateString("OffsetCalculate"));
-  emlrtSetField(xEntryPoints, 13, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(4.0));
-  emlrtSetField(xEntryPoints, 13, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(1.0));
-  emlrtSetField(xEntryPoints, 13, "ConstantInputs", xInputs);
-  emlrtSetField(
-      xEntryPoints, 13, "FullPath",
-      emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\OffsetCalculate.m"));
-  emlrtSetField(xEntryPoints, 13, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739437.51668981486));
-  emlrtSetField(xEntryPoints, 13, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 13, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 4);
-  emlrtSetField(xEntryPoints, 14, "Name", emlrtMxCreateString("planefit"));
-  emlrtSetField(xEntryPoints, 14, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(4.0));
-  emlrtSetField(xEntryPoints, 14, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(2.0));
-  emlrtSetField(xEntryPoints, 14, "ConstantInputs", xInputs);
-  emlrtSetField(
-      xEntryPoints, 14, "FullPath",
-      emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\planefit.m"));
-  emlrtSetField(xEntryPoints, 14, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 14, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 14, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 4);
-  emlrtSetField(xEntryPoints, 15, "Name", emlrtMxCreateString("RepeatSurvey"));
-  emlrtSetField(xEntryPoints, 15, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(4.0));
-  emlrtSetField(xEntryPoints, 15, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(2.0));
-  emlrtSetField(xEntryPoints, 15, "ConstantInputs", xInputs);
-  emlrtSetField(
-      xEntryPoints, 15, "FullPath",
-      emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\RepeatSurvey.m"));
-  emlrtSetField(xEntryPoints, 15, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739432.90363425924));
-  emlrtSetField(xEntryPoints, 15, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 15, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 1);
-  emlrtSetField(xEntryPoints, 16, "Name",
-                emlrtMxCreateString("ShengLuJiaoJiSuan"));
-  emlrtSetField(xEntryPoints, 16, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(1.0));
-  emlrtSetField(xEntryPoints, 16, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(1.0));
-  emlrtSetField(xEntryPoints, 16, "ConstantInputs", xInputs);
-  emlrtSetField(xEntryPoints, 16, "FullPath",
+      xEntryPoints, 6, (const char_T *)"FullPath",
+      emlrtMxCreateString(
+          (const char_T
+               *)"C:"
+                 "\\Users\\Administrator\\Desktop\\zongQZY\\test3\\codeupdate\\"
+                 "Generate_multi_layered_measurement_points.m"));
+  emlrtSetField(xEntryPoints, 6, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
+  xInputs = emlrtCreateLogicalMatrix(1, 3);
+  emlrtSetField(xEntryPoints, 7, (const char_T *)"Name",
                 emlrtMxCreateString(
-                    "C:\\Users\\XWT\\Desktop\\test3\\ShengLuJiaoJiSuan.m"));
-  emlrtSetField(xEntryPoints, 16, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739469.01425925922));
-  emlrtSetField(xEntryPoints, 16, "Constructor",
-                emlrtMxCreateLogicalScalar(false));
-  emlrtSetField(xEntryPoints, 16, "Visible", emlrtMxCreateLogicalScalar(true));
+                    (const char_T *)"generate_unit_circle_with_normal_vector"));
+  emlrtSetField(xEntryPoints, 7, (const char_T *)"NumberOfInputs",
+                emlrtMxCreateDoubleScalar(3.0));
+  emlrtSetField(xEntryPoints, 7, (const char_T *)"NumberOfOutputs",
+                emlrtMxCreateDoubleScalar(1.0));
+  emlrtSetField(xEntryPoints, 7, (const char_T *)"ConstantInputs", xInputs);
+  emlrtSetField(
+      xEntryPoints, 7, (const char_T *)"FullPath",
+      emlrtMxCreateString((
+          const char_T *)"C:"
+                         "\\Users\\Administrator\\Desktop\\zongQZY\\test3\\code"
+                         "update\\generate_unit_circle_with_normal_vector.m"));
+  emlrtSetField(xEntryPoints, 7, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
+  xInputs = emlrtCreateLogicalMatrix(1, 6);
+  emlrtSetField(xEntryPoints, 8, (const char_T *)"Name",
+                emlrtMxCreateString((
+                    const char_T *)"generate_unit_circle_with_normal_vector2"));
+  emlrtSetField(xEntryPoints, 8, (const char_T *)"NumberOfInputs",
+                emlrtMxCreateDoubleScalar(6.0));
+  emlrtSetField(xEntryPoints, 8, (const char_T *)"NumberOfOutputs",
+                emlrtMxCreateDoubleScalar(1.0));
+  emlrtSetField(xEntryPoints, 8, (const char_T *)"ConstantInputs", xInputs);
+  emlrtSetField(
+      xEntryPoints, 8, (const char_T *)"FullPath",
+      emlrtMxCreateString((
+          const char_T *)"C:"
+                         "\\Users\\Administrator\\Desktop\\zongQZY\\test3\\code"
+                         "update\\generate_unit_circle_with_normal_vector2.m"));
+  emlrtSetField(xEntryPoints, 8, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
+  xInputs = emlrtCreateLogicalMatrix(1, 4);
+  emlrtSetField(xEntryPoints, 9, (const char_T *)"Name",
+                emlrtMxCreateString((const char_T *)"GenerateTrianglePoints"));
+  emlrtSetField(xEntryPoints, 9, (const char_T *)"NumberOfInputs",
+                emlrtMxCreateDoubleScalar(4.0));
+  emlrtSetField(xEntryPoints, 9, (const char_T *)"NumberOfOutputs",
+                emlrtMxCreateDoubleScalar(1.0));
+  emlrtSetField(xEntryPoints, 9, (const char_T *)"ConstantInputs", xInputs);
+  emlrtSetField(
+      xEntryPoints, 9, (const char_T *)"FullPath",
+      emlrtMxCreateString(
+          (const char_T *)"C:"
+                          "\\Users\\Administrator\\Desktop\\zongQZY\\test3\\cod"
+                          "eupdate\\GenerateTrianglePoints.m"));
+  emlrtSetField(xEntryPoints, 9, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
+  xInputs = emlrtCreateLogicalMatrix(1, 1);
+  emlrtSetField(xEntryPoints, 10, (const char_T *)"Name",
+                emlrtMxCreateString((const char_T *)"myvrrotvec2mat"));
+  emlrtSetField(xEntryPoints, 10, (const char_T *)"NumberOfInputs",
+                emlrtMxCreateDoubleScalar(1.0));
+  emlrtSetField(xEntryPoints, 10, (const char_T *)"NumberOfOutputs",
+                emlrtMxCreateDoubleScalar(1.0));
+  emlrtSetField(xEntryPoints, 10, (const char_T *)"ConstantInputs", xInputs);
+  emlrtSetField(xEntryPoints, 10, (const char_T *)"FullPath",
+                emlrtMxCreateString(
+                    (const char_T *)"C:"
+                                    "\\Users\\Administrator\\Desktop\\zongQZY\\"
+                                    "test3\\codeupdate\\myvrrotvec2mat.m"));
+  emlrtSetField(xEntryPoints, 10, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
+  xInputs = emlrtCreateLogicalMatrix(1, 4);
+  emlrtSetField(xEntryPoints, 11, (const char_T *)"Name",
+                emlrtMxCreateString((const char_T *)"OffsetCalculate"));
+  emlrtSetField(xEntryPoints, 11, (const char_T *)"NumberOfInputs",
+                emlrtMxCreateDoubleScalar(4.0));
+  emlrtSetField(xEntryPoints, 11, (const char_T *)"NumberOfOutputs",
+                emlrtMxCreateDoubleScalar(1.0));
+  emlrtSetField(xEntryPoints, 11, (const char_T *)"ConstantInputs", xInputs);
+  emlrtSetField(xEntryPoints, 11, (const char_T *)"FullPath",
+                emlrtMxCreateString(
+                    (const char_T *)"C:"
+                                    "\\Users\\Administrator\\Desktop\\zongQZY\\"
+                                    "test3\\codeupdate\\OffsetCalculate.m"));
+  emlrtSetField(xEntryPoints, 11, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
+  xInputs = emlrtCreateLogicalMatrix(1, 4);
+  emlrtSetField(xEntryPoints, 12, (const char_T *)"Name",
+                emlrtMxCreateString((const char_T *)"planefit"));
+  emlrtSetField(xEntryPoints, 12, (const char_T *)"NumberOfInputs",
+                emlrtMxCreateDoubleScalar(4.0));
+  emlrtSetField(xEntryPoints, 12, (const char_T *)"NumberOfOutputs",
+                emlrtMxCreateDoubleScalar(2.0));
+  emlrtSetField(xEntryPoints, 12, (const char_T *)"ConstantInputs", xInputs);
+  emlrtSetField(xEntryPoints, 12, (const char_T *)"FullPath",
+                emlrtMxCreateString(
+                    (const char_T *)"C:"
+                                    "\\Users\\Administrator\\Desktop\\zongQZY\\"
+                                    "test3\\codeupdate\\planefit.m"));
+  emlrtSetField(xEntryPoints, 12, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
+  xInputs = emlrtCreateLogicalMatrix(1, 4);
+  emlrtSetField(xEntryPoints, 13, (const char_T *)"Name",
+                emlrtMxCreateString((const char_T *)"RepeatSurvey"));
+  emlrtSetField(xEntryPoints, 13, (const char_T *)"NumberOfInputs",
+                emlrtMxCreateDoubleScalar(4.0));
+  emlrtSetField(xEntryPoints, 13, (const char_T *)"NumberOfOutputs",
+                emlrtMxCreateDoubleScalar(2.0));
+  emlrtSetField(xEntryPoints, 13, (const char_T *)"ConstantInputs", xInputs);
+  emlrtSetField(xEntryPoints, 13, (const char_T *)"FullPath",
+                emlrtMxCreateString(
+                    (const char_T *)"C:"
+                                    "\\Users\\Administrator\\Desktop\\zongQZY\\"
+                                    "test3\\codeupdate\\RepeatSurvey.m"));
+  emlrtSetField(xEntryPoints, 13, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
+  xInputs = emlrtCreateLogicalMatrix(1, 1);
+  emlrtSetField(xEntryPoints, 14, (const char_T *)"Name",
+                emlrtMxCreateString((const char_T *)"ShengLuJiaoJiSuan"));
+  emlrtSetField(xEntryPoints, 14, (const char_T *)"NumberOfInputs",
+                emlrtMxCreateDoubleScalar(1.0));
+  emlrtSetField(xEntryPoints, 14, (const char_T *)"NumberOfOutputs",
+                emlrtMxCreateDoubleScalar(1.0));
+  emlrtSetField(xEntryPoints, 14, (const char_T *)"ConstantInputs", xInputs);
+  emlrtSetField(xEntryPoints, 14, (const char_T *)"FullPath",
+                emlrtMxCreateString(
+                    (const char_T *)"C:"
+                                    "\\Users\\Administrator\\Desktop\\zongQZY\\"
+                                    "test3\\codeupdate\\ShengLuJiaoJiSuan.m"));
+  emlrtSetField(xEntryPoints, 14, (const char_T *)"TimeStamp",
+                emlrtMxCreateDoubleScalar(739469.63717592589));
   xResult =
-      emlrtCreateStructMatrix(1, 1, 9, (const char_T **)&propFieldName[0]);
-  emlrtSetField(xResult, 0, "Version",
-                emlrtMxCreateString("23.2.0.2365128 (R2023b)"));
-  emlrtSetField(xResult, 0, "ResolvedFunctions",
-                (mxArray *)c_emlrtMexFcnResolvedFunctionsI());
-  emlrtSetField(xResult, 0, "Checksum",
-                emlrtMxCreateString("z8ZicJgolr22zhaBiCMaSB"));
-  emlrtSetField(xResult, 0, "EntryPoints", xEntryPoints);
+      emlrtCreateStructMatrix(1, 1, 6, (const char_T **)&propFieldName[0]);
+  emlrtSetField(xResult, 0, (const char_T *)"Version",
+                emlrtMxCreateString((const char_T *)"9.12.0.1884302 (R2022a)"));
+  emlrtSetField(xResult, 0, (const char_T *)"ResolvedFunctions",
+                (mxArray *)emlrtMexFcnResolvedFunctionsInfo());
+  emlrtSetField(xResult, 0, (const char_T *)"Checksum",
+                emlrtMxCreateString((const char_T *)"jQcBS7vuVQ219emhWY3FOG"));
+  emlrtSetField(xResult, 0, (const char_T *)"EntryPoints", xEntryPoints);
   return xResult;
 }
 

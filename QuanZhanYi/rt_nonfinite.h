@@ -1,8 +1,8 @@
 /*
  * File: rt_nonfinite.h
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:57:42
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 05-Aug-2024 16:15:51
  */
 
 #ifndef RT_NONFINITE_H
@@ -43,7 +43,7 @@ extern real32_T rtInfF;
 extern real32_T rtMinusInfF;
 extern real32_T rtNaNF;
 
-extern void rt_InitInfAndNaN(void);
+extern void rt_InitInfAndNaN();
 
 extern boolean_T rtIsInf(real_T value);
 extern boolean_T rtIsInfF(real32_T value);

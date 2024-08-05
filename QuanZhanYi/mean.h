@@ -1,14 +1,15 @@
 /*
- * File: QuanZhanYi_terminate.h
+ * File: mean.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 05-Aug-2024 16:15:51
  */
 
-#ifndef QUANZHANYI_TERMINATE_H
-#define QUANZHANYI_TERMINATE_H
+#ifndef MEAN_H
+#define MEAN_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,7 +19,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void QuanZhanYi_terminate(void);
+void b_mean(const emxArray_real_T *x, double y[3]);
+
+double mean(const emxArray_real_T *x);
 
 #ifdef __cplusplus
 }
@@ -26,7 +29,7 @@ extern void QuanZhanYi_terminate(void);
 
 #endif
 /*
- * File trailer for QuanZhanYi_terminate.h
+ * File trailer for mean.h
  *
  * [EOF]
  */

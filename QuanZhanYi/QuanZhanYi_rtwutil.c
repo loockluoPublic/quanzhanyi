@@ -1,8 +1,8 @@
 /*
  * File: QuanZhanYi_rtwutil.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:57:42
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 05-Aug-2024 16:15:51
  */
 
 /* Include Files */
@@ -21,22 +21,22 @@
 double rt_atan2d_snf(double u0, double u1)
 {
   double y;
-  int i;
-  int i1;
+  int b_u0;
+  int b_u1;
   if (rtIsNaN(u0) || rtIsNaN(u1)) {
     y = rtNaN;
   } else if (rtIsInf(u0) && rtIsInf(u1)) {
     if (u0 > 0.0) {
-      i = 1;
+      b_u0 = 1;
     } else {
-      i = -1;
+      b_u0 = -1;
     }
     if (u1 > 0.0) {
-      i1 = 1;
+      b_u1 = 1;
     } else {
-      i1 = -1;
+      b_u1 = -1;
     }
-    y = atan2(i, i1);
+    y = atan2(b_u0, b_u1);
   } else if (u1 == 0.0) {
     if (u0 > 0.0) {
       y = RT_PI / 2.0;
@@ -59,19 +59,16 @@ double rt_atan2d_snf(double u0, double u1)
 double rt_hypotd_snf(double u0, double u1)
 {
   double a;
-  double b;
   double y;
   a = fabs(u0);
-  b = fabs(u1);
-  if (a < b) {
-    a /= b;
-    y = b * sqrt(a * a + 1.0);
-  } else if (a > b) {
-    b /= a;
-    y = a * sqrt(b * b + 1.0);
-  } else if (rtIsNaN(b)) {
-    y = rtNaN;
-  } else {
+  y = fabs(u1);
+  if (a < y) {
+    a /= y;
+    y *= sqrt(a * a + 1.0);
+  } else if (a > y) {
+    y /= a;
+    y = a * sqrt(y * y + 1.0);
+  } else if (!rtIsNaN(y)) {
     y = a * 1.4142135623730951;
   }
   return y;

@@ -1,8 +1,8 @@
 /*
  * File: generate_unit_circle_with_normal_vector2.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:57:42
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 05-Aug-2024 16:15:51
  */
 
 /* Include Files */
@@ -59,14 +59,17 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   double *x_circle_data;
   double *y_circle_data;
   double *z_circle_data;
-  int b_i;
   int i;
   int i1;
   int j;
   int k;
+  int nx;
   if (!isInitialized_QuanZhanYi) {
     QuanZhanYi_initialize();
   }
+  emxInit_real_T(&deltx, 2);
+  emxInit_real_T(&delty, 2);
+  emxInit_real_T(&deltz, 2);
   scale = cos(azimuth);
   Pl2_idx_2 = sin(azimuth);
   Pl2_idx_0 = scale * cos(elevation);
@@ -91,30 +94,27 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   t = K * Pl2_idx_0;
   yN2 = K * Pl2_idx_1;
   scale = K * Pl2_idx_2;
-  emxInit_real_T(&deltx, 2);
   i = deltx->size[0] * deltx->size[1];
   deltx->size[0] = 1;
   i1 = (int)laynum;
   deltx->size[1] = (int)laynum;
   emxEnsureCapacity_real_T(deltx, i);
   deltx_data = deltx->data;
-  emxInit_real_T(&delty, 2);
   i = delty->size[0] * delty->size[1];
   delty->size[0] = 1;
   delty->size[1] = (int)laynum;
   emxEnsureCapacity_real_T(delty, i);
   delty_data = delty->data;
-  emxInit_real_T(&deltz, 2);
   i = deltz->size[0] * deltz->size[1];
   deltz->size[0] = 1;
   deltz->size[1] = (int)laynum;
   emxEnsureCapacity_real_T(deltz, i);
   deltz_data = deltz->data;
-  for (b_i = 0; b_i < i1; b_i++) {
-    lamuda = ((double)b_i + 1.0) / ((laynum + 1.0) - ((double)b_i + 1.0));
-    deltx_data[b_i] = (xN1 + lamuda * t) / (lamuda + 1.0);
-    delty_data[b_i] = (yN1 + lamuda * yN2) / (lamuda + 1.0);
-    deltz_data[b_i] = (zN1 + lamuda * scale) / (lamuda + 1.0);
+  for (nx = 0; nx < i1; nx++) {
+    lamuda = ((double)nx + 1.0) / ((laynum + 1.0) - ((double)nx + 1.0));
+    deltx_data[nx] = (xN1 + lamuda * t) / (lamuda + 1.0);
+    delty_data[nx] = (yN1 + lamuda * yN2) / (lamuda + 1.0);
+    deltz_data[nx] = (zN1 + lamuda * scale) / (lamuda + 1.0);
   }
   /*  定义法向量 */
   /*  检查法向量是否是单位向量，如果不是则归一化 */
@@ -236,6 +236,7 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
     t = lamuda / scale;
     K += t * t;
   }
+  emxInit_real_T(&x_circle, 2);
   K = scale * sqrt(K);
   v[0] /= K;
   v[1] /= K;
@@ -246,35 +247,44 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   u[2] = v[0] * Pl2_idx_1 - Pl2_idx_0 * v[1];
   /*  创建另一个垂直向量 */
   /*  单位圆的参数方程 */
-  emxInit_real_T(&x_circle, 2);
   i = x_circle->size[0] * x_circle->size[1];
   x_circle->size[0] = 1;
   x_circle->size[1] = theta->size[1];
   emxEnsureCapacity_real_T(x_circle, i);
   x_circle_data = x_circle->data;
-  b_i = theta->size[1];
+  nx = theta->size[1];
+  for (i = 0; i < nx; i++) {
+    x_circle_data[i] = theta_data[i];
+  }
+  nx = theta->size[1];
+  for (k = 0; k < nx; k++) {
+    x_circle_data[k] = cos(x_circle_data[k]);
+  }
   emxInit_real_T(&z_circle, 2);
   i = z_circle->size[0] * z_circle->size[1];
   z_circle->size[0] = 1;
   z_circle->size[1] = theta->size[1];
   emxEnsureCapacity_real_T(z_circle, i);
   z_circle_data = z_circle->data;
-  for (k = 0; k < b_i; k++) {
-    K = theta_data[k];
-    x_circle_data[k] = cos(K);
-    z_circle_data[k] = sin(K);
+  nx = theta->size[1];
+  for (i = 0; i < nx; i++) {
+    z_circle_data[i] = theta_data[i];
+  }
+  nx = theta->size[1];
+  for (k = 0; k < nx; k++) {
+    z_circle_data[k] = sin(z_circle_data[k]);
   }
   if (x_circle->size[1] == z_circle->size[1]) {
-    b_i = x_circle->size[1] - 1;
+    nx = x_circle->size[1] - 1;
     i = x_circle->size[0] * x_circle->size[1];
     x_circle->size[0] = 1;
     emxEnsureCapacity_real_T(x_circle, i);
     x_circle_data = x_circle->data;
-    for (i = 0; i <= b_i; i++) {
+    for (i = 0; i <= nx; i++) {
       x_circle_data[i] = x_circle_data[i] * v[0] + z_circle_data[i] * u[0];
     }
   } else {
-    binary_expand_op_6(x_circle, v, z_circle, u);
+    h_binary_expand_op(x_circle, v, z_circle, u);
     x_circle_data = x_circle->data;
   }
   emxInit_real_T(&y_circle, 2);
@@ -283,28 +293,38 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   y_circle->size[1] = theta->size[1];
   emxEnsureCapacity_real_T(y_circle, i);
   y_circle_data = y_circle->data;
-  b_i = theta->size[1];
+  nx = theta->size[1];
+  for (i = 0; i < nx; i++) {
+    y_circle_data[i] = theta_data[i];
+  }
+  nx = theta->size[1];
+  for (k = 0; k < nx; k++) {
+    y_circle_data[k] = cos(y_circle_data[k]);
+  }
   i = z_circle->size[0] * z_circle->size[1];
   z_circle->size[0] = 1;
   z_circle->size[1] = theta->size[1];
   emxEnsureCapacity_real_T(z_circle, i);
   z_circle_data = z_circle->data;
-  for (k = 0; k < b_i; k++) {
-    K = theta_data[k];
-    y_circle_data[k] = cos(K);
-    z_circle_data[k] = sin(K);
+  nx = theta->size[1];
+  for (i = 0; i < nx; i++) {
+    z_circle_data[i] = theta_data[i];
+  }
+  nx = theta->size[1];
+  for (k = 0; k < nx; k++) {
+    z_circle_data[k] = sin(z_circle_data[k]);
   }
   if (y_circle->size[1] == z_circle->size[1]) {
-    b_i = y_circle->size[1] - 1;
+    nx = y_circle->size[1] - 1;
     i = y_circle->size[0] * y_circle->size[1];
     y_circle->size[0] = 1;
     emxEnsureCapacity_real_T(y_circle, i);
     y_circle_data = y_circle->data;
-    for (i = 0; i <= b_i; i++) {
+    for (i = 0; i <= nx; i++) {
       y_circle_data[i] = y_circle_data[i] * v[1] + z_circle_data[i] * u[1];
     }
   } else {
-    binary_expand_op_5(y_circle, v, z_circle, u);
+    g_binary_expand_op(y_circle, v, z_circle, u);
     y_circle_data = y_circle->data;
   }
   i = z_circle->size[0] * z_circle->size[1];
@@ -312,24 +332,29 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   z_circle->size[1] = theta->size[1];
   emxEnsureCapacity_real_T(z_circle, i);
   z_circle_data = z_circle->data;
-  b_i = theta->size[1];
-  for (k = 0; k < b_i; k++) {
-    K = theta_data[k];
-    z_circle_data[k] = cos(K);
-    K = sin(K);
-    theta_data[k] = K;
+  nx = theta->size[1];
+  for (i = 0; i < nx; i++) {
+    z_circle_data[i] = theta_data[i];
+  }
+  nx = theta->size[1];
+  for (k = 0; k < nx; k++) {
+    z_circle_data[k] = cos(z_circle_data[k]);
+  }
+  nx = theta->size[1];
+  for (k = 0; k < nx; k++) {
+    theta_data[k] = sin(theta_data[k]);
   }
   if (z_circle->size[1] == theta->size[1]) {
-    b_i = z_circle->size[1] - 1;
+    nx = z_circle->size[1] - 1;
     i = z_circle->size[0] * z_circle->size[1];
     z_circle->size[0] = 1;
     emxEnsureCapacity_real_T(z_circle, i);
     z_circle_data = z_circle->data;
-    for (i = 0; i <= b_i; i++) {
+    for (i = 0; i <= nx; i++) {
       z_circle_data[i] = z_circle_data[i] * v[2] + theta_data[i] * u[2];
     }
   } else {
-    binary_expand_op_4(z_circle, v, theta, u);
+    f_binary_expand_op(z_circle, v, theta, u);
     z_circle_data = z_circle->data;
   }
   emxFree_real_T(&theta);
@@ -339,8 +364,8 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   Point_out->size[1] = k;
   emxEnsureCapacity_real_T(Point_out, i);
   theta_data = Point_out->data;
-  b_i = 3 * k;
-  for (i = 0; i < b_i; i++) {
+  nx = 3 * k;
+  for (i = 0; i < nx; i++) {
     theta_data[i] = 0.0;
   }
   for (j = 0; j < i1; j++) {
@@ -353,16 +378,16 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
     scale = deltx_data[j];
     K = delty_data[j];
     lamuda = deltz_data[j];
-    b_i = x_circle->size[1];
-    for (k = 0; k < b_i; k++) {
+    nx = x_circle->size[1];
+    for (k = 0; k < nx; k++) {
       theta_data[3 * (i + k)] = x_circle_data[k] + scale;
     }
-    b_i = y_circle->size[1];
-    for (k = 0; k < b_i; k++) {
+    nx = y_circle->size[1];
+    for (k = 0; k < nx; k++) {
       theta_data[3 * (i + k) + 1] = y_circle_data[k] + K;
     }
-    b_i = z_circle->size[1];
-    for (k = 0; k < b_i; k++) {
+    nx = z_circle->size[1];
+    for (k = 0; k < nx; k++) {
       theta_data[3 * (i + k) + 2] = z_circle_data[k] + lamuda;
     }
   }
