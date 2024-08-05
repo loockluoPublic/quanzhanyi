@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points_after_Offest2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:21:22
+ * C/C++ source code generated on  : 05-Aug-2024 00:57:42
  */
 
 /* Include Files */
@@ -22,14 +22,14 @@
  *                const emxArray_real_T *Ang
  *                const emxArray_real_T *toff
  *                const emxArray_real_T *roff
- *                const int PointTable_A_off_size[2]
+ *                const emxArray_real_T *PointTable_A_off
  * Return Type  : void
  */
 void Calculat_A_and_B_Points_after_Offest2(
     const double MTaon[3], const double Mcenter[3], double Mradial,
     const double PAB[3], double phi, const emxArray_real_T *Ang,
     const emxArray_real_T *toff, const emxArray_real_T *roff,
-    const int PointTable_A_off_size[2])
+    const emxArray_real_T *PointTable_A_off)
 {
   (void)MTaon;
   (void)Mcenter;
@@ -39,7 +39,7 @@ void Calculat_A_and_B_Points_after_Offest2(
   (void)Ang;
   (void)toff;
   (void)roff;
-  (void)PointTable_A_off_size;
+  (void)PointTable_A_off;
   if (!isInitialized_QuanZhanYi) {
     QuanZhanYi_initialize();
   }

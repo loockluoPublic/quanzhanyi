@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:21:22
+ * C/C++ source code generated on  : 05-Aug-2024 00:57:42
  */
 
 /*************************************************************************/
@@ -310,11 +310,11 @@ void main_Calculat_A_and_B_Points_after_Offest(void)
 void main_Calculat_A_and_B_Points_after_Offest2(void)
 {
   emxArray_real_T *Ang;
+  emxArray_real_T *PointTable_A_off;
   emxArray_real_T *roff;
   emxArray_real_T *toff;
   double MTaon_tmp[3];
   double Mradial_tmp;
-  int unusedExpr[2];
   /* Initialize function 'Calculat_A_and_B_Points_after_Offest2' input
    * arguments. */
   /* Initialize function input argument 'MTaon'. */
@@ -329,12 +329,14 @@ void main_Calculat_A_and_B_Points_after_Offest2(void)
   /* Initialize function input argument 'roff'. */
   roff = argInit_1xUnbounded_real_T();
   /* Call the entry-point 'Calculat_A_and_B_Points_after_Offest2'. */
+  emxInitArray_real_T(&PointTable_A_off, 2);
   Calculat_A_and_B_Points_after_Offest2(MTaon_tmp, MTaon_tmp, Mradial_tmp,
                                         MTaon_tmp, Mradial_tmp, Ang, toff, roff,
-                                        unusedExpr);
+                                        PointTable_A_off);
   emxDestroyArray_real_T(roff);
   emxDestroyArray_real_T(toff);
   emxDestroyArray_real_T(Ang);
+  emxDestroyArray_real_T(PointTable_A_off);
 }
 
 /*

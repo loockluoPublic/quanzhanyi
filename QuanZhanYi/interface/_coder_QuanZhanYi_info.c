@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Aug-2024 00:21:22
+ * C/C++ source code generated on  : 05-Aug-2024 00:57:42
  */
 
 /* Include Files */
@@ -148,7 +148,7 @@ mxArray *emlrtMexFcnProperties(void)
                 emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\test3\\Calculat_"
                                     "A_and_B_Points_after_Offest2.m"));
   emlrtSetField(xEntryPoints, 3, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739468.9914930556));
+                emlrtMxCreateDoubleScalar(739469.03990740736));
   emlrtSetField(xEntryPoints, 3, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 3, "Visible", emlrtMxCreateLogicalScalar(true));
