@@ -4,7 +4,6 @@
 #include "generate_unit_circle_with_normal_vector2.h"
 #include "Generate_multi_layered_measurement_points.h"
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
-#include "Calculat_A_and_B_Points_after_Offest.h"
 #include "Calculat_A_and_B_Points_after_Offest2.h"
 #include "RepeatSurvey.h"
 #include "planefit.h"
