@@ -156,7 +156,7 @@ export function CalculateResultPoints(props: { hideMode?: true }) {
       dataIndex: "bottomA",
       key: "bottomA",
       align: "center",
-      render: (v, row) => {
+      render: (v) => {
         console.log("%c Line:148 🥖 v", "color:#3f7cff", v);
         return <Point p={v} />;
       },
