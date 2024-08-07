@@ -236,7 +236,7 @@ export function CalculateResultPoints(props: { hideMode?: true }) {
 
   useEffect(() => {
     updateOffset();
-  }, [[...paramAng, ...paramA].join(",")]);
+  }, [[...paramAng, ...paramA, data.sdj].join(",")]);
 
   const tOff =
     data.resultTable?.map?.((item) => {
