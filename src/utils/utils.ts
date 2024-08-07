@@ -184,16 +184,6 @@ export const CalculatAAndBPoints = async (
   const _rOff = new EmxArray_real_T(rOff);
   const A = new EmxArray_real_T(3, ang.length);
 
-  console.log("%c Line:188 🍞 CalculatAAndBPoints", "color:#6ec1c2", {
-    MTaon,
-    Mcenter,
-    R,
-    PAB,
-    phi: ang2rad(phi),
-    ang,
-    tOff,
-    rOff,
-  });
   _CalculatAAndBPoints(
     mTaon.arrayPtr,
     mCenter.arrayPtr,

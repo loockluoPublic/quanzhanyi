@@ -27,10 +27,18 @@ const { Item } = Form;
 
 const Point = (props) => {
   const v = props.p;
+
   if (typeof v?.x === "number")
     return (
       <div>
-        ({v.x.toFixed(3)},{v.y.toFixed(3)},{v.z.toFixed(3)})
+        <Tooltip
+          title={`(${v.x.toFixed(3)},${v.y.toFixed(3)},${v.z.toFixed(3)})`}
+        >
+          <a className="q-cursor-pointer">
+            {v.label}
+            {v.key}
+          </a>
+        </Tooltip>
       </div>
     );
 
@@ -152,7 +160,7 @@ export function CalculateResultPoints(props: { hideMode?: true }) {
     },
 
     {
-      title: "A面点",
+      title: "安装点",
       dataIndex: "bottomA",
       key: "bottomA",
       align: "center",
