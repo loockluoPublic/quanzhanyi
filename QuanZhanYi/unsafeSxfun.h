@@ -1,8 +1,8 @@
 /*
  * File: unsafeSxfun.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Aug-2024 16:15:51
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 07-Aug-2024 19:00:37
  */
 
 #ifndef UNSAFESXFUN_H
@@ -19,7 +19,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void d_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in3);
+void binary_expand_op_3(emxArray_real_T *in1, const emxArray_real_T *in3);
 
 #ifdef __cplusplus
 }

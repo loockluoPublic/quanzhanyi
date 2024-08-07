@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_api.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Aug-2024 16:15:51
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 07-Aug-2024 19:00:37
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -10,6 +10,7 @@
 
 /* Include Files */
 #include "emlrt.h"
+#include "mex.h"
 #include "tmwtypes.h"
 #include <string.h>
 
@@ -50,7 +51,8 @@ void Calculat_A_and_B_Points_after_Offest2(real_T MTaon[3], real_T Mcenter[3],
                                            real_T phi, emxArray_real_T *Ang,
                                            emxArray_real_T *toff,
                                            emxArray_real_T *roff,
-                                           emxArray_real_T *PointTable_A_off);
+                                           emxArray_real_T *PointTable_A_off,
+                                           emxArray_real_T *PointTable_B_off);
 
 void Calculat_A_and_B_Points_api(const mxArray *const prhs[8], int32_T nlhs,
                                  const mxArray *plhs[2]);
@@ -106,8 +108,14 @@ void ShengLuJiaoJiSuan(real_T numShengLu, emxArray_real_T *Ang);
 
 void ShengLuJiaoJiSuan_api(const mxArray *prhs, const mxArray **plhs);
 
-void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[8],
-                                     const mxArray **plhs);
+void angle2point(real_T ANG, real_T a, real_T b, real_T c, real_T d,
+                 real_T Mradial, real_T *x, real_T *y, real_T *z);
+
+void angle2point_api(const mxArray *const prhs[6], int32_T nlhs,
+                     const mxArray *plhs[3]);
+
+void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[8], int32_T nlhs,
+                                     const mxArray *plhs[2]);
 
 void c_Calculate_accurate_cylinders_(const mxArray *const prhs[3], int32_T nlhs,
                                      const mxArray *plhs[6]);
