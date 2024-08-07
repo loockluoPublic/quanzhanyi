@@ -1,15 +1,14 @@
 /*
- * File: mldivide.h
+ * File: angle2point.h
  *
  * MATLAB Coder version            : 23.2
  * C/C++ source code generated on  : 07-Aug-2024 19:00:37
  */
 
-#ifndef MLDIVIDE_H
-#define MLDIVIDE_H
+#ifndef ANGLE2POINT_H
+#define ANGLE2POINT_H
 
 /* Include Files */
-#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -19,9 +18,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void b_mldivide(const double A[6], const double B[2], double Y[3]);
-
-void mldivide(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3]);
+extern void angle2point(double ANG, double a, double b, double c, double d,
+                        double Mradial, double *x, double *y, double *z);
 
 #ifdef __cplusplus
 }
@@ -29,7 +27,7 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3]);
 
 #endif
 /*
- * File trailer for mldivide.h
+ * File trailer for angle2point.h
  *
  * [EOF]
  */

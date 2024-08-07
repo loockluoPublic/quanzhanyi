@@ -1,22 +1,25 @@
 /*
- * File: _coder_QuanZhanYi_info.h
+ * File: xgeqp3.h
  *
  * MATLAB Coder version            : 23.2
  * C/C++ source code generated on  : 07-Aug-2024 19:00:37
  */
 
-#ifndef _CODER_QUANZHANYI_INFO_H
-#define _CODER_QUANZHANYI_INFO_H
+#ifndef XGEQP3_H
+#define XGEQP3_H
 
 /* Include Files */
-#include "mex.h"
+#include "QuanZhanYi_types.h"
+#include "rtwtypes.h"
+#include <stddef.h>
+#include <stdlib.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /* Function Declarations */
-MEXFUNCTION_LINKAGE mxArray *emlrtMexFcnProperties(void);
+int xgeqp3(emxArray_real_T *A, double tau_data[], int jpvt[3]);
 
 #ifdef __cplusplus
 }
@@ -24,7 +27,7 @@ MEXFUNCTION_LINKAGE mxArray *emlrtMexFcnProperties(void);
 
 #endif
 /*
- * File trailer for _coder_QuanZhanYi_info.h
+ * File trailer for xgeqp3.h
  *
  * [EOF]
  */

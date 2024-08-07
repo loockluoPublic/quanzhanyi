@@ -1,12 +1,12 @@
 /*
- * File: mldivide.h
+ * File: svd1.h
  *
  * MATLAB Coder version            : 23.2
  * C/C++ source code generated on  : 07-Aug-2024 19:00:37
  */
 
-#ifndef MLDIVIDE_H
-#define MLDIVIDE_H
+#ifndef SVD1_H
+#define SVD1_H
 
 /* Include Files */
 #include "QuanZhanYi_types.h"
@@ -19,9 +19,11 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void b_mldivide(const double A[6], const double B[2], double Y[3]);
+void b_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *S,
+           double V[16]);
 
-void mldivide(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3]);
+void d_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *S,
+           double V[9]);
 
 #ifdef __cplusplus
 }
@@ -29,7 +31,7 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3]);
 
 #endif
 /*
- * File trailer for mldivide.h
+ * File trailer for svd1.h
  *
  * [EOF]
  */

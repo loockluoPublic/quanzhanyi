@@ -2,7 +2,7 @@
 ## Makefile generated for component 'QuanZhanYi'. 
 ## 
 ## Makefile     : QuanZhanYi_rtw.mk
-## Generated on : Mon Aug 05 16:16:27 2024
+## Generated on : Wed Aug 07 19:01:40 2024
 ## Final product: ./QuanZhanYi.lib
 ## Product type : static-library
 ## 
@@ -20,10 +20,10 @@
 
 PRODUCT_NAME              = QuanZhanYi
 MAKEFILE                  = QuanZhanYi_rtw.mk
-MATLAB_ROOT               = E:/matlab2022a
-MATLAB_BIN                = E:/matlab2022a/bin
+MATLAB_ROOT               = E:/SystemInstallation/matlab2023b
+MATLAB_BIN                = E:/SystemInstallation/matlab2023b/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = C:/Users/Administrator/Desktop/zongQZY/test3/codeupdate
+START_DIR                 = C:/Users/XWT/Desktop/zongQZY/test3
 TGT_FCN_LIB               = None
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
@@ -40,7 +40,7 @@ MODELLIB                  = QuanZhanYi.lib
 
 # Toolchain Name:          LCC-win64 v2.4.1 | gmake (64-bit Windows)
 # Supported Version(s):    2.4.1
-# ToolchainInfo Version:   2022a
+# ToolchainInfo Version:   2023b
 # Specification Revision:  1.0
 # 
 
@@ -154,7 +154,7 @@ DEFINES = $(DEFINES_CUSTOM) $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_data.c $(START_DIR)/codegen/lib/QuanZhanYi/rt_nonfinite.c $(START_DIR)/codegen/lib/QuanZhanYi/rtGetNaN.c $(START_DIR)/codegen/lib/QuanZhanYi/rtGetInf.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_initialize.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_terminate.c $(START_DIR)/codegen/lib/QuanZhanYi/Calculat_A_and_B_Points.c $(START_DIR)/codegen/lib/QuanZhanYi/norm.c $(START_DIR)/codegen/lib/QuanZhanYi/pinv.c $(START_DIR)/codegen/lib/QuanZhanYi/svd.c $(START_DIR)/codegen/lib/QuanZhanYi/xnrm2.c $(START_DIR)/codegen/lib/QuanZhanYi/xdotc.c $(START_DIR)/codegen/lib/QuanZhanYi/Calculat_A_and_B_Points_after_Offest2.c $(START_DIR)/codegen/lib/QuanZhanYi/Calculate_accurate_cylinders_from_multiple_measurement_points2.c $(START_DIR)/codegen/lib/QuanZhanYi/mldivide.c $(START_DIR)/codegen/lib/QuanZhanYi/qrsolve.c $(START_DIR)/codegen/lib/QuanZhanYi/ixfun.c $(START_DIR)/codegen/lib/QuanZhanYi/mean.c $(START_DIR)/codegen/lib/QuanZhanYi/CrossLine.c $(START_DIR)/codegen/lib/QuanZhanYi/fitcircle.c $(START_DIR)/codegen/lib/QuanZhanYi/foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)/codegen/lib/QuanZhanYi/Generate_multi_layered_measurement_points.c $(START_DIR)/codegen/lib/QuanZhanYi/generate_unit_circle_with_normal_vector.c $(START_DIR)/codegen/lib/QuanZhanYi/generate_unit_circle_with_normal_vector2.c $(START_DIR)/codegen/lib/QuanZhanYi/GenerateTrianglePoints.c $(START_DIR)/codegen/lib/QuanZhanYi/myvrrotvec2mat.c $(START_DIR)/codegen/lib/QuanZhanYi/OffsetCalculate.c $(START_DIR)/codegen/lib/QuanZhanYi/planefit.c $(START_DIR)/codegen/lib/QuanZhanYi/polyfit.c $(START_DIR)/codegen/lib/QuanZhanYi/minOrMax.c $(START_DIR)/codegen/lib/QuanZhanYi/RepeatSurvey.c $(START_DIR)/codegen/lib/QuanZhanYi/ShengLuJiaoJiSuan.c $(START_DIR)/codegen/lib/QuanZhanYi/xaxpy.c $(START_DIR)/codegen/lib/QuanZhanYi/xrotg.c $(START_DIR)/codegen/lib/QuanZhanYi/xrot.c $(START_DIR)/codegen/lib/QuanZhanYi/xswap.c $(START_DIR)/codegen/lib/QuanZhanYi/cat.c $(START_DIR)/codegen/lib/QuanZhanYi/unsafeSxfun.c $(START_DIR)/codegen/lib/QuanZhanYi/div.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_emxutil.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_emxAPI.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_rtwutil.c
+SRCS = $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_data.c $(START_DIR)/codegen/lib/QuanZhanYi/rt_nonfinite.c $(START_DIR)/codegen/lib/QuanZhanYi/rtGetNaN.c $(START_DIR)/codegen/lib/QuanZhanYi/rtGetInf.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_initialize.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_terminate.c $(START_DIR)/codegen/lib/QuanZhanYi/angle2point.c $(START_DIR)/codegen/lib/QuanZhanYi/Calculat_A_and_B_Points.c $(START_DIR)/codegen/lib/QuanZhanYi/pinv.c $(START_DIR)/codegen/lib/QuanZhanYi/svd.c $(START_DIR)/codegen/lib/QuanZhanYi/xnrm2.c $(START_DIR)/codegen/lib/QuanZhanYi/xdotc.c $(START_DIR)/codegen/lib/QuanZhanYi/Calculat_A_and_B_Points_after_Offest2.c $(START_DIR)/codegen/lib/QuanZhanYi/Calculate_accurate_cylinders_from_multiple_measurement_points2.c $(START_DIR)/codegen/lib/QuanZhanYi/svd1.c $(START_DIR)/codegen/lib/QuanZhanYi/xzsvdc.c $(START_DIR)/codegen/lib/QuanZhanYi/mldivide.c $(START_DIR)/codegen/lib/QuanZhanYi/ixfun.c $(START_DIR)/codegen/lib/QuanZhanYi/CrossLine.c $(START_DIR)/codegen/lib/QuanZhanYi/fitcircle.c $(START_DIR)/codegen/lib/QuanZhanYi/foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)/codegen/lib/QuanZhanYi/Generate_multi_layered_measurement_points.c $(START_DIR)/codegen/lib/QuanZhanYi/generate_unit_circle_with_normal_vector.c $(START_DIR)/codegen/lib/QuanZhanYi/generate_unit_circle_with_normal_vector2.c $(START_DIR)/codegen/lib/QuanZhanYi/GenerateTrianglePoints.c $(START_DIR)/codegen/lib/QuanZhanYi/myvrrotvec2mat.c $(START_DIR)/codegen/lib/QuanZhanYi/OffsetCalculate.c $(START_DIR)/codegen/lib/QuanZhanYi/planefit.c $(START_DIR)/codegen/lib/QuanZhanYi/polyfit.c $(START_DIR)/codegen/lib/QuanZhanYi/minOrMax.c $(START_DIR)/codegen/lib/QuanZhanYi/RepeatSurvey.c $(START_DIR)/codegen/lib/QuanZhanYi/ShengLuJiaoJiSuan.c $(START_DIR)/codegen/lib/QuanZhanYi/xaxpy.c $(START_DIR)/codegen/lib/QuanZhanYi/xrotg.c $(START_DIR)/codegen/lib/QuanZhanYi/xrot.c $(START_DIR)/codegen/lib/QuanZhanYi/xswap.c $(START_DIR)/codegen/lib/QuanZhanYi/xgeqp3.c $(START_DIR)/codegen/lib/QuanZhanYi/cat.c $(START_DIR)/codegen/lib/QuanZhanYi/unsafeSxfun.c $(START_DIR)/codegen/lib/QuanZhanYi/div.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_emxutil.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_emxAPI.c $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_rtwutil.c
 
 ALL_SRCS = $(SRCS)
 
@@ -162,7 +162,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = QuanZhanYi_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj QuanZhanYi_initialize.obj QuanZhanYi_terminate.obj Calculat_A_and_B_Points.obj norm.obj pinv.obj svd.obj xnrm2.obj xdotc.obj Calculat_A_and_B_Points_after_Offest2.obj Calculate_accurate_cylinders_from_multiple_measurement_points2.obj mldivide.obj qrsolve.obj ixfun.obj mean.obj CrossLine.obj fitcircle.obj foot_of_perpendicular_from_a_point_to_a_line.obj Generate_multi_layered_measurement_points.obj generate_unit_circle_with_normal_vector.obj generate_unit_circle_with_normal_vector2.obj GenerateTrianglePoints.obj myvrrotvec2mat.obj OffsetCalculate.obj planefit.obj polyfit.obj minOrMax.obj RepeatSurvey.obj ShengLuJiaoJiSuan.obj xaxpy.obj xrotg.obj xrot.obj xswap.obj cat.obj unsafeSxfun.obj div.obj QuanZhanYi_emxutil.obj QuanZhanYi_emxAPI.obj QuanZhanYi_rtwutil.obj
+OBJS = QuanZhanYi_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj QuanZhanYi_initialize.obj QuanZhanYi_terminate.obj angle2point.obj Calculat_A_and_B_Points.obj pinv.obj svd.obj xnrm2.obj xdotc.obj Calculat_A_and_B_Points_after_Offest2.obj Calculate_accurate_cylinders_from_multiple_measurement_points2.obj svd1.obj xzsvdc.obj mldivide.obj ixfun.obj CrossLine.obj fitcircle.obj foot_of_perpendicular_from_a_point_to_a_line.obj Generate_multi_layered_measurement_points.obj generate_unit_circle_with_normal_vector.obj generate_unit_circle_with_normal_vector2.obj GenerateTrianglePoints.obj myvrrotvec2mat.obj OffsetCalculate.obj planefit.obj polyfit.obj minOrMax.obj RepeatSurvey.obj ShengLuJiaoJiSuan.obj xaxpy.obj xrotg.obj xrot.obj xswap.obj xgeqp3.obj cat.obj unsafeSxfun.obj div.obj QuanZhanYi_emxutil.obj QuanZhanYi_emxAPI.obj QuanZhanYi_rtwutil.obj
 
 ALL_OBJS = $(OBJS)
 
@@ -285,11 +285,11 @@ QuanZhanYi_terminate.obj : $(START_DIR)/codegen/lib/QuanZhanYi/QuanZhanYi_termin
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-Calculat_A_and_B_Points.obj : $(START_DIR)/codegen/lib/QuanZhanYi/Calculat_A_and_B_Points.c
+angle2point.obj : $(START_DIR)/codegen/lib/QuanZhanYi/angle2point.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-norm.obj : $(START_DIR)/codegen/lib/QuanZhanYi/norm.c
+Calculat_A_and_B_Points.obj : $(START_DIR)/codegen/lib/QuanZhanYi/Calculat_A_and_B_Points.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
@@ -317,19 +317,19 @@ Calculate_accurate_cylinders_from_multiple_measurement_points2.obj : $(START_DIR
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
+svd1.obj : $(START_DIR)/codegen/lib/QuanZhanYi/svd1.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
+xzsvdc.obj : $(START_DIR)/codegen/lib/QuanZhanYi/xzsvdc.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
 mldivide.obj : $(START_DIR)/codegen/lib/QuanZhanYi/mldivide.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-qrsolve.obj : $(START_DIR)/codegen/lib/QuanZhanYi/qrsolve.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
-
-
 ixfun.obj : $(START_DIR)/codegen/lib/QuanZhanYi/ixfun.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
-
-
-mean.obj : $(START_DIR)/codegen/lib/QuanZhanYi/mean.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
@@ -405,6 +405,10 @@ xswap.obj : $(START_DIR)/codegen/lib/QuanZhanYi/xswap.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
+xgeqp3.obj : $(START_DIR)/codegen/lib/QuanZhanYi/xgeqp3.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
 cat.obj : $(START_DIR)/codegen/lib/QuanZhanYi/cat.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
@@ -466,7 +470,7 @@ info :
 
 
 clean : 
-	$(ECHO) "### Deleting all derived files..."
+	$(ECHO) "### Deleting all derived files ..."
 	$(RM) $(subst /,\,$(PRODUCT))
 	$(RM) $(subst /,\,$(ALL_OBJS))
 	$(ECHO) "### Deleted all derived files."

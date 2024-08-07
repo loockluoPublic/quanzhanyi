@@ -1,8 +1,8 @@
 /*
  * File: xrotg.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 05-Aug-2024 16:15:51
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 07-Aug-2024 19:00:37
  */
 
 #ifndef XROTG_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void xrotg(double *a, double *b, double *c, double *s);
+double xrotg(double *a, double *b, double *s);
 
 #ifdef __cplusplus
 }
