@@ -44,6 +44,9 @@ dependencies:
   recoil:
     specifier: ^0.7.7
     version: 0.7.7(react-dom@18.3.1)(react@18.3.1)
+  tauri-plugin-serialport-api:
+    specifier: github:lzhida/tauri-plugin-serialport#master
+    version: github.com/lzhida/tauri-plugin-serialport/6f4f86f6e8ca6e7ac3658bcada3fbca008a515db
   three:
     specifier: ^0.161.0
     version: 0.161.0
@@ -1495,6 +1498,11 @@ packages:
     dependencies:
       defer-to-connect: 2.0.1
     dev: true
+
+  /@tauri-apps/api@1.6.0:
+    resolution: {integrity: sha512-rqI++FWClU5I2UBp4HXFvl+sBWkdigBkxnpJDQUWttNyG7IZP4FwQGhTNL5EOw0vI8i6eSAJ5frLqO7n7jbJdg==}
+    engines: {node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
+    dev: false
 
   /@tauri-apps/cli-darwin-arm64@1.6.0:
     resolution: {integrity: sha512-SNRwUD9nqGxY47mbY1CGTt/jqyQOU7Ps7Mx/mpgahL0FVUDiCEY/5L9QfEPPhEgccgcelEVn7i6aQHIkHyUtCA==}
@@ -5296,4 +5304,13 @@ packages:
       '@types/react': 18.3.3
       react: 18.3.1
       use-sync-external-store: 1.2.0(react@18.3.1)
+    dev: false
+
+  github.com/lzhida/tauri-plugin-serialport/6f4f86f6e8ca6e7ac3658bcada3fbca008a515db:
+    resolution: {tarball: https://codeload.github.com/lzhida/tauri-plugin-serialport/tar.gz/6f4f86f6e8ca6e7ac3658bcada3fbca008a515db}
+    name: tauri-plugin-serialport-api
+    version: 0.0.4
+    dependencies:
+      '@tauri-apps/api': 1.6.0
+      tslib: 2.6.3
     dev: false

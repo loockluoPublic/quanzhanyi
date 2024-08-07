@@ -4,6 +4,8 @@ import { useRecoilState } from "recoil";
 import { deviceInfo } from "../atom/globalState";
 import * as commond from "../utils/commond";
 import { getDeviceInfo } from "../utils/commond";
+import { availablePorts } from "../utils/serialport";
+
 (window as any).commond = commond;
 export const serial = new SerialMonitor({ mode: "text", parseLines: true });
 
@@ -30,8 +32,9 @@ export default function Connect() {
       {deviceInfoData ? (
         <Button
           onClick={() => {
-            serial.disconnect();
-            setDeviceInfo(undefined);
+            // serial.disconnect();
+            // setDeviceInfo(undefined);
+            availablePorts();
           }}
         >
           断开连接
