@@ -28,20 +28,20 @@ const { Item } = Form;
 const Point = (props) => {
   const v = props.p;
 
-  if (typeof v?.x === "number")
+  if (typeof v?.x === "number") {
+    const name = v.label + v.key;
     return (
-      <div>
+      <div className={props.className}>
         <Tooltip
-          title={`(${v.x.toFixed(3)},${v.y.toFixed(3)},${v.z.toFixed(3)})`}
+          title={`${name}(${v.x.toFixed(3)},${v.y.toFixed(3)},${v.z.toFixed(
+            3
+          )})`}
         >
-          <a className="q-cursor-pointer">
-            {v.label}
-            {v.key}
-          </a>
+          <a className="q-cursor-pointer">{name}</a>
         </Tooltip>
       </div>
     );
-
+  }
   return null;
 };
 
@@ -49,6 +49,7 @@ const defaultA = 0.015;
 
 export function CalculateResultPoints(props: { hideMode?: true }) {
   const [data, setData] = useRecoilState(Data);
+  console.log("%c Line:52 🍻 data", "color:#465975", data);
 
   const sdfbPreRef = useRef();
 
@@ -161,12 +162,19 @@ export function CalculateResultPoints(props: { hideMode?: true }) {
 
     {
       title: "安装点",
-      dataIndex: "bottomA",
-      key: "bottomA",
+      dataIndex: "AB",
+      key: "AB",
       align: "center",
       render: (v) => {
         console.log("%c Line:148 🥖 v", "color:#3f7cff", v);
-        return <Point p={v} />;
+        return (
+          <div className="q-flex">
+            {data?.sdm?.includes("A") && <Point p={v?.pointA} />}
+            {data?.sdm?.includes("B") && (
+              <Point className="q-ml-2" p={v?.pointB} />
+            )}
+          </div>
+        );
       },
     },
   ];
@@ -288,14 +296,9 @@ export function CalculateResultPoints(props: { hideMode?: true }) {
               key={data.sdfb}
               dataSource={
                 data.resultTable?.map((item, i) => {
-                  console.log(
-                    "%c Line:282 🍑 data.AB",
-                    "color:#42b983",
-                    data.AB
-                  );
                   return {
                     ...item,
-                    bottomA: data.AB?.bottomA?.[i],
+                    AB: data.AB?.[i],
                   };
                 }) ?? []
               }

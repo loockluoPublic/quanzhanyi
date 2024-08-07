@@ -165,11 +165,17 @@ export default function Index(props: {
         <PointsLabel points={showPoints.filter((p) => p.enable)} color="#000" />
 
         {props?.sdm?.includes("A") && (
-          <PointsLabel points={props?.AB?.bottomA} color="green" />
+          <PointsLabel
+            points={props?.AB?.map?.((item) => item.pointA)}
+            color="green"
+          />
         )}
 
         {props?.sdm?.includes("B") && (
-          <PointsLabel points={props?.AB?.bottomB} color="red" />
+          <PointsLabel
+            points={props?.AB?.map?.((item) => item.pointB)}
+            color="red"
+          />
         )}
 
         {/* {props?.direct?.length > 0 && (

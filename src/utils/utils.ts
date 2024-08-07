@@ -183,6 +183,7 @@ export const CalculatAAndBPoints = async (
   const _tOff = new EmxArray_real_T(tOff);
   const _rOff = new EmxArray_real_T(rOff);
   const A = new EmxArray_real_T(3, ang.length);
+  const B = new EmxArray_real_T(3, ang.length);
 
   _CalculatAAndBPoints(
     mTaon.arrayPtr,
@@ -193,15 +194,21 @@ export const CalculatAAndBPoints = async (
     _ang.ptr,
     _tOff.ptr,
     _rOff.ptr,
-    A.ptr
+    A.ptr,
+    B.ptr
   );
 
   CustomVector3.setPublicInfo("A", 0);
   const bottomA = A.toVector3();
+  CustomVector3.setPublicInfo("B", 0);
+  const bottomB = B.toVector3();
 
-  const res = {
-    bottomA,
-  };
+  const res = bottomA.map((a, i) => {
+    return {
+      pointA: a,
+      pointB: bottomB[i],
+    };
+  });
   mTaon.free();
   mCenter.free();
   _PAB.free();
@@ -209,6 +216,7 @@ export const CalculatAAndBPoints = async (
   _tOff.free();
   _rOff.free();
   A.free();
+  B.free();
   return res;
 };
 

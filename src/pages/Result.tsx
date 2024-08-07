@@ -100,20 +100,20 @@ export default function ResultTable() {
   const R = data.calulateRes?.R;
   const dataSource = useMemo(() => {
     const tableData = [];
-    sdm?.map((element) => {
-      switch (element) {
-        case "A":
-          AB?.bottomA?.forEach?.(trasfrom("A", sdfb, tableData, R));
+    // sdm?.map((element) => {
+    //   switch (element) {
+    //     case "A":
+    //       AB?.bottomA?.forEach?.(trasfrom("A", sdfb, tableData, R));
 
-          break;
-        case "B":
-          AB?.bottomB?.forEach?.(trasfrom("B", sdfb, tableData, R));
-          break;
+    //       break;
+    //     case "B":
+    //       AB?.bottomB?.forEach?.(trasfrom("B", sdfb, tableData, R));
+    //       break;
 
-        default:
-          break;
-      }
-    });
+    //     default:
+    //       break;
+    //   }
+    // });
 
     return tableData;
   }, [sdfb, sdm, AB]);

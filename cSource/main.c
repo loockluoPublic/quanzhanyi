@@ -55,13 +55,13 @@ void CalculatAAndBPoints(const double MTaon[3],
                          double phi, emxArray_real_T *Ang,
                          const emxArray_real_T *toff,
                          const emxArray_real_T *roff,
-                         emxArray_real_T *PointTable_A_off)
+                         emxArray_real_T *PointTable_A_off, emxArray_real_T *PointTable_B_off)
 {
     Calculat_A_and_B_Points_after_Offest2(MTaon, Mcenter, Mradial,
                                           PAB,
                                           phi,
                                           Ang,
-                                          toff, roff, PointTable_A_off);
+                                          toff, roff, PointTable_A_off, PointTable_B_off);
 }
 
 EMSCRIPTEN_KEEPALIVE
