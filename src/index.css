@@ -77,3 +77,14 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.ant-layout {
+  height: 100%;
+}
+
+.canvas-style {
+  border: #CCC 1px solid;
+  border-radius: 8px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}

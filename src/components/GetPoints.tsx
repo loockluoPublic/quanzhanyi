@@ -3,6 +3,7 @@ import PointsVector3 from "./PointVector3";
 import PointsVector2 from "./PointVector2";
 import { CustomVector3 } from "../class/CustomVector3";
 import initData from "../utils/mockData";
+import Next from "./Next";
 
 function GetPoints(props: {
   pickPoint: (key: string, field?: any) => void;
@@ -197,6 +198,7 @@ function GetPoints(props: {
           );
         }}
       </Form.List> */}
+      <Next className="q-mt-4" />
     </div>
   );
 }

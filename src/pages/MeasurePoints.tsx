@@ -64,23 +64,21 @@ export function MeasurePoints() {
   };
 
   return (
-    <div>
-      <Module3D
-        loading={loading}
-        mPoints={data.mPoints ?? []}
-        height="500px"
-        direct={data?.direct}
-        setData={setMData}
-        pointsShowType="points"
-        component={
-          <div className="q-flex-shrink-0 q-flex-grow-0 q-w-[200px]">
-            <Button type="primary" loading={loading} onClick={run}>
-              运行
-            </Button>
-            <Button onClick={setMockData}>测试数据</Button>
-          </div>
-        }
-      ></Module3D>
-    </div>
+    <Module3D
+      loading={loading}
+      mPoints={data.mPoints ?? []}
+      height="500px"
+      direct={data?.direct}
+      setData={setMData}
+      pointsShowType="points"
+      component={
+        <div className="q-flex-shrink-0 q-flex-grow-0 q-w-[200px]">
+          <Button type="primary" loading={loading} onClick={run}>
+            运行
+          </Button>
+          <Button onClick={setMockData}>测试数据</Button>
+        </div>
+      }
+    ></Module3D>
   );
 }

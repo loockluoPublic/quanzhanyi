@@ -94,6 +94,10 @@ export default function Index(props: {
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<number[]>([]);
 
+  const [h, setH] = useState(0);
+
+  const ref = useRef<any>();
+
   const getShowPoints = () => {
     return showPoints
       .filter((p) => p.enable)
@@ -143,12 +147,16 @@ export default function Index(props: {
         );
     }
   };
+
+  useEffect(() => {
+    setH(ref.current?.clientHeight);
+  }, []);
   return (
-    <div className=" q-flex q-w-full">
+    <div className=" q-flex q-w-full q-h-full q-overflow-hidden" ref={ref}>
       <Canvas
         dpr={window.devicePixelRatio}
-        className={`${props.className} q-grow`}
-        style={{ height: props.height }}
+        className={`${props.className} q-grow q-cursor-pointer canvas-style`}
+        style={{ height: h }}
       >
         <PerspectiveCamera />
         <ambientLight intensity={Math.PI / 2} />

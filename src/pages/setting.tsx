@@ -172,16 +172,16 @@ export default function Setting() {
   };
 
   return (
-    <>
+    <div className="q-flex q-flex-col q-h-full">
       <Steps
-        className=" q-bg-white !q-pt-4 q-mb-4"
+        className=" q-bg-white !q-pt-4 q-mb-2"
         current={step}
         type="navigation"
         size="small"
         onChange={onChange}
         items={steps}
       />
-      <div className=" q-flex q-justify-center q-bg-white q-m-4 q-p-8 q-rounded-xl">
+      <div className=" q-flex q-justify-center q-bg-white q-m-4 q-p-4 q-rounded-xl q-flex-1">
         <Form
           key={step}
           onFinish={next}
@@ -191,15 +191,8 @@ export default function Setting() {
           initialValues={data}
         >
           {steps?.[step]?.components}
-          {steps.length - 1 > step && (
-            <div className=" q-text-center">
-              <Button type="primary" htmlType="submit">
-                下一步
-              </Button>
-            </div>
-          )}
         </Form>
       </div>
-    </>
+    </div>
   );
 }

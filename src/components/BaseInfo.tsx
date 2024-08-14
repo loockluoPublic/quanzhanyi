@@ -1,5 +1,6 @@
 import { Checkbox, Radio, Select, Form, InputNumber } from "antd";
 import { DefaultOptionType } from "antd/es/select";
+import Next from "./Next";
 
 const SDFBOptions = (() => {
   const options: DefaultOptionType[] = [];
@@ -59,6 +60,7 @@ export default function BaseInfo(props: { hideMode?: boolean }) {
         <InputNumber addonAfter="度" />
       </Item>
 
+      <Next className="q-mt-4" />
       {/* <Item
         label="轴向偏移"
         name="tOff"
