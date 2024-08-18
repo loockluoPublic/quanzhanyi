@@ -100,6 +100,7 @@ export function CalculateResultPoints(props: { hideMode?: true }) {
       render: (v, _, i) => {
         return (
           <InputNumber
+            step={0.01}
             value={v}
             onChange={(v) => onChange(v, i, "a")}
             addonAfter={
@@ -137,6 +138,7 @@ export function CalculateResultPoints(props: { hideMode?: true }) {
       render: (v, _, i) => {
         return (
           <InputNumber
+            step={0.01}
             value={v}
             onChange={(v) => onChange(v, i, "rOff")}
             addonAfter="米"
@@ -152,6 +154,7 @@ export function CalculateResultPoints(props: { hideMode?: true }) {
       render: (v, _, i) => {
         return (
           <InputNumber
+            step={0.01}
             value={v}
             onChange={(v) => onChange(v, i, "tOff")}
             addonAfter="米"
