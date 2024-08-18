@@ -18,20 +18,6 @@ const { Item } = Form;
 export default function BaseInfo(props: { hideMode?: boolean }) {
   return (
     <>
-      {!props.hideMode && (
-        <Item
-          label="管道类型"
-          name="type"
-          rules={[{ required: true }]}
-          initialValue={1}
-        >
-          <Radio.Group>
-            <Radio value={1}>管道</Radio>
-            <Radio value={2}>方涵</Radio>
-          </Radio.Group>
-        </Item>
-      )}
-
       <Item
         label="声道分布"
         name="sdfb"
@@ -60,7 +46,8 @@ export default function BaseInfo(props: { hideMode?: boolean }) {
         <InputNumber addonAfter="度" />
       </Item>
 
-      <Next className="q-mt-4" />
+      {!props.hideMode && <Next className="q-mt-4" />}
+
       {/* <Item
         label="轴向偏移"
         name="tOff"

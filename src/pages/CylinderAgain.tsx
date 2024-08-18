@@ -8,13 +8,7 @@ import { measureAndGetSimpleCoord } from "../utils/commond";
 
 const SLCPicker = (props) => {
   const { value, onChange } = props;
-  console.log(
-    "%c Line:10 🥤 value, onChange",
-    "color:#f5ce50",
-    props,
-    value,
-    onChange
-  );
+
   return (
     <div className=" q-flex q-justify-between q-w-[600px]">
       <div className="q-flex">

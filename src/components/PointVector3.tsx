@@ -35,12 +35,13 @@ export default function PointsVector3(props: {
     <div className=" ">
       <span style={props.style}>
         <span>{`${props?.value?.label || ""}${props?.value?.key ?? ""}`}</span>
-        <span>x:</span>
-        <span>{props?.value?.x?.toFixed(3)}</span>
-        <span> y:</span>
-        <span>{props?.value?.y?.toFixed(3)}</span>
-        <span> z:</span>
-        <span>{props?.value?.z?.toFixed(3)}</span>
+        <span>
+          （
+          {`${props?.value?.x?.toFixed(3)}, ${props?.value?.y?.toFixed(
+            3
+          )}, ${props?.value?.z?.toFixed(3)}`}
+          ）
+        </span>
       </span>
       {showGetPoints && (
         <span>

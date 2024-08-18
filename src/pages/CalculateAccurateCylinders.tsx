@@ -7,22 +7,17 @@ import {
 import { useState } from "react";
 import Module3D from "../components/Module3D";
 import { Button, InputNumber } from "antd";
-import { CustomVector3 } from "../class/CustomVector3";
-import { PointsTable } from "../components/Module3D/PointsTable";
+import ResultsTable2 from "../components/ResultsTable2";
 
 export function CalculateAccurateCylinders() {
   const [data, setData] = useRecoilState(Data);
-  console.log(
-    "%c Line:15 🍏 data CalculateAccurateCylinders",
-    "color:#33a5ff",
-    data
-  );
-  console.log("%c Line:14 🍌 data", "color:#3f7cff", data);
+  console.log("%c Line:14 🥛 data", "color:#33a5ff", data);
+
   const [loading, setLoading] = useState(false);
 
   const [customStandardDeviation, setStandardDeviation] = useState(3);
 
-  const calculateCylinders = (curData: GlobalData) => {
+  const calculateCylinders = (curData: GlobalData, isFirst?: boolean) => {
     const enablePoints = curData.mPoints.filter((item) => item.enable);
     return new Promise((reslove) => {
       setTimeout(() => {
@@ -37,13 +32,21 @@ export function CalculateAccurateCylinders() {
             item.difference = differences[i];
           });
 
+          if (isFirst) {
+            enablePoints.forEach((item, i) => {
+              item.originDiff = differences[i];
+            });
+          }
+
           const standardDeviation = calculateStandardDeviation(enablePoints);
 
-          const nd = {
+          const nd: any = {
             ...curData,
             mPoints: curData.mPoints,
-            standardDeviation,
             calulateRes,
+            [isFirst ? "originStandardDeviation" : "standardDeviation"]:
+              standardDeviation,
+            standardDeviation,
           };
 
           setTimeout(() => {
@@ -67,7 +70,6 @@ export function CalculateAccurateCylinders() {
       mPoints: newMP,
     };
     setLoading(true);
-    // setData(nD);
     calculateCylinders(nD).then(() => {
       setLoading(false);
     });
@@ -75,23 +77,16 @@ export function CalculateAccurateCylinders() {
 
   const run = () => {
     setLoading(true);
-    calculateCylinders({
-      ...data,
-      mPoints: data.mPoints.map((d) => d.fromCustomVector3()),
-    })
+
+    calculateCylinders(
+      {
+        ...data,
+        mPoints: data.mPoints.map((d) => d.fromCustomVector3()),
+      },
+      true
+    )
       .then((newData: any) => {
-        // const standardDeviation = calculateStandardDeviation(newData.mPoints);
-
-        // const _newData = {
-        //   ...newData,
-        //   // mPoints: newPoints,
-        //   standardDeviation,
-        // };
-
-        // setData(_newData);
-
         reRun(newData);
-
         setLoading(false);
       })
       .catch((err) => {
@@ -103,46 +98,84 @@ export function CalculateAccurateCylinders() {
     <Module3D
       loading={loading}
       mPoints={data.mPoints ?? []}
-      height="500px"
       direct={data?.direct}
       {...data}
       component={
         <>
-          <Button loading={loading} onClick={run}>
-            圆柱面拟合
-          </Button>
-          <div>
-            <div>标准差δ：{data?.standardDeviation?.toFixed(6)} 米</div>
-            <div>半径：{data?.calulateRes?.R?.toFixed(6)} 米</div>
-            <PointsTable mPoints={data.mPoints} />
+          <div className="options">
+            <Button loading={loading} onClick={run} type="primary">
+              圆柱面拟合
+            </Button>
+          </div>
+          <div className="q-my-4">
+            <div className="q-grid q-grid-cols-2">
+              <div>
+                初始标准差δ：
+                <span className=" q-font-bold">
+                  {data?.originStandardDeviation?.toFixed(6) ?? "--"} 米
+                </span>
+              </div>
+              <div>
+                标准差：
+                <span className=" q-font-bold">
+                  {data?.standardDeviation?.toFixed(6) ?? "--"} 米
+                </span>
+              </div>
+              <div>
+                半径：
+                <span className=" q-font-bold">
+                  {data?.calulateRes?.R?.toFixed(6) ?? "--"} 米
+                </span>
+              </div>
+              <span>
+                有效点：
+                <span className=" q-font-bold">
+                  {data.mPoints.filter((item) => item.enable).length}/
+                  {data.mPoints.length}
+                </span>
+              </span>
+            </div>
 
-            <div className=" q-mt-6">人工干预</div>
-            <div>
+            <div
+              className="q-flex q-items-center q-my-2"
+              style={{
+                visibility:
+                  typeof data.standardDeviation !== "number"
+                    ? "hidden"
+                    : "initial",
+              }}
+            >
               阈值：
               <InputNumber
+                step={0.01}
                 style={{ width: "200px" }}
                 value={customStandardDeviation}
                 onChange={(standardDeviation) => {
+                  console.log(
+                    "%c Line:146 🍉 standardDeviation",
+                    "color:#f5ce50",
+                    standardDeviation
+                  );
                   setStandardDeviation(standardDeviation);
                 }}
-                addonAfter={
-                  <div>
-                    <span>δ</span>
-                    <span
-                      className=" q-cursor-pointer q-ml-4"
-                      onClick={() => {
-                        reRun({
-                          ...data,
-                          standardDeviation: customStandardDeviation,
-                        });
-                      }}
-                    >
-                      计算
-                    </span>
-                  </div>
-                }
+                addonAfter="δ"
               />
+              <Button
+                className="q-float-right q-ml-4"
+                loading={loading}
+                onClick={() => {
+                  reRun({
+                    ...data,
+                    standardDeviation:
+                      customStandardDeviation * data.standardDeviation,
+                  });
+                }}
+                type="primary"
+              >
+                再次拟合
+              </Button>
             </div>
+            <ResultsTable2 />
           </div>
         </>
       }

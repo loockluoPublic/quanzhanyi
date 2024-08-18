@@ -85,6 +85,16 @@ button:focus-visible {
 .canvas-style {
   border: #CCC 1px solid;
   border-radius: 8px;
-  margin-right: 8px;
-  margin-bottom: 8px;
+  margin-right: 16px;
 }
+
+.h-button {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.options {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.resultPoint {}

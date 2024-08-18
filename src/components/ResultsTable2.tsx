@@ -8,7 +8,7 @@ const columns: any = [
     title: "",
     dataIndex: "enable",
     key: "enable",
-    with: 30,
+    with: 10,
     align: "center",
     render: (enable) => {
       return enable ? (
@@ -19,47 +19,62 @@ const columns: any = [
     },
   },
   {
-    title: "ID",
-    dataIndex: "key",
-    key: "ID",
-    with: 200,
-  },
-  {
-    title: "坐标",
+    title: "点",
     dataIndex: "x",
-    align: "center",
+    align: "left",
     key: "x",
+    with: 120,
     render: (_, item) => {
-      return `( ${item?.x?.toFixed?.(4)}, ${item.y?.toFixed?.(
-        4
-      )}, ${item.z?.toFixed?.(4)} )`;
+      return `${item.key} ( ${item?.x?.toFixed?.(3)}, ${item.y?.toFixed?.(
+        3
+      )}, ${item.z?.toFixed?.(3)} )`;
     },
   },
   {
-    title: "差值",
+    title: "初始标准差倍数",
+    dataIndex: "originDiff",
+    tip: "asda",
+    key: "originDiff",
+    align: "right",
+  },
+  {
+    title: "最新差值",
     dataIndex: "diff",
     key: "difference",
     align: "right",
-    render: (v) => {
-      return v?.toFixed?.(8);
-    },
   },
 ];
 
 export default function ResultsTable2() {
   const d = useRecoilValue(Data);
-
+  const originStandardDeviation = d.originStandardDeviation;
+  const renderStandardDeviation = (v) => {
+    if (typeof v === "number") {
+      return `${(v / originStandardDeviation).toFixed(2)} δ`;
+    } else {
+      return `-- δ`;
+    }
+  };
   const data = d.mPoints.map((item) => {
     return {
-      diff: item.difference,
+      originDiff: renderStandardDeviation(item.originDiff),
+      diff: renderStandardDeviation(item.difference),
       enable: item.enable,
       key: `${item.label}${item.key}`,
+      label: item.label,
       x: item.x,
       y: item.y,
       z: item.z,
     };
   });
   return (
-    <Table dataSource={data} columns={columns} pagination={{ pageSize: 10 }} />
+    <div className="q-w-[430px]">
+      <Table
+        dataSource={data}
+        columns={columns}
+        pagination={{ pageSize: 10 }}
+        size="small"
+      />
+    </div>
   );
 }

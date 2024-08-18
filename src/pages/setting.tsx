@@ -13,6 +13,7 @@ import ResultTable from "./Result";
 import CylinderAgain from "./CylinderAgain";
 import Cube from "./Cube";
 import CubePre from "../components/CubePre";
+import { TType } from "../Layout";
 
 const isVoild = (b) => (b & 0b0011) > 0;
 enum SHOWTYPE {
@@ -73,7 +74,7 @@ export default function Setting() {
 
   const currentType =
     (mode !== TMode.first ? SHOWTYPE.F : SHOWTYPE.c) |
-    (data.type === 2 ? SHOWTYPE.f : SHOWTYPE.y);
+    (data.type === TType.cube ? SHOWTYPE.f : SHOWTYPE.y);
 
   const steps = [
     {
@@ -106,14 +107,14 @@ export default function Setting() {
     /** 圆形-测量 */
     {
       title: "计算安装位",
-      components: <CalculateResultPoints hideMode={true} />,
+      components: <CalculateResultPoints />,
       type: SHOWTYPE.yc,
     },
-    {
-      title: "报表",
-      components: <ResultTable />,
-      type: SHOWTYPE.yc,
-    },
+    // {
+    //   title: "报表",
+    //   components: <ResultTable />,
+    //   type: SHOWTYPE.yc,
+    // },
 
     /** 圆形-复测 */
     {

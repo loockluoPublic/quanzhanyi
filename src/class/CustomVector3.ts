@@ -7,7 +7,9 @@ export class CustomVector3 extends Vector3 {
   public label?: string;
   public color?: string;
   public enable: boolean;
+
   difference?: number;
+  originDiff?: number;
 
   static setPublicInfo(newLabel: string, newCount?: number) {
     CustomVector3.count = newCount ?? 0;
@@ -26,6 +28,7 @@ export class CustomVector3 extends Vector3 {
           color?: string;
           enable?: boolean;
           difference?: number;
+          originDiff?: number;
         },
     key?: number
   ) {
@@ -36,6 +39,7 @@ export class CustomVector3 extends Vector3 {
       this.color = (label as any)?.color;
       this.enable = (label as any)?.enable ?? true;
       this.difference = (label as any)?.difference;
+      this.originDiff = (label as any)?.originDiff;
     } else if (typeof label === "string") {
       this.key = key ?? ++CustomVector3.count;
       this.label = (label as string) ?? CustomVector3.publicLable;
@@ -54,6 +58,7 @@ export class CustomVector3 extends Vector3 {
       enable: this.enable,
       color: this.color,
       difference: this.difference,
+      originDiff: this.originDiff,
     });
   }
 
@@ -85,13 +90,13 @@ export class CustomVector3 extends Vector3 {
   }
 
   fromCustomVector3(cv3 = this) {
-    console.log("%c Line:84 🥟 cv3", "color:#7f2b82", cv3);
     const newCV3 = new CustomVector3(cv3.x, cv3.y, cv3.z, {
       key: cv3.key,
       label: cv3.label,
       color: cv3.color,
       enable: cv3.enable,
       difference: cv3.difference,
+      originDiff: cv3.originDiff,
     });
 
     return newCV3;

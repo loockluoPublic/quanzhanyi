@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import type { MenuProps } from "antd";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Switch } from "antd";
 import { BrowserRouter as Router, Routes } from "react-router-dom";
 import { Data, Mode, TMode } from "./atom/globalState";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -8,14 +8,18 @@ import { downLoadFile } from "./utils/utils";
 import UploadFile from "./components/UploadFile";
 const { Header, Content } = Layout;
 
+export enum TType {
+  cycle = "cycle",
+  cube = "cube",
+}
 const items1: MenuProps["items"] = [
   {
-    key: TMode.first,
-    label: `定位模式`,
+    key: TType.cycle,
+    label: `管道`,
   },
   {
-    key: TMode.second,
-    label: `复测模式`,
+    key: TType.cube,
+    label: `方涵`,
   },
 ];
 
@@ -30,15 +34,24 @@ const App: React.FC<PropsWithChildren> = (props) => {
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={[TMode.first]}
+            defaultSelectedKeys={[TType.cycle]}
             items={items1}
             style={{ flex: 1, minWidth: 0 }}
             onClick={({ key }) => {
-              setMode(key as TMode);
+              setData({ ...data, type: key });
+            }}
+          />
+          <Switch
+            className="h-button"
+            checkedChildren="复测"
+            unCheckedChildren="首测"
+            checked={mode === TMode.second}
+            onChange={(v) => {
+              setMode(v ? TMode.second : TMode.first);
             }}
           />
           <div
-            className=" q-text-white q-cursor-pointer"
+            className=" q-text-white q-cursor-pointer q-ml-6"
             onClick={() => downLoadFile(data)}
           >
             导出

@@ -26,38 +26,6 @@ for (let i = 0; i < 10; i++) {
   pointsData.push(new THREE.Vector2(Math.sin(i * 0.2) * 3 + 5, (i - 5) * 2));
 }
 
-function Box(props) {
-  // This reference gives us direct access to the THREE.Mesh object
-  // const ref = useRef()
-  // // Hold state for hovered and clicked events
-  // const [hovered, hover] = useState(false)
-  // const [clicked, click] = useState(false)
-  // // Subscribe this component to the render-loop, rotate the mesh every frame
-  // useFrame((state, delta) => (ref.current.rotation.x += delta))
-  // // Return the view, these are regular Threejs elements expressed in JSX
-  return (
-    <mesh
-      {...props}
-      // ref={ref}
-      // scale={clicked ? 1.5 : 1}
-      // onClick={(event) => click(!clicked)}
-      // onPointerOver={(event) => (event.stopPropagation(), hover(true))}
-      // onPointerOut={(event) => hover(false)}
-    >
-      {/* <boxGeometry args={[1, 1, 1]} /> */}
-      {/* <cylinderGeometry args={[ 5, 5, 20, 32]} /> */}
-      <latheGeometry args={[pointsData]} />
-      <points />
-      <meshBasicMaterial
-        color={"#00aec7"}
-        side={THREE.DoubleSide}
-        opacity={0.5}
-        transparent={true}
-      />
-    </mesh>
-  );
-}
-
 function PointsLabel(props: {
   points: CustomVector3[];
   style?: React.CSSProperties;
@@ -80,7 +48,6 @@ function PointsLabel(props: {
 
 export default function Index(props: {
   className?: string;
-  height: string;
   mPoints: CustomVector3[];
   loading?: boolean;
   setData?: (md: CustomVector3[]) => void;
@@ -90,7 +57,7 @@ export default function Index(props: {
   [k: string]: any;
 }) {
   const pointsShowType = props.pointsShowType || false;
-  console.log("%c Line:82 🥚 props", "color:#b03734", props);
+
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<number[]>([]);
 
@@ -114,7 +81,6 @@ export default function Index(props: {
   useEffect(() => {
     // props 不允许更改，必须重新创建对象
     setPoints(props.mPoints.map((p) => p.fromCustomVector3()));
-    console.log("%c Line:94 🍺 props.points", "color:#6ec1c2", props.points);
   }, [props.mPoints]);
 
   useEffect(() => {
@@ -122,7 +88,6 @@ export default function Index(props: {
       .map((p) => (p.enable ? p.key : null))
       .filter((p) => !!p);
     setSelectedKeys(keys);
-    console.log("%c Line:119 🥚 showPoints", "color:#3f7cff", showPoints);
   }, [showPoints]);
 
   const showPointsDom = () => {
@@ -133,14 +98,12 @@ export default function Index(props: {
       default:
       case "table":
         return (
-          <div className="cm-w-[400px]">
+          <div>
             {props.mPoints?.map((item) => {
               return (
-                <PointsVector3
-                  showGetPoints={false}
-                  key={item.key}
-                  value={item}
-                />
+                <div key={item.key} className="q-my-1">
+                  <PointsVector3 showGetPoints={false} value={item} />
+                </div>
               );
             })}
           </div>
@@ -202,7 +165,10 @@ export default function Index(props: {
         <OrbitControls />
       </Canvas>
       {props?.component && (
-        <div>
+        <div
+          style={{ maxHeight: h, overflow: "scroll" }}
+          className="q-flex-shrink-0 q-flex-grow-0"
+        >
           {props?.component}
 
           {showPointsDom()}

@@ -311,7 +311,6 @@ export const repeatSurvey = (
  * @returns
  */
 export const calculateStandardDeviation = (points: CustomVector3[]) => {
-  console.log("%c Line:214 🥒 points", "color:#f5ce50", points);
   const mean =
     points.reduce((acc, cur) => {
       return acc + cur.difference;

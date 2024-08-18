@@ -162,13 +162,14 @@ export function CalculateResultPoints(props: { hideMode?: true }) {
 
     {
       title: "安装点",
+      width: 100,
       dataIndex: "AB",
       key: "AB",
       align: "center",
       render: (v) => {
         console.log("%c Line:148 🥖 v", "color:#3f7cff", v);
         return (
-          <div className="q-flex">
+          <div className="q-flex q-justify-center">
             {data?.sdm?.includes("A") && <Point p={v?.pointA} />}
             {data?.sdm?.includes("B") && (
               <Point className="q-ml-2" p={v?.pointB} />
@@ -285,14 +286,12 @@ export function CalculateResultPoints(props: { hideMode?: true }) {
       mPoints={[]}
       component={
         <div className="q-flex-shrink-0 q-flex-grow-0 q-w-[800px]">
-          <Button type="primary" loading={loading}>
-            运行
-          </Button>
-          <div className="q-flex">
-            <BaseInfo hideMode={props.hideMode} />
+          <div className="q-flex resultPoint">
+            <BaseInfo hideMode={true} />
           </div>
           <div>
             <Table
+              size="small"
               key={data.sdfb}
               dataSource={
                 data.resultTable?.map((item, i) => {
@@ -303,6 +302,7 @@ export function CalculateResultPoints(props: { hideMode?: true }) {
                 }) ?? []
               }
               columns={columns}
+              pagination={{ hideOnSinglePage: true }}
             ></Table>
           </div>
         </div>
