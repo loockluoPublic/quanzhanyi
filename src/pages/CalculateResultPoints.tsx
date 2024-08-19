@@ -2,28 +2,15 @@ import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import {
   CalculatAAndBPoints,
-  CalculateAccurateCylindersFromMultipleMeasurementPoints,
   offsetCalculate,
   shengLuJiao2Ang,
 } from "../utils/utils";
 import { useEffect, useRef, useState } from "react";
 import Module3D from "../components/Module3D";
-import { Button, Form, InputNumber, Table, Tooltip } from "antd";
+import { InputNumber, Table, Tooltip } from "antd";
 import BaseInfo from "../components/BaseInfo";
-import { goToCV } from "../utils/commond";
+
 import { SettingOutlined } from "@ant-design/icons";
-const { Item } = Form;
-/**
- * shengLuJiaoJiSuan(声道数)  ==>  10个角度
- *
- * offsetCalculate = (
-  R: number,
-  phi: number,
-  ang: number[],
-  a: number[]      插入深度，只是手动设置，手动全部设置
-)  ==>  得到 偏移   [rof,tof]
- *
- */
 
 const Point = (props) => {
   const v = props.p;
@@ -49,7 +36,6 @@ const defaultA = 0.015;
 
 export function CalculateResultPoints() {
   const [data, setData] = useRecoilState(Data);
-  console.log("%c Line:52 🍻 data", "color:#465975", data);
 
   const sdfbPreRef = useRef();
 

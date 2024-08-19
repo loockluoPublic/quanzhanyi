@@ -82,7 +82,6 @@ function GetPoints(props: {
         ]}
       >
         {(fields) => {
-          console.log("%c Line:50 🍋 fields", "color:#b03734", fields);
           return (
             <>
               {fields.map((field, index) => (

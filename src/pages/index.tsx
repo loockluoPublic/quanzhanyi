@@ -9,7 +9,6 @@ import GetPoints from "../components/GetPoints";
 import { MeasurePoints } from "./MeasurePoints";
 import { CalculateAccurateCylinders } from "./CalculateAccurateCylinders";
 import { CalculateResultPoints } from "./CalculateResultPoints";
-import ResultTable from "./Result";
 import CylinderAgain from "./CylinderAgain";
 import Cube from "./Cube";
 import CubePre from "../components/CubePre";
@@ -40,7 +39,6 @@ export default function Setting() {
   const [data, setData] = useRecoilState(Data);
   const [step, setStep] = useState(0);
   const [mode] = useRecoilState(Mode);
-  console.log("%c Line:40 🍩 data", "color:#4fff4B", data);
 
   useEffect(() => {
     setStep(0);
@@ -82,11 +80,13 @@ export default function Setting() {
       components: <Connect />,
       type: SHOWTYPE.bb,
     },
+
     {
       title: "基本参数",
       components: <BaseInfo />,
       type: SHOWTYPE.bb,
     },
+
     /** 圆形 */
     {
       title: "手动采点",
@@ -110,11 +110,6 @@ export default function Setting() {
       components: <CalculateResultPoints />,
       type: SHOWTYPE.yc,
     },
-    // {
-    //   title: "报表",
-    //   components: <ResultTable />,
-    //   type: SHOWTYPE.yc,
-    // },
 
     /** 圆形-复测 */
     {

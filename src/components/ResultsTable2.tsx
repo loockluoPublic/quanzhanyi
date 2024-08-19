@@ -72,7 +72,7 @@ export default function ResultsTable2() {
       <Table
         dataSource={data}
         columns={columns}
-        pagination={{ pageSize: 10 }}
+        pagination={{ pageSize: 10, hideOnSinglePage: true }}
         size="small"
       />
     </div>

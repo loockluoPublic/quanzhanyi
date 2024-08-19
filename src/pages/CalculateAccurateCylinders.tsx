@@ -151,11 +151,6 @@ export function CalculateAccurateCylinders() {
                 style={{ width: "200px" }}
                 value={customStandardDeviation}
                 onChange={(standardDeviation) => {
-                  console.log(
-                    "%c Line:146 🍉 standardDeviation",
-                    "color:#f5ce50",
-                    standardDeviation
-                  );
                   setStandardDeviation(standardDeviation);
                 }}
                 addonAfter="δ"
