@@ -47,7 +47,7 @@ const Point = (props) => {
 
 const defaultA = 0.015;
 
-export function CalculateResultPoints(props: { hideMode?: true }) {
+export function CalculateResultPoints() {
   const [data, setData] = useRecoilState(Data);
   console.log("%c Line:52 🍻 data", "color:#465975", data);
 
