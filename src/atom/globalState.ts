@@ -1,6 +1,7 @@
 import { atom } from "recoil";
 import mockData from "../utils/mockData";
 import { CustomVector3 } from "../class/CustomVector3";
+import { BaseInfo, ICycle, ICycleBase } from "./type";
 
 export const connectState = atom({
   key: "connectState", // 唯一标识这个状态
@@ -12,8 +13,7 @@ export const deviceInfo = atom({
   default: undefined, // 默认值
 });
 
-export interface GlobalData {
-  mPoints: CustomVector3[];
+export interface GlobalData extends Partial<BaseInfo & ICycleBase & ICycle> {
   [k: string]: any;
 }
 export const Data = atom<GlobalData>({

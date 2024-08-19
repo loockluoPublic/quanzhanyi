@@ -1404,8 +1404,8 @@ var wasmImports = {
 };
 var wasmExports = createWasm();
 var ___wasm_call_ctors = createExportWrapper('__wasm_call_ctors');
-var _free = Module['_free'] = createExportWrapper('free');
 var _malloc = Module['_malloc'] = createExportWrapper('malloc');
+var _free = Module['_free'] = createExportWrapper('free');
 var _generateUnitCircleWithNormalVector = Module['_generateUnitCircleWithNormalVector'] = createExportWrapper('generateUnitCircleWithNormalVector');
 var _GenerateMultiLayeredMeasurementPoints = Module['_GenerateMultiLayeredMeasurementPoints'] = createExportWrapper('GenerateMultiLayeredMeasurementPoints');
 var _CalculateAccurateCylindersFromMultipleMeasurementPoints = Module['_CalculateAccurateCylindersFromMultipleMeasurementPoints'] = createExportWrapper('CalculateAccurateCylindersFromMultipleMeasurementPoints');

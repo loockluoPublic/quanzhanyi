@@ -1,4 +1,5 @@
 import { CustomVector3 } from "../class/CustomVector3";
+
 interface BaseInfo {
   /**
    * 声道分布

@@ -37,7 +37,7 @@ const defaultA = 0.015;
 export function CalculateResultPoints() {
   const [data, setData] = useRecoilState(Data);
 
-  const sdfbPreRef = useRef();
+  const sdfbPreRef = useRef<any>();
 
   const [loading, setLoading] = useState(false);
 
