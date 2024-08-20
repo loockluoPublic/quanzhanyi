@@ -2,7 +2,7 @@
  * File: main.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Aug-2024 19:00:37
+ * C/C++ source code generated on  : 20-Aug-2024 16:15:12
  */
 
 /*************************************************************************/
@@ -49,8 +49,12 @@ extern void main_Calculat_A_and_B_Points(void);
 
 extern void main_Calculat_A_and_B_Points_after_Offest2(void);
 
+extern void main_Calculat_JuXing_A_and_B_Points_after_Offest(void);
+
 extern void
 main_Calculate_accurate_cylinders_from_multiple_measurement_points2(void);
+
+extern void main_Calculate_rectangle_from_vertex(void);
 
 extern void main_CrossLine(void);
 
@@ -61,6 +65,8 @@ extern void main_Generate_multi_layered_measurement_points(void);
 extern void main_OffsetCalculate(void);
 
 extern void main_RepeatSurvey(void);
+
+extern void main_ShengDaoGaoDu(void);
 
 extern void main_ShengLuJiaoJiSuan(void);
 
@@ -77,6 +83,8 @@ extern void main_generate_unit_circle_with_normal_vector2(void);
 extern void main_myvrrotvec2mat(void);
 
 extern void main_planefit(void);
+
+extern void main_planefit4(void);
 
 #ifdef __cplusplus
 }

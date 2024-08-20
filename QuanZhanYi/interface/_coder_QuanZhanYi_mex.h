@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Aug-2024 19:00:37
+ * C/C++ source code generated on  : 20-Aug-2024 16:15:12
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -30,8 +30,16 @@ void unsafe_Calculat_A_and_B_Points_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                                 int32_T nrhs,
                                                 const mxArray *prhs[8]);
 
+void unsafe_Calculat_JuXing_A_and_B_Points_after_Offest_mexFunction(
+    int32_T nlhs, mxArray *plhs[2], int32_T nrhs, const mxArray *prhs[9]);
+
 void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points2_mexFunction(
     int32_T nlhs, mxArray *plhs[6], int32_T nrhs, const mxArray *prhs[3]);
+
+void unsafe_Calculate_rectangle_from_vertex_mexFunction(int32_T nlhs,
+                                                        mxArray *plhs[8],
+                                                        int32_T nrhs,
+                                                        const mxArray *prhs[3]);
 
 void unsafe_CrossLine_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
                                   const mxArray *prhs[3]);
@@ -48,6 +56,9 @@ void unsafe_OffsetCalculate_mexFunction(int32_T nlhs, mxArray *plhs[1],
 
 void unsafe_RepeatSurvey_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                      int32_T nrhs, const mxArray *prhs[4]);
+
+void unsafe_ShengDaoGaoDu_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                      int32_T nrhs, const mxArray *prhs[1]);
 
 void unsafe_ShengLuJiaoJiSuan_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                           int32_T nrhs, const mxArray *prhs[1]);
@@ -69,6 +80,9 @@ void unsafe_generate_unit_circle_with_normal_vector_mexFunction(
 
 void unsafe_myvrrotvec2mat_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                        int32_T nrhs, const mxArray *prhs[1]);
+
+void unsafe_planefit4_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
+                                  const mxArray *prhs[6]);
 
 void unsafe_planefit_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
                                  const mxArray *prhs[4]);

@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Aug-2024 19:00:37
+ * C/C++ source code generated on  : 20-Aug-2024 16:15:12
  */
 
 /*************************************************************************/
@@ -34,7 +34,9 @@
 #include "main.h"
 #include "Calculat_A_and_B_Points.h"
 #include "Calculat_A_and_B_Points_after_Offest2.h"
+#include "Calculat_JuXing_A_and_B_Points_after_Offest.h"
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
+#include "Calculate_rectangle_from_vertex.h"
 #include "CrossLine.h"
 #include "GenerateTrianglePoints.h"
 #include "Generate_multi_layered_measurement_points.h"
@@ -43,6 +45,7 @@
 #include "QuanZhanYi_terminate.h"
 #include "QuanZhanYi_types.h"
 #include "RepeatSurvey.h"
+#include "ShengDaoGaoDu.h"
 #include "ShengLuJiaoJiSuan.h"
 #include "angle2point.h"
 #include "fitcircle.h"
@@ -51,6 +54,7 @@
 #include "generate_unit_circle_with_normal_vector2.h"
 #include "myvrrotvec2mat.h"
 #include "planefit.h"
+#include "planefit4.h"
 #include "rt_nonfinite.h"
 
 /* Function Declarations */
@@ -61,6 +65,8 @@ static void argInit_3x1_real_T(double result[3]);
 static emxArray_real_T *argInit_3xUnbounded_real_T(void);
 
 static void argInit_4x1_real_T(double result[4]);
+
+static void argInit_4x4_real_T(double result[16]);
 
 static emxArray_real_T *argInit_4xUnbounded_real_T(void);
 
@@ -150,6 +156,21 @@ Change this value to the value that the application requires. */
 }
 
 /*
+ * Arguments    : double result[16]
+ * Return Type  : void
+ */
+static void argInit_4x4_real_T(double result[16])
+{
+  int i;
+  /* Loop over the array to initialize each element. */
+  for (i = 0; i < 16; i++) {
+    /* Set the value of the array element.
+Change this value to the value that the application requires. */
+    result[i] = argInit_real_T();
+  }
+}
+
+/*
  * Arguments    : void
  * Return Type  : emxArray_real_T *
  */
@@ -224,7 +245,9 @@ You can call entry-point functions multiple times. */
   main_angle2point();
   main_Calculat_A_and_B_Points();
   main_Calculat_A_and_B_Points_after_Offest2();
+  main_Calculat_JuXing_A_and_B_Points_after_Offest();
   main_Calculate_accurate_cylinders_from_multiple_measurement_points2();
+  main_Calculate_rectangle_from_vertex();
   main_CrossLine();
   main_fitcircle();
   main_foot_of_perpendicular_from_a_point_to_a_line();
@@ -235,7 +258,9 @@ You can call entry-point functions multiple times. */
   main_myvrrotvec2mat();
   main_OffsetCalculate();
   main_planefit();
+  main_planefit4();
   main_RepeatSurvey();
+  main_ShengDaoGaoDu();
   main_ShengLuJiaoJiSuan();
   /* Terminate the application.
 You do not need to do this more than one time. */
@@ -314,6 +339,38 @@ void main_Calculat_A_and_B_Points_after_Offest2(void)
  * Arguments    : void
  * Return Type  : void
  */
+void main_Calculat_JuXing_A_and_B_Points_after_Offest(void)
+{
+  emxArray_real_T *PointTable_A_off;
+  emxArray_real_T *PointTable_B_off;
+  emxArray_real_T *a;
+  double Tao_tmp[3];
+  double b_tmp;
+  /* Initialize function 'Calculat_JuXing_A_and_B_Points_after_Offest' input
+   * arguments. */
+  /* Initialize function input argument 'Tao'. */
+  argInit_3x1_real_T(Tao_tmp);
+  /* Initialize function input argument 'UPP'. */
+  /* Initialize function input argument 'Pin'. */
+  b_tmp = argInit_real_T();
+  /* Initialize function input argument 'PAB'. */
+  /* Initialize function input argument 'a'. */
+  a = argInit_1xUnbounded_real_T();
+  /* Call the entry-point 'Calculat_JuXing_A_and_B_Points_after_Offest'. */
+  emxInitArray_real_T(&PointTable_A_off, 2);
+  emxInitArray_real_T(&PointTable_B_off, 2);
+  Calculat_JuXing_A_and_B_Points_after_Offest(
+      Tao_tmp, Tao_tmp, Tao_tmp, b_tmp, b_tmp, Tao_tmp, b_tmp, b_tmp, a,
+      PointTable_A_off, PointTable_B_off);
+  emxDestroyArray_real_T(a);
+  emxDestroyArray_real_T(PointTable_A_off);
+  emxDestroyArray_real_T(PointTable_B_off);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 void main_Calculate_accurate_cylinders_from_multiple_measurement_points2(void)
 {
   emxArray_real_T *Err_every;
@@ -340,6 +397,33 @@ void main_Calculate_accurate_cylinders_from_multiple_measurement_points2(void)
       Bottom_round_center1, Bottom_round_center2);
   emxDestroyArray_real_T(points);
   emxDestroyArray_real_T(Err_every);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+void main_Calculate_rectangle_from_vertex(void)
+{
+  double PP[24];
+  double dv[16];
+  double Tao[4];
+  double P_bound1_tmp[3];
+  double Pin[3];
+  double Pout[3];
+  double UPP[3];
+  double b;
+  double h;
+  double w;
+  /* Initialize function 'Calculate_rectangle_from_vertex' input arguments. */
+  /* Initialize function input argument 'TrianglePoints4'. */
+  /* Initialize function input argument 'P_bound1'. */
+  argInit_3x1_real_T(P_bound1_tmp);
+  /* Initialize function input argument 'P_bound2'. */
+  /* Call the entry-point 'Calculate_rectangle_from_vertex'. */
+  argInit_4x4_real_T(dv);
+  Calculate_rectangle_from_vertex(dv, P_bound1_tmp, P_bound1_tmp, Pin, Pout,
+                                  UPP, &b, &h, &w, Tao, PP);
 }
 
 /*
@@ -449,6 +533,20 @@ void main_RepeatSurvey(void)
   /* Call the entry-point 'RepeatSurvey'. */
   RepeatSurvey(SoundPoint1_tmp, SoundPoint1_tmp, SoundPoint1_tmp,
                SoundPoint1_tmp, &SoundAngle, &SoundLength);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+void main_ShengDaoGaoDu(void)
+{
+  emxArray_real_T *Ti;
+  /* Initialize function 'ShengDaoGaoDu' input arguments. */
+  /* Call the entry-point 'ShengDaoGaoDu'. */
+  emxInitArray_real_T(&Ti, 2);
+  ShengDaoGaoDu(argInit_real_T(), Ti);
+  emxDestroyArray_real_T(Ti);
 }
 
 /*
@@ -604,6 +702,40 @@ void main_planefit(void)
   emxDestroyArray_real_T(Points);
   emxDestroyArray_real_T(PlaneParaOut);
   emxDestroyArray_real_T(TrianglePoints);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+void main_planefit4(void)
+{
+  emxArray_real_T *Points1;
+  emxArray_real_T *Points2;
+  emxArray_real_T *Points3;
+  emxArray_real_T *Points4;
+  double TrianglePoints[72];
+  double PlaneParaOut[16];
+  double BoundPoint1_tmp[3];
+  /* Initialize function 'planefit4' input arguments. */
+  /* Initialize function input argument 'Points1'. */
+  Points1 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'Points2'. */
+  Points2 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'Points3'. */
+  Points3 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'Points4'. */
+  Points4 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'BoundPoint1'. */
+  argInit_3x1_real_T(BoundPoint1_tmp);
+  /* Initialize function input argument 'BoundPoint2'. */
+  /* Call the entry-point 'planefit4'. */
+  planefit4(Points1, Points2, Points3, Points4, BoundPoint1_tmp,
+            BoundPoint1_tmp, PlaneParaOut, TrianglePoints);
+  emxDestroyArray_real_T(Points4);
+  emxDestroyArray_real_T(Points3);
+  emxDestroyArray_real_T(Points2);
+  emxDestroyArray_real_T(Points1);
 }
 
 /*
