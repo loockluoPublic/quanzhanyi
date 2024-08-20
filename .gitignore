@@ -29,3 +29,5 @@ Makefile
 *.sw?
 
 !*.lib
+
+target
