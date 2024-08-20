@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Aug-2024 21:47:45
+ * C/C++ source code generated on  : 21-Aug-2024 00:46:56
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -31,7 +31,7 @@ void unsafe_Calculat_A_and_B_Points_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                                 const mxArray *prhs[8]);
 
 void unsafe_Calculat_JuXing_A_and_B_Points_after_Offest_mexFunction(
-    int32_T nlhs, mxArray *plhs[2], int32_T nrhs, const mxArray *prhs[9]);
+    int32_T nlhs, mxArray *plhs[2], int32_T nrhs, const mxArray *prhs[10]);
 
 void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points2_mexFunction(
     int32_T nlhs, mxArray *plhs[6], int32_T nrhs, const mxArray *prhs[3]);

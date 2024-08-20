@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Aug-2024 21:47:45
+ * C/C++ source code generated on  : 21-Aug-2024 00:46:56
  */
 
 /* Include Files */
@@ -1303,13 +1303,13 @@ void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[8], int32_T nlhs,
 }
 
 /*
- * Arguments    : const mxArray * const prhs[9]
+ * Arguments    : const mxArray * const prhs[10]
  *                int32_T nlhs
  *                const mxArray *plhs[2]
  * Return Type  : void
  */
-void c_Calculat_JuXing_A_and_B_Point(const mxArray *const prhs[9], int32_T nlhs,
-                                     const mxArray *plhs[2])
+void c_Calculat_JuXing_A_and_B_Point(const mxArray *const prhs[10],
+                                     int32_T nlhs, const mxArray *plhs[2])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -1318,7 +1318,8 @@ void c_Calculat_JuXing_A_and_B_Point(const mxArray *const prhs[9], int32_T nlhs,
   };
   emxArray_real_T *PointTable_A_off;
   emxArray_real_T *PointTable_B_off;
-  emxArray_real_T *a;
+  emxArray_real_T *Ti;
+  emxArray_real_T *toff;
   real_T(*PAB)[3];
   real_T(*Pin)[3];
   real_T(*Tao)[3];
@@ -1338,16 +1339,20 @@ void c_Calculat_JuXing_A_and_B_Point(const mxArray *const prhs[9], int32_T nlhs,
   PAB = c_emlrt_marshallIn(&st, emlrtAlias(prhs[5]), "PAB");
   phi = emlrt_marshallIn(&st, emlrtAliasP(prhs[6]), "phi");
   shenglunum = emlrt_marshallIn(&st, emlrtAliasP(prhs[7]), "shenglunum");
-  emxInit_real_T(&st, &a);
-  a->canFreeData = false;
-  e_emlrt_marshallIn(&st, emlrtAlias(prhs[8]), "a", a);
+  emxInit_real_T(&st, &Ti);
+  Ti->canFreeData = false;
+  e_emlrt_marshallIn(&st, emlrtAlias(prhs[8]), "Ti", Ti);
+  emxInit_real_T(&st, &toff);
+  toff->canFreeData = false;
+  e_emlrt_marshallIn(&st, emlrtAlias(prhs[9]), "toff", toff);
   /* Invoke the target function */
   emxInit_real_T(&st, &PointTable_A_off);
   emxInit_real_T(&st, &PointTable_B_off);
-  Calculat_JuXing_A_and_B_Points_after_Offest(*Tao, *UPP, *Pin, b, h, *PAB, phi,
-                                              shenglunum, a, PointTable_A_off,
-                                              PointTable_B_off);
-  emxFree_real_T(&st, &a);
+  Calculat_JuXing_A_and_B_Points_after_Offest(
+      *Tao, *UPP, *Pin, b, h, *PAB, phi, shenglunum, Ti, toff, PointTable_A_off,
+      PointTable_B_off);
+  emxFree_real_T(&st, &toff);
+  emxFree_real_T(&st, &Ti);
   /* Marshall function outputs */
   PointTable_A_off->canFreeData = false;
   plhs[0] = b_emlrt_marshallOut(PointTable_A_off);

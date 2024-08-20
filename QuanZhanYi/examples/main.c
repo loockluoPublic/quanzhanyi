@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Aug-2024 21:47:45
+ * C/C++ source code generated on  : 21-Aug-2024 00:46:56
  */
 
 /*************************************************************************/
@@ -343,7 +343,8 @@ void main_Calculat_JuXing_A_and_B_Points_after_Offest(void)
 {
   emxArray_real_T *PointTable_A_off;
   emxArray_real_T *PointTable_B_off;
-  emxArray_real_T *a;
+  emxArray_real_T *Ti;
+  emxArray_real_T *toff;
   double Tao_tmp[3];
   double b_tmp;
   /* Initialize function 'Calculat_JuXing_A_and_B_Points_after_Offest' input
@@ -354,15 +355,18 @@ void main_Calculat_JuXing_A_and_B_Points_after_Offest(void)
   /* Initialize function input argument 'Pin'. */
   b_tmp = argInit_real_T();
   /* Initialize function input argument 'PAB'. */
-  /* Initialize function input argument 'a'. */
-  a = argInit_1xUnbounded_real_T();
+  /* Initialize function input argument 'Ti'. */
+  Ti = argInit_1xUnbounded_real_T();
+  /* Initialize function input argument 'toff'. */
+  toff = argInit_1xUnbounded_real_T();
   /* Call the entry-point 'Calculat_JuXing_A_and_B_Points_after_Offest'. */
   emxInitArray_real_T(&PointTable_A_off, 2);
   emxInitArray_real_T(&PointTable_B_off, 2);
   Calculat_JuXing_A_and_B_Points_after_Offest(
-      Tao_tmp, Tao_tmp, Tao_tmp, b_tmp, b_tmp, Tao_tmp, b_tmp, b_tmp, a,
+      Tao_tmp, Tao_tmp, Tao_tmp, b_tmp, b_tmp, Tao_tmp, b_tmp, b_tmp, Ti, toff,
       PointTable_A_off, PointTable_B_off);
-  emxDestroyArray_real_T(a);
+  emxDestroyArray_real_T(toff);
+  emxDestroyArray_real_T(Ti);
   emxDestroyArray_real_T(PointTable_A_off);
   emxDestroyArray_real_T(PointTable_B_off);
 }

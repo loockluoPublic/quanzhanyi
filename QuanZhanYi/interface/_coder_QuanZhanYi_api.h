@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Aug-2024 21:47:45
+ * C/C++ source code generated on  : 21-Aug-2024 00:46:56
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -59,8 +59,9 @@ void Calculat_A_and_B_Points_api(const mxArray *const prhs[8], int32_T nlhs,
 
 void Calculat_JuXing_A_and_B_Points_after_Offest(
     real_T Tao[3], real_T UPP[3], real_T Pin[3], real_T b, real_T h,
-    real_T PAB[3], real_T phi, real_T shenglunum, emxArray_real_T *a,
-    emxArray_real_T *PointTable_A_off, emxArray_real_T *PointTable_B_off);
+    real_T PAB[3], real_T phi, real_T shenglunum, emxArray_real_T *Ti,
+    emxArray_real_T *toff, emxArray_real_T *PointTable_A_off,
+    emxArray_real_T *PointTable_B_off);
 
 void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     emxArray_real_T *points, real_T P_bound1[3], real_T P_bound2[3],
@@ -132,8 +133,8 @@ void angle2point_api(const mxArray *const prhs[6], int32_T nlhs,
 void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[8], int32_T nlhs,
                                      const mxArray *plhs[2]);
 
-void c_Calculat_JuXing_A_and_B_Point(const mxArray *const prhs[9], int32_T nlhs,
-                                     const mxArray *plhs[2]);
+void c_Calculat_JuXing_A_and_B_Point(const mxArray *const prhs[10],
+                                     int32_T nlhs, const mxArray *plhs[2]);
 
 void c_Calculate_accurate_cylinders_(const mxArray *const prhs[3], int32_T nlhs,
                                      const mxArray *plhs[6]);
