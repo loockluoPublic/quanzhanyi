@@ -2,7 +2,7 @@
  * File: planefit.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Aug-2024 19:00:37
+ * C/C++ source code generated on  : 20-Aug-2024 16:15:12
  */
 
 /* Include Files */
@@ -13,6 +13,7 @@
 #include "QuanZhanYi_emxutil.h"
 #include "QuanZhanYi_initialize.h"
 #include "QuanZhanYi_types.h"
+#include "mean.h"
 #include "minOrMax.h"
 #include "mldivide.h"
 #include "polyfit.h"
@@ -41,12 +42,10 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
               const double BoundPoint1[3], const double BoundPoint2[3],
               emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints)
 {
-  static const signed char iv2[24] = {0, 1, 2, 1, 2, 3, 0, 2, 4, 2, 4, 5,
-                                      4, 5, 6, 5, 6, 7, 1, 3, 6, 3, 6, 7};
   static const signed char iv1[18] = {0, 1, 2, 1, 2, 3, 0, 2, 4,
                                       2, 4, 5, 4, 5, 6, 5, 6, 7};
-  static const signed char iv3[12] = {0, 1, 2, 1, 2, 3, 0, 2, 4, 2, 4, 5};
-  static const signed char iv[6] = {0, 1, 2, 0, 2, 3};
+  static const signed char iv2[12] = {0, 1, 2, 1, 2, 3, 0, 2, 4, 2, 4, 5};
+  static const signed char b_iv[6] = {0, 1, 2, 0, 2, 3};
   emxArray_real_T *a__1;
   emxArray_real_T *b_Points;
   emxArray_real_T *b_pointss;
@@ -73,25 +72,21 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
   const double *PlaneParaIn_data;
   const double *Points_data;
   double a;
+  double a21;
   double b;
-  double bsum;
   double d;
   double x_val;
+  double yz_idx_1;
   double yz_idx_1_tmp;
   double *PlaneParaOut_data;
   double *pointss_data;
   double *x_data;
   double *y_data;
-  int firstBlockLength;
-  int hi;
-  int ib;
-  int k;
-  int lastBlockLength;
-  int nblocks;
-  int xblockoffset;
-  int xi;
-  int xpageoffset;
-  signed char i;
+  int c;
+  int i;
+  int r1;
+  int r2;
+  signed char i1;
   if (!isInitialized_QuanZhanYi) {
     QuanZhanYi_initialize();
   }
@@ -99,98 +94,57 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
   Points_data = Points->data;
   /*  平面拟合 */
   emxInit_real_T(&x, 1);
-  nblocks = x->size[0];
+  r2 = x->size[0];
   x->size[0] = Points->size[1];
-  emxEnsureCapacity_real_T(x, nblocks);
+  emxEnsureCapacity_real_T(x, r2);
   x_data = x->data;
-  firstBlockLength = Points->size[1];
+  r1 = Points->size[1];
   emxInit_real_T(&y, 1);
-  nblocks = y->size[0];
+  r2 = y->size[0];
   y->size[0] = Points->size[1];
-  emxEnsureCapacity_real_T(y, nblocks);
+  emxEnsureCapacity_real_T(y, r2);
   y_data = y->data;
-  for (nblocks = 0; nblocks < firstBlockLength; nblocks++) {
-    x_data[nblocks] = Points_data[3 * nblocks];
-    y_data[nblocks] = Points_data[3 * nblocks + 1];
+  for (r2 = 0; r2 < r1; r2++) {
+    x_data[r2] = Points_data[3 * r2];
+    y_data[r2] = Points_data[3 * r2 + 1];
   }
   emxInit_real_T(&pointss, 2);
-  nblocks = pointss->size[0] * pointss->size[1];
+  r2 = pointss->size[0] * pointss->size[1];
   pointss->size[0] = Points->size[1];
   pointss->size[1] = 3;
-  emxEnsureCapacity_real_T(pointss, nblocks);
+  emxEnsureCapacity_real_T(pointss, r2);
   pointss_data = pointss->data;
-  firstBlockLength = Points->size[1];
-  for (nblocks = 0; nblocks < 3; nblocks++) {
-    for (xpageoffset = 0; xpageoffset < firstBlockLength; xpageoffset++) {
-      pointss_data[xpageoffset + pointss->size[0] * nblocks] =
-          Points_data[nblocks + 3 * xpageoffset];
+  r1 = Points->size[1];
+  for (r2 = 0; r2 < 3; r2++) {
+    for (i = 0; i < r1; i++) {
+      pointss_data[i + pointss->size[0] * r2] = Points_data[r2 + 3 * i];
     }
   }
   /*  Fit a plane through the points */
-  if (pointss->size[0] == 0) {
-    coefficients[0] = 0.0;
-    coefficients[1] = 0.0;
-    coefficients[2] = 0.0;
-  } else {
-    if (pointss->size[0] <= 1024) {
-      firstBlockLength = pointss->size[0];
-      lastBlockLength = 0;
-      nblocks = 1;
-    } else {
-      firstBlockLength = 1024;
-      nblocks = (int)((unsigned int)pointss->size[0] >> 10);
-      lastBlockLength = pointss->size[0] - (nblocks << 10);
-      if (lastBlockLength > 0) {
-        nblocks++;
-      } else {
-        lastBlockLength = 1024;
-      }
-    }
-    for (xi = 0; xi < 3; xi++) {
-      xpageoffset = xi * pointss->size[0];
-      coefficients[xi] = pointss_data[xpageoffset];
-      for (k = 2; k <= firstBlockLength; k++) {
-        coefficients[xi] += pointss_data[(xpageoffset + k) - 1];
-      }
-      for (ib = 2; ib <= nblocks; ib++) {
-        xblockoffset = xpageoffset + ((ib - 1) << 10);
-        bsum = pointss_data[xblockoffset];
-        if (ib == nblocks) {
-          hi = lastBlockLength;
-        } else {
-          hi = 1024;
-        }
-        for (k = 2; k <= hi; k++) {
-          bsum += pointss_data[(xblockoffset + k) - 1];
-        }
-        coefficients[xi] += bsum;
-      }
-    }
-  }
+  mean(pointss, coefficients);
   emxInit_real_T(&b_pointss, 2);
-  nblocks = b_pointss->size[0] * b_pointss->size[1];
+  r2 = b_pointss->size[0] * b_pointss->size[1];
   b_pointss->size[0] = pointss->size[0];
   b_pointss->size[1] = 3;
-  emxEnsureCapacity_real_T(b_pointss, nblocks);
+  emxEnsureCapacity_real_T(b_pointss, r2);
   PlaneParaOut_data = b_pointss->data;
-  firstBlockLength = pointss->size[0];
-  for (nblocks = 0; nblocks < 3; nblocks++) {
-    for (xpageoffset = 0; xpageoffset < firstBlockLength; xpageoffset++) {
-      PlaneParaOut_data[xpageoffset + b_pointss->size[0] * nblocks] =
-          pointss_data[xpageoffset + pointss->size[0] * nblocks] -
-          coefficients[nblocks] / (double)pointss->size[0];
+  r1 = pointss->size[0];
+  for (r2 = 0; r2 < 3; r2++) {
+    for (i = 0; i < r1; i++) {
+      PlaneParaOut_data[i + b_pointss->size[0] * r2] =
+          pointss_data[i + pointss->size[0] * r2] - coefficients[r2];
     }
   }
-  nblocks = pointss->size[0] * pointss->size[1];
+  r2 = pointss->size[0] * pointss->size[1];
   pointss->size[0] = b_pointss->size[0];
   pointss->size[1] = 3;
-  emxEnsureCapacity_real_T(pointss, nblocks);
+  emxEnsureCapacity_real_T(pointss, r2);
   pointss_data = pointss->data;
-  firstBlockLength = b_pointss->size[0];
-  for (nblocks = 0; nblocks < 3; nblocks++) {
-    for (xpageoffset = 0; xpageoffset < firstBlockLength; xpageoffset++) {
-      pointss_data[xpageoffset + pointss->size[0] * nblocks] =
-          PlaneParaOut_data[xpageoffset + b_pointss->size[0] * nblocks];
+  r1 = b_pointss->size[0];
+  for (r2 = 0; r2 < 3; r2++) {
+    for (i = 0; i < r1; i++) {
+      pointss_data[i + pointss->size[0] * r2] =
+          PlaneParaOut_data[i + b_pointss->size[0] * r2];
     }
   }
   emxInit_real_T(&a__1, 2);
@@ -202,7 +156,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
   /*  Check if angle is below threshold */
   if (fabs(90.0 - 57.295779513082323 *
                       acos(fabs((V[6] * 0.0 + V[7] * 0.0) + V[8]))) < 0.5) {
-    lastBlockLength = 0;
+    c = 0;
     polyfit(x, y, bb);
     /*  拟合，其实是线性回归，但可以用来拟合平面 */
     a = bb[0];
@@ -211,95 +165,94 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
   } else {
     /*  构建矩阵 A 和向量 b */
     /*  使用最小二乘法拟合平面 */
-    nblocks = pointss->size[0] * pointss->size[1];
+    r2 = pointss->size[0] * pointss->size[1];
     pointss->size[0] = x->size[0];
     pointss->size[1] = 3;
-    emxEnsureCapacity_real_T(pointss, nblocks);
+    emxEnsureCapacity_real_T(pointss, r2);
     pointss_data = pointss->data;
-    firstBlockLength = x->size[0];
+    r1 = x->size[0];
     emxInit_real_T(&b_Points, 1);
-    nblocks = b_Points->size[0];
+    r2 = b_Points->size[0];
     b_Points->size[0] = Points->size[1];
-    emxEnsureCapacity_real_T(b_Points, nblocks);
+    emxEnsureCapacity_real_T(b_Points, r2);
     PlaneParaOut_data = b_Points->data;
-    for (nblocks = 0; nblocks < firstBlockLength; nblocks++) {
-      pointss_data[nblocks] = x_data[nblocks];
-      pointss_data[nblocks + pointss->size[0]] = y_data[nblocks];
-      pointss_data[nblocks + pointss->size[0] * 2] = 1.0;
-      PlaneParaOut_data[nblocks] = Points_data[3 * nblocks + 2];
+    for (r2 = 0; r2 < r1; r2++) {
+      pointss_data[r2] = x_data[r2];
+      pointss_data[r2 + pointss->size[0]] = y_data[r2];
+      pointss_data[r2 + pointss->size[0] * 2] = 1.0;
+      PlaneParaOut_data[r2] = Points_data[3 * r2 + 2];
     }
     mldivide(pointss, b_Points, coefficients);
     emxFree_real_T(&b_Points);
     a = coefficients[0];
     b = coefficients[1];
     d = coefficients[2];
-    lastBlockLength = -1;
+    c = -1;
   }
   emxFree_real_T(&pointss);
-  nblocks = PlaneParaOut->size[0] * PlaneParaOut->size[1];
+  r2 = PlaneParaOut->size[0] * PlaneParaOut->size[1];
   PlaneParaOut->size[0] = 4;
   PlaneParaOut->size[1] = 1;
-  emxEnsureCapacity_real_T(PlaneParaOut, nblocks);
+  emxEnsureCapacity_real_T(PlaneParaOut, r2);
   PlaneParaOut_data = PlaneParaOut->data;
   PlaneParaOut_data[0] = 0.0;
   PlaneParaOut_data[1] = 0.0;
   PlaneParaOut_data[2] = 0.0;
   PlaneParaOut_data[3] = 0.0;
-  nblocks = TrianglePoints->size[0] * TrianglePoints->size[1];
+  r2 = TrianglePoints->size[0] * TrianglePoints->size[1];
   TrianglePoints->size[0] = 3;
   TrianglePoints->size[1] = 6;
-  emxEnsureCapacity_real_T(TrianglePoints, nblocks);
+  emxEnsureCapacity_real_T(TrianglePoints, r2);
   PlaneParaOut_data = TrianglePoints->data;
-  for (nblocks = 0; nblocks < 18; nblocks++) {
-    PlaneParaOut_data[nblocks] = 0.0;
+  for (r2 = 0; r2 < 18; r2++) {
+    PlaneParaOut_data[r2] = 0.0;
   }
   if (PlaneParaIn->size[1] == 0) {
     /*  平面方程的系数输出 */
-    nblocks = PlaneParaOut->size[0] * PlaneParaOut->size[1];
+    r2 = PlaneParaOut->size[0] * PlaneParaOut->size[1];
     PlaneParaOut->size[0] = 4;
     PlaneParaOut->size[1] = 1;
-    emxEnsureCapacity_real_T(PlaneParaOut, nblocks);
+    emxEnsureCapacity_real_T(PlaneParaOut, r2);
     PlaneParaOut_data = PlaneParaOut->data;
     PlaneParaOut_data[0] = a;
     PlaneParaOut_data[1] = b;
-    PlaneParaOut_data[2] = lastBlockLength;
+    PlaneParaOut_data[2] = c;
     PlaneParaOut_data[3] = d;
     /*  找到边界，确定三角点 */
-    bsum = minimum(x);
-    yz_idx_1_tmp = maximum(x);
-    xfit[0] = bsum;
-    xfit[1] = bsum;
-    xfit[2] = yz_idx_1_tmp;
-    xfit[3] = yz_idx_1_tmp;
-    yz_idx_1_tmp = maximum(y);
-    bsum = minimum(y);
-    yfit[0] = yz_idx_1_tmp;
-    yfit[1] = bsum;
-    yfit[2] = bsum;
-    yfit[3] = yz_idx_1_tmp;
-    for (nblocks = 0; nblocks < 6; nblocks++) {
-      i = iv[nblocks];
-      bsum = xfit[i];
-      c_xfit[3 * nblocks] = bsum;
-      yz_idx_1_tmp = yfit[i];
-      c_xfit[3 * nblocks + 1] = yz_idx_1_tmp;
-      c_xfit[3 * nblocks + 2] =
-          -((d + a * bsum) + b * yz_idx_1_tmp) / (double)lastBlockLength;
+    a21 = minimum(x);
+    yz_idx_1 = maximum(x);
+    xfit[0] = a21;
+    xfit[1] = a21;
+    xfit[2] = yz_idx_1;
+    xfit[3] = yz_idx_1;
+    yz_idx_1 = maximum(y);
+    a21 = minimum(y);
+    yfit[0] = yz_idx_1;
+    yfit[1] = a21;
+    yfit[2] = a21;
+    yfit[3] = yz_idx_1;
+    for (r2 = 0; r2 < 6; r2++) {
+      i1 = b_iv[r2];
+      a21 = xfit[i1];
+      c_xfit[3 * r2] = a21;
+      yz_idx_1 = yfit[i1];
+      c_xfit[3 * r2 + 1] = yz_idx_1;
+      c_xfit[3 * r2 + 2] = -((d + a * a21) + b * yz_idx_1) / (double)c;
     }
-    nblocks = TrianglePoints->size[0] * TrianglePoints->size[1];
+    r2 = TrianglePoints->size[0] * TrianglePoints->size[1];
     TrianglePoints->size[0] = 3;
     TrianglePoints->size[1] = 6;
-    emxEnsureCapacity_real_T(TrianglePoints, nblocks);
+    emxEnsureCapacity_real_T(TrianglePoints, r2);
     PlaneParaOut_data = TrianglePoints->data;
-    for (nblocks = 0; nblocks < 18; nblocks++) {
-      PlaneParaOut_data[nblocks] = c_xfit[nblocks];
+    for (r2 = 0; r2 < 18; r2++) {
+      PlaneParaOut_data[r2] = c_xfit[r2];
     }
   } else if (PlaneParaIn->size[1] == 1) {
     /*  平面方程的系数输出 */
-    nblocks = PlaneParaOut->size[0] * PlaneParaOut->size[1];
+    r2 = PlaneParaOut->size[0] * PlaneParaOut->size[1];
     PlaneParaOut->size[0] = 4;
     PlaneParaOut->size[1] = 2;
-    emxEnsureCapacity_real_T(PlaneParaOut, nblocks);
+    emxEnsureCapacity_real_T(PlaneParaOut, r2);
     PlaneParaOut_data = PlaneParaOut->data;
     PlaneParaOut_data[0] = PlaneParaIn_data[0];
     PlaneParaOut_data[1] = PlaneParaIn_data[1];
@@ -307,44 +260,40 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     PlaneParaOut_data[3] = PlaneParaIn_data[3];
     PlaneParaOut_data[4] = a;
     PlaneParaOut_data[5] = b;
-    PlaneParaOut_data[6] = lastBlockLength;
+    PlaneParaOut_data[6] = c;
     PlaneParaOut_data[7] = d;
     /*  计算交线 */
     x_val = (maximum(x) + minimum(x)) / 2.0;
     /*  定义平面1的系数 */
     /*  定义平面2的系数 */
     /*  计算法向量的叉乘得到交线的方向向量 */
-    D[0] =
-        PlaneParaIn_data[1] * (double)lastBlockLength - b * PlaneParaIn_data[2];
-    D[1] =
-        a * PlaneParaIn_data[2] - PlaneParaIn_data[0] * (double)lastBlockLength;
+    D[0] = PlaneParaIn_data[1] * (double)c - b * PlaneParaIn_data[2];
+    D[1] = a * PlaneParaIn_data[2] - PlaneParaIn_data[0] * (double)c;
     D[2] = PlaneParaIn_data[0] * b - a * PlaneParaIn_data[1];
     /*  确定一个交点 */
     /*  Create the system of equations */
     /*  Solve for y and z */
-    bsum = PlaneParaIn_data[1];
+    a21 = PlaneParaIn_data[1];
     yfit[0] = PlaneParaIn_data[1];
     yfit[1] = b;
     yfit[2] = PlaneParaIn_data[2];
-    yfit[3] = lastBlockLength;
+    yfit[3] = c;
     bb[0] = -PlaneParaIn_data[3] - PlaneParaIn_data[0] * x_val;
     bb[1] = -d - a * x_val;
-    if (fabs(b) > fabs(bsum)) {
-      firstBlockLength = 1;
-      nblocks = 0;
+    if (fabs(b) > fabs(a21)) {
+      r1 = 1;
+      r2 = 0;
     } else {
-      firstBlockLength = 0;
-      nblocks = 1;
+      r1 = 0;
+      r2 = 1;
     }
-    bsum = yfit[nblocks] / yfit[firstBlockLength];
-    yz_idx_1_tmp = yfit[firstBlockLength + 2];
-    bsum = (bb[nblocks] - bb[firstBlockLength] * bsum) /
-           (yfit[nblocks + 2] - bsum * yz_idx_1_tmp);
+    a21 = yfit[r2] / yfit[r1];
+    yz_idx_1_tmp = yfit[r1 + 2];
+    yz_idx_1 = (bb[r2] - bb[r1] * a21) / (yfit[r2 + 2] - a21 * yz_idx_1_tmp);
     /*  The point on the intersection line */
     coefficients[0] = x_val;
-    coefficients[1] =
-        (bb[firstBlockLength] - bsum * yz_idx_1_tmp) / yfit[firstBlockLength];
-    coefficients[2] = bsum;
+    coefficients[1] = (bb[r1] - yz_idx_1 * yz_idx_1_tmp) / yfit[r1];
+    coefficients[2] = yz_idx_1;
     /*  找到边界，确定三角点 */
     b_GenerateTrianglePoints(PlaneParaIn, BoundPoint1, coefficients, D,
                              PointTri);
@@ -364,7 +313,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     b_zfit[3] = PointTri[5];
     xfit[0] = a;
     xfit[1] = b;
-    xfit[2] = lastBlockLength;
+    xfit[2] = c;
     xfit[3] = d;
     c_GenerateTrianglePoints(xfit, BoundPoint1, coefficients, D, PointTri);
     d_xfit[4] = PointTri[3];
@@ -372,45 +321,45 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     b_zfit[4] = PointTri[5];
     xfit[0] = a;
     xfit[1] = b;
-    xfit[2] = lastBlockLength;
+    xfit[2] = c;
     xfit[3] = d;
     c_GenerateTrianglePoints(xfit, BoundPoint2, coefficients, D, PointTri);
     d_xfit[5] = PointTri[3];
     c_yfit[5] = PointTri[4];
     b_zfit[5] = PointTri[5];
-    for (nblocks = 0; nblocks < 12; nblocks++) {
-      i = iv3[nblocks];
-      g_xfit[3 * nblocks] = d_xfit[i];
-      g_xfit[3 * nblocks + 1] = c_yfit[i];
-      g_xfit[3 * nblocks + 2] = b_zfit[i];
+    for (r2 = 0; r2 < 12; r2++) {
+      i1 = iv2[r2];
+      g_xfit[3 * r2] = d_xfit[i1];
+      g_xfit[3 * r2 + 1] = c_yfit[i1];
+      g_xfit[3 * r2 + 2] = b_zfit[i1];
     }
-    nblocks = TrianglePoints->size[0] * TrianglePoints->size[1];
+    r2 = TrianglePoints->size[0] * TrianglePoints->size[1];
     TrianglePoints->size[0] = 3;
     TrianglePoints->size[1] = 12;
-    emxEnsureCapacity_real_T(TrianglePoints, nblocks);
+    emxEnsureCapacity_real_T(TrianglePoints, r2);
     PlaneParaOut_data = TrianglePoints->data;
-    for (nblocks = 0; nblocks < 36; nblocks++) {
-      PlaneParaOut_data[nblocks] = g_xfit[nblocks];
+    for (r2 = 0; r2 < 36; r2++) {
+      PlaneParaOut_data[r2] = g_xfit[r2];
     }
   } else if (PlaneParaIn->size[1] == 2) {
     /*  平面方程的系数输出 */
-    nblocks = PlaneParaOut->size[0] * PlaneParaOut->size[1];
+    r2 = PlaneParaOut->size[0] * PlaneParaOut->size[1];
     PlaneParaOut->size[0] = 4;
     PlaneParaOut->size[1] = 3;
-    emxEnsureCapacity_real_T(PlaneParaOut, nblocks);
+    emxEnsureCapacity_real_T(PlaneParaOut, r2);
     PlaneParaOut_data = PlaneParaOut->data;
-    for (nblocks = 0; nblocks < 2; nblocks++) {
-      PlaneParaOut_data[4 * nblocks] = PlaneParaIn_data[4 * nblocks];
-      xpageoffset = 4 * nblocks + 1;
-      PlaneParaOut_data[xpageoffset] = PlaneParaIn_data[xpageoffset];
-      xpageoffset = 4 * nblocks + 2;
-      PlaneParaOut_data[xpageoffset] = PlaneParaIn_data[xpageoffset];
-      xpageoffset = 4 * nblocks + 3;
-      PlaneParaOut_data[xpageoffset] = PlaneParaIn_data[xpageoffset];
+    for (r2 = 0; r2 < 2; r2++) {
+      PlaneParaOut_data[4 * r2] = PlaneParaIn_data[4 * r2];
+      i = 4 * r2 + 1;
+      PlaneParaOut_data[i] = PlaneParaIn_data[i];
+      i = 4 * r2 + 2;
+      PlaneParaOut_data[i] = PlaneParaIn_data[i];
+      i = 4 * r2 + 3;
+      PlaneParaOut_data[i] = PlaneParaIn_data[i];
     }
     PlaneParaOut_data[8] = a;
     PlaneParaOut_data[9] = b;
-    PlaneParaOut_data[10] = lastBlockLength;
+    PlaneParaOut_data[10] = c;
     PlaneParaOut_data[11] = d;
     /* %%%%% 前2个面的交点 %%%% */
     /*  计算交线 */
@@ -454,39 +403,39 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     b_xfit[7] = PointTri[3];
     b_yfit[7] = PointTri[4];
     zfit[7] = PointTri[5];
-    for (nblocks = 0; nblocks < 18; nblocks++) {
-      i = iv1[nblocks];
-      e_xfit[3 * nblocks] = b_xfit[i];
-      e_xfit[3 * nblocks + 1] = b_yfit[i];
-      e_xfit[3 * nblocks + 2] = zfit[i];
+    for (r2 = 0; r2 < 18; r2++) {
+      i1 = iv1[r2];
+      e_xfit[3 * r2] = b_xfit[i1];
+      e_xfit[3 * r2 + 1] = b_yfit[i1];
+      e_xfit[3 * r2 + 2] = zfit[i1];
     }
-    nblocks = TrianglePoints->size[0] * TrianglePoints->size[1];
+    r2 = TrianglePoints->size[0] * TrianglePoints->size[1];
     TrianglePoints->size[0] = 3;
     TrianglePoints->size[1] = 18;
-    emxEnsureCapacity_real_T(TrianglePoints, nblocks);
+    emxEnsureCapacity_real_T(TrianglePoints, r2);
     PlaneParaOut_data = TrianglePoints->data;
-    for (nblocks = 0; nblocks < 54; nblocks++) {
-      PlaneParaOut_data[nblocks] = e_xfit[nblocks];
+    for (r2 = 0; r2 < 54; r2++) {
+      PlaneParaOut_data[r2] = e_xfit[r2];
     }
   } else if (PlaneParaIn->size[1] == 3) {
     /*  平面方程的系数输出 */
-    nblocks = PlaneParaOut->size[0] * PlaneParaOut->size[1];
+    r2 = PlaneParaOut->size[0] * PlaneParaOut->size[1];
     PlaneParaOut->size[0] = 4;
     PlaneParaOut->size[1] = 4;
-    emxEnsureCapacity_real_T(PlaneParaOut, nblocks);
+    emxEnsureCapacity_real_T(PlaneParaOut, r2);
     PlaneParaOut_data = PlaneParaOut->data;
-    for (nblocks = 0; nblocks < 3; nblocks++) {
-      PlaneParaOut_data[4 * nblocks] = PlaneParaIn_data[4 * nblocks];
-      xpageoffset = 4 * nblocks + 1;
-      PlaneParaOut_data[xpageoffset] = PlaneParaIn_data[xpageoffset];
-      xpageoffset = 4 * nblocks + 2;
-      PlaneParaOut_data[xpageoffset] = PlaneParaIn_data[xpageoffset];
-      xpageoffset = 4 * nblocks + 3;
-      PlaneParaOut_data[xpageoffset] = PlaneParaIn_data[xpageoffset];
+    for (r2 = 0; r2 < 3; r2++) {
+      PlaneParaOut_data[4 * r2] = PlaneParaIn_data[4 * r2];
+      i = 4 * r2 + 1;
+      PlaneParaOut_data[i] = PlaneParaIn_data[i];
+      i = 4 * r2 + 2;
+      PlaneParaOut_data[i] = PlaneParaIn_data[i];
+      i = 4 * r2 + 3;
+      PlaneParaOut_data[i] = PlaneParaIn_data[i];
     }
     PlaneParaOut_data[12] = a;
     PlaneParaOut_data[13] = b;
-    PlaneParaOut_data[14] = lastBlockLength;
+    PlaneParaOut_data[14] = c;
     PlaneParaOut_data[15] = d;
     /* %%%%% 前2个面的交点 %%%% */
     /*  计算交线 */
@@ -544,19 +493,19 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     b_xfit[3] = PointTri[0];
     b_yfit[3] = PointTri[1];
     zfit[3] = PointTri[2];
-    for (nblocks = 0; nblocks < 24; nblocks++) {
-      i = iv2[nblocks];
-      f_xfit[3 * nblocks] = b_xfit[i];
-      f_xfit[3 * nblocks + 1] = b_yfit[i];
-      f_xfit[3 * nblocks + 2] = zfit[i];
+    for (r2 = 0; r2 < 24; r2++) {
+      i1 = iv[r2];
+      f_xfit[3 * r2] = b_xfit[i1];
+      f_xfit[3 * r2 + 1] = b_yfit[i1];
+      f_xfit[3 * r2 + 2] = zfit[i1];
     }
-    nblocks = TrianglePoints->size[0] * TrianglePoints->size[1];
+    r2 = TrianglePoints->size[0] * TrianglePoints->size[1];
     TrianglePoints->size[0] = 3;
     TrianglePoints->size[1] = 24;
-    emxEnsureCapacity_real_T(TrianglePoints, nblocks);
+    emxEnsureCapacity_real_T(TrianglePoints, r2);
     PlaneParaOut_data = TrianglePoints->data;
-    for (nblocks = 0; nblocks < 72; nblocks++) {
-      PlaneParaOut_data[nblocks] = f_xfit[nblocks];
+    for (r2 = 0; r2 < 72; r2++) {
+      PlaneParaOut_data[r2] = f_xfit[r2];
     }
   }
   emxFree_real_T(&y);

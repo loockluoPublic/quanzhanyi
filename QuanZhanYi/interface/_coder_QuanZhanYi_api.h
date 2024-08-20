@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Aug-2024 19:00:37
+ * C/C++ source code generated on  : 20-Aug-2024 16:15:12
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -57,11 +57,22 @@ void Calculat_A_and_B_Points_after_Offest2(real_T MTaon[3], real_T Mcenter[3],
 void Calculat_A_and_B_Points_api(const mxArray *const prhs[8], int32_T nlhs,
                                  const mxArray *plhs[2]);
 
+void Calculat_JuXing_A_and_B_Points_after_Offest(
+    real_T Tao[3], real_T UPP[3], real_T Pin[3], real_T b, real_T h,
+    real_T PAB[3], real_T phi, real_T shenglunum, emxArray_real_T *a,
+    emxArray_real_T *PointTable_A_off, emxArray_real_T *PointTable_B_off);
+
 void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     emxArray_real_T *points, real_T P_bound1[3], real_T P_bound2[3],
     real_T Mcenter[3], real_T MTaon[3], real_T *Mradial,
     emxArray_real_T *Err_every, real_T Bottom_round_center1[3],
     real_T Bottom_round_center2[3]);
+
+void Calculate_rectangle_from_vertex(real_T TrianglePoints4[16],
+                                     real_T P_bound1[3], real_T P_bound2[3],
+                                     real_T Pin[3], real_T Pout[3],
+                                     real_T UPP[3], real_T *b, real_T *h,
+                                     real_T *w, real_T Tao[4], real_T PP[24]);
 
 void CrossLine(real_T PlanePara1[4], real_T PlanePara2[4], real_T x_val,
                real_T P0[3], real_T d[3]);
@@ -104,6 +115,10 @@ void RepeatSurvey(real_T SoundPoint1[3], real_T SoundPoint2[3],
 void RepeatSurvey_api(const mxArray *const prhs[4], int32_T nlhs,
                       const mxArray *plhs[2]);
 
+void ShengDaoGaoDu(real_T numShengLu, emxArray_real_T *Ti);
+
+void ShengDaoGaoDu_api(const mxArray *prhs, const mxArray **plhs);
+
 void ShengLuJiaoJiSuan(real_T numShengLu, emxArray_real_T *Ang);
 
 void ShengLuJiaoJiSuan_api(const mxArray *prhs, const mxArray **plhs);
@@ -117,8 +132,14 @@ void angle2point_api(const mxArray *const prhs[6], int32_T nlhs,
 void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[8], int32_T nlhs,
                                      const mxArray *plhs[2]);
 
+void c_Calculat_JuXing_A_and_B_Point(const mxArray *const prhs[9], int32_T nlhs,
+                                     const mxArray *plhs[2]);
+
 void c_Calculate_accurate_cylinders_(const mxArray *const prhs[3], int32_T nlhs,
                                      const mxArray *plhs[6]);
+
+void c_Calculate_rectangle_from_vert(const mxArray *const prhs[3], int32_T nlhs,
+                                     const mxArray *plhs[8]);
 
 void c_Generate_multi_layered_measur(const mxArray *const prhs[5],
                                      const mxArray **plhs);
@@ -158,6 +179,14 @@ void myvrrotvec2mat_api(const mxArray *prhs, const mxArray **plhs);
 void planefit(emxArray_real_T *Points, emxArray_real_T *PlaneParaIn,
               real_T BoundPoint1[3], real_T BoundPoint2[3],
               emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints);
+
+void planefit4(emxArray_real_T *Points1, emxArray_real_T *Points2,
+               emxArray_real_T *Points3, emxArray_real_T *Points4,
+               real_T BoundPoint1[3], real_T BoundPoint2[3],
+               real_T PlaneParaOut[16], real_T TrianglePoints[72]);
+
+void planefit4_api(const mxArray *const prhs[6], int32_T nlhs,
+                   const mxArray *plhs[2]);
 
 void planefit_api(const mxArray *const prhs[4], int32_T nlhs,
                   const mxArray *plhs[2]);

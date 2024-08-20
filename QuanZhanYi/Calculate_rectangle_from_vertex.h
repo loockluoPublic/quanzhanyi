@@ -1,0 +1,35 @@
+/*
+ * File: Calculate_rectangle_from_vertex.h
+ *
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 20-Aug-2024 16:15:12
+ */
+
+#ifndef CALCULATE_RECTANGLE_FROM_VERTEX_H
+#define CALCULATE_RECTANGLE_FROM_VERTEX_H
+
+/* Include Files */
+#include "rtwtypes.h"
+#include <stddef.h>
+#include <stdlib.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Function Declarations */
+extern void Calculate_rectangle_from_vertex(
+    const double TrianglePoints4[16], const double P_bound1[3],
+    const double P_bound2[3], double Pin[3], double Pout[3], double UPP[3],
+    double *b, double *h, double *w, double Tao[4], double PP[24]);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+/*
+ * File trailer for Calculate_rectangle_from_vertex.h
+ *
+ * [EOF]
+ */

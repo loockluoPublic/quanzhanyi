@@ -11,11 +11,15 @@ svd.obj
 xnrm2.obj
 xdotc.obj
 Calculat_A_and_B_Points_after_Offest2.obj
+Calculat_JuXing_A_and_B_Points_after_Offest.obj
+ShengDaoGaoDu.obj
+mtimes.obj
 Calculate_accurate_cylinders_from_multiple_measurement_points2.obj
 svd1.obj
 xzsvdc.obj
 mldivide.obj
 ixfun.obj
+Calculate_rectangle_from_vertex.obj
 CrossLine.obj
 fitcircle.obj
 foot_of_perpendicular_from_a_point_to_a_line.obj
@@ -26,8 +30,10 @@ GenerateTrianglePoints.obj
 myvrrotvec2mat.obj
 OffsetCalculate.obj
 planefit.obj
+mean.obj
 polyfit.obj
 minOrMax.obj
+planefit4.obj
 RepeatSurvey.obj
 ShengLuJiaoJiSuan.obj
 xaxpy.obj

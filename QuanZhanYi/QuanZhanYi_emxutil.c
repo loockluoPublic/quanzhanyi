@@ -2,7 +2,7 @@
  * File: QuanZhanYi_emxutil.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Aug-2024 19:00:37
+ * C/C++ source code generated on  : 20-Aug-2024 16:15:12
  */
 
 /* Include Files */
@@ -13,6 +13,41 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : cell_wrap_6 *dst
+ *                const cell_wrap_6 *src
+ * Return Type  : void
+ */
+void emxCopyStruct_cell_wrap_6(cell_wrap_6 *dst, const cell_wrap_6 *src)
+{
+  emxCopy_real_T(&dst->f1, &src->f1);
+}
+
+/*
+ * Arguments    : emxArray_real_T **dst
+ *                emxArray_real_T * const *src
+ * Return Type  : void
+ */
+void emxCopy_real_T(emxArray_real_T **dst, emxArray_real_T *const *src)
+{
+  int i;
+  int numElDst;
+  int numElSrc;
+  numElDst = 1;
+  numElSrc = 1;
+  for (i = 0; i < (*dst)->numDimensions; i++) {
+    numElDst *= (*dst)->size[i];
+    numElSrc *= (*src)->size[i];
+  }
+  for (i = 0; i < (*dst)->numDimensions; i++) {
+    (*dst)->size[i] = (*src)->size[i];
+  }
+  emxEnsureCapacity_real_T(*dst, numElDst);
+  for (i = 0; i < numElSrc; i++) {
+    (*dst)->data[i] = (*src)->data[i];
+  }
+}
+
 /*
  * Arguments    : emxArray_real_T *emxArray
  *                int oldNumel
@@ -56,6 +91,27 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
 }
 
 /*
+ * Arguments    : cell_wrap_6 pMatrix[4]
+ * Return Type  : void
+ */
+void emxFreeMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4])
+{
+  int i;
+  for (i = 0; i < 4; i++) {
+    emxFreeStruct_cell_wrap_6(&pMatrix[i]);
+  }
+}
+
+/*
+ * Arguments    : cell_wrap_6 *pStruct
+ * Return Type  : void
+ */
+void emxFreeStruct_cell_wrap_6(cell_wrap_6 *pStruct)
+{
+  emxFree_real_T(&pStruct->f1);
+}
+
+/*
  * Arguments    : emxArray_real_T **pEmxArray
  * Return Type  : void
  */
@@ -69,6 +125,27 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
     free(*pEmxArray);
     *pEmxArray = (emxArray_real_T *)NULL;
   }
+}
+
+/*
+ * Arguments    : cell_wrap_6 pMatrix[4]
+ * Return Type  : void
+ */
+void emxInitMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4])
+{
+  int i;
+  for (i = 0; i < 4; i++) {
+    emxInitStruct_cell_wrap_6(&pMatrix[i]);
+  }
+}
+
+/*
+ * Arguments    : cell_wrap_6 *pStruct
+ * Return Type  : void
+ */
+void emxInitStruct_cell_wrap_6(cell_wrap_6 *pStruct)
+{
+  emxInit_real_T(&pStruct->f1, 2);
 }
 
 /*

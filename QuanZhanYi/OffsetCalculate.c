@@ -2,7 +2,7 @@
  * File: OffsetCalculate.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Aug-2024 19:00:37
+ * C/C++ source code generated on  : 20-Aug-2024 16:15:12
  */
 
 /* Include Files */
@@ -167,7 +167,7 @@ void OffsetCalculate(double Mradial, double phi, const emxArray_real_T *Ang,
       temp_data[k] = Mradial * temp_data[k] / y_tmp_data[k];
     }
   } else {
-    binary_expand_op_13(temp, Mradial, y_tmp);
+    binary_expand_op_16(temp, Mradial, y_tmp);
     temp_data = temp->data;
   }
   nx = temp->size[1];
@@ -239,7 +239,7 @@ void OffsetCalculate(double Mradial, double phi, const emxArray_real_T *Ang,
           (Mradial * x_data[k] - y_tmp_data[k] * r1[k]) / b_x;
     }
   } else {
-    binary_expand_op_12(OffsetOut, b_a, temp, Mradial, x, y_tmp, r, b_x);
+    binary_expand_op_15(OffsetOut, b_a, temp, Mradial, x, y_tmp, r, b_x);
     OffsetOut_data = OffsetOut->data;
   }
   emxFree_real_T(&y_tmp);
