@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Aug-2024 16:15:12
+ * C/C++ source code generated on  : 20-Aug-2024 21:47:45
  */
 
 /*************************************************************************/
@@ -710,12 +710,12 @@ void main_planefit(void)
  */
 void main_planefit4(void)
 {
+  emxArray_real_T *PlaneParaOut;
   emxArray_real_T *Points1;
   emxArray_real_T *Points2;
   emxArray_real_T *Points3;
   emxArray_real_T *Points4;
-  double TrianglePoints[72];
-  double PlaneParaOut[16];
+  emxArray_real_T *TrianglePoints;
   double BoundPoint1_tmp[3];
   /* Initialize function 'planefit4' input arguments. */
   /* Initialize function input argument 'Points1'. */
@@ -730,12 +730,16 @@ void main_planefit4(void)
   argInit_3x1_real_T(BoundPoint1_tmp);
   /* Initialize function input argument 'BoundPoint2'. */
   /* Call the entry-point 'planefit4'. */
+  emxInitArray_real_T(&PlaneParaOut, 2);
+  emxInitArray_real_T(&TrianglePoints, 2);
   planefit4(Points1, Points2, Points3, Points4, BoundPoint1_tmp,
             BoundPoint1_tmp, PlaneParaOut, TrianglePoints);
   emxDestroyArray_real_T(Points4);
   emxDestroyArray_real_T(Points3);
   emxDestroyArray_real_T(Points2);
   emxDestroyArray_real_T(Points1);
+  emxDestroyArray_real_T(PlaneParaOut);
+  emxDestroyArray_real_T(TrianglePoints);
 }
 
 /*

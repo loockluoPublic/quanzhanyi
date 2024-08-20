@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Aug-2024 16:15:12
+ * C/C++ source code generated on  : 20-Aug-2024 21:47:45
  */
 
 /* Include Files */
@@ -89,12 +89,8 @@ static const mxArray *i_emlrt_marshallOut(const real_T u[9]);
 static real_T (*j_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                    const emlrtMsgIdentifier *parentId))[16];
 
-static const mxArray *j_emlrt_marshallOut(const real_T u[16]);
-
 static real_T (*k_emlrt_marshallIn(const emlrtStack *sp, const mxArray *nullptr,
                                    const char_T *identifier))[4];
-
-static const mxArray *k_emlrt_marshallOut(const real_T u[72]);
 
 static real_T (*l_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                    const emlrtMsgIdentifier *parentId))[4];
@@ -604,24 +600,6 @@ static real_T (*j_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
 }
 
 /*
- * Arguments    : const real_T u[16]
- * Return Type  : const mxArray *
- */
-static const mxArray *j_emlrt_marshallOut(const real_T u[16])
-{
-  static const int32_T iv[2] = {0, 0};
-  static const int32_T iv1[2] = {4, 4};
-  const mxArray *m;
-  const mxArray *y;
-  y = NULL;
-  m = emlrtCreateNumericArray(2, (const void *)&iv[0], mxDOUBLE_CLASS, mxREAL);
-  emlrtMxSetData((mxArray *)m, (void *)&u[0]);
-  emlrtSetDimensions((mxArray *)m, &iv1[0], 2);
-  emlrtAssign(&y, m);
-  return y;
-}
-
-/*
  * Arguments    : const emlrtStack *sp
  *                const mxArray *nullptr
  *                const char_T *identifier
@@ -637,24 +615,6 @@ static real_T (*k_emlrt_marshallIn(const emlrtStack *sp, const mxArray *nullptr,
   thisId.bParentIsCell = false;
   y = l_emlrt_marshallIn(sp, emlrtAlias(nullptr), &thisId);
   emlrtDestroyArray(&nullptr);
-  return y;
-}
-
-/*
- * Arguments    : const real_T u[72]
- * Return Type  : const mxArray *
- */
-static const mxArray *k_emlrt_marshallOut(const real_T u[72])
-{
-  static const int32_T iv[2] = {0, 0};
-  static const int32_T iv1[2] = {3, 24};
-  const mxArray *m;
-  const mxArray *y;
-  y = NULL;
-  m = emlrtCreateNumericArray(2, (const void *)&iv[0], mxDOUBLE_CLASS, mxREAL);
-  emlrtMxSetData((mxArray *)m, (void *)&u[0]);
-  emlrtSetDimensions((mxArray *)m, &iv1[0], 2);
-  emlrtAssign(&y, m);
   return y;
 }
 
@@ -1755,17 +1715,15 @@ void planefit4_api(const mxArray *const prhs[6], int32_T nlhs,
       NULL, /* tls */
       NULL  /* prev */
   };
+  emxArray_real_T *PlaneParaOut;
   emxArray_real_T *Points1;
   emxArray_real_T *Points2;
   emxArray_real_T *Points3;
   emxArray_real_T *Points4;
-  real_T(*TrianglePoints)[72];
-  real_T(*PlaneParaOut)[16];
+  emxArray_real_T *TrianglePoints;
   real_T(*BoundPoint1)[3];
   real_T(*BoundPoint2)[3];
   st.tls = emlrtRootTLSGlobal;
-  PlaneParaOut = (real_T(*)[16])mxMalloc(sizeof(real_T[16]));
-  TrianglePoints = (real_T(*)[72])mxMalloc(sizeof(real_T[72]));
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   /* Marshall function inputs */
   emxInit_real_T(&st, &Points1);
@@ -1783,17 +1741,23 @@ void planefit4_api(const mxArray *const prhs[6], int32_T nlhs,
   BoundPoint1 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[4]), "BoundPoint1");
   BoundPoint2 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[5]), "BoundPoint2");
   /* Invoke the target function */
+  emxInit_real_T(&st, &PlaneParaOut);
+  emxInit_real_T(&st, &TrianglePoints);
   planefit4(Points1, Points2, Points3, Points4, *BoundPoint1, *BoundPoint2,
-            *PlaneParaOut, *TrianglePoints);
+            PlaneParaOut, TrianglePoints);
   emxFree_real_T(&st, &Points4);
   emxFree_real_T(&st, &Points3);
   emxFree_real_T(&st, &Points2);
   emxFree_real_T(&st, &Points1);
   /* Marshall function outputs */
-  plhs[0] = j_emlrt_marshallOut(*PlaneParaOut);
+  PlaneParaOut->canFreeData = false;
+  plhs[0] = b_emlrt_marshallOut(PlaneParaOut);
+  emxFree_real_T(&st, &PlaneParaOut);
   if (nlhs > 1) {
-    plhs[1] = k_emlrt_marshallOut(*TrianglePoints);
+    TrianglePoints->canFreeData = false;
+    plhs[1] = b_emlrt_marshallOut(TrianglePoints);
   }
+  emxFree_real_T(&st, &TrianglePoints);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 

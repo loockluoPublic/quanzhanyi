@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Aug-2024 16:15:12
+ * C/C++ source code generated on  : 20-Aug-2024 21:47:45
  */
 
 /* Include Files */
@@ -373,7 +373,7 @@ mxArray *emlrtMexFcnProperties(void)
                 emlrtMxCreateString(
                     "C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\planefit4.m"));
   emlrtSetField(xEntryPoints, 16, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739484.6771875));
+                emlrtMxCreateDoubleScalar(739484.90813657409));
   emlrtSetField(xEntryPoints, 16, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 16, "Visible", emlrtMxCreateLogicalScalar(true));
