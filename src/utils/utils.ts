@@ -12,6 +12,10 @@ const {
   _Planefit,
   _offsetCalculate,
   _shengLuJiaoJiSuan,
+  _shengDaoGaoDu,
+  _Planefit4,
+  _CalculateRectangleFromVertex,
+  _CalcJuXingAAndBPointsAfterOffest,
 } = (window as any).Module;
 
 /**
@@ -425,6 +429,82 @@ export const offsetCalculate = (
   _ang.free();
   _a.free();
   _offset.free();
+  return res;
+};
+
+/**
+ * 矩形拟合
+ * @param M1Points 左面点
+ * @param M2Points 上面点
+ * @param M3Points 右面点
+ * @param M4Points 下面点
+ * @param BoundPoint1 矩形范围点
+ * @param BoundPoint2 矩形范围点
+ * @returns
+ */
+export const Planefit4 = (
+  M1Points: CustomVector3[],
+  M2Points: CustomVector3[],
+  M3Points: CustomVector3[],
+  M4Points: CustomVector3[],
+  BoundPoint1: CustomVector3,
+  BoundPoint2: CustomVector3
+) => {
+  const m1 = new EmxArray_real_T(M1Points);
+  const m2 = new EmxArray_real_T(M2Points);
+  const m3 = new EmxArray_real_T(M3Points);
+  const m4 = new EmxArray_real_T(M4Points);
+
+  const boundPoint1 = new EmxArray_real_T(BoundPoint1);
+  const boundPoint2 = new EmxArray_real_T(BoundPoint2);
+  const planeParaOut = new EmxArray_real_T(4, 4);
+  const trianglePoints = new EmxArray_real_T(3, 4 * 2 * 3);
+
+  _Planefit4(
+    m1.ptr,
+    m2.ptr,
+    m3.ptr,
+    m4.ptr,
+    boundPoint1.arrayPtr,
+    boundPoint2.arrayPtr,
+    planeParaOut.ptr,
+    trianglePoints.ptr
+  );
+
+  const res = {
+    planeParaOut: planeParaOut.toJSON(),
+    trianglePoints: trianglePoints.toVector3(),
+  };
+
+  m1.free();
+  m2.free();
+  m3.free();
+  m4.free();
+  boundPoint1.free();
+  boundPoint2.free();
+  planeParaOut.free();
+  trianglePoints.free();
+
+  return res;
+};
+
+export const CalculateRectangleFromVertex = () => {
+  _CalculateRectangleFromVertex();
+};
+
+/**
+ * 计算相对高度
+ * @param numShengLu
+ * @returns
+ */
+export const shengDaoGaoDu = (numShengLu: number) => {
+  const ti = new EmxArray_real_T(3, numShengLu * 2);
+
+  _shengDaoGaoDu(numShengLu, ti.ptr);
+
+  const res = ti.toVector3();
+
+  ti.free();
   return res;
 };
 

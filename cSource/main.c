@@ -103,19 +103,12 @@ void shengLuJiaoJiSuan(double numShengLu, emxArray_real_T *Ang)
 };
 
 EMSCRIPTEN_KEEPALIVE
-void CalcJuXingAAndBPointsAfterOffest(const double Tao[3],
-                                      const double UPP[3],
-                                      const double Pin[3],
-                                      double b,
-                                      double h,
-                                      const double PAB[3],
-                                      double phi,
-                                      double shenglunum,
-                                      const emxArray_real_T *a,
-                                      emxArray_real_T *PointTable_A_off,
-                                      emxArray_real_T *PointTable_B_off)
+void CalcJuXingAAndBPointsAfterOffest(const double Tao[3], const double UPP[3], const double Pin[3], double b,
+                                      double h, const double PAB[3], double phi, double shenglunum,
+                                      const emxArray_real_T *Ti, const emxArray_real_T *toff,
+                                      emxArray_real_T *PointTable_A_off, emxArray_real_T *PointTable_B_off)
 {
-    Calculat_JuXing_A_and_B_Points_after_Offest(Tao, UPP, Pin, b, h, PAB, phi, shenglunum, a, PointTable_A_off, PointTable_B_off);
+    Calculat_JuXing_A_and_B_Points_after_Offest(Tao, UPP, Pin, b, h, PAB, phi, shenglunum, Ti, toff, PointTable_A_off, PointTable_B_off);
 };
 
 EMSCRIPTEN_KEEPALIVE
@@ -134,7 +127,7 @@ EMSCRIPTEN_KEEPALIVE
 void Planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
                const emxArray_real_T *Points3, const emxArray_real_T *Points4,
                const double BoundPoint1[3], const double BoundPoint2[3],
-               double PlaneParaOut[16], double TrianglePoints[72])
+               emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints)
 {
     planefit4(Points1, Points2, Points3, Points4, BoundPoint1, BoundPoint2, PlaneParaOut, TrianglePoints);
 };
