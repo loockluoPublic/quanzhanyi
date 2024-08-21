@@ -1414,6 +1414,10 @@ var _Repeat_Survey = Module['_Repeat_Survey'] = createExportWrapper('Repeat_Surv
 var _Planefit = Module['_Planefit'] = createExportWrapper('Planefit');
 var _offsetCalculate = Module['_offsetCalculate'] = createExportWrapper('offsetCalculate');
 var _shengLuJiaoJiSuan = Module['_shengLuJiaoJiSuan'] = createExportWrapper('shengLuJiaoJiSuan');
+var _CalcJuXingAAndBPointsAfterOffest = Module['_CalcJuXingAAndBPointsAfterOffest'] = createExportWrapper('CalcJuXingAAndBPointsAfterOffest');
+var _CalculateRectangleFromVertex = Module['_CalculateRectangleFromVertex'] = createExportWrapper('CalculateRectangleFromVertex');
+var _Planefit4 = Module['_Planefit4'] = createExportWrapper('Planefit4');
+var _shengDaoGaoDu = Module['_shengDaoGaoDu'] = createExportWrapper('shengDaoGaoDu');
 var _fflush = createExportWrapper('fflush');
 var _emscripten_stack_init = () => (_emscripten_stack_init = wasmExports['emscripten_stack_init'])();
 var _emscripten_stack_get_free = () => (_emscripten_stack_get_free = wasmExports['emscripten_stack_get_free'])();

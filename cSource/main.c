@@ -9,6 +9,10 @@
 #include "planefit.h"
 #include "OffsetCalculate.h"
 #include "ShengLuJiaoJiSuan.h"
+#include "Calculat_JuXing_A_and_B_Points_after_Offest.h"
+#include "Calculate_rectangle_from_vertex.h"
+#include "planefit4.h"
+#include "ShengDaoGaoDu.h"
 
 EMSCRIPTEN_KEEPALIVE
 void generateUnitCircleWithNormalVector(double azimuth, double elevation,
@@ -96,4 +100,47 @@ EMSCRIPTEN_KEEPALIVE
 void shengLuJiaoJiSuan(double numShengLu, emxArray_real_T *Ang)
 {
     ShengLuJiaoJiSuan(numShengLu, Ang);
+};
+
+EMSCRIPTEN_KEEPALIVE
+void CalcJuXingAAndBPointsAfterOffest(const double Tao[3],
+                                      const double UPP[3],
+                                      const double Pin[3],
+                                      double b,
+                                      double h,
+                                      const double PAB[3],
+                                      double phi,
+                                      double shenglunum,
+                                      const emxArray_real_T *a,
+                                      emxArray_real_T *PointTable_A_off,
+                                      emxArray_real_T *PointTable_B_off)
+{
+    Calculat_JuXing_A_and_B_Points_after_Offest(Tao, UPP, Pin, b, h, PAB, phi, shenglunum, a, PointTable_A_off, PointTable_B_off);
+};
+
+EMSCRIPTEN_KEEPALIVE
+void CalculateRectangleFromVertex(
+    const double TrianglePoints4[16], const double P_bound1[3],
+    const double P_bound2[3], double Pin[3], double Pout[3], double UPP[3],
+    double *b, double *h, double *w, double Tao[4], double PP[24])
+{
+    Calculate_rectangle_from_vertex(
+        TrianglePoints4, P_bound1,
+        P_bound2, Pin, Pout, UPP,
+        b, h, w, Tao, PP);
+};
+
+EMSCRIPTEN_KEEPALIVE
+void Planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
+               const emxArray_real_T *Points3, const emxArray_real_T *Points4,
+               const double BoundPoint1[3], const double BoundPoint2[3],
+               double PlaneParaOut[16], double TrianglePoints[72])
+{
+    planefit4(Points1, Points2, Points3, Points4, BoundPoint1, BoundPoint2, PlaneParaOut, TrianglePoints);
+};
+
+EMSCRIPTEN_KEEPALIVE
+void shengDaoGaoDu(double numShengLu, emxArray_real_T *Ti)
+{
+    ShengDaoGaoDu(numShengLu, Ti);
 };
