@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Aug-2024 16:15:12
+ * C/C++ source code generated on  : 21-Aug-2024 00:46:56
  */
 
 /* Include Files */
@@ -228,25 +228,25 @@ void unsafe_Calculat_A_and_B_Points_mexFunction(int32_T nlhs, mxArray *plhs[2],
  * Arguments    : int32_T nlhs
  *                mxArray *plhs[2]
  *                int32_T nrhs
- *                const mxArray *prhs[9]
+ *                const mxArray *prhs[10]
  * Return Type  : void
  */
 void unsafe_Calculat_JuXing_A_and_B_Points_after_Offest_mexFunction(
-    int32_T nlhs, mxArray *plhs[2], int32_T nrhs, const mxArray *prhs[9])
+    int32_T nlhs, mxArray *plhs[2], int32_T nrhs, const mxArray *prhs[10])
 {
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[9];
+  const mxArray *b_prhs[10];
   const mxArray *outputs[2];
   int32_T i;
   int32_T i1;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 9) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 9, 4,
+  if (nrhs != 10) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 10, 4,
                         43, "Calculat_JuXing_A_and_B_Points_after_Offest");
   }
   if (nlhs > 2) {
@@ -254,7 +254,7 @@ void unsafe_Calculat_JuXing_A_and_B_Points_after_Offest_mexFunction(
                         "Calculat_JuXing_A_and_B_Points_after_Offest");
   }
   /* Call the function. */
-  for (i = 0; i < 9; i++) {
+  for (i = 0; i < 10; i++) {
     b_prhs[i] = prhs[i];
   }
   c_Calculat_JuXing_A_and_B_Point(b_prhs, nlhs, outputs);

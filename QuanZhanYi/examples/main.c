@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Aug-2024 16:15:12
+ * C/C++ source code generated on  : 21-Aug-2024 00:46:56
  */
 
 /*************************************************************************/
@@ -343,7 +343,8 @@ void main_Calculat_JuXing_A_and_B_Points_after_Offest(void)
 {
   emxArray_real_T *PointTable_A_off;
   emxArray_real_T *PointTable_B_off;
-  emxArray_real_T *a;
+  emxArray_real_T *Ti;
+  emxArray_real_T *toff;
   double Tao_tmp[3];
   double b_tmp;
   /* Initialize function 'Calculat_JuXing_A_and_B_Points_after_Offest' input
@@ -354,15 +355,18 @@ void main_Calculat_JuXing_A_and_B_Points_after_Offest(void)
   /* Initialize function input argument 'Pin'. */
   b_tmp = argInit_real_T();
   /* Initialize function input argument 'PAB'. */
-  /* Initialize function input argument 'a'. */
-  a = argInit_1xUnbounded_real_T();
+  /* Initialize function input argument 'Ti'. */
+  Ti = argInit_1xUnbounded_real_T();
+  /* Initialize function input argument 'toff'. */
+  toff = argInit_1xUnbounded_real_T();
   /* Call the entry-point 'Calculat_JuXing_A_and_B_Points_after_Offest'. */
   emxInitArray_real_T(&PointTable_A_off, 2);
   emxInitArray_real_T(&PointTable_B_off, 2);
   Calculat_JuXing_A_and_B_Points_after_Offest(
-      Tao_tmp, Tao_tmp, Tao_tmp, b_tmp, b_tmp, Tao_tmp, b_tmp, b_tmp, a,
+      Tao_tmp, Tao_tmp, Tao_tmp, b_tmp, b_tmp, Tao_tmp, b_tmp, b_tmp, Ti, toff,
       PointTable_A_off, PointTable_B_off);
-  emxDestroyArray_real_T(a);
+  emxDestroyArray_real_T(toff);
+  emxDestroyArray_real_T(Ti);
   emxDestroyArray_real_T(PointTable_A_off);
   emxDestroyArray_real_T(PointTable_B_off);
 }
@@ -710,12 +714,12 @@ void main_planefit(void)
  */
 void main_planefit4(void)
 {
+  emxArray_real_T *PlaneParaOut;
   emxArray_real_T *Points1;
   emxArray_real_T *Points2;
   emxArray_real_T *Points3;
   emxArray_real_T *Points4;
-  double TrianglePoints[72];
-  double PlaneParaOut[16];
+  emxArray_real_T *TrianglePoints;
   double BoundPoint1_tmp[3];
   /* Initialize function 'planefit4' input arguments. */
   /* Initialize function input argument 'Points1'. */
@@ -730,12 +734,16 @@ void main_planefit4(void)
   argInit_3x1_real_T(BoundPoint1_tmp);
   /* Initialize function input argument 'BoundPoint2'. */
   /* Call the entry-point 'planefit4'. */
+  emxInitArray_real_T(&PlaneParaOut, 2);
+  emxInitArray_real_T(&TrianglePoints, 2);
   planefit4(Points1, Points2, Points3, Points4, BoundPoint1_tmp,
             BoundPoint1_tmp, PlaneParaOut, TrianglePoints);
   emxDestroyArray_real_T(Points4);
   emxDestroyArray_real_T(Points3);
   emxDestroyArray_real_T(Points2);
   emxDestroyArray_real_T(Points1);
+  emxDestroyArray_real_T(PlaneParaOut);
+  emxDestroyArray_real_T(TrianglePoints);
 }
 
 /*

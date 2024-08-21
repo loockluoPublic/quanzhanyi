@@ -12,7 +12,6 @@ xnrm2.obj
 xdotc.obj
 Calculat_A_and_B_Points_after_Offest2.obj
 Calculat_JuXing_A_and_B_Points_after_Offest.obj
-ShengDaoGaoDu.obj
 mtimes.obj
 Calculate_accurate_cylinders_from_multiple_measurement_points2.obj
 svd1.obj
@@ -35,6 +34,7 @@ polyfit.obj
 minOrMax.obj
 planefit4.obj
 RepeatSurvey.obj
+ShengDaoGaoDu.obj
 ShengLuJiaoJiSuan.obj
 xaxpy.obj
 xrotg.obj

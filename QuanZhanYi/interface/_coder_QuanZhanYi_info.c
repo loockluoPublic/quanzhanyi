@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Aug-2024 16:15:12
+ * C/C++ source code generated on  : 21-Aug-2024 00:46:56
  */
 
 /* Include Files */
@@ -21,51 +21,49 @@ static const mxArray *c_emlrtMexFcnResolvedFunctionsI(void);
 static const mxArray *c_emlrtMexFcnResolvedFunctionsI(void)
 {
   const mxArray *nameCaptureInfo;
-  const char_T *data[12] = {
-      "789ced9bcf6fdb3614c795a11b360ceb8c01db9fb05e8ac2b193ae1db00d8d7f2d711cdb"
-      "b0b3c4a9078595285bad44391465c7f90b765b8f3be6b8638ffb1376"
-      "da1fb03f63f701b34d33b1d430a6a22cb18df72e32f3acf77d24c30f9e285a5bdbaeac69"
-      "9af650e35633f8f5b3693b35bd7ea0852dea5f9b5ebf88b4857da83d",
-      "08dd27fcbf4eaf8647183e65bc41908b2fee343dd72688b0e6b087358a7dcfe96373e2b1"
-      "6c07376d1737661b7be3965b9c715d34c6aef1e75c171b6f1a81abd1"
-      "ae7f99a133dbb8188f73497f1f288ec70f92f14845fc2f0b3fe7be6deffb98faedc38366"
-      "3b8ffd37ccebb5cf3cd2a91fb5da0cfb2cdbce21c7081cc4f4173a22",
-      "a6bea5d73c9b30ff897b91efdb84f93e9e93aff05b9ec774cfd27b98f63031ed715a54b7"
-      "a8e7ea48ef8db3d29937fae8d864329522bfe384f97d24cd8f7b4c2f"
-      "78e5e04bbd3f12ea35a57a61bfdafcc519b5d1a46af3c7ed73c57e44af97dfff7872fdee"
-      "9fbfd7ee52efaf97ff7e7d977ac2ee4bef54124ff5fff02b895e2ae2",
-      "376cb459df280cd356fae868fda854ad67f7abc519becfd19997872669df55fc73c9fd8b"
-      "cae35ec27c1f46dad17c85df1df629f5581f1b1917b1fbe3ed6f09f5"
-      "9e4af5c27eb5f9098fca98a8c0d3dbd113b6ea3c4d67ecfdadf241ddb4712ebdf1536540"
-      "76bac512f0745979fae99c7c851f918e833393926cd25e569e66a57a",
-      "61bfdafccc8c0a2f4f81a7b7a4276c5979faa5442f15f1d74e28cd6dbf28a70f7f3cda4b"
-      "3fdfea3f77d1a6b63a3c7d27b95f751c2b92f8a9883f114f7564314c"
-      "f5aa658dbe9599ac64d83f80fd83ebfa017ce6b6ac7c86fd036ecbce67d84f88a707fb09"
-      "37d303be7283fd8478f193d64b0d49fc54c41f93af3bc1a14d3ad761",
-      "36f23c0b9c8da7079cbd991e70961b70365e7ce06cf8efb27e087fa38b49278fbc12f2f2"
-      "81b6bc9cdd94ea85fd6af3161a95d073c6b1240fe0ac9a9eb055e76c"
-      "f6209f768be56fb0db6a1d9ae9ae7f66564f0babc3d93f25f7ab8ea325899f8af8e37116"
-      "ebc830023afe600c1d9b98a3dbf836a01b38ccee39587731f2038a5d",
-      "4c18df19f433b37514d4b7f1f4a0bebd991e70971bd4b7f1e20377afeed72773fa25fc96"
-      "cd0c9b1a8e3847bdacdc5d97ea85fd8aefcfc4a84c9f4280bbc05d6e"
-      "aadc4585934eb733d87d55ebbb3b4f9bc1ba79564279e0eea273f76dc27ec1b986707c38"
-      "d7f0ffe801b7b9c1b98678f17f97dcaf3a8e2549fc54c41f97db141b",
-      "6c726a94afe63ea60c9fc2efd580cb73fa015ce6065cbe5e675e1e9aa4bd2cefe9ea92f8"
-      "a9885f6d3d9730c1932a7a5236eb0e1a628acd2b6ae7f79e8f81d3c0"
-      "e9abfa019ce6069cbe5e675e1e9aa40d9c8ec7e95f12f6e3d19c7e087f476418109be97c"
-      "53551fd8acab138fbac81955fa06f3e8bdf1f95d42bdaa542fec579b",
-      "4fc5d19a792e3a96e4075c56d313b6ac5c56fd3ddd96556ea056a79c6d0506dbaa6f6f66"
-      "ed6e435b1d2e275dc7b5485b8b7c4ff86f751d679eb8503743dd7c5d"
-      "3f80cfdc9695cf5037734bcab7b4247e2ae2575bcf3d07116cd9ec92bfbd84f9a99eb7c8"
-      "51cff777a770d5e0bcc5f43d801815386f71cb7ac2569d9ff5d7cf9e",
-      "edeff4dcbd6ac5dfabe041d124557785ce172f3a3fef6a9ec58e4793da93d785fc9723f7"
-      "c7d1f3847adf4bf5c2fe78fb41e1d18173c3c0d3b8ebacd9aff64f58"
-      "d6361aa4b05b1d9ac6ebc3d620b73a3c5dacfa47f074e3bdfa07ead2787a5097de4c0f38"
-      "ca0dead278f1176bbdca390af5e9cdf4a03e4da6075ce506f5a95afc",
-      "ff00eb8c5a10",
+  const char_T *data[11] = {
+      "789ced9bcf73da4614c7e54eda69a7d3543db47f427be96430d899a4334d27104cfd0303"
+      "036e6c4246d9482b50a25f5eadc0e42fe82d39e6e8638f39e64fc8a9"
+      "7f40ff829e7bef4c41cb1aa47891845c6c98f72e62e7a1f77dbbcb7ee6ed4a481bbbd50d"
+      "49926e4bccfe7ecaae5f4ddaf2e4fa8914b6a87f6372fd26d2e6f6a9",
+      "742b741ff7bf9e5c55c7a6f88cb2868d2c7c71a7e658868d6cda1aba5822d873cc3ed602"
+      "8f6e98b86558b839db381cb7ac9d19d74563ec1a7f2ef5b0fab2e95b"
+      "12e979d30ccdd9c6c5789c0bfa7b2be178fc22180f39e27f527e5afaa973e461e2758e1f"
+      "b73a8fb0f7923a6ee79563771bed930ec51e2d744ac8547d1351e5a1",
+      "826c4d292a75c7b0a977c7bac8f74dc67c7f8cc997fb75c7a18aa32b2e262eb635639c16"
+      "5174e2580a52dc71560a75461f4dc30ea692e7f72c637e9f09f3631e"
+      "cdf19f9b78aaf73ea35e4ba817f6279bbf34a3369a54297edcbe4ed88fe875fafdcf83eb"
+      "cffffcb5b14cbd3f9ffcfbfd32f5b85d97de99205ed2dfe177023d39",
+      "e2570db4ddd82a0f737aaeddde6c576a8dc2516d679a473d46272e0f49d05e56fc73c1fd"
+      "3795c76ec67c6f47dad17cb9df1af60971681fab790bd1ebe3eddb8c"
+      "7a77857a617fb2f9098fca98a8c0d3abd1e3b6ee3ccde58da3e2fee38666e0526eebb7ea"
+      "c0deebed5480a7abcad32f63f2e57e64774d9c0f4ab2a0bdaa3c2d08",
+      "f5c2fe64f333332aac3c059e5e911eb755e5e9b7023d39e2af9f1252da7db89f3bfeb57d"
+      "98bb5fecdfb7d0b6b43e3c7d27b83fe9385605f1e5883f134f15a453"
+      "4c949aae8fbe950f56329c1fc0f9c1bc7e009f99ad2a9fe1fc80d9aaf319ce13d2e9c179"
+      "c2627ac05766709e902e7ed67aa929882f47fc29f9bae71f1b76771e",
+      "6623fb59e06c3a3de0ec627ac05966c0d974f13f08ee4f3a8eba20be1cf1a7e32c5690aa"
+      "fa64fc411d8e36a1dae836b63db57c931aae89150b23cf27d8c2a3bd"
+      "6ab063f5f2b3eb1bb89b4e0fb8bb981e70971970375d7ce0eee5fdfa22a65fdcaf1b5435"
+      "886af2f7fb5695bb9b42bdb03fe1b92e1f95c92e04b80bdc659694bb",
+      "a87cdaed750707cfeb7d6bef6ecbdfd45e55d023e0ee4de7ee9b8cfd82e76de1f8f0bced"
+      "ffd1036e3383e76de9e2ff21b83fe9385604f1e5883f2db7095669f0"
+      "36135bcd7d4c283e83ff51009763fa015c66065c9eaf1397872468afca73ba8620be1cf1"
+      "275bcf156ce3a08a0eca66c544434cb07649edfcd1fe18380d9cbeac",
+      "1fc06966c0e9f93a7179488236703a1da77fcfd88f1f62fac1fd5d9ea16f1b546187aaca"
+      "c0a03dc5768885cc51a5af52875c1b9fdf65d4ab09f5c2fe64f39970"
+      "b466f645cf04f9019793e9715b552e27fd9f4751df6fa293ee7ee1c45769b1b1bb5d307a"
+      "4d697db89c751dd7236d29f23deebfd2759cbf6341dd0c75f3bc7e00",
+      "9f99ad2a9fa16e6696956f39417c39e24fb69e5d13d95837e894bf6ec6fc92be6f51228e"
+      "e71d4ce02ac1fb1693e7007c54e07d8b2bd6e3b6eefc6cbcb877ef68"
+      "cfb50e6b55efb08a073b9a5db3cac0cf65f17359f3cc4f3c5ac4081e17b27f8e5c1f47cf"
+      "33ea3d10ea85fde9ce83c2a303ef0d034fd3aeb356bfd63fa505436d",
+      "dae583da50535f1c9f0c4aebc3d39b55ff709e6e7d54ff405d9a4e0fead2c5f480a3cca0"
+      "2e4d17ff66ad573147a13e5d4c0fead36c7ac05566509f268bff1feb"
+      "4e09ef",
       ""};
   nameCaptureInfo = NULL;
-  emlrtNameCaptureMxArrayR2016a(&data[0], 25448U, &nameCaptureInfo);
+  emlrtNameCaptureMxArrayR2016a(&data[0], 24064U, &nameCaptureInfo);
   return nameCaptureInfo;
 }
 
@@ -141,12 +139,12 @@ mxArray *emlrtMexFcnProperties(void)
   emlrtSetField(xEntryPoints, 2, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 2, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 9);
+  xInputs = emlrtCreateLogicalMatrix(1, 10);
   emlrtSetField(
       xEntryPoints, 3, "Name",
       emlrtMxCreateString("Calculat_JuXing_A_and_B_Points_after_Offest"));
   emlrtSetField(xEntryPoints, 3, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(9.0));
+                emlrtMxCreateDoubleScalar(10.0));
   emlrtSetField(xEntryPoints, 3, "NumberOfOutputs",
                 emlrtMxCreateDoubleScalar(2.0));
   emlrtSetField(xEntryPoints, 3, "ConstantInputs", xInputs);
@@ -155,7 +153,7 @@ mxArray *emlrtMexFcnProperties(void)
       emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\Calculat_"
                           "JuXing_A_and_B_Points_after_Offest.m"));
   emlrtSetField(xEntryPoints, 3, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739484.67384259263));
+                emlrtMxCreateDoubleScalar(739485.031863426));
   emlrtSetField(xEntryPoints, 3, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 3, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -373,7 +371,7 @@ mxArray *emlrtMexFcnProperties(void)
                 emlrtMxCreateString(
                     "C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\planefit4.m"));
   emlrtSetField(xEntryPoints, 16, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739484.6771875));
+                emlrtMxCreateDoubleScalar(739484.90813657409));
   emlrtSetField(xEntryPoints, 16, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 16, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -432,7 +430,7 @@ mxArray *emlrtMexFcnProperties(void)
   emlrtSetField(xResult, 0, "ResolvedFunctions",
                 (mxArray *)c_emlrtMexFcnResolvedFunctionsI());
   emlrtSetField(xResult, 0, "Checksum",
-                emlrtMxCreateString("qhoNfLn6TRQjKamCAmr7rG"));
+                emlrtMxCreateString("acaHRxCTVlPZa3FhNqaNXH"));
   emlrtSetField(xResult, 0, "EntryPoints", xEntryPoints);
   return xResult;
 }
