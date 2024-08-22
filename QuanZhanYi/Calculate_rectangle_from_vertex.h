@@ -2,13 +2,14 @@
  * File: Calculate_rectangle_from_vertex.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 21-Aug-2024 00:46:56
+ * C/C++ source code generated on  : 22-Aug-2024 17:04:17
  */
 
 #ifndef CALCULATE_RECTANGLE_FROM_VERTEX_H
 #define CALCULATE_RECTANGLE_FROM_VERTEX_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -19,9 +20,9 @@ extern "C" {
 
 /* Function Declarations */
 extern void Calculate_rectangle_from_vertex(
-    const double TrianglePoints4[16], const double P_bound1[3],
+    const emxArray_real_T *TrianglePoints4, const double P_bound1[3],
     const double P_bound2[3], double Pin[3], double Pout[3], double UPP[3],
-    double *b, double *h, double *w, double Tao[4], double PP[24]);
+    double *b, double *h, double *w, double Tao[3], emxArray_real_T *PP);
 
 #ifdef __cplusplus
 }

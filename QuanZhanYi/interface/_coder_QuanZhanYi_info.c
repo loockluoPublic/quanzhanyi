@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 21-Aug-2024 00:46:56
+ * C/C++ source code generated on  : 22-Aug-2024 17:04:17
  */
 
 /* Include Files */
@@ -189,7 +189,7 @@ mxArray *emlrtMexFcnProperties(void)
       emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\Calculate_"
                           "rectangle_from_vertex.m"));
   emlrtSetField(xEntryPoints, 5, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739484.67355324072));
+                emlrtMxCreateDoubleScalar(739486.7112847222));
   emlrtSetField(xEntryPoints, 5, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 5, "Visible", emlrtMxCreateLogicalScalar(true));

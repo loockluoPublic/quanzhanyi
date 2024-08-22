@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 21-Aug-2024 00:46:56
+ * C/C++ source code generated on  : 22-Aug-2024 17:04:17
  */
 
 /*************************************************************************/
@@ -65,8 +65,6 @@ static void argInit_3x1_real_T(double result[3]);
 static emxArray_real_T *argInit_3xUnbounded_real_T(void);
 
 static void argInit_4x1_real_T(double result[4]);
-
-static void argInit_4x4_real_T(double result[16]);
 
 static emxArray_real_T *argInit_4xUnbounded_real_T(void);
 
@@ -152,21 +150,6 @@ static void argInit_4x1_real_T(double result[4])
     /* Set the value of the array element.
 Change this value to the value that the application requires. */
     result[idx0] = argInit_real_T();
-  }
-}
-
-/*
- * Arguments    : double result[16]
- * Return Type  : void
- */
-static void argInit_4x4_real_T(double result[16])
-{
-  int i;
-  /* Loop over the array to initialize each element. */
-  for (i = 0; i < 16; i++) {
-    /* Set the value of the array element.
-Change this value to the value that the application requires. */
-    result[i] = argInit_real_T();
   }
 }
 
@@ -409,25 +392,28 @@ void main_Calculate_accurate_cylinders_from_multiple_measurement_points2(void)
  */
 void main_Calculate_rectangle_from_vertex(void)
 {
-  double PP[24];
-  double dv[16];
-  double Tao[4];
+  emxArray_real_T *PP;
+  emxArray_real_T *TrianglePoints4;
   double P_bound1_tmp[3];
   double Pin[3];
   double Pout[3];
+  double Tao[3];
   double UPP[3];
   double b;
   double h;
   double w;
   /* Initialize function 'Calculate_rectangle_from_vertex' input arguments. */
   /* Initialize function input argument 'TrianglePoints4'. */
+  TrianglePoints4 = argInit_3xUnbounded_real_T();
   /* Initialize function input argument 'P_bound1'. */
   argInit_3x1_real_T(P_bound1_tmp);
   /* Initialize function input argument 'P_bound2'. */
   /* Call the entry-point 'Calculate_rectangle_from_vertex'. */
-  argInit_4x4_real_T(dv);
-  Calculate_rectangle_from_vertex(dv, P_bound1_tmp, P_bound1_tmp, Pin, Pout,
-                                  UPP, &b, &h, &w, Tao, PP);
+  emxInitArray_real_T(&PP, 2);
+  Calculate_rectangle_from_vertex(TrianglePoints4, P_bound1_tmp, P_bound1_tmp,
+                                  Pin, Pout, UPP, &b, &h, &w, Tao, PP);
+  emxDestroyArray_real_T(TrianglePoints4);
+  emxDestroyArray_real_T(PP);
 }
 
 /*
