@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 21-Aug-2024 00:46:56
+ * C/C++ source code generated on  : 22-Aug-2024 17:04:17
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -69,11 +69,12 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     emxArray_real_T *Err_every, real_T Bottom_round_center1[3],
     real_T Bottom_round_center2[3]);
 
-void Calculate_rectangle_from_vertex(real_T TrianglePoints4[16],
+void Calculate_rectangle_from_vertex(emxArray_real_T *TrianglePoints4,
                                      real_T P_bound1[3], real_T P_bound2[3],
                                      real_T Pin[3], real_T Pout[3],
                                      real_T UPP[3], real_T *b, real_T *h,
-                                     real_T *w, real_T Tao[4], real_T PP[24]);
+                                     real_T *w, real_T Tao[3],
+                                     emxArray_real_T *PP);
 
 void CrossLine(real_T PlanePara1[4], real_T PlanePara2[4], real_T x_val,
                real_T P0[3], real_T d[3]);
