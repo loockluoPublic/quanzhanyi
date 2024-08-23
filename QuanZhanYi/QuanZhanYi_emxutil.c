@@ -2,7 +2,7 @@
  * File: QuanZhanYi_emxutil.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 21:29:19
+ * C/C++ source code generated on  : 23-Aug-2024 22:07:29
  */
 
 /* Include Files */
@@ -103,6 +103,18 @@ void emxFreeMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4])
 }
 
 /*
+ * Arguments    : cell_wrap_6 pMatrix[8]
+ * Return Type  : void
+ */
+void emxFreeMatrix_cell_wrap_61(cell_wrap_6 pMatrix[8])
+{
+  int i;
+  for (i = 0; i < 8; i++) {
+    emxFreeStruct_cell_wrap_6(&pMatrix[i]);
+  }
+}
+
+/*
  * Arguments    : cell_wrap_6 *pStruct
  * Return Type  : void
  */
@@ -135,6 +147,18 @@ void emxInitMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4])
 {
   int i;
   for (i = 0; i < 4; i++) {
+    emxInitStruct_cell_wrap_6(&pMatrix[i]);
+  }
+}
+
+/*
+ * Arguments    : cell_wrap_6 pMatrix[8]
+ * Return Type  : void
+ */
+void emxInitMatrix_cell_wrap_61(cell_wrap_6 pMatrix[8])
+{
+  int i;
+  for (i = 0; i < 8; i++) {
     emxInitStruct_cell_wrap_6(&pMatrix[i]);
   }
 }

@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 21:29:19
+ * C/C++ source code generated on  : 23-Aug-2024 22:07:29
  */
 
 /* Include Files */
@@ -20,7 +20,7 @@
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
-  static const char_T *emlrtEntryPoints[20] = {
+  static const char_T *emlrtEntryPoints[21] = {
       "angle2point",
       "Calculat_A_and_B_Points",
       "Calculat_A_and_B_Points_after_Offest2",
@@ -38,6 +38,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
       "OffsetCalculate",
       "planefit",
       "planefit4",
+      "planefit8",
       "RepeatSurvey",
       "ShengDaoGaoDu",
       "ShengLuJiaoJiSuan"};
@@ -52,7 +53,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   st.tls = emlrtRootTLSGlobal;
   /* Dispatch the entry-point. */
   switch (emlrtGetEntryPointIndexR2016a(
-      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 20)) {
+      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 21)) {
   case 0:
     unsafe_angle2point_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
@@ -113,12 +114,15 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
     unsafe_planefit4_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 17:
-    unsafe_RepeatSurvey_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_planefit8_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 18:
-    unsafe_ShengDaoGaoDu_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_RepeatSurvey_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 19:
+    unsafe_ShengDaoGaoDu_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 20:
     unsafe_ShengLuJiaoJiSuan_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   }
@@ -874,6 +878,49 @@ void unsafe_planefit4_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
     b_prhs[i] = prhs[i];
   }
   planefit4_api(b_prhs, nlhs, outputs);
+  /* Copy over outputs to the caller. */
+  if (nlhs < 1) {
+    i1 = 1;
+  } else {
+    i1 = nlhs;
+  }
+  emlrtReturnArrays(i1, &plhs[0], &outputs[0]);
+}
+
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[2]
+ *                int32_T nrhs
+ *                const mxArray *prhs[10]
+ * Return Type  : void
+ */
+void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
+                                  const mxArray *prhs[10])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *b_prhs[10];
+  const mxArray *outputs[2];
+  int32_T i;
+  int32_T i1;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 10) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 10, 4,
+                        9, "planefit8");
+  }
+  if (nlhs > 2) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 9,
+                        "planefit8");
+  }
+  /* Call the function. */
+  for (i = 0; i < 10; i++) {
+    b_prhs[i] = prhs[i];
+  }
+  planefit8_api(b_prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
     i1 = 1;

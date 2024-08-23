@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 21:29:19
+ * C/C++ source code generated on  : 23-Aug-2024 22:07:29
  */
 
 /*************************************************************************/
@@ -55,6 +55,7 @@
 #include "myvrrotvec2mat.h"
 #include "planefit.h"
 #include "planefit4.h"
+#include "planefit8.h"
 #include "rt_nonfinite.h"
 
 /* Function Declarations */
@@ -242,6 +243,7 @@ You can call entry-point functions multiple times. */
   main_OffsetCalculate();
   main_planefit();
   main_planefit4();
+  main_planefit8();
   main_RepeatSurvey();
   main_ShengDaoGaoDu();
   main_ShengLuJiaoJiSuan();
@@ -718,6 +720,60 @@ void main_planefit4(void)
   emxInitArray_real_T(&TrianglePoints, 2);
   planefit4(Points1, Points2, Points3, Points4, BoundPoint1_tmp,
             BoundPoint1_tmp, PlaneParaOut, TrianglePoints);
+  emxDestroyArray_real_T(Points4);
+  emxDestroyArray_real_T(Points3);
+  emxDestroyArray_real_T(Points2);
+  emxDestroyArray_real_T(Points1);
+  emxDestroyArray_real_T(PlaneParaOut);
+  emxDestroyArray_real_T(TrianglePoints);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+void main_planefit8(void)
+{
+  emxArray_real_T *PlaneParaOut;
+  emxArray_real_T *Points1;
+  emxArray_real_T *Points2;
+  emxArray_real_T *Points3;
+  emxArray_real_T *Points4;
+  emxArray_real_T *Points5;
+  emxArray_real_T *Points6;
+  emxArray_real_T *Points7;
+  emxArray_real_T *Points8;
+  emxArray_real_T *TrianglePoints;
+  double P_bound1_tmp[3];
+  /* Initialize function 'planefit8' input arguments. */
+  /* Initialize function input argument 'Points1'. */
+  Points1 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'Points2'. */
+  Points2 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'Points3'. */
+  Points3 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'Points4'. */
+  Points4 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'Points5'. */
+  Points5 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'Points6'. */
+  Points6 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'Points7'. */
+  Points7 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'Points8'. */
+  Points8 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'P_bound1'. */
+  argInit_3x1_real_T(P_bound1_tmp);
+  /* Initialize function input argument 'P_bound2'. */
+  /* Call the entry-point 'planefit8'. */
+  emxInitArray_real_T(&PlaneParaOut, 2);
+  emxInitArray_real_T(&TrianglePoints, 2);
+  planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7,
+            Points8, P_bound1_tmp, P_bound1_tmp, PlaneParaOut, TrianglePoints);
+  emxDestroyArray_real_T(Points8);
+  emxDestroyArray_real_T(Points7);
+  emxDestroyArray_real_T(Points6);
+  emxDestroyArray_real_T(Points5);
   emxDestroyArray_real_T(Points4);
   emxDestroyArray_real_T(Points3);
   emxDestroyArray_real_T(Points2);

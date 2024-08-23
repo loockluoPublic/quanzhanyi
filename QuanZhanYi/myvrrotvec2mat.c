@@ -2,7 +2,7 @@
  * File: myvrrotvec2mat.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 21:29:19
+ * C/C++ source code generated on  : 23-Aug-2024 22:07:29
  */
 
 /* Include Files */

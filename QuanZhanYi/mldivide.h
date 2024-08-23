@@ -2,7 +2,7 @@
  * File: mldivide.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 21:29:19
+ * C/C++ source code generated on  : 23-Aug-2024 22:07:29
  */
 
 #ifndef MLDIVIDE_H
@@ -20,6 +20,8 @@ extern "C" {
 
 /* Function Declarations */
 void b_mldivide(const double A[6], const double B[2], double Y[3]);
+
+void c_mldivide(const double A[9], const double B[3], double Y[3]);
 
 void mldivide(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3]);
 

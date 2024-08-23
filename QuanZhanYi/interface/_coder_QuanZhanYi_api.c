@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 21:29:19
+ * C/C++ source code generated on  : 23-Aug-2024 22:07:29
  */
 
 /* Include Files */
@@ -1667,6 +1667,86 @@ void planefit4_api(const mxArray *const prhs[6], int32_T nlhs,
   emxInit_real_T(&st, &TrianglePoints);
   planefit4(Points1, Points2, Points3, Points4, *BoundPoint1, *BoundPoint2,
             PlaneParaOut, TrianglePoints);
+  emxFree_real_T(&st, &Points4);
+  emxFree_real_T(&st, &Points3);
+  emxFree_real_T(&st, &Points2);
+  emxFree_real_T(&st, &Points1);
+  /* Marshall function outputs */
+  PlaneParaOut->canFreeData = false;
+  plhs[0] = b_emlrt_marshallOut(PlaneParaOut);
+  emxFree_real_T(&st, &PlaneParaOut);
+  if (nlhs > 1) {
+    TrianglePoints->canFreeData = false;
+    plhs[1] = b_emlrt_marshallOut(TrianglePoints);
+  }
+  emxFree_real_T(&st, &TrianglePoints);
+  emlrtHeapReferenceStackLeaveFcnR2012b(&st);
+}
+
+/*
+ * Arguments    : const mxArray * const prhs[10]
+ *                int32_T nlhs
+ *                const mxArray *plhs[2]
+ * Return Type  : void
+ */
+void planefit8_api(const mxArray *const prhs[10], int32_T nlhs,
+                   const mxArray *plhs[2])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  emxArray_real_T *PlaneParaOut;
+  emxArray_real_T *Points1;
+  emxArray_real_T *Points2;
+  emxArray_real_T *Points3;
+  emxArray_real_T *Points4;
+  emxArray_real_T *Points5;
+  emxArray_real_T *Points6;
+  emxArray_real_T *Points7;
+  emxArray_real_T *Points8;
+  emxArray_real_T *TrianglePoints;
+  real_T(*P_bound1)[3];
+  real_T(*P_bound2)[3];
+  st.tls = emlrtRootTLSGlobal;
+  emlrtHeapReferenceStackEnterFcnR2012b(&st);
+  /* Marshall function inputs */
+  emxInit_real_T(&st, &Points1);
+  Points1->canFreeData = false;
+  g_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "Points1", Points1);
+  emxInit_real_T(&st, &Points2);
+  Points2->canFreeData = false;
+  g_emlrt_marshallIn(&st, emlrtAlias(prhs[1]), "Points2", Points2);
+  emxInit_real_T(&st, &Points3);
+  Points3->canFreeData = false;
+  g_emlrt_marshallIn(&st, emlrtAlias(prhs[2]), "Points3", Points3);
+  emxInit_real_T(&st, &Points4);
+  Points4->canFreeData = false;
+  g_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "Points4", Points4);
+  emxInit_real_T(&st, &Points5);
+  Points5->canFreeData = false;
+  g_emlrt_marshallIn(&st, emlrtAlias(prhs[4]), "Points5", Points5);
+  emxInit_real_T(&st, &Points6);
+  Points6->canFreeData = false;
+  g_emlrt_marshallIn(&st, emlrtAlias(prhs[5]), "Points6", Points6);
+  emxInit_real_T(&st, &Points7);
+  Points7->canFreeData = false;
+  g_emlrt_marshallIn(&st, emlrtAlias(prhs[6]), "Points7", Points7);
+  emxInit_real_T(&st, &Points8);
+  Points8->canFreeData = false;
+  g_emlrt_marshallIn(&st, emlrtAlias(prhs[7]), "Points8", Points8);
+  P_bound1 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[8]), "P_bound1");
+  P_bound2 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[9]), "P_bound2");
+  /* Invoke the target function */
+  emxInit_real_T(&st, &PlaneParaOut);
+  emxInit_real_T(&st, &TrianglePoints);
+  planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7,
+            Points8, *P_bound1, *P_bound2, PlaneParaOut, TrianglePoints);
+  emxFree_real_T(&st, &Points8);
+  emxFree_real_T(&st, &Points7);
+  emxFree_real_T(&st, &Points6);
+  emxFree_real_T(&st, &Points5);
   emxFree_real_T(&st, &Points4);
   emxFree_real_T(&st, &Points3);
   emxFree_real_T(&st, &Points2);

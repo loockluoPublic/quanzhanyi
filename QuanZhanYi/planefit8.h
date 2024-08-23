@@ -1,12 +1,12 @@
 /*
- * File: planefit4.h
+ * File: planefit8.h
  *
  * MATLAB Coder version            : 23.2
  * C/C++ source code generated on  : 23-Aug-2024 22:07:29
  */
 
-#ifndef PLANEFIT4_H
-#define PLANEFIT4_H
+#ifndef PLANEFIT8_H
+#define PLANEFIT8_H
 
 /* Include Files */
 #include "QuanZhanYi_types.h"
@@ -20,9 +20,11 @@ extern "C" {
 
 /* Function Declarations */
 extern void
-planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
+planefit8(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
           const emxArray_real_T *Points3, const emxArray_real_T *Points4,
-          const double BoundPoint1[3], const double BoundPoint2[3],
+          const emxArray_real_T *Points5, const emxArray_real_T *Points6,
+          const emxArray_real_T *Points7, const emxArray_real_T *Points8,
+          const double P_bound1[3], const double P_bound2[3],
           emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints);
 
 #ifdef __cplusplus
@@ -31,7 +33,7 @@ planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
 
 #endif
 /*
- * File trailer for planefit4.h
+ * File trailer for planefit8.h
  *
  * [EOF]
  */
