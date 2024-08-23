@@ -2,7 +2,7 @@
  * File: planefit4.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 22-Aug-2024 17:04:17
+ * C/C++ source code generated on  : 23-Aug-2024 21:29:19
  */
 
 /* Include Files */
@@ -13,6 +13,7 @@
 #include "QuanZhanYi_emxutil.h"
 #include "QuanZhanYi_initialize.h"
 #include "QuanZhanYi_types.h"
+#include "foot_of_perpendicular_from_a_point_to_a_line.h"
 #include "mean.h"
 #include "minOrMax.h"
 #include "mldivide.h"
@@ -27,7 +28,7 @@
  *  BoundPoint1 边界点1
  *  BoundPoint2 边界点2
  *  PlaneParaOut 平面参数4*n
- *  TrianglePoints 三角形点3*n（n 123，456，789这样取）
+ *  BJD 三角形点3*n（n 123，456，789这样取）
  *
  * Arguments    : const emxArray_real_T *Points1
  *                const emxArray_real_T *Points2
@@ -44,6 +45,7 @@ void planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
                const double BoundPoint1[3], const double BoundPoint2[3],
                emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints)
 {
+  static const signed char b_iv[8] = {0, 1, 2, 5, 8, 15, 16, 17};
   cell_wrap_6 PointAll[4];
   cell_wrap_6 r;
   cell_wrap_6 r1;
@@ -55,12 +57,13 @@ void planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
   emxArray_real_T *x;
   emxArray_real_T *y;
   double b_xfit[72];
+  double Pdd[24];
   double V[9];
   double xfit[8];
   double yfit[8];
   double zfit[8];
   double PointTri[6];
-  double D[3];
+  double PP2[3];
   double coefficients[3];
   double bb[2];
   const double *Points1_data;
@@ -70,6 +73,27 @@ void planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
   double a;
   double b;
   double d;
+  double xN2;
+  double xN3;
+  double xN4;
+  double xN5;
+  double xN6;
+  double xN7;
+  double xN8;
+  double yN2;
+  double yN3;
+  double yN4;
+  double yN5;
+  double yN6;
+  double yN7;
+  double yN8;
+  double zN2;
+  double zN3;
+  double zN4;
+  double zN5;
+  double zN6;
+  double zN7;
+  double zN8;
   double *PlaneParaOut_data;
   double *b_pointss_data;
   double *pointss_data;
@@ -259,61 +283,159 @@ void planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
   /*  计算交线 */
   a = (maximum(x) + minimum(x)) / 2.0;
   emxFree_real_T(&x);
-  CrossLine(&PlaneParaOut_data[0], &PlaneParaOut_data[4], a, coefficients, D);
+  CrossLine(&PlaneParaOut_data[0], &PlaneParaOut_data[4], a, coefficients, PP2);
   /*  找到边界，确定三角点 */
-  d_GenerateTrianglePoints(&PlaneParaOut_data[0], BoundPoint1, coefficients, D,
-                           PointTri);
+  d_GenerateTrianglePoints(&PlaneParaOut_data[0], BoundPoint1, coefficients,
+                           PP2, PointTri);
   xfit[0] = PointTri[0];
   yfit[0] = PointTri[1];
   zfit[0] = PointTri[2];
-  d_GenerateTrianglePoints(&PlaneParaOut_data[0], BoundPoint2, coefficients, D,
-                           PointTri);
+  d_GenerateTrianglePoints(&PlaneParaOut_data[0], BoundPoint2, coefficients,
+                           PP2, PointTri);
   xfit[2] = PointTri[0];
   yfit[2] = PointTri[1];
   zfit[2] = PointTri[2];
   /* %%%%% 第2、3个面的交点 %%%% */
-  CrossLine(&PlaneParaOut_data[4], &PlaneParaOut_data[8], a, coefficients, D);
+  CrossLine(&PlaneParaOut_data[4], &PlaneParaOut_data[8], a, coefficients, PP2);
   /*  找到边界，确定三角点 */
-  d_GenerateTrianglePoints(&PlaneParaOut_data[8], BoundPoint1, coefficients, D,
-                           PointTri);
+  d_GenerateTrianglePoints(&PlaneParaOut_data[8], BoundPoint1, coefficients,
+                           PP2, PointTri);
   xfit[4] = PointTri[0];
   yfit[4] = PointTri[1];
   zfit[4] = PointTri[2];
-  d_GenerateTrianglePoints(&PlaneParaOut_data[8], BoundPoint2, coefficients, D,
-                           PointTri);
+  d_GenerateTrianglePoints(&PlaneParaOut_data[8], BoundPoint2, coefficients,
+                           PP2, PointTri);
   xfit[5] = PointTri[0];
   yfit[5] = PointTri[1];
   zfit[5] = PointTri[2];
   /* %%%%% 第3、4个面的交点 %%%% */
-  CrossLine(&PlaneParaOut_data[8], &PlaneParaOut_data[12], a, coefficients, D);
-  d_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint1, coefficients, D,
-                           PointTri);
+  CrossLine(&PlaneParaOut_data[8], &PlaneParaOut_data[12], a, coefficients,
+            PP2);
+  d_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint1, coefficients,
+                           PP2, PointTri);
   xfit[6] = PointTri[0];
   yfit[6] = PointTri[1];
   zfit[6] = PointTri[2];
-  d_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint2, coefficients, D,
-                           PointTri);
+  d_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint2, coefficients,
+                           PP2, PointTri);
   xfit[7] = PointTri[0];
   yfit[7] = PointTri[1];
   zfit[7] = PointTri[2];
   /* %%%%% 第1、4个面的交点 %%%% */
-  CrossLine(&PlaneParaOut_data[0], &PlaneParaOut_data[12], a, coefficients, D);
-  d_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint1, coefficients, D,
-                           PointTri);
+  CrossLine(&PlaneParaOut_data[0], &PlaneParaOut_data[12], a, coefficients,
+            PP2);
+  d_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint1, coefficients,
+                           PP2, PointTri);
   xfit[1] = PointTri[0];
   yfit[1] = PointTri[1];
   zfit[1] = PointTri[2];
-  d_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint2, coefficients, D,
-                           PointTri);
+  d_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint2, coefficients,
+                           PP2, PointTri);
   xfit[3] = PointTri[0];
   yfit[3] = PointTri[1];
   zfit[3] = PointTri[2];
+  /*  取八个点 */
   for (i = 0; i < 24; i++) {
     i2 = iv[i];
     b_xfit[3 * i] = xfit[i2];
     b_xfit[3 * i + 1] = yfit[i2];
     b_xfit[3 * i + 2] = zfit[i2];
   }
+  for (i = 0; i < 8; i++) {
+    c = 3 * b_iv[i];
+    Pdd[3 * i] = b_xfit[c];
+    Pdd[3 * i + 1] = b_xfit[c + 1];
+    Pdd[3 * i + 2] = b_xfit[c + 2];
+  }
+  /*  计算投影点 */
+  foot_of_perpendicular_from_a_point_to_a_line(BoundPoint1, &Pdd[0], &Pdd[6],
+                                               &a, &b, &d);
+  foot_of_perpendicular_from_a_point_to_a_line(BoundPoint1, &Pdd[3], &Pdd[9],
+                                               &xN2, &yN2, &zN2);
+  foot_of_perpendicular_from_a_point_to_a_line(BoundPoint2, &Pdd[0], &Pdd[6],
+                                               &xN3, &yN3, &zN3);
+  foot_of_perpendicular_from_a_point_to_a_line(BoundPoint2, &Pdd[3], &Pdd[9],
+                                               &xN4, &yN4, &zN4);
+  foot_of_perpendicular_from_a_point_to_a_line(BoundPoint1, &Pdd[12], &Pdd[15],
+                                               &xN5, &yN5, &zN5);
+  foot_of_perpendicular_from_a_point_to_a_line(BoundPoint2, &Pdd[12], &Pdd[15],
+                                               &xN6, &yN6, &zN6);
+  foot_of_perpendicular_from_a_point_to_a_line(BoundPoint1, &Pdd[18], &Pdd[21],
+                                               &xN7, &yN7, &zN7);
+  foot_of_perpendicular_from_a_point_to_a_line(BoundPoint2, &Pdd[18], &Pdd[21],
+                                               &xN8, &yN8, &zN8);
+  b_xfit[0] = a;
+  b_xfit[3] = xN2;
+  b_xfit[6] = xN3;
+  b_xfit[9] = xN2;
+  b_xfit[12] = xN3;
+  b_xfit[15] = xN4;
+  b_xfit[18] = a;
+  b_xfit[21] = xN3;
+  b_xfit[24] = xN5;
+  b_xfit[27] = xN3;
+  b_xfit[30] = xN5;
+  b_xfit[33] = xN6;
+  b_xfit[36] = xN5;
+  b_xfit[39] = xN6;
+  b_xfit[42] = xN7;
+  b_xfit[45] = xN6;
+  b_xfit[48] = xN7;
+  b_xfit[51] = xN8;
+  b_xfit[54] = xN2;
+  b_xfit[57] = xN4;
+  b_xfit[60] = xN7;
+  b_xfit[63] = xN4;
+  b_xfit[66] = xN7;
+  b_xfit[69] = xN8;
+  b_xfit[1] = b;
+  b_xfit[4] = yN2;
+  b_xfit[7] = yN3;
+  b_xfit[10] = yN2;
+  b_xfit[13] = yN3;
+  b_xfit[16] = yN4;
+  b_xfit[19] = b;
+  b_xfit[22] = yN3;
+  b_xfit[25] = yN5;
+  b_xfit[28] = yN3;
+  b_xfit[31] = yN5;
+  b_xfit[34] = yN6;
+  b_xfit[37] = yN5;
+  b_xfit[40] = yN6;
+  b_xfit[43] = yN7;
+  b_xfit[46] = yN6;
+  b_xfit[49] = yN7;
+  b_xfit[52] = yN8;
+  b_xfit[55] = yN2;
+  b_xfit[58] = yN4;
+  b_xfit[61] = yN7;
+  b_xfit[64] = yN4;
+  b_xfit[67] = yN7;
+  b_xfit[70] = yN8;
+  b_xfit[2] = d;
+  b_xfit[5] = zN2;
+  b_xfit[8] = zN3;
+  b_xfit[11] = zN2;
+  b_xfit[14] = zN3;
+  b_xfit[17] = zN4;
+  b_xfit[20] = d;
+  b_xfit[23] = zN3;
+  b_xfit[26] = zN5;
+  b_xfit[29] = zN3;
+  b_xfit[32] = zN5;
+  b_xfit[35] = zN6;
+  b_xfit[38] = zN5;
+  b_xfit[41] = zN6;
+  b_xfit[44] = zN7;
+  b_xfit[47] = zN6;
+  b_xfit[50] = zN7;
+  b_xfit[53] = zN8;
+  b_xfit[56] = zN2;
+  b_xfit[59] = zN4;
+  b_xfit[62] = zN7;
+  b_xfit[65] = zN4;
+  b_xfit[68] = zN7;
+  b_xfit[71] = zN8;
   i = TrianglePoints->size[0] * TrianglePoints->size[1];
   TrianglePoints->size[0] = 3;
   TrianglePoints->size[1] = 24;

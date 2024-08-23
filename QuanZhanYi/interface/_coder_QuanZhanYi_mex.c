@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 22-Aug-2024 17:04:17
+ * C/C++ source code generated on  : 23-Aug-2024 21:29:19
  */
 
 /* Include Files */
@@ -315,13 +315,13 @@ void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points2_mexFu
  * Arguments    : int32_T nlhs
  *                mxArray *plhs[8]
  *                int32_T nrhs
- *                const mxArray *prhs[3]
+ *                const mxArray *prhs[1]
  * Return Type  : void
  */
 void unsafe_Calculate_rectangle_from_vertex_mexFunction(int32_T nlhs,
                                                         mxArray *plhs[8],
                                                         int32_T nrhs,
-                                                        const mxArray *prhs[3])
+                                                        const mxArray *prhs[1])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -329,12 +329,11 @@ void unsafe_Calculate_rectangle_from_vertex_mexFunction(int32_T nlhs,
       NULL  /* prev */
   };
   const mxArray *outputs[8];
-  const mxArray *b_prhs[3];
   int32_T i;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 3) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 3, 4,
+  if (nrhs != 1) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 1, 4,
                         31, "Calculate_rectangle_from_vertex");
   }
   if (nlhs > 8) {
@@ -342,10 +341,7 @@ void unsafe_Calculate_rectangle_from_vertex_mexFunction(int32_T nlhs,
                         "Calculate_rectangle_from_vertex");
   }
   /* Call the function. */
-  b_prhs[0] = prhs[0];
-  b_prhs[1] = prhs[1];
-  b_prhs[2] = prhs[2];
-  c_Calculate_rectangle_from_vert(b_prhs, nlhs, outputs);
+  c_Calculate_rectangle_from_vert(prhs[0], nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
     i = 1;

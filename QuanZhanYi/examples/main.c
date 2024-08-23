@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 22-Aug-2024 17:04:17
+ * C/C++ source code generated on  : 23-Aug-2024 21:29:19
  */
 
 /*************************************************************************/
@@ -392,9 +392,8 @@ void main_Calculate_accurate_cylinders_from_multiple_measurement_points2(void)
  */
 void main_Calculate_rectangle_from_vertex(void)
 {
-  emxArray_real_T *PP;
   emxArray_real_T *TrianglePoints4;
-  double P_bound1_tmp[3];
+  double PP[24];
   double Pin[3];
   double Pout[3];
   double Tao[3];
@@ -405,15 +404,10 @@ void main_Calculate_rectangle_from_vertex(void)
   /* Initialize function 'Calculate_rectangle_from_vertex' input arguments. */
   /* Initialize function input argument 'TrianglePoints4'. */
   TrianglePoints4 = argInit_3xUnbounded_real_T();
-  /* Initialize function input argument 'P_bound1'. */
-  argInit_3x1_real_T(P_bound1_tmp);
-  /* Initialize function input argument 'P_bound2'. */
   /* Call the entry-point 'Calculate_rectangle_from_vertex'. */
-  emxInitArray_real_T(&PP, 2);
-  Calculate_rectangle_from_vertex(TrianglePoints4, P_bound1_tmp, P_bound1_tmp,
-                                  Pin, Pout, UPP, &b, &h, &w, Tao, PP);
+  Calculate_rectangle_from_vertex(TrianglePoints4, Pin, Pout, UPP, &b, &h, &w,
+                                  Tao, PP);
   emxDestroyArray_real_T(TrianglePoints4);
-  emxDestroyArray_real_T(PP);
 }
 
 /*

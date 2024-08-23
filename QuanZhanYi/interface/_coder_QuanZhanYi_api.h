@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 22-Aug-2024 17:04:17
+ * C/C++ source code generated on  : 23-Aug-2024 21:29:19
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -70,11 +70,9 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     real_T Bottom_round_center2[3]);
 
 void Calculate_rectangle_from_vertex(emxArray_real_T *TrianglePoints4,
-                                     real_T P_bound1[3], real_T P_bound2[3],
                                      real_T Pin[3], real_T Pout[3],
                                      real_T UPP[3], real_T *b, real_T *h,
-                                     real_T *w, real_T Tao[3],
-                                     emxArray_real_T *PP);
+                                     real_T *w, real_T Tao[3], real_T PP[24]);
 
 void CrossLine(real_T PlanePara1[4], real_T PlanePara2[4], real_T x_val,
                real_T P0[3], real_T d[3]);
@@ -140,7 +138,7 @@ void c_Calculat_JuXing_A_and_B_Point(const mxArray *const prhs[10],
 void c_Calculate_accurate_cylinders_(const mxArray *const prhs[3], int32_T nlhs,
                                      const mxArray *plhs[6]);
 
-void c_Calculate_rectangle_from_vert(const mxArray *const prhs[3], int32_T nlhs,
+void c_Calculate_rectangle_from_vert(const mxArray *prhs, int32_T nlhs,
                                      const mxArray *plhs[8]);
 
 void c_Generate_multi_layered_measur(const mxArray *const prhs[5],

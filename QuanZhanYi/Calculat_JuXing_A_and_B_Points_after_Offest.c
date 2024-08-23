@@ -2,7 +2,7 @@
  * File: Calculat_JuXing_A_and_B_Points_after_Offest.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 22-Aug-2024 17:04:17
+ * C/C++ source code generated on  : 23-Aug-2024 21:29:19
  */
 
 /* Include Files */
@@ -166,23 +166,22 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
   emxArray_real_T *r;
   emxArray_real_T *r2;
   double ROT[9];
-  double b_PAB[9];
+  double dv[9];
   double rot1[9];
   double UPPmove[3];
+  double theta1_tmp[3];
   const double *Ti_data;
   const double *toff_data;
   double absxk;
+  double b_theta1_tmp;
   double c;
   double norm_vec;
   double r_idx_0;
+  double r_idx_1;
   double r_idx_2;
   double s;
   double scale;
   double t;
-  double theta1_tmp;
-  double theta1_tmp_idx_1;
-  double theta1_tmp_idx_2;
-  double xbase;
   double *Axoff_data;
   double *Ay_data;
   double *Az_data;
@@ -203,34 +202,34 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
   UPPmove[1] = UPP[1] - Pin[1];
   UPPmove[2] = UPP[2] - Pin[2];
   /*  构建旋转矩阵1,pt6转到z轴 */
-  xbase = 0.0 * UPPmove[2] - UPPmove[1];
-  theta1_tmp_idx_1 = UPPmove[0] - 0.0 * UPPmove[2];
-  theta1_tmp_idx_2 = 0.0 * UPPmove[1] - 0.0 * UPPmove[0];
+  theta1_tmp[0] = 0.0 * UPPmove[2] - UPPmove[1];
+  theta1_tmp[1] = UPPmove[0] - 0.0 * UPPmove[2];
+  theta1_tmp[2] = 0.0 * UPPmove[1] - 0.0 * UPPmove[0];
   scale = 3.3121686421112381E-170;
-  absxk = fabs(xbase);
+  absxk = fabs(theta1_tmp[0]);
   if (absxk > 3.3121686421112381E-170) {
-    theta1_tmp = 1.0;
+    b_theta1_tmp = 1.0;
     scale = absxk;
   } else {
     t = absxk / 3.3121686421112381E-170;
-    theta1_tmp = t * t;
+    b_theta1_tmp = t * t;
   }
-  absxk = fabs(theta1_tmp_idx_1);
+  absxk = fabs(theta1_tmp[1]);
   if (absxk > scale) {
     t = scale / absxk;
-    theta1_tmp = theta1_tmp * t * t + 1.0;
+    b_theta1_tmp = b_theta1_tmp * t * t + 1.0;
     scale = absxk;
   } else {
     t = absxk / scale;
-    theta1_tmp += t * t;
+    b_theta1_tmp += t * t;
   }
-  t = theta1_tmp_idx_2 / scale;
-  theta1_tmp += t * t;
-  theta1_tmp = scale * sqrt(theta1_tmp);
-  norm_vec = rt_atan2d_snf(theta1_tmp,
-                           (0.0 * UPPmove[0] + 0.0 * UPPmove[1]) + UPPmove[2]);
-  s = sin(norm_vec);
-  c = cos(norm_vec);
+  t = theta1_tmp[2] / scale;
+  b_theta1_tmp += t * t;
+  b_theta1_tmp = scale * sqrt(b_theta1_tmp);
+  r_idx_2 = rt_atan2d_snf(b_theta1_tmp,
+                          (0.0 * UPPmove[0] + 0.0 * UPPmove[1]) + UPPmove[2]);
+  s = sin(r_idx_2);
+  c = cos(r_idx_2);
   /* SL3DNORMALIZE Normalize a vector. */
   /*    Y = SL3DNORMALIZE(X,MAXZERO) returns a unit vector Y parallel to the */
   /*    input vector X. Input X can be vector of any size. If the modulus of */
@@ -239,7 +238,7 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
   /*    Not to be called directly. */
   /*    Copyright 1998-2008 HUMUSOFT s.r.o. and The MathWorks, Inc. */
   scale = 3.3121686421112381E-170;
-  r_idx_2 = xbase / theta1_tmp;
+  r_idx_2 = theta1_tmp[0] / b_theta1_tmp;
   r_idx_0 = r_idx_2;
   absxk = fabs(r_idx_2);
   if (absxk > 3.3121686421112381E-170) {
@@ -249,8 +248,8 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     t = absxk / 3.3121686421112381E-170;
     norm_vec = t * t;
   }
-  r_idx_2 = theta1_tmp_idx_1 / theta1_tmp;
-  xbase = r_idx_2;
+  r_idx_2 = theta1_tmp[1] / b_theta1_tmp;
+  r_idx_1 = r_idx_2;
   absxk = fabs(r_idx_2);
   if (absxk > scale) {
     t = scale / absxk;
@@ -260,7 +259,7 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     t = absxk / scale;
     norm_vec += t * t;
   }
-  r_idx_2 = theta1_tmp_idx_2 / theta1_tmp;
+  r_idx_2 = theta1_tmp[2] / b_theta1_tmp;
   t = r_idx_2 / scale;
   norm_vec += t * t;
   norm_vec = scale * sqrt(norm_vec);
@@ -270,65 +269,65 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     UPPmove[2] = 0.0;
   } else {
     UPPmove[0] = r_idx_0 / norm_vec;
-    UPPmove[1] = xbase / norm_vec;
+    UPPmove[1] = r_idx_1 / norm_vec;
     UPPmove[2] = r_idx_2 / norm_vec;
   }
-  xbase = (1.0 - c) * UPPmove[0];
-  rot1[0] = xbase * UPPmove[0] + c;
-  r_idx_2 = xbase * UPPmove[1];
-  r_idx_0 = s * UPPmove[2];
-  rot1[3] = r_idx_2 - r_idx_0;
-  xbase *= UPPmove[2];
-  norm_vec = s * UPPmove[1];
-  rot1[6] = xbase + norm_vec;
-  rot1[1] = r_idx_2 + r_idx_0;
-  r_idx_2 = (1.0 - c) * UPPmove[1];
-  rot1[4] = r_idx_2 * UPPmove[1] + c;
-  r_idx_2 *= UPPmove[2];
-  r_idx_0 = s * UPPmove[0];
-  rot1[7] = r_idx_2 - r_idx_0;
-  rot1[2] = xbase - norm_vec;
-  rot1[5] = r_idx_2 + r_idx_0;
+  scale = (1.0 - c) * UPPmove[0];
+  rot1[0] = scale * UPPmove[0] + c;
+  absxk = scale * UPPmove[1];
+  t = s * UPPmove[2];
+  rot1[3] = absxk - t;
+  scale *= UPPmove[2];
+  r_idx_2 = s * UPPmove[1];
+  rot1[6] = scale + r_idx_2;
+  rot1[1] = absxk + t;
+  absxk = (1.0 - c) * UPPmove[1];
+  rot1[4] = absxk * UPPmove[1] + c;
+  absxk *= UPPmove[2];
+  t = s * UPPmove[0];
+  rot1[7] = absxk - t;
+  rot1[2] = scale - r_idx_2;
+  rot1[5] = absxk + t;
   rot1[8] = (1.0 - c) * UPPmove[2] * UPPmove[2] + c;
   /*  Tao旋转rot1 */
-  norm_vec = Tao[0];
-  xbase = Tao[1];
-  r_idx_2 = Tao[2];
+  r_idx_2 = Tao[0];
+  scale = Tao[1];
+  absxk = Tao[2];
   for (i = 0; i < 3; i++) {
-    UPPmove[i] = (norm_vec * rot1[3 * i] + xbase * rot1[3 * i + 1]) +
-                 r_idx_2 * rot1[3 * i + 2];
+    UPPmove[i] = (r_idx_2 * rot1[3 * i] + scale * rot1[3 * i + 1]) +
+                 absxk * rot1[3 * i + 2];
   }
   /*  构建旋转矩阵2,taorot1转到x轴 */
-  xbase = 0.0 * UPPmove[2] - 0.0 * UPPmove[1];
-  theta1_tmp_idx_1 = 0.0 * UPPmove[0] - UPPmove[2];
-  theta1_tmp_idx_2 = UPPmove[1] - 0.0 * UPPmove[0];
+  theta1_tmp[0] = 0.0 * UPPmove[2] - 0.0 * UPPmove[1];
+  theta1_tmp[1] = 0.0 * UPPmove[0] - UPPmove[2];
+  theta1_tmp[2] = UPPmove[1] - 0.0 * UPPmove[0];
   scale = 3.3121686421112381E-170;
-  t = xbase / 3.3121686421112381E-170;
-  theta1_tmp = t * t;
-  absxk = fabs(theta1_tmp_idx_1);
+  t = theta1_tmp[0] / 3.3121686421112381E-170;
+  b_theta1_tmp = t * t;
+  absxk = fabs(theta1_tmp[1]);
   if (absxk > 3.3121686421112381E-170) {
     t = 3.3121686421112381E-170 / absxk;
-    theta1_tmp = theta1_tmp * t * t + 1.0;
+    b_theta1_tmp = b_theta1_tmp * t * t + 1.0;
     scale = absxk;
   } else {
     t = absxk / 3.3121686421112381E-170;
-    theta1_tmp += t * t;
+    b_theta1_tmp += t * t;
   }
-  absxk = fabs(theta1_tmp_idx_2);
+  absxk = fabs(theta1_tmp[2]);
   if (absxk > scale) {
     t = scale / absxk;
-    theta1_tmp = theta1_tmp * t * t + 1.0;
+    b_theta1_tmp = b_theta1_tmp * t * t + 1.0;
     scale = absxk;
   } else {
     t = absxk / scale;
-    theta1_tmp += t * t;
+    b_theta1_tmp += t * t;
   }
-  theta1_tmp = scale * sqrt(theta1_tmp);
+  b_theta1_tmp = scale * sqrt(b_theta1_tmp);
   /*  总的旋转矩阵 ROT */
-  norm_vec = rt_atan2d_snf(theta1_tmp,
-                           (UPPmove[0] + 0.0 * UPPmove[1]) + 0.0 * UPPmove[2]);
-  s = sin(norm_vec);
-  c = cos(norm_vec);
+  r_idx_2 = rt_atan2d_snf(b_theta1_tmp,
+                          (UPPmove[0] + 0.0 * UPPmove[1]) + 0.0 * UPPmove[2]);
+  s = sin(r_idx_2);
+  c = cos(r_idx_2);
   /* SL3DNORMALIZE Normalize a vector. */
   /*    Y = SL3DNORMALIZE(X,MAXZERO) returns a unit vector Y parallel to the */
   /*    input vector X. Input X can be vector of any size. If the modulus of */
@@ -337,12 +336,12 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
   /*    Not to be called directly. */
   /*    Copyright 1998-2008 HUMUSOFT s.r.o. and The MathWorks, Inc. */
   scale = 3.3121686421112381E-170;
-  r_idx_2 = xbase / theta1_tmp;
+  r_idx_2 = theta1_tmp[0] / b_theta1_tmp;
   r_idx_0 = r_idx_2;
   t = r_idx_2 / 3.3121686421112381E-170;
   norm_vec = t * t;
-  r_idx_2 = theta1_tmp_idx_1 / theta1_tmp;
-  xbase = r_idx_2;
+  r_idx_2 = theta1_tmp[1] / b_theta1_tmp;
+  r_idx_1 = r_idx_2;
   absxk = fabs(r_idx_2);
   if (absxk > 3.3121686421112381E-170) {
     t = 3.3121686421112381E-170 / absxk;
@@ -352,7 +351,7 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     t = absxk / 3.3121686421112381E-170;
     norm_vec += t * t;
   }
-  r_idx_2 = theta1_tmp_idx_2 / theta1_tmp;
+  r_idx_2 = theta1_tmp[2] / b_theta1_tmp;
   absxk = fabs(r_idx_2);
   if (absxk > scale) {
     t = scale / absxk;
@@ -369,62 +368,51 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     UPPmove[2] = 0.0;
   } else {
     UPPmove[0] = r_idx_0 / norm_vec;
-    UPPmove[1] = xbase / norm_vec;
+    UPPmove[1] = r_idx_1 / norm_vec;
     UPPmove[2] = r_idx_2 / norm_vec;
   }
-  xbase = (1.0 - c) * UPPmove[0];
-  b_PAB[0] = xbase * UPPmove[0] + c;
-  r_idx_2 = xbase * UPPmove[1];
-  r_idx_0 = s * UPPmove[2];
-  b_PAB[3] = r_idx_2 - r_idx_0;
-  xbase *= UPPmove[2];
-  norm_vec = s * UPPmove[1];
-  b_PAB[6] = xbase + norm_vec;
-  b_PAB[1] = r_idx_2 + r_idx_0;
-  r_idx_2 = (1.0 - c) * UPPmove[1];
-  b_PAB[4] = r_idx_2 * UPPmove[1] + c;
+  r_idx_2 = (1.0 - c) * UPPmove[0];
+  dv[0] = r_idx_2 * UPPmove[0] + c;
+  scale = r_idx_2 * UPPmove[1];
+  absxk = s * UPPmove[2];
+  dv[3] = scale - absxk;
   r_idx_2 *= UPPmove[2];
-  r_idx_0 = s * UPPmove[0];
-  b_PAB[7] = r_idx_2 - r_idx_0;
-  b_PAB[2] = xbase - norm_vec;
-  b_PAB[5] = r_idx_2 + r_idx_0;
-  b_PAB[8] = (1.0 - c) * UPPmove[2] * UPPmove[2] + c;
-  for (i = 0; i < 3; i++) {
-    norm_vec = rot1[i];
-    xbase = rot1[i + 3];
-    r_idx_2 = rot1[i + 6];
-    for (itilerow = 0; itilerow < 3; itilerow++) {
-      ROT[i + 3 * itilerow] =
-          (norm_vec * b_PAB[3 * itilerow] + xbase * b_PAB[3 * itilerow + 1]) +
-          r_idx_2 * b_PAB[3 * itilerow + 2];
-    }
-  }
+  t = s * UPPmove[1];
+  dv[6] = r_idx_2 + t;
+  dv[1] = scale + absxk;
+  scale = (1.0 - c) * UPPmove[1];
+  dv[4] = scale * UPPmove[1] + c;
+  scale *= UPPmove[2];
+  absxk = s * UPPmove[0];
+  dv[7] = scale - absxk;
+  dv[2] = r_idx_2 - t;
+  dv[5] = scale + absxk;
+  dv[8] = (1.0 - c) * UPPmove[2] * UPPmove[2] + c;
   /*  计算A点 */
   /*  在PABrot的基础上增量xyz */
   /*  x为b*tan(phi) */
   /*  y为b */
   /*  z为Ti*h */
-  norm_vec = PAB[0];
-  xbase = PAB[1];
-  r_idx_2 = PAB[2];
   for (i = 0; i < 3; i++) {
-    r_idx_0 = Pin[i];
-    rot1[3 * i] = norm_vec - r_idx_0;
-    rot1[3 * i + 1] = xbase - r_idx_0;
-    rot1[3 * i + 2] = r_idx_2 - r_idx_0;
-  }
-  for (i = 0; i < 3; i++) {
-    norm_vec = rot1[i];
-    xbase = rot1[i + 3];
-    r_idx_2 = rot1[i + 6];
+    r_idx_2 = rot1[i];
+    scale = rot1[i + 3];
+    absxk = rot1[i + 6];
     for (itilerow = 0; itilerow < 3; itilerow++) {
-      b_PAB[i + 3 * itilerow] =
-          (norm_vec * ROT[3 * itilerow] + xbase * ROT[3 * itilerow + 1]) +
-          r_idx_2 * ROT[3 * itilerow + 2];
+      ROT[i + 3 * itilerow] =
+          (r_idx_2 * dv[3 * itilerow] + scale * dv[3 * itilerow + 1]) +
+          absxk * dv[3 * itilerow + 2];
     }
+    UPPmove[i] = PAB[i] - Pin[i];
   }
-  xbase = b_PAB[0];
-  r_idx_2 = tan(phi);
+  r_idx_2 = UPPmove[0];
+  scale = UPPmove[1];
+  absxk = UPPmove[2];
+  for (i = 0; i < 3; i++) {
+    theta1_tmp[i] = (r_idx_2 * ROT[3 * i] + scale * ROT[3 * i + 1]) +
+                    absxk * ROT[3 * i + 2];
+  }
+  scale = theta1_tmp[0];
+  absxk = tan(phi);
   emxInit_real_T(&Ay, 2);
   i = Ay->size[0] * Ay->size[1];
   Ay->size[0] = 1;
@@ -459,10 +447,10 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     emxEnsureCapacity_real_T(b_b, i);
     PointTable_A_off_data = b_b->data;
     for (i = 0; i < ibmat; i++) {
-      PointTable_A_off_data[i] = b / 2.0 * r_idx_2 + xbase;
+      PointTable_A_off_data[i] = b / 2.0 * absxk + scale;
     }
     for (i = 0; i < ibmat; i++) {
-      PointTable_A_off_data[i + (int)shenglunum] = -b / 2.0 * r_idx_2 + xbase;
+      PointTable_A_off_data[i + (int)shenglunum] = -b / 2.0 * absxk + scale;
     }
     i = Axoff->size[0] * Axoff->size[1];
     Axoff->size[0] = 1;
@@ -475,7 +463,7 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     }
     emxFree_real_T(&b_b);
   } else {
-    binary_expand_op_4(Axoff, b, r_idx_2, b_PAB[0], shenglunum, toff);
+    binary_expand_op_4(Axoff, b, absxk, theta1_tmp[0], shenglunum, toff);
     Axoff_data = Axoff->data;
   }
   /*  旋转平移回去 */
