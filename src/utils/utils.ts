@@ -379,30 +379,17 @@ export const downLoadFile = (data, filename = "data.json") => {
 
 export const loadFile = (jsonStr: string) => {
   return JSON.parse(jsonStr, (k, v) => {
-    console.log(
-      "%c Line:473 🥤 k,v",
-      "color:#f5ce50",
-      k,
-      typeof v,
-      v,
-      Object.prototype.hasOwnProperty.call(v, "x"),
-      Object.prototype.hasOwnProperty.call(v, "y"),
-      Object.prototype.hasOwnProperty.call(v, "z")
-    );
     if (
       typeof v === "object" &&
       Object.prototype.hasOwnProperty.call(v, "x") &&
       Object.prototype.hasOwnProperty.call(v, "y") &&
       Object.prototype.hasOwnProperty.call(v, "z")
     ) {
-      console.log("%c Line:473 🍖 d v", "color:#ea7e5c", v);
       return new CustomVector3(v.x, v.y, v.z, v);
     }
     return v;
   });
 };
-
-// loadFile("");
 
 /**
  * 根据声道数计算角度
@@ -488,8 +475,62 @@ export const Planefit4 = (
   return res;
 };
 
-export const CalculateRectangleFromVertex = () => {
-  _CalculateRectangleFromVertex();
+export const CalculateRectangleFromVertex = (
+  TrianglePoints4: CustomVector3[],
+  BoundPoint1: CustomVector3,
+  BoundPoint2: CustomVector3
+) => {
+  const trianglePoints4 = new EmxArray_real_T(TrianglePoints4);
+  const boundPoint1 = new EmxArray_real_T(BoundPoint1);
+  const boundPoint2 = new EmxArray_real_T(BoundPoint2);
+  const Pin = new EmxArray_real_T(3, 1);
+  const Pout = new EmxArray_real_T(3, 1);
+  const UPP = new EmxArray_real_T(3, 1);
+  const b = new EmxArray_real_T(1, 1);
+  const h = new EmxArray_real_T(1, 1);
+  const w = new EmxArray_real_T(1, 1);
+  const Tao = new EmxArray_real_T(3, 1);
+  /**
+   *  矩形8个顶点，8*3 矩阵
+   */
+  const PP = new EmxArray_real_T(8, 3);
+  _CalculateRectangleFromVertex(
+    trianglePoints4.ptr,
+    boundPoint1.arrayPtr,
+    boundPoint2.arrayPtr,
+    Pin.arrayPtr,
+    Pout.arrayPtr,
+    UPP.arrayPtr,
+    b.arrayPtr,
+    h.arrayPtr,
+    w.arrayPtr,
+    Tao.arrayPtr,
+    PP.ptr
+  );
+
+  const res = {
+    pIn: Pin.toVector3()[0],
+    pOut: Pout.toVector3()[0],
+    UPP: UPP.toVector3()[0],
+    b: b.toJSON()?.[0]?.[0],
+    h: h.toJSON()?.[0]?.[0],
+    w: w.toJSON()?.[0]?.[0],
+    Tao: Tao.toVector3()[0],
+    PP: PP.toJSON(),
+  };
+
+  trianglePoints4.free();
+  boundPoint1.free();
+  boundPoint2.free();
+  Pin.free();
+  Pout.free();
+  UPP.free();
+  b.free();
+  h.free();
+  w.free();
+  Tao.free();
+  PP.free();
+  return res;
 };
 
 /**

@@ -209,7 +209,11 @@ export const pointToAndMeasure = (v: CustomVector3) => {
 export const measureAndGetSimpleCoord = () => {
   if (location.search.includes("mock"))
     return Promise.resolve(
-      new CustomVector3(Math.random(), Math.random(), Math.random())
+      new CustomVector3(
+        Math.random() * 10,
+        Math.random() * 10,
+        Math.random() * 10
+      )
     );
   return measure().then(getSimpleCoord);
 };

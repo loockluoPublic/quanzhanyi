@@ -104,3 +104,15 @@ interface ICycle {
     pointB: CustomVector3;
   }[];
 }
+
+interface ICube {
+  /**
+   * 是否包含倒角
+   */
+  hasChamfer: boolean;
+
+  /**
+   * 矩形面采集点
+   */
+  MxPoints: Record<string, CustomVector3[]>;
+}

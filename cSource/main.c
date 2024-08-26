@@ -113,9 +113,14 @@ void CalcJuXingAAndBPointsAfterOffest(const double Tao[3], const double UPP[3], 
 
 EMSCRIPTEN_KEEPALIVE
 void CalculateRectangleFromVertex(
-    const double TrianglePoints4[16], const double P_bound1[3],
-    const double P_bound2[3], double Pin[3], double Pout[3], double UPP[3],
-    double *b, double *h, double *w, double Tao[4], double PP[24])
+    const emxArray_real_T *TrianglePoints4,
+    const double P_bound1[3],
+    const double P_bound2[3],
+    double Pin[3],
+    double Pout[3],
+    double UPP[3], double *b,
+    double *h, double *w, double Tao[3],
+    emxArray_real_T *PP)
 {
     Calculate_rectangle_from_vertex(
         TrianglePoints4, P_bound1,

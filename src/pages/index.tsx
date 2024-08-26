@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Connect from "../components/ConnectDevice";
 import { getLine, measureAndGetSimpleCoord } from "../utils/commond";
 import { useRecoilState } from "recoil";
-import { Data, Mode, TMode } from "../atom/globalState";
+import { Data, Mode, TMode, TType } from "../atom/globalState";
 import BaseInfo from "../components/BaseInfo";
 import GetPoints from "../components/GetPoints";
 import { MeasurePoints } from "./MeasurePoints";
@@ -11,8 +11,8 @@ import { CalculateAccurateCylinders } from "./CalculateAccurateCylinders";
 import { CalculateResultPoints } from "./CalculateResultPoints";
 import CylinderAgain from "./CylinderAgain";
 import Cube from "./Cube";
-import CubePre from "../components/CubePre";
-import { TType } from "../Layout";
+import CubePre from "./CubePre";
+import CubeFit from "./CubeFit";
 
 const isVoild = (b) => (b & 0b0011) > 0;
 enum SHOWTYPE {
@@ -37,12 +37,12 @@ enum SHOWTYPE {
 
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
   const [mode] = useRecoilState(Mode);
 
-  useEffect(() => {
-    setStep(0);
-  }, [mode]);
+  // useEffect(() => {
+  //   setStep(0);
+  // }, [mode]);
 
   const [form] = Form.useForm();
   (window as any).form = form;
@@ -74,7 +74,7 @@ export default function Setting() {
     (mode !== TMode.first ? SHOWTYPE.F : SHOWTYPE.c) |
     (data.type === TType.cube ? SHOWTYPE.f : SHOWTYPE.y);
 
-  const steps = [
+  const CycleSteps = [
     {
       title: "设备连接",
       components: <Connect />,
@@ -110,49 +110,35 @@ export default function Setting() {
       components: <CalculateResultPoints />,
       type: SHOWTYPE.yc,
     },
+  ];
 
-    /** 圆形-复测 */
-    {
+  if (mode === TMode.second) {
+    CycleSteps[CycleSteps.length - 1] = {
       title: "采集",
       components: <CylinderAgain />,
       type: SHOWTYPE.yf,
-    },
+    };
+  }
 
-    /** 方形 */
+  const CubeSteps = [
     {
-      title: "矩形范围",
+      title: "设备连接",
+      components: <Connect />,
+      type: SHOWTYPE.bb,
+    },
+    {
+      title: "手动采点",
       components: <CubePre />,
-      type: SHOWTYPE.fb,
+      type: SHOWTYPE.bb,
     },
     {
-      title: "手动采点左侧面",
-      components: <Cube pointsKeys="cubePointsL" />,
-      type: SHOWTYPE.fb,
+      title: "方涵拟合",
+      components: <CubeFit />,
+      type: SHOWTYPE.bb,
     },
-    {
-      title: "手动采点顶面",
-      components: <Cube pointsKeys="cubePointsT" />,
-      type: SHOWTYPE.fb,
-    },
-    {
-      title: "手动采点右侧面",
-      components: <Cube pointsKeys="cubePointsR" />,
-      type: SHOWTYPE.fb,
-    },
-    {
-      title: "手动采点低面",
-      components: <Cube pointsKeys="cubePointsB" />,
-      type: SHOWTYPE.fb,
-    },
-    {
-      title: "计算安装位",
-      components: <Cube pointsKeys="demo" />,
-      type: SHOWTYPE.fb,
-    },
-  ].filter((item) => {
-    const res = currentType & item.type;
-    return isVoild(res) && isVoild(res >> 2);
-  });
+  ];
+
+  let steps = data.type === TType.cube ? CubeSteps : CycleSteps;
 
   const updateFormData = () => {
     const formValues = form.getFieldsValue();
@@ -181,7 +167,11 @@ export default function Setting() {
         <Form
           key={step}
           onFinish={next}
-          className={step > 2 ? " q-w-full" : ""}
+          className={
+            step > 2 || (data.type === TType.cube && step > 0)
+              ? " q-w-full"
+              : ""
+          }
           form={form}
           onValuesChange={updateFormData}
           initialValues={data}

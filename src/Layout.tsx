@@ -2,16 +2,12 @@ import React, { PropsWithChildren } from "react";
 import type { MenuProps } from "antd";
 import { Layout, Menu, Switch } from "antd";
 import { BrowserRouter as Router, Routes } from "react-router-dom";
-import { Data, Mode, TMode } from "./atom/globalState";
+import { Data, Mode, TMode, TType } from "./atom/globalState";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { downLoadFile } from "./utils/utils";
 import UploadFile from "./components/UploadFile";
 const { Header, Content } = Layout;
 
-export enum TType {
-  cycle = "cycle",
-  cube = "cube",
-}
 const items1: MenuProps["items"] = [
   {
     key: TType.cycle,
@@ -34,7 +30,7 @@ const App: React.FC<PropsWithChildren> = (props) => {
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={[TType.cycle]}
+            defaultSelectedKeys={[data.type]}
             items={items1}
             style={{ flex: 1, minWidth: 0 }}
             onClick={({ key }) => {

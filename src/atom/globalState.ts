@@ -1,7 +1,12 @@
 import { atom } from "recoil";
 import mockData from "../utils/mockData";
 import { CustomVector3 } from "../class/CustomVector3";
-import { BaseInfo, ICycle, ICycleBase } from "./type";
+import { BaseInfo, ICube, ICycle, ICycleBase } from "./type";
+
+export enum TType {
+  cycle = "cycle",
+  cube = "cube",
+}
 
 export const connectState = atom({
   key: "connectState", // 唯一标识这个状态
@@ -13,12 +18,21 @@ export const deviceInfo = atom({
   default: undefined, // 默认值
 });
 
-export interface GlobalData extends Partial<BaseInfo & ICycleBase & ICycle> {
+export interface GlobalData
+  extends Partial<BaseInfo & ICycleBase & ICycle & ICube> {
+  /**
+   * 类型，管道或者方涵
+   */
+  type: TType;
   [k: string]: any;
 }
 export const Data = atom<GlobalData>({
   key: "data", // 唯一标识这个状态
   default: {
+    MxPoints: {},
+    hasChamfer: false,
+    firstPoints: [],
+    type: TType.cube,
     mPoints: mockData.mPoints.map((item) => {
       return new CustomVector3(item.x, item.y, item.z);
     }),

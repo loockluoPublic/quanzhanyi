@@ -3,23 +3,30 @@ import { Cylinder, Html, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import "./index.css";
 import "../../utils/utils";
-import { useRecoilState } from "recoil";
-import { Data } from "../../atom/globalState";
-import useMeasure from "../../utils/useMeasure";
+
 import { ReactNode, useEffect, useRef, useState } from "react";
-import { GenerateMultiLayeredMeasurementPoints } from "../../utils/utils";
-import PointsVector3 from "../PointVector3";
-import { pointToAndMeasure } from "../../utils/commond";
-import { Tree, message } from "antd";
+
 import { CustomVector3 } from "../../class/CustomVector3";
-import { Line } from "@react-three/drei";
+
 import PerspectiveCamera from "./PerspectiveCamera";
-import MyCylinder from "./MyCylinder";
+
 import React from "react";
+import Rectangular from "../Rectangular";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
 // import { button, useControls } from "leva";
+
+const MxColor = [
+  "#5352ed",
+  "#e74c3c",
+  "#1e90ff",
+  "#e67e22",
+  "#1e90ff",
+  "#7bed9f",
+  "#f39c12",
+  "#9b59b6",
+];
 
 const pointsData: any = [];
 for (let i = 0; i < 10; i++) {
@@ -31,9 +38,9 @@ function PointsLabel(props: {
   style?: React.CSSProperties;
   color?: string;
 }) {
-  return props?.points?.map((item, i) => {
+  return props?.points?.map((item) => {
     return (
-      <Html position={item.toVector3()} key={`${item.key}_${i}`}>
+      <Html position={item.toVector3()} key={item.key}>
         <div
           className="q-w-20 relative"
           style={{ "--point-color": props.color } as any}
@@ -48,7 +55,7 @@ function PointsLabel(props: {
 
 export default function Index(props: {
   className?: string;
-  mPoints: CustomVector3[];
+  MxPoints?: Record<string, CustomVector3[]>;
   loading?: boolean;
   setData?: (md: CustomVector3[]) => void;
   direct?: number[];
@@ -59,7 +66,6 @@ export default function Index(props: {
   const pointsShowType = props.pointsShowType || false;
 
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
-  const [selectedKeys, setSelectedKeys] = useState<number[]>([]);
 
   const [h, setH] = useState(0);
 
@@ -80,40 +86,19 @@ export default function Index(props: {
 
   useEffect(() => {
     // props 不允许更改，必须重新创建对象
-    setPoints(props.mPoints.map((p) => p.fromCustomVector3()));
+    setPoints(props.mPoints?.map?.((p) => p.fromCustomVector3()) ?? []);
   }, [props.mPoints]);
 
   useEffect(() => {
     const keys = showPoints
       .map((p) => (p.enable ? p.key : null))
       .filter((p) => !!p);
-    setSelectedKeys(keys);
   }, [showPoints]);
-
-  const showPointsDom = () => {
-    switch (pointsShowType) {
-      case false:
-        return null;
-
-      default:
-      case "table":
-        return (
-          <div>
-            {props.mPoints?.map((item) => {
-              return (
-                <div key={item.key} className="q-my-1">
-                  <PointsVector3 showGetPoints={false} value={item} />
-                </div>
-              );
-            })}
-          </div>
-        );
-    }
-  };
 
   useEffect(() => {
     setH(ref.current?.clientHeight);
   }, []);
+
   return (
     <div className=" q-flex q-w-full q-h-full q-overflow-hidden" ref={ref}>
       <Canvas
@@ -131,9 +116,14 @@ export default function Index(props: {
           decay={0}
           intensity={Math.PI}
         />
-        <MyCylinder {...props?.calulateRes} />
-        {/* <Box position={[0, 0, 0]} /> */}
-        <PointsLabel points={showPoints.filter((p) => p.enable)} color="#000" />
+
+        <Rectangular
+          trianglePoints={props.trianglePoints as CustomVector3[]}
+        ></Rectangular>
+
+        {Object.values(props.MxPoints)?.map((pArr, i) => {
+          return <PointsLabel points={pArr} color={MxColor[i]} />;
+        })}
 
         {props?.sdm?.includes("A") && (
           <PointsLabel
@@ -149,19 +139,6 @@ export default function Index(props: {
           />
         )}
 
-        {/* {props?.direct?.length > 0 && (
-          <Line
-            points={[
-              new THREE.Vector3().setFromSpherical(
-                new THREE.Spherical(1, props.direct[1], props.direct[0])
-              ),
-              new THREE.Vector3().setFromSpherical(
-                new THREE.Spherical(-1, props.direct[1], props.direct[0])
-              ),
-            ]}
-          />
-        )} */}
-
         <OrbitControls />
       </Canvas>
       {props?.component && (
@@ -170,8 +147,6 @@ export default function Index(props: {
           className="q-flex-shrink-0 q-flex-grow-0"
         >
           {props?.component}
-
-          {showPointsDom()}
         </div>
       )}
     </div>
