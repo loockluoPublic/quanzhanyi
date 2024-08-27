@@ -12,7 +12,7 @@ import BaseInfo from "../components/BaseInfo";
 
 import { SettingOutlined } from "@ant-design/icons";
 
-const Point = (props) => {
+export const Point = (props) => {
   const v = props.p;
 
   if (typeof v?.x === "number") {

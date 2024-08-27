@@ -65,6 +65,7 @@ export default function Index(props: {
   [k: string]: any;
 }) {
   const pointsShowType = props.pointsShowType || false;
+  console.log("%c Line:68 🍢 props", "color:#f5ce50", props);
 
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
 
@@ -122,7 +123,7 @@ export default function Index(props: {
           trianglePoints={props.trianglePoints as CustomVector3[]}
         ></Rectangular>
 
-        {Object.values(props.MxPoints)?.map((pArr, i) => {
+        {Object.values(props.MxPoints ?? [])?.map((pArr, i) => {
           return <PointsLabel points={pArr} color={MxColor[i]} />;
         })}
 

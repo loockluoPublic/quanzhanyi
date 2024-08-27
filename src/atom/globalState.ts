@@ -29,6 +29,9 @@ export interface GlobalData
 export const Data = atom<GlobalData>({
   key: "data", // 唯一标识这个状态
   default: {
+    sdfb: 4,
+    sdj: 45,
+    sdm: ["A", "B"],
     MxPoints: {},
     hasChamfer: false,
     firstPoints: [] as any,

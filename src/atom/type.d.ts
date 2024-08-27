@@ -41,7 +41,7 @@ interface ICycleBase {
   /**
    * AB面交点
    */
-  centerPoint: [CustomVector3];
+  centerPoint: [CustomVector3] | CustomVector3;
 }
 
 interface ICycle {

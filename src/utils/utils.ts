@@ -539,13 +539,88 @@ export const CalculateRectangleFromVertex = (
  * @returns
  */
 export const shengDaoGaoDu = (numShengLu: number) => {
-  const ti = new EmxArray_real_T(3, numShengLu * 2);
+  const ti = new EmxArray_real_T(1, numShengLu * 2);
 
   _shengDaoGaoDu(numShengLu, ti.ptr);
 
-  const res = ti.toVector3();
+  const res = ti.toJSON();
 
   ti.free();
+  return res;
+};
+
+/**
+ * 矩形tOff计算
+ * @param a 插入深度
+ * @param sdj 声道角
+ * @param sign 符号
+ * @returns
+ */
+export const cubeTOff = (a: number, sdj: number, sign: number) => {
+  return Number(((a / Math.tan(ang2rad(sdj))) * sign).toFixed(4));
+};
+
+/**
+ * 计算矩形安装位置
+ * @param cubeRes
+ * @param PAB AB面交点
+ * @param sdj 声道角
+ * @param sdfb 声道分布
+ */
+export const CalcJuXingAAndBPointsAfterOffest = (
+  cubeRes: ReturnType<typeof CalculateRectangleFromVertex>,
+  PAB: CustomVector3,
+  sdj: number,
+  sdfb: number,
+  Ti: number[],
+  TOff: number[]
+) => {
+  const Pin = new EmxArray_real_T(cubeRes.pIn);
+  const UPP = new EmxArray_real_T(cubeRes.UPP);
+  const Tao = new EmxArray_real_T(cubeRes.Tao);
+  const pab = new EmxArray_real_T(PAB);
+  const ti = new EmxArray_real_T(Ti);
+  const tOff = new EmxArray_real_T(TOff);
+
+  const A = new EmxArray_real_T(3, Ti.length);
+  const B = new EmxArray_real_T(3, Ti.length);
+
+  _CalcJuXingAAndBPointsAfterOffest(
+    Tao.arrayPtr,
+    UPP.arrayPtr,
+    Pin.arrayPtr,
+    cubeRes.b,
+    cubeRes.h,
+    pab.arrayPtr,
+    sdj,
+    sdfb,
+    ti.ptr,
+    tOff.ptr,
+    A.ptr,
+    B.ptr
+  );
+
+  CustomVector3.setPublicInfo("A", 0);
+  const bottomA = A.toVector3();
+  CustomVector3.setPublicInfo("B", 0);
+  const bottomB = B.toVector3();
+
+  const res = bottomA.map((a, i) => {
+    return {
+      pointA: a,
+      pointB: bottomB[i],
+    };
+  });
+
+  Pin.free();
+  UPP.free();
+  Tao.free();
+  pab.free();
+  ti.free();
+  tOff.free();
+  A.free();
+  B.free();
+
   return res;
 };
 

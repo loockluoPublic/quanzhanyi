@@ -98,3 +98,7 @@ button:focus-visible {
 }
 
 .resultPoint {}
+
+.ant-input-number {
+  width: 90px !important;
+}

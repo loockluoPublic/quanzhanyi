@@ -12,7 +12,7 @@ import { CalculateResultPoints } from "./CalculateResultPoints";
 import CylinderAgain from "./CylinderAgain";
 import Cube from "./Cube";
 import CubePre from "./CubePre";
-import CubeFit from "./CubeFit";
+import CubeFit from "./CubeResult";
 
 const isVoild = (b) => (b & 0b0011) > 0;
 enum SHOWTYPE {
