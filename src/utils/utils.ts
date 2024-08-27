@@ -378,7 +378,7 @@ export const downLoadFile = (data, filename = "data.json") => {
 };
 
 export const loadFile = (jsonStr: string) => {
-  return JSON.parse(jsonStr, (k, v) => {
+  return JSON.parse(jsonStr, (_, v) => {
     if (
       typeof v === "object" &&
       Object.prototype.hasOwnProperty.call(v, "x") &&
@@ -476,11 +476,11 @@ export const Planefit4 = (
 };
 
 export const CalculateRectangleFromVertex = (
-  TrianglePoints4: CustomVector3[],
+  TrianglePoints: CustomVector3[],
   BoundPoint1: CustomVector3,
   BoundPoint2: CustomVector3
 ) => {
-  const trianglePoints4 = new EmxArray_real_T(TrianglePoints4);
+  const trianglePoints = new EmxArray_real_T(TrianglePoints);
   const boundPoint1 = new EmxArray_real_T(BoundPoint1);
   const boundPoint2 = new EmxArray_real_T(BoundPoint2);
   const Pin = new EmxArray_real_T(3, 1);
@@ -495,7 +495,7 @@ export const CalculateRectangleFromVertex = (
    */
   const PP = new EmxArray_real_T(8, 3);
   _CalculateRectangleFromVertex(
-    trianglePoints4.ptr,
+    trianglePoints.ptr,
     boundPoint1.arrayPtr,
     boundPoint2.arrayPtr,
     Pin.arrayPtr,
@@ -512,14 +512,14 @@ export const CalculateRectangleFromVertex = (
     pIn: Pin.toVector3()[0],
     pOut: Pout.toVector3()[0],
     UPP: UPP.toVector3()[0],
-    b: b.toJSON()?.[0]?.[0],
-    h: h.toJSON()?.[0]?.[0],
-    w: w.toJSON()?.[0]?.[0],
+    b: b.toJSON()?.[0],
+    h: h.toJSON()?.[0],
+    w: w.toJSON()?.[0],
     Tao: Tao.toVector3()[0],
     PP: PP.toJSON(),
   };
 
-  trianglePoints4.free();
+  trianglePoints.free();
   boundPoint1.free();
   boundPoint2.free();
   Pin.free();

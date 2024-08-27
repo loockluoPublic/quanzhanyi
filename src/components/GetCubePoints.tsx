@@ -7,6 +7,7 @@ import PointsVector3 from "./PointVector3";
 
 import * as mockData from "../utils/cubeMockData";
 import { CustomVector3 } from "../class/CustomVector3";
+import { CalculateRectangleFromVertex, Planefit4 } from "../utils/utils";
 
 const mx = [
   mockData.cubePointsL,
@@ -17,6 +18,7 @@ const mx = [
 
 export default function () {
   const [data, setData] = useRecoilState(Data);
+  console.log("%c Line:21 🌽 data", "color:#33a5ff", data);
 
   const options = [
     { value: 0, label: "左面" },
@@ -37,6 +39,29 @@ export default function () {
       ),
     };
   });
+
+  const planeFit = () => {
+    const paramArr: [
+      CustomVector3[],
+      CustomVector3[],
+      CustomVector3[],
+      CustomVector3[],
+      CustomVector3,
+      CustomVector3
+    ] = [...Object.values(data.MxPoints), ...data.firstPoints] as any;
+    const res = Planefit4(...paramArr);
+
+    const cubeResult = CalculateRectangleFromVertex(
+      res.trianglePoints,
+      ...data.firstPoints
+    );
+
+    setData({
+      ...data,
+      ...res,
+      cubeResult,
+    });
+  };
 
   const [num, setNum] = useState(0);
 
@@ -111,6 +136,9 @@ export default function () {
         </Button>
       </div>
       <div>
+        <Button className=" q-float-right q-mt-2  q-ml-4" onClick={planeFit}>
+          方涵拟合
+        </Button>
         <Button
           className=" q-float-right q-mt-2  q-ml-4"
           onClick={() => {

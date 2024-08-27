@@ -61,6 +61,7 @@ export default function Index(props: {
   direct?: number[];
   component?: ReactNode;
   pointsShowType?: "points" | "table" | false;
+  trianglePoints?: CustomVector3[];
   [k: string]: any;
 }) {
   const pointsShowType = props.pointsShowType || false;

@@ -34,7 +34,7 @@ const App: React.FC<PropsWithChildren> = (props) => {
             items={items1}
             style={{ flex: 1, minWidth: 0 }}
             onClick={({ key }) => {
-              setData({ ...data, type: key });
+              setData({ ...data, type: key as TType });
             }}
           />
           <Switch

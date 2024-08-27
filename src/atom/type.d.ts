@@ -115,4 +115,9 @@ interface ICube {
    * 矩形面采集点
    */
   MxPoints: Record<string, CustomVector3[]>;
+
+  /**
+   * 三角面顶点
+   */
+  trianglePoints?: CustomVector3[];
 }

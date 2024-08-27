@@ -31,7 +31,7 @@ export const Data = atom<GlobalData>({
   default: {
     MxPoints: {},
     hasChamfer: false,
-    firstPoints: [],
+    firstPoints: [] as any,
     type: TType.cube,
     mPoints: mockData.mPoints.map((item) => {
       return new CustomVector3(item.x, item.y, item.z);

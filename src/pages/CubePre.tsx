@@ -14,7 +14,13 @@ function CubePre() {
       <GetCubePoints />
     </div>
   );
-  return <CubeFitting component={comp} MxPoints={data.MxPoints}></CubeFitting>;
+  return (
+    <CubeFitting
+      component={comp}
+      MxPoints={data.MxPoints}
+      trianglePoints={data.trianglePoints}
+    ></CubeFitting>
+  );
 }
 
 export default CubePre;
