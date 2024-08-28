@@ -7,6 +7,7 @@ import { Point } from "./CalculateResultPoints";
 import { useEffect, useRef } from "react";
 import Select, { DefaultOptionType } from "antd/es/select";
 import {
+  ang2rad,
   CalcJuXingAAndBPointsAfterOffest,
   cubeTOff,
   rad2ang,
@@ -53,7 +54,6 @@ function CubeResult() {
         };
       });
     }
-
     sdfbPreRef.current = data.sdfb;
   }, [data.sdfb, data?.cubeTable]);
 
@@ -91,8 +91,6 @@ function CubeResult() {
     }) ?? [];
 
   const calcPoint = () => {
-    console.log("%c Line:92 🍋 calcPoint", "color:#fca650", tOff, Ti);
-
     if (!data.centerPoint) {
       message.error("请采集AB面交点");
       return;
@@ -108,7 +106,7 @@ function CubeResult() {
         const AB = CalcJuXingAAndBPointsAfterOffest(
           data.cubeResult,
           data.centerPoint as CustomVector3,
-          data.sdj,
+          ang2rad(data.sdj),
           data.sdfb,
           Ti,
           tOff
@@ -117,7 +115,6 @@ function CubeResult() {
         const tableData = data.cubeTable.map((item, i) => {
           const newItem = {
             ...item,
-            tOff: cubeTOff(item.a, data.sdj, item.sign),
             AB: AB[i],
           };
 
@@ -141,14 +138,10 @@ function CubeResult() {
     }
   };
 
-  // useEffect(() => {
-  //   calcPoint();
-  // }, []);
-
   useEffect(() => {
-    calcPoint();
+    if (data.centerPoint) calcPoint();
     console.log("%c Line:113 🥕 Ti", "color:#ffdd4d", Ti, tOff);
-  }, [[...Ti, ...tOff].join(",")]);
+  }, [[...Ti, ...tOff].join(","), data.centerPoint]);
 
   const onChange = (v: number, i: number, key: string) => {
     console.log("%c Line:153 🌮 v", "color:#3f7cff", v, i, key);
@@ -158,9 +151,9 @@ function CubeResult() {
       };
       if (index === i) {
         newItem[key] = v;
-        // if (key === "a") {
-        //   newItem.tOff = cubeTOff(newItem.a, data.sdj, item.sign);
-        // }
+        if (key === "a") {
+          newItem.tOff = cubeTOff(newItem.a, data.sdj, item.sign);
+        }
       }
       return newItem;
     });

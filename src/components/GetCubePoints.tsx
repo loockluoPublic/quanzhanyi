@@ -140,6 +140,7 @@ export default function () {
           方涵拟合
         </Button>
         <Button
+          size="small"
           className=" q-float-right q-mt-2  q-ml-4"
           onClick={() => {
             setData((d) => {
@@ -156,6 +157,7 @@ export default function () {
           模拟数据
         </Button>
         <Button
+          size="small"
           className=" q-float-right q-mt-2"
           onClick={() => {
             setData((d) => {
