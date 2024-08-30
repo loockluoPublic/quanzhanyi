@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 22:07:29
+ * C/C++ source code generated on  : 30-Aug-2024 21:53:25
  */
 
 /* Include Files */
@@ -1624,12 +1624,12 @@ void myvrrotvec2mat_api(const mxArray *prhs, const mxArray **plhs)
 }
 
 /*
- * Arguments    : const mxArray * const prhs[6]
+ * Arguments    : const mxArray * const prhs[7]
  *                int32_T nlhs
  *                const mxArray *plhs[2]
  * Return Type  : void
  */
-void planefit4_api(const mxArray *const prhs[6], int32_T nlhs,
+void planefit4_api(const mxArray *const prhs[7], int32_T nlhs,
                    const mxArray *plhs[2])
 {
   emlrtStack st = {
@@ -1645,6 +1645,7 @@ void planefit4_api(const mxArray *const prhs[6], int32_T nlhs,
   emxArray_real_T *TrianglePoints;
   real_T(*BoundPoint1)[3];
   real_T(*BoundPoint2)[3];
+  real_T distanceThreshold;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   /* Marshall function inputs */
@@ -1662,11 +1663,13 @@ void planefit4_api(const mxArray *const prhs[6], int32_T nlhs,
   g_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "Points4", Points4);
   BoundPoint1 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[4]), "BoundPoint1");
   BoundPoint2 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[5]), "BoundPoint2");
+  distanceThreshold =
+      emlrt_marshallIn(&st, emlrtAliasP(prhs[6]), "distanceThreshold");
   /* Invoke the target function */
   emxInit_real_T(&st, &PlaneParaOut);
   emxInit_real_T(&st, &TrianglePoints);
   planefit4(Points1, Points2, Points3, Points4, *BoundPoint1, *BoundPoint2,
-            PlaneParaOut, TrianglePoints);
+            distanceThreshold, PlaneParaOut, TrianglePoints);
   emxFree_real_T(&st, &Points4);
   emxFree_real_T(&st, &Points3);
   emxFree_real_T(&st, &Points2);
@@ -1684,12 +1687,12 @@ void planefit4_api(const mxArray *const prhs[6], int32_T nlhs,
 }
 
 /*
- * Arguments    : const mxArray * const prhs[10]
+ * Arguments    : const mxArray * const prhs[11]
  *                int32_T nlhs
  *                const mxArray *plhs[2]
  * Return Type  : void
  */
-void planefit8_api(const mxArray *const prhs[10], int32_T nlhs,
+void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
                    const mxArray *plhs[2])
 {
   emlrtStack st = {
@@ -1709,6 +1712,7 @@ void planefit8_api(const mxArray *const prhs[10], int32_T nlhs,
   emxArray_real_T *TrianglePoints;
   real_T(*P_bound1)[3];
   real_T(*P_bound2)[3];
+  real_T distanceThreshold;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   /* Marshall function inputs */
@@ -1738,11 +1742,14 @@ void planefit8_api(const mxArray *const prhs[10], int32_T nlhs,
   g_emlrt_marshallIn(&st, emlrtAlias(prhs[7]), "Points8", Points8);
   P_bound1 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[8]), "P_bound1");
   P_bound2 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[9]), "P_bound2");
+  distanceThreshold =
+      emlrt_marshallIn(&st, emlrtAliasP(prhs[10]), "distanceThreshold");
   /* Invoke the target function */
   emxInit_real_T(&st, &PlaneParaOut);
   emxInit_real_T(&st, &TrianglePoints);
   planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7,
-            Points8, *P_bound1, *P_bound2, PlaneParaOut, TrianglePoints);
+            Points8, *P_bound1, *P_bound2, distanceThreshold, PlaneParaOut,
+            TrianglePoints);
   emxFree_real_T(&st, &Points8);
   emxFree_real_T(&st, &Points7);
   emxFree_real_T(&st, &Points6);

@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 22:07:29
+ * C/C++ source code generated on  : 30-Aug-2024 21:53:25
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -82,10 +82,10 @@ void unsafe_myvrrotvec2mat_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                        int32_T nrhs, const mxArray *prhs[1]);
 
 void unsafe_planefit4_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
-                                  const mxArray *prhs[6]);
+                                  const mxArray *prhs[7]);
 
 void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
-                                  const mxArray *prhs[10]);
+                                  const mxArray *prhs[11]);
 
 void unsafe_planefit_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
                                  const mxArray *prhs[4]);

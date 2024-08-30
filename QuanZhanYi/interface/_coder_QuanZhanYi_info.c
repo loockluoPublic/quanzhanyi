@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 22:07:29
+ * C/C++ source code generated on  : 30-Aug-2024 21:53:25
  */
 
 /* Include Files */
@@ -359,10 +359,10 @@ mxArray *emlrtMexFcnProperties(void)
   emlrtSetField(xEntryPoints, 15, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 15, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 6);
+  xInputs = emlrtCreateLogicalMatrix(1, 7);
   emlrtSetField(xEntryPoints, 16, "Name", emlrtMxCreateString("planefit4"));
   emlrtSetField(xEntryPoints, 16, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(6.0));
+                emlrtMxCreateDoubleScalar(7.0));
   emlrtSetField(xEntryPoints, 16, "NumberOfOutputs",
                 emlrtMxCreateDoubleScalar(2.0));
   emlrtSetField(xEntryPoints, 16, "ConstantInputs", xInputs);
@@ -370,14 +370,14 @@ mxArray *emlrtMexFcnProperties(void)
                 emlrtMxCreateString(
                     "C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\planefit4.m"));
   emlrtSetField(xEntryPoints, 16, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739487.88630787039));
+                emlrtMxCreateDoubleScalar(739494.9117592593));
   emlrtSetField(xEntryPoints, 16, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 16, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 10);
+  xInputs = emlrtCreateLogicalMatrix(1, 11);
   emlrtSetField(xEntryPoints, 17, "Name", emlrtMxCreateString("planefit8"));
   emlrtSetField(xEntryPoints, 17, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(10.0));
+                emlrtMxCreateDoubleScalar(11.0));
   emlrtSetField(xEntryPoints, 17, "NumberOfOutputs",
                 emlrtMxCreateDoubleScalar(2.0));
   emlrtSetField(xEntryPoints, 17, "ConstantInputs", xInputs);
@@ -385,7 +385,7 @@ mxArray *emlrtMexFcnProperties(void)
                 emlrtMxCreateString(
                     "C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\planefit8.m"));
   emlrtSetField(xEntryPoints, 17, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739487.92180555558));
+                emlrtMxCreateDoubleScalar(739494.91206018522));
   emlrtSetField(xEntryPoints, 17, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 17, "Visible", emlrtMxCreateLogicalScalar(true));

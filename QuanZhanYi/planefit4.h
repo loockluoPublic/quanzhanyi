@@ -2,7 +2,7 @@
  * File: planefit4.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 22:07:29
+ * C/C++ source code generated on  : 30-Aug-2024 21:53:25
  */
 
 #ifndef PLANEFIT4_H
@@ -19,11 +19,13 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void
-planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
-          const emxArray_real_T *Points3, const emxArray_real_T *Points4,
-          const double BoundPoint1[3], const double BoundPoint2[3],
-          emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints);
+extern void planefit4(const emxArray_real_T *Points1,
+                      const emxArray_real_T *Points2,
+                      const emxArray_real_T *Points3,
+                      const emxArray_real_T *Points4,
+                      const double BoundPoint1[3], const double BoundPoint2[3],
+                      double distanceThreshold, emxArray_real_T *PlaneParaOut,
+                      emxArray_real_T *TrianglePoints);
 
 #ifdef __cplusplus
 }

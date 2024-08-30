@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 22:07:29
+ * C/C++ source code generated on  : 30-Aug-2024 21:53:25
  */
 
 /* Include Files */
@@ -848,25 +848,25 @@ void unsafe_myvrrotvec2mat_mexFunction(int32_T nlhs, mxArray *plhs[1],
  * Arguments    : int32_T nlhs
  *                mxArray *plhs[2]
  *                int32_T nrhs
- *                const mxArray *prhs[6]
+ *                const mxArray *prhs[7]
  * Return Type  : void
  */
 void unsafe_planefit4_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
-                                  const mxArray *prhs[6])
+                                  const mxArray *prhs[7])
 {
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[6];
+  const mxArray *b_prhs[7];
   const mxArray *outputs[2];
   int32_T i;
   int32_T i1;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 6) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 6, 4,
+  if (nrhs != 7) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 7, 4,
                         9, "planefit4");
   }
   if (nlhs > 2) {
@@ -874,7 +874,7 @@ void unsafe_planefit4_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
                         "planefit4");
   }
   /* Call the function. */
-  for (i = 0; i < 6; i++) {
+  for (i = 0; i < 7; i++) {
     b_prhs[i] = prhs[i];
   }
   planefit4_api(b_prhs, nlhs, outputs);
@@ -891,25 +891,25 @@ void unsafe_planefit4_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
  * Arguments    : int32_T nlhs
  *                mxArray *plhs[2]
  *                int32_T nrhs
- *                const mxArray *prhs[10]
+ *                const mxArray *prhs[11]
  * Return Type  : void
  */
 void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
-                                  const mxArray *prhs[10])
+                                  const mxArray *prhs[11])
 {
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[10];
+  const mxArray *b_prhs[11];
   const mxArray *outputs[2];
   int32_T i;
   int32_T i1;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 10) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 10, 4,
+  if (nrhs != 11) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 11, 4,
                         9, "planefit8");
   }
   if (nlhs > 2) {
@@ -917,7 +917,7 @@ void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
                         "planefit8");
   }
   /* Call the function. */
-  for (i = 0; i < 10; i++) {
+  for (i = 0; i < 11; i++) {
     b_prhs[i] = prhs[i];
   }
   planefit8_api(b_prhs, nlhs, outputs);

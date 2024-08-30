@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 22:07:29
+ * C/C++ source code generated on  : 30-Aug-2024 21:53:25
  */
 
 /*************************************************************************/
@@ -719,7 +719,7 @@ void main_planefit4(void)
   emxInitArray_real_T(&PlaneParaOut, 2);
   emxInitArray_real_T(&TrianglePoints, 2);
   planefit4(Points1, Points2, Points3, Points4, BoundPoint1_tmp,
-            BoundPoint1_tmp, PlaneParaOut, TrianglePoints);
+            BoundPoint1_tmp, argInit_real_T(), PlaneParaOut, TrianglePoints);
   emxDestroyArray_real_T(Points4);
   emxDestroyArray_real_T(Points3);
   emxDestroyArray_real_T(Points2);
@@ -769,7 +769,8 @@ void main_planefit8(void)
   emxInitArray_real_T(&PlaneParaOut, 2);
   emxInitArray_real_T(&TrianglePoints, 2);
   planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7,
-            Points8, P_bound1_tmp, P_bound1_tmp, PlaneParaOut, TrianglePoints);
+            Points8, P_bound1_tmp, P_bound1_tmp, argInit_real_T(), PlaneParaOut,
+            TrianglePoints);
   emxDestroyArray_real_T(Points8);
   emxDestroyArray_real_T(Points7);
   emxDestroyArray_real_T(Points6);

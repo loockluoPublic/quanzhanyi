@@ -2,7 +2,7 @@
  * File: QuanZhanYi_emxutil.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 22:07:29
+ * C/C++ source code generated on  : 30-Aug-2024 21:53:25
  */
 
 /* Include Files */
@@ -45,6 +45,91 @@ void emxCopy_real_T(emxArray_real_T **dst, emxArray_real_T *const *src)
   emxEnsureCapacity_real_T(*dst, numElDst);
   for (i = 0; i < numElSrc; i++) {
     (*dst)->data[i] = (*src)->data[i];
+  }
+}
+
+/*
+ * Arguments    : emxArray_boolean_T *emxArray
+ *                int oldNumel
+ * Return Type  : void
+ */
+void emxEnsureCapacity_boolean_T(emxArray_boolean_T *emxArray, int oldNumel)
+{
+  int i;
+  int newNumel;
+  void *newData;
+  if (oldNumel < 0) {
+    oldNumel = 0;
+  }
+  newNumel = 1;
+  for (i = 0; i < emxArray->numDimensions; i++) {
+    newNumel *= emxArray->size[i];
+  }
+  if (newNumel > emxArray->allocatedSize) {
+    i = emxArray->allocatedSize;
+    if (i < 16) {
+      i = 16;
+    }
+    while (i < newNumel) {
+      if (i > 1073741823) {
+        i = MAX_int32_T;
+      } else {
+        i *= 2;
+      }
+    }
+    newData = malloc((unsigned int)i * sizeof(boolean_T));
+    if (emxArray->data != NULL) {
+      memcpy(newData, emxArray->data,
+             sizeof(boolean_T) * (unsigned int)oldNumel);
+      if (emxArray->canFreeData) {
+        free(emxArray->data);
+      }
+    }
+    emxArray->data = (boolean_T *)newData;
+    emxArray->allocatedSize = i;
+    emxArray->canFreeData = true;
+  }
+}
+
+/*
+ * Arguments    : emxArray_int32_T *emxArray
+ *                int oldNumel
+ * Return Type  : void
+ */
+void emxEnsureCapacity_int32_T(emxArray_int32_T *emxArray, int oldNumel)
+{
+  int i;
+  int newNumel;
+  void *newData;
+  if (oldNumel < 0) {
+    oldNumel = 0;
+  }
+  newNumel = 1;
+  for (i = 0; i < emxArray->numDimensions; i++) {
+    newNumel *= emxArray->size[i];
+  }
+  if (newNumel > emxArray->allocatedSize) {
+    i = emxArray->allocatedSize;
+    if (i < 16) {
+      i = 16;
+    }
+    while (i < newNumel) {
+      if (i > 1073741823) {
+        i = MAX_int32_T;
+      } else {
+        i *= 2;
+      }
+    }
+    newData = malloc((unsigned int)i * sizeof(int));
+    if (emxArray->data != NULL) {
+      memcpy(newData, emxArray->data, sizeof(int) * (unsigned int)oldNumel);
+      if (emxArray->canFreeData) {
+        free(emxArray->data);
+      }
+    }
+    emxArray->data = (int *)newData;
+    emxArray->allocatedSize = i;
+    emxArray->canFreeData = true;
   }
 }
 
@@ -124,6 +209,39 @@ void emxFreeStruct_cell_wrap_6(cell_wrap_6 *pStruct)
 }
 
 /*
+ * Arguments    : emxArray_boolean_T **pEmxArray
+ * Return Type  : void
+ */
+void emxFree_boolean_T(emxArray_boolean_T **pEmxArray)
+{
+  if (*pEmxArray != (emxArray_boolean_T *)NULL) {
+    if (((*pEmxArray)->data != (boolean_T *)NULL) &&
+        (*pEmxArray)->canFreeData) {
+      free((*pEmxArray)->data);
+    }
+    free((*pEmxArray)->size);
+    free(*pEmxArray);
+    *pEmxArray = (emxArray_boolean_T *)NULL;
+  }
+}
+
+/*
+ * Arguments    : emxArray_int32_T **pEmxArray
+ * Return Type  : void
+ */
+void emxFree_int32_T(emxArray_int32_T **pEmxArray)
+{
+  if (*pEmxArray != (emxArray_int32_T *)NULL) {
+    if (((*pEmxArray)->data != (int *)NULL) && (*pEmxArray)->canFreeData) {
+      free((*pEmxArray)->data);
+    }
+    free((*pEmxArray)->size);
+    free(*pEmxArray);
+    *pEmxArray = (emxArray_int32_T *)NULL;
+  }
+}
+
+/*
  * Arguments    : emxArray_real_T **pEmxArray
  * Return Type  : void
  */
@@ -170,6 +288,46 @@ void emxInitMatrix_cell_wrap_61(cell_wrap_6 pMatrix[8])
 void emxInitStruct_cell_wrap_6(cell_wrap_6 *pStruct)
 {
   emxInit_real_T(&pStruct->f1, 2);
+}
+
+/*
+ * Arguments    : emxArray_boolean_T **pEmxArray
+ * Return Type  : void
+ */
+void emxInit_boolean_T(emxArray_boolean_T **pEmxArray)
+{
+  emxArray_boolean_T *emxArray;
+  int i;
+  *pEmxArray = (emxArray_boolean_T *)malloc(sizeof(emxArray_boolean_T));
+  emxArray = *pEmxArray;
+  emxArray->data = (boolean_T *)NULL;
+  emxArray->numDimensions = 2;
+  emxArray->size = (int *)malloc(sizeof(int) * 2U);
+  emxArray->allocatedSize = 0;
+  emxArray->canFreeData = true;
+  for (i = 0; i < 2; i++) {
+    emxArray->size[i] = 0;
+  }
+}
+
+/*
+ * Arguments    : emxArray_int32_T **pEmxArray
+ * Return Type  : void
+ */
+void emxInit_int32_T(emxArray_int32_T **pEmxArray)
+{
+  emxArray_int32_T *emxArray;
+  int i;
+  *pEmxArray = (emxArray_int32_T *)malloc(sizeof(emxArray_int32_T));
+  emxArray = *pEmxArray;
+  emxArray->data = (int *)NULL;
+  emxArray->numDimensions = 2;
+  emxArray->size = (int *)malloc(sizeof(int) * 2U);
+  emxArray->allocatedSize = 0;
+  emxArray->canFreeData = true;
+  for (i = 0; i < 2; i++) {
+    emxArray->size[i] = 0;
+  }
 }
 
 /*

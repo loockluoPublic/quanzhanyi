@@ -2,7 +2,7 @@
  * File: planefit8.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Aug-2024 22:07:29
+ * C/C++ source code generated on  : 30-Aug-2024 21:53:25
  */
 
 #ifndef PLANEFIT8_H
@@ -25,7 +25,8 @@ planefit8(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
           const emxArray_real_T *Points5, const emxArray_real_T *Points6,
           const emxArray_real_T *Points7, const emxArray_real_T *Points8,
           const double P_bound1[3], const double P_bound2[3],
-          emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints);
+          double distanceThreshold, emxArray_real_T *PlaneParaOut,
+          emxArray_real_T *TrianglePoints);
 
 #ifdef __cplusplus
 }
