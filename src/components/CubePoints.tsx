@@ -24,15 +24,7 @@ function CubePoints(props: { pointsKeys: string }) {
       data.planeParaOut ?? [],
       data?.cubeBounders?.[0],
       data?.cubeBounders?.[1]
-    ).then((res) => {
-      console.log("%c Line:24 🍔 res", "color:#b03734", res);
-      setData((d) => {
-        return {
-          ...d,
-          ...res,
-        };
-      });
-    });
+    );
   };
 
   return (
