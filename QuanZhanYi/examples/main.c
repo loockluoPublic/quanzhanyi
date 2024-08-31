@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 30-Aug-2024 21:53:25
+ * C/C++ source code generated on  : 31-Aug-2024 15:45:21
  */
 
 /*************************************************************************/
@@ -702,6 +702,8 @@ void main_planefit4(void)
   emxArray_real_T *Points3;
   emxArray_real_T *Points4;
   emxArray_real_T *TrianglePoints;
+  emxArray_real_T *distancesFianal;
+  double MaxDis[4];
   double BoundPoint1_tmp[3];
   /* Initialize function 'planefit4' input arguments. */
   /* Initialize function input argument 'Points1'. */
@@ -718,14 +720,17 @@ void main_planefit4(void)
   /* Call the entry-point 'planefit4'. */
   emxInitArray_real_T(&PlaneParaOut, 2);
   emxInitArray_real_T(&TrianglePoints, 2);
+  emxInitArray_real_T(&distancesFianal, 2);
   planefit4(Points1, Points2, Points3, Points4, BoundPoint1_tmp,
-            BoundPoint1_tmp, argInit_real_T(), PlaneParaOut, TrianglePoints);
+            BoundPoint1_tmp, argInit_real_T(), PlaneParaOut, TrianglePoints,
+            MaxDis, distancesFianal);
   emxDestroyArray_real_T(Points4);
   emxDestroyArray_real_T(Points3);
   emxDestroyArray_real_T(Points2);
   emxDestroyArray_real_T(Points1);
   emxDestroyArray_real_T(PlaneParaOut);
   emxDestroyArray_real_T(TrianglePoints);
+  emxDestroyArray_real_T(distancesFianal);
 }
 
 /*
@@ -744,6 +749,8 @@ void main_planefit8(void)
   emxArray_real_T *Points7;
   emxArray_real_T *Points8;
   emxArray_real_T *TrianglePoints;
+  emxArray_real_T *distancesFianal;
+  double MaxDis[8];
   double P_bound1_tmp[3];
   /* Initialize function 'planefit8' input arguments. */
   /* Initialize function input argument 'Points1'. */
@@ -768,9 +775,10 @@ void main_planefit8(void)
   /* Call the entry-point 'planefit8'. */
   emxInitArray_real_T(&PlaneParaOut, 2);
   emxInitArray_real_T(&TrianglePoints, 2);
+  emxInitArray_real_T(&distancesFianal, 2);
   planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7,
             Points8, P_bound1_tmp, P_bound1_tmp, argInit_real_T(), PlaneParaOut,
-            TrianglePoints);
+            TrianglePoints, MaxDis, distancesFianal);
   emxDestroyArray_real_T(Points8);
   emxDestroyArray_real_T(Points7);
   emxDestroyArray_real_T(Points6);
@@ -781,6 +789,7 @@ void main_planefit8(void)
   emxDestroyArray_real_T(Points1);
   emxDestroyArray_real_T(PlaneParaOut);
   emxDestroyArray_real_T(TrianglePoints);
+  emxDestroyArray_real_T(distancesFianal);
 }
 
 /*

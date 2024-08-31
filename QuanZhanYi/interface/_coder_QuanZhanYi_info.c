@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 30-Aug-2024 21:53:25
+ * C/C++ source code generated on  : 31-Aug-2024 15:45:21
  */
 
 /* Include Files */
@@ -364,13 +364,13 @@ mxArray *emlrtMexFcnProperties(void)
   emlrtSetField(xEntryPoints, 16, "NumberOfInputs",
                 emlrtMxCreateDoubleScalar(7.0));
   emlrtSetField(xEntryPoints, 16, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(2.0));
+                emlrtMxCreateDoubleScalar(4.0));
   emlrtSetField(xEntryPoints, 16, "ConstantInputs", xInputs);
   emlrtSetField(xEntryPoints, 16, "FullPath",
                 emlrtMxCreateString(
                     "C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\planefit4.m"));
   emlrtSetField(xEntryPoints, 16, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739494.9117592593));
+                emlrtMxCreateDoubleScalar(739495.65626157413));
   emlrtSetField(xEntryPoints, 16, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 16, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -379,13 +379,13 @@ mxArray *emlrtMexFcnProperties(void)
   emlrtSetField(xEntryPoints, 17, "NumberOfInputs",
                 emlrtMxCreateDoubleScalar(11.0));
   emlrtSetField(xEntryPoints, 17, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(2.0));
+                emlrtMxCreateDoubleScalar(4.0));
   emlrtSetField(xEntryPoints, 17, "ConstantInputs", xInputs);
   emlrtSetField(xEntryPoints, 17, "FullPath",
                 emlrtMxCreateString(
                     "C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\planefit8.m"));
   emlrtSetField(xEntryPoints, 17, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739494.91206018522));
+                emlrtMxCreateDoubleScalar(739495.656400463));
   emlrtSetField(xEntryPoints, 17, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 17, "Visible", emlrtMxCreateLogicalScalar(true));

@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 30-Aug-2024 21:53:25
+ * C/C++ source code generated on  : 31-Aug-2024 15:45:21
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -184,20 +184,22 @@ void planefit4(emxArray_real_T *Points1, emxArray_real_T *Points2,
                emxArray_real_T *Points3, emxArray_real_T *Points4,
                real_T BoundPoint1[3], real_T BoundPoint2[3],
                real_T distanceThreshold, emxArray_real_T *PlaneParaOut,
-               emxArray_real_T *TrianglePoints);
+               emxArray_real_T *TrianglePoints, real_T MaxDis[4],
+               emxArray_real_T *distancesFianal);
 
 void planefit4_api(const mxArray *const prhs[7], int32_T nlhs,
-                   const mxArray *plhs[2]);
+                   const mxArray *plhs[4]);
 
 void planefit8(emxArray_real_T *Points1, emxArray_real_T *Points2,
                emxArray_real_T *Points3, emxArray_real_T *Points4,
                emxArray_real_T *Points5, emxArray_real_T *Points6,
                emxArray_real_T *Points7, emxArray_real_T *Points8,
                real_T P_bound1[3], real_T P_bound2[3], real_T distanceThreshold,
-               emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints);
+               emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints,
+               real_T MaxDis[8], emxArray_real_T *distancesFianal);
 
 void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
-                   const mxArray *plhs[2]);
+                   const mxArray *plhs[4]);
 
 void planefit_api(const mxArray *const prhs[4], int32_T nlhs,
                   const mxArray *plhs[2]);
