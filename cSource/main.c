@@ -129,9 +129,10 @@ EMSCRIPTEN_KEEPALIVE
 void Planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
                const emxArray_real_T *Points3, const emxArray_real_T *Points4,
                const double BoundPoint1[3], const double BoundPoint2[3], double distanceThreshold,
-               emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints)
+               emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints, double MaxDis[4],
+               emxArray_real_T *distancesFianal)
 {
-    planefit4(Points1, Points2, Points3, Points4, BoundPoint1, BoundPoint2, distanceThreshold, PlaneParaOut, TrianglePoints);
+    planefit4(Points1, Points2, Points3, Points4, BoundPoint1, BoundPoint2, distanceThreshold, PlaneParaOut, TrianglePoints, MaxDis, distancesFianal);
 };
 
 EMSCRIPTEN_KEEPALIVE
@@ -139,10 +140,12 @@ void Planefit8(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
                const emxArray_real_T *Points3, const emxArray_real_T *Points4,
                const emxArray_real_T *Points5, const emxArray_real_T *Points6,
                const emxArray_real_T *Points7, const emxArray_real_T *Points8,
-               const double BoundPoint1[3], const double BoundPoint2[3], double distanceThreshold,
-               emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints)
+               const double BoundPoint1[3], const double BoundPoint2[3],
+               double distanceThreshold,
+               emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints,
+               double MaxDis[4], emxArray_real_T *distancesFianal)
 {
-    planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7, Points8, BoundPoint1, BoundPoint2, distanceThreshold, PlaneParaOut, TrianglePoints);
+    planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7, Points8, BoundPoint1, BoundPoint2, distanceThreshold, PlaneParaOut, TrianglePoints, MaxDis, distancesFianal);
 };
 
 EMSCRIPTEN_KEEPALIVE

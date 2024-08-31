@@ -1,5 +1,5 @@
-import { Badge, Button, Checkbox, InputNumber, Select } from "antd";
-import { useEffect, useState } from "react";
+import { Badge, Button, Checkbox, InputNumber, message, Select } from "antd";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import { measureAndGetSimpleCoord } from "../utils/commond";
@@ -7,7 +7,7 @@ import PointsVector3 from "./PointVector3";
 
 import * as mockData from "../utils/cubeMockData";
 import { CustomVector3 } from "../class/CustomVector3";
-import { CalculateRectangleFromVertex, Planefit4 } from "../utils/utils";
+import { CalculateRectangleFromVertex, Planefit } from "../utils/utils";
 
 const mx = [
   mockData.cubePointsL,
@@ -19,6 +19,9 @@ const mx = [
 export default function () {
   const [data, setData] = useRecoilState(Data);
 
+  const [loading, setLoading] = useState(false);
+  const [planeFitLoading, setPlaneFitLoadint] = useState(false);
+
   const options = [
     { value: 0, label: "左面" },
     { value: 1, label: "顶面" },
@@ -28,46 +31,51 @@ export default function () {
     { value: 5, label: "左上" },
     { value: 6, label: "右上" },
     { value: 7, label: "右下" },
-  ].map((item) => {
-    return {
-      ...item,
-      label: (
-        <Badge dot={!(data.MxPoints?.[`m${item.value}`]?.length > 0)}>
-          <span className="q-mr-1">{item.label}</span>
-        </Badge>
-      ),
-    };
+  ].filter((item) => {
+    if (data.hasChamfer) return true;
+    return item.value < 4;
   });
 
-  const planeFit = () => {
-    const paramArr: [
-      CustomVector3[],
-      CustomVector3[],
-      CustomVector3[],
-      CustomVector3[],
-      CustomVector3,
-      CustomVector3,
-      number
-    ] = [
-      ...Object.values(data.MxPoints),
-      ...data.firstPoints,
-      data.distanceThreshold,
-    ] as any;
-    console.log("%c Line:53 🍩 paramArr", "color:#465975", paramArr);
-    const res = Planefit4(...paramArr);
+  const planeFit = async () => {
+    const MxPortsArr: CustomVector3[][] = [];
 
-    const cubeResult = CalculateRectangleFromVertex(res.trianglePoints);
+    for (const item of options) {
+      const key = `m${item.value}`;
+      if (data.MxPoints[key]?.length > 9) {
+        MxPortsArr.push(data.MxPoints[key]);
+      } else {
+        message.error(`【${item.label}】采集点少于10个，请补充采集点`);
+        return;
+      }
+    }
 
-    setData({
-      ...data,
-      ...res,
-      cubeResult,
-    });
+    if (!(data.firstPoints[0] && data.firstPoints[1])) {
+      message.error(`缺少边界点，请补充采集点`);
+      return;
+    }
+    setPlaneFitLoadint(true);
+    setTimeout(() => {
+      const res: any = Planefit(
+        MxPortsArr,
+        ...data.firstPoints,
+        data.distanceThreshold
+      );
+
+      console.log("%c Line:60 🍒 res", "color:#3f7cff", res);
+
+      const cubeResult = CalculateRectangleFromVertex(res.trianglePoints);
+
+      setPlaneFitLoadint(false);
+
+      setData({
+        ...data,
+        ...res,
+        cubeResult,
+      });
+    }, 500);
   };
 
   const [num, setNum] = useState(0);
-
-  const [loading, setLoading] = useState(false);
 
   const points = data.MxPoints?.[`m${num}`];
 
@@ -113,7 +121,7 @@ export default function () {
     });
 
     const MxPoints: any = {};
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < options.length; i++) {
       MxPoints[`m${i}`] = mx[i];
     }
 
@@ -145,16 +153,24 @@ export default function () {
             defaultValue={0}
             style={{ width: 120 }}
             onChange={(v) => setNum(v)}
-            options={options.filter((item) => {
-              if (data.hasChamfer) return true;
-              return item.value < 4;
+            options={options.map((item) => {
+              return {
+                ...item,
+                label: (
+                  <Badge dot={!(data.MxPoints?.[`m${item.value}`]?.length > 0)}>
+                    <span className="q-mr-1">{item.label}</span>
+                  </Badge>
+                ),
+              };
             })}
           />
         </span>
         <span className="q-ml-8">
-          误差：
+          阈值：
           <InputNumber
-            step={0.01}
+            step={0.001}
+            min={0.001}
+            max={0.1}
             value={data.distanceThreshold}
             style={{ width: 120 }}
             onChange={(distanceThreshold) => {
@@ -174,7 +190,11 @@ export default function () {
         </Button>
       </div>
       <div>
-        <Button className=" q-float-right q-mt-2  q-ml-4" onClick={planeFit}>
+        <Button
+          loading={planeFitLoading}
+          className=" q-float-right q-mt-2  q-ml-4"
+          onClick={planeFit}
+        >
           方涵拟合
         </Button>
         <Button

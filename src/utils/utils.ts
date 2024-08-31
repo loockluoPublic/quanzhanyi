@@ -14,6 +14,7 @@ const {
   _shengLuJiaoJiSuan,
   _shengDaoGaoDu,
   _Planefit4,
+  _Planefit8,
   _CalculateRectangleFromVertex,
   _CalcJuXingAAndBPointsAfterOffest,
 } = (window as any).Module;
@@ -224,52 +225,52 @@ export const CalculatAAndBPoints = async (
   return res;
 };
 
-/**
- * @description 矩形面拟合
- * @param Points 计算面的点
- * @param PlaneParaIn 已计算的平面参数
- * @param BoundPoint1 边界1
- * @param BoundPoint2 边界2
- * @param PlaneParaOut 输出平面参数
- * @param TrianglePoints 三角面的点
- * @returns
- */
-export const Planefit = async (
-  Points: CustomVector3[],
-  PlaneParaIn: number[][],
-  BoundPoint1: CustomVector3,
-  BoundPoint2: CustomVector3
-) => {
-  const plantNum = PlaneParaIn.length + 1;
-  const points = new EmxArray_real_T(Points);
-  const planeParaIn = new EmxArray_real_T(PlaneParaIn);
-  const boundPoint1 = new EmxArray_real_T(BoundPoint1);
-  const boundPoint2 = new EmxArray_real_T(BoundPoint2);
-  const planeParaOut = new EmxArray_real_T(4, plantNum);
-  const trianglePoints = new EmxArray_real_T(3, plantNum * 2 * 3);
+// /**
+//  * @description 矩形面拟合
+//  * @param Points 计算面的点
+//  * @param PlaneParaIn 已计算的平面参数
+//  * @param BoundPoint1 边界1
+//  * @param BoundPoint2 边界2
+//  * @param PlaneParaOut 输出平面参数
+//  * @param TrianglePoints 三角面的点
+//  * @returns
+//  */
+// export const Planefit = async (
+//   Points: CustomVector3[],
+//   PlaneParaIn: number[][],
+//   BoundPoint1: CustomVector3,
+//   BoundPoint2: CustomVector3
+// ) => {
+//   const plantNum = PlaneParaIn.length + 1;
+//   const points = new EmxArray_real_T(Points);
+//   const planeParaIn = new EmxArray_real_T(PlaneParaIn);
+//   const boundPoint1 = new EmxArray_real_T(BoundPoint1);
+//   const boundPoint2 = new EmxArray_real_T(BoundPoint2);
+//   const planeParaOut = new EmxArray_real_T(4, plantNum);
+//   const trianglePoints = new EmxArray_real_T(3, plantNum * 2 * 3);
 
-  _Planefit(
-    points.ptr,
-    planeParaIn.ptr,
-    boundPoint1.arrayPtr,
-    boundPoint2.arrayPtr,
-    planeParaOut.ptr,
-    trianglePoints.ptr
-  );
-  trianglePoints.getSize();
-  const res = {
-    planeParaOut: planeParaOut.toJSON(),
-    trianglePoints: trianglePoints.toVector3(),
-  };
+//   _Planefit(
+//     points.ptr,
+//     planeParaIn.ptr,
+//     boundPoint1.arrayPtr,
+//     boundPoint2.arrayPtr,
+//     planeParaOut.ptr,
+//     trianglePoints.ptr
+//   );
+//   trianglePoints.getSize();
+//   const res = {
+//     planeParaOut: planeParaOut.toJSON(),
+//     trianglePoints: trianglePoints.toVector3(),
+//   };
 
-  points.free();
-  planeParaIn.free();
-  planeParaOut.free();
-  boundPoint1.free();
-  boundPoint2.free();
-  trianglePoints.free();
-  return res;
-};
+//   points.free();
+//   planeParaIn.free();
+//   planeParaOut.free();
+//   boundPoint1.free();
+//   boundPoint2.free();
+//   trianglePoints.free();
+//   return res;
+// };
 
 /**
  * 复测计算声路角和生路长
@@ -429,47 +430,68 @@ export const offsetCalculate = (
  * @param BoundPoint2 矩形范围点
  * @returns
  */
-export const Planefit4 = (
-  M1Points: CustomVector3[],
-  M2Points: CustomVector3[],
-  M3Points: CustomVector3[],
-  M4Points: CustomVector3[],
+export const Planefit = (
+  MPoints: CustomVector3[][],
   BoundPoint1: CustomVector3,
   BoundPoint2: CustomVector3,
   distanceThreshold: number
 ) => {
-  const m1 = new EmxArray_real_T(M1Points);
-  const m2 = new EmxArray_real_T(M2Points);
-  const m3 = new EmxArray_real_T(M3Points);
-  const m4 = new EmxArray_real_T(M4Points);
+  const len = MPoints.length;
+
+  if (![4, 8].includes(len)) {
+    console.error("采集面需要4或8个面");
+    return {};
+  }
+
+  const mP = MPoints.map((item) => new EmxArray_real_T(item));
 
   const boundPoint1 = new EmxArray_real_T(BoundPoint1);
   const boundPoint2 = new EmxArray_real_T(BoundPoint2);
-  const planeParaOut = new EmxArray_real_T(4, 4);
-  const trianglePoints = new EmxArray_real_T(3, 4 * 2 * 3);
 
-  _Planefit4(
-    m1.ptr,
-    m2.ptr,
-    m3.ptr,
-    m4.ptr,
+  const planeParaOut = new EmxArray_real_T(4, len);
+  const trianglePoints = new EmxArray_real_T(3, len * 2 * 3);
+  const MaxDis = new EmxArray_real_T(len, 1);
+  const distancesFianal = new EmxArray_real_T(len * 2 * 3, 1);
+  const fn = len === 4 ? _Planefit4 : _Planefit8;
+  fn(
+    ...mP.map((p) => p.ptr),
     boundPoint1.arrayPtr,
     boundPoint2.arrayPtr,
     distanceThreshold,
     planeParaOut.ptr,
-    trianglePoints.ptr
+    trianglePoints.ptr,
+    MaxDis.arrayPtr,
+    distancesFianal.ptr
   );
+
+  const _max = Number(Math.max(...MaxDis.toJSON()?.[0]).toFixed(3));
+  console.log(
+    "%c Line:468 🌰 _max",
+    "color:#fca650",
+    _max,
+    distancesFianal.toJSON()
+  );
+  let _distancesFianal = distancesFianal.toJSON()?.[0];
+
+  let i = 0;
 
   const res = {
     planeParaOut: planeParaOut.toJSON(),
     trianglePoints: trianglePoints.toVector3(),
+    distanceThreshold: _max,
+    MPoints: MPoints.map((arr) => {
+      return arr.map((p) => {
+        const curDiff = _distancesFianal[i];
+        const newP = p.cloneCustomVector3();
+        newP.difference = curDiff;
+        newP.enable = curDiff < _max;
+        return newP;
+      });
+    }),
   };
 
-  m1.free();
-  m2.free();
-  m3.free();
-  m4.free();
-  boundPoint1.free();
+  mP.forEach((p) => p.free()), boundPoint1.free();
+
   boundPoint2.free();
   planeParaOut.free();
   trianglePoints.free();

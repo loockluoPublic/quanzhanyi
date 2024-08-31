@@ -36,7 +36,7 @@ export const Data = atom<GlobalData>({
     hasChamfer: false,
     firstPoints: [] as any,
     type: TType.cycle,
-    distanceThreshold: 0.2,
+    distanceThreshold: 0.1,
     mPoints: mockData.mPoints.map((item) => {
       return new CustomVector3(item.x, item.y, item.z);
     }),
