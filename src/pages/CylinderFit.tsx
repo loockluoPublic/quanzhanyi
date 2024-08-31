@@ -1,29 +1,18 @@
 import CylinderModule from "../components/Module3D";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
-import { Button, Checkbox, InputNumber, message, Table, Tooltip } from "antd";
+import { Checkbox, InputNumber, message, Table, Tooltip } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
 import { Point } from "./CalculateResultPoints";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Select, { DefaultOptionType } from "antd/es/select";
 import {
-  ang2rad,
-  CalcJuXingAAndBPointsAfterOffest,
   CalculatAAndBPoints,
-  cubeTOff,
-  generateUnitCircleWithNormalVector,
   offsetCalculate,
-  rad2ang,
-  shengDaoGaoDu,
   shengLuJiao2Ang,
 } from "../utils/utils";
 import PointsVector3 from "../components/PointVector3";
 import { CustomVector3 } from "../class/CustomVector3";
-import PointsVector2 from "../components/PointVector2";
-import { getLine } from "../utils/commond";
-
-import mockData from "../utils/mockData";
-import useMeasure from "../utils/useMeasure";
 
 const SDFBOptions = (() => {
   const options: DefaultOptionType[] = [];

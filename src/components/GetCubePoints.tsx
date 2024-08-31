@@ -6,6 +6,7 @@ import { measureAndGetSimpleCoord } from "../utils/commond";
 import PointsVector3 from "./PointVector3";
 
 import * as mockData from "../utils/cubeMockData";
+import { cubePoints } from "../utils/cubeMockData8";
 import { CustomVector3 } from "../class/CustomVector3";
 import { CalculateRectangleFromVertex, Planefit } from "../utils/utils";
 
@@ -37,7 +38,7 @@ export default function () {
   });
 
   const planeFit = async () => {
-    const MxPortsArr: CustomVector3[][] = [];
+    let MxPortsArr: CustomVector3[][] = [];
 
     for (const item of options) {
       const key = `m${item.value}`;
@@ -52,6 +53,11 @@ export default function () {
     if (!(data.firstPoints[0] && data.firstPoints[1])) {
       message.error(`缺少边界点，请补充采集点`);
       return;
+    }
+
+    if (options.length === 8) {
+      const [l, t, r, b, lb, lt, rt, rb] = MxPortsArr;
+      MxPortsArr = [lt, t, rt, r, rb, b, lb, l];
     }
     setPlaneFitLoadint(true);
     setTimeout(() => {
@@ -122,7 +128,7 @@ export default function () {
 
     const MxPoints: any = {};
     for (let i = 0; i < options.length; i++) {
-      MxPoints[`m${i}`] = mx[i];
+      MxPoints[`m${i}`] = cubePoints[i];
     }
 
     setData((d) => {
@@ -213,7 +219,7 @@ export default function () {
                 ...d,
                 MxPoints: {
                   ...data.MxPoints,
-                  [`m${num}`]: mx[num],
+                  [`m${num}`]: cubePoints[num],
                 },
               };
             });

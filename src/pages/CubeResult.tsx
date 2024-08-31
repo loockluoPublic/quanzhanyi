@@ -10,7 +10,6 @@ import {
   ang2rad,
   CalcJuXingAAndBPointsAfterOffest,
   cubeTOff,
-  rad2ang,
   shengDaoGaoDu,
 } from "../utils/utils";
 import PointsVector3 from "../components/PointVector3";
