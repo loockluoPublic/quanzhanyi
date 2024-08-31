@@ -1,4 +1,4 @@
-import { Badge, Button, Checkbox, Select } from "antd";
+import { Badge, Button, Checkbox, InputNumber, Select } from "antd";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
@@ -18,7 +18,6 @@ const mx = [
 
 export default function () {
   const [data, setData] = useRecoilState(Data);
-  console.log("%c Line:21 🌽 data", "color:#33a5ff", data);
 
   const options = [
     { value: 0, label: "左面" },
@@ -47,14 +46,17 @@ export default function () {
       CustomVector3[],
       CustomVector3[],
       CustomVector3,
-      CustomVector3
-    ] = [...Object.values(data.MxPoints), ...data.firstPoints] as any;
+      CustomVector3,
+      number
+    ] = [
+      ...Object.values(data.MxPoints),
+      ...data.firstPoints,
+      data.distanceThreshold,
+    ] as any;
+    console.log("%c Line:53 🍩 paramArr", "color:#465975", paramArr);
     const res = Planefit4(...paramArr);
 
-    const cubeResult = CalculateRectangleFromVertex(
-      res.trianglePoints,
-      ...data.firstPoints
-    );
+    const cubeResult = CalculateRectangleFromVertex(res.trianglePoints);
 
     setData({
       ...data,
@@ -102,6 +104,27 @@ export default function () {
     });
   };
 
+  const setMock = () => {
+    setData((d) => {
+      return {
+        ...d,
+        firstPoints: mockData.bounders as [CustomVector3, CustomVector3],
+      };
+    });
+
+    const MxPoints: any = {};
+    for (let i = 0; i < 4; i++) {
+      MxPoints[`m${i}`] = mx[i];
+    }
+
+    setData((d) => {
+      return {
+        ...d,
+        MxPoints,
+      };
+    });
+  };
+
   return (
     <div>
       <div className="q-mt-2">
@@ -116,20 +139,35 @@ export default function () {
         >
           是否包含导角
         </Checkbox>
-        <span className="q-ml-8">采集面：</span>
-        <Select
-          defaultValue={0}
-          style={{ width: 120 }}
-          onChange={(v) => setNum(v)}
-          options={options.filter((item) => {
-            if (data.hasChamfer) return true;
-            return item.value < 4;
-          })}
-        />
+        <span className="q-ml-8">
+          采集面：
+          <Select
+            defaultValue={0}
+            style={{ width: 120 }}
+            onChange={(v) => setNum(v)}
+            options={options.filter((item) => {
+              if (data.hasChamfer) return true;
+              return item.value < 4;
+            })}
+          />
+        </span>
+        <span className="q-ml-8">
+          误差：
+          <InputNumber
+            step={0.01}
+            value={data.distanceThreshold}
+            style={{ width: 120 }}
+            onChange={(distanceThreshold) => {
+              setData({ ...data, distanceThreshold });
+            }}
+          />
+        </span>
+      </div>
+      <div className="q-mt-2">
         <Button
           loading={loading}
           type="primary"
-          className="q-float-right"
+          // className="q-float-right"
           onClick={getPoints}
         >
           采集点
@@ -138,6 +176,13 @@ export default function () {
       <div>
         <Button className=" q-float-right q-mt-2  q-ml-4" onClick={planeFit}>
           方涵拟合
+        </Button>
+        <Button
+          size="small"
+          className=" q-float-right q-mt-2  q-ml-4"
+          onClick={setMock}
+        >
+          全部模拟
         </Button>
         <Button
           size="small"

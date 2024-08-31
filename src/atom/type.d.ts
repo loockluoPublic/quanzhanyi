@@ -120,4 +120,9 @@ interface ICube {
    * 三角面顶点
    */
   trianglePoints?: CustomVector3[];
+
+  /**
+   * 平面拟合误差
+   */
+  distanceThreshold: number;
 }

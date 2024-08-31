@@ -1417,6 +1417,7 @@ var _shengLuJiaoJiSuan = Module['_shengLuJiaoJiSuan'] = createExportWrapper('she
 var _CalcJuXingAAndBPointsAfterOffest = Module['_CalcJuXingAAndBPointsAfterOffest'] = createExportWrapper('CalcJuXingAAndBPointsAfterOffest');
 var _CalculateRectangleFromVertex = Module['_CalculateRectangleFromVertex'] = createExportWrapper('CalculateRectangleFromVertex');
 var _Planefit4 = Module['_Planefit4'] = createExportWrapper('Planefit4');
+var _Planefit8 = Module['_Planefit8'] = createExportWrapper('Planefit8');
 var _shengDaoGaoDu = Module['_shengDaoGaoDu'] = createExportWrapper('shengDaoGaoDu');
 var _fflush = createExportWrapper('fflush');
 var _emscripten_stack_init = () => (_emscripten_stack_init = wasmExports['emscripten_stack_init'])();

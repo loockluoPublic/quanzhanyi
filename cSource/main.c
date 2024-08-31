@@ -12,6 +12,7 @@
 #include "Calculat_JuXing_A_and_B_Points_after_Offest.h"
 #include "Calculate_rectangle_from_vertex.h"
 #include "planefit4.h"
+#include "planefit8.h"
 #include "ShengDaoGaoDu.h"
 
 EMSCRIPTEN_KEEPALIVE
@@ -114,27 +115,34 @@ void CalcJuXingAAndBPointsAfterOffest(const double Tao[3], const double UPP[3], 
 EMSCRIPTEN_KEEPALIVE
 void CalculateRectangleFromVertex(
     const emxArray_real_T *TrianglePoints4,
-    const double P_bound1[3],
-    const double P_bound2[3],
     double Pin[3],
     double Pout[3],
     double UPP[3], double *b,
-    double *h, double *w, double Tao[3],
-    emxArray_real_T *PP)
+    double *h, double *w, double Tao[3])
 {
+    double PP[24] = {0};
     Calculate_rectangle_from_vertex(
-        TrianglePoints4, P_bound1,
-        P_bound2, Pin, Pout, UPP,
-        b, h, w, Tao, PP);
+        TrianglePoints4, Pin, Pout, UPP, b, h, w, Tao, PP);
 };
 
 EMSCRIPTEN_KEEPALIVE
 void Planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
                const emxArray_real_T *Points3, const emxArray_real_T *Points4,
-               const double BoundPoint1[3], const double BoundPoint2[3],
+               const double BoundPoint1[3], const double BoundPoint2[3], double distanceThreshold,
                emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints)
 {
-    planefit4(Points1, Points2, Points3, Points4, BoundPoint1, BoundPoint2, PlaneParaOut, TrianglePoints);
+    planefit4(Points1, Points2, Points3, Points4, BoundPoint1, BoundPoint2, distanceThreshold, PlaneParaOut, TrianglePoints);
+};
+
+EMSCRIPTEN_KEEPALIVE
+void Planefit8(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
+               const emxArray_real_T *Points3, const emxArray_real_T *Points4,
+               const emxArray_real_T *Points5, const emxArray_real_T *Points6,
+               const emxArray_real_T *Points7, const emxArray_real_T *Points8,
+               const double BoundPoint1[3], const double BoundPoint2[3], double distanceThreshold,
+               emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints)
+{
+    planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7, Points8, BoundPoint1, BoundPoint2, distanceThreshold, PlaneParaOut, TrianglePoints);
 };
 
 EMSCRIPTEN_KEEPALIVE

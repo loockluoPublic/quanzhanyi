@@ -23,6 +23,7 @@
 #include "rt_nonfinite.h"
 #include "svd1.h"
 #include <math.h>
+#include <stdio.h>
 
 /* Function Definitions */
 /*
@@ -49,6 +50,10 @@ void planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
                double distanceThreshold, emxArray_real_T *PlaneParaOut,
                emxArray_real_T *TrianglePoints)
 {
+
+  printf("  distanceThreshold= %f TrianglePoints->size[0], "
+         "TrianglePoints->size[1] = %d,%d \n",
+         distanceThreshold, TrianglePoints->size[0], TrianglePoints->size[1]);
   static const signed char b_iv[8] = {0, 1, 2, 5, 8, 15, 16, 17};
   cell_wrap_6 PointAll[4];
   cell_wrap_6 r;

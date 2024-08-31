@@ -435,7 +435,8 @@ export const Planefit4 = (
   M3Points: CustomVector3[],
   M4Points: CustomVector3[],
   BoundPoint1: CustomVector3,
-  BoundPoint2: CustomVector3
+  BoundPoint2: CustomVector3,
+  distanceThreshold: number
 ) => {
   const m1 = new EmxArray_real_T(M1Points);
   const m2 = new EmxArray_real_T(M2Points);
@@ -454,6 +455,7 @@ export const Planefit4 = (
     m4.ptr,
     boundPoint1.arrayPtr,
     boundPoint2.arrayPtr,
+    distanceThreshold,
     planeParaOut.ptr,
     trianglePoints.ptr
   );
@@ -476,13 +478,9 @@ export const Planefit4 = (
 };
 
 export const CalculateRectangleFromVertex = (
-  TrianglePoints: CustomVector3[],
-  BoundPoint1: CustomVector3,
-  BoundPoint2: CustomVector3
+  TrianglePoints: CustomVector3[]
 ) => {
   const trianglePoints = new EmxArray_real_T(TrianglePoints);
-  const boundPoint1 = new EmxArray_real_T(BoundPoint1);
-  const boundPoint2 = new EmxArray_real_T(BoundPoint2);
   const Pin = new EmxArray_real_T(3, 1);
   const Pout = new EmxArray_real_T(3, 1);
   const UPP = new EmxArray_real_T(3, 1);
@@ -490,22 +488,16 @@ export const CalculateRectangleFromVertex = (
   const h = new EmxArray_real_T(1, 1);
   const w = new EmxArray_real_T(1, 1);
   const Tao = new EmxArray_real_T(3, 1);
-  /**
-   *  矩形8个顶点，8*3 矩阵
-   */
-  const PP = new EmxArray_real_T(8, 3);
+
   _CalculateRectangleFromVertex(
     trianglePoints.ptr,
-    boundPoint1.arrayPtr,
-    boundPoint2.arrayPtr,
     Pin.arrayPtr,
     Pout.arrayPtr,
     UPP.arrayPtr,
     b.arrayPtr,
     h.arrayPtr,
     w.arrayPtr,
-    Tao.arrayPtr,
-    PP.ptr
+    Tao.arrayPtr
   );
 
   const res = {
@@ -516,12 +508,9 @@ export const CalculateRectangleFromVertex = (
     h: h.toJSON()?.[0],
     w: w.toJSON()?.[0],
     Tao: Tao.toVector3()[0],
-    PP: PP.toJSON(),
   };
 
   trianglePoints.free();
-  boundPoint1.free();
-  boundPoint2.free();
   Pin.free();
   Pout.free();
   UPP.free();
@@ -529,7 +518,6 @@ export const CalculateRectangleFromVertex = (
   h.free();
   w.free();
   Tao.free();
-  PP.free();
   return res;
 };
 
