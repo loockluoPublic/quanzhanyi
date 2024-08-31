@@ -124,7 +124,7 @@ export default function Index(props: {
         ></Rectangular>
 
         {Object.values(props.MxPoints ?? [])?.map((pArr, i) => {
-          return <PointsLabel points={pArr} color={MxColor[i]} />;
+          return <PointsLabel key={i} points={pArr} color={MxColor[i]} />;
         })}
 
         {props?.sdm?.includes("A") && (

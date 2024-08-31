@@ -1,20 +1,14 @@
-import { Button, Form, Steps } from "antd";
+import { Steps } from "antd";
 import { useEffect, useState } from "react";
 import Connect from "../components/ConnectDevice";
-import { getLine, measureAndGetSimpleCoord } from "../utils/commond";
 import { useRecoilState } from "recoil";
 import { Data, Mode, TMode, TType } from "../atom/globalState";
-import BaseInfo from "../components/BaseInfo";
-import GetPoints from "../components/GetPoints";
-import { MeasurePoints } from "./MeasurePoints";
-import { CalculateAccurateCylinders } from "./CalculateAccurateCylinders";
-import { CalculateResultPoints } from "./CalculateResultPoints";
 import CylinderAgain from "./CylinderAgain";
-import Cube from "./Cube";
 import CubePre from "./CubePre";
 import CubeFit from "./CubeResult";
+import CylinderPre from "./CylinderPre";
+import CylinderFit from "./CylinderFit";
 
-const isVoild = (b) => (b & 0b0011) > 0;
 enum SHOWTYPE {
   /** 圆柱-复测 */
   yf = 0b1010,
@@ -37,42 +31,16 @@ enum SHOWTYPE {
 
 export default function Setting() {
   const [data, setData] = useRecoilState(Data);
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [mode] = useRecoilState(Mode);
 
-  // useEffect(() => {
-  //   setStep(0);
-  // }, [mode]);
-
-  const [form] = Form.useForm();
-  (window as any).form = form;
-  const pickPoint = (key: string, field?: any) => {
-    const arr = form.getFieldValue(key);
-
-    return measureAndGetSimpleCoord().then((res) => {
-      if (field) {
-        arr[field.key] = res;
-        form.setFieldValue(key, [...arr]);
-      } else {
-        form.setFieldValue(key, res);
-      }
-      return res;
-    });
-  };
-
-  const getDirect = (key: string) => {
-    getLine().then((res) => {
-      form.setFieldValue(key, res);
-    });
-  };
+  useEffect(() => {
+    setStep(0);
+  }, [data.type]);
 
   const onChange = (value: number) => {
     if (value <= step + 1) setStep(value);
   };
-
-  const currentType =
-    (mode !== TMode.first ? SHOWTYPE.F : SHOWTYPE.c) |
-    (data.type === TType.cube ? SHOWTYPE.f : SHOWTYPE.y);
 
   const CycleSteps = [
     {
@@ -82,34 +50,43 @@ export default function Setting() {
     },
 
     {
-      title: "基本参数",
-      components: <BaseInfo />,
-      type: SHOWTYPE.bb,
-    },
-
-    /** 圆形 */
-    {
-      title: "手动采点",
-      components: <GetPoints pickPoint={pickPoint} getDirect={getDirect} />,
+      title: "自动采点&管道拟合",
+      components: <CylinderPre />,
       type: SHOWTYPE.yb,
     },
     {
-      title: "自动圆面点采集",
-      components: <MeasurePoints />,
-      type: SHOWTYPE.yb,
-    },
-    {
-      title: "圆柱拟合",
-      components: <CalculateAccurateCylinders />,
+      title: "安装点计算",
+      components: <CylinderFit />,
       type: SHOWTYPE.yb,
     },
 
-    /** 圆形-测量 */
-    {
-      title: "计算安装位",
-      components: <CalculateResultPoints />,
-      type: SHOWTYPE.yc,
-    },
+    // {
+    //   title: "基本参数",
+    //   components: <BaseInfo />,
+    //   type: SHOWTYPE.bb,
+    // },
+
+    // /** 圆形 */
+    // {
+    //   title: "手动采点",
+    //   components: <GetPoints pickPoint={pickPoint} getDirect={getDirect} />,
+    //   type: SHOWTYPE.yb,
+    // },
+    // {
+    //   title: "自动圆面点采集",
+    //   components: <MeasurePoints />,
+    //   type: SHOWTYPE.yb,
+    // },
+    // {
+    //   title: "圆柱拟合",
+    //   components: <CalculateAccurateCylinders />,
+    //   type: SHOWTYPE.yb,
+    // },
+    // {
+    //   title: "计算安装位",
+    //   components: <CalculateResultPoints />,
+    //   type: SHOWTYPE.yc,
+    // },
   ];
 
   if (mode === TMode.second) {
@@ -127,31 +104,18 @@ export default function Setting() {
       type: SHOWTYPE.bb,
     },
     {
-      title: "手动采点",
+      title: "手动采点&方涵拟合",
       components: <CubePre />,
       type: SHOWTYPE.bb,
     },
     {
-      title: "方涵拟合",
+      title: "安装点计算",
       components: <CubeFit />,
       type: SHOWTYPE.bb,
     },
   ];
 
   let steps = data.type === TType.cube ? CubeSteps : CycleSteps;
-
-  const updateFormData = () => {
-    const formValues = form.getFieldsValue();
-
-    setData({ ...data, ...formValues });
-  };
-
-  const next = () => {
-    updateFormData();
-    if (step < steps.length) {
-      setStep(step + 1);
-    }
-  };
 
   return (
     <div className="q-flex q-flex-col q-h-full">
@@ -163,21 +127,8 @@ export default function Setting() {
         onChange={onChange}
         items={steps}
       />
-      <div className=" q-flex q-justify-center q-bg-white q-m-4 q-p-4 q-rounded-xl q-flex-1">
-        <Form
-          key={step}
-          onFinish={next}
-          className={
-            step > 2 || (data.type === TType.cube && step > 0)
-              ? " q-w-full"
-              : ""
-          }
-          form={form}
-          onValuesChange={updateFormData}
-          initialValues={data}
-        >
-          {steps?.[step]?.components}
-        </Form>
+      <div className=" q-flex q-justify-center q-bg-white q-m1x-2 q-p-4 q-rounded-xl q-flex-1">
+        {steps?.[step]?.components}
       </div>
     </div>
   );

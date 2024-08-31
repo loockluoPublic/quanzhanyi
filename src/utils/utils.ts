@@ -413,7 +413,7 @@ export const offsetCalculate = (
 
   const res = _offset
     .toJSON()
-    ?.map((row) => row.map((v) => Number(v.toFixed(6))));
+    ?.map((row) => row.map((v) => Number(v.toFixed(5))));
   _ang.free();
   _a.free();
   _offset.free();

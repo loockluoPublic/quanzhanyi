@@ -23,7 +23,7 @@ const columns: any = [
     dataIndex: "x",
     align: "left",
     key: "x",
-    with: 120,
+
     render: (_, item) => {
       return `${item.key} ( ${item?.x?.toFixed?.(3)}, ${item.y?.toFixed?.(
         3
@@ -38,7 +38,7 @@ const columns: any = [
     align: "right",
   },
   {
-    title: "最新差值",
+    title: "当前标准差倍数",
     dataIndex: "diff",
     key: "difference",
     align: "right",
@@ -68,8 +68,9 @@ export default function ResultsTable2() {
     };
   });
   return (
-    <div className="q-w-[430px]">
+    <div>
       <Table
+        className="q-w-full"
         dataSource={data}
         columns={columns}
         pagination={{ pageSize: 10, hideOnSinglePage: true }}

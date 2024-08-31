@@ -16,6 +16,7 @@ export default function PointsVector3(props: {
   const { showGetPoints = true, value } = props;
 
   const [loading, setLoading] = useState(false);
+
   const getPoints = () => {
     setLoading(true);
     measureAndGetSimpleCoord()
@@ -26,6 +27,7 @@ export default function PointsVector3(props: {
         setLoading(false);
       });
   };
+
   useEffect(() => {
     !props.value && props.autoMeasure && getPoints();
   }, []);

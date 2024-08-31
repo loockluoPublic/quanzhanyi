@@ -37,9 +37,11 @@ export const Data = atom<GlobalData>({
     firstPoints: [] as any,
     type: TType.cycle,
     distanceThreshold: 0.1,
-    mPoints: mockData.mPoints.map((item) => {
-      return new CustomVector3(item.x, item.y, item.z);
-    }),
+
+    layNum: 2,
+    numPerLay: 3,
+
+    mPoints: [],
   }, // 默认值
 });
 
