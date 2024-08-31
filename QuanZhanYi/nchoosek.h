@@ -1,14 +1,15 @@
 /*
- * File: CrossLine.h
+ * File: nchoosek.h
  *
  * MATLAB Coder version            : 23.2
  * C/C++ source code generated on  : 30-Aug-2024 21:53:25
  */
 
-#ifndef CROSSLINE_H
-#define CROSSLINE_H
+#ifndef NCHOOSEK_H
+#define NCHOOSEK_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,8 +19,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void CrossLine(const double PlanePara1[4], const double PlanePara2[4],
-                      double x_val, double P0[3], double d[3]);
+void nchoosek(const emxArray_real_T *x, emxArray_real_T *y);
 
 #ifdef __cplusplus
 }
@@ -27,7 +27,7 @@ extern void CrossLine(const double PlanePara1[4], const double PlanePara2[4],
 
 #endif
 /*
- * File trailer for CrossLine.h
+ * File trailer for nchoosek.h
  *
  * [EOF]
  */

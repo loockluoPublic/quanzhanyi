@@ -2,7 +2,7 @@
  * File: planefit.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 22-Aug-2024 17:04:17
+ * C/C++ source code generated on  : 30-Aug-2024 21:53:25
  */
 
 /* Include Files */
@@ -121,7 +121,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     }
   }
   /*  Fit a plane through the points */
-  mean(pointss, coefficients);
+  b_mean(pointss, coefficients);
   emxInit_real_T(&b_pointss, 2);
   r2 = b_pointss->size[0] * b_pointss->size[1];
   b_pointss->size[0] = pointss->size[0];

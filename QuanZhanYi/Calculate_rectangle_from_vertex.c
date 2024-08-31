@@ -2,16 +2,14 @@
  * File: Calculate_rectangle_from_vertex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 22-Aug-2024 17:04:17
+ * C/C++ source code generated on  : 30-Aug-2024 21:53:25
  */
 
 /* Include Files */
 #include "Calculate_rectangle_from_vertex.h"
 #include "QuanZhanYi_data.h"
-#include "QuanZhanYi_emxutil.h"
 #include "QuanZhanYi_initialize.h"
 #include "QuanZhanYi_types.h"
-#include "foot_of_perpendicular_from_a_point_to_a_line.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 
@@ -30,8 +28,6 @@
  *  PP   8个顶点
  *
  * Arguments    : const emxArray_real_T *TrianglePoints4
- *                const double P_bound1[3]
- *                const double P_bound2[3]
  *                double Pin[3]
  *                double Pout[3]
  *                double UPP[3]
@@ -39,53 +35,32 @@
  *                double *h
  *                double *w
  *                double Tao[3]
- *                emxArray_real_T *PP
+ *                double PP[24]
  * Return Type  : void
  */
 void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
-                                     const double P_bound1[3],
-                                     const double P_bound2[3], double Pin[3],
-                                     double Pout[3], double UPP[3], double *b,
-                                     double *h, double *w, double Tao[3],
-                                     emxArray_real_T *PP)
+                                     double Pin[3], double Pout[3],
+                                     double UPP[3], double *b, double *h,
+                                     double *w, double Tao[3], double PP[24])
 {
   static const signed char b_iv[8] = {1, 2, 3, 6, 9, 16, 17, 18};
   double Pdd[24];
   const double *TrianglePoints4_data;
-  double PP1_idx_0;
-  double PP1_idx_1;
-  double PP4_idx_0;
-  double PP4_idx_1;
+  double Tao2_tmp_idx_0;
+  double Tao2_tmp_idx_1;
+  double Tao2_tmp_idx_2;
   double Tao3_tmp;
-  double a;
+  double Tao3_tmp_idx_0;
+  double Tao3_tmp_idx_1;
+  double Tao3_tmp_idx_2;
   double absxk;
-  double b_a;
   double b_scale;
   double b_y;
-  double c_a;
   double c_scale;
-  double d_a;
-  double e_a;
-  double f_a;
-  double g_a;
-  double h_a;
-  double i_a;
+  double d;
   double scale;
   double t;
-  double xN2;
-  double xN3;
-  double xN6;
-  double xN7;
-  double xN8;
   double y;
-  double yN2;
-  double yN6;
-  double yN7;
-  double yN8;
-  double zN6;
-  double zN7;
-  double zN8;
-  double *PP_data;
   int Pdd_tmp;
   int i;
   if (!isInitialized_QuanZhanYi) {
@@ -103,13 +78,13 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
   scale = 3.3121686421112381E-170;
   b_scale = 3.3121686421112381E-170;
   c_scale = 3.3121686421112381E-170;
-  xN2 = Pdd[6] - Pdd[0];
-  Tao[0] = xN2;
-  yN2 = Pdd[9] - Pdd[3];
-  PP1_idx_0 = yN2;
-  xN3 = Pdd[15] - Pdd[12];
-  PP4_idx_0 = xN3;
-  absxk = fabs(xN3);
+  d = Pdd[6] - Pdd[0];
+  Tao[0] = d;
+  Tao2_tmp_idx_2 = Pdd[9] - Pdd[3];
+  Tao2_tmp_idx_0 = Tao2_tmp_idx_2;
+  Tao3_tmp_idx_2 = Pdd[15] - Pdd[12];
+  Tao3_tmp_idx_0 = Tao3_tmp_idx_2;
+  absxk = fabs(Tao3_tmp_idx_2);
   if (absxk > 3.3121686421112381E-170) {
     Tao3_tmp = 1.0;
     scale = absxk;
@@ -117,7 +92,7 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
     t = absxk / 3.3121686421112381E-170;
     Tao3_tmp = t * t;
   }
-  absxk = fabs(xN2);
+  absxk = fabs(d);
   if (absxk > 3.3121686421112381E-170) {
     y = 1.0;
     b_scale = absxk;
@@ -125,7 +100,7 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
     t = absxk / 3.3121686421112381E-170;
     y = t * t;
   }
-  absxk = fabs(yN2);
+  absxk = fabs(Tao2_tmp_idx_2);
   if (absxk > 3.3121686421112381E-170) {
     b_y = 1.0;
     c_scale = absxk;
@@ -133,13 +108,13 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
     t = absxk / 3.3121686421112381E-170;
     b_y = t * t;
   }
-  xN2 = Pdd[7] - Pdd[1];
-  Tao[1] = xN2;
-  yN2 = Pdd[10] - Pdd[4];
-  PP1_idx_1 = yN2;
-  xN3 = Pdd[16] - Pdd[13];
-  PP4_idx_1 = xN3;
-  absxk = fabs(xN3);
+  d = Pdd[7] - Pdd[1];
+  Tao[1] = d;
+  Tao2_tmp_idx_2 = Pdd[10] - Pdd[4];
+  Tao2_tmp_idx_1 = Tao2_tmp_idx_2;
+  Tao3_tmp_idx_2 = Pdd[16] - Pdd[13];
+  Tao3_tmp_idx_1 = Tao3_tmp_idx_2;
+  absxk = fabs(Tao3_tmp_idx_2);
   if (absxk > scale) {
     t = scale / absxk;
     Tao3_tmp = Tao3_tmp * t * t + 1.0;
@@ -148,7 +123,7 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
     t = absxk / scale;
     Tao3_tmp += t * t;
   }
-  absxk = fabs(xN2);
+  absxk = fabs(d);
   if (absxk > b_scale) {
     t = b_scale / absxk;
     y = y * t * t + 1.0;
@@ -157,7 +132,7 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
     t = absxk / b_scale;
     y += t * t;
   }
-  absxk = fabs(yN2);
+  absxk = fabs(Tao2_tmp_idx_2);
   if (absxk > c_scale) {
     t = c_scale / absxk;
     b_y = b_y * t * t + 1.0;
@@ -166,10 +141,10 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
     t = absxk / c_scale;
     b_y += t * t;
   }
-  xN2 = Pdd[8] - Pdd[2];
-  yN2 = Pdd[11] - Pdd[5];
-  xN3 = Pdd[17] - Pdd[14];
-  absxk = fabs(xN3);
+  d = Pdd[8] - Pdd[2];
+  Tao2_tmp_idx_2 = Pdd[11] - Pdd[5];
+  Tao3_tmp_idx_2 = Pdd[17] - Pdd[14];
+  absxk = fabs(Tao3_tmp_idx_2);
   if (absxk > scale) {
     t = scale / absxk;
     Tao3_tmp = Tao3_tmp * t * t + 1.0;
@@ -178,7 +153,7 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
     t = absxk / scale;
     Tao3_tmp += t * t;
   }
-  absxk = fabs(xN2);
+  absxk = fabs(d);
   if (absxk > b_scale) {
     t = b_scale / absxk;
     y = y * t * t + 1.0;
@@ -187,7 +162,7 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
     t = absxk / b_scale;
     y += t * t;
   }
-  absxk = fabs(yN2);
+  absxk = fabs(Tao2_tmp_idx_2);
   if (absxk > c_scale) {
     t = c_scale / absxk;
     b_y = b_y * t * t + 1.0;
@@ -199,90 +174,65 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
   Tao3_tmp = scale * sqrt(Tao3_tmp);
   y = b_scale * sqrt(y);
   b_y = c_scale * sqrt(b_y);
-  Tao[0] = (((Tao[0] / y + PP1_idx_0 / b_y) + PP4_idx_0 / Tao3_tmp) +
-            (Pdd[21] - Pdd[18]) / Tao3_tmp) /
-           4.0;
-  Tao[1] = (((Tao[1] / y + PP1_idx_1 / b_y) + PP4_idx_1 / Tao3_tmp) +
-            (Pdd[22] - Pdd[19]) / Tao3_tmp) /
-           4.0;
-  Tao[2] = (((xN2 / y + yN2 / b_y) + xN3 / Tao3_tmp) +
-            (Pdd[23] - Pdd[20]) / Tao3_tmp) /
-           4.0;
-  /*  计算投影点 */
-  foot_of_perpendicular_from_a_point_to_a_line(P_bound1, &Pdd[0], &Pdd[6],
-                                               &scale, &b_scale, &c_scale);
-  foot_of_perpendicular_from_a_point_to_a_line(P_bound1, &Pdd[3], &Pdd[9], &xN2,
-                                               &yN2, &PP1_idx_0);
-  foot_of_perpendicular_from_a_point_to_a_line(P_bound2, &Pdd[0], &Pdd[6], &xN3,
-                                               &PP4_idx_0, &absxk);
-  foot_of_perpendicular_from_a_point_to_a_line(P_bound2, &Pdd[3], &Pdd[9], &t,
-                                               &Tao3_tmp, &y);
-  foot_of_perpendicular_from_a_point_to_a_line(P_bound1, &Pdd[12], &Pdd[15],
-                                               &b_y, &PP1_idx_1, &PP4_idx_1);
-  foot_of_perpendicular_from_a_point_to_a_line(P_bound2, &Pdd[12], &Pdd[15],
-                                               &xN6, &yN6, &zN6);
-  foot_of_perpendicular_from_a_point_to_a_line(P_bound1, &Pdd[18], &Pdd[21],
-                                               &xN7, &yN7, &zN7);
-  foot_of_perpendicular_from_a_point_to_a_line(P_bound2, &Pdd[18], &Pdd[21],
-                                               &xN8, &yN8, &zN8);
   /*  计算进口中心 */
   /*  计算出口中心 */
   /*  计算上顶点 */
   /*  计算长宽高 */
-  a = scale - b_y;
-  b_a = b_scale - PP1_idx_1;
-  c_a = c_scale - PP4_idx_1;
-  d_a = scale - xN2;
-  e_a = b_scale - yN2;
-  f_a = c_scale - PP1_idx_0;
-  g_a = scale - xN3;
-  h_a = b_scale - PP4_idx_0;
-  i_a = c_scale - absxk;
-  Pdd[0] = scale;
-  Pdd[3] = xN2;
-  Pdd[6] = xN3;
-  Pdd[9] = t;
-  Pdd[12] = b_y;
-  Pdd[15] = xN6;
-  Pdd[18] = xN7;
-  Pdd[21] = xN8;
-  Pdd[1] = b_scale;
-  Pdd[4] = yN2;
-  Pdd[7] = PP4_idx_0;
-  Pdd[10] = Tao3_tmp;
-  Pdd[13] = PP1_idx_1;
-  Pdd[16] = yN6;
-  Pdd[19] = yN7;
-  Pdd[22] = yN8;
-  Pdd[2] = c_scale;
-  Pdd[5] = PP1_idx_0;
-  Pdd[8] = absxk;
-  Pdd[11] = y;
-  Pdd[14] = PP4_idx_1;
-  Pdd[17] = zN6;
-  Pdd[20] = zN7;
-  Pdd[23] = zN8;
-  i = PP->size[0] * PP->size[1];
-  PP->size[0] = 3;
-  PP->size[1] = 8;
-  emxEnsureCapacity_real_T(PP, i);
-  PP_data = PP->data;
-  for (i = 0; i < 24; i++) {
-    PP_data[i] = Pdd[i];
-  }
+  scale = Pdd[0] - Pdd[12];
+  b_scale = Pdd[1] - Pdd[13];
+  c_scale = Pdd[2] - Pdd[14];
+  *b = sqrt((scale * scale + b_scale * b_scale) + c_scale * c_scale);
+  scale = Pdd[0] - Pdd[3];
+  b_scale = Pdd[1] - Pdd[4];
+  c_scale = Pdd[2] - Pdd[5];
+  *h = sqrt((scale * scale + b_scale * b_scale) + c_scale * c_scale);
+  scale = Pdd[0] - Pdd[6];
+  b_scale = Pdd[1] - Pdd[7];
+  c_scale = Pdd[2] - Pdd[8];
+  *w = sqrt((scale * scale + b_scale * b_scale) + c_scale * c_scale);
+  Tao[0] = (((Tao[0] / y + Tao2_tmp_idx_0 / b_y) + Tao3_tmp_idx_0 / Tao3_tmp) +
+            (Pdd[21] - Pdd[18]) / Tao3_tmp) /
+           4.0;
+  Pin[0] = ((Pdd[3] + Pdd[12]) / 2.0 + (Pdd[0] + Pdd[18]) / 2.0) / 2.0;
+  Pout[0] = ((Pdd[6] + Pdd[21]) / 2.0 + (Pdd[9] + Pdd[15]) / 2.0) / 2.0;
+  UPP[0] = (Pdd[12] + Pdd[18]) / 2.0;
+  PP[0] = Pdd[0];
+  PP[1] = Pdd[3];
+  PP[2] = Pdd[6];
+  PP[3] = Pdd[9];
+  PP[4] = Pdd[12];
+  PP[5] = Pdd[15];
+  PP[6] = Pdd[18];
+  PP[7] = Pdd[21];
+  Tao[1] = (((Tao[1] / y + Tao2_tmp_idx_1 / b_y) + Tao3_tmp_idx_1 / Tao3_tmp) +
+            (Pdd[22] - Pdd[19]) / Tao3_tmp) /
+           4.0;
+  Pin[1] = ((Pdd[4] + Pdd[13]) / 2.0 + (Pdd[1] + Pdd[19]) / 2.0) / 2.0;
+  Pout[1] = ((Pdd[7] + Pdd[22]) / 2.0 + (Pdd[10] + Pdd[16]) / 2.0) / 2.0;
+  UPP[1] = (Pdd[13] + Pdd[19]) / 2.0;
+  PP[8] = Pdd[1];
+  PP[9] = Pdd[4];
+  PP[10] = Pdd[7];
+  PP[11] = Pdd[10];
+  PP[12] = Pdd[13];
+  PP[13] = Pdd[16];
+  PP[14] = Pdd[19];
+  PP[15] = Pdd[22];
+  Tao[2] = (((d / y + Tao2_tmp_idx_2 / b_y) + Tao3_tmp_idx_2 / Tao3_tmp) +
+            (Pdd[23] - Pdd[20]) / Tao3_tmp) /
+           4.0;
+  Pin[2] = ((Pdd[5] + Pdd[14]) / 2.0 + (Pdd[2] + Pdd[20]) / 2.0) / 2.0;
+  Pout[2] = ((Pdd[8] + Pdd[23]) / 2.0 + (Pdd[11] + Pdd[17]) / 2.0) / 2.0;
+  UPP[2] = (Pdd[14] + Pdd[20]) / 2.0;
+  PP[16] = Pdd[2];
+  PP[17] = Pdd[5];
+  PP[18] = Pdd[8];
+  PP[19] = Pdd[11];
+  PP[20] = Pdd[14];
+  PP[21] = Pdd[17];
+  PP[22] = Pdd[20];
+  PP[23] = Pdd[23];
   /*  8个顶点 */
-  Pin[0] = ((xN2 + b_y) / 2.0 + (scale + xN7) / 2.0) / 2.0;
-  Pout[0] = ((xN3 + xN8) / 2.0 + (t + xN6) / 2.0) / 2.0;
-  UPP[0] = (b_y + xN7) / 2.0;
-  Pin[1] = ((yN2 + PP1_idx_1) / 2.0 + (b_scale + yN7) / 2.0) / 2.0;
-  Pout[1] = ((PP4_idx_0 + yN8) / 2.0 + (Tao3_tmp + yN6) / 2.0) / 2.0;
-  UPP[1] = (PP1_idx_1 + yN7) / 2.0;
-  Pin[2] = ((PP1_idx_0 + PP4_idx_1) / 2.0 + (c_scale + zN7) / 2.0) / 2.0;
-  Pout[2] = ((absxk + zN8) / 2.0 + (y + zN6) / 2.0) / 2.0;
-  UPP[2] = (PP4_idx_1 + zN7) / 2.0;
-  *b = sqrt((a * a + b_a * b_a) + c_a * c_a);
-  *h = sqrt((d_a * d_a + e_a * e_a) + f_a * f_a);
-  *w = sqrt((g_a * g_a + h_a * h_a) + i_a * i_a);
 }
 
 /*
