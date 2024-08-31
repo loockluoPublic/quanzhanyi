@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 30-Aug-2024 21:53:25
+ * C/C++ source code generated on  : 31-Aug-2024 15:45:21
  */
 
 /* Include Files */
@@ -77,8 +77,12 @@ static const mxArray *h_emlrt_marshallOut(const real_T u[9]);
 static real_T (*i_emlrt_marshallIn(const emlrtStack *sp, const mxArray *nullptr,
                                    const char_T *identifier))[4];
 
+static const mxArray *i_emlrt_marshallOut(const real_T u[4]);
+
 static real_T (*j_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                    const emlrtMsgIdentifier *parentId))[4];
+
+static const mxArray *j_emlrt_marshallOut(const real_T u[8]);
 
 static void k_emlrt_marshallIn(const emlrtStack *sp, const mxArray *nullptr,
                                const char_T *identifier, emxArray_real_T *y);
@@ -509,6 +513,24 @@ static real_T (*i_emlrt_marshallIn(const emlrtStack *sp, const mxArray *nullptr,
 }
 
 /*
+ * Arguments    : const real_T u[4]
+ * Return Type  : const mxArray *
+ */
+static const mxArray *i_emlrt_marshallOut(const real_T u[4])
+{
+  static const int32_T iv[2] = {0, 0};
+  static const int32_T iv1[2] = {1, 4};
+  const mxArray *m;
+  const mxArray *y;
+  y = NULL;
+  m = emlrtCreateNumericArray(2, (const void *)&iv[0], mxDOUBLE_CLASS, mxREAL);
+  emlrtMxSetData((mxArray *)m, (void *)&u[0]);
+  emlrtSetDimensions((mxArray *)m, &iv1[0], 2);
+  emlrtAssign(&y, m);
+  return y;
+}
+
+/*
  * Arguments    : const emlrtStack *sp
  *                const mxArray *u
  *                const emlrtMsgIdentifier *parentId
@@ -520,6 +542,24 @@ static real_T (*j_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
   real_T(*y)[4];
   y = u_emlrt_marshallIn(sp, emlrtAlias(u), parentId);
   emlrtDestroyArray(&u);
+  return y;
+}
+
+/*
+ * Arguments    : const real_T u[8]
+ * Return Type  : const mxArray *
+ */
+static const mxArray *j_emlrt_marshallOut(const real_T u[8])
+{
+  static const int32_T iv[2] = {0, 0};
+  static const int32_T iv1[2] = {1, 8};
+  const mxArray *m;
+  const mxArray *y;
+  y = NULL;
+  m = emlrtCreateNumericArray(2, (const void *)&iv[0], mxDOUBLE_CLASS, mxREAL);
+  emlrtMxSetData((mxArray *)m, (void *)&u[0]);
+  emlrtSetDimensions((mxArray *)m, &iv1[0], 2);
+  emlrtAssign(&y, m);
   return y;
 }
 
@@ -1626,11 +1666,11 @@ void myvrrotvec2mat_api(const mxArray *prhs, const mxArray **plhs)
 /*
  * Arguments    : const mxArray * const prhs[7]
  *                int32_T nlhs
- *                const mxArray *plhs[2]
+ *                const mxArray *plhs[4]
  * Return Type  : void
  */
 void planefit4_api(const mxArray *const prhs[7], int32_T nlhs,
-                   const mxArray *plhs[2])
+                   const mxArray *plhs[4])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -1643,10 +1683,13 @@ void planefit4_api(const mxArray *const prhs[7], int32_T nlhs,
   emxArray_real_T *Points3;
   emxArray_real_T *Points4;
   emxArray_real_T *TrianglePoints;
+  emxArray_real_T *distancesFianal;
+  real_T(*MaxDis)[4];
   real_T(*BoundPoint1)[3];
   real_T(*BoundPoint2)[3];
   real_T distanceThreshold;
   st.tls = emlrtRootTLSGlobal;
+  MaxDis = (real_T(*)[4])mxMalloc(sizeof(real_T[4]));
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   /* Marshall function inputs */
   emxInit_real_T(&st, &Points1);
@@ -1668,8 +1711,10 @@ void planefit4_api(const mxArray *const prhs[7], int32_T nlhs,
   /* Invoke the target function */
   emxInit_real_T(&st, &PlaneParaOut);
   emxInit_real_T(&st, &TrianglePoints);
+  emxInit_real_T(&st, &distancesFianal);
   planefit4(Points1, Points2, Points3, Points4, *BoundPoint1, *BoundPoint2,
-            distanceThreshold, PlaneParaOut, TrianglePoints);
+            distanceThreshold, PlaneParaOut, TrianglePoints, *MaxDis,
+            distancesFianal);
   emxFree_real_T(&st, &Points4);
   emxFree_real_T(&st, &Points3);
   emxFree_real_T(&st, &Points2);
@@ -1683,17 +1728,25 @@ void planefit4_api(const mxArray *const prhs[7], int32_T nlhs,
     plhs[1] = b_emlrt_marshallOut(TrianglePoints);
   }
   emxFree_real_T(&st, &TrianglePoints);
+  if (nlhs > 2) {
+    plhs[2] = i_emlrt_marshallOut(*MaxDis);
+  }
+  if (nlhs > 3) {
+    distancesFianal->canFreeData = false;
+    plhs[3] = b_emlrt_marshallOut(distancesFianal);
+  }
+  emxFree_real_T(&st, &distancesFianal);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 
 /*
  * Arguments    : const mxArray * const prhs[11]
  *                int32_T nlhs
- *                const mxArray *plhs[2]
+ *                const mxArray *plhs[4]
  * Return Type  : void
  */
 void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
-                   const mxArray *plhs[2])
+                   const mxArray *plhs[4])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -1710,10 +1763,13 @@ void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
   emxArray_real_T *Points7;
   emxArray_real_T *Points8;
   emxArray_real_T *TrianglePoints;
+  emxArray_real_T *distancesFianal;
+  real_T(*MaxDis)[8];
   real_T(*P_bound1)[3];
   real_T(*P_bound2)[3];
   real_T distanceThreshold;
   st.tls = emlrtRootTLSGlobal;
+  MaxDis = (real_T(*)[8])mxMalloc(sizeof(real_T[8]));
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   /* Marshall function inputs */
   emxInit_real_T(&st, &Points1);
@@ -1747,9 +1803,10 @@ void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
   /* Invoke the target function */
   emxInit_real_T(&st, &PlaneParaOut);
   emxInit_real_T(&st, &TrianglePoints);
+  emxInit_real_T(&st, &distancesFianal);
   planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7,
             Points8, *P_bound1, *P_bound2, distanceThreshold, PlaneParaOut,
-            TrianglePoints);
+            TrianglePoints, *MaxDis, distancesFianal);
   emxFree_real_T(&st, &Points8);
   emxFree_real_T(&st, &Points7);
   emxFree_real_T(&st, &Points6);
@@ -1767,6 +1824,14 @@ void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
     plhs[1] = b_emlrt_marshallOut(TrianglePoints);
   }
   emxFree_real_T(&st, &TrianglePoints);
+  if (nlhs > 2) {
+    plhs[2] = j_emlrt_marshallOut(*MaxDis);
+  }
+  if (nlhs > 3) {
+    distancesFianal->canFreeData = false;
+    plhs[3] = b_emlrt_marshallOut(distancesFianal);
+  }
+  emxFree_real_T(&st, &distancesFianal);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 

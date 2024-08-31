@@ -2,7 +2,7 @@
  * File: QuanZhanYi_types.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 30-Aug-2024 21:53:25
+ * C/C++ source code generated on  : 31-Aug-2024 15:45:21
  */
 
 #ifndef QUANZHANYI_TYPES_H
@@ -27,6 +27,20 @@ struct emxArray_real_T {
 typedef struct emxArray_real_T emxArray_real_T;
 #endif /* typedef_emxArray_real_T */
 
+#ifndef typedef_cell_wrap_1
+#define typedef_cell_wrap_1
+typedef struct {
+  emxArray_real_T *f1;
+} cell_wrap_1;
+#endif /* typedef_cell_wrap_1 */
+
+#ifndef typedef_cell_wrap_6
+#define typedef_cell_wrap_6
+typedef struct {
+  emxArray_real_T *f1;
+} cell_wrap_6;
+#endif /* typedef_cell_wrap_6 */
+
 #ifndef struct_emxArray_int32_T
 #define struct_emxArray_int32_T
 struct emxArray_int32_T {
@@ -41,13 +55,6 @@ struct emxArray_int32_T {
 #define typedef_emxArray_int32_T
 typedef struct emxArray_int32_T emxArray_int32_T;
 #endif /* typedef_emxArray_int32_T */
-
-#ifndef typedef_cell_wrap_6
-#define typedef_cell_wrap_6
-typedef struct {
-  emxArray_real_T *f1;
-} cell_wrap_6;
-#endif /* typedef_cell_wrap_6 */
 
 #ifndef struct_emxArray_boolean_T
 #define struct_emxArray_boolean_T
