@@ -177,7 +177,7 @@ function CylinderPre() {
 
   const comp = (
     <div>
-      <h3>基础参数：</h3>
+      <h3>自动采样参数：</h3>
       <div>
         <span>
           采样层数：
@@ -201,7 +201,34 @@ function CylinderPre() {
             }}
           />
         </span>
-        <span className="q-ml-8">
+      </div>
+
+      <h3 className="border-top  q-mt-4 q-pt-2"></h3>
+      <div className="q-my-1 q-flex ">
+        <div className="q-fle1x">
+          <span className="q-block">
+            边界点1：
+            <PointsVector3
+              className="!q-inline-flex !q-my-1"
+              value={data.firstPoints[0] as CustomVector3}
+              onChange={(v) => {
+                setData({ ...data, firstPoints: [v, data.firstPoints[1]] });
+              }}
+            />
+          </span>
+          <span className="q-block ">
+            边界点2：
+            <PointsVector3
+              className="!q-inline-flex !q-my-1"
+              value={data.firstPoints[1] as CustomVector3}
+              onChange={(v) => {
+                setData({ ...data, firstPoints: [data.firstPoints[0], v] });
+              }}
+            />
+          </span>
+        </div>
+
+        <span className=" q-block q-ml-8">
           管道轴线方向：
           <span>
             <PointsVector2 value={data.direct} />
@@ -220,44 +247,29 @@ function CylinderPre() {
           </span>
         </span>
       </div>
-      <div className="q-my-1">
-        <span className="">
-          边界点1：
-          <PointsVector3
-            className="!q-inline-flex"
-            value={data.firstPoints[0] as CustomVector3}
-            onChange={(v) => {
-              setData({ ...data, firstPoints: [v, data.firstPoints[1]] });
-            }}
-          />
-        </span>
-        <span className="q-ml-8">
-          边界点2：
-          <PointsVector3
-            className="!q-inline-flex"
-            value={data.firstPoints[1] as CustomVector3}
-            onChange={(v) => {
-              setData({ ...data, firstPoints: [data.firstPoints[0], v] });
-            }}
-          />
-        </span>
-      </div>
-
-      <div className=" q-flex q-justify-end">
-        <Button className="q-ml-2" size="small" onClick={setMockData}>
+      {/* <h3 className="border-top  q-mt-4 q-pt-2"></h3> */}
+      <div className="q-my-1 q-flex q-justify-end">
+        <Button
+          type="dashed"
+          className="q-ml-2"
+          size="small"
+          onClick={setMockData}
+        >
           测试数据
         </Button>
+
         <Button
-          className="q-ml-2"
+          className="q-ml q-ml-8"
           type="primary"
           loading={loading}
           onClick={autoGetPoints}
         >
           开始采集
         </Button>
+
         <Button
+          className=" q-ml-8 "
           disabled={!disableFit}
-          className="q-ml-2"
           type="primary"
           loading={cyLoading}
           onClick={cyFit}

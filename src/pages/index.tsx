@@ -39,7 +39,7 @@ export default function Setting() {
   }, [data.type]);
 
   const onChange = (value: number) => {
-    if (value <= step + 1) setStep(value);
+    setStep(value);
   };
 
   const CycleSteps = [

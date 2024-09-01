@@ -13,44 +13,6 @@ export default function Perspective(props) {
   //   far: { value: 100, min: 0.1, max: 100 },
   // });
 
-  // const [{ 转向点 }, set, get] = useControls("全站仪控制", () => ({
-  //   转向点: {
-  //     x: 0,
-  //     y: 0,
-  //     z: 0,
-  //   },
-  //   转向并测量: button(() => {
-  //     const v = get("转向点");
-  //     console.log("%c Line:25 🍅 v", "color:#42b983", v);
-  //     goToCV(v.x, v.y, v.z)
-  //       .then(() => {
-  //         return measureAndGetSimpleCoord();
-  //       })
-  //       .then((res) => {
-  //         set({
-  //           测量结果: {
-  //             x: res.x,
-  //             y: res.y,
-  //             z: res.z,
-  //           },
-  //         });
-  //       })
-  //       .then(() => {
-  //         return getLine();
-  //       })
-  //       .then((res: [number, number]) => {
-  //         set({
-  //           测量角度: {
-  //             p: res[0],
-  //             h: res[1],
-  //           },
-  //         });
-  //       });
-  //   }),
-  //   测量结果: { x: 0, y: 0, z: 0 },
-  //   测量角度: { p: 0, h: 0 },
-  // }));
-
   useEffect(() => {
     camera.current.updateProjectionMatrix();
   }, []);
