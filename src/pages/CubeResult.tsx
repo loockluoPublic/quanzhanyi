@@ -259,6 +259,7 @@ function CubeResult() {
 
   const comp = (
     <div>
+      <h3>声道参数：</h3>
       <div>
         <span>
           声道分布：
@@ -313,7 +314,7 @@ function CubeResult() {
           />
         </span>
       </div>
-
+      <h3 className="q-mt-2 border-top q-pt-2">安装点详情：</h3>
       <div>
         <Table
           size="small"

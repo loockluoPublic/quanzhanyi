@@ -1,6 +1,13 @@
+import { rad2ang } from "../utils/utils";
+
 export default function PointsVector2(props: {
   value?: number[];
   style?: React.CSSProperties;
 }) {
-  return <span style={props.style}>{props?.value?.join?.(",")}</span>;
+  const value = props.value?.map((v) => rad2ang(v).toFixed(1));
+  return (
+    <span style={props.style}>
+      ( {value?.[0] ?? "--"}°, {value?.[1] ?? "--"}° )
+    </span>
+  );
 }

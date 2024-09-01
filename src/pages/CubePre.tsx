@@ -3,6 +3,7 @@ import BoundPoints from "../components/BoundPoints";
 import GetCubePoints from "../components/GetCubePoints";
 import { useRecoilValue } from "recoil";
 import { Data } from "../atom/globalState";
+import Block from "../components/Block";
 
 function CubePre() {
   const data = useRecoilValue(Data);
@@ -10,6 +11,7 @@ function CubePre() {
 
   const comp = (
     <div>
+      <h3>基础参数：</h3>
       <BoundPoints />
       <GetCubePoints />
     </div>

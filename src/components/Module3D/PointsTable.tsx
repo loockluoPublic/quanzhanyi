@@ -2,7 +2,7 @@ import { Button, Modal, Table } from "antd";
 import { CustomVector3 } from "../../class/CustomVector3";
 import { useMemo, useState } from "react";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
-import ResultsTable2 from "../ResultsTable2";
+import CylinderTable from "../CylinderTable";
 
 export function PointsTable(props: { mPoints: CustomVector3[] }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,7 +38,7 @@ export function PointsTable(props: { mPoints: CustomVector3[] }) {
         footer={null}
         zIndex={9999}
       >
-        <ResultsTable2 />
+        <CylinderTable />
       </Modal>
     </div>
   );

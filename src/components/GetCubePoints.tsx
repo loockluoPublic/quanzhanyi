@@ -9,6 +9,7 @@ import * as mockData from "../utils/cubeMockData";
 import { cubePoints } from "../utils/cubeMockData8";
 import { CustomVector3 } from "../class/CustomVector3";
 import { CalculateRectangleFromVertex, Planefit } from "../utils/utils";
+import CubeTable from "./CubeTable";
 
 const mx = [
   mockData.cubePointsL,
@@ -28,10 +29,10 @@ export default function () {
     { value: 1, label: "顶面" },
     { value: 2, label: "右面" },
     { value: 3, label: "底面" },
-    { value: 4, label: "左下" },
-    { value: 5, label: "左上" },
-    { value: 6, label: "右上" },
-    { value: 7, label: "右下" },
+    { value: 4, label: "左下面" },
+    { value: 5, label: "左上面" },
+    { value: 6, label: "右上面" },
+    { value: 7, label: "右下面" },
   ].filter((item) => {
     if (data.hasChamfer) return true;
     return item.value < 4;
@@ -39,7 +40,7 @@ export default function () {
 
   const planeFit = async () => {
     let MxPortsArr: CustomVector3[][] = [];
-
+    let MxPorts8Arr: CustomVector3[][] = [];
     for (const item of options) {
       const key = `m${item.value}`;
       if (data.MxPoints[key]?.length > 9) {
@@ -57,27 +58,37 @@ export default function () {
 
     if (options.length === 8) {
       const [l, t, r, b, lb, lt, rt, rb] = MxPortsArr;
-      MxPortsArr = [lt, t, rt, r, rb, b, lb, l];
+      MxPorts8Arr = [lt, t, rt, r, rb, b, lb, l];
+      MxPortsArr = [l, t, r, b];
     }
     setPlaneFitLoadint(true);
     setTimeout(() => {
-      const res: any = Planefit(
+      const res4: any = Planefit(
         MxPortsArr,
         ...data.firstPoints,
         data.distanceThreshold
       );
 
-      console.log("%c Line:60 🍒 res", "color:#3f7cff", res);
+      const cubeResult4 = CalculateRectangleFromVertex(res4.trianglePoints);
 
-      const cubeResult = CalculateRectangleFromVertex(res.trianglePoints);
+      const newData = {
+        ...data,
+        ...res4,
+        cubeResult: cubeResult4,
+      };
+      // // 当8个面时，8个面的拟合结果仅仅用于展示3D模型
+      if (options.length === 8) {
+        const res8: any = Planefit(
+          MxPorts8Arr,
+          ...data.firstPoints,
+          data.distanceThreshold
+        );
+        newData.trianglePoints = res8.trianglePoints;
+      }
 
       setPlaneFitLoadint(false);
 
-      setData({
-        ...data,
-        ...res,
-        cubeResult,
-      });
+      setData(newData);
     }, 500);
   };
 
@@ -185,51 +196,19 @@ export default function () {
           />
         </span>
       </div>
-      <div className="q-mt-2">
-        <Button
-          loading={loading}
-          type="primary"
-          // className="q-float-right"
-          onClick={getPoints}
-        >
-          采集点
-        </Button>
-      </div>
-      <div>
-        <Button
-          loading={planeFitLoading}
-          className=" q-float-right q-mt-2  q-ml-4"
-          onClick={planeFit}
-        >
-          方涵拟合
-        </Button>
+      <div className="q-mt-2 q-flex q-justify-end">
         <Button
           size="small"
-          className=" q-float-right q-mt-2  q-ml-4"
+          className="q-mt-2  q-ml-4"
           onClick={setMock}
+          type="dashed"
         >
           全部模拟
         </Button>
         <Button
           size="small"
-          className=" q-float-right q-mt-2  q-ml-4"
-          onClick={() => {
-            setData((d) => {
-              return {
-                ...d,
-                MxPoints: {
-                  ...data.MxPoints,
-                  [`m${num}`]: cubePoints[num],
-                },
-              };
-            });
-          }}
-        >
-          模拟数据
-        </Button>
-        <Button
-          size="small"
-          className=" q-float-right q-mt-2"
+          type="dashed"
+          className=" q-mt-2  q-ml-4"
           onClick={() => {
             setData((d) => {
               return {
@@ -244,19 +223,39 @@ export default function () {
         >
           模拟边界
         </Button>
+        <Button
+          type="dashed"
+          size="small"
+          className="q-mt-2  q-mx-4"
+          onClick={() => {
+            setData((d) => {
+              return {
+                ...d,
+                MxPoints: {
+                  ...data.MxPoints,
+                  [`m${num}`]: cubePoints[num],
+                },
+              };
+            });
+          }}
+        >
+          模拟数据
+        </Button>
+
+        <Button loading={loading} type="primary" onClick={getPoints}>
+          采集点
+        </Button>
+        <Button
+          className="q-ml-4"
+          type="primary"
+          loading={planeFitLoading}
+          onClick={planeFit}
+        >
+          方涵拟合
+        </Button>
       </div>
-      <div className="q-flex q-flex-wrap q-justify-between q-w-[530px] q-mt-4">
-        {points?.map?.((item, i) => {
-          return (
-            <PointsVector3
-              key={item.key}
-              value={item}
-              showGetPoints={false}
-              remove={() => remove(i)}
-            />
-          );
-        })}
-      </div>
+      <h3 className="q-mt-4 border-top q-pt-2">{options[num].label}采集点：</h3>
+      <CubeTable points={points} />
     </div>
   );
 }

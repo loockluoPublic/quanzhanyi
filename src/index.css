@@ -82,6 +82,17 @@ button:focus-visible {
   height: 100%;
 }
 
+.border-style {
+  border: #CCC 1px solid;
+  border-radius: 8px;
+  padding: 10px
+}
+
+.border-top {
+  border-top: #CCC 1px solid;
+
+}
+
 .canvas-style {
   border: #CCC 1px solid;
   border-radius: 8px;
@@ -101,4 +112,18 @@ button:focus-visible {
 
 .ant-input-number {
   width: 90px !important;
+}
+
+
+header {
+  justify-content: space-between;
+
+  ul {
+    flex: unset !important;
+  }
+}
+
+h3 {
+  margin-top: 4px;
+  margin-bottom: 4px;
 }

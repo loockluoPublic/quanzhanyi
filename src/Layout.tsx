@@ -27,33 +27,40 @@ const App: React.FC<PropsWithChildren> = (props) => {
     <Router>
       <Layout>
         <Header style={{ display: "flex", alignItems: "center" }}>
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={[data.type]}
-            items={items1}
-            style={{ flex: 1, minWidth: 0 }}
-            onClick={({ key }) => {
-              setData({ ...data, type: key as TType });
-            }}
-          />
-          <Switch
-            className="h-button"
-            checkedChildren="复测"
-            unCheckedChildren="首测"
-            checked={mode === TMode.second}
-            onChange={(v) => {
-              setMode(v ? TMode.second : TMode.first);
-            }}
-          />
-          <div
-            className=" q-text-white q-cursor-pointer q-ml-6"
-            onClick={() => downLoadFile(data)}
-          >
-            导出
+          <div>
+            <Menu
+              theme="dark"
+              mode="horizontal"
+              defaultSelectedKeys={[data.type]}
+              items={items1}
+              style={{ flex: 1, minWidth: 0 }}
+              onClick={({ key }) => {
+                setData({ ...data, type: key as TType });
+              }}
+            />
           </div>
+          <div className="q-text-white q-flex-1 q-text-center">
+            <h2>测量软件</h2>
+          </div>
+          <div className="q-inline-flex q-items-center">
+            <Switch
+              className="h-button"
+              checkedChildren="复测"
+              unCheckedChildren="首测"
+              checked={mode === TMode.second}
+              onChange={(v) => {
+                setMode(v ? TMode.second : TMode.first);
+              }}
+            />
+            <div
+              className=" q-text-white q-cursor-pointer q-ml-6"
+              onClick={() => downLoadFile(data)}
+            >
+              导出
+            </div>
 
-          <UploadFile />
+            <UploadFile />
+          </div>
         </Header>
 
         <Layout>

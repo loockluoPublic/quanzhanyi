@@ -7,7 +7,7 @@ import {
 import { useState } from "react";
 import Module3D from "../components/Module3D";
 import { Button, InputNumber } from "antd";
-import ResultsTable2 from "../components/ResultsTable2";
+import CylinderTable from "../components/CylinderTable";
 
 export function CalculateAccurateCylinders() {
   const [data, setData] = useRecoilState(Data);
@@ -170,7 +170,7 @@ export function CalculateAccurateCylinders() {
                 再次拟合
               </Button>
             </div>
-            <ResultsTable2 />
+            <CylinderTable />
           </div>
         </>
       }

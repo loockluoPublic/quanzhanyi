@@ -45,7 +45,7 @@ const columns: any = [
   },
 ];
 
-export default function ResultsTable2() {
+export default function CylinderTable() {
   const d = useRecoilValue(Data);
   const originStandardDeviation = d.originStandardDeviation;
   const renderStandardDeviation = (v) => {
@@ -60,7 +60,7 @@ export default function ResultsTable2() {
       originDiff: renderStandardDeviation(item.originDiff),
       diff: renderStandardDeviation(item.difference),
       enable: item.enable,
-      key: `${item.label}${item.key}`,
+      key: `${item.label ?? ""}${item.key}`,
       label: item.label,
       x: item.x,
       y: item.y,
@@ -73,7 +73,11 @@ export default function ResultsTable2() {
         className="q-w-full"
         dataSource={data}
         columns={columns}
-        pagination={{ pageSize: 10, hideOnSinglePage: true }}
+        pagination={{
+          pageSize: 10,
+          hideOnSinglePage: true,
+          showSizeChanger: false,
+        }}
         size="small"
       />
     </div>

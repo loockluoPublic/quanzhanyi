@@ -6,6 +6,7 @@ import * as commond from "../utils/commond";
 import { getDeviceInfo } from "../utils/commond";
 import { availablePorts } from "../utils/serialport";
 import Next from "./Next";
+import logo from "../assets/logo.png";
 
 (window as any).commond = commond;
 export const serial = new SerialMonitor({ mode: "text", parseLines: true });
@@ -34,8 +35,6 @@ export default function Connect() {
         <>
           <Button
             onClick={() => {
-              // serial.disconnect();
-              // setDeviceInfo(undefined);
               availablePorts();
             }}
           >
@@ -50,7 +49,6 @@ export default function Connect() {
             serial
               .connect(19200)
               .then(() => {
-                // props?.onConnected?.();
                 return getDeviceInfo();
               })
               .then((res) => {
@@ -64,6 +62,14 @@ export default function Connect() {
           连接设备
         </Button>
       )}
+
+      <div className="q-absolute q-bottom-10 q-left-0 q-w-full ">
+        <img className="q-w-[100px]" src={logo} alt="" />
+        <div>
+          Copyright © 2024
+          <a href="https://www.qingwanshui.com/"> 青岛清万水技术有限公司</a>
+        </div>
+      </div>
     </div>
   );
 }

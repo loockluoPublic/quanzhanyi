@@ -266,6 +266,7 @@ function CylinderFit() {
 
   const comp = (
     <div>
+      <h3>声道参数：</h3>
       <div>
         <span>
           声道分布：
@@ -295,7 +296,7 @@ function CylinderFit() {
           />
         </span>
       </div>
-      <div>
+      <div className="q-my-1">
         <span>
           声道面：{" "}
           <Checkbox.Group
@@ -320,6 +321,7 @@ function CylinderFit() {
           />
         </span>
       </div>
+      <h3 className="q-mt-2 border-top q-pt-2">安装点详情：</h3>
       <div>
         <Table
           size="small"

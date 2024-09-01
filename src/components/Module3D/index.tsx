@@ -95,7 +95,7 @@ export default function Index(props: {
       {props?.component && (
         <div
           style={{ maxHeight: h, overflow: "scroll" }}
-          className="q-flex-shrink-0 q-flex-grow-0"
+          className="q-flex-shrink-0 q-flex-grow-0 border-style"
         >
           {props?.component}
         </div>

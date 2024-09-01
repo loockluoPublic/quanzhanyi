@@ -18,10 +18,11 @@ function AntdFileReader() {
 
   return (
     <Upload
+      className=" q-inline-block"
       beforeUpload={handleFileChange} // 阻止自动上传
       showUploadList={false} // 隐藏上传列表
     >
-      <div className="q-ml-4 q-text-white  q-cursor-pointer">导入</div>
+      <div className="q-ml-4 q-text-white  q-cursor-pointer ">导入</div>
     </Upload>
   );
 }

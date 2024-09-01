@@ -3,7 +3,7 @@ import { Data } from "../atom/globalState";
 import { useMemo } from "react";
 import { Button, Table, Tabs, TabsProps } from "antd";
 import { getDataFromTable } from "../utils/utils";
-import ResultsTable2 from "../components/ResultsTable2";
+import CylinderTable from "../components/CylinderTable";
 import Result3 from "../components/Result3";
 import { goToCV } from "../utils/commond";
 import Module3D from "../components/Module3D";
@@ -113,7 +113,7 @@ export default function ResultTable() {
     {
       key: "2",
       label: "测量点",
-      children: <ResultsTable2 />,
+      children: <CylinderTable />,
     },
     {
       key: "3",

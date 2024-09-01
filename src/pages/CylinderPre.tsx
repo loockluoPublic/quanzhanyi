@@ -23,7 +23,7 @@ import { getLine } from "../utils/commond";
 
 import mockData from "../utils/mockData";
 import useMeasure from "../utils/useMeasure";
-import ResultsTable2 from "../components/ResultsTable2";
+import CylinderTable from "../components/CylinderTable";
 
 const SDFBOptions = (() => {
   const options: DefaultOptionType[] = [];
@@ -177,6 +177,7 @@ function CylinderPre() {
 
   const comp = (
     <div>
+      <h3>基础参数：</h3>
       <div>
         <span>
           采样层数：
@@ -219,7 +220,7 @@ function CylinderPre() {
           </span>
         </span>
       </div>
-      <div>
+      <div className="q-my-1">
         <span className="">
           边界点1：
           <PointsVector3
@@ -265,7 +266,8 @@ function CylinderPre() {
         </Button>
       </div>
 
-      <div className="q-my-4">
+      <h3 className="border-top q-mt-4 q-pt-2">拟合结果：</h3>
+      <div className="q-my-2">
         <div className="q-grid q-grid-cols-4">
           <div>
             半径：
@@ -296,7 +298,7 @@ function CylinderPre() {
         </div>
 
         <div
-          className="q-flex q-items-center q-my-2"
+          className="q-flex q-items-center q-my-2  q-justify-end"
           style={{
             visibility:
               typeof data.standardDeviation !== "number" ? "hidden" : "initial",
@@ -322,12 +324,11 @@ function CylinderPre() {
                   customStandardDeviation * data.standardDeviation,
               });
             }}
-            type="primary"
           >
             再次拟合
           </Button>
         </div>
-        <ResultsTable2 />
+        <CylinderTable />
       </div>
     </div>
   );

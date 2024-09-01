@@ -465,12 +465,7 @@ export const Planefit = (
   );
 
   const _max = Number(Math.max(...MaxDis.toJSON()?.[0]).toFixed(3));
-  console.log(
-    "%c Line:468 🌰 _max",
-    "color:#fca650",
-    _max,
-    distancesFianal.toJSON()
-  );
+
   let _distancesFianal = distancesFianal.toJSON()?.[0];
 
   let i = 0;
