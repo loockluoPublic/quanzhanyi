@@ -27,7 +27,7 @@ const columns: any = [
 
     render: (_, item) => {
       return `${item.key ?? ""} ( ${item?.x?.toFixed?.(4)}, ${item.y?.toFixed?.(
-        3
+        4
       )}, ${item.z?.toFixed?.(4)} )`;
     },
   },

@@ -100,6 +100,9 @@ export default function () {
     setLoading(true);
     measureAndGetSimpleCoord()
       .then((res) => {
+        if (data.tc) {
+          res.y = res.y + data.tcH;
+        }
         setData((d) => {
           return {
             ...d,
@@ -182,10 +185,42 @@ export default function () {
             })}
           />
         </span>
-        <span className="q-ml-8">
-          阈值：
+
+        <Checkbox
+          className="q-ml-8"
+          checked={data.tc}
+          onChange={({ target }) => {
+            setData({
+              ...data,
+              tc: target.checked,
+            });
+          }}
+        >
+          使用塔尺
+        </Checkbox>
+
+        {data.tc && (
+          <span className="q-ml-4">
+            塔尺高度：
+            <InputNumber
+              step={0.2}
+              min={0}
+              max={1}
+              value={data.tcH}
+              style={{ width: 120 }}
+              addonAfter="米"
+              onChange={(tcH) => {
+                setData({ ...data, tcH });
+              }}
+            />
+          </span>
+        )}
+      </div>
+      <div className="q-mt-2">
+        <span>
+          拟合阈值：
           <InputNumber
-            step={0.001}
+            step={0.01}
             min={0.001}
             max={0.1}
             value={data.distanceThreshold}

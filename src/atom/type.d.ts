@@ -125,4 +125,14 @@ interface ICube {
    * 平面拟合误差
    */
   distanceThreshold: number;
+
+  /**
+   * 是否使用塔尺
+   */
+  tc: boolean;
+
+  /**
+   * 塔尺高度
+   */
+  tcH: number;
 }
