@@ -20,7 +20,7 @@ export const Point = (props) => {
     return (
       <div className={props.className}>
         <Tooltip
-          title={`${name}(${v.x.toFixed(3)},${v.y.toFixed(3)},${v.z.toFixed(
+          title={`${name}(${v.x.toFixed(4)},${v.y.toFixed(4)},${v.z.toFixed(
             3
           )})`}
         >

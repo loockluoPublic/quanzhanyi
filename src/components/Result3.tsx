@@ -21,15 +21,15 @@ export default function ResultsTable2() {
         <tbody>
           <tr>
             <td>半径：</td>
-            <td>{data?.calulateRes?.R?.toFixed(6)}米</td>
+            <td>{data?.calulateRes?.R?.toFixed?.(4)}米</td>
           </tr>
           <tr>
             <td>圆度：</td>
-            <td>{res?.toFixed(6)}</td>
+            <td>{res?.toFixed?.(6)}</td>
           </tr>
           <tr>
             <td>管道总长：</td>
-            <td>{A?.distanceTo?.(B)?.toFixed(6)}米</td>
+            <td>{A?.distanceTo?.(B)?.toFixed?.(4)}米</td>
           </tr>
         </tbody>
       </table>

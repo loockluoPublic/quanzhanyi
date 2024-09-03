@@ -25,9 +25,9 @@ const columns: any = [
     key: "x",
 
     render: (_, item) => {
-      return `${item.key} ( ${item?.x?.toFixed?.(3)}, ${item.y?.toFixed?.(
+      return `${item.key} ( ${item?.x?.toFixed?.(4)}, ${item.y?.toFixed?.(
         3
-      )}, ${item.z?.toFixed?.(3)} )`;
+      )}, ${item.z?.toFixed?.(4)} )`;
     },
   },
   {

@@ -49,7 +49,7 @@ const App: React.FC<PropsWithChildren> = (props) => {
               <Switch
                 className="h-button"
                 checkedChildren="复测"
-                unCheckedChildren="首测"
+                unCheckedChildren="定位"
                 checked={mode === TMode.second}
                 onChange={(v) => {
                   setMode(v ? TMode.second : TMode.first);

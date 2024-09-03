@@ -50,9 +50,9 @@ export default function PointsVector3(props: {
         <span>{`${props?.value?.label || ""}${props?.value?.key ?? ""}`}</span>
         <span>
           （
-          {`${props?.value?.x?.toFixed(3) ?? "--"}, ${
-            props?.value?.y?.toFixed(3) ?? "--"
-          }, ${props?.value?.z?.toFixed(3) ?? "--"}`}
+          {`${props?.value?.x?.toFixed(4) ?? "--"}, ${
+            props?.value?.y?.toFixed(4) ?? "--"
+          }, ${props?.value?.z?.toFixed(4) ?? "--"}`}
           ）
         </span>
       </span>

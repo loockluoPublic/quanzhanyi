@@ -9,6 +9,8 @@ import Select, { DefaultOptionType } from "antd/es/select";
 import {
   CalculatAAndBPoints,
   offsetCalculate,
+  sdj_n2v,
+  sdj_v2n,
   shengLuJiao2Ang,
 } from "../utils/utils";
 import PointsVector3 from "../components/PointVector3";
@@ -285,12 +287,14 @@ function CylinderFit() {
         <span className="q-ml-8">
           声道角：
           <InputNumber
-            value={data.sdj}
+            value={sdj_n2v(data.sdj)}
             addonAfter="度"
+            min={0}
+            max={90}
             onChange={(sdj) => {
               setData({
                 ...data,
-                sdj: sdj!,
+                sdj: sdj_v2n(sdj),
               });
             }}
           />

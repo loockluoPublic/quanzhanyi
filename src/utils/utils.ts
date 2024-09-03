@@ -413,7 +413,7 @@ export const offsetCalculate = (
 
   const res = _offset
     .toJSON()
-    ?.map((row) => row.map((v) => Number(v.toFixed(5))));
+    ?.map((row) => row.map((v) => Number(v.toFixed(4))));
   _ang.free();
   _a.free();
   _offset.free();
@@ -464,7 +464,7 @@ export const Planefit = (
     distancesFianal.ptr
   );
 
-  const _max = Number(Math.max(...MaxDis.toJSON()?.[0]).toFixed(3));
+  const _max = Number(Math.max(...MaxDis.toJSON()?.[0]).toFixed(4));
 
   let _distancesFianal = distancesFianal.toJSON()?.[0];
 
@@ -657,3 +657,15 @@ export const ang2rad = (ang: number) => ang * (Math.PI / 180);
  * @returns
  */
 export const rad2ang = (rad: number) => rad * (180 / Math.PI);
+
+/**
+ * 声道角 实际值转换为 可见值
+ * @param n
+ */
+export const sdj_n2v = (n: number) => 90 - n;
+
+/**
+ * 声道角 转换
+ * @param n
+ */
+export const sdj_v2n = (v: number) => 90 - v;

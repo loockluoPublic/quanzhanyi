@@ -10,6 +10,8 @@ import {
   ang2rad,
   CalcJuXingAAndBPointsAfterOffest,
   cubeTOff,
+  sdj_n2v,
+  sdj_v2n,
   shengDaoGaoDu,
 } from "../utils/utils";
 import PointsVector3 from "../components/PointVector3";
@@ -38,7 +40,7 @@ function CubeResult() {
     if (typeof data.sdfb === "number" && data.sdfb !== sdfbPreRef.current) {
       const cubeTable = shengDaoGaoDu(data.sdfb).map((ti, i) => {
         const sign = i < data.sdfb ? -1 : 1;
-        const h = Number(ti.toFixed(2));
+        const h = Number(ti.toFixed(6));
         return {
           h,
           a: defaultA,
@@ -278,12 +280,14 @@ function CubeResult() {
         <span className="q-ml-8">
           声道角：
           <InputNumber
-            value={data.sdj}
+            value={sdj_n2v(data.sdj)}
             addonAfter="度"
+            min={0}
+            max={90}
             onChange={(sdj: number) => {
               setData({
                 ...data,
-                sdj,
+                sdj: sdj_v2n(sdj),
               });
             }}
           />

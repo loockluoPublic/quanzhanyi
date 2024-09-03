@@ -112,19 +112,19 @@ export function CalculateAccurateCylinders() {
               <div>
                 初始标准差δ：
                 <span className=" q-font-bold">
-                  {data?.originStandardDeviation?.toFixed(6) ?? "--"} 米
+                  {data?.originStandardDeviation?.toFixed(4) ?? "--"} 米
                 </span>
               </div>
               <div>
                 标准差：
                 <span className=" q-font-bold">
-                  {data?.standardDeviation?.toFixed(6) ?? "--"} 米
+                  {data?.standardDeviation?.toFixed(4) ?? "--"} 米
                 </span>
               </div>
               <div>
                 半径：
                 <span className=" q-font-bold">
-                  {data?.calulateRes?.R?.toFixed(6) ?? "--"} 米
+                  {data?.calulateRes?.R?.toFixed(4) ?? "--"} 米
                 </span>
               </div>
               <span>

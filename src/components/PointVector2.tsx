@@ -4,7 +4,7 @@ export default function PointsVector2(props: {
   value?: number[];
   style?: React.CSSProperties;
 }) {
-  const value = props.value?.map((v) => rad2ang(v).toFixed(1));
+  const value = props.value?.map((v) => rad2ang(v).toFixed(2));
   return (
     <span style={props.style}>
       ( {value?.[0] ?? "--"}°, {value?.[1] ?? "--"}° )
