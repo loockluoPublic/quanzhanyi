@@ -1,5 +1,3 @@
-import React from "react";
-import { Canvas } from "@react-three/fiber";
 import { Cylinder, Line } from "@react-three/drei";
 import * as THREE from "three";
 import { CustomVector3 } from "../../class/CustomVector3";
@@ -36,6 +34,7 @@ const MyCylinder = (props: any) => {
       </Cylinder>
       {props?.Bottom_round_center && (
         <Line
+          color="blue"
           points={
             props?.Bottom_round_center?.map((item: CustomVector3) =>
               item.toVector3()

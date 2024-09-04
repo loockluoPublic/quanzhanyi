@@ -205,8 +205,16 @@ export const CalculatAAndBPoints = async (
 
   CustomVector3.setPublicInfo("A", 0);
   const bottomA = A.toVector3();
+  for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
+    bottomA[i].key = 2 * i + 1;
+    bottomA[j].key = 2 * i + 2;
+  }
   CustomVector3.setPublicInfo("B", 0);
   const bottomB = B.toVector3();
+  for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
+    bottomB[i].key = 2 * i + 1;
+    bottomB[j].key = 2 * i + 2;
+  }
 
   const res = bottomA.map((a, i) => {
     return {
@@ -443,7 +451,11 @@ export const Planefit = (
     return {};
   }
 
-  const mP = MPoints.map((item) => new EmxArray_real_T(item));
+  let totalPoints = 0;
+  const mP = MPoints.map((item) => {
+    totalPoints += item.length;
+    return new EmxArray_real_T(item);
+  });
 
   const boundPoint1 = new EmxArray_real_T(BoundPoint1);
   const boundPoint2 = new EmxArray_real_T(BoundPoint2);
@@ -451,7 +463,8 @@ export const Planefit = (
   const planeParaOut = new EmxArray_real_T(4, len);
   const trianglePoints = new EmxArray_real_T(3, len * 2 * 3);
   const MaxDis = new EmxArray_real_T(len, 1);
-  const distancesFianal = new EmxArray_real_T(len * 2 * 3, 1);
+
+  const distancesFianal = new EmxArray_real_T(totalPoints, 1);
   const fn = len === 4 ? _Planefit4 : _Planefit8;
   fn(
     ...mP.map((p) => p.ptr),
@@ -474,9 +487,9 @@ export const Planefit = (
     planeParaOut: planeParaOut.toJSON(),
     trianglePoints: trianglePoints.toVector3(),
     distanceThreshold: _max,
-    MPoints: MPoints.map((arr) => {
+    MxPoints: MPoints.map((arr) => {
       return arr.map((p) => {
-        const curDiff = _distancesFianal[i];
+        const curDiff = _distancesFianal[i++];
         const newP = p.cloneCustomVector3();
         newP.difference = curDiff;
         newP.enable = curDiff < _max;
@@ -607,8 +620,16 @@ export const CalcJuXingAAndBPointsAfterOffest = (
 
   CustomVector3.setPublicInfo("A", 0);
   const bottomA = A.toVector3();
+  for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
+    bottomA[i].key = 2 * i + 1;
+    bottomA[j].key = 2 * i + 2;
+  }
   CustomVector3.setPublicInfo("B", 0);
   const bottomB = B.toVector3();
+  for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
+    bottomB[i].key = 2 * i + 1;
+    bottomB[j].key = 2 * i + 2;
+  }
 
   const res = bottomA.map((a, i) => {
     return {

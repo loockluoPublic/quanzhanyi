@@ -227,15 +227,18 @@ function CubeResult() {
       dataIndex: "tOff",
       key: "tOff",
       align: "center",
-      render: (v, _, i) => {
-        return (
-          <InputNumber
-            step={0.01}
-            value={v}
-            onChange={(v) => onChange(v, i, "tOff")}
-            addonAfter="米"
-          />
-        );
+      render: (v) => {
+        return <>{v?.toFixed?.(3) ?? "--"}米</>;
+      },
+    },
+
+    {
+      title: "斜面偏移",
+      dataIndex: "rOff",
+      key: "rOff",
+      align: "center",
+      render: (v) => {
+        return <>{v?.toFixed?.(3) ?? "--"}米</>;
       },
     },
 

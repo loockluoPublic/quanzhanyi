@@ -8,6 +8,7 @@ export default function PointsVector3(props: {
   value?: CustomVector3;
   style?: React.CSSProperties;
   showGetPoints?: boolean;
+  before?: () => void;
   onChange?: (v: CustomVector3) => void;
   remove?: () => void;
   autoMeasure?: boolean;
@@ -19,6 +20,7 @@ export default function PointsVector3(props: {
 
   const getPoints = () => {
     setLoading(true);
+    props?.before?.();
     measureAndGetSimpleCoord()
       .then((res) => {
         props.onChange?.(res);
@@ -43,16 +45,16 @@ export default function PointsVector3(props: {
 
   return (
     <div
-      className={"q-flex q-justify-between q-my-2 " + props.className}
-      style={{ width: `${w}px` }}
+      className={" q-inline-flex q-justify-between q-my-2 " + props.className}
+      style={{ minWidth: `${w}px` }}
     >
       <span style={props.style}>
         <span>{`${props?.value?.label || ""}${props?.value?.key ?? ""}`}</span>
         <span>
           （
-          {`${props?.value?.x?.toFixed(4) ?? "--"}, ${
-            props?.value?.y?.toFixed(4) ?? "--"
-          }, ${props?.value?.z?.toFixed(4) ?? "--"}`}
+          {`${props?.value?.x?.toFixed(3) ?? "--"}, ${
+            props?.value?.y?.toFixed(3) ?? "--"
+          }, ${props?.value?.z?.toFixed(3) ?? "--"}`}
           ）
         </span>
       </span>

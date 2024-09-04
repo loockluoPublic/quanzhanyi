@@ -4,6 +4,8 @@ import GetCubePoints from "../components/GetCubePoints";
 import { useRecoilValue } from "recoil";
 import { Data } from "../atom/globalState";
 import Block from "../components/Block";
+import { useEffect } from "react";
+import { CustomVector3 } from "../class/CustomVector3";
 
 function CubePre() {
   const data = useRecoilValue(Data);

@@ -124,7 +124,8 @@ export function CalculateResultPoints() {
       render: (v, _, i) => {
         return (
           <InputNumber
-            step={0.01}
+            readOnly
+            step={0.001}
             value={v}
             onChange={(v) => onChange(v, i, "rOff")}
             addonAfter="米"
@@ -140,7 +141,8 @@ export function CalculateResultPoints() {
       render: (v, _, i) => {
         return (
           <InputNumber
-            step={0.01}
+            readOnly
+            step={0.001}
             value={v}
             onChange={(v) => onChange(v, i, "tOff")}
             addonAfter="米"

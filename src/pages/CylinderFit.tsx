@@ -114,15 +114,8 @@ function CylinderFit() {
       dataIndex: "rOff",
       key: "rOff",
       align: "center",
-      render: (v, _, i) => {
-        return (
-          <InputNumber
-            step={0.01}
-            value={v}
-            onChange={(v) => onChange(v, i, "rOff")}
-            addonAfter="米"
-          />
-        );
+      render: (v) => {
+        return <>{v?.toFixed?.(3) ?? "--"}米</>;
       },
     },
     {
@@ -130,15 +123,8 @@ function CylinderFit() {
       dataIndex: "tOff",
       key: "tOff",
       align: "center",
-      render: (v, _, i) => {
-        return (
-          <InputNumber
-            step={0.01}
-            value={v}
-            onChange={(v) => onChange(v, i, "tOff")}
-            addonAfter="米"
-          />
-        );
+      render: (v) => {
+        return <>{v?.toFixed?.(3) ?? "--"}米</>;
       },
     },
 

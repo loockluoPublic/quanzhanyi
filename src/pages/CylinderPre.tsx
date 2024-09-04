@@ -211,6 +211,9 @@ function CylinderPre() {
             <PointsVector3
               className="!q-inline-flex !q-my-1"
               value={data.firstPoints[0] as CustomVector3}
+              before={() => {
+                CustomVector3.setPublicInfo("上游点", 0);
+              }}
               onChange={(v) => {
                 setData({ ...data, firstPoints: [v, data.firstPoints[1]] });
               }}
@@ -221,6 +224,9 @@ function CylinderPre() {
             <PointsVector3
               className="!q-inline-flex !q-my-1"
               value={data.firstPoints[1] as CustomVector3}
+              before={() => {
+                CustomVector3.setPublicInfo("下游点", 1);
+              }}
               onChange={(v) => {
                 setData({ ...data, firstPoints: [data.firstPoints[0], v] });
               }}
@@ -293,7 +299,7 @@ function CylinderPre() {
               {data?.originStandardDeviation?.toFixed(4) ?? "--"} 米
             </span>
           </div>
-          <div>
+          <div className="q-ml-4">
             标准差：
             <span className=" q-font-bold">
               {data?.standardDeviation?.toFixed(4) ?? "--"} 米
@@ -346,6 +352,7 @@ function CylinderPre() {
   );
   return (
     <CylinderModule
+      firstPoints={data.firstPoints}
       component={comp}
       mPoints={data.mPoints}
       calulateRes={data.calulateRes}

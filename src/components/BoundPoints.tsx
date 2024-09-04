@@ -16,8 +16,10 @@ export default function BoundPoints() {
           className="!q-inline-flex"
           value={boundPoints?.[0]}
           autoMeasure
+          before={() => {
+            CustomVector3.setPublicInfo("上游点", 0);
+          }}
           onChange={(v) => {
-            CustomVector3.setPublicInfo("B", 1);
             setData({ ...data, firstPoints: [v, boundPoints?.[1]] });
           }}
         />
@@ -27,6 +29,9 @@ export default function BoundPoints() {
         <PointsVector3
           className="!q-inline-flex"
           value={boundPoints?.[1]}
+          before={() => {
+            CustomVector3.setPublicInfo("下游点", 0);
+          }}
           onChange={(v) => {
             setData({ ...data, firstPoints: [boundPoints?.[0], v] });
           }}

@@ -20,17 +20,21 @@ function PointsLabel(props: {
   color?: string;
 }) {
   return props?.points?.map((item, i) => {
-    return (
-      <Html position={item.toVector3()} key={`${item.key}_${i}`}>
-        <div
-          className="q-w-20 relative"
-          style={{ "--point-color": props.color } as any}
-        >
-          {item.label || ""}
-          {item.key}
-        </div>
-      </Html>
-    );
+    if (item instanceof CustomVector3) {
+      return (
+        <Html position={item.toVector3()} key={`${item.key}_${i}`}>
+          <div
+            className="q-w-20 relative"
+            style={{ "--point-color": props.color } as any}
+          >
+            {item.label || ""}
+            {item.key}
+          </div>
+        </Html>
+      );
+    } else {
+      return null;
+    }
   });
 }
 
@@ -39,6 +43,7 @@ export default function Index(props: {
   mPoints?: CustomVector3[];
   loading?: boolean;
   direct?: number[];
+  firstPoints?: CustomVector3[];
   component?: ReactNode;
   [k: string]: any;
 }) {
@@ -76,17 +81,21 @@ export default function Index(props: {
           color="#000"
         />
 
+        {props.firstPoints?.length > 0 && (
+          <PointsLabel points={props.firstPoints} color="red" />
+        )}
+
         {props?.sdm?.includes("A") && (
           <PointsLabel
             points={props?.AB?.map?.((item) => item.pointA)}
-            color="green"
+            color="red"
           />
         )}
 
         {props?.sdm?.includes("B") && (
           <PointsLabel
             points={props?.AB?.map?.((item) => item.pointB)}
-            color="red"
+            color="#fab005"
           />
         )}
 

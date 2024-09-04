@@ -1,5 +1,3 @@
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
-import { Table } from "antd";
 import { useRecoilValue } from "recoil";
 import { Data } from "../atom/globalState";
 

@@ -12,7 +12,7 @@ export class CustomVector3 extends Vector3 {
   originDiff?: number;
 
   static setPublicInfo(newLabel: string, newCount?: number) {
-    CustomVector3.count = newCount ?? 0;
+    if (typeof newCount === "number") CustomVector3.count = newCount;
     CustomVector3.publicLable = newLabel;
   }
 

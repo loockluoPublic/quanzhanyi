@@ -1,5 +1,5 @@
 import { Badge, Button, Checkbox, InputNumber, message, Select } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import { measureAndGetSimpleCoord } from "../utils/commond";
@@ -74,8 +74,15 @@ export default function () {
       const newData = {
         ...data,
         ...res4,
+        MxPoints: (res4.MxPoints as any[]).reduce((acc, cur, i) => {
+          return {
+            ...acc,
+            [`m${i}`]: cur,
+          };
+        }, {}),
         cubeResult: cubeResult4,
       };
+      console.log("%c Line:75 🍢 newData", "color:#6ec1c2", newData);
       // // 当8个面时，8个面的拟合结果仅仅用于展示3D模型
       if (options.length === 8) {
         const res8: any = Planefit(
@@ -98,6 +105,7 @@ export default function () {
 
   const getPoints = () => {
     setLoading(true);
+    CustomVector3.setPublicInfo("P");
     measureAndGetSimpleCoord()
       .then((res) => {
         if (data.tc && num === 3 && data.tcH) {
@@ -116,20 +124,6 @@ export default function () {
       .finally(() => {
         setLoading(false);
       });
-  };
-
-  const remove = (i) => {
-    const m = [...data.MxPoints?.[`m${num}`]];
-    m.splice(i, 1);
-    setData((d) => {
-      return {
-        ...d,
-        MxPoints: {
-          ...data.MxPoints,
-          [`m${num}`]: m,
-        },
-      };
-    });
   };
 
   const setMock = () => {
@@ -152,6 +146,10 @@ export default function () {
       };
     });
   };
+
+  useEffect(() => {
+    CustomVector3.setPublicInfo("P", 0);
+  }, []);
 
   return (
     <div>
@@ -293,7 +291,7 @@ export default function () {
         </Button>
       </div>
       <h3 className="q-mt-4 border-top q-pt-2">{options[num].label}采集点：</h3>
-      <CubeTable points={points} />
+      <CubeTable points={points} num={num} />
     </div>
   );
 }

@@ -127,17 +127,21 @@ export default function Index(props: {
           return <PointsLabel key={i} points={pArr} color={MxColor[i]} />;
         })}
 
+        {props.firstPoints?.length > 0 && (
+          <PointsLabel points={props.firstPoints} color="red" />
+        )}
+
         {props?.sdm?.includes("A") && (
           <PointsLabel
             points={props?.AB?.map?.((item) => item.pointA)}
-            color="green"
+            color="red"
           />
         )}
 
         {props?.sdm?.includes("B") && (
           <PointsLabel
             points={props?.AB?.map?.((item) => item.pointB)}
-            color="red"
+            color="#fab005"
           />
         )}
 
