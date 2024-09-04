@@ -1,7 +1,7 @@
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import PointsVector3 from "./PointVector3";
-import Block from "./Block";
+import { CustomVector3 } from "../class/CustomVector3";
 
 export default function BoundPoints() {
   const [data, setData] = useRecoilState(Data);
@@ -17,6 +17,7 @@ export default function BoundPoints() {
           value={boundPoints?.[0]}
           autoMeasure
           onChange={(v) => {
+            CustomVector3.setPublicInfo("B", 1);
             setData({ ...data, firstPoints: [v, boundPoints?.[1]] });
           }}
         />

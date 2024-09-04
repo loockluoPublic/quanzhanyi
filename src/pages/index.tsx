@@ -1,8 +1,8 @@
-import { Steps } from "antd";
+import { message, Steps } from "antd";
 import { useEffect, useState } from "react";
 import Connect from "../components/ConnectDevice";
-import { useRecoilState } from "recoil";
-import { Data, Mode, TMode, TType } from "../atom/globalState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Data, deviceInfo, Mode, TMode, TType } from "../atom/globalState";
 import CylinderAgain from "./CylinderAgain";
 import CubePre from "./CubePre";
 import CubeFit from "./CubeResult";
@@ -30,6 +30,7 @@ enum SHOWTYPE {
 }
 
 export default function Setting() {
+  const deviceInfoData = useRecoilValue(deviceInfo);
   const [data, setData] = useRecoilState(Data);
   const [step, setStep] = useState(0);
   const [mode] = useRecoilState(Mode);
@@ -39,7 +40,10 @@ export default function Setting() {
   }, [data.type]);
 
   const onChange = (value: number) => {
-    setStep(value);
+    if (deviceInfoData.auth || location.search.includes("mock")) setStep(value);
+    else {
+      message.error("请验证秘钥");
+    }
   };
 
   const CycleSteps = [

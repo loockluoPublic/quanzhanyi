@@ -216,7 +216,7 @@ function CylinderPre() {
               }}
             />
           </span>
-          <span className="q-block q-ml-4">
+          <span className="q-block ">
             边界点2：
             <PointsVector3
               className="!q-inline-flex !q-my-1"

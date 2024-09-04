@@ -100,7 +100,7 @@ export default function () {
     setLoading(true);
     measureAndGetSimpleCoord()
       .then((res) => {
-        if (data.tc) {
+        if (data.tc && num === 3 && data.tcH) {
           res.y = res.y + data.tcH;
         }
         setData((d) => {
@@ -185,35 +185,38 @@ export default function () {
             })}
           />
         </span>
-
-        <Checkbox
-          className="q-ml-8"
-          checked={data.tc}
-          onChange={({ target }) => {
-            setData({
-              ...data,
-              tc: target.checked,
-            });
-          }}
-        >
-          使用塔尺
-        </Checkbox>
-
-        {data.tc && (
-          <span className="q-ml-4">
-            塔尺高度：
-            <InputNumber
-              step={0.2}
-              min={0}
-              max={1}
-              value={data.tcH}
-              style={{ width: 120 }}
-              addonAfter="米"
-              onChange={(tcH) => {
-                setData({ ...data, tcH });
+        {num === 3 && (
+          <>
+            <Checkbox
+              className="q-ml-8"
+              checked={data.tc}
+              onChange={({ target }) => {
+                setData({
+                  ...data,
+                  tc: target.checked,
+                });
               }}
-            />
-          </span>
+            >
+              使用塔尺
+            </Checkbox>
+
+            {data.tc && (
+              <span className="q-ml-4">
+                偏移高度：
+                <InputNumber
+                  step={0.2}
+                  min={0}
+                  max={1}
+                  value={data.tcH}
+                  style={{ width: 120 }}
+                  addonAfter="米"
+                  onChange={(tcH) => {
+                    setData({ ...data, tcH });
+                  }}
+                />
+              </span>
+            )}
+          </>
         )}
       </div>
       <div className="q-mt-2">

@@ -1,5 +1,5 @@
 import SerialMonitor from "@ridge18/web-serial-monitor";
-import { Button, Input } from "antd";
+import { Button, Input, message } from "antd";
 import { useRecoilState } from "recoil";
 import { deviceInfo } from "../atom/globalState";
 import * as commond from "../utils/commond";
@@ -8,16 +8,20 @@ import { availablePorts } from "../utils/serialport";
 import Next from "./Next";
 import logo from "../assets/logo.png";
 import banner from "../assets/banner.jpg";
+import { useState } from "react";
+import { encode } from "../utils/secret";
 
 (window as any).commond = commond;
 export const serial = new SerialMonitor({ mode: "text", parseLines: true });
 
 export default function Connect() {
   const [deviceInfoData, setDeviceInfo] = useRecoilState(deviceInfo);
+
+  const [pwd, setPwd] = useState("");
   return (
     <div
       style={{ backgroundImage: `url(${banner})` }}
-      className="q-w-full q-bg-no-repeat q-bg-center q-bg-cover"
+      className="q-w-full q-bg-no-repeat q-bg-center q-bg-contain"
     >
       <div className="q-mb-4 q-text-center q-mt-40 q-flex q-flex-col q-w-[200px] q-m-auto">
         <table className="q-mb-4 q-m-auto">
@@ -38,14 +42,36 @@ export default function Connect() {
           </tbody>
         </table>
 
-        {deviceInfoData ? (
+        {deviceInfoData?.SerialNo ? (
           <>
             <div className="q-inline-flex q-items-center q-mt-2 ">
               <div className="q-w-14">秘钥：</div>
-              <Input />
+              <Input
+                defaultValue={encode(deviceInfoData?.SerialNo)}
+                type="password"
+                onChange={(v) => setPwd(v.target.value)}
+              />
             </div>
-            <Button className="q-block q-mt-2" type="primary">
-              验证
+            <Button
+              className="q-block q-mt-2"
+              type="primary"
+              onClick={() => {
+                console.log(
+                  "%c Line:60 🍅 pwd",
+                  "color:#6ec1c2",
+                  pwd,
+                  "s",
+                  encode(deviceInfoData?.SerialNo)
+                );
+                if (pwd === encode(deviceInfoData?.SerialNo)) {
+                  setDeviceInfo({ ...deviceInfoData, auth: true });
+                  message.success("秘钥验证成功");
+                } else {
+                  message.error("秘钥验证错误，请确定秘钥与设备是否对应");
+                }
+              }}
+            >
+              验证秘钥
             </Button>
             <Button
               className="q-mt-2"

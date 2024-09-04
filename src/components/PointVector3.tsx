@@ -32,7 +32,7 @@ export default function PointsVector3(props: {
     !props.value && props.autoMeasure && getPoints();
   }, []);
 
-  let w = 220;
+  let w = 230;
 
   if (showGetPoints) {
     w = w + 50;

@@ -13,9 +13,11 @@ export const connectState = atom({
   default: false, // 默认值
 });
 
-export const deviceInfo = atom({
+export const deviceInfo = atom<any>({
   key: "deviceInfo", // 唯一标识这个状态
-  default: undefined, // 默认值
+  default: {
+    auth: false,
+  }, // 默认值
 });
 
 export interface GlobalData
