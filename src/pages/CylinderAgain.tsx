@@ -130,7 +130,7 @@ export default function () {
   );
 
   const mPoints = [];
-  data.cylinderAgainTable?.forEach((item) => {
+  data.cylinderAgainTable?.forEach((item: any) => {
     item.p1 && mPoints.push(item.p1);
     item.p2 && mPoints.push(item.p2);
   });
