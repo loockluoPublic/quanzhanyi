@@ -28,10 +28,24 @@ export interface GlobalData
   type: TType;
   [k: string]: any;
 }
+
+export const getInitCylinderAgainTable = (sdfb: number, sdm: string[]): any => {
+  const res = [];
+  let i = 1;
+  sdm.forEach((m) => {
+    for (let j = 1; j <= sdfb; i++, j++) {
+      res.push({ sdm: m, i });
+    }
+  });
+
+  return res;
+};
+
 export const Data = atom<GlobalData>({
   key: "data", // 唯一标识这个状态
   default: {
     sdfb: 4,
+    cylinderAgainTable: getInitCylinderAgainTable(4, ["A", "B"]) as any,
     sdj: 45,
     sdm: ["A", "B"],
     MxPoints: {},
@@ -54,4 +68,9 @@ export enum TMode {
 export const Mode = atom<TMode>({
   key: "mode", // 唯一标识这个状态
   default: TMode.first, // 默认值
+});
+
+export const Step = atom<number>({
+  key: "stop",
+  default: 0,
 });

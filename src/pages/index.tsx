@@ -1,8 +1,15 @@
 import { message, Steps } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Connect from "../components/ConnectDevice";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { Data, deviceInfo, Mode, TMode, TType } from "../atom/globalState";
+import {
+  Data,
+  deviceInfo,
+  Mode,
+  Step,
+  TMode,
+  TType,
+} from "../atom/globalState";
 import CylinderAgain from "./CylinderAgain";
 import CubePre from "./CubePre";
 import CubeFit from "./CubeResult";
@@ -31,8 +38,8 @@ enum SHOWTYPE {
 
 export default function Setting() {
   const deviceInfoData = useRecoilValue(deviceInfo);
-  const [data, setData] = useRecoilState(Data);
-  const [step, setStep] = useState(0);
+  const data = useRecoilValue(Data);
+  const [step, setStep] = useRecoilState(Step);
   const [mode] = useRecoilState(Mode);
 
   useEffect(() => {
@@ -63,42 +70,14 @@ export default function Setting() {
       components: <CylinderFit />,
       type: SHOWTYPE.yb,
     },
-
-    // {
-    //   title: "基本参数",
-    //   components: <BaseInfo />,
-    //   type: SHOWTYPE.bb,
-    // },
-
-    // /** 圆形 */
-    // {
-    //   title: "手动采点",
-    //   components: <GetPoints pickPoint={pickPoint} getDirect={getDirect} />,
-    //   type: SHOWTYPE.yb,
-    // },
-    // {
-    //   title: "自动圆面点采集",
-    //   components: <MeasurePoints />,
-    //   type: SHOWTYPE.yb,
-    // },
-    // {
-    //   title: "圆柱拟合",
-    //   components: <CalculateAccurateCylinders />,
-    //   type: SHOWTYPE.yb,
-    // },
-    // {
-    //   title: "计算安装位",
-    //   components: <CalculateResultPoints />,
-    //   type: SHOWTYPE.yc,
-    // },
   ];
 
   if (mode === TMode.second) {
-    CycleSteps[CycleSteps.length - 1] = {
-      title: "采集",
+    CycleSteps.push({
+      title: "管道复测",
       components: <CylinderAgain />,
-      type: SHOWTYPE.yf,
-    };
+      type: SHOWTYPE.yb,
+    });
   }
 
   const CubeSteps = [

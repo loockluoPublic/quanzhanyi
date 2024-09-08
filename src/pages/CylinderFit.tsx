@@ -1,6 +1,6 @@
 import CylinderModule from "../components/Module3D";
 import { useRecoilState } from "recoil";
-import { Data } from "../atom/globalState";
+import { Data, getInitCylinderAgainTable } from "../atom/globalState";
 import { Checkbox, InputNumber, message, Table, Tooltip } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
 import { Point } from "./CalculateResultPoints";
@@ -252,6 +252,13 @@ function CylinderFit() {
     if (data.centerPoint) calcPoint();
   }, [[...rOff, ...tOff].join(","), data.centerPoint]);
 
+  useEffect(() => {
+    setData((d) => ({
+      ...d,
+      cylinderAgainTable: getInitCylinderAgainTable(data.sdfb, data.sdm) as any,
+    }));
+  }, [data.sdfb, data.sdm]);
+
   const comp = (
     <div>
       <h3>声道参数：</h3>
@@ -265,6 +272,7 @@ function CylinderFit() {
             onChange={(sdfb) => {
               setData({
                 ...data,
+                cylinderAgainTable: new Array(sdfb) as any,
                 sdfb,
               });
             }}

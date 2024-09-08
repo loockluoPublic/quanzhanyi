@@ -17,6 +17,37 @@ interface BaseInfo {
   sdj: number;
 }
 
+interface AgainTable {
+  /**
+   * 声道角
+   */
+  sdj: number;
+  /**
+   * 声道长
+   */
+  sdc: number;
+
+  /**
+   * 所在声道面
+   */
+  sdm: "A" | "B";
+
+  /**
+   * LT 偏移
+   */
+  ltOffset: number;
+
+  /**
+   * 声道相对高度
+   */
+  sdH: number;
+
+  /**
+   * 权系数
+   */
+  qxs: number;
+}
+
 interface ICycleBase {
   /**
    * 采样层数
@@ -103,6 +134,14 @@ interface ICycle {
     pointA: CustomVector3;
     pointB: CustomVector3;
   }[];
+
+  /**
+   * 复测表格
+   */
+  cylinderAgainTable: {
+    p1: CustomVector3;
+    p2: CustomVector3;
+  } & AgainTable[];
 }
 
 interface ICube {

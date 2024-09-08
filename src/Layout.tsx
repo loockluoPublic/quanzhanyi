@@ -2,8 +2,8 @@ import React, { PropsWithChildren } from "react";
 import type { MenuProps } from "antd";
 import { ConfigProvider, Layout, Menu, Switch } from "antd";
 import { BrowserRouter as Router, Routes } from "react-router-dom";
-import { Data, Mode, TMode, TType } from "./atom/globalState";
-import { useRecoilState } from "recoil";
+import { Data, Mode, Step, TMode, TType } from "./atom/globalState";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { downLoadFile } from "./utils/utils";
 import UploadFile from "./components/UploadFile";
 import zhCN from "antd/es/locale/zh_CN";
@@ -24,6 +24,7 @@ const items1: MenuProps["items"] = [
 const App: React.FC<PropsWithChildren> = (props) => {
   const [mode, setMode] = useRecoilState(Mode);
   const [data, setData] = useRecoilState(Data);
+  const setStep = useSetRecoilState(Step);
 
   return (
     <ConfigProvider locale={zhCN}>
@@ -52,6 +53,7 @@ const App: React.FC<PropsWithChildren> = (props) => {
                 unCheckedChildren="定位"
                 checked={mode === TMode.second}
                 onChange={(v) => {
+                  setStep(0);
                   setMode(v ? TMode.second : TMode.first);
                 }}
               />
