@@ -43,7 +43,7 @@ export default function () {
       align: "center",
       key: "i",
       render: (i, _i) => {
-        return <>第{i}声路</>;
+        return <>第{i}声道</>;
       },
     },
     {
