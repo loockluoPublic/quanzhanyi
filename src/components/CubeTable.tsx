@@ -63,7 +63,7 @@ export default function CubeTable(props: {
       key: "originDiff",
       align: "right",
       render: (_, item) => {
-        return <>{item.difference?.toFixed?.(6)}米</>;
+        return <>{item.difference?.toFixed?.(6) ?? "--"}米</>;
       },
     },
     // {

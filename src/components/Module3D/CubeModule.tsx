@@ -39,6 +39,9 @@ function PointsLabel(props: {
   color?: string;
 }) {
   return props?.points?.map((item) => {
+    console.log("%c Line:42 🍒 item", "color:#b03734", item);
+
+    if (!item) return null;
     return (
       <Html position={item.toVector3()} key={item.key}>
         <div
@@ -64,7 +67,6 @@ export default function Index(props: {
   trianglePoints?: CustomVector3[];
   [k: string]: any;
 }) {
-  const pointsShowType = props.pointsShowType || false;
   console.log("%c Line:68 🍢 props", "color:#f5ce50", props);
 
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);

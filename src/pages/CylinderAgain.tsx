@@ -51,9 +51,19 @@ export default function () {
       dataIndex: "p1",
       key: "p1",
       align: "center",
-      render: (_v, _, i) => {
+      render: (_v, row, i) => {
         return (
-          <PointsVector3 value={_v} onChange={(v) => onChange(v, i, "p1")} />
+          <PointsVector3
+            before={() => {
+              const slnum =
+                data.sdm?.length === 2 && row.sdm === "B"
+                  ? row.i - data.sdfb
+                  : row.i;
+              CustomVector3.setPublicInfo(row.sdm, 2 * slnum - 2);
+            }}
+            value={_v}
+            onChange={(v) => onChange(v, i, "p1")}
+          />
         );
       },
     },
@@ -62,9 +72,19 @@ export default function () {
       dataIndex: "p2",
       key: "p3",
       align: "center",
-      render: (_v, _, i) => {
+      render: (_v, row, i) => {
         return (
-          <PointsVector3 value={_v} onChange={(v) => onChange(v, i, "p2")} />
+          <PointsVector3
+            before={() => {
+              const slnum =
+                data.sdm?.length === 2 && row.sdm === "B"
+                  ? row.i - data.sdfb
+                  : row.i;
+              CustomVector3.setPublicInfo(row.sdm, 2 * slnum - 1);
+            }}
+            value={_v}
+            onChange={(v) => onChange(v, i, "p2")}
+          />
         );
       },
     },
