@@ -47,7 +47,7 @@ export default function Setting() {
   }, [data.type]);
 
   const onChange = (value: number) => {
-    if (deviceInfoData.auth || location.search.includes("mock")) setStep(value);
+   // if (deviceInfoData.auth || location.search.includes("mock")) setStep(value);
     else {
       message.error("请验证秘钥");
     }
