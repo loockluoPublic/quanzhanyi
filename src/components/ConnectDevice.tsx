@@ -7,7 +7,9 @@ import { getDeviceInfo } from "../utils/commond";
 import { availablePorts } from "../utils/serialport";
 import Next from "./Next";
 import logo from "../assets/logo.png";
-import banner from "../assets/banner.jpg";
+import banner from "../assets/bg.jpg";
+import qzy from "../assets/qzy.png";
+import bgLogo from "../assets/bgLogo.png";
 import { useState } from "react";
 import { encode } from "../utils/secret";
 
@@ -21,9 +23,9 @@ export default function Connect() {
   return (
     <div
       style={{ backgroundImage: `url(${banner})` }}
-      className="q-w-full q-bg-no-repeat q-bg-center q-bg-contain"
+      className="q-w-full q-bg-no-repeat q-bg-center q-bg-cover q-shadow-lg q-rounded-lg"
     >
-      <div className="q-mb-4 q-text-center q-mt-40 q-flex q-flex-col q-w-[200px] q-m-auto">
+      <div className="q-absolute q-w-[320px] q-p-6 q-shadow-md q-rounded-xl q-mt-32 q-left-1/2 q-ml-[-160px] q-text-center q-bg-[#e9ecef88]">
         <table className="q-mb-4 q-m-auto">
           <tbody>
             <tr>
@@ -44,7 +46,7 @@ export default function Connect() {
 
         {deviceInfoData?.SerialNo ? (
           <>
-            <div className="q-inline-flex q-items-center q-mt-2 ">
+            <div className="q-inline-flex q-items-center  ">
               <div className="q-w-14">秘钥：</div>
               <Input
                 defaultValue={encode(deviceInfoData?.SerialNo)}
@@ -52,35 +54,37 @@ export default function Connect() {
                 onChange={(v) => setPwd(v.target.value)}
               />
             </div>
-            <Button
-              className="q-block q-mt-2"
-              type="primary"
-              onClick={() => {
-                console.log(
-                  "%c Line:60 🍅 pwd",
-                  "color:#6ec1c2",
-                  pwd,
-                  "s",
-                  encode(deviceInfoData?.SerialNo)
-                );
-                if (pwd === encode(deviceInfoData?.SerialNo)) {
-                  setDeviceInfo({ ...deviceInfoData, auth: true });
-                  message.success("秘钥验证成功");
-                } else {
-                  message.error("秘钥验证错误，请确定秘钥与设备是否对应");
-                }
-              }}
-            >
-              验证秘钥
-            </Button>
-            <Button
-              className="q-mt-2"
-              onClick={() => {
-                availablePorts();
-              }}
-            >
-              断开连接
-            </Button>
+            <div className="q-text-center q-mt-2">
+              <Button
+                className="q-mt-2 q-mr-2"
+                onClick={() => {
+                  availablePorts();
+                }}
+              >
+                断开连接
+              </Button>
+              <Button
+                className="q-mt-2"
+                type="primary"
+                onClick={() => {
+                  console.log(
+                    "%c Line:60 🍅 pwd",
+                    "color:#6ec1c2",
+                    pwd,
+                    "s",
+                    encode(deviceInfoData?.SerialNo)
+                  );
+                  if (pwd === encode(deviceInfoData?.SerialNo)) {
+                    setDeviceInfo({ ...deviceInfoData, auth: true });
+                    message.success("秘钥验证成功");
+                  } else {
+                    message.error("秘钥验证错误，请确定秘钥与设备是否对应");
+                  }
+                }}
+              >
+                验证秘钥
+              </Button>
+            </div>
           </>
         ) : (
           <Button
@@ -102,15 +106,27 @@ export default function Connect() {
             连接设备
           </Button>
         )}
-
-        <div className="q-absolute q-bottom-10 q-left-0 q-w-full ">
-          <img className="q-w-[100px]" src={logo} alt="" />
-          <div>
-            Copyright © 2024
-            <a href="https://www.qingwanshui.com/"> 青岛清万水技术有限公司</a>
-          </div>
+      </div>
+      <div className="q-absolute q-bottom-10 q-left-0 q-w-full q-text-center">
+        <div className=" q-text-white">
+          Copyright © 2024
+          <a className=" q-text-white" href="https://www.qingwanshui.com/">
+            {" "}
+            青岛清万水技术有限公司
+          </a>
         </div>
       </div>
+
+      <img
+        src={bgLogo}
+        alt=""
+        className=" q-h-[40%] q-absolute q-bottom-[80px] q-right-[10%]"
+      />
+      <img
+        src={qzy}
+        alt=""
+        className="  q-w-[250px]  q-absolute q-bottom-0 q-left-[15%]"
+      />
     </div>
   );
 }
