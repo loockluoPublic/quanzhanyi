@@ -109,7 +109,7 @@ export default function () {
     measureAndGetSimpleCoord()
       .then((res) => {
         if (data.tc && num === 3 && data.tcH) {
-          res.y = res.y + data.tcH;
+          res.y = res.y - data.tcH;
         }
         setData((d) => {
           return {
