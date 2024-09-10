@@ -15,6 +15,7 @@ import CubePre from "./CubePre";
 import CubeFit from "./CubeResult";
 import CylinderPre from "./CylinderPre";
 import CylinderFit from "./CylinderFit";
+import CubeAgain from "./CubeAgain";
 
 enum SHOWTYPE {
   /** 圆柱-复测 */
@@ -97,6 +98,14 @@ export default function Setting() {
       type: SHOWTYPE.bb,
     },
   ];
+
+  if (mode === TMode.second) {
+    CubeSteps.push({
+      title: "管道复测",
+      components: <CubeAgain />,
+      type: SHOWTYPE.yb,
+    });
+  }
 
   let steps = data.type === TType.cube ? CubeSteps : CycleSteps;
 

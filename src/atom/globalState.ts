@@ -29,7 +29,7 @@ export interface GlobalData
   [k: string]: any;
 }
 
-export const getInitCylinderAgainTable = (sdfb: number, sdm: string[]): any => {
+export const getInitAgainTable = (sdfb: number, sdm: string[]): any => {
   const res = [];
   let i = 1;
   sdm.forEach((m) => {
@@ -45,7 +45,6 @@ export const Data = atom<GlobalData>({
   key: "data", // 唯一标识这个状态
   default: {
     sdfb: 4,
-    cylinderAgainTable: getInitCylinderAgainTable(4, ["A", "B"]) as any,
     sdj: 45,
     sdm: ["A", "B"],
     MxPoints: {},

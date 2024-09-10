@@ -1,6 +1,6 @@
 import CubeFitting from "../components/Module3D/CubeModule";
 import { useRecoilState } from "recoil";
-import { Data } from "../atom/globalState";
+import { Data, getInitAgainTable } from "../atom/globalState";
 import { Checkbox, InputNumber, message, Table, Tooltip } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
 import { Point } from "./CalculateResultPoints";
@@ -261,6 +261,13 @@ function CubeResult() {
       },
     },
   ];
+
+  useEffect(() => {
+    setData((d) => ({
+      ...d,
+      cylinderAgainTable: getInitAgainTable(data.sdfb, data.sdm) as any,
+    }));
+  }, [data.sdfb, data.sdm]);
 
   const comp = (
     <div>
