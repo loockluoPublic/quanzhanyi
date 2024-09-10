@@ -120,13 +120,18 @@ export default function () {
     },
   ];
 
+  const d =
+    typeof data.calulateRes?.R === "number"
+      ? ((data.calulateRes?.R || 0) * 2).toFixed(4)
+      : "--";
+
   const comp = (
     <div>
       <h3>拟合参数：</h3>
       <div className=" q-my-4">
         <span>
-          声道分布：
-          {data.sdfb}
+          管道直径：
+          {d} 米
         </span>
         <span className="q-ml-8">
           拟合标准差： {data?.standardDeviation?.toFixed(4) ?? "--"} 米

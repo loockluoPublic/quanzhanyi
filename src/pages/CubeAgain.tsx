@@ -121,17 +121,17 @@ export default function () {
     },
   ];
 
+  const w = "--";
+  const h = "--";
   const comp = (
     <div>
       <h3>拟合参数：</h3>
       <div className=" q-my-4">
         <span>
-          声道分布：
-          {data.sdfb}
+          方涵宽度：
+          {w} 米
         </span>
-        {/* <span className="q-ml-8">
-          拟合标准差： {data?.standardDeviation?.toFixed(4) ?? "--"} 米
-        </span> */}
+        <span className="q-ml-8">方涵高度： {h} 米</span>
         <span className="q-ml-8">
           声道配置： {data.sdm.length}E{data.sdfb}P
         </span>
