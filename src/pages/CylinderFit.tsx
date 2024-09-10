@@ -312,6 +312,9 @@ function CylinderFit() {
           <PointsVector3
             className="!q-inline-flex"
             value={data.centerPoint as CustomVector3}
+            before={() => {
+              CustomVector3.setPublicInfo("AB", 0);
+            }}
             onChange={(v) => {
               setData({ ...data, centerPoint: v });
             }}
@@ -341,6 +344,7 @@ function CylinderFit() {
   return (
     <CylinderModule
       component={comp}
+      firstPoints={data.firstPoints}
       calulateRes={data.calulateRes}
       sdm={data.sdm}
       AB={data.AB}

@@ -20,6 +20,7 @@ function CubePre() {
   );
   return (
     <CubeFitting
+      firstPoints={data.firstPoints}
       component={comp}
       MxPoints={data.MxPoints}
       trianglePoints={data.trianglePoints}

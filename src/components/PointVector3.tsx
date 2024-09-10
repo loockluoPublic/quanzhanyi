@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, message } from "antd";
 import { CustomVector3 } from "../class/CustomVector3";
 import { measureAndGetSimpleCoord } from "../utils/commond";
 import { MinusCircleOutlined } from "@ant-design/icons";
@@ -24,6 +24,10 @@ export default function PointsVector3(props: {
     measureAndGetSimpleCoord()
       .then((res) => {
         props.onChange?.(res);
+      })
+      .catch((err) => {
+        console.error("%c Line:125 🍆 err", "color:#3f7cff", err);
+        message.error("获取点坐标失败，请更换测量点后重试");
       })
       .finally(() => {
         setLoading(false);

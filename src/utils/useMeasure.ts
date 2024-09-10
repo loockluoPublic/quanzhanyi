@@ -11,8 +11,8 @@ export default function useMeasure() {
     setPoints([...points]);
   };
   const measure = async (ps: CustomVector3[]) => {
-    console.log("%c Line:14 🍇 ps", "color:#2eafb0", ps);
     setTrue();
+    CustomVector3.setPublicInfo("P", 0);
     for await (const p of ps) {
       const np = await pointToAndMeasure(p);
       np && addPoint(np);

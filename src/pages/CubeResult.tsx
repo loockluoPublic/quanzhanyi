@@ -265,7 +265,7 @@ function CubeResult() {
   useEffect(() => {
     setData((d) => ({
       ...d,
-      cylinderAgainTable: getInitAgainTable(data.sdfb, data.sdm) as any,
+      cubeAgainTable: getInitAgainTable(data.sdfb, data.sdm) as any,
     }));
   }, [data.sdfb, data.sdm]);
 
@@ -351,6 +351,7 @@ function CubeResult() {
   return (
     <CubeFitting
       component={comp}
+      firstPoints={data.firstPoints}
       trianglePoints={data.trianglePoints}
       AB={data.AB}
       sdm={data.sdm}

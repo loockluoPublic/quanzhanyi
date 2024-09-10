@@ -30,7 +30,7 @@ export default function BoundPoints() {
           className="!q-inline-flex"
           value={boundPoints?.[1]}
           before={() => {
-            CustomVector3.setPublicInfo("下游点", 0);
+            CustomVector3.setPublicInfo("下游点", 1);
           }}
           onChange={(v) => {
             setData({ ...data, firstPoints: [boundPoints?.[0], v] });

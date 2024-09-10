@@ -1,7 +1,7 @@
 import { Badge, Button, Checkbox, InputNumber, message, Select } from "antd";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { Data } from "../atom/globalState";
+import { Data, getInitAgainTable } from "../atom/globalState";
 import { measureAndGetSimpleCoord } from "../utils/commond";
 import PointsVector3 from "./PointVector3";
 
@@ -25,14 +25,14 @@ export default function () {
   const [planeFitLoading, setPlaneFitLoadint] = useState(false);
 
   const options = [
-    { value: 0, label: "左面" },
-    { value: 1, label: "顶面" },
-    { value: 2, label: "右面" },
-    { value: 3, label: "底面" },
-    { value: 4, label: "左下面" },
-    { value: 5, label: "左上面" },
-    { value: 6, label: "右上面" },
-    { value: 7, label: "右下面" },
+    { value: 0, label: "左面", pK: "L" },
+    { value: 1, label: "顶面", pK: "T" },
+    { value: 2, label: "右面", pK: "R" },
+    { value: 3, label: "底面", pK: "B" },
+    { value: 4, label: "左下面", pK: "LB" },
+    { value: 5, label: "左上面", pK: "LT" },
+    { value: 6, label: "右上面", pK: "RT" },
+    { value: 7, label: "右下面", pK: "RB" },
   ].filter((item) => {
     if (data.hasChamfer) return true;
     return item.value < 4;
@@ -103,9 +103,16 @@ export default function () {
 
   const points = data.MxPoints?.[`m${num}`];
 
+  const getMaxKey = () => {
+    return Math.max(0, ...(points?.map((p) => p.key) ?? []));
+  };
+
   const getPoints = () => {
     setLoading(true);
-    CustomVector3.setPublicInfo("P");
+
+    const k = getMaxKey();
+    CustomVector3.setPublicInfo(options[num].pK, k);
+
     measureAndGetSimpleCoord()
       .then((res) => {
         if (data.tc && num === 3 && data.tcH) {
@@ -120,6 +127,10 @@ export default function () {
             },
           };
         });
+      })
+      .catch((err) => {
+        console.error("%c Line:125 🍆 err", "color:#3f7cff", err);
+        message.error("获取点坐标失败，请更换测量点后重试");
       })
       .finally(() => {
         setLoading(false);
