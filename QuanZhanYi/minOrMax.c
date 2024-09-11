@@ -2,7 +2,7 @@
  * File: minOrMax.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 31-Aug-2024 15:45:21
+ * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
 /* Include Files */
@@ -26,12 +26,12 @@ double b_maximum(const emxArray_real_T *x)
   int last;
   boolean_T exitg1;
   x_data = x->data;
-  last = x->size[1];
-  if (x->size[1] <= 2) {
-    if (x->size[1] == 1) {
+  last = x->size[0];
+  if (x->size[0] <= 2) {
+    if (x->size[0] == 1) {
       ex = x_data[0];
     } else {
-      ex = x_data[x->size[1] - 1];
+      ex = x_data[x->size[0] - 1];
       if ((!(x_data[0] < ex)) && ((!rtIsNaN(x_data[0])) || rtIsNaN(ex))) {
         ex = x_data[0];
       }
@@ -82,12 +82,12 @@ double maximum(const emxArray_real_T *x)
   int last;
   boolean_T exitg1;
   x_data = x->data;
-  last = x->size[0];
-  if (x->size[0] <= 2) {
-    if (x->size[0] == 1) {
+  last = x->size[1];
+  if (x->size[1] <= 2) {
+    if (x->size[1] == 1) {
       ex = x_data[0];
     } else {
-      ex = x_data[x->size[0] - 1];
+      ex = x_data[x->size[1] - 1];
       if ((!(x_data[0] < ex)) && ((!rtIsNaN(x_data[0])) || rtIsNaN(ex))) {
         ex = x_data[0];
       }

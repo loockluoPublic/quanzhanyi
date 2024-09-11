@@ -2,7 +2,7 @@
  * File: svd1.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 31-Aug-2024 15:45:21
+ * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
 /* Include Files */
@@ -134,7 +134,7 @@ void b_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *S,
  *                double V[9]
  * Return Type  : void
  */
-void d_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *S,
+void c_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *S,
            double V[9])
 {
   static const signed char b_V[9] = {1, 0, 0, 0, 1, 0, 0, 0, 1};

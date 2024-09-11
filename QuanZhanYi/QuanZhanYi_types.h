@@ -2,7 +2,7 @@
  * File: QuanZhanYi_types.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 31-Aug-2024 15:45:21
+ * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
 #ifndef QUANZHANYI_TYPES_H
@@ -34,12 +34,12 @@ typedef struct {
 } cell_wrap_1;
 #endif /* typedef_cell_wrap_1 */
 
-#ifndef typedef_cell_wrap_6
-#define typedef_cell_wrap_6
+#ifndef typedef_cell_wrap_4
+#define typedef_cell_wrap_4
 typedef struct {
   emxArray_real_T *f1;
-} cell_wrap_6;
-#endif /* typedef_cell_wrap_6 */
+} cell_wrap_4;
+#endif /* typedef_cell_wrap_4 */
 
 #ifndef struct_emxArray_int32_T
 #define struct_emxArray_int32_T

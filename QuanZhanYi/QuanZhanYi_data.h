@@ -2,7 +2,7 @@
  * File: QuanZhanYi_data.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 31-Aug-2024 15:45:21
+ * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
 #ifndef QUANZHANYI_DATA_H
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 
 /* Variable Declarations */
-extern const signed char iv[24];
+extern const signed char iv1[24];
 extern boolean_T isInitialized_QuanZhanYi;
 
 #endif

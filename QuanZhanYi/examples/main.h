@@ -2,7 +2,7 @@
  * File: main.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 31-Aug-2024 15:45:21
+ * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
 /*************************************************************************/
@@ -55,6 +55,8 @@ extern void
 main_Calculate_accurate_cylinders_from_multiple_measurement_points2(void);
 
 extern void main_Calculate_rectangle_from_vertex(void);
+
+extern void main_Calculate_rectangle_from_vertex8(void);
 
 extern void main_CrossLine(void);
 

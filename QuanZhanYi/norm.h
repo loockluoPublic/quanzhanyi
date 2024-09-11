@@ -1,15 +1,14 @@
 /*
- * File: ShengDaoGaoDu.h
+ * File: norm.h
  *
  * MATLAB Coder version            : 23.2
  * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
-#ifndef SHENGDAOGAODU_H
-#define SHENGDAOGAODU_H
+#ifndef NORM_H
+#define NORM_H
 
 /* Include Files */
-#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -19,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void ShengDaoGaoDu(double numShengLu, emxArray_real_T *Ti);
+double b_norm(const double x[3]);
 
 #ifdef __cplusplus
 }
@@ -27,7 +26,7 @@ extern void ShengDaoGaoDu(double numShengLu, emxArray_real_T *Ti);
 
 #endif
 /*
- * File trailer for ShengDaoGaoDu.h
+ * File trailer for norm.h
  *
  * [EOF]
  */
