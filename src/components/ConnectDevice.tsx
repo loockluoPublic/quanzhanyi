@@ -20,6 +20,7 @@ export default function Connect() {
   const [deviceInfoData, setDeviceInfo] = useRecoilState(deviceInfo);
 
   const [pwd, setPwd] = useState("");
+
   return (
     <div
       style={{ backgroundImage: `url(${banner})` }}
@@ -48,8 +49,8 @@ export default function Connect() {
           <>
             <div className="q-inline-flex q-items-center  ">
               <div className="q-w-14">秘钥：</div>
-              <Input
-                defaultValue={encode(deviceInfoData?.SerialNo)}
+              <Input.Password
+                value={pwd}
                 type="password"
                 onChange={(v) => setPwd(v.target.value)}
               />
@@ -67,13 +68,6 @@ export default function Connect() {
                 className="q-mt-2"
                 type="primary"
                 onClick={() => {
-                  console.log(
-                    "%c Line:60 🍅 pwd",
-                    "color:#6ec1c2",
-                    pwd,
-                    "s",
-                    encode(deviceInfoData?.SerialNo)
-                  );
                   if (pwd === encode(deviceInfoData?.SerialNo)) {
                     setDeviceInfo({ ...deviceInfoData, auth: true });
                     message.success("秘钥验证成功");
@@ -97,6 +91,7 @@ export default function Connect() {
                 })
                 .then((res) => {
                   setDeviceInfo(res);
+                  setPwd(encode(res?.SerialNo));
                 })
                 .catch(() => {
                   console.log("Something went wrong...");
