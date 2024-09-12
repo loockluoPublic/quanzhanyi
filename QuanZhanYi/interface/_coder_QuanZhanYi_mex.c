@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 31-Aug-2024 15:45:21
+ * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
 /* Include Files */
@@ -20,13 +20,14 @@
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
-  static const char_T *emlrtEntryPoints[21] = {
+  static const char_T *emlrtEntryPoints[22] = {
       "angle2point",
       "Calculat_A_and_B_Points",
       "Calculat_A_and_B_Points_after_Offest2",
       "Calculat_JuXing_A_and_B_Points_after_Offest",
       "Calculate_accurate_cylinders_from_multiple_measurement_points2",
       "Calculate_rectangle_from_vertex",
+      "Calculate_rectangle_from_vertex8",
       "CrossLine",
       "fitcircle",
       "foot_of_perpendicular_from_a_point_to_a_line",
@@ -53,7 +54,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   st.tls = emlrtRootTLSGlobal;
   /* Dispatch the entry-point. */
   switch (emlrtGetEntryPointIndexR2016a(
-      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 21)) {
+      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 22)) {
   case 0:
     unsafe_angle2point_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
@@ -77,52 +78,56 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                                                        &prhs[1]);
     break;
   case 6:
-    unsafe_CrossLine_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_Calculate_rectangle_from_vertex8_mexFunction(nlhs, plhs, nrhs - 1,
+                                                        &prhs[1]);
     break;
   case 7:
-    unsafe_fitcircle_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_CrossLine_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 8:
+    unsafe_fitcircle_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 9:
     unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
         nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 9:
+  case 10:
     unsafe_Generate_multi_layered_measurement_points_mexFunction(
         nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 10:
+  case 11:
     unsafe_generate_unit_circle_with_normal_vector_mexFunction(
         nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 11:
+  case 12:
     unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
         nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 12:
+  case 13:
     unsafe_GenerateTrianglePoints_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 13:
+  case 14:
     unsafe_myvrrotvec2mat_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 14:
+  case 15:
     unsafe_OffsetCalculate_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 15:
+  case 16:
     unsafe_planefit_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 16:
+  case 17:
     unsafe_planefit4_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 17:
+  case 18:
     unsafe_planefit8_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 18:
+  case 19:
     unsafe_RepeatSurvey_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 19:
+  case 20:
     unsafe_ShengDaoGaoDu_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 20:
+  case 21:
     unsafe_ShengLuJiaoJiSuan_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   }
@@ -313,6 +318,49 @@ void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points2_mexFu
     i = nlhs;
   }
   emlrtReturnArrays(i, &plhs[0], &outputs[0]);
+}
+
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[2]
+ *                int32_T nrhs
+ *                const mxArray *prhs[16]
+ * Return Type  : void
+ */
+void unsafe_Calculate_rectangle_from_vertex8_mexFunction(
+    int32_T nlhs, mxArray *plhs[2], int32_T nrhs, const mxArray *prhs[16])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *b_prhs[16];
+  const mxArray *outputs[2];
+  int32_T i;
+  int32_T i1;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 16) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 16, 4,
+                        32, "Calculate_rectangle_from_vertex8");
+  }
+  if (nlhs > 2) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 32,
+                        "Calculate_rectangle_from_vertex8");
+  }
+  /* Call the function. */
+  for (i = 0; i < 16; i++) {
+    b_prhs[i] = prhs[i];
+  }
+  d_Calculate_rectangle_from_vert(b_prhs, nlhs, outputs);
+  /* Copy over outputs to the caller. */
+  if (nlhs < 1) {
+    i1 = 1;
+  } else {
+    i1 = nlhs;
+  }
+  emlrtReturnArrays(i1, &plhs[0], &outputs[0]);
 }
 
 /*

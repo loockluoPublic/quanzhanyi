@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 31-Aug-2024 15:45:21
+ * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
 /* Include Files */
@@ -43,7 +43,7 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
                                      double UPP[3], double *b, double *h,
                                      double *w, double Tao[3], double PP[24])
 {
-  static const signed char b_iv[8] = {1, 2, 3, 6, 9, 16, 17, 18};
+  static const signed char b_iv[8] = {1, 2, 3, 6, 9, 12, 17, 18};
   double Pdd[24];
   const double *TrianglePoints4_data;
   double Tao2_tmp_idx_0;
@@ -195,7 +195,7 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
            4.0;
   Pin[0] = ((Pdd[3] + Pdd[12]) / 2.0 + (Pdd[0] + Pdd[18]) / 2.0) / 2.0;
   Pout[0] = ((Pdd[6] + Pdd[21]) / 2.0 + (Pdd[9] + Pdd[15]) / 2.0) / 2.0;
-  UPP[0] = (Pdd[12] + Pdd[18]) / 2.0;
+  UPP[0] = (Pdd[0] + Pdd[12]) / 2.0;
   PP[0] = Pdd[0];
   PP[1] = Pdd[3];
   PP[2] = Pdd[6];
@@ -209,7 +209,7 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
            4.0;
   Pin[1] = ((Pdd[4] + Pdd[13]) / 2.0 + (Pdd[1] + Pdd[19]) / 2.0) / 2.0;
   Pout[1] = ((Pdd[7] + Pdd[22]) / 2.0 + (Pdd[10] + Pdd[16]) / 2.0) / 2.0;
-  UPP[1] = (Pdd[13] + Pdd[19]) / 2.0;
+  UPP[1] = (Pdd[1] + Pdd[13]) / 2.0;
   PP[8] = Pdd[1];
   PP[9] = Pdd[4];
   PP[10] = Pdd[7];
@@ -223,7 +223,7 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
            4.0;
   Pin[2] = ((Pdd[5] + Pdd[14]) / 2.0 + (Pdd[2] + Pdd[20]) / 2.0) / 2.0;
   Pout[2] = ((Pdd[8] + Pdd[23]) / 2.0 + (Pdd[11] + Pdd[17]) / 2.0) / 2.0;
-  UPP[2] = (Pdd[14] + Pdd[20]) / 2.0;
+  UPP[2] = (Pdd[2] + Pdd[14]) / 2.0;
   PP[16] = Pdd[2];
   PP[17] = Pdd[5];
   PP[18] = Pdd[8];

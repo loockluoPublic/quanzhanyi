@@ -2,7 +2,7 @@
  * File: mldivide.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 31-Aug-2024 15:45:21
+ * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
 /* Include Files */
@@ -18,12 +18,120 @@
 
 /* Function Definitions */
 /*
+ * Arguments    : const double A[9]
+ *                const double B_data[]
+ *                double Y[3]
+ * Return Type  : void
+ */
+void b_mldivide(const double A[9], const double B_data[], double Y[3])
+{
+  double b_A[9];
+  double a21;
+  double maxval;
+  int r1;
+  int r2;
+  int r3;
+  int rtemp;
+  memcpy(&b_A[0], &A[0], 9U * sizeof(double));
+  r1 = 0;
+  r2 = 1;
+  r3 = 2;
+  maxval = fabs(A[0]);
+  a21 = fabs(A[1]);
+  if (a21 > maxval) {
+    maxval = a21;
+    r1 = 1;
+    r2 = 0;
+  }
+  if (fabs(A[2]) > maxval) {
+    r1 = 2;
+    r2 = 1;
+    r3 = 0;
+  }
+  b_A[r2] = A[r2] / A[r1];
+  b_A[r3] /= b_A[r1];
+  b_A[r2 + 3] -= b_A[r2] * b_A[r1 + 3];
+  b_A[r3 + 3] -= b_A[r3] * b_A[r1 + 3];
+  b_A[r2 + 6] -= b_A[r2] * b_A[r1 + 6];
+  b_A[r3 + 6] -= b_A[r3] * b_A[r1 + 6];
+  if (fabs(b_A[r3 + 3]) > fabs(b_A[r2 + 3])) {
+    rtemp = r2;
+    r2 = r3;
+    r3 = rtemp;
+  }
+  b_A[r3 + 3] /= b_A[r2 + 3];
+  b_A[r3 + 6] -= b_A[r3 + 3] * b_A[r2 + 6];
+  Y[1] = B_data[r2] - B_data[r1] * b_A[r2];
+  Y[2] = (B_data[r3] - B_data[r1] * b_A[r3]) - Y[1] * b_A[r3 + 3];
+  Y[2] /= b_A[r3 + 6];
+  Y[0] = B_data[r1] - Y[2] * b_A[r1 + 6];
+  Y[1] -= Y[2] * b_A[r2 + 6];
+  Y[1] /= b_A[r2 + 3];
+  Y[0] -= Y[1] * b_A[r1 + 3];
+  Y[0] /= b_A[r1];
+}
+
+/*
+ * Arguments    : const double A[9]
+ *                const double B[3]
+ *                double Y[3]
+ * Return Type  : void
+ */
+void c_mldivide(const double A[9], const double B[3], double Y[3])
+{
+  double b_A[9];
+  double a21;
+  double maxval;
+  int r1;
+  int r2;
+  int r3;
+  int rtemp;
+  memcpy(&b_A[0], &A[0], 9U * sizeof(double));
+  r1 = 0;
+  r2 = 1;
+  r3 = 2;
+  maxval = fabs(A[0]);
+  a21 = fabs(A[1]);
+  if (a21 > maxval) {
+    maxval = a21;
+    r1 = 1;
+    r2 = 0;
+  }
+  if (fabs(A[2]) > maxval) {
+    r1 = 2;
+    r2 = 1;
+    r3 = 0;
+  }
+  b_A[r2] = A[r2] / A[r1];
+  b_A[r3] /= b_A[r1];
+  b_A[r2 + 3] -= b_A[r2] * b_A[r1 + 3];
+  b_A[r3 + 3] -= b_A[r3] * b_A[r1 + 3];
+  b_A[r2 + 6] -= b_A[r2] * b_A[r1 + 6];
+  b_A[r3 + 6] -= b_A[r3] * b_A[r1 + 6];
+  if (fabs(b_A[r3 + 3]) > fabs(b_A[r2 + 3])) {
+    rtemp = r2;
+    r2 = r3;
+    r3 = rtemp;
+  }
+  b_A[r3 + 3] /= b_A[r2 + 3];
+  b_A[r3 + 6] -= b_A[r3 + 3] * b_A[r2 + 6];
+  Y[1] = B[r2] - B[r1] * b_A[r2];
+  Y[2] = (B[r3] - B[r1] * b_A[r3]) - Y[1] * b_A[r3 + 3];
+  Y[2] /= b_A[r3 + 6];
+  Y[0] = B[r1] - Y[2] * b_A[r1 + 6];
+  Y[1] -= Y[2] * b_A[r2 + 6];
+  Y[1] /= b_A[r2 + 3];
+  Y[0] -= Y[1] * b_A[r1 + 3];
+  Y[0] /= b_A[r1];
+}
+
+/*
  * Arguments    : const double A[6]
  *                const double B[2]
  *                double Y[3]
  * Return Type  : void
  */
-void b_mldivide(const double A[6], const double B[2], double Y[3])
+void d_mldivide(const double A[6], const double B[2], double Y[3])
 {
   double b_A[6];
   double vn1[3];
@@ -284,114 +392,6 @@ void b_mldivide(const double A[6], const double B[2], double Y[3])
       Y[jpvt[0] - 1] -= Y[kend] * b_A[pvt];
     }
   }
-}
-
-/*
- * Arguments    : const double A[9]
- *                const double B_data[]
- *                double Y[3]
- * Return Type  : void
- */
-void c_mldivide(const double A[9], const double B_data[], double Y[3])
-{
-  double b_A[9];
-  double a21;
-  double maxval;
-  int r1;
-  int r2;
-  int r3;
-  int rtemp;
-  memcpy(&b_A[0], &A[0], 9U * sizeof(double));
-  r1 = 0;
-  r2 = 1;
-  r3 = 2;
-  maxval = fabs(A[0]);
-  a21 = fabs(A[1]);
-  if (a21 > maxval) {
-    maxval = a21;
-    r1 = 1;
-    r2 = 0;
-  }
-  if (fabs(A[2]) > maxval) {
-    r1 = 2;
-    r2 = 1;
-    r3 = 0;
-  }
-  b_A[r2] = A[r2] / A[r1];
-  b_A[r3] /= b_A[r1];
-  b_A[r2 + 3] -= b_A[r2] * b_A[r1 + 3];
-  b_A[r3 + 3] -= b_A[r3] * b_A[r1 + 3];
-  b_A[r2 + 6] -= b_A[r2] * b_A[r1 + 6];
-  b_A[r3 + 6] -= b_A[r3] * b_A[r1 + 6];
-  if (fabs(b_A[r3 + 3]) > fabs(b_A[r2 + 3])) {
-    rtemp = r2;
-    r2 = r3;
-    r3 = rtemp;
-  }
-  b_A[r3 + 3] /= b_A[r2 + 3];
-  b_A[r3 + 6] -= b_A[r3 + 3] * b_A[r2 + 6];
-  Y[1] = B_data[r2] - B_data[r1] * b_A[r2];
-  Y[2] = (B_data[r3] - B_data[r1] * b_A[r3]) - Y[1] * b_A[r3 + 3];
-  Y[2] /= b_A[r3 + 6];
-  Y[0] = B_data[r1] - Y[2] * b_A[r1 + 6];
-  Y[1] -= Y[2] * b_A[r2 + 6];
-  Y[1] /= b_A[r2 + 3];
-  Y[0] -= Y[1] * b_A[r1 + 3];
-  Y[0] /= b_A[r1];
-}
-
-/*
- * Arguments    : const double A[9]
- *                const double B[3]
- *                double Y[3]
- * Return Type  : void
- */
-void d_mldivide(const double A[9], const double B[3], double Y[3])
-{
-  double b_A[9];
-  double a21;
-  double maxval;
-  int r1;
-  int r2;
-  int r3;
-  int rtemp;
-  memcpy(&b_A[0], &A[0], 9U * sizeof(double));
-  r1 = 0;
-  r2 = 1;
-  r3 = 2;
-  maxval = fabs(A[0]);
-  a21 = fabs(A[1]);
-  if (a21 > maxval) {
-    maxval = a21;
-    r1 = 1;
-    r2 = 0;
-  }
-  if (fabs(A[2]) > maxval) {
-    r1 = 2;
-    r2 = 1;
-    r3 = 0;
-  }
-  b_A[r2] = A[r2] / A[r1];
-  b_A[r3] /= b_A[r1];
-  b_A[r2 + 3] -= b_A[r2] * b_A[r1 + 3];
-  b_A[r3 + 3] -= b_A[r3] * b_A[r1 + 3];
-  b_A[r2 + 6] -= b_A[r2] * b_A[r1 + 6];
-  b_A[r3 + 6] -= b_A[r3] * b_A[r1 + 6];
-  if (fabs(b_A[r3 + 3]) > fabs(b_A[r2 + 3])) {
-    rtemp = r2;
-    r2 = r3;
-    r3 = rtemp;
-  }
-  b_A[r3 + 3] /= b_A[r2 + 3];
-  b_A[r3 + 6] -= b_A[r3 + 3] * b_A[r2 + 6];
-  Y[1] = B[r2] - B[r1] * b_A[r2];
-  Y[2] = (B[r3] - B[r1] * b_A[r3]) - Y[1] * b_A[r3 + 3];
-  Y[2] /= b_A[r3 + 6];
-  Y[0] = B[r1] - Y[2] * b_A[r1 + 6];
-  Y[1] -= Y[2] * b_A[r2 + 6];
-  Y[1] /= b_A[r2 + 3];
-  Y[0] -= Y[1] * b_A[r1 + 3];
-  Y[0] /= b_A[r1];
 }
 
 /*

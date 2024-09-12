@@ -2,7 +2,7 @@
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 31-Aug-2024 15:45:21
+ * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
 /* Include Files */
@@ -677,6 +677,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   Bottom_round_center2[0] = absxk * r_idx_1 + Mcenter[0];
   Bottom_round_center2[1] = absxk * absx + Mcenter[1];
   Bottom_round_center2[2] = absxk * rcoselev + Mcenter[2];
+  /*  ！  需求1  判断方向 ，改法向量方向 */
 }
 
 /*

@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 31-Aug-2024 15:45:21
+ * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -73,6 +73,19 @@ void Calculate_rectangle_from_vertex(emxArray_real_T *TrianglePoints4,
                                      real_T Pin[3], real_T Pout[3],
                                      real_T UPP[3], real_T *b, real_T *h,
                                      real_T *w, real_T Tao[3], real_T PP[24]);
+
+void Calculate_rectangle_from_vertex8(
+    emxArray_real_T *side_faces_transformed1,
+    emxArray_real_T *side_faces_transformed2,
+    emxArray_real_T *side_faces_transformed3,
+    emxArray_real_T *side_faces_transformed4,
+    emxArray_real_T *side_faces_transformed5,
+    emxArray_real_T *side_faces_transformed6,
+    emxArray_real_T *side_faces_transformed7,
+    emxArray_real_T *side_faces_transformed8, real_T P_bound1[3],
+    real_T P_bound2[3], real_T PAB[3], real_T phi, real_T shenglunum,
+    emxArray_real_T *Ti, emxArray_real_T *a, real_T distanceThreshold,
+    emxArray_real_T *PointTable_A_off8, emxArray_real_T *PointTable_B_off8);
 
 void CrossLine(real_T PlanePara1[4], real_T PlanePara2[4], real_T x_val,
                real_T P0[3], real_T d[3]);
@@ -149,6 +162,9 @@ void c_foot_of_perpendicular_from_a_(const mxArray *const prhs[3], int32_T nlhs,
 
 void c_generate_unit_circle_with_nor(const mxArray *const prhs[3],
                                      const mxArray **plhs);
+
+void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
+                                     int32_T nlhs, const mxArray *plhs[2]);
 
 void d_generate_unit_circle_with_nor(const mxArray *const prhs[6],
                                      const mxArray **plhs);

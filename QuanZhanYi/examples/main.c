@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 31-Aug-2024 15:45:21
+ * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
 /*************************************************************************/
@@ -37,6 +37,7 @@
 #include "Calculat_JuXing_A_and_B_Points_after_Offest.h"
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
 #include "Calculate_rectangle_from_vertex.h"
+#include "Calculate_rectangle_from_vertex8.h"
 #include "CrossLine.h"
 #include "GenerateTrianglePoints.h"
 #include "Generate_multi_layered_measurement_points.h"
@@ -232,6 +233,7 @@ You can call entry-point functions multiple times. */
   main_Calculat_JuXing_A_and_B_Points_after_Offest();
   main_Calculate_accurate_cylinders_from_multiple_measurement_points2();
   main_Calculate_rectangle_from_vertex();
+  main_Calculate_rectangle_from_vertex8();
   main_CrossLine();
   main_fitcircle();
   main_foot_of_perpendicular_from_a_point_to_a_line();
@@ -410,6 +412,77 @@ void main_Calculate_rectangle_from_vertex(void)
   Calculate_rectangle_from_vertex(TrianglePoints4, Pin, Pout, UPP, &b, &h, &w,
                                   Tao, PP);
   emxDestroyArray_real_T(TrianglePoints4);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+void main_Calculate_rectangle_from_vertex8(void)
+{
+  emxArray_real_T *PointTable_A_off8;
+  emxArray_real_T *PointTable_B_off8;
+  emxArray_real_T *Ti;
+  emxArray_real_T *a;
+  emxArray_real_T *side_faces_transformed1;
+  emxArray_real_T *side_faces_transformed2;
+  emxArray_real_T *side_faces_transformed3;
+  emxArray_real_T *side_faces_transformed4;
+  emxArray_real_T *side_faces_transformed5;
+  emxArray_real_T *side_faces_transformed6;
+  emxArray_real_T *side_faces_transformed7;
+  emxArray_real_T *side_faces_transformed8;
+  double P_bound1_tmp[3];
+  double dv[3];
+  double phi_tmp;
+  /* Initialize function 'Calculate_rectangle_from_vertex8' input arguments. */
+  /* Initialize function input argument 'side_faces_transformed1'. */
+  side_faces_transformed1 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'side_faces_transformed2'. */
+  side_faces_transformed2 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'side_faces_transformed3'. */
+  side_faces_transformed3 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'side_faces_transformed4'. */
+  side_faces_transformed4 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'side_faces_transformed5'. */
+  side_faces_transformed5 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'side_faces_transformed6'. */
+  side_faces_transformed6 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'side_faces_transformed7'. */
+  side_faces_transformed7 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'side_faces_transformed8'. */
+  side_faces_transformed8 = argInit_3xUnbounded_real_T();
+  /* Initialize function input argument 'P_bound1'. */
+  argInit_3x1_real_T(P_bound1_tmp);
+  /* Initialize function input argument 'P_bound2'. */
+  /* Initialize function input argument 'PAB'. */
+  phi_tmp = argInit_real_T();
+  /* Initialize function input argument 'Ti'. */
+  Ti = argInit_1xUnbounded_real_T();
+  /* Initialize function input argument 'a'. */
+  a = argInit_1xUnbounded_real_T();
+  /* Call the entry-point 'Calculate_rectangle_from_vertex8'. */
+  emxInitArray_real_T(&PointTable_A_off8, 2);
+  emxInitArray_real_T(&PointTable_B_off8, 2);
+  argInit_3x1_real_T(dv);
+  Calculate_rectangle_from_vertex8(
+      side_faces_transformed1, side_faces_transformed2, side_faces_transformed3,
+      side_faces_transformed4, side_faces_transformed5, side_faces_transformed6,
+      side_faces_transformed7, side_faces_transformed8, P_bound1_tmp,
+      P_bound1_tmp, dv, phi_tmp, phi_tmp, Ti, a, phi_tmp, PointTable_A_off8,
+      PointTable_B_off8);
+  emxDestroyArray_real_T(a);
+  emxDestroyArray_real_T(Ti);
+  emxDestroyArray_real_T(side_faces_transformed8);
+  emxDestroyArray_real_T(side_faces_transformed7);
+  emxDestroyArray_real_T(side_faces_transformed6);
+  emxDestroyArray_real_T(side_faces_transformed5);
+  emxDestroyArray_real_T(side_faces_transformed4);
+  emxDestroyArray_real_T(side_faces_transformed3);
+  emxDestroyArray_real_T(side_faces_transformed2);
+  emxDestroyArray_real_T(side_faces_transformed1);
+  emxDestroyArray_real_T(PointTable_A_off8);
+  emxDestroyArray_real_T(PointTable_B_off8);
 }
 
 /*

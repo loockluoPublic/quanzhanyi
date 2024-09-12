@@ -2,7 +2,7 @@
  * File: QuanZhanYi_emxutil.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 31-Aug-2024 15:45:21
+ * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
 /* Include Files */
@@ -24,11 +24,11 @@ void emxCopyStruct_cell_wrap_1(cell_wrap_1 *dst, const cell_wrap_1 *src)
 }
 
 /*
- * Arguments    : cell_wrap_6 *dst
- *                const cell_wrap_6 *src
+ * Arguments    : cell_wrap_4 *dst
+ *                const cell_wrap_4 *src
  * Return Type  : void
  */
-void emxCopyStruct_cell_wrap_6(cell_wrap_6 *dst, const cell_wrap_6 *src)
+void emxCopyStruct_cell_wrap_4(cell_wrap_4 *dst, const cell_wrap_4 *src)
 {
   emxCopy_real_T(&dst->f1, &src->f1);
 }
@@ -186,22 +186,10 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
 }
 
 /*
- * Arguments    : cell_wrap_1 pMatrix[4]
- * Return Type  : void
- */
-void emxFreeMatrix_cell_wrap_1(cell_wrap_1 pMatrix[4])
-{
-  int i;
-  for (i = 0; i < 4; i++) {
-    emxFreeStruct_cell_wrap_1(&pMatrix[i]);
-  }
-}
-
-/*
  * Arguments    : cell_wrap_1 pMatrix[8]
  * Return Type  : void
  */
-void emxFreeMatrix_cell_wrap_11(cell_wrap_1 pMatrix[8])
+void emxFreeMatrix_cell_wrap_1(cell_wrap_1 pMatrix[8])
 {
   int i;
   for (i = 0; i < 8; i++) {
@@ -210,26 +198,38 @@ void emxFreeMatrix_cell_wrap_11(cell_wrap_1 pMatrix[8])
 }
 
 /*
- * Arguments    : cell_wrap_6 pMatrix[4]
+ * Arguments    : cell_wrap_1 pMatrix[4]
  * Return Type  : void
  */
-void emxFreeMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4])
+void emxFreeMatrix_cell_wrap_11(cell_wrap_1 pMatrix[4])
 {
   int i;
   for (i = 0; i < 4; i++) {
-    emxFreeStruct_cell_wrap_6(&pMatrix[i]);
+    emxFreeStruct_cell_wrap_1(&pMatrix[i]);
   }
 }
 
 /*
- * Arguments    : cell_wrap_6 pMatrix[8]
+ * Arguments    : cell_wrap_4 pMatrix[8]
  * Return Type  : void
  */
-void emxFreeMatrix_cell_wrap_61(cell_wrap_6 pMatrix[8])
+void emxFreeMatrix_cell_wrap_4(cell_wrap_4 pMatrix[8])
 {
   int i;
   for (i = 0; i < 8; i++) {
-    emxFreeStruct_cell_wrap_6(&pMatrix[i]);
+    emxFreeStruct_cell_wrap_4(&pMatrix[i]);
+  }
+}
+
+/*
+ * Arguments    : cell_wrap_4 pMatrix[4]
+ * Return Type  : void
+ */
+void emxFreeMatrix_cell_wrap_41(cell_wrap_4 pMatrix[4])
+{
+  int i;
+  for (i = 0; i < 4; i++) {
+    emxFreeStruct_cell_wrap_4(&pMatrix[i]);
   }
 }
 
@@ -243,10 +243,10 @@ void emxFreeStruct_cell_wrap_1(cell_wrap_1 *pStruct)
 }
 
 /*
- * Arguments    : cell_wrap_6 *pStruct
+ * Arguments    : cell_wrap_4 *pStruct
  * Return Type  : void
  */
-void emxFreeStruct_cell_wrap_6(cell_wrap_6 *pStruct)
+void emxFreeStruct_cell_wrap_4(cell_wrap_4 *pStruct)
 {
   emxFree_real_T(&pStruct->f1);
 }
@@ -301,22 +301,10 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
 }
 
 /*
- * Arguments    : cell_wrap_1 pMatrix[4]
- * Return Type  : void
- */
-void emxInitMatrix_cell_wrap_1(cell_wrap_1 pMatrix[4])
-{
-  int i;
-  for (i = 0; i < 4; i++) {
-    emxInitStruct_cell_wrap_1(&pMatrix[i]);
-  }
-}
-
-/*
  * Arguments    : cell_wrap_1 pMatrix[8]
  * Return Type  : void
  */
-void emxInitMatrix_cell_wrap_11(cell_wrap_1 pMatrix[8])
+void emxInitMatrix_cell_wrap_1(cell_wrap_1 pMatrix[8])
 {
   int i;
   for (i = 0; i < 8; i++) {
@@ -325,26 +313,38 @@ void emxInitMatrix_cell_wrap_11(cell_wrap_1 pMatrix[8])
 }
 
 /*
- * Arguments    : cell_wrap_6 pMatrix[4]
+ * Arguments    : cell_wrap_1 pMatrix[4]
  * Return Type  : void
  */
-void emxInitMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4])
+void emxInitMatrix_cell_wrap_11(cell_wrap_1 pMatrix[4])
 {
   int i;
   for (i = 0; i < 4; i++) {
-    emxInitStruct_cell_wrap_6(&pMatrix[i]);
+    emxInitStruct_cell_wrap_1(&pMatrix[i]);
   }
 }
 
 /*
- * Arguments    : cell_wrap_6 pMatrix[8]
+ * Arguments    : cell_wrap_4 pMatrix[8]
  * Return Type  : void
  */
-void emxInitMatrix_cell_wrap_61(cell_wrap_6 pMatrix[8])
+void emxInitMatrix_cell_wrap_4(cell_wrap_4 pMatrix[8])
 {
   int i;
   for (i = 0; i < 8; i++) {
-    emxInitStruct_cell_wrap_6(&pMatrix[i]);
+    emxInitStruct_cell_wrap_4(&pMatrix[i]);
+  }
+}
+
+/*
+ * Arguments    : cell_wrap_4 pMatrix[4]
+ * Return Type  : void
+ */
+void emxInitMatrix_cell_wrap_41(cell_wrap_4 pMatrix[4])
+{
+  int i;
+  for (i = 0; i < 4; i++) {
+    emxInitStruct_cell_wrap_4(&pMatrix[i]);
   }
 }
 
@@ -358,10 +358,10 @@ void emxInitStruct_cell_wrap_1(cell_wrap_1 *pStruct)
 }
 
 /*
- * Arguments    : cell_wrap_6 *pStruct
+ * Arguments    : cell_wrap_4 *pStruct
  * Return Type  : void
  */
-void emxInitStruct_cell_wrap_6(cell_wrap_6 *pStruct)
+void emxInitStruct_cell_wrap_4(cell_wrap_4 *pStruct)
 {
   emxInit_real_T(&pStruct->f1, 2);
 }

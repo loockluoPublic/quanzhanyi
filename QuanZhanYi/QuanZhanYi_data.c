@@ -2,7 +2,7 @@
  * File: QuanZhanYi_data.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 31-Aug-2024 15:45:21
+ * C/C++ source code generated on  : 12-Sep-2024 01:13:06
  */
 
 /* Include Files */
@@ -10,8 +10,8 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-const signed char iv[24] = {0, 1, 2, 1, 2, 3, 0, 2, 4, 2, 4, 5,
-                            4, 5, 6, 5, 6, 7, 1, 3, 6, 3, 6, 7};
+const signed char iv1[24] = {0, 1, 2, 1, 2, 3, 0, 2, 4, 2, 4, 5,
+                             4, 5, 6, 5, 6, 7, 1, 3, 6, 3, 6, 7};
 
 boolean_T isInitialized_QuanZhanYi = false;
 
