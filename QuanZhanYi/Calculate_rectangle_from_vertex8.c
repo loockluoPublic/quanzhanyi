@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 12-Sep-2024 01:13:06
+ * C/C++ source code generated on  : 12-Sep-2024 22:50:43
  */
 
 /* Include Files */
@@ -42,6 +42,7 @@
  *                double distanceThreshold
  *                emxArray_real_T *PointTable_A_off8
  *                emxArray_real_T *PointTable_B_off8
+ *                emxArray_real_T *XieMianPianYi
  * Return Type  : void
  */
 void Calculate_rectangle_from_vertex8(
@@ -56,7 +57,7 @@ void Calculate_rectangle_from_vertex8(
     const double P_bound2[3], const double PAB[3], double phi,
     double shenglunum, const emxArray_real_T *Ti, const emxArray_real_T *a,
     double distanceThreshold, emxArray_real_T *PointTable_A_off8,
-    emxArray_real_T *PointTable_B_off8)
+    emxArray_real_T *PointTable_B_off8, emxArray_real_T *XieMianPianYi)
 {
   static const signed char b_iv[16] = {6, 7, 13, 19, 25, 31, 37, 43,
                                        2, 8, 17, 23, 29, 35, 41, 47};
@@ -96,11 +97,11 @@ void Calculate_rectangle_from_vertex8(
   double theta4;
   double zN5;
   double *PlaneParaOut8_data;
-  double *PointTable_A_off4_data;
   double *PointTable_B_off4_data;
   double *Ti2_data;
   double *TrianglePoints8_data;
   double *XMFlag_data;
+  double *XieMianPianYi_data;
   int PP16_tmp;
   int b_loop_ub;
   int i;
@@ -124,24 +125,24 @@ void Calculate_rectangle_from_vertex8(
   /* %%%%%%%%%%%%%%%%%%%%%  计算角度  %%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
   zN5 = b_norm(&PlaneParaOut8_data[0]);
   ab4 = b_norm(&PlaneParaOut8_data[16]);
-  TiYuZhi3 = PlaneParaOut8_data[0];
-  Tii = TiYuZhi3 * PlaneParaOut8_data[4];
-  dir_vec_tmp = PlaneParaOut8_data[16];
-  ab1 = PlaneParaOut8_data[12] * dir_vec_tmp;
-  ab3 = dir_vec_tmp * PlaneParaOut8_data[20];
-  temp = TiYuZhi3 * PlaneParaOut8_data[28];
-  TiYuZhi3 = PlaneParaOut8_data[1];
-  Tii += TiYuZhi3 * PlaneParaOut8_data[5];
-  dir_vec_tmp = PlaneParaOut8_data[17];
-  ab1 += PlaneParaOut8_data[13] * dir_vec_tmp;
-  ab3 += dir_vec_tmp * PlaneParaOut8_data[21];
-  temp += TiYuZhi3 * PlaneParaOut8_data[29];
-  TiYuZhi3 = PlaneParaOut8_data[2];
-  Tii += TiYuZhi3 * PlaneParaOut8_data[6];
-  dir_vec_tmp = PlaneParaOut8_data[18];
-  ab1 += PlaneParaOut8_data[14] * dir_vec_tmp;
-  ab3 += dir_vec_tmp * PlaneParaOut8_data[22];
-  temp += TiYuZhi3 * PlaneParaOut8_data[30];
+  dir_vec_tmp = PlaneParaOut8_data[0];
+  Tii = dir_vec_tmp * PlaneParaOut8_data[4];
+  TiYuZhi3 = PlaneParaOut8_data[16];
+  ab1 = PlaneParaOut8_data[12] * TiYuZhi3;
+  ab3 = TiYuZhi3 * PlaneParaOut8_data[20];
+  temp = dir_vec_tmp * PlaneParaOut8_data[28];
+  dir_vec_tmp = PlaneParaOut8_data[1];
+  Tii += dir_vec_tmp * PlaneParaOut8_data[5];
+  TiYuZhi3 = PlaneParaOut8_data[17];
+  ab1 += PlaneParaOut8_data[13] * TiYuZhi3;
+  ab3 += TiYuZhi3 * PlaneParaOut8_data[21];
+  temp += dir_vec_tmp * PlaneParaOut8_data[29];
+  dir_vec_tmp = PlaneParaOut8_data[2];
+  Tii += dir_vec_tmp * PlaneParaOut8_data[6];
+  TiYuZhi3 = PlaneParaOut8_data[18];
+  ab1 += PlaneParaOut8_data[14] * TiYuZhi3;
+  ab3 += TiYuZhi3 * PlaneParaOut8_data[22];
+  temp += dir_vec_tmp * PlaneParaOut8_data[30];
   theta1 = acos(Tii / zN5 / b_norm(&PlaneParaOut8_data[4]));
   theta2 = acos(ab1 / b_norm(&PlaneParaOut8_data[12]) / ab4);
   theta3 = acos(ab3 / ab4 / b_norm(&PlaneParaOut8_data[20]));
@@ -171,10 +172,10 @@ void Calculate_rectangle_from_vertex8(
                                                &zN5, &Tii, &temp);
   ab4 = PP16[21] - PP16[12];
   dir_vec[0] = ab4;
-  dir_vec_tmp = PP16[22] - PP16[13];
-  dir_vec[1] = dir_vec_tmp;
-  ab3 = PP16[23] - PP16[14];
-  dir_vec[2] = ab3;
+  ab3 = PP16[22] - PP16[13];
+  dir_vec[1] = ab3;
+  dir_vec_tmp = PP16[23] - PP16[14];
+  dir_vec[2] = dir_vec_tmp;
   ab1 = b_norm(dir_vec) / 2.0;
   dir_vec[0] = PP16[21] - zN5;
   dir_vec[1] = PP16[22] - Tii;
@@ -183,8 +184,8 @@ void Calculate_rectangle_from_vertex8(
   foot_of_perpendicular_from_a_point_to_a_line(&PP16[15], &PP16[21], &PP16[12],
                                                &zN5, &Tii, &temp);
   dir_vec[0] = ab4;
-  dir_vec[1] = dir_vec_tmp;
-  dir_vec[2] = ab3;
+  dir_vec[1] = ab3;
+  dir_vec[2] = dir_vec_tmp;
   ab3 = b_norm(dir_vec) / 2.0;
   dir_vec[0] = PP16[21] - zN5;
   dir_vec[1] = PP16[22] - Tii;
@@ -233,35 +234,55 @@ void Calculate_rectangle_from_vertex8(
   for (i = 0; i < loop_ub; i++) {
     Ti2_data[i] = 0.0;
   }
+  i = XieMianPianYi->size[0] * XieMianPianYi->size[1];
+  XieMianPianYi->size[0] = 1;
+  XieMianPianYi->size[1] = loop_ub;
+  emxEnsureCapacity_real_T(XieMianPianYi, i);
+  XieMianPianYi_data = XieMianPianYi->data;
+  for (i = 0; i < loop_ub; i++) {
+    XieMianPianYi_data[i] = 0.0;
+  }
   /* %%%%%%%%%%%%%%%%%%%%%  对斜面上的点进行偏移（修正Ti）
    * %%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
   for (PP16_tmp = 0; PP16_tmp < loop_ub; PP16_tmp++) {
     if ((double)PP16_tmp + 1.0 <= temp) {
       if (XMFlag_data[PP16_tmp] == 1.0) {
         /* 斜面上 */
-        Ti2_data[PP16_tmp] = Ti_data[PP16_tmp] + a_data[PP16_tmp] * theta3;
+        dir_vec_tmp = a_data[PP16_tmp];
+        Ti2_data[PP16_tmp] = Ti_data[PP16_tmp] + dir_vec_tmp * sin(theta3);
+        XieMianPianYi_data[PP16_tmp] = dir_vec_tmp * tan(theta3);
       } else {
         Ti2_data[PP16_tmp] = Ti_data[PP16_tmp];
+        XieMianPianYi_data[PP16_tmp] = 0.0;
       }
     } else if ((double)PP16_tmp + 1.0 <= 2.0 * temp) {
       if (XMFlag_data[PP16_tmp] == 1.0) {
         /* 斜面上 */
-        Ti2_data[PP16_tmp] = Ti_data[PP16_tmp] - a_data[PP16_tmp] * theta2;
+        dir_vec_tmp = a_data[PP16_tmp];
+        Ti2_data[PP16_tmp] = Ti_data[PP16_tmp] - dir_vec_tmp * sin(theta2);
+        XieMianPianYi_data[PP16_tmp] = dir_vec_tmp * tan(theta2);
       } else {
         Ti2_data[PP16_tmp] = Ti_data[PP16_tmp];
+        XieMianPianYi_data[PP16_tmp] = 0.0;
       }
     } else if ((double)PP16_tmp + 1.0 <= 3.0 * temp) {
       if (XMFlag_data[PP16_tmp] == 1.0) {
         /* 斜面上 */
-        Ti2_data[PP16_tmp] = Ti_data[PP16_tmp] - a_data[PP16_tmp] * theta1;
+        dir_vec_tmp = a_data[PP16_tmp];
+        Ti2_data[PP16_tmp] = Ti_data[PP16_tmp] - dir_vec_tmp * sin(theta1);
+        XieMianPianYi_data[PP16_tmp] = dir_vec_tmp * tan(theta1);
       } else {
         Ti2_data[PP16_tmp] = Ti_data[PP16_tmp];
+        XieMianPianYi_data[PP16_tmp] = 0.0;
       }
     } else if (XMFlag_data[PP16_tmp] == 1.0) {
       /* 斜面上 */
-      Ti2_data[PP16_tmp] = Ti_data[PP16_tmp] + a_data[PP16_tmp] * theta4;
+      dir_vec_tmp = a_data[PP16_tmp];
+      Ti2_data[PP16_tmp] = Ti_data[PP16_tmp] + dir_vec_tmp * sin(theta4);
+      XieMianPianYi_data[PP16_tmp] = dir_vec_tmp * tan(theta4);
     } else {
       Ti2_data[PP16_tmp] = Ti_data[PP16_tmp];
+      XieMianPianYi_data[PP16_tmp] = 0.0;
     }
   }
   /* %%%%%%%%%%%%%%%%%%%%%  调用矩形拟合  %%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
@@ -307,7 +328,7 @@ void Calculate_rectangle_from_vertex8(
       Tao, UPP, dir_vec, Tii, ab4, PAB, phi, shenglunum, Ti2, a__5,
       PointTable_A_off4, PointTable_B_off4);
   PointTable_B_off4_data = PointTable_B_off4->data;
-  PointTable_A_off4_data = PointTable_A_off4->data;
+  XieMianPianYi_data = PointTable_A_off4->data;
   emxFree_real_T(&a__5);
   emxFree_real_T(&Ti2);
   /* %%%%%%%%%%%%%%%%%%%%%  计算交点  %%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
@@ -330,17 +351,17 @@ void Calculate_rectangle_from_vertex8(
         /* 斜面上 */
         /*  计算方向向量 */
         /*  将直线方程代入平面方程，求解参数 t */
-        ab4 = PointTable_A_off4_data[3 * k] + dir_vec[0];
+        ab4 = XieMianPianYi_data[3 * k] + dir_vec[0];
         PP16_tmp = 3 * k + 1;
-        ab3 = PointTable_A_off4_data[PP16_tmp] + dir_vec[1];
+        ab3 = XieMianPianYi_data[PP16_tmp] + dir_vec[1];
         b_loop_ub = 3 * k + 2;
-        zN5 = PointTable_A_off4_data[b_loop_ub] + dir_vec[2];
-        TiYuZhi3 = PlaneParaOut8_data[20];
-        dir_vec_tmp = PlaneParaOut8_data[21];
+        zN5 = XieMianPianYi_data[b_loop_ub] + dir_vec[2];
+        dir_vec_tmp = PlaneParaOut8_data[20];
+        TiYuZhi3 = PlaneParaOut8_data[21];
         Tii = PlaneParaOut8_data[22];
-        ab1 = -(((TiYuZhi3 * ab4 + dir_vec_tmp * ab3) + Tii * zN5) +
+        ab1 = -(((dir_vec_tmp * ab4 + TiYuZhi3 * ab3) + Tii * zN5) +
                 PlaneParaOut8_data[23]) /
-              ((TiYuZhi3 * dir_vec[0] + dir_vec_tmp * dir_vec[1]) +
+              ((dir_vec_tmp * dir_vec[0] + TiYuZhi3 * dir_vec[1]) +
                Tii * dir_vec[2]);
         /*  计算交点 */
         /*  输出交点 */
@@ -348,28 +369,28 @@ void Calculate_rectangle_from_vertex8(
         Ti2_data[PP16_tmp] = ab3 + ab1 * dir_vec[1];
         Ti2_data[b_loop_ub] = zN5 + ab1 * dir_vec[2];
       } else {
-        Ti2_data[3 * k] = PointTable_A_off4_data[3 * k];
+        Ti2_data[3 * k] = XieMianPianYi_data[3 * k];
         i = 3 * k + 1;
-        Ti2_data[i] = PointTable_A_off4_data[i];
+        Ti2_data[i] = XieMianPianYi_data[i];
         i = 3 * k + 2;
-        Ti2_data[i] = PointTable_A_off4_data[i];
+        Ti2_data[i] = XieMianPianYi_data[i];
       }
     } else if ((double)k + 1.0 <= 2.0 * temp) {
       if (XMFlag_data[k] == 1.0) {
         /* 斜面上 */
         /*  计算方向向量 */
         /*  将直线方程代入平面方程，求解参数 t */
-        ab4 = PointTable_A_off4_data[3 * k] + dir_vec[0];
+        ab4 = XieMianPianYi_data[3 * k] + dir_vec[0];
         PP16_tmp = 3 * k + 1;
-        ab3 = PointTable_A_off4_data[PP16_tmp] + dir_vec[1];
+        ab3 = XieMianPianYi_data[PP16_tmp] + dir_vec[1];
         b_loop_ub = 3 * k + 2;
-        zN5 = PointTable_A_off4_data[b_loop_ub] + dir_vec[2];
-        TiYuZhi3 = PlaneParaOut8_data[12];
-        dir_vec_tmp = PlaneParaOut8_data[13];
+        zN5 = XieMianPianYi_data[b_loop_ub] + dir_vec[2];
+        dir_vec_tmp = PlaneParaOut8_data[12];
+        TiYuZhi3 = PlaneParaOut8_data[13];
         Tii = PlaneParaOut8_data[14];
-        ab1 = -(((TiYuZhi3 * ab4 + dir_vec_tmp * ab3) + Tii * zN5) +
+        ab1 = -(((dir_vec_tmp * ab4 + TiYuZhi3 * ab3) + Tii * zN5) +
                 PlaneParaOut8_data[15]) /
-              ((TiYuZhi3 * dir_vec[0] + dir_vec_tmp * dir_vec[1]) +
+              ((dir_vec_tmp * dir_vec[0] + TiYuZhi3 * dir_vec[1]) +
                Tii * dir_vec[2]);
         /*  计算交点 */
         /*  输出交点 */
@@ -377,28 +398,28 @@ void Calculate_rectangle_from_vertex8(
         Ti2_data[PP16_tmp] = ab3 + ab1 * dir_vec[1];
         Ti2_data[b_loop_ub] = zN5 + ab1 * dir_vec[2];
       } else {
-        Ti2_data[3 * k] = PointTable_A_off4_data[3 * k];
+        Ti2_data[3 * k] = XieMianPianYi_data[3 * k];
         i = 3 * k + 1;
-        Ti2_data[i] = PointTable_A_off4_data[i];
+        Ti2_data[i] = XieMianPianYi_data[i];
         i = 3 * k + 2;
-        Ti2_data[i] = PointTable_A_off4_data[i];
+        Ti2_data[i] = XieMianPianYi_data[i];
       }
     } else if ((double)k + 1.0 <= 3.0 * temp) {
       if (XMFlag_data[k] == 1.0) {
         /* 斜面上 */
         /*  计算方向向量 */
         /*  将直线方程代入平面方程，求解参数 t */
-        ab4 = PointTable_A_off4_data[3 * k] + dir_vec[0];
+        ab4 = XieMianPianYi_data[3 * k] + dir_vec[0];
         PP16_tmp = 3 * k + 1;
-        ab3 = PointTable_A_off4_data[PP16_tmp] + dir_vec[1];
+        ab3 = XieMianPianYi_data[PP16_tmp] + dir_vec[1];
         b_loop_ub = 3 * k + 2;
-        zN5 = PointTable_A_off4_data[b_loop_ub] + dir_vec[2];
-        TiYuZhi3 = PlaneParaOut8_data[4];
-        dir_vec_tmp = PlaneParaOut8_data[5];
+        zN5 = XieMianPianYi_data[b_loop_ub] + dir_vec[2];
+        dir_vec_tmp = PlaneParaOut8_data[4];
+        TiYuZhi3 = PlaneParaOut8_data[5];
         Tii = PlaneParaOut8_data[6];
-        ab1 = -(((TiYuZhi3 * ab4 + dir_vec_tmp * ab3) + Tii * zN5) +
+        ab1 = -(((dir_vec_tmp * ab4 + TiYuZhi3 * ab3) + Tii * zN5) +
                 PlaneParaOut8_data[7]) /
-              ((TiYuZhi3 * dir_vec[0] + dir_vec_tmp * dir_vec[1]) +
+              ((dir_vec_tmp * dir_vec[0] + TiYuZhi3 * dir_vec[1]) +
                Tii * dir_vec[2]);
         /*  计算交点 */
         /*  输出交点 */
@@ -406,27 +427,27 @@ void Calculate_rectangle_from_vertex8(
         Ti2_data[PP16_tmp] = ab3 + ab1 * dir_vec[1];
         Ti2_data[b_loop_ub] = zN5 + ab1 * dir_vec[2];
       } else {
-        Ti2_data[3 * k] = PointTable_A_off4_data[3 * k];
+        Ti2_data[3 * k] = XieMianPianYi_data[3 * k];
         i = 3 * k + 1;
-        Ti2_data[i] = PointTable_A_off4_data[i];
+        Ti2_data[i] = XieMianPianYi_data[i];
         i = 3 * k + 2;
-        Ti2_data[i] = PointTable_A_off4_data[i];
+        Ti2_data[i] = XieMianPianYi_data[i];
       }
     } else if (XMFlag_data[k] == 1.0) {
       /* 斜面上 */
       /*  计算方向向量 */
       /*  将直线方程代入平面方程，求解参数 t */
-      ab4 = PointTable_A_off4_data[3 * k] + dir_vec[0];
+      ab4 = XieMianPianYi_data[3 * k] + dir_vec[0];
       PP16_tmp = 3 * k + 1;
-      ab3 = PointTable_A_off4_data[PP16_tmp] + dir_vec[1];
+      ab3 = XieMianPianYi_data[PP16_tmp] + dir_vec[1];
       b_loop_ub = 3 * k + 2;
-      zN5 = PointTable_A_off4_data[b_loop_ub] + dir_vec[2];
-      TiYuZhi3 = PlaneParaOut8_data[28];
-      dir_vec_tmp = PlaneParaOut8_data[29];
+      zN5 = XieMianPianYi_data[b_loop_ub] + dir_vec[2];
+      dir_vec_tmp = PlaneParaOut8_data[28];
+      TiYuZhi3 = PlaneParaOut8_data[29];
       Tii = PlaneParaOut8_data[30];
-      ab1 = -(((TiYuZhi3 * ab4 + dir_vec_tmp * ab3) + Tii * zN5) +
+      ab1 = -(((dir_vec_tmp * ab4 + TiYuZhi3 * ab3) + Tii * zN5) +
               PlaneParaOut8_data[31]) /
-            ((TiYuZhi3 * dir_vec[0] + dir_vec_tmp * dir_vec[1]) +
+            ((dir_vec_tmp * dir_vec[0] + TiYuZhi3 * dir_vec[1]) +
              Tii * dir_vec[2]);
       /*  计算交点 */
       /*  输出交点 */
@@ -434,11 +455,11 @@ void Calculate_rectangle_from_vertex8(
       Ti2_data[PP16_tmp] = ab3 + ab1 * dir_vec[1];
       Ti2_data[b_loop_ub] = zN5 + ab1 * dir_vec[2];
     } else {
-      Ti2_data[3 * k] = PointTable_A_off4_data[3 * k];
+      Ti2_data[3 * k] = XieMianPianYi_data[3 * k];
       i = 3 * k + 1;
-      Ti2_data[i] = PointTable_A_off4_data[i];
+      Ti2_data[i] = XieMianPianYi_data[i];
       i = 3 * k + 2;
-      Ti2_data[i] = PointTable_A_off4_data[i];
+      Ti2_data[i] = XieMianPianYi_data[i];
     }
   }
   emxFree_real_T(&PointTable_A_off4);
@@ -462,12 +483,12 @@ void Calculate_rectangle_from_vertex8(
         ab3 = PointTable_B_off4_data[PP16_tmp];
         b_loop_ub = 3 * k + 2;
         zN5 = PointTable_B_off4_data[b_loop_ub];
-        TiYuZhi3 = PlaneParaOut8_data[28];
-        dir_vec_tmp = PlaneParaOut8_data[29];
+        dir_vec_tmp = PlaneParaOut8_data[28];
+        TiYuZhi3 = PlaneParaOut8_data[29];
         Tii = PlaneParaOut8_data[30];
-        ab1 = -(((TiYuZhi3 * ab4 + dir_vec_tmp * ab3) + Tii * zN5) +
+        ab1 = -(((dir_vec_tmp * ab4 + TiYuZhi3 * ab3) + Tii * zN5) +
                 PlaneParaOut8_data[31]) /
-              ((TiYuZhi3 * dir_vec[0] + dir_vec_tmp * dir_vec[1]) +
+              ((dir_vec_tmp * dir_vec[0] + TiYuZhi3 * dir_vec[1]) +
                Tii * dir_vec[2]);
         /*  计算交点 */
         /*  输出交点 */
@@ -491,12 +512,12 @@ void Calculate_rectangle_from_vertex8(
         ab3 = PointTable_B_off4_data[PP16_tmp];
         b_loop_ub = 3 * k + 2;
         zN5 = PointTable_B_off4_data[b_loop_ub];
-        TiYuZhi3 = PlaneParaOut8_data[4];
-        dir_vec_tmp = PlaneParaOut8_data[5];
+        dir_vec_tmp = PlaneParaOut8_data[4];
+        TiYuZhi3 = PlaneParaOut8_data[5];
         Tii = PlaneParaOut8_data[6];
-        ab1 = -(((TiYuZhi3 * ab4 + dir_vec_tmp * ab3) + Tii * zN5) +
+        ab1 = -(((dir_vec_tmp * ab4 + TiYuZhi3 * ab3) + Tii * zN5) +
                 PlaneParaOut8_data[7]) /
-              ((TiYuZhi3 * dir_vec[0] + dir_vec_tmp * dir_vec[1]) +
+              ((dir_vec_tmp * dir_vec[0] + TiYuZhi3 * dir_vec[1]) +
                Tii * dir_vec[2]);
         /*  计算交点 */
         /*  输出交点 */
@@ -520,12 +541,12 @@ void Calculate_rectangle_from_vertex8(
         ab3 = PointTable_B_off4_data[PP16_tmp];
         b_loop_ub = 3 * k + 2;
         zN5 = PointTable_B_off4_data[b_loop_ub];
-        TiYuZhi3 = PlaneParaOut8_data[12];
-        dir_vec_tmp = PlaneParaOut8_data[13];
+        dir_vec_tmp = PlaneParaOut8_data[12];
+        TiYuZhi3 = PlaneParaOut8_data[13];
         Tii = PlaneParaOut8_data[14];
-        ab1 = -(((TiYuZhi3 * ab4 + dir_vec_tmp * ab3) + Tii * zN5) +
+        ab1 = -(((dir_vec_tmp * ab4 + TiYuZhi3 * ab3) + Tii * zN5) +
                 PlaneParaOut8_data[15]) /
-              ((TiYuZhi3 * dir_vec[0] + dir_vec_tmp * dir_vec[1]) +
+              ((dir_vec_tmp * dir_vec[0] + TiYuZhi3 * dir_vec[1]) +
                Tii * dir_vec[2]);
         /*  计算交点 */
         /*  输出交点 */
@@ -548,12 +569,12 @@ void Calculate_rectangle_from_vertex8(
       ab3 = PointTable_B_off4_data[PP16_tmp];
       b_loop_ub = 3 * k + 2;
       zN5 = PointTable_B_off4_data[b_loop_ub];
-      TiYuZhi3 = PlaneParaOut8_data[20];
-      dir_vec_tmp = PlaneParaOut8_data[21];
+      dir_vec_tmp = PlaneParaOut8_data[20];
+      TiYuZhi3 = PlaneParaOut8_data[21];
       Tii = PlaneParaOut8_data[22];
-      ab1 = -(((TiYuZhi3 * ab4 + dir_vec_tmp * ab3) + Tii * zN5) +
+      ab1 = -(((dir_vec_tmp * ab4 + TiYuZhi3 * ab3) + Tii * zN5) +
               PlaneParaOut8_data[23]) /
-            ((TiYuZhi3 * dir_vec[0] + dir_vec_tmp * dir_vec[1]) +
+            ((dir_vec_tmp * dir_vec[0] + TiYuZhi3 * dir_vec[1]) +
              Tii * dir_vec[2]);
       /*  计算交点 */
       /*  输出交点 */

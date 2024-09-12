@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 12-Sep-2024 01:13:06
+ * C/C++ source code generated on  : 12-Sep-2024 22:50:43
  */
 
 /* Include Files */
@@ -1564,11 +1564,11 @@ void c_generate_unit_circle_with_nor(const mxArray *const prhs[3],
 /*
  * Arguments    : const mxArray * const prhs[16]
  *                int32_T nlhs
- *                const mxArray *plhs[2]
+ *                const mxArray *plhs[3]
  * Return Type  : void
  */
 void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
-                                     int32_T nlhs, const mxArray *plhs[2])
+                                     int32_T nlhs, const mxArray *plhs[3])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -1578,6 +1578,7 @@ void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
   emxArray_real_T *PointTable_A_off8;
   emxArray_real_T *PointTable_B_off8;
   emxArray_real_T *Ti;
+  emxArray_real_T *XieMianPianYi;
   emxArray_real_T *a;
   emxArray_real_T *side_faces_transformed1;
   emxArray_real_T *side_faces_transformed2;
@@ -1644,12 +1645,13 @@ void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
   /* Invoke the target function */
   emxInit_real_T(&st, &PointTable_A_off8);
   emxInit_real_T(&st, &PointTable_B_off8);
+  emxInit_real_T(&st, &XieMianPianYi);
   Calculate_rectangle_from_vertex8(
       side_faces_transformed1, side_faces_transformed2, side_faces_transformed3,
       side_faces_transformed4, side_faces_transformed5, side_faces_transformed6,
       side_faces_transformed7, side_faces_transformed8, *P_bound1, *P_bound2,
       *PAB, phi, shenglunum, Ti, a, distanceThreshold, PointTable_A_off8,
-      PointTable_B_off8);
+      PointTable_B_off8, XieMianPianYi);
   emxFree_real_T(&st, &a);
   emxFree_real_T(&st, &Ti);
   emxFree_real_T(&st, &side_faces_transformed8);
@@ -1669,6 +1671,11 @@ void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
     plhs[1] = b_emlrt_marshallOut(PointTable_B_off8);
   }
   emxFree_real_T(&st, &PointTable_B_off8);
+  if (nlhs > 2) {
+    XieMianPianYi->canFreeData = false;
+    plhs[2] = b_emlrt_marshallOut(XieMianPianYi);
+  }
+  emxFree_real_T(&st, &XieMianPianYi);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 

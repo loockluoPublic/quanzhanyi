@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 12-Sep-2024 01:13:06
+ * C/C++ source code generated on  : 12-Sep-2024 22:50:43
  */
 
 /*************************************************************************/
@@ -423,6 +423,7 @@ void main_Calculate_rectangle_from_vertex8(void)
   emxArray_real_T *PointTable_A_off8;
   emxArray_real_T *PointTable_B_off8;
   emxArray_real_T *Ti;
+  emxArray_real_T *XieMianPianYi;
   emxArray_real_T *a;
   emxArray_real_T *side_faces_transformed1;
   emxArray_real_T *side_faces_transformed2;
@@ -464,13 +465,14 @@ void main_Calculate_rectangle_from_vertex8(void)
   /* Call the entry-point 'Calculate_rectangle_from_vertex8'. */
   emxInitArray_real_T(&PointTable_A_off8, 2);
   emxInitArray_real_T(&PointTable_B_off8, 2);
+  emxInitArray_real_T(&XieMianPianYi, 2);
   argInit_3x1_real_T(dv);
   Calculate_rectangle_from_vertex8(
       side_faces_transformed1, side_faces_transformed2, side_faces_transformed3,
       side_faces_transformed4, side_faces_transformed5, side_faces_transformed6,
       side_faces_transformed7, side_faces_transformed8, P_bound1_tmp,
       P_bound1_tmp, dv, phi_tmp, phi_tmp, Ti, a, phi_tmp, PointTable_A_off8,
-      PointTable_B_off8);
+      PointTable_B_off8, XieMianPianYi);
   emxDestroyArray_real_T(a);
   emxDestroyArray_real_T(Ti);
   emxDestroyArray_real_T(side_faces_transformed8);
@@ -483,6 +485,7 @@ void main_Calculate_rectangle_from_vertex8(void)
   emxDestroyArray_real_T(side_faces_transformed1);
   emxDestroyArray_real_T(PointTable_A_off8);
   emxDestroyArray_real_T(PointTable_B_off8);
+  emxDestroyArray_real_T(XieMianPianYi);
 }
 
 /*

@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 12-Sep-2024 01:13:06
+ * C/C++ source code generated on  : 12-Sep-2024 22:50:43
  */
 
 /* Include Files */
@@ -206,14 +206,14 @@ mxArray *emlrtMexFcnProperties(void)
   emlrtSetField(xEntryPoints, 6, "NumberOfInputs",
                 emlrtMxCreateDoubleScalar(16.0));
   emlrtSetField(xEntryPoints, 6, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(2.0));
+                emlrtMxCreateDoubleScalar(3.0));
   emlrtSetField(xEntryPoints, 6, "ConstantInputs", xInputs);
   emlrtSetField(
       xEntryPoints, 6, "FullPath",
       emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\Calculate_"
                           "rectangle_from_vertex8.m"));
   emlrtSetField(xEntryPoints, 6, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739507.045925926));
+                emlrtMxCreateDoubleScalar(739507.95030092588));
   emlrtSetField(xEntryPoints, 6, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 6, "Visible", emlrtMxCreateLogicalScalar(true));
