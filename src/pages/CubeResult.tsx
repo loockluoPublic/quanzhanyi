@@ -104,7 +104,7 @@ function CubeResult() {
 
     if (tOff.length > 0 && Ti.length > 0) {
       try {
-        const AB = CalcJuXingAAndBPointsAfterOffest(
+        let AB = CalcJuXingAAndBPointsAfterOffest(
           data.cubeResult,
           data.centerPoint,
           ang2rad(data.sdj),

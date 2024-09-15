@@ -14,6 +14,7 @@
 #include "planefit4.h"
 #include "planefit8.h"
 #include "ShengDaoGaoDu.h"
+#include "Calculate_rectangle_from_vertex8.h"
 
 EMSCRIPTEN_KEEPALIVE
 void generateUnitCircleWithNormalVector(double azimuth, double elevation,
@@ -153,3 +154,21 @@ void shengDaoGaoDu(double numShengLu, emxArray_real_T *Ti)
 {
     ShengDaoGaoDu(numShengLu, Ti);
 };
+
+EMSCRIPTEN_KEEPALIVE
+void CalculateRectangleFromVertex8(
+    const emxArray_real_T *side_faces_transformed1,
+    const emxArray_real_T *side_faces_transformed2,
+    const emxArray_real_T *side_faces_transformed3,
+    const emxArray_real_T *side_faces_transformed4,
+    const emxArray_real_T *side_faces_transformed5,
+    const emxArray_real_T *side_faces_transformed6,
+    const emxArray_real_T *side_faces_transformed7,
+    const emxArray_real_T *side_faces_transformed8, const double P_bound1[3],
+    const double P_bound2[3], const double PAB[3], double phi,
+    double shenglunum, const emxArray_real_T *Ti, const emxArray_real_T *a,
+    double distanceThreshold, emxArray_real_T *PointTable_A_off8,
+    emxArray_real_T *PointTable_B_off8)
+{
+    Calculate_rectangle_from_vertex8(side_faces_transformed1, side_faces_transformed2, side_faces_transformed3, side_faces_transformed4, side_faces_transformed5, side_faces_transformed6, side_faces_transformed7, side_faces_transformed8, P_bound1, P_bound2, PAB, phi, shenglunum, Ti, a, distanceThreshold, PointTable_A_off8, PointTable_B_off8);
+}

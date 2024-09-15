@@ -138,6 +138,7 @@ export default function () {
   };
 
   const setMock = () => {
+    CustomVector3.setPublicInfo("P", 0);
     setData((d) => {
       return {
         ...d,

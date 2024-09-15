@@ -17,6 +17,7 @@ const {
   _Planefit8,
   _CalculateRectangleFromVertex,
   _CalcJuXingAAndBPointsAfterOffest,
+  _CalculateRectangleFromVertex8,
 } = (window as any).Module;
 
 /**
@@ -548,6 +549,90 @@ export const CalculateRectangleFromVertex = (
   h.free();
   w.free();
   Tao.free();
+  return res;
+};
+
+export const CalculateRectangleFromVertex8 = (
+  MPoints: CustomVector3[][],
+  BoundPoint1: CustomVector3,
+  BoundPoint2: CustomVector3,
+  PAB: CustomVector3,
+  phi: number,
+  sdfb: number,
+  ti: number[],
+  a: number[],
+  distanceThreshold: number
+) => {
+  const len = MPoints.length;
+
+  if (len !== 8) {
+    console.error("采集面需要8个面的点");
+    return {};
+  }
+
+  let totalPoints = 0;
+  const mP = MPoints.map((item) => {
+    totalPoints += item.length;
+    return new EmxArray_real_T(item);
+  });
+
+  const boundPoint1 = new EmxArray_real_T(BoundPoint1);
+  const boundPoint2 = new EmxArray_real_T(BoundPoint2);
+
+  const _PAB = new EmxArray_real_T(PAB);
+
+  const Ti = new EmxArray_real_T(ti);
+
+  const tOff = new EmxArray_real_T(a);
+  const A = new EmxArray_real_T(3, ti.length);
+  const B = new EmxArray_real_T(3, ti.length);
+
+  _CalculateRectangleFromVertex8(
+    ...mP.map((p) => p.ptr),
+    boundPoint1.arrayPtr,
+    boundPoint2.arrayPtr,
+    _PAB.arrayPtr,
+    phi,
+    sdfb,
+    Ti.arrayPtr,
+    tOff.arrayPtr,
+    distanceThreshold,
+    A.ptr,
+    B.ptr
+  );
+
+  CustomVector3.setPublicInfo("A", 0);
+  const bottomA = A.toVector3();
+  for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
+    bottomA[i].key = 2 * i + 1;
+    bottomA[j].key = 2 * i + 2;
+  }
+  CustomVector3.setPublicInfo("B", 0);
+
+  const bottomB = B.toVector3();
+  for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
+    bottomB[i].key = 2 * i + 1;
+    bottomB[j].key = 2 * i + 2;
+  }
+
+  const res = bottomA.map((a, i) => {
+    return {
+      pointA: a,
+      pointB: bottomB[i],
+    };
+  });
+
+  mP.map((p) => p.free());
+
+  boundPoint1.free();
+  boundPoint2.free();
+
+  _PAB.free();
+  Ti.free();
+  tOff.free();
+  A.free();
+  B.free();
+
   return res;
 };
 
