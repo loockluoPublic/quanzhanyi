@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 12-Sep-2024 01:13:06
+ * C/C++ source code generated on  : 19-Sep-2024 15:15:59
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -85,7 +85,8 @@ void Calculate_rectangle_from_vertex8(
     emxArray_real_T *side_faces_transformed8, real_T P_bound1[3],
     real_T P_bound2[3], real_T PAB[3], real_T phi, real_T shenglunum,
     emxArray_real_T *Ti, emxArray_real_T *a, real_T distanceThreshold,
-    emxArray_real_T *PointTable_A_off8, emxArray_real_T *PointTable_B_off8);
+    emxArray_real_T *PointTable_A_off8, emxArray_real_T *PointTable_B_off8,
+    emxArray_real_T *XieMianPianYi);
 
 void CrossLine(real_T PlanePara1[4], real_T PlanePara2[4], real_T x_val,
                real_T P0[3], real_T d[3]);
@@ -104,6 +105,15 @@ void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
                                                real_T num, real_T laynum,
                                                real_T P3[3], real_T P4[3],
                                                emxArray_real_T *Point_test);
+
+void JuXingFuCe(emxArray_real_T *PointIn, real_T shenglunum, real_T Pin[3],
+                real_T Tao[3], real_T h, emxArray_real_T *PlaneParaOut8,
+                emxArray_real_T *Distance, emxArray_real_T *theta,
+                emxArray_real_T *LTPY, emxArray_real_T *TiC,
+                emxArray_real_T *Wquanzhong3, emxArray_real_T *Wquanzhong4);
+
+void JuXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
+                    const mxArray *plhs[6]);
 
 void OffsetCalculate(real_T Mradial, real_T phi, emxArray_real_T *Ang,
                      emxArray_real_T *a, emxArray_real_T *OffsetOut);
@@ -164,7 +174,7 @@ void c_generate_unit_circle_with_nor(const mxArray *const prhs[3],
                                      const mxArray **plhs);
 
 void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
-                                     int32_T nlhs, const mxArray *plhs[2]);
+                                     int32_T nlhs, const mxArray *plhs[3]);
 
 void d_generate_unit_circle_with_nor(const mxArray *const prhs[6],
                                      const mxArray **plhs);

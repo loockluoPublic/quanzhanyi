@@ -2,7 +2,7 @@
  * File: OffsetCalculate.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 12-Sep-2024 01:13:06
+ * C/C++ source code generated on  : 19-Sep-2024 15:15:59
  */
 
 /* Include Files */
@@ -18,18 +18,55 @@
 #include <math.h>
 
 /* Function Declarations */
-static void b_minus(emxArray_real_T *in1, const emxArray_real_T *in2);
-
 static void b_plus(emxArray_real_T *in1, const emxArray_real_T *in2,
                    const emxArray_real_T *in3);
+
+static void c_minus(emxArray_real_T *in1, const emxArray_real_T *in2);
 
 /* Function Definitions */
 /*
  * Arguments    : emxArray_real_T *in1
  *                const emxArray_real_T *in2
+ *                const emxArray_real_T *in3
  * Return Type  : void
  */
-static void b_minus(emxArray_real_T *in1, const emxArray_real_T *in2)
+static void b_plus(emxArray_real_T *in1, const emxArray_real_T *in2,
+                   const emxArray_real_T *in3)
+{
+  const double *in2_data;
+  const double *in3_data;
+  double *in1_data;
+  int i;
+  int loop_ub;
+  int stride_0_1;
+  int stride_1_1;
+  in3_data = in3->data;
+  in2_data = in2->data;
+  i = in1->size[0] * in1->size[1];
+  in1->size[0] = 1;
+  emxEnsureCapacity_real_T(in1, i);
+  if (in3->size[1] == 1) {
+    loop_ub = in2->size[1];
+  } else {
+    loop_ub = in3->size[1];
+  }
+  i = in1->size[0] * in1->size[1];
+  in1->size[1] = loop_ub;
+  emxEnsureCapacity_real_T(in1, i);
+  in1_data = in1->data;
+  stride_0_1 = (in2->size[1] != 1);
+  stride_1_1 = (in3->size[1] != 1);
+  for (i = 0; i < loop_ub; i++) {
+    in1_data[i] = in2_data[i * stride_0_1] + in3_data[i * stride_1_1];
+  }
+}
+
+/*
+ * Arguments    : emxArray_real_T *in1
+ *                const emxArray_real_T *in2
+ * Return Type  : void
+ */
+static void c_minus(emxArray_real_T *in1, const emxArray_real_T *in2)
 {
   emxArray_real_T *b_in1;
   const double *in2_data;
@@ -67,43 +104,6 @@ static void b_minus(emxArray_real_T *in1, const emxArray_real_T *in2)
     in1_data[i] = b_in1_data[i];
   }
   emxFree_real_T(&b_in1);
-}
-
-/*
- * Arguments    : emxArray_real_T *in1
- *                const emxArray_real_T *in2
- *                const emxArray_real_T *in3
- * Return Type  : void
- */
-static void b_plus(emxArray_real_T *in1, const emxArray_real_T *in2,
-                   const emxArray_real_T *in3)
-{
-  const double *in2_data;
-  const double *in3_data;
-  double *in1_data;
-  int i;
-  int loop_ub;
-  int stride_0_1;
-  int stride_1_1;
-  in3_data = in3->data;
-  in2_data = in2->data;
-  i = in1->size[0] * in1->size[1];
-  in1->size[0] = 1;
-  emxEnsureCapacity_real_T(in1, i);
-  if (in3->size[1] == 1) {
-    loop_ub = in2->size[1];
-  } else {
-    loop_ub = in3->size[1];
-  }
-  i = in1->size[0] * in1->size[1];
-  in1->size[1] = loop_ub;
-  emxEnsureCapacity_real_T(in1, i);
-  in1_data = in1->data;
-  stride_0_1 = (in2->size[1] != 1);
-  stride_1_1 = (in3->size[1] != 1);
-  for (i = 0; i < loop_ub; i++) {
-    in1_data[i] = in2_data[i * stride_0_1] + in3_data[i * stride_1_1];
-  }
 }
 
 /*
@@ -184,7 +184,7 @@ void OffsetCalculate(double Mradial, double phi, const emxArray_real_T *Ang,
       temp_data[k] -= Ang_data[k];
     }
   } else {
-    b_minus(temp, Ang);
+    c_minus(temp, Ang);
     temp_data = temp->data;
   }
   b_a = 6.2831853071795862 * Mradial / 360.0;

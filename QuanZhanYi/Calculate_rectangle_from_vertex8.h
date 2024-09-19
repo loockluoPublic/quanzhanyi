@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex8.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 12-Sep-2024 01:13:06
+ * C/C++ source code generated on  : 19-Sep-2024 15:15:59
  */
 
 #ifndef CALCULATE_RECTANGLE_FROM_VERTEX8_H
@@ -31,7 +31,7 @@ extern void Calculate_rectangle_from_vertex8(
     const double P_bound2[3], const double PAB[3], double phi,
     double shenglunum, const emxArray_real_T *Ti, const emxArray_real_T *a,
     double distanceThreshold, emxArray_real_T *PointTable_A_off8,
-    emxArray_real_T *PointTable_B_off8);
+    emxArray_real_T *PointTable_B_off8, emxArray_real_T *XieMianPianYi);
 
 #ifdef __cplusplus
 }

@@ -2,7 +2,7 @@
  * File: svd.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 12-Sep-2024 01:13:06
+ * C/C++ source code generated on  : 19-Sep-2024 15:15:59
  */
 
 /* Include Files */
@@ -26,7 +26,7 @@
  *                double V[16]
  * Return Type  : void
  */
-void d_svd(const double A[8], double U[4], double s[2], double V[16])
+void c_svd(const double A[8], double U[4], double s[2], double V[16])
 {
   double b_A[8];
   double e[4];
