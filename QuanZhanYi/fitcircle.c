@@ -2,7 +2,7 @@
  * File: fitcircle.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 12-Sep-2024 22:50:43
+ * C/C++ source code generated on  : 19-Sep-2024 15:15:59
  */
 
 /* Include Files */
@@ -14,7 +14,6 @@
 #include "mldivide.h"
 #include "rt_nonfinite.h"
 #include "svd.h"
-#include "svd1.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 
@@ -191,73 +190,6 @@ void binary_expand_op_7(emxArray_real_T *in1, const double in3[3],
 }
 
 /*
- * Arguments    : const emxArray_real_T *in2
- *                const emxArray_real_T *in3
- *                const emxArray_real_T *in4
- *                emxArray_real_T *in5
- *                emxArray_real_T *in6
- *                double in7[16]
- * Return Type  : void
- */
-void binary_expand_op_8(const emxArray_real_T *in2, const emxArray_real_T *in3,
-                        const emxArray_real_T *in4, emxArray_real_T *in5,
-                        emxArray_real_T *in6, double in7[16])
-{
-  emxArray_real_T *r;
-  emxArray_real_T *r2;
-  const double *in2_data;
-  const double *in3_data;
-  const double *in4_data;
-  double b_varargin_1;
-  double varargin_1;
-  double *r1;
-  double *r3;
-  int i;
-  int loop_ub;
-  int stride_0_0;
-  int stride_1_0;
-  in4_data = in4->data;
-  in3_data = in3->data;
-  in2_data = in2->data;
-  emxInit_real_T(&r, 1);
-  if (in3->size[0] == 1) {
-    loop_ub = in2->size[0];
-  } else {
-    loop_ub = in3->size[0];
-  }
-  i = r->size[0];
-  r->size[0] = loop_ub;
-  emxEnsureCapacity_real_T(r, i);
-  r1 = r->data;
-  stride_0_0 = (in2->size[0] != 1);
-  stride_1_0 = (in3->size[0] != 1);
-  for (i = 0; i < loop_ub; i++) {
-    varargin_1 = in2_data[i * stride_0_0];
-    b_varargin_1 = in3_data[i * stride_1_0];
-    r1[i] = varargin_1 * varargin_1 + b_varargin_1 * b_varargin_1;
-  }
-  emxInit_real_T(&r2, 2);
-  i = r2->size[0] * r2->size[1];
-  r2->size[0] = r->size[0];
-  r2->size[1] = 4;
-  emxEnsureCapacity_real_T(r2, i);
-  r3 = r2->data;
-  loop_ub = r->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    r3[i] = r1[i];
-  }
-  emxFree_real_T(&r);
-  loop_ub = in4->size[1];
-  for (i = 0; i < loop_ub; i++) {
-    r3[i + r2->size[0]] = in4_data[2 * i];
-    r3[i + r2->size[0] * 2] = in4_data[2 * i + 1];
-    r3[i + r2->size[0] * 3] = 1.0;
-  }
-  b_svd(r2, in5, in6, in7);
-  emxFree_real_T(&r2);
-}
-
-/*
  * Arguments    : const emxArray_real_T *x
  *                double z[2]
  *                double *r
@@ -318,7 +250,7 @@ void fitcircle(const emxArray_real_T *x, double z[2], double *r,
     }
   }
   if (p) {
-    d_svd(B, U, y, V);
+    c_svd(B, U, y, V);
   } else {
     for (k = 0; k < 16; k++) {
       V[k] = rtNaN;

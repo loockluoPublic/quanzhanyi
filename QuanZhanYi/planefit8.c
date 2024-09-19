@@ -2,7 +2,7 @@
  * File: planefit8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 12-Sep-2024 22:50:43
+ * C/C++ source code generated on  : 19-Sep-2024 15:15:59
  */
 
 /* Include Files */
@@ -644,7 +644,7 @@ void b_planefit8(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
             distances_data[i1 + b_pointss->size[0] * i];
       }
     }
-    c_svd(pointss, a__1, b_pointss, A);
+    b_svd(pointss, a__1, b_pointss, A);
     /*  Normal vector of the plane */
     /*  Calculate angle between normal vector and z-axis */
     /*  Check if angle is below threshold */
@@ -1680,7 +1680,7 @@ void planefit8(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
             distances_data[i1 + b_pointss->size[0] * i];
       }
     }
-    c_svd(pointss, a__1, b_pointss, A);
+    b_svd(pointss, a__1, b_pointss, A);
     /*  Normal vector of the plane */
     /*  Calculate angle between normal vector and z-axis */
     /*  Check if angle is below threshold */

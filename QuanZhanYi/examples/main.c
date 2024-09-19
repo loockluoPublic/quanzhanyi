@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 12-Sep-2024 22:50:43
+ * C/C++ source code generated on  : 19-Sep-2024 15:15:59
  */
 
 /*************************************************************************/
@@ -41,6 +41,7 @@
 #include "CrossLine.h"
 #include "GenerateTrianglePoints.h"
 #include "Generate_multi_layered_measurement_points.h"
+#include "JuXingFuCe.h"
 #include "OffsetCalculate.h"
 #include "QuanZhanYi_emxAPI.h"
 #include "QuanZhanYi_terminate.h"
@@ -241,6 +242,7 @@ You can call entry-point functions multiple times. */
   main_generate_unit_circle_with_normal_vector();
   main_generate_unit_circle_with_normal_vector2();
   main_GenerateTrianglePoints();
+  main_JuXingFuCe();
   main_myvrrotvec2mat();
   main_OffsetCalculate();
   main_planefit();
@@ -551,6 +553,51 @@ void main_Generate_multi_layered_measurement_points(void)
                                             P3_tmp, Point_test);
   emxDestroyArray_real_T(Point_out);
   emxDestroyArray_real_T(Point_test);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+void main_JuXingFuCe(void)
+{
+  emxArray_real_T *Distance;
+  emxArray_real_T *LTPY;
+  emxArray_real_T *PlaneParaOut8;
+  emxArray_real_T *PointIn;
+  emxArray_real_T *TiC;
+  emxArray_real_T *Wquanzhong3;
+  emxArray_real_T *Wquanzhong4;
+  emxArray_real_T *theta;
+  double Pin_tmp[3];
+  double shenglunum_tmp;
+  /* Initialize function 'JuXingFuCe' input arguments. */
+  /* Initialize function input argument 'PointIn'. */
+  PointIn = argInit_3xUnbounded_real_T();
+  shenglunum_tmp = argInit_real_T();
+  /* Initialize function input argument 'Pin'. */
+  argInit_3x1_real_T(Pin_tmp);
+  /* Initialize function input argument 'Tao'. */
+  /* Initialize function input argument 'PlaneParaOut8'. */
+  PlaneParaOut8 = argInit_4xUnbounded_real_T();
+  /* Call the entry-point 'JuXingFuCe'. */
+  emxInitArray_real_T(&Distance, 2);
+  emxInitArray_real_T(&theta, 2);
+  emxInitArray_real_T(&LTPY, 2);
+  emxInitArray_real_T(&TiC, 2);
+  emxInitArray_real_T(&Wquanzhong3, 1);
+  emxInitArray_real_T(&Wquanzhong4, 1);
+  JuXingFuCe(PointIn, shenglunum_tmp, Pin_tmp, Pin_tmp, shenglunum_tmp,
+             PlaneParaOut8, Distance, theta, LTPY, TiC, Wquanzhong3,
+             Wquanzhong4);
+  emxDestroyArray_real_T(PlaneParaOut8);
+  emxDestroyArray_real_T(PointIn);
+  emxDestroyArray_real_T(Distance);
+  emxDestroyArray_real_T(theta);
+  emxDestroyArray_real_T(LTPY);
+  emxDestroyArray_real_T(TiC);
+  emxDestroyArray_real_T(Wquanzhong3);
+  emxDestroyArray_real_T(Wquanzhong4);
 }
 
 /*

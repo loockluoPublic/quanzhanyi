@@ -2,7 +2,7 @@
  * File: nchoosek.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 12-Sep-2024 22:50:43
+ * C/C++ source code generated on  : 19-Sep-2024 15:15:59
  */
 
 #ifndef NCHOOSEK_H
@@ -19,6 +19,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+void b_nchoosek(const emxArray_real_T *x, double k, emxArray_real_T *y);
+
 void nchoosek(const emxArray_real_T *x, emxArray_real_T *y);
 
 #ifdef __cplusplus

@@ -2,7 +2,7 @@
  * File: svd1.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 12-Sep-2024 22:50:43
+ * C/C++ source code generated on  : 19-Sep-2024 15:15:59
  */
 
 #ifndef SVD1_H
@@ -20,9 +20,6 @@ extern "C" {
 
 /* Function Declarations */
 void b_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *S,
-           double V[16]);
-
-void c_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *S,
            double V[9]);
 
 #ifdef __cplusplus
