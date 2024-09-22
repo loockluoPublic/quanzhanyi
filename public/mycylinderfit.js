@@ -1420,6 +1420,7 @@ var _Planefit4 = Module['_Planefit4'] = createExportWrapper('Planefit4');
 var _Planefit8 = Module['_Planefit8'] = createExportWrapper('Planefit8');
 var _shengDaoGaoDu = Module['_shengDaoGaoDu'] = createExportWrapper('shengDaoGaoDu');
 var _CalculateRectangleFromVertex8 = Module['_CalculateRectangleFromVertex8'] = createExportWrapper('CalculateRectangleFromVertex8');
+var _juXingFuCe = Module['_juXingFuCe'] = createExportWrapper('juXingFuCe');
 var _fflush = createExportWrapper('fflush');
 var _emscripten_stack_init = () => (_emscripten_stack_init = wasmExports['emscripten_stack_init'])();
 var _emscripten_stack_get_free = () => (_emscripten_stack_get_free = wasmExports['emscripten_stack_get_free'])();

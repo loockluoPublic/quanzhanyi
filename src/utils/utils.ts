@@ -18,6 +18,7 @@ const {
   _CalculateRectangleFromVertex,
   _CalcJuXingAAndBPointsAfterOffest,
   _CalculateRectangleFromVertex8,
+  _juXingFuCe,
 } = (window as any).Module;
 
 /**
@@ -586,6 +587,7 @@ export const CalculateRectangleFromVertex8 = (
   const tOff = new EmxArray_real_T(a);
   const A = new EmxArray_real_T(3, ti.length);
   const B = new EmxArray_real_T(3, ti.length);
+  const XieMianPianYi = new EmxArray_real_T(ti.length, 1);
 
   _CalculateRectangleFromVertex8(
     ...mP.map((p) => p.ptr),
@@ -598,7 +600,8 @@ export const CalculateRectangleFromVertex8 = (
     tOff.arrayPtr,
     distanceThreshold,
     A.ptr,
-    B.ptr
+    B.ptr,
+    XieMianPianYi.ptr
   );
 
   CustomVector3.setPublicInfo("A", 0);
@@ -632,6 +635,7 @@ export const CalculateRectangleFromVertex8 = (
   tOff.free();
   A.free();
   B.free();
+  XieMianPianYi.free();
 
   return res;
 };
@@ -748,6 +752,34 @@ export const shengLuJiao2Ang = (numSL: number) => {
   });
   angs.free();
   return res;
+};
+
+/**
+ * 根据声道数计算角度 ang
+ * @param numSL
+ * @returns
+ */
+export const juXingFuCe = (
+  cubeRes: ReturnType<typeof CalculateRectangleFromVertex>,
+  cubeAgainTable: { p1: CustomVector3; p2: CustomVector3 }[],
+  sdfb: number
+) => {
+  const PointIn = new EmxArray_real_T(
+    cubeAgainTable?.reduce?.((acc, cur) => {
+      return [...acc, cur.p1, cur.p2];
+    }, []) ?? []
+  );
+  const Pin = new EmxArray_real_T(cubeRes.pIn);
+  const Tao = new EmxArray_real_T(cubeRes.Tao);
+
+  // const PlaneParaOut8 = new EmxArray_real_T();
+
+  // _juXingFuCe(PointIn.ptr, sdfb, Pin.arrayPtr, Tao.arrayPtr, cubeRes.h);
+  // const res = angs.toJSON()?.[0]?.map((v) => {
+  //   return Number(rad2ang(v).toFixed(6));
+  // });
+  // angs.free();
+  // return res;
 };
 
 /**
