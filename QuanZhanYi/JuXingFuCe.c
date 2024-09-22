@@ -2,7 +2,7 @@
  * File: JuXingFuCe.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Sep-2024 15:15:59
+ * C/C++ source code generated on  : 22-Sep-2024 11:56:57
  */
 
 /* Include Files */
@@ -129,7 +129,7 @@ static double rt_powd_snf(double u0, double u1)
  *                const double Pin[3]
  *                const double Tao[3]
  *                double h
- *                const emxArray_real_T *PlaneParaOut8
+ *                const emxArray_real_T *PlaneParaOut4
  *                emxArray_real_T *Distance
  *                emxArray_real_T *theta
  *                emxArray_real_T *LTPY
@@ -140,7 +140,7 @@ static double rt_powd_snf(double u0, double u1)
  */
 void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
                 const double Pin[3], const double Tao[3], double h,
-                const emxArray_real_T *PlaneParaOut8, emxArray_real_T *Distance,
+                const emxArray_real_T *PlaneParaOut4, emxArray_real_T *Distance,
                 emxArray_real_T *theta, emxArray_real_T *LTPY,
                 emxArray_real_T *TiC, emxArray_real_T *Wquanzhong3,
                 emxArray_real_T *Wquanzhong4)
@@ -154,7 +154,7 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   emxArray_real_T *r1;
   emxArray_real_T *t_k;
   emxArray_real_T *w;
-  const double *PlaneParaOut8_data;
+  const double *PlaneParaOut4_data;
   const double *PointIn_data;
   double a;
   double absxk;
@@ -190,7 +190,7 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   if (!isInitialized_QuanZhanYi) {
     QuanZhanYi_initialize();
   }
-  PlaneParaOut8_data = PlaneParaOut8->data;
+  PlaneParaOut4_data = PlaneParaOut4->data;
   PointIn_data = PointIn->data;
   i = Distance->size[0] * Distance->size[1];
   Distance->size[0] = 1;
@@ -338,26 +338,26 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
     shengdao1_idx_2 = PointIn_data[i + 2];
     shengdao2_idx_2 = PointIn_data[idx + 2] - shengdao1_idx_2;
     /*  计算方向向量 */
-    a = PlaneParaOut8_data[0];
-    b = PlaneParaOut8_data[1];
-    c = PlaneParaOut8_data[2];
+    a = PlaneParaOut4_data[0];
+    b = PlaneParaOut4_data[1];
+    c = PlaneParaOut4_data[2];
     /*  将直线方程代入平面方程，求解参数 t */
     i = ((b_i + 1) << 1) - 2;
     d = PointIn_data[3 * i];
     d1 = PointIn_data[3 * i + 1];
     d2 = PointIn_data[3 * i + 2];
-    t = -(((a * d + b * d1) + c * d2) + PlaneParaOut8_data[3]) /
+    t = -(((a * d + b * d1) + c * d2) + PlaneParaOut4_data[3]) /
         ((a * b_scale + b * shengdao2_idx_1) + c * shengdao2_idx_2);
     /*  计算交点 */
     x_intersect1 = d + t * b_scale;
     y_intersect1 = d1 + t * shengdao2_idx_1;
     z_intersect1 = d2 + t * shengdao2_idx_2;
     /*  计算方向向量 */
-    a = PlaneParaOut8_data[16];
-    b = PlaneParaOut8_data[17];
-    c = PlaneParaOut8_data[18];
+    a = PlaneParaOut4_data[8];
+    b = PlaneParaOut4_data[9];
+    c = PlaneParaOut4_data[10];
     /*  将直线方程代入平面方程，求解参数 t */
-    t = -(((a * d + b * d1) + c * d2) + PlaneParaOut8_data[19]) /
+    t = -(((a * d + b * d1) + c * d2) + PlaneParaOut4_data[11]) /
         ((a * b_scale + b * shengdao2_idx_1) + c * shengdao2_idx_2);
     /*  计算交点 */
     scale = 3.3121686421112381E-170;
@@ -412,9 +412,9 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
     TiC_data[i] = 0.0;
   }
   if (na - 1 >= 0) {
-    a = PlaneParaOut8_data[8];
-    b = PlaneParaOut8_data[9];
-    c = PlaneParaOut8_data[10];
+    a = PlaneParaOut4_data[4];
+    b = PlaneParaOut4_data[5];
+    c = PlaneParaOut4_data[6];
     shengdao1_idx_0 = a;
     shengdao1_idx_1 = b;
     shengdao1_idx_2 = c;

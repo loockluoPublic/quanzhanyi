@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Sep-2024 15:15:59
+ * C/C++ source code generated on  : 22-Sep-2024 11:56:57
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -107,7 +107,7 @@ void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
                                                emxArray_real_T *Point_test);
 
 void JuXingFuCe(emxArray_real_T *PointIn, real_T shenglunum, real_T Pin[3],
-                real_T Tao[3], real_T h, emxArray_real_T *PlaneParaOut8,
+                real_T Tao[3], real_T h, emxArray_real_T *PlaneParaOut4,
                 emxArray_real_T *Distance, emxArray_real_T *theta,
                 emxArray_real_T *LTPY, emxArray_real_T *TiC,
                 emxArray_real_T *Wquanzhong3, emxArray_real_T *Wquanzhong4);

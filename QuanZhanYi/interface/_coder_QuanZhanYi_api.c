@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Sep-2024 15:15:59
+ * C/C++ source code generated on  : 22-Sep-2024 11:56:57
  */
 
 /* Include Files */
@@ -1012,7 +1012,7 @@ void JuXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
   };
   emxArray_real_T *Distance;
   emxArray_real_T *LTPY;
-  emxArray_real_T *PlaneParaOut8;
+  emxArray_real_T *PlaneParaOut4;
   emxArray_real_T *PointIn;
   emxArray_real_T *TiC;
   emxArray_real_T *Wquanzhong3;
@@ -1032,9 +1032,9 @@ void JuXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
   Pin = c_emlrt_marshallIn(&st, emlrtAlias(prhs[2]), "Pin");
   Tao = c_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "Tao");
   h = emlrt_marshallIn(&st, emlrtAliasP(prhs[4]), "h");
-  emxInit_real_T(&st, &PlaneParaOut8, 2);
-  PlaneParaOut8->canFreeData = false;
-  o_emlrt_marshallIn(&st, emlrtAlias(prhs[5]), "PlaneParaOut8", PlaneParaOut8);
+  emxInit_real_T(&st, &PlaneParaOut4, 2);
+  PlaneParaOut4->canFreeData = false;
+  o_emlrt_marshallIn(&st, emlrtAlias(prhs[5]), "PlaneParaOut4", PlaneParaOut4);
   /* Invoke the target function */
   emxInit_real_T(&st, &Distance, 2);
   emxInit_real_T(&st, &theta, 2);
@@ -1042,9 +1042,9 @@ void JuXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
   emxInit_real_T(&st, &TiC, 2);
   emxInit_real_T(&st, &Wquanzhong3, 1);
   emxInit_real_T(&st, &Wquanzhong4, 1);
-  JuXingFuCe(PointIn, shenglunum, *Pin, *Tao, h, PlaneParaOut8, Distance, theta,
+  JuXingFuCe(PointIn, shenglunum, *Pin, *Tao, h, PlaneParaOut4, Distance, theta,
              LTPY, TiC, Wquanzhong3, Wquanzhong4);
-  emxFree_real_T(&st, &PlaneParaOut8);
+  emxFree_real_T(&st, &PlaneParaOut4);
   emxFree_real_T(&st, &PointIn);
   /* Marshall function outputs */
   Distance->canFreeData = false;

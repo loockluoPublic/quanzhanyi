@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Sep-2024 15:15:59
+ * C/C++ source code generated on  : 22-Sep-2024 11:56:57
  */
 
 /*************************************************************************/
@@ -563,7 +563,7 @@ void main_JuXingFuCe(void)
 {
   emxArray_real_T *Distance;
   emxArray_real_T *LTPY;
-  emxArray_real_T *PlaneParaOut8;
+  emxArray_real_T *PlaneParaOut4;
   emxArray_real_T *PointIn;
   emxArray_real_T *TiC;
   emxArray_real_T *Wquanzhong3;
@@ -578,8 +578,8 @@ void main_JuXingFuCe(void)
   /* Initialize function input argument 'Pin'. */
   argInit_3x1_real_T(Pin_tmp);
   /* Initialize function input argument 'Tao'. */
-  /* Initialize function input argument 'PlaneParaOut8'. */
-  PlaneParaOut8 = argInit_4xUnbounded_real_T();
+  /* Initialize function input argument 'PlaneParaOut4'. */
+  PlaneParaOut4 = argInit_4xUnbounded_real_T();
   /* Call the entry-point 'JuXingFuCe'. */
   emxInitArray_real_T(&Distance, 2);
   emxInitArray_real_T(&theta, 2);
@@ -588,9 +588,9 @@ void main_JuXingFuCe(void)
   emxInitArray_real_T(&Wquanzhong3, 1);
   emxInitArray_real_T(&Wquanzhong4, 1);
   JuXingFuCe(PointIn, shenglunum_tmp, Pin_tmp, Pin_tmp, shenglunum_tmp,
-             PlaneParaOut8, Distance, theta, LTPY, TiC, Wquanzhong3,
+             PlaneParaOut4, Distance, theta, LTPY, TiC, Wquanzhong3,
              Wquanzhong4);
-  emxDestroyArray_real_T(PlaneParaOut8);
+  emxDestroyArray_real_T(PlaneParaOut4);
   emxDestroyArray_real_T(PointIn);
   emxDestroyArray_real_T(Distance);
   emxDestroyArray_real_T(theta);
