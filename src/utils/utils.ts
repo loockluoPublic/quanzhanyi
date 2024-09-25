@@ -778,6 +778,7 @@ export const juXingFuCe = (
   cubeAgainTable: { p1: CustomVector3; p2: CustomVector3 }[],
   sdfb: number
 ) => {
+  console.log("%c Line:780 🍒 sdfb", "color:#33a5ff", sdfb);
   const PointIn = new EmxArray_real_T(
     cubeAgainTable?.reduce?.((acc, cur) => {
       return [...acc, cur.p1, cur.p2];
