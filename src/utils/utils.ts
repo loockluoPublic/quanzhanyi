@@ -440,12 +440,20 @@ export const offsetCalculate = (
  * @param BoundPoint2 矩形范围点
  * @returns
  */
+
+interface IPlanefit {
+  planeParaOut: number[][];
+  trianglePoints: CustomVector3[];
+  distanceThreshold: number;
+  MxPoints: number[];
+}
+
 export const Planefit = (
   MPoints: CustomVector3[][],
   BoundPoint1: CustomVector3,
   BoundPoint2: CustomVector3,
   distanceThreshold: number
-) => {
+): IPlanefit | {} => {
   const len = MPoints.length;
 
   if (![4, 8].includes(len)) {
@@ -596,8 +604,8 @@ export const CalculateRectangleFromVertex8 = (
     _PAB.arrayPtr,
     phi,
     sdfb,
-    Ti.arrayPtr,
-    tOff.arrayPtr,
+    Ti.ptr,
+    tOff.ptr,
     distanceThreshold,
     A.ptr,
     B.ptr,
@@ -618,10 +626,16 @@ export const CalculateRectangleFromVertex8 = (
     bottomB[j].key = 2 * i + 2;
   }
 
+  console.log(
+    "%c Line:634 🍑 XieMianPianYi.toJSON()",
+    "color:#fca650",
+    XieMianPianYi.toJSON()
+  );
   const res = bottomA.map((a, i) => {
     return {
       pointA: a,
       pointB: bottomB[i],
+      // rOff: XieMianPianYi.toJSON()[0],
     };
   });
 

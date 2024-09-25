@@ -1,9 +1,8 @@
 import { Badge, Button, Checkbox, InputNumber, message, Select } from "antd";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { Data, getInitAgainTable } from "../atom/globalState";
+import { Data } from "../atom/globalState";
 import { measureAndGetSimpleCoord } from "../utils/commond";
-import PointsVector3 from "./PointVector3";
 
 import * as mockData from "../utils/cubeMockData";
 import { cubePoints } from "../utils/cubeMockData8";
@@ -40,7 +39,6 @@ export default function () {
 
   const planeFit = async () => {
     let MxPortsArr: CustomVector3[][] = [];
-    let MxPorts8Arr: CustomVector3[][] = [];
     for (const item of options) {
       const key = `m${item.value}`;
       if (data.MxPoints[key]?.length > 9) {
@@ -58,40 +56,29 @@ export default function () {
 
     if (options.length === 8) {
       const [l, t, r, b, lb, lt, rt, rb] = MxPortsArr;
-      MxPorts8Arr = [lt, t, rt, r, rb, b, lb, l];
-      MxPortsArr = [l, t, r, b];
+      MxPortsArr = [lt, t, rt, r, rb, b, lb, l];
     }
     setPlaneFitLoadint(true);
     setTimeout(() => {
-      const res4: any = Planefit(
+      const res: any = Planefit(
         MxPortsArr,
         ...data.firstPoints,
         data.distanceThreshold
       );
 
-      const cubeResult4 = CalculateRectangleFromVertex(res4.trianglePoints);
+      const cubeResult = CalculateRectangleFromVertex(res.trianglePoints);
 
       const newData = {
         ...data,
-        ...res4,
-        MxPoints: (res4.MxPoints as any[]).reduce((acc, cur, i) => {
+        ...res,
+        MxPoints: (res.MxPoints as any[]).reduce((acc, cur, i) => {
           return {
             ...acc,
             [`m${i}`]: cur,
           };
         }, {}),
-        cubeResult: cubeResult4,
+        cubeResult: cubeResult,
       };
-      console.log("%c Line:75 🍢 newData", "color:#6ec1c2", newData);
-      // // 当8个面时，8个面的拟合结果仅仅用于展示3D模型
-      if (options.length === 8) {
-        const res8: any = Planefit(
-          MxPorts8Arr,
-          ...data.firstPoints,
-          data.distanceThreshold
-        );
-        newData.trianglePoints = res8.trianglePoints;
-      }
 
       setPlaneFitLoadint(false);
 

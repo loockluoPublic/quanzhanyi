@@ -9,6 +9,7 @@ import Select, { DefaultOptionType } from "antd/es/select";
 import {
   ang2rad,
   CalcJuXingAAndBPointsAfterOffest,
+  CalculateRectangleFromVertex8,
   cubeTOff,
   sdj_n2v,
   sdj_v2n,
@@ -104,14 +105,44 @@ function CubeResult() {
 
     if (tOff.length > 0 && Ti.length > 0) {
       try {
-        let AB = CalcJuXingAAndBPointsAfterOffest(
-          data.cubeResult,
-          data.centerPoint,
-          ang2rad(data.sdj),
-          data.sdfb,
-          Ti,
-          tOff
-        );
+        let AB;
+
+        if (data.hasChamfer) {
+          let MxPortsArr: CustomVector3[][] = [];
+          for (let i = 0; i < 8; i++) {
+            const key = `m${i}`;
+            if (data.MxPoints[key]?.length > 9) {
+              MxPortsArr.push(data.MxPoints[key].slice(0, 50));
+            } else {
+              message.error(`${key}面采集点少于10个，请补充采集点`);
+              return;
+            }
+          }
+
+          const [l, t, r, b, lb, lt, rt, rb] = MxPortsArr;
+          MxPortsArr = [lt, t, rt, r, rb, b, lb, l];
+
+          AB = CalculateRectangleFromVertex8(
+            MxPortsArr,
+            data.firstPoints[0],
+            data.firstPoints[1],
+            data.centerPoint,
+            ang2rad(data.sdj),
+            data.sdfb,
+            Ti,
+            tOff,
+            data.distanceThreshold
+          );
+        } else {
+          AB = CalcJuXingAAndBPointsAfterOffest(
+            data.cubeResult,
+            data.centerPoint,
+            ang2rad(data.sdj),
+            data.sdfb,
+            Ti,
+            tOff
+          );
+        }
 
         const tableData = data.cubeTable.map((item, i) => {
           const newItem = {
@@ -249,7 +280,6 @@ function CubeResult() {
       key: "AB",
       align: "center",
       render: (v) => {
-        console.log("%c Line:260 🥕 v", "color:#42b983", v);
         return (
           <div className="q-flex q-justify-center">
             {data?.sdm?.includes("A") && <Point p={v?.pointA} />}
@@ -260,7 +290,9 @@ function CubeResult() {
         );
       },
     },
-  ];
+  ].filter((item) => {
+    return (!data.hasChamfer && item.key !== "rOff") || data.hasChamfer;
+  });
 
   useEffect(() => {
     setData((d) => ({
