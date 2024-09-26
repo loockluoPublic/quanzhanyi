@@ -120,7 +120,7 @@ function CubeResult() {
           }
 
           const [l, t, r, b, lb, lt, rt, rb] = MxPortsArr;
-          MxPortsArr = [lt, t, rt, r, rb, b, lb, l];
+          MxPortsArr = [l, lt, t, rt, r, rb, b, lb];
 
           AB = CalculateRectangleFromVertex8(
             MxPortsArr,

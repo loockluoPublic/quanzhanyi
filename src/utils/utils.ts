@@ -572,6 +572,19 @@ export const CalculateRectangleFromVertex8 = (
   a: number[],
   distanceThreshold: number
 ) => {
+  console.log("%c Line:566 🍿 MPoints", "color:#ffdd4d", MPoints);
+  console.log("%c Line:567 🍿 BoundPoint1", "color:#4fff4B", BoundPoint1);
+  console.log("%c Line:568 🍿 BoundPoint2", "color:#b03734", BoundPoint2);
+  console.log("%c Line:569 🍿 PAB", "color:#fca650", PAB);
+  console.log("%c Line:570 🍿 phi", "color:#93c0a4", phi);
+  console.log("%c Line:571 🍿 sdfb", "color:#b03734", sdfb);
+  console.log("%c Line:572 🍿 ti", "color:#465975", ti);
+  console.log("%c Line:573 🍿 a", "color:#42b983", a);
+  console.log(
+    "%c Line:574 🌶 distanceThreshold",
+    "color:#ffdd4d",
+    distanceThreshold
+  );
   const len = MPoints.length;
 
   if (len !== 8) {

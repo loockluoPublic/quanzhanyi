@@ -56,7 +56,7 @@ export default function () {
 
     if (options.length === 8) {
       const [l, t, r, b, lb, lt, rt, rb] = MxPortsArr;
-      MxPortsArr = [lt, t, rt, r, rb, b, lb, l];
+      MxPortsArr = [l, lt, t, rt, r, rb, b, lb];
     }
     setPlaneFitLoadint(true);
     setTimeout(() => {
@@ -135,7 +135,7 @@ export default function () {
 
     const MxPoints: any = {};
     for (let i = 0; i < options.length; i++) {
-      MxPoints[`m${i}`] = cubePoints[i];
+      MxPoints[`m${i}`] = cubePoints[i].slice(0, 50);
     }
 
     setData((d) => {
@@ -149,6 +149,11 @@ export default function () {
   useEffect(() => {
     CustomVector3.setPublicInfo("P", 0);
   }, []);
+  console.log(
+    "%c Line:227 🥟 data.distanceThreshold",
+    "color:#33a5ff",
+    data.distanceThreshold
+  );
 
   return (
     <div>
