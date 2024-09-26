@@ -87,6 +87,11 @@ function CubeResult() {
       return item.tOff;
     }) ?? [];
 
+  const a =
+    data.cubeTable?.map?.((item) => {
+      return item.a;
+    }) ?? [];
+
   const Ti =
     data.cubeTable?.map?.((item) => {
       return item.h;
@@ -130,7 +135,7 @@ function CubeResult() {
             ang2rad(data.sdj),
             data.sdfb,
             Ti,
-            tOff,
+            a,
             data.distanceThreshold
           );
         } else {
@@ -172,7 +177,7 @@ function CubeResult() {
 
   useEffect(() => {
     if (data.centerPoint) calcPoint();
-  }, [[...Ti, ...tOff].join(","), data.centerPoint]);
+  }, [[...Ti, ...tOff, ...a].join(","), data.centerPoint]);
 
   const onChange = (v: number, i: number, key: string) => {
     console.log("%c Line:153 🌮 v", "color:#3f7cff", v, i, key);
