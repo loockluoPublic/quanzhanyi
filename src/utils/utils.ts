@@ -605,7 +605,7 @@ export const CalculateRectangleFromVertex8 = (
 
   const Ti = new EmxArray_real_T(ti);
 
-  const tOff = new EmxArray_real_T(a);
+  const _a = new EmxArray_real_T(a);
   const A = new EmxArray_real_T(3, ti.length);
   const B = new EmxArray_real_T(3, ti.length);
   const XieMianPianYi = new EmxArray_real_T(ti.length, 1);
@@ -618,7 +618,7 @@ export const CalculateRectangleFromVertex8 = (
     phi,
     sdfb,
     Ti.ptr,
-    tOff.ptr,
+    _a.ptr,
     distanceThreshold,
     A.ptr,
     B.ptr,
@@ -655,7 +655,7 @@ export const CalculateRectangleFromVertex8 = (
 
   _PAB.free();
   Ti.free();
-  tOff.free();
+  _a.free();
   A.free();
   B.free();
   XieMianPianYi.free();

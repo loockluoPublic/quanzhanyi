@@ -82,11 +82,19 @@ export class CustomVector3 extends Vector3 {
   }
 
   toCArray() {
-    return [this.y, this.z, this.x];
+    if ((window as any).mock) {
+      return [this.x, this.y, this.z];
+    } else {
+      return [this.y, this.z, this.x];
+    }
   }
 
   static fromCArray(arr: [number, number, number]) {
-    return new CustomVector3(arr[2], arr[0], arr[1]);
+    if ((window as any).mock) {
+      return new CustomVector3(arr[0], arr[1], arr[2]);
+    } else {
+      return new CustomVector3(arr[2], arr[0], arr[1]);
+    }
   }
 
   fromCustomVector3(cv3 = this) {

@@ -52,10 +52,9 @@ export const Data = atom<GlobalData>({
     firstPoints: [] as any,
     type: TType.cycle,
     distanceThreshold: 0.1,
-
+    centerPoint: new CustomVector3(-0.176, -0.06, 0.6),
     layNum: 2,
     numPerLay: 3,
-
     mPoints: [],
   }, // 默认值
 });

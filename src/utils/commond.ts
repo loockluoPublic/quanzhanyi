@@ -2,7 +2,7 @@ import { CustomVector3 } from "../class/CustomVector3";
 import { serial } from "../components/ConnectDevice";
 
 const mock = new URLSearchParams(location.search).has("mock");
-
+(window as any).mock = mock;
 export const sendText = (text): Promise<string> => {
   return new Promise((resolve) => {
     if (mock) {
