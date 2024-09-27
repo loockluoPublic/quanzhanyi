@@ -1,8 +1,8 @@
 /*
  * File: fitcircle.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Sep-2024 14:25:16
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 27-Sep-2024 21:13:02
  */
 
 /* Include Files */
@@ -46,137 +46,81 @@ static void minus(double in1[4], const emxArray_real_T *in2,
 }
 
 /*
- * Arguments    : emxArray_real_T *in1
- *                const emxArray_real_T *in2
- * Return Type  : void
- */
-void b_plus(emxArray_real_T *in1, const emxArray_real_T *in2)
-{
-  emxArray_real_T *b_in1;
-  const double *in2_data;
-  double *b_in1_data;
-  double *in1_data;
-  int i;
-  int loop_ub;
-  int stride_0_0;
-  int stride_1_0;
-  in2_data = in2->data;
-  in1_data = in1->data;
-  emxInit_real_T(&b_in1, 1);
-  i = b_in1->size[0];
-  if (in2->size[0] == 1) {
-    b_in1->size[0] = in1->size[0];
-  } else {
-    b_in1->size[0] = in2->size[0];
-  }
-  emxEnsureCapacity_real_T(b_in1, i);
-  b_in1_data = b_in1->data;
-  stride_0_0 = (in1->size[0] != 1);
-  stride_1_0 = (in2->size[0] != 1);
-  if (in2->size[0] == 1) {
-    loop_ub = in1->size[0];
-  } else {
-    loop_ub = in2->size[0];
-  }
-  for (i = 0; i < loop_ub; i++) {
-    b_in1_data[i] = in1_data[i * stride_0_0] + in2_data[i * stride_1_0];
-  }
-  i = in1->size[0];
-  in1->size[0] = b_in1->size[0];
-  emxEnsureCapacity_real_T(in1, i);
-  in1_data = in1->data;
-  loop_ub = b_in1->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    in1_data[i] = b_in1_data[i];
-  }
-  emxFree_real_T(&b_in1);
-}
-
-/*
- * Arguments    : double in1[3]
- *                const double in2[3]
+ * Arguments    : const double in2[3]
  *                const emxArray_real_T *in3
  *                const emxArray_real_T *in4
  *                const emxArray_real_T *in5
  *                const int in6[2]
  *                const emxArray_real_T *in7
+ *                double in1[3]
  * Return Type  : void
  */
-void e_binary_expand_op(double in1[3], const double in2[3],
-                        const emxArray_real_T *in3, const emxArray_real_T *in4,
-                        const emxArray_real_T *in5, const int in6[2],
-                        const emxArray_real_T *in7)
+void binary_expand_op_5(const double in2[3], const emxArray_real_T *in3,
+                        const emxArray_real_T *in4, const emxArray_real_T *in5,
+                        const int in6[2], const emxArray_real_T *in7,
+                        double in1[3])
 {
-  emxArray_real_T *b_in2;
+  emxArray_real_T *d_in2;
   emxArray_real_T *e_in2;
   emxArray_real_T *f_in2;
   const double *in3_data;
   const double *in4_data;
   const double *in5_data;
   const double *in7_data;
+  double b_in2;
   double c_in2;
-  double d_in2;
   double *b_in2_data;
   double *c_in2_data;
   double *in2_data;
   int i;
   int loop_ub;
   int stride_0_0;
-  int stride_1_0;
+  int stride_1_0_tmp;
   in7_data = in7->data;
   in5_data = in5->data;
   in4_data = in4->data;
   in3_data = in3->data;
-  emxInit_real_T(&b_in2, 1);
-  c_in2 = in2[0];
-  d_in2 = in2[1];
-  i = b_in2->size[0];
-  if (in4->size[0] == 1) {
-    b_in2->size[0] = in3->size[0];
-  } else {
-    b_in2->size[0] = in4->size[0];
-  }
-  emxEnsureCapacity_real_T(b_in2, i);
-  in2_data = b_in2->data;
-  stride_0_0 = (in3->size[0] != 1);
-  stride_1_0 = (in4->size[0] != 1);
+  b_in2 = in2[0];
+  c_in2 = in2[1];
+  emxInit_real_T(&d_in2, 1);
   if (in4->size[0] == 1) {
     loop_ub = in3->size[0];
   } else {
     loop_ub = in4->size[0];
   }
+  i = d_in2->size[0];
+  d_in2->size[0] = loop_ub;
+  emxEnsureCapacity_real_T(d_in2, i);
+  in2_data = d_in2->data;
+  stride_0_0 = (in3->size[0] != 1);
+  stride_1_0_tmp = (in4->size[0] != 1);
   for (i = 0; i < loop_ub; i++) {
     in2_data[i] =
-        -((c_in2 - in3_data[i * stride_0_0]) / in4_data[i * stride_1_0]);
+        -((b_in2 - in3_data[i * stride_0_0]) / in4_data[i * stride_1_0_tmp]);
   }
   emxInit_real_T(&e_in2, 1);
-  i = e_in2->size[0];
-  if (in4->size[0] == 1) {
-    e_in2->size[0] = in5->size[0];
-  } else {
-    e_in2->size[0] = in4->size[0];
-  }
-  emxEnsureCapacity_real_T(e_in2, i);
-  b_in2_data = e_in2->data;
-  stride_0_0 = (in5->size[0] != 1);
-  stride_1_0 = (in4->size[0] != 1);
   if (in4->size[0] == 1) {
     loop_ub = in5->size[0];
   } else {
     loop_ub = in4->size[0];
   }
+  i = e_in2->size[0];
+  e_in2->size[0] = loop_ub;
+  emxEnsureCapacity_real_T(e_in2, i);
+  b_in2_data = e_in2->data;
+  stride_0_0 = (in5->size[0] != 1);
   for (i = 0; i < loop_ub; i++) {
     b_in2_data[i] =
-        -((d_in2 - in5_data[i * stride_0_0]) / in4_data[i * stride_1_0]);
+        -((c_in2 - in5_data[i * stride_0_0]) / in4_data[i * stride_1_0_tmp]);
   }
+  b_in2 = in2[2];
   emxInit_real_T(&f_in2, 2);
-  c_in2 = in2[2];
   i = f_in2->size[0] * f_in2->size[1];
-  f_in2->size[0] = b_in2->size[0];
+  f_in2->size[0] = d_in2->size[0];
   f_in2->size[1] = 3;
   emxEnsureCapacity_real_T(f_in2, i);
   c_in2_data = f_in2->data;
-  loop_ub = b_in2->size[0];
+  loop_ub = d_in2->size[0];
   for (i = 0; i < loop_ub; i++) {
     c_in2_data[i] = in2_data[i];
   }
@@ -189,17 +133,60 @@ void e_binary_expand_op(double in1[3], const double in2[3],
   for (i = 0; i < loop_ub; i++) {
     c_in2_data[i + f_in2->size[0] * 2] = 1.0;
   }
-  i = b_in2->size[0];
-  b_in2->size[0] = in7->size[1];
-  emxEnsureCapacity_real_T(b_in2, i);
-  in2_data = b_in2->data;
+  i = d_in2->size[0];
+  d_in2->size[0] = in7->size[1];
+  emxEnsureCapacity_real_T(d_in2, i);
+  in2_data = d_in2->data;
   loop_ub = in7->size[1];
   for (i = 0; i < loop_ub; i++) {
-    in2_data[i] = in7_data[i] - c_in2;
+    in2_data[i] = in7_data[i] - b_in2;
   }
-  mldivide(f_in2, b_in2, in1);
+  mldivide(f_in2, d_in2, in1);
   emxFree_real_T(&f_in2);
-  emxFree_real_T(&b_in2);
+  emxFree_real_T(&d_in2);
+}
+
+/*
+ * Arguments    : emxArray_real_T *in1
+ *                const double in3[3]
+ *                const emxArray_real_T *in4
+ *                const emxArray_real_T *in5
+ * Return Type  : void
+ */
+void binary_expand_op_7(emxArray_real_T *in1, const double in3[3],
+                        const emxArray_real_T *in4, const emxArray_real_T *in5)
+{
+  const double *in4_data;
+  const double *in5_data;
+  double b_in3;
+  double b_varargin_1;
+  double c_in3;
+  double varargin_1;
+  double *in1_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  in5_data = in5->data;
+  in4_data = in4->data;
+  b_in3 = in3[0];
+  c_in3 = in3[1];
+  if (in5->size[0] == 1) {
+    loop_ub = in4->size[0];
+  } else {
+    loop_ub = in5->size[0];
+  }
+  i = in1->size[0];
+  in1->size[0] = loop_ub;
+  emxEnsureCapacity_real_T(in1, i);
+  in1_data = in1->data;
+  stride_0_0 = (in4->size[0] != 1);
+  stride_1_0 = (in5->size[0] != 1);
+  for (i = 0; i < loop_ub; i++) {
+    varargin_1 = b_in3 - in4_data[i * stride_0_0];
+    b_varargin_1 = c_in3 - in5_data[i * stride_1_0];
+    in1_data[i] = varargin_1 * varargin_1 + b_varargin_1 * b_varargin_1;
+  }
 }
 
 /*
@@ -215,9 +202,10 @@ void fitcircle(const emxArray_real_T *x, double z[2], double *r,
   emxArray_real_T *b_r;
   double V[16];
   double B[8];
-  double u[6];
+  double b_u[6];
   double U[4];
   double h[3];
+  double u[3];
   double y[2];
   const double *x_data;
   double absxk;
@@ -225,12 +213,9 @@ void fitcircle(const emxArray_real_T *x, double z[2], double *r,
   double d;
   double scale;
   double t;
-  double u_idx_0;
-  double u_idx_1;
   double *r1;
-  int U_tmp;
-  int i;
   int k;
+  int nIts;
   boolean_T exitg1;
   boolean_T p;
   if (!isInitialized_QuanZhanYi) {
@@ -239,31 +224,36 @@ void fitcircle(const emxArray_real_T *x, double z[2], double *r,
   x_data = x->data;
   /*  Form the coefficient matrix */
   d = x_data[0];
-  absxk = x_data[1];
-  B[0] = d * d + absxk * absxk;
+  t = x_data[1];
+  B[0] = d * d + t * t;
   B[2] = d;
-  B[4] = absxk;
+  B[4] = t;
   d = x_data[x->size[0]];
-  absxk = x_data[x->size[0] + 1];
-  B[1] = d * d + absxk * absxk;
+  t = x_data[x->size[0] + 1];
+  B[1] = d * d + t * t;
   B[3] = d;
-  B[5] = absxk;
-  for (i = 0; i < 2; i++) {
-    B[i + 6] = 1.0;
+  B[5] = t;
+  for (k = 0; k < 2; k++) {
+    B[k + 6] = 1.0;
   }
   /*  Least squares estimate is right singular vector corresp. to smallest */
   /*  singular value of B */
   p = true;
   for (k = 0; k < 8; k++) {
-    if ((!p) || (rtIsInf(B[k]) || rtIsNaN(B[k]))) {
+    if (p) {
+      d = B[k];
+      if (rtIsInf(d) || rtIsNaN(d)) {
+        p = false;
+      }
+    } else {
       p = false;
     }
   }
   if (p) {
-    e_svd(B, U, y, V);
+    c_svd(B, U, y, V);
   } else {
-    for (i = 0; i < 16; i++) {
-      V[i] = rtNaN;
+    for (k = 0; k < 16; k++) {
+      V[k] = rtNaN;
     }
   }
   /*  For clarity, set the quadratic form variables */
@@ -285,7 +275,7 @@ void fitcircle(const emxArray_real_T *x, double z[2], double *r,
     t = absxk / 3.3121686421112381E-170;
     b_y = t * t;
   }
-  u_idx_0 = -V[13] / d;
+  u[0] = -V[13] / d;
   absxk = fabs(V[14]);
   if (absxk > scale) {
     t = scale / absxk;
@@ -295,34 +285,32 @@ void fitcircle(const emxArray_real_T *x, double z[2], double *r,
     t = absxk / scale;
     b_y += t * t;
   }
-  u_idx_1 = -V[14] / d;
+  u[1] = -V[14] / d;
   b_y = scale * sqrt(b_y);
-  absxk = b_y / (2.0 * V[12]);
-  *r = sqrt(absxk * absxk - V[15] / V[12]);
+  scale = b_y / (2.0 * V[12]);
+  u[2] = sqrt(scale * scale - V[15] / V[12]);
   /*  Delta is the norm of current step, scaled by the norm of u */
-  k = 0;
+  nIts = 0;
   emxInit_real_T(&b_r, 2);
   exitg1 = false;
-  while ((!exitg1) && (k < 100)) {
+  while ((!exitg1) && (nIts < 100)) {
     /*  Find the function and Jacobian  */
     /* SYS   Nonlinear system to be minimised - the objective */
     /* function is the distance to each point from the fitted circle */
     /* contained in u */
     /*  Objective function */
-    i = b_r->size[0] * b_r->size[1];
+    k = b_r->size[0] * b_r->size[1];
     b_r->size[0] = 2;
     b_r->size[1] = 2;
-    emxEnsureCapacity_real_T(b_r, i);
+    emxEnsureCapacity_real_T(b_r, k);
     r1 = b_r->data;
-    r1[0] = u_idx_0;
-    r1[1] = u_idx_1;
-    r1[2] = u_idx_0;
-    r1[3] = u_idx_1;
+    r1[0] = u[0];
+    r1[1] = u[1];
+    r1[2] = u[0];
+    r1[3] = u[1];
     if (x->size[0] == 2) {
-      for (i = 0; i < 2; i++) {
-        U_tmp = i << 1;
-        U[U_tmp] = r1[2 * i] - x_data[x->size[0] * i];
-        U[U_tmp + 1] = r1[2 * i + 1] - x_data[x->size[0] * i + 1];
+      for (k = 0; k < 4; k++) {
+        U[k] = r1[k] - x_data[k];
       }
     } else {
       minus(U, b_r, x);
@@ -330,82 +318,64 @@ void fitcircle(const emxArray_real_T *x, double z[2], double *r,
     /*  Jacobian */
     /*  Solve for the step and update u */
     y[0] = sqrt(U[0] * U[0] + U[1] * U[1]);
-    d = u_idx_0 - x_data[0];
-    absxk = u_idx_1 - x_data[1];
-    t = sqrt(d * d + absxk * absxk);
-    u[0] = -(d / t);
-    u[2] = -(absxk / t);
+    d = u[0] - x_data[0];
+    t = u[1] - x_data[1];
+    scale = sqrt(d * d + t * t);
+    b_u[0] = -(d / scale);
+    b_u[2] = -(t / scale);
     y[1] = sqrt(U[2] * U[2] + U[3] * U[3]);
-    d = u_idx_0 - x_data[x->size[0]];
-    absxk = u_idx_1 - x_data[x->size[0] + 1];
-    t = sqrt(d * d + absxk * absxk);
-    u[1] = -(d / t);
-    u[3] = -(absxk / t);
-    for (i = 0; i < 2; i++) {
-      u[i + 4] = 1.0;
+    d = u[0] - x_data[x->size[0]];
+    t = u[1] - x_data[x->size[0] + 1];
+    scale = sqrt(d * d + t * t);
+    b_u[1] = -(d / scale);
+    b_u[3] = -(t / scale);
+    for (k = 0; k < 2; k++) {
+      b_u[k + 4] = 1.0;
     }
-    y[0] -= *r;
-    y[1] -= *r;
-    d_mldivide(u, y, h);
+    y[0] -= u[2];
+    y[1] -= u[2];
+    d_mldivide(b_u, y, h);
     /*  Check for convergence */
     b_y = 0.0;
     absxk = 0.0;
-    d = u_idx_0 + h[0];
-    u_idx_0 = d;
-    t = fabs(h[0]);
-    if (rtIsNaN(t) || (t > 0.0)) {
-      b_y = t;
-    }
-    t = fabs(d);
-    if (rtIsNaN(t) || (t > 0.0)) {
-      absxk = t;
-    }
-    d = u_idx_1 + h[1];
-    u_idx_1 = d;
-    t = fabs(h[1]);
-    if (rtIsNaN(t) || (t > b_y)) {
-      b_y = t;
-    }
-    t = fabs(d);
-    if (rtIsNaN(t) || (t > absxk)) {
-      absxk = t;
-    }
-    d = *r + h[2];
-    *r = d;
-    t = fabs(h[2]);
-    if (rtIsNaN(t) || (t > b_y)) {
-      b_y = t;
-    }
-    t = fabs(d);
-    if (rtIsNaN(t) || (t > absxk)) {
-      absxk = t;
+    for (k = 0; k < 3; k++) {
+      d = h[k];
+      t = u[k] + d;
+      u[k] = t;
+      scale = fabs(d);
+      if (rtIsNaN(scale) || (scale > b_y)) {
+        b_y = scale;
+      }
+      scale = fabs(t);
+      if (rtIsNaN(scale) || (scale > absxk)) {
+        absxk = scale;
+      }
     }
     if (b_y / absxk < 1.0E-5) {
       exitg1 = true;
     } else {
-      k++;
+      nIts++;
     }
   }
+  *r = u[2];
   /* SYS   Nonlinear system to be minimised - the objective */
   /* function is the distance to each point from the fitted circle */
   /* contained in u */
   /*  Objective function */
-  i = b_r->size[0] * b_r->size[1];
+  k = b_r->size[0] * b_r->size[1];
   b_r->size[0] = 2;
   b_r->size[1] = 2;
-  emxEnsureCapacity_real_T(b_r, i);
+  emxEnsureCapacity_real_T(b_r, k);
   r1 = b_r->data;
-  z[0] = u_idx_0;
-  r1[0] = u_idx_0;
-  r1[1] = u_idx_1;
-  z[1] = u_idx_1;
-  r1[2] = u_idx_0;
-  r1[3] = u_idx_1;
+  z[0] = u[0];
+  r1[0] = u[0];
+  r1[1] = u[1];
+  z[1] = u[1];
+  r1[2] = u[0];
+  r1[3] = u[1];
   if (x->size[0] == 2) {
-    for (i = 0; i < 2; i++) {
-      U_tmp = i << 1;
-      U[U_tmp] = r1[2 * i] - x_data[x->size[0] * i];
-      U[U_tmp + 1] = r1[2 * i + 1] - x_data[x->size[0] * i + 1];
+    for (k = 0; k < 4; k++) {
+      U[k] = r1[k] - x_data[k];
     }
   } else {
     minus(U, b_r, x);
@@ -413,7 +383,7 @@ void fitcircle(const emxArray_real_T *x, double z[2], double *r,
   emxFree_real_T(&b_r);
   /*  Jacobian */
   scale = 3.3121686421112381E-170;
-  absxk = fabs(sqrt(U[0] * U[0] + U[1] * U[1]) - *r);
+  absxk = fabs(sqrt(U[0] * U[0] + U[1] * U[1]) - u[2]);
   if (absxk > 3.3121686421112381E-170) {
     *residual = 1.0;
     scale = absxk;
@@ -421,7 +391,7 @@ void fitcircle(const emxArray_real_T *x, double z[2], double *r,
     t = absxk / 3.3121686421112381E-170;
     *residual = t * t;
   }
-  absxk = fabs(sqrt(U[2] * U[2] + U[3] * U[3]) - *r);
+  absxk = fabs(sqrt(U[2] * U[2] + U[3] * U[3]) - u[2]);
   if (absxk > scale) {
     t = scale / absxk;
     *residual = *residual * t * t + 1.0;

@@ -1,8 +1,8 @@
 /*
  * File: generate_unit_circle_with_normal_vector.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Sep-2024 14:25:16
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 27-Sep-2024 21:13:02
  */
 
 /* Include Files */
@@ -15,11 +15,13 @@
 #include <math.h>
 
 /* Function Declarations */
-static void i_binary_expand_op(emxArray_real_T *in1, const double in2[3],
-                               const emxArray_real_T *in3, const double in4[3]);
+static void binary_expand_op_10(emxArray_real_T *in1, const double in2[3],
+                                const emxArray_real_T *in3,
+                                const double in4[3]);
 
-static void j_binary_expand_op(emxArray_real_T *in1, const double in2[3],
-                               const emxArray_real_T *in3, const double in4[3]);
+static void binary_expand_op_11(emxArray_real_T *in1, const double in2[3],
+                                const emxArray_real_T *in3,
+                                const double in4[3]);
 
 /* Function Definitions */
 /*
@@ -29,8 +31,8 @@ static void j_binary_expand_op(emxArray_real_T *in1, const double in2[3],
  *                const double in4[3]
  * Return Type  : void
  */
-static void i_binary_expand_op(emxArray_real_T *in1, const double in2[3],
-                               const emxArray_real_T *in3, const double in4[3])
+static void binary_expand_op_10(emxArray_real_T *in1, const double in2[3],
+                                const emxArray_real_T *in3, const double in4[3])
 {
   emxArray_real_T *b_in1;
   const double *in3_data;
@@ -44,25 +46,21 @@ static void i_binary_expand_op(emxArray_real_T *in1, const double in2[3],
   int stride_1_1;
   in3_data = in3->data;
   in1_data = in1->data;
-  emxInit_real_T(&b_in1, 2);
   b_in2 = in2[1];
   b_in4 = in4[1];
+  emxInit_real_T(&b_in1, 2);
   i = b_in1->size[0] * b_in1->size[1];
   b_in1->size[0] = 1;
-  if (in3->size[1] == 1) {
-    b_in1->size[1] = in1->size[1];
-  } else {
-    b_in1->size[1] = in3->size[1];
-  }
-  emxEnsureCapacity_real_T(b_in1, i);
-  b_in1_data = b_in1->data;
-  stride_0_1 = (in1->size[1] != 1);
-  stride_1_1 = (in3->size[1] != 1);
   if (in3->size[1] == 1) {
     loop_ub = in1->size[1];
   } else {
     loop_ub = in3->size[1];
   }
+  b_in1->size[1] = loop_ub;
+  emxEnsureCapacity_real_T(b_in1, i);
+  b_in1_data = b_in1->data;
+  stride_0_1 = (in1->size[1] != 1);
+  stride_1_1 = (in3->size[1] != 1);
   for (i = 0; i < loop_ub; i++) {
     b_in1_data[i] =
         in1_data[i * stride_0_1] * b_in2 + in3_data[i * stride_1_1] * b_in4;
@@ -86,8 +84,8 @@ static void i_binary_expand_op(emxArray_real_T *in1, const double in2[3],
  *                const double in4[3]
  * Return Type  : void
  */
-static void j_binary_expand_op(emxArray_real_T *in1, const double in2[3],
-                               const emxArray_real_T *in3, const double in4[3])
+static void binary_expand_op_11(emxArray_real_T *in1, const double in2[3],
+                                const emxArray_real_T *in3, const double in4[3])
 {
   emxArray_real_T *b_in1;
   const double *in3_data;
@@ -101,25 +99,74 @@ static void j_binary_expand_op(emxArray_real_T *in1, const double in2[3],
   int stride_1_1;
   in3_data = in3->data;
   in1_data = in1->data;
-  emxInit_real_T(&b_in1, 2);
   b_in2 = in2[0];
   b_in4 = in4[0];
+  emxInit_real_T(&b_in1, 2);
   i = b_in1->size[0] * b_in1->size[1];
   b_in1->size[0] = 1;
-  if (in3->size[1] == 1) {
-    b_in1->size[1] = in1->size[1];
-  } else {
-    b_in1->size[1] = in3->size[1];
-  }
-  emxEnsureCapacity_real_T(b_in1, i);
-  b_in1_data = b_in1->data;
-  stride_0_1 = (in1->size[1] != 1);
-  stride_1_1 = (in3->size[1] != 1);
   if (in3->size[1] == 1) {
     loop_ub = in1->size[1];
   } else {
     loop_ub = in3->size[1];
   }
+  b_in1->size[1] = loop_ub;
+  emxEnsureCapacity_real_T(b_in1, i);
+  b_in1_data = b_in1->data;
+  stride_0_1 = (in1->size[1] != 1);
+  stride_1_1 = (in3->size[1] != 1);
+  for (i = 0; i < loop_ub; i++) {
+    b_in1_data[i] =
+        in1_data[i * stride_0_1] * b_in2 + in3_data[i * stride_1_1] * b_in4;
+  }
+  i = in1->size[0] * in1->size[1];
+  in1->size[0] = 1;
+  in1->size[1] = b_in1->size[1];
+  emxEnsureCapacity_real_T(in1, i);
+  in1_data = in1->data;
+  loop_ub = b_in1->size[1];
+  for (i = 0; i < loop_ub; i++) {
+    in1_data[i] = b_in1_data[i];
+  }
+  emxFree_real_T(&b_in1);
+}
+
+/*
+ * Arguments    : emxArray_real_T *in1
+ *                const double in2[3]
+ *                const emxArray_real_T *in3
+ *                const double in4[3]
+ * Return Type  : void
+ */
+void binary_expand_op_9(emxArray_real_T *in1, const double in2[3],
+                        const emxArray_real_T *in3, const double in4[3])
+{
+  emxArray_real_T *b_in1;
+  const double *in3_data;
+  double b_in2;
+  double b_in4;
+  double *b_in1_data;
+  double *in1_data;
+  int i;
+  int loop_ub;
+  int stride_0_1;
+  int stride_1_1;
+  in3_data = in3->data;
+  in1_data = in1->data;
+  b_in2 = in2[2];
+  b_in4 = in4[2];
+  emxInit_real_T(&b_in1, 2);
+  i = b_in1->size[0] * b_in1->size[1];
+  b_in1->size[0] = 1;
+  if (in3->size[1] == 1) {
+    loop_ub = in1->size[1];
+  } else {
+    loop_ub = in3->size[1];
+  }
+  b_in1->size[1] = loop_ub;
+  emxEnsureCapacity_real_T(b_in1, i);
+  b_in1_data = b_in1->data;
+  stride_0_1 = (in1->size[1] != 1);
+  stride_1_1 = (in3->size[1] != 1);
   for (i = 0; i < loop_ub; i++) {
     b_in1_data[i] =
         in1_data[i * stride_0_1] * b_in2 + in3_data[i * stride_1_1] * b_in4;
@@ -164,10 +211,10 @@ void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
   double *x_circle_data;
   double *y_circle_data;
   double *z_circle_data;
+  int b_loop_ub;
   int i;
   int k;
   int loop_ub;
-  int nx;
   if (!isInitialized_QuanZhanYi) {
     QuanZhanYi_initialize();
   }
@@ -295,7 +342,6 @@ void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
     t = absxk / scale;
     delta1 += t * t;
   }
-  emxInit_real_T(&x_circle, 2);
   delta1 = scale * sqrt(delta1);
   v[0] /= delta1;
   v[1] /= delta1;
@@ -306,44 +352,35 @@ void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
   u[2] = v[0] * normal_vector_idx_1 - normal_vector_idx_0 * v[1];
   /*  创建另一个垂直向量 */
   /*  单位圆的参数方程 */
+  emxInit_real_T(&x_circle, 2);
   i = x_circle->size[0] * x_circle->size[1];
   x_circle->size[0] = 1;
   x_circle->size[1] = theta->size[1];
   emxEnsureCapacity_real_T(x_circle, i);
   x_circle_data = x_circle->data;
-  nx = theta->size[1];
-  for (i = 0; i < nx; i++) {
-    x_circle_data[i] = theta_data[i];
-  }
-  nx = theta->size[1];
-  for (k = 0; k < nx; k++) {
-    x_circle_data[k] = cos(x_circle_data[k]);
-  }
+  loop_ub = theta->size[1];
   emxInit_real_T(&z_circle, 2);
   i = z_circle->size[0] * z_circle->size[1];
   z_circle->size[0] = 1;
   z_circle->size[1] = theta->size[1];
   emxEnsureCapacity_real_T(z_circle, i);
   z_circle_data = z_circle->data;
-  nx = theta->size[1];
-  for (i = 0; i < nx; i++) {
-    z_circle_data[i] = theta_data[i];
-  }
-  nx = theta->size[1];
-  for (k = 0; k < nx; k++) {
-    z_circle_data[k] = sin(z_circle_data[k]);
+  for (k = 0; k < loop_ub; k++) {
+    delta1 = theta_data[k];
+    x_circle_data[k] = cos(delta1);
+    z_circle_data[k] = sin(delta1);
   }
   if (x_circle->size[1] == z_circle->size[1]) {
-    nx = x_circle->size[1] - 1;
+    loop_ub = x_circle->size[1] - 1;
     i = x_circle->size[0] * x_circle->size[1];
     x_circle->size[0] = 1;
     emxEnsureCapacity_real_T(x_circle, i);
     x_circle_data = x_circle->data;
-    for (i = 0; i <= nx; i++) {
+    for (i = 0; i <= loop_ub; i++) {
       x_circle_data[i] = x_circle_data[i] * v[0] + z_circle_data[i] * u[0];
     }
   } else {
-    j_binary_expand_op(x_circle, v, z_circle, u);
+    binary_expand_op_11(x_circle, v, z_circle, u);
     x_circle_data = x_circle->data;
   }
   emxInit_real_T(&y_circle, 2);
@@ -352,38 +389,28 @@ void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
   y_circle->size[1] = theta->size[1];
   emxEnsureCapacity_real_T(y_circle, i);
   y_circle_data = y_circle->data;
-  nx = theta->size[1];
-  for (i = 0; i < nx; i++) {
-    y_circle_data[i] = theta_data[i];
-  }
-  nx = theta->size[1];
-  for (k = 0; k < nx; k++) {
-    y_circle_data[k] = cos(y_circle_data[k]);
-  }
+  loop_ub = theta->size[1];
   i = z_circle->size[0] * z_circle->size[1];
   z_circle->size[0] = 1;
   z_circle->size[1] = theta->size[1];
   emxEnsureCapacity_real_T(z_circle, i);
   z_circle_data = z_circle->data;
-  nx = theta->size[1];
-  for (i = 0; i < nx; i++) {
-    z_circle_data[i] = theta_data[i];
-  }
-  nx = theta->size[1];
-  for (k = 0; k < nx; k++) {
-    z_circle_data[k] = sin(z_circle_data[k]);
+  for (k = 0; k < loop_ub; k++) {
+    delta1 = theta_data[k];
+    y_circle_data[k] = cos(delta1);
+    z_circle_data[k] = sin(delta1);
   }
   if (y_circle->size[1] == z_circle->size[1]) {
-    nx = y_circle->size[1] - 1;
+    loop_ub = y_circle->size[1] - 1;
     i = y_circle->size[0] * y_circle->size[1];
     y_circle->size[0] = 1;
     emxEnsureCapacity_real_T(y_circle, i);
     y_circle_data = y_circle->data;
-    for (i = 0; i <= nx; i++) {
+    for (i = 0; i <= loop_ub; i++) {
       y_circle_data[i] = y_circle_data[i] * v[1] + z_circle_data[i] * u[1];
     }
   } else {
-    i_binary_expand_op(y_circle, v, z_circle, u);
+    binary_expand_op_10(y_circle, v, z_circle, u);
     y_circle_data = y_circle->data;
   }
   i = z_circle->size[0] * z_circle->size[1];
@@ -391,36 +418,31 @@ void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
   z_circle->size[1] = theta->size[1];
   emxEnsureCapacity_real_T(z_circle, i);
   z_circle_data = z_circle->data;
-  nx = theta->size[1];
-  for (i = 0; i < nx; i++) {
-    z_circle_data[i] = theta_data[i];
-  }
-  nx = theta->size[1];
-  for (k = 0; k < nx; k++) {
-    z_circle_data[k] = cos(z_circle_data[k]);
-  }
-  nx = theta->size[1];
-  for (k = 0; k < nx; k++) {
-    theta_data[k] = sin(theta_data[k]);
+  loop_ub = theta->size[1];
+  for (k = 0; k < loop_ub; k++) {
+    delta1 = theta_data[k];
+    z_circle_data[k] = cos(delta1);
+    delta1 = sin(delta1);
+    theta_data[k] = delta1;
   }
   if (z_circle->size[1] == theta->size[1]) {
-    nx = z_circle->size[1] - 1;
+    loop_ub = z_circle->size[1] - 1;
     i = z_circle->size[0] * z_circle->size[1];
     z_circle->size[0] = 1;
     emxEnsureCapacity_real_T(z_circle, i);
     z_circle_data = z_circle->data;
-    for (i = 0; i <= nx; i++) {
+    for (i = 0; i <= loop_ub; i++) {
       z_circle_data[i] = z_circle_data[i] * v[2] + theta_data[i] * u[2];
     }
   } else {
-    h_binary_expand_op(z_circle, v, theta, u);
+    binary_expand_op_9(z_circle, v, theta, u);
     z_circle_data = z_circle->data;
   }
   emxFree_real_T(&theta);
   if (x_circle->size[1] - 1 < 1) {
-    nx = 0;
+    loop_ub = 0;
   } else {
-    nx = x_circle->size[1] - 1;
+    loop_ub = x_circle->size[1] - 1;
   }
   if (y_circle->size[1] - 1 < 1) {
     k = 1;
@@ -428,16 +450,16 @@ void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
     k = y_circle->size[1];
   }
   if (z_circle->size[1] - 1 < 1) {
-    loop_ub = 1;
+    b_loop_ub = 1;
   } else {
-    loop_ub = z_circle->size[1];
+    b_loop_ub = z_circle->size[1];
   }
   i = Point_out->size[0] * Point_out->size[1];
   Point_out->size[0] = 3;
-  Point_out->size[1] = nx;
+  Point_out->size[1] = loop_ub;
   emxEnsureCapacity_real_T(Point_out, i);
   theta_data = Point_out->data;
-  for (i = 0; i < nx; i++) {
+  for (i = 0; i < loop_ub; i++) {
     theta_data[3 * i] = x_circle_data[i];
   }
   emxFree_real_T(&x_circle);
@@ -445,67 +467,10 @@ void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
     theta_data[3 * i + 1] = y_circle_data[i];
   }
   emxFree_real_T(&y_circle);
-  for (i = 0; i <= loop_ub - 2; i++) {
+  for (i = 0; i <= b_loop_ub - 2; i++) {
     theta_data[3 * i + 2] = z_circle_data[i];
   }
   emxFree_real_T(&z_circle);
-}
-
-/*
- * Arguments    : emxArray_real_T *in1
- *                const double in2[3]
- *                const emxArray_real_T *in3
- *                const double in4[3]
- * Return Type  : void
- */
-void h_binary_expand_op(emxArray_real_T *in1, const double in2[3],
-                        const emxArray_real_T *in3, const double in4[3])
-{
-  emxArray_real_T *b_in1;
-  const double *in3_data;
-  double b_in2;
-  double b_in4;
-  double *b_in1_data;
-  double *in1_data;
-  int i;
-  int loop_ub;
-  int stride_0_1;
-  int stride_1_1;
-  in3_data = in3->data;
-  in1_data = in1->data;
-  emxInit_real_T(&b_in1, 2);
-  b_in2 = in2[2];
-  b_in4 = in4[2];
-  i = b_in1->size[0] * b_in1->size[1];
-  b_in1->size[0] = 1;
-  if (in3->size[1] == 1) {
-    b_in1->size[1] = in1->size[1];
-  } else {
-    b_in1->size[1] = in3->size[1];
-  }
-  emxEnsureCapacity_real_T(b_in1, i);
-  b_in1_data = b_in1->data;
-  stride_0_1 = (in1->size[1] != 1);
-  stride_1_1 = (in3->size[1] != 1);
-  if (in3->size[1] == 1) {
-    loop_ub = in1->size[1];
-  } else {
-    loop_ub = in3->size[1];
-  }
-  for (i = 0; i < loop_ub; i++) {
-    b_in1_data[i] =
-        in1_data[i * stride_0_1] * b_in2 + in3_data[i * stride_1_1] * b_in4;
-  }
-  i = in1->size[0] * in1->size[1];
-  in1->size[0] = 1;
-  in1->size[1] = b_in1->size[1];
-  emxEnsureCapacity_real_T(in1, i);
-  in1_data = in1->data;
-  loop_ub = b_in1->size[1];
-  for (i = 0; i < loop_ub; i++) {
-    in1_data[i] = b_in1_data[i];
-  }
-  emxFree_real_T(&b_in1);
 }
 
 /*

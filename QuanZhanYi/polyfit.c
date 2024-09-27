@@ -1,8 +1,8 @@
 /*
  * File: polyfit.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Sep-2024 14:25:16
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 27-Sep-2024 21:13:02
  */
 
 /* Include Files */
@@ -43,15 +43,15 @@ void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2])
   int iac;
   int ii;
   int ip1;
+  int ix;
   int k;
   int knt;
   int lastv;
   int m;
   int ma;
-  int minmana;
-  int minmn;
   int mmi;
   int pvt;
+  int u0;
   signed char jpvt[2];
   y_data = y->data;
   x_data = x->data;
@@ -65,29 +65,22 @@ void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2])
     i = x->size[0];
     for (k = 0; k < i; k++) {
       V_data[k + V->size[0]] = 1.0;
-    }
-    i = x->size[0];
-    for (k = 0; k < i; k++) {
       V_data[k] = x_data[k];
     }
   }
   m = V->size[0];
-  minmana = V->size[0];
-  if (minmana > 2) {
-    minmana = 2;
+  u0 = V->size[0];
+  if (u0 > 2) {
+    u0 = 2;
   }
-  if (minmana - 1 >= 0) {
-    memset(&tau_data[0], 0, minmana * sizeof(double));
+  if (u0 - 1 >= 0) {
+    memset(&tau_data[0], 0, (unsigned int)u0 * sizeof(double));
   }
   if (V->size[0] == 0) {
     jpvt[0] = 1;
     jpvt[1] = 2;
   } else {
     ma = V->size[0];
-    minmn = V->size[0];
-    if (minmn > 2) {
-      minmn = 2;
-    }
     jpvt[0] = 1;
     work[0] = 0.0;
     temp = b_xnrm2(V->size[0], V, 1);
@@ -98,34 +91,34 @@ void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2])
     temp = b_xnrm2(V->size[0], V, V->size[0] + 1);
     vn1[1] = temp;
     vn2[1] = temp;
-    for (b_i = 0; b_i < minmn; b_i++) {
+    for (b_i = 0; b_i < u0; b_i++) {
       ip1 = b_i + 2;
       lastv = b_i * ma;
       ii = lastv + b_i;
       mmi = m - b_i;
-      minmana = 0;
+      ix = 0;
       if ((2 - b_i > 1) && (fabs(vn1[b_i + 1]) > fabs(vn1[b_i]))) {
-        minmana = 1;
+        ix = 1;
       }
-      pvt = b_i + minmana;
+      pvt = b_i + ix;
       if (pvt != b_i) {
-        minmana = pvt * ma;
+        ix = pvt * ma;
         for (k = 0; k < m; k++) {
-          knt = minmana + k;
+          knt = ix + k;
           temp = V_data[knt];
           i = lastv + k;
           V_data[knt] = V_data[i];
           V_data[i] = temp;
         }
-        minmana = jpvt[pvt];
+        ix = jpvt[pvt];
         jpvt[pvt] = jpvt[b_i];
-        jpvt[b_i] = (signed char)minmana;
+        jpvt[b_i] = (signed char)ix;
         vn1[pvt] = vn1[b_i];
         vn2[pvt] = vn2[b_i];
       }
       if (b_i + 1 < m) {
         atmp = V_data[ii];
-        minmana = ii + 2;
+        ix = ii + 2;
         tau_data[b_i] = 0.0;
         if (mmi > 0) {
           temp = b_xnrm2(mmi - 1, V, ii + 2);
@@ -139,7 +132,7 @@ void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2])
               i = ii + mmi;
               do {
                 knt++;
-                for (k = minmana; k <= i; k++) {
+                for (k = ix; k <= i; k++) {
                   V_data[k - 1] *= 9.9792015476736E+291;
                 }
                 beta1 *= 9.9792015476736E+291;
@@ -151,7 +144,7 @@ void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2])
               }
               tau_data[b_i] = (beta1 - atmp) / beta1;
               temp = 1.0 / (atmp - beta1);
-              for (k = minmana; k <= i; k++) {
+              for (k = ix; k <= i; k++) {
                 V_data[k - 1] *= temp;
               }
               for (k = 0; k < knt; k++) {
@@ -162,7 +155,7 @@ void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2])
               tau_data[b_i] = (beta1 - V_data[ii]) / beta1;
               temp = 1.0 / (V_data[ii] - beta1);
               i = ii + mmi;
-              for (k = minmana; k <= i; k++) {
+              for (k = ix; k <= i; k++) {
                 V_data[k - 1] *= temp;
               }
               atmp = beta1;
@@ -179,12 +172,12 @@ void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2])
         pvt = (ii + ma) + 1;
         if (tau_data[0] != 0.0) {
           lastv = mmi - 1;
-          minmana = (ii + mmi) - 1;
-          while ((lastv + 1 > 0) && (V_data[minmana] == 0.0)) {
+          ix = (ii + mmi) - 1;
+          while ((lastv + 1 > 0) && (V_data[ix] == 0.0)) {
             lastv--;
-            minmana--;
+            ix--;
           }
-          knt = 1;
+          ix = 1;
           k = pvt;
           do {
             exitg1 = 0;
@@ -195,35 +188,35 @@ void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2])
                 k++;
               }
             } else {
-              knt = 0;
+              ix = 0;
               exitg1 = 1;
             }
           } while (exitg1 == 0);
         } else {
           lastv = -1;
-          knt = 0;
+          ix = 0;
         }
         if (lastv + 1 > 0) {
-          if (knt != 0) {
+          if (ix != 0) {
             work[0] = 0.0;
-            minmana = 0;
+            knt = 0;
             for (iac = pvt; ma < 0 ? iac >= pvt : iac <= pvt; iac += ma) {
               temp = 0.0;
               i = iac + lastv;
               for (k = iac; k <= i; k++) {
                 temp += V_data[k - 1] * V_data[(ii + k) - iac];
               }
-              work[minmana] += temp;
-              minmana++;
+              work[knt] += temp;
+              knt++;
             }
           }
           if (!(-tau_data[0] == 0.0)) {
-            for (iac = 0; iac < knt; iac++) {
+            for (iac = 0; iac < ix; iac++) {
               if (work[0] != 0.0) {
                 temp = work[0] * -tau_data[0];
                 i = lastv + pvt;
-                for (minmana = pvt; minmana <= i; minmana++) {
-                  V_data[minmana - 1] += V_data[(ii + minmana) - pvt] * temp;
+                for (knt = pvt; knt <= i; knt++) {
+                  V_data[knt - 1] += V_data[(ii + knt) - pvt] * temp;
                 }
               }
               pvt += ma;
@@ -233,9 +226,9 @@ void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2])
         V_data[ii] = atmp;
       }
       for (iac = ip1; iac < 3; iac++) {
-        minmana = b_i + ma;
+        ix = b_i + ma;
         if (vn1[1] != 0.0) {
-          temp = fabs(V_data[minmana]) / vn1[1];
+          temp = fabs(V_data[ix]) / vn1[1];
           temp = 1.0 - temp * temp;
           if (temp < 0.0) {
             temp = 0.0;
@@ -244,7 +237,7 @@ void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2])
           beta1 = temp * (beta1 * beta1);
           if (beta1 <= 1.4901161193847656E-8) {
             if (b_i + 1 < m) {
-              temp = b_xnrm2(mmi - 1, V, minmana + 2);
+              temp = b_xnrm2(mmi - 1, V, ix + 2);
               vn1[1] = temp;
               vn2[1] = temp;
             } else {
@@ -259,12 +252,8 @@ void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2])
     }
   }
   knt = 0;
-  minmana = V->size[0];
-  if (minmana > 2) {
-    minmana = 2;
-  }
-  if (minmana > 0) {
-    for (k = 0; k < minmana; k++) {
+  if (u0 > 0) {
+    for (k = 0; k < u0; k++) {
       if (V_data[k + V->size[0] * k] != 0.0) {
         knt++;
       }
@@ -275,18 +264,14 @@ void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2])
   B->size[0] = y->size[0];
   emxEnsureCapacity_real_T(B, i);
   B_data = B->data;
-  minmana = y->size[0];
-  for (i = 0; i < minmana; i++) {
+  ix = y->size[0];
+  for (i = 0; i < ix; i++) {
     B_data[i] = y_data[i];
   }
   p[0] = 0.0;
   p[1] = 0.0;
   m = V->size[0];
-  minmana = V->size[0];
-  if (minmana > 2) {
-    minmana = 2;
-  }
-  for (iac = 0; iac < minmana; iac++) {
+  for (iac = 0; iac < u0; iac++) {
     if (tau_data[iac] != 0.0) {
       temp = B_data[iac];
       i = iac + 2;
@@ -307,10 +292,10 @@ void polyfit(const emxArray_real_T *x, const emxArray_real_T *y, double p[2])
   }
   emxFree_real_T(&B);
   for (iac = knt; iac >= 1; iac--) {
-    minmana = jpvt[iac - 1] - 1;
-    p[minmana] /= V_data[(iac + V->size[0] * (iac - 1)) - 1];
+    ix = jpvt[iac - 1] - 1;
+    p[ix] /= V_data[(iac + V->size[0] * (iac - 1)) - 1];
     for (b_i = 0; b_i <= iac - 2; b_i++) {
-      p[jpvt[0] - 1] -= p[minmana] * V_data[V->size[0] * (iac - 1)];
+      p[jpvt[0] - 1] -= p[ix] * V_data[V->size[0] * (iac - 1)];
     }
   }
   emxFree_real_T(&V);

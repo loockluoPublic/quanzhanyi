@@ -1,8 +1,8 @@
 /*
  * File: cat.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Sep-2024 14:25:16
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 27-Sep-2024 21:13:02
  */
 
 #ifndef CAT_H
@@ -23,13 +23,13 @@ void binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
                       const emxArray_real_T *in3, double in4,
                       const double in5[3]);
 
-void g_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
-                        const emxArray_real_T *in3, const emxArray_real_T *in4);
+void binary_expand_op_15(emxArray_real_T *in1, double in2,
+                         const emxArray_real_T *in3, double in4,
+                         const emxArray_real_T *in5, const emxArray_real_T *in6,
+                         const emxArray_real_T *in7, double in8);
 
-void m_binary_expand_op(emxArray_real_T *in1, double in2,
-                        const emxArray_real_T *in3, double in4,
-                        const emxArray_real_T *in5, const emxArray_real_T *in6,
-                        const emxArray_real_T *in7, double in8);
+void binary_expand_op_8(emxArray_real_T *in1, const emxArray_real_T *in3,
+                        const emxArray_real_T *in4, const emxArray_real_T *in5);
 
 #ifdef __cplusplus
 }
