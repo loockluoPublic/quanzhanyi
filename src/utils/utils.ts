@@ -581,7 +581,7 @@ export const CalculateRectangleFromVertex8 = (
   console.log("%c Line:572 🍿 ti", "color:#465975", ti);
   console.log("%c Line:573 🍿 a", "color:#42b983", a);
   console.log(
-    "%c Line:574 🌶 distanceThreshold",
+    "%c Line:574 🍿 distanceThreshold",
     "color:#ffdd4d",
     distanceThreshold
   );
@@ -639,16 +639,12 @@ export const CalculateRectangleFromVertex8 = (
     bottomB[j].key = 2 * i + 2;
   }
 
-  console.log(
-    "%c Line:634 🍑 XieMianPianYi.toJSON()",
-    "color:#fca650",
-    XieMianPianYi.toJSON()
-  );
+  const rOff = XieMianPianYi.toJSON()[0];
   const res = bottomA.map((a, i) => {
     return {
       pointA: a,
       pointB: bottomB[i],
-      // rOff: XieMianPianYi.toJSON()[0],
+      rOff: rOff[i],
     };
   });
 

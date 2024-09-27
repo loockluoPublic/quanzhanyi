@@ -153,6 +153,7 @@ function CubeResult() {
           const newItem = {
             ...item,
             AB: AB[i],
+            rOff: AB?.[i]?.rOff,
           };
 
           return newItem;
