@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_mex.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 22-Sep-2024 11:56:57
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 27-Sep-2024 14:25:16
  */
 
 /* Include Files */
@@ -20,7 +20,7 @@
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
-  static const char_T *emlrtEntryPoints[23] = {
+  static const char_T *emlrtEntryPoints[22] = {
       "angle2point",
       "Calculat_A_and_B_Points",
       "Calculat_A_and_B_Points_after_Offest2",
@@ -35,7 +35,6 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
       "generate_unit_circle_with_normal_vector",
       "generate_unit_circle_with_normal_vector2",
       "GenerateTrianglePoints",
-      "JuXingFuCe",
       "myvrrotvec2mat",
       "OffsetCalculate",
       "planefit",
@@ -55,7 +54,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   st.tls = emlrtRootTLSGlobal;
   /* Dispatch the entry-point. */
   switch (emlrtGetEntryPointIndexR2016a(
-      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 23)) {
+      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 22)) {
   case 0:
     unsafe_angle2point_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
@@ -108,30 +107,27 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
     unsafe_GenerateTrianglePoints_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 14:
-    unsafe_JuXingFuCe_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
-    break;
-  case 15:
     unsafe_myvrrotvec2mat_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 16:
+  case 15:
     unsafe_OffsetCalculate_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 17:
+  case 16:
     unsafe_planefit_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 18:
+  case 17:
     unsafe_planefit4_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 19:
+  case 18:
     unsafe_planefit8_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 20:
+  case 19:
     unsafe_RepeatSurvey_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 21:
+  case 20:
     unsafe_ShengDaoGaoDu_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
-  case 22:
+  case 21:
     unsafe_ShengLuJiaoJiSuan_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   }
@@ -146,7 +142,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
 emlrtCTX mexFunctionCreateRootTLS(void)
 {
   emlrtCreateRootTLSR2022a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
-                           NULL, "GBK", true);
+                           NULL, (const char_T *)"GBK", true);
   return emlrtRootTLSGlobal;
 }
 
@@ -165,10 +161,8 @@ void unsafe_Calculat_A_and_B_Points_after_Offest2_mexFunction(
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[8];
   const mxArray *outputs[2];
-  int32_T i;
-  int32_T i1;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 8) {
@@ -180,17 +174,14 @@ void unsafe_Calculat_A_and_B_Points_after_Offest2_mexFunction(
                         "Calculat_A_and_B_Points_after_Offest2");
   }
   /* Call the function. */
-  for (i = 0; i < 8; i++) {
-    b_prhs[i] = prhs[i];
-  }
-  c_Calculat_A_and_B_Points_after(b_prhs, nlhs, outputs);
+  c_Calculat_A_and_B_Points_after(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i1 = 1;
+    b_nlhs = 1;
   } else {
-    i1 = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i1, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -209,10 +200,8 @@ void unsafe_Calculat_A_and_B_Points_mexFunction(int32_T nlhs, mxArray *plhs[2],
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[8];
   const mxArray *outputs[2];
-  int32_T i;
-  int32_T i1;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 8) {
@@ -224,17 +213,14 @@ void unsafe_Calculat_A_and_B_Points_mexFunction(int32_T nlhs, mxArray *plhs[2],
                         "Calculat_A_and_B_Points");
   }
   /* Call the function. */
-  for (i = 0; i < 8; i++) {
-    b_prhs[i] = prhs[i];
-  }
-  Calculat_A_and_B_Points_api(b_prhs, nlhs, outputs);
+  Calculat_A_and_B_Points_api(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i1 = 1;
+    b_nlhs = 1;
   } else {
-    i1 = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i1, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -252,10 +238,8 @@ void unsafe_Calculat_JuXing_A_and_B_Points_after_Offest_mexFunction(
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[10];
   const mxArray *outputs[2];
-  int32_T i;
-  int32_T i1;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 10) {
@@ -267,17 +251,14 @@ void unsafe_Calculat_JuXing_A_and_B_Points_after_Offest_mexFunction(
                         "Calculat_JuXing_A_and_B_Points_after_Offest");
   }
   /* Call the function. */
-  for (i = 0; i < 10; i++) {
-    b_prhs[i] = prhs[i];
-  }
-  c_Calculat_JuXing_A_and_B_Point(b_prhs, nlhs, outputs);
+  c_Calculat_JuXing_A_and_B_Point(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i1 = 1;
+    b_nlhs = 1;
   } else {
-    i1 = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i1, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -296,8 +277,7 @@ void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points2_mexFu
       NULL  /* prev */
   };
   const mxArray *outputs[6];
-  const mxArray *b_prhs[3];
-  int32_T i;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 3) {
@@ -311,17 +291,14 @@ void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points2_mexFu
         "Calculate_accurate_cylinders_from_multiple_measurement_points2");
   }
   /* Call the function. */
-  b_prhs[0] = prhs[0];
-  b_prhs[1] = prhs[1];
-  b_prhs[2] = prhs[2];
-  c_Calculate_accurate_cylinders_(b_prhs, nlhs, outputs);
+  c_Calculate_accurate_cylinders_(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i = 1;
+    b_nlhs = 1;
   } else {
-    i = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -339,10 +316,8 @@ void unsafe_Calculate_rectangle_from_vertex8_mexFunction(
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[16];
   const mxArray *outputs[3];
-  int32_T i;
-  int32_T i1;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 16) {
@@ -354,17 +329,14 @@ void unsafe_Calculate_rectangle_from_vertex8_mexFunction(
                         "Calculate_rectangle_from_vertex8");
   }
   /* Call the function. */
-  for (i = 0; i < 16; i++) {
-    b_prhs[i] = prhs[i];
-  }
-  d_Calculate_rectangle_from_vert(b_prhs, nlhs, outputs);
+  d_Calculate_rectangle_from_vert(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i1 = 1;
+    b_nlhs = 1;
   } else {
-    i1 = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i1, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -385,7 +357,7 @@ void unsafe_Calculate_rectangle_from_vertex_mexFunction(int32_T nlhs,
       NULL  /* prev */
   };
   const mxArray *outputs[8];
-  int32_T i;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 1) {
@@ -400,11 +372,11 @@ void unsafe_Calculate_rectangle_from_vertex_mexFunction(int32_T nlhs,
   c_Calculate_rectangle_from_vert(prhs[0], nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i = 1;
+    b_nlhs = 1;
   } else {
-    i = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -422,9 +394,8 @@ void unsafe_CrossLine_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[3];
   const mxArray *outputs[2];
-  int32_T i;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 3) {
@@ -436,17 +407,14 @@ void unsafe_CrossLine_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
                         "CrossLine");
   }
   /* Call the function. */
-  b_prhs[0] = prhs[0];
-  b_prhs[1] = prhs[1];
-  b_prhs[2] = prhs[2];
-  CrossLine_api(b_prhs, nlhs, outputs);
+  CrossLine_api(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i = 1;
+    b_nlhs = 1;
   } else {
-    i = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -465,7 +433,6 @@ void unsafe_GenerateTrianglePoints_mexFunction(int32_T nlhs, mxArray *plhs[1],
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[4];
   const mxArray *outputs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
@@ -478,11 +445,7 @@ void unsafe_GenerateTrianglePoints_mexFunction(int32_T nlhs, mxArray *plhs[1],
                         "GenerateTrianglePoints");
   }
   /* Call the function. */
-  b_prhs[0] = prhs[0];
-  b_prhs[1] = prhs[1];
-  b_prhs[2] = prhs[2];
-  b_prhs[3] = prhs[3];
-  GenerateTrianglePoints_api(b_prhs, &outputs);
+  GenerateTrianglePoints_api(prhs, &outputs);
   /* Copy over outputs to the caller. */
   emlrtReturnArrays(1, &plhs[0], &outputs);
 }
@@ -502,9 +465,7 @@ void unsafe_Generate_multi_layered_measurement_points_mexFunction(
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[5];
   const mxArray *outputs;
-  int32_T i;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 5) {
@@ -516,55 +477,9 @@ void unsafe_Generate_multi_layered_measurement_points_mexFunction(
                         "Generate_multi_layered_measurement_points");
   }
   /* Call the function. */
-  for (i = 0; i < 5; i++) {
-    b_prhs[i] = prhs[i];
-  }
-  c_Generate_multi_layered_measur(b_prhs, &outputs);
+  c_Generate_multi_layered_measur(prhs, &outputs);
   /* Copy over outputs to the caller. */
   emlrtReturnArrays(1, &plhs[0], &outputs);
-}
-
-/*
- * Arguments    : int32_T nlhs
- *                mxArray *plhs[6]
- *                int32_T nrhs
- *                const mxArray *prhs[6]
- * Return Type  : void
- */
-void unsafe_JuXingFuCe_mexFunction(int32_T nlhs, mxArray *plhs[6], int32_T nrhs,
-                                   const mxArray *prhs[6])
-{
-  emlrtStack st = {
-      NULL, /* site */
-      NULL, /* tls */
-      NULL  /* prev */
-  };
-  const mxArray *b_prhs[6];
-  const mxArray *outputs[6];
-  int32_T i;
-  int32_T i1;
-  st.tls = emlrtRootTLSGlobal;
-  /* Check for proper number of arguments. */
-  if (nrhs != 6) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 6, 4,
-                        10, "JuXingFuCe");
-  }
-  if (nlhs > 6) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 10,
-                        "JuXingFuCe");
-  }
-  /* Call the function. */
-  for (i = 0; i < 6; i++) {
-    b_prhs[i] = prhs[i];
-  }
-  JuXingFuCe_api(b_prhs, nlhs, outputs);
-  /* Copy over outputs to the caller. */
-  if (nlhs < 1) {
-    i1 = 1;
-  } else {
-    i1 = nlhs;
-  }
-  emlrtReturnArrays(i1, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -582,7 +497,6 @@ void unsafe_OffsetCalculate_mexFunction(int32_T nlhs, mxArray *plhs[1],
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[4];
   const mxArray *outputs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
@@ -595,11 +509,7 @@ void unsafe_OffsetCalculate_mexFunction(int32_T nlhs, mxArray *plhs[1],
                         "OffsetCalculate");
   }
   /* Call the function. */
-  b_prhs[0] = prhs[0];
-  b_prhs[1] = prhs[1];
-  b_prhs[2] = prhs[2];
-  b_prhs[3] = prhs[3];
-  OffsetCalculate_api(b_prhs, &outputs);
+  OffsetCalculate_api(prhs, &outputs);
   /* Copy over outputs to the caller. */
   emlrtReturnArrays(1, &plhs[0], &outputs);
 }
@@ -619,9 +529,8 @@ void unsafe_RepeatSurvey_mexFunction(int32_T nlhs, mxArray *plhs[2],
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[4];
   const mxArray *outputs[2];
-  int32_T i;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 4) {
@@ -633,18 +542,14 @@ void unsafe_RepeatSurvey_mexFunction(int32_T nlhs, mxArray *plhs[2],
                         "RepeatSurvey");
   }
   /* Call the function. */
-  b_prhs[0] = prhs[0];
-  b_prhs[1] = prhs[1];
-  b_prhs[2] = prhs[2];
-  b_prhs[3] = prhs[3];
-  RepeatSurvey_api(b_prhs, nlhs, outputs);
+  RepeatSurvey_api(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i = 1;
+    b_nlhs = 1;
   } else {
-    i = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -726,10 +631,8 @@ void unsafe_angle2point_mexFunction(int32_T nlhs, mxArray *plhs[3],
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[6];
   const mxArray *outputs[3];
-  int32_T i;
-  int32_T i1;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 6) {
@@ -741,17 +644,14 @@ void unsafe_angle2point_mexFunction(int32_T nlhs, mxArray *plhs[3],
                         "angle2point");
   }
   /* Call the function. */
-  for (i = 0; i < 6; i++) {
-    b_prhs[i] = prhs[i];
-  }
-  angle2point_api(b_prhs, nlhs, outputs);
+  angle2point_api(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i1 = 1;
+    b_nlhs = 1;
   } else {
-    i1 = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i1, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -770,7 +670,7 @@ void unsafe_fitcircle_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
       NULL  /* prev */
   };
   const mxArray *outputs[3];
-  int32_T i;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 1) {
@@ -785,11 +685,11 @@ void unsafe_fitcircle_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
   fitcircle_api(prhs[0], nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i = 1;
+    b_nlhs = 1;
   } else {
-    i = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -807,9 +707,8 @@ void unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[3];
   const mxArray *outputs[3];
-  int32_T i;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 3) {
@@ -821,17 +720,14 @@ void unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
                         "foot_of_perpendicular_from_a_point_to_a_line");
   }
   /* Call the function. */
-  b_prhs[0] = prhs[0];
-  b_prhs[1] = prhs[1];
-  b_prhs[2] = prhs[2];
-  c_foot_of_perpendicular_from_a_(b_prhs, nlhs, outputs);
+  c_foot_of_perpendicular_from_a_(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i = 1;
+    b_nlhs = 1;
   } else {
-    i = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -849,9 +745,7 @@ void unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[6];
   const mxArray *outputs;
-  int32_T i;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 6) {
@@ -863,10 +757,7 @@ void unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
                         "generate_unit_circle_with_normal_vector2");
   }
   /* Call the function. */
-  for (i = 0; i < 6; i++) {
-    b_prhs[i] = prhs[i];
-  }
-  d_generate_unit_circle_with_nor(b_prhs, &outputs);
+  d_generate_unit_circle_with_nor(prhs, &outputs);
   /* Copy over outputs to the caller. */
   emlrtReturnArrays(1, &plhs[0], &outputs);
 }
@@ -886,7 +777,6 @@ void unsafe_generate_unit_circle_with_normal_vector_mexFunction(
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[3];
   const mxArray *outputs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
@@ -899,10 +789,7 @@ void unsafe_generate_unit_circle_with_normal_vector_mexFunction(
                         "generate_unit_circle_with_normal_vector");
   }
   /* Call the function. */
-  b_prhs[0] = prhs[0];
-  b_prhs[1] = prhs[1];
-  b_prhs[2] = prhs[2];
-  c_generate_unit_circle_with_nor(b_prhs, &outputs);
+  c_generate_unit_circle_with_nor(prhs, &outputs);
   /* Copy over outputs to the caller. */
   emlrtReturnArrays(1, &plhs[0], &outputs);
 }
@@ -954,10 +841,8 @@ void unsafe_planefit4_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[7];
   const mxArray *outputs[4];
-  int32_T i;
-  int32_T i1;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 7) {
@@ -969,17 +854,14 @@ void unsafe_planefit4_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
                         "planefit4");
   }
   /* Call the function. */
-  for (i = 0; i < 7; i++) {
-    b_prhs[i] = prhs[i];
-  }
-  planefit4_api(b_prhs, nlhs, outputs);
+  planefit4_api(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i1 = 1;
+    b_nlhs = 1;
   } else {
-    i1 = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i1, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -997,10 +879,8 @@ void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[11];
   const mxArray *outputs[4];
-  int32_T i;
-  int32_T i1;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 11) {
@@ -1012,17 +892,14 @@ void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
                         "planefit8");
   }
   /* Call the function. */
-  for (i = 0; i < 11; i++) {
-    b_prhs[i] = prhs[i];
-  }
-  planefit8_api(b_prhs, nlhs, outputs);
+  planefit8_api(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i1 = 1;
+    b_nlhs = 1;
   } else {
-    i1 = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i1, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*
@@ -1040,9 +917,8 @@ void unsafe_planefit_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[4];
   const mxArray *outputs[2];
-  int32_T i;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 4) {
@@ -1054,18 +930,14 @@ void unsafe_planefit_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
                         "planefit");
   }
   /* Call the function. */
-  b_prhs[0] = prhs[0];
-  b_prhs[1] = prhs[1];
-  b_prhs[2] = prhs[2];
-  b_prhs[3] = prhs[3];
-  planefit_api(b_prhs, nlhs, outputs);
+  planefit_api(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i = 1;
+    b_nlhs = 1;
   } else {
-    i = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*

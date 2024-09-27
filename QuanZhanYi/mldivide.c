@@ -1,17 +1,16 @@
 /*
  * File: mldivide.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 22-Sep-2024 11:56:57
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 27-Sep-2024 14:25:16
  */
 
 /* Include Files */
 #include "mldivide.h"
-#include "QuanZhanYi_emxutil.h"
 #include "QuanZhanYi_rtwutil.h"
 #include "QuanZhanYi_types.h"
+#include "qrsolve.h"
 #include "rt_nonfinite.h"
-#include "xgeqp3.h"
 #include "xnrm2.h"
 #include <math.h>
 #include <string.h>
@@ -300,7 +299,7 @@ void d_mldivide(const double A[6], const double B[2], double Y[3])
     }
     if (lastv > 0) {
       if (lastc + 1 != 0) {
-        memset(&work[0], 0, (unsigned int)(lastc + 1) * sizeof(double));
+        memset(&work[0], 0, (lastc + 1) * sizeof(double));
         i = (ii + (lastc << 1)) + 3;
         for (pvt = k; pvt <= i; pvt += 2) {
           smax = 0.0;
@@ -402,150 +401,64 @@ void d_mldivide(const double A[6], const double B[2], double Y[3])
  */
 void mldivide(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3])
 {
-  emxArray_real_T *b_A;
-  emxArray_real_T *b_B;
   double b_A_data[9];
-  double tau_data[3];
   const double *A_data;
   const double *B_data;
   double a21;
-  double tol;
-  double *b_B_data;
-  double *c_A_data;
-  int jpvt[3];
-  int b_i;
-  int i;
-  int maxmn;
-  int minmn;
-  int rankA;
+  double maxval;
+  int r1;
+  int r2;
+  int r3;
   int rtemp;
   B_data = B->data;
   A_data = A->data;
-  emxInit_real_T(&b_A, 2);
-  emxInit_real_T(&b_B, 1);
   if ((A->size[0] == 0) || (B->size[0] == 0)) {
     Y[0] = 0.0;
     Y[1] = 0.0;
     Y[2] = 0.0;
   } else if (A->size[0] == 3) {
-    for (i = 0; i < 9; i++) {
-      b_A_data[i] = A_data[i];
+    for (r1 = 0; r1 < 9; r1++) {
+      b_A_data[r1] = A_data[r1];
     }
-    minmn = 0;
-    maxmn = 1;
-    rankA = 2;
-    tol = fabs(A_data[0]);
+    r1 = 0;
+    r2 = 1;
+    r3 = 2;
+    maxval = fabs(A_data[0]);
     a21 = fabs(A_data[1]);
-    if (a21 > tol) {
-      tol = a21;
-      minmn = 1;
-      maxmn = 0;
+    if (a21 > maxval) {
+      maxval = a21;
+      r1 = 1;
+      r2 = 0;
     }
-    if (fabs(A_data[2]) > tol) {
-      minmn = 2;
-      maxmn = 1;
-      rankA = 0;
+    if (fabs(A_data[2]) > maxval) {
+      r1 = 2;
+      r2 = 1;
+      r3 = 0;
     }
-    b_A_data[maxmn] = A_data[maxmn] / A_data[minmn];
-    b_A_data[rankA] /= b_A_data[minmn];
-    b_A_data[maxmn + 3] -= b_A_data[maxmn] * b_A_data[minmn + 3];
-    b_A_data[rankA + 3] -= b_A_data[rankA] * b_A_data[minmn + 3];
-    b_A_data[maxmn + 6] -= b_A_data[maxmn] * b_A_data[minmn + 6];
-    b_A_data[rankA + 6] -= b_A_data[rankA] * b_A_data[minmn + 6];
-    if (fabs(b_A_data[rankA + 3]) > fabs(b_A_data[maxmn + 3])) {
-      rtemp = maxmn;
-      maxmn = rankA;
-      rankA = rtemp;
+    b_A_data[r2] = A_data[r2] / A_data[r1];
+    b_A_data[r3] /= b_A_data[r1];
+    b_A_data[r2 + 3] -= b_A_data[r2] * b_A_data[r1 + 3];
+    b_A_data[r3 + 3] -= b_A_data[r3] * b_A_data[r1 + 3];
+    b_A_data[r2 + 6] -= b_A_data[r2] * b_A_data[r1 + 6];
+    b_A_data[r3 + 6] -= b_A_data[r3] * b_A_data[r1 + 6];
+    if (fabs(b_A_data[r3 + 3]) > fabs(b_A_data[r2 + 3])) {
+      rtemp = r2;
+      r2 = r3;
+      r3 = rtemp;
     }
-    b_A_data[rankA + 3] /= b_A_data[maxmn + 3];
-    b_A_data[rankA + 6] -= b_A_data[rankA + 3] * b_A_data[maxmn + 6];
-    Y[1] = B_data[maxmn] - B_data[minmn] * b_A_data[maxmn];
-    Y[2] = (B_data[rankA] - B_data[minmn] * b_A_data[rankA]) -
-           Y[1] * b_A_data[rankA + 3];
-    Y[2] /= b_A_data[rankA + 6];
-    Y[0] = B_data[minmn] - Y[2] * b_A_data[minmn + 6];
-    Y[1] -= Y[2] * b_A_data[maxmn + 6];
-    Y[1] /= b_A_data[maxmn + 3];
-    Y[0] -= Y[1] * b_A_data[minmn + 3];
-    Y[0] /= b_A_data[minmn];
+    b_A_data[r3 + 3] /= b_A_data[r2 + 3];
+    b_A_data[r3 + 6] -= b_A_data[r3 + 3] * b_A_data[r2 + 6];
+    Y[1] = B_data[r2] - B_data[r1] * b_A_data[r2];
+    Y[2] = (B_data[r3] - B_data[r1] * b_A_data[r3]) - Y[1] * b_A_data[r3 + 3];
+    Y[2] /= b_A_data[r3 + 6];
+    Y[0] = B_data[r1] - Y[2] * b_A_data[r1 + 6];
+    Y[1] -= Y[2] * b_A_data[r2 + 6];
+    Y[1] /= b_A_data[r2 + 3];
+    Y[0] -= Y[1] * b_A_data[r1 + 3];
+    Y[0] /= b_A_data[r1];
   } else {
-    i = b_A->size[0] * b_A->size[1];
-    b_A->size[0] = A->size[0];
-    b_A->size[1] = 3;
-    emxEnsureCapacity_real_T(b_A, i);
-    c_A_data = b_A->data;
-    minmn = A->size[0] * 3;
-    for (i = 0; i < minmn; i++) {
-      c_A_data[i] = A_data[i];
-    }
-    xgeqp3(b_A, tau_data, jpvt);
-    c_A_data = b_A->data;
-    rankA = 0;
-    if (b_A->size[0] < 3) {
-      minmn = b_A->size[0];
-      maxmn = 3;
-    } else {
-      minmn = 3;
-      maxmn = b_A->size[0];
-    }
-    if (minmn > 0) {
-      tol = 2.2204460492503131E-15 * (double)maxmn;
-      if (tol >= 1.4901161193847656E-8) {
-        tol = 1.4901161193847656E-8;
-      }
-      tol *= fabs(c_A_data[0]);
-      while ((rankA < minmn) &&
-             (!(fabs(c_A_data[rankA + b_A->size[0] * rankA]) <= tol))) {
-        rankA++;
-      }
-    }
-    i = b_B->size[0];
-    b_B->size[0] = B->size[0];
-    emxEnsureCapacity_real_T(b_B, i);
-    b_B_data = b_B->data;
-    minmn = B->size[0];
-    for (i = 0; i < minmn; i++) {
-      b_B_data[i] = B_data[i];
-    }
-    Y[0] = 0.0;
-    Y[1] = 0.0;
-    Y[2] = 0.0;
-    minmn = b_A->size[0];
-    maxmn = b_A->size[0];
-    if (maxmn > 3) {
-      maxmn = 3;
-    }
-    for (rtemp = 0; rtemp < maxmn; rtemp++) {
-      if (tau_data[rtemp] != 0.0) {
-        tol = b_B_data[rtemp];
-        i = rtemp + 2;
-        for (b_i = i; b_i <= minmn; b_i++) {
-          tol += c_A_data[(b_i + b_A->size[0] * rtemp) - 1] * b_B_data[b_i - 1];
-        }
-        tol *= tau_data[rtemp];
-        if (tol != 0.0) {
-          b_B_data[rtemp] -= tol;
-          for (b_i = i; b_i <= minmn; b_i++) {
-            b_B_data[b_i - 1] -=
-                c_A_data[(b_i + b_A->size[0] * rtemp) - 1] * tol;
-          }
-        }
-      }
-    }
-    for (b_i = 0; b_i < rankA; b_i++) {
-      Y[jpvt[b_i] - 1] = b_B_data[b_i];
-    }
-    for (rtemp = rankA; rtemp >= 1; rtemp--) {
-      minmn = jpvt[rtemp - 1] - 1;
-      Y[minmn] /= c_A_data[(rtemp + b_A->size[0] * (rtemp - 1)) - 1];
-      for (b_i = 0; b_i <= rtemp - 2; b_i++) {
-        i = jpvt[b_i];
-        Y[i - 1] -= Y[minmn] * c_A_data[b_i + b_A->size[0] * (rtemp - 1)];
-      }
-    }
+    qrsolve(A, B, Y);
   }
-  emxFree_real_T(&b_B);
-  emxFree_real_T(&b_A);
 }
 
 /*

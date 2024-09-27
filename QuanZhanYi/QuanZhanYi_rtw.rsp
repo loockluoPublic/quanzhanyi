@@ -14,10 +14,9 @@ Calculat_A_and_B_Points_after_Offest2.obj
 Calculat_JuXing_A_and_B_Points_after_Offest.obj
 mtimes.obj
 Calculate_accurate_cylinders_from_multiple_measurement_points2.obj
-xzsvdc.obj
 mldivide.obj
+qrsolve.obj
 ixfun.obj
-combineVectorElements.obj
 Calculate_rectangle_from_vertex.obj
 norm.obj
 Calculate_rectangle_from_vertex8.obj
@@ -26,6 +25,7 @@ nchoosek.obj
 find.obj
 mean.obj
 svd1.obj
+dot.obj
 polyfit.obj
 minOrMax.obj
 foot_of_perpendicular_from_a_point_to_a_line.obj
@@ -36,9 +36,6 @@ fitcircle.obj
 Generate_multi_layered_measurement_points.obj
 generate_unit_circle_with_normal_vector.obj
 generate_unit_circle_with_normal_vector2.obj
-JuXingFuCe.obj
-mod.obj
-prod.obj
 myvrrotvec2mat.obj
 OffsetCalculate.obj
 planefit.obj
@@ -49,7 +46,6 @@ xaxpy.obj
 xrotg.obj
 xrot.obj
 xswap.obj
-xgeqp3.obj
 cat.obj
 unsafeSxfun.obj
 div.obj

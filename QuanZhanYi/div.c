@@ -1,8 +1,8 @@
 /*
  * File: div.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 22-Sep-2024 11:56:57
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 27-Sep-2024 14:25:16
  */
 
 /* Include Files */
@@ -18,8 +18,8 @@
  *                const emxArray_real_T *in3
  * Return Type  : void
  */
-void binary_expand_op_16(emxArray_real_T *in1, double in2,
-                         const emxArray_real_T *in3)
+void n_binary_expand_op(emxArray_real_T *in1, double in2,
+                        const emxArray_real_T *in3)
 {
   emxArray_real_T *b_in2;
   const double *in3_data;
@@ -35,15 +35,19 @@ void binary_expand_op_16(emxArray_real_T *in1, double in2,
   i = b_in2->size[0] * b_in2->size[1];
   b_in2->size[0] = 1;
   if (in3->size[1] == 1) {
-    loop_ub = in1->size[1];
+    b_in2->size[1] = in1->size[1];
   } else {
-    loop_ub = in3->size[1];
+    b_in2->size[1] = in3->size[1];
   }
-  b_in2->size[1] = loop_ub;
   emxEnsureCapacity_real_T(b_in2, i);
   in2_data = b_in2->data;
   stride_0_1 = (in1->size[1] != 1);
   stride_1_1 = (in3->size[1] != 1);
+  if (in3->size[1] == 1) {
+    loop_ub = in1->size[1];
+  } else {
+    loop_ub = in3->size[1];
+  }
   for (i = 0; i < loop_ub; i++) {
     in2_data[i] = in2 * in1_data[i * stride_0_1] / in3_data[i * stride_1_1];
   }

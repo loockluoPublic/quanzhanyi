@@ -1,12 +1,12 @@
 /*
- * File: unsafeSxfun.h
+ * File: qrsolve.h
  *
  * MATLAB Coder version            : 5.4
  * C/C++ source code generated on  : 27-Sep-2024 14:25:16
  */
 
-#ifndef UNSAFESXFUN_H
-#define UNSAFESXFUN_H
+#ifndef QRSOLVE_H
+#define QRSOLVE_H
 
 /* Include Files */
 #include "QuanZhanYi_types.h"
@@ -19,7 +19,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void f_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in3);
+void qrsolve(const emxArray_real_T *A, const emxArray_real_T *B, double Y[3]);
 
 #ifdef __cplusplus
 }
@@ -27,7 +27,7 @@ void f_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in3);
 
 #endif
 /*
- * File trailer for unsafeSxfun.h
+ * File trailer for qrsolve.h
  *
  * [EOF]
  */
