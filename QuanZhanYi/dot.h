@@ -1,12 +1,12 @@
 /*
- * File: mod.h
+ * File: dot.h
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 22-Sep-2024 11:56:57
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 27-Sep-2024 14:25:16
  */
 
-#ifndef MOD_H
-#define MOD_H
+#ifndef DOT_H
+#define DOT_H
 
 /* Include Files */
 #include "rtwtypes.h"
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double b_mod(double x);
+double dot(const double a[3], const double b[3]);
 
 #ifdef __cplusplus
 }
@@ -26,7 +26,7 @@ double b_mod(double x);
 
 #endif
 /*
- * File trailer for mod.h
+ * File trailer for dot.h
  *
  * [EOF]
  */
