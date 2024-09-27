@@ -1,8 +1,8 @@
 /*
  * File: QuanZhanYi_emxutil.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Sep-2024 14:25:16
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 27-Sep-2024 21:13:02
  */
 
 /* Include Files */
@@ -87,9 +87,10 @@ void emxEnsureCapacity_boolean_T(emxArray_boolean_T *emxArray, int oldNumel)
         i *= 2;
       }
     }
-    newData = calloc((unsigned int)i, sizeof(boolean_T));
+    newData = malloc((unsigned int)i * sizeof(boolean_T));
     if (emxArray->data != NULL) {
-      memcpy(newData, emxArray->data, sizeof(boolean_T) * oldNumel);
+      memcpy(newData, emxArray->data,
+             sizeof(boolean_T) * (unsigned int)oldNumel);
       if (emxArray->canFreeData) {
         free(emxArray->data);
       }
@@ -129,9 +130,9 @@ void emxEnsureCapacity_int32_T(emxArray_int32_T *emxArray, int oldNumel)
         i *= 2;
       }
     }
-    newData = calloc((unsigned int)i, sizeof(int));
+    newData = malloc((unsigned int)i * sizeof(int));
     if (emxArray->data != NULL) {
-      memcpy(newData, emxArray->data, sizeof(int) * oldNumel);
+      memcpy(newData, emxArray->data, sizeof(int) * (unsigned int)oldNumel);
       if (emxArray->canFreeData) {
         free(emxArray->data);
       }
@@ -171,9 +172,9 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
         i *= 2;
       }
     }
-    newData = calloc((unsigned int)i, sizeof(double));
+    newData = malloc((unsigned int)i * sizeof(double));
     if (emxArray->data != NULL) {
-      memcpy(newData, emxArray->data, sizeof(double) * oldNumel);
+      memcpy(newData, emxArray->data, sizeof(double) * (unsigned int)oldNumel);
       if (emxArray->canFreeData) {
         free(emxArray->data);
       }
@@ -387,21 +388,20 @@ void emxInit_boolean_T(emxArray_boolean_T **pEmxArray)
 
 /*
  * Arguments    : emxArray_int32_T **pEmxArray
- *                int numDimensions
  * Return Type  : void
  */
-void emxInit_int32_T(emxArray_int32_T **pEmxArray, int numDimensions)
+void emxInit_int32_T(emxArray_int32_T **pEmxArray)
 {
   emxArray_int32_T *emxArray;
   int i;
   *pEmxArray = (emxArray_int32_T *)malloc(sizeof(emxArray_int32_T));
   emxArray = *pEmxArray;
   emxArray->data = (int *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int *)malloc(sizeof(int) * numDimensions);
+  emxArray->numDimensions = 2;
+  emxArray->size = (int *)malloc(sizeof(int) * 2U);
   emxArray->allocatedSize = 0;
   emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
+  for (i = 0; i < 2; i++) {
     emxArray->size[i] = 0;
   }
 }
@@ -419,7 +419,7 @@ void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions)
   emxArray = *pEmxArray;
   emxArray->data = (double *)NULL;
   emxArray->numDimensions = numDimensions;
-  emxArray->size = (int *)malloc(sizeof(int) * numDimensions);
+  emxArray->size = (int *)malloc(sizeof(int) * (unsigned int)numDimensions);
   emxArray->allocatedSize = 0;
   emxArray->canFreeData = true;
   for (i = 0; i < numDimensions; i++) {
