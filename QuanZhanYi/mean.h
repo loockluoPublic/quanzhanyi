@@ -2,7 +2,7 @@
  * File: mean.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Sep-2024 21:13:02
+ * C/C++ source code generated on  : 27-Sep-2024 22:03:53
  */
 
 #ifndef MEAN_H

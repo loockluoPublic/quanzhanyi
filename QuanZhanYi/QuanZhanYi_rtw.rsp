@@ -21,6 +21,7 @@ combineVectorElements.obj
 Calculate_rectangle_from_vertex.obj
 norm.obj
 Calculate_rectangle_from_vertex8.obj
+validate_print_arguments.obj
 planefit8.obj
 nchoosek.obj
 find.obj
