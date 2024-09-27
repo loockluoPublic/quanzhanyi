@@ -53,7 +53,7 @@ const App: React.FC<PropsWithChildren> = (props) => {
                 unCheckedChildren="定位"
                 checked={mode === TMode.second}
                 onChange={(v) => {
-                  setStep(0);
+                  // setStep(0);
                   setMode(v ? TMode.second : TMode.first);
                 }}
               />

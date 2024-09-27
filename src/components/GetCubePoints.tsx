@@ -38,7 +38,9 @@ export default function () {
   });
 
   const planeFit = async () => {
-    let MxPortsArr: CustomVector3[][] = [];
+    const MxPortsArr: CustomVector3[][] = [];
+    let MxPoint8Arr: { i: number; v: CustomVector3[] }[] = [];
+
     for (const item of options) {
       const key = `m${item.value}`;
       if (data.MxPoints[key]?.length > 9) {
@@ -54,34 +56,65 @@ export default function () {
       return;
     }
 
-    if (options.length === 8) {
+    if (data.hasChamfer) {
       const [l, t, r, b, lb, lt, rt, rb] = MxPortsArr;
-      MxPortsArr = [l, lt, t, rt, r, rb, b, lb];
+      MxPoint8Arr = [
+        { i: 0, v: l },
+        { i: 5, v: lt },
+        { i: 1, v: t },
+        { i: 6, v: rt },
+        { i: 2, v: r },
+        { i: 7, v: rb },
+        { i: 3, v: b },
+        { i: 4, v: lb },
+      ];
     }
     setPlaneFitLoadint(true);
     setTimeout(() => {
       const res: any = Planefit(
-        MxPortsArr,
+        data.hasChamfer ? MxPoint8Arr.map((item) => item.v) : MxPortsArr,
         ...data.firstPoints,
         data.distanceThreshold
       );
 
       const cubeResult = CalculateRectangleFromVertex(res.trianglePoints);
 
-      const newData = {
-        ...data,
-        ...res,
-        MxPoints: (res.MxPoints as any[]).reduce((acc, cur, i) => {
+      let MxPoints = {};
+      if (data.hasChamfer) {
+        MxPoints = MxPoint8Arr.map((item, i) => {
+          return {
+            ...item,
+            v: res.MxPoints?.[i],
+          };
+        })
+          .sort((a, b) => a.i - b.i)
+          .reduce((acc, cur, i) => {
+            return {
+              ...acc,
+              [`m${i}`]: cur.v,
+            };
+          }, {});
+        console.log("%c Line:85 🥝 MxPoints", "color:#fca650", MxPoints);
+        //   .forEach((cur, index) => {
+        //     MxPoints[`m${cur.i}`] = res.MxPoints?.[index];
+        //   });
+      } else {
+        MxPoints = (res.MxPoints as any[]).reduce((acc, cur, i) => {
           return {
             ...acc,
             [`m${i}`]: cur,
           };
-        }, {}),
+        }, {});
+      }
+
+      const newData = {
+        ...data,
+        ...res,
+        MxPoints,
         cubeResult: cubeResult,
       };
 
       setPlaneFitLoadint(false);
-
       setData(newData);
     }, 500);
   };

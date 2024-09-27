@@ -180,6 +180,7 @@ function CylinderFit() {
   const updateOffset = () => {
     if (!data.centerPoint || !paramAng || !paramA) return;
     if (!(data.resultTable?.length > 0)) return;
+    if (!data?.calulateRes?.R) return;
 
     const res = offsetCalculate(
       data.calulateRes.R,
