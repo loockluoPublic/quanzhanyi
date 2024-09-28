@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Sep-2024 23:23:36
+ * C/C++ source code generated on  : 29-Sep-2024 01:27:40
  */
 
 /* Include Files */
@@ -92,6 +92,9 @@ static const mxArray *k_emlrt_marshallOut(const real_T u[8]);
 
 static real_T (*l_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                    const emlrtMsgIdentifier *parentId))[4];
+
+static const mxArray *l_emlrt_marshallOut(const real_T u_data[],
+                                          const int32_T u_size[2]);
 
 static void m_emlrt_marshallIn(const emlrtStack *sp, const mxArray *nullptr,
                                const char_T *identifier, emxArray_real_T *y);
@@ -619,6 +622,25 @@ static real_T (*l_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
   real_T(*y)[4];
   y = v_emlrt_marshallIn(sp, emlrtAlias(u), parentId);
   emlrtDestroyArray(&u);
+  return y;
+}
+
+/*
+ * Arguments    : const real_T u_data[]
+ *                const int32_T u_size[2]
+ * Return Type  : const mxArray *
+ */
+static const mxArray *l_emlrt_marshallOut(const real_T u_data[],
+                                          const int32_T u_size[2])
+{
+  static const int32_T iv[2] = {0, 0};
+  const mxArray *m;
+  const mxArray *y;
+  y = NULL;
+  m = emlrtCreateNumericArray(2, (const void *)&iv[0], mxDOUBLE_CLASS, mxREAL);
+  emlrtMxSetData((mxArray *)m, (void *)&u_data[0]);
+  emlrtSetDimensions((mxArray *)m, &u_size[0], 2);
+  emlrtAssign(&y, m);
   return y;
 }
 
@@ -1257,6 +1279,119 @@ void ShengLuJiaoJiSuan_api(const mxArray *prhs, const mxArray **plhs)
   *plhs = b_emlrt_marshallOut(Ang);
   emxFree_real_T(&st, &Ang);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
+}
+
+/*
+ * Arguments    : const mxArray * const prhs[6]
+ *                int32_T nlhs
+ *                const mxArray *plhs[6]
+ * Return Type  : void
+ */
+void YuanXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
+                      const mxArray *plhs[6])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  emxArray_real_T *Distance;
+  emxArray_real_T *LTPY;
+  emxArray_real_T *PointIn;
+  emxArray_real_T *TiC;
+  emxArray_real_T *Wquanzhong1;
+  emxArray_real_T *Wquanzhong2;
+  emxArray_real_T *theta;
+  real_T(*MTaon)[3];
+  real_T(*Mcenter)[3];
+  real_T Mradial;
+  real_T phi;
+  real_T shenglunum;
+  st.tls = emlrtRootTLSGlobal;
+  emlrtHeapReferenceStackEnterFcnR2012b(&st);
+  /* Marshall function inputs */
+  emxInit_real_T(&st, &PointIn, 2);
+  PointIn->canFreeData = false;
+  g_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "PointIn", PointIn);
+  shenglunum = emlrt_marshallIn(&st, emlrtAliasP(prhs[1]), "shenglunum");
+  Mcenter = i_emlrt_marshallIn(&st, emlrtAlias(prhs[2]), "Mcenter");
+  MTaon = i_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "MTaon");
+  Mradial = emlrt_marshallIn(&st, emlrtAliasP(prhs[4]), "Mradial");
+  phi = emlrt_marshallIn(&st, emlrtAliasP(prhs[5]), "phi");
+  /* Invoke the target function */
+  emxInit_real_T(&st, &Distance, 2);
+  emxInit_real_T(&st, &theta, 2);
+  emxInit_real_T(&st, &LTPY, 2);
+  emxInit_real_T(&st, &TiC, 2);
+  emxInit_real_T(&st, &Wquanzhong1, 1);
+  emxInit_real_T(&st, &Wquanzhong2, 1);
+  YuanXingFuCe(PointIn, shenglunum, *Mcenter, *MTaon, Mradial, phi, Distance,
+               theta, LTPY, TiC, Wquanzhong1, Wquanzhong2);
+  emxFree_real_T(&st, &PointIn);
+  /* Marshall function outputs */
+  Distance->canFreeData = false;
+  plhs[0] = b_emlrt_marshallOut(Distance);
+  emxFree_real_T(&st, &Distance);
+  if (nlhs > 1) {
+    theta->canFreeData = false;
+    plhs[1] = b_emlrt_marshallOut(theta);
+  }
+  emxFree_real_T(&st, &theta);
+  if (nlhs > 2) {
+    LTPY->canFreeData = false;
+    plhs[2] = b_emlrt_marshallOut(LTPY);
+  }
+  emxFree_real_T(&st, &LTPY);
+  if (nlhs > 3) {
+    TiC->canFreeData = false;
+    plhs[3] = b_emlrt_marshallOut(TiC);
+  }
+  emxFree_real_T(&st, &TiC);
+  if (nlhs > 4) {
+    Wquanzhong1->canFreeData = false;
+    plhs[4] = h_emlrt_marshallOut(Wquanzhong1);
+  }
+  emxFree_real_T(&st, &Wquanzhong1);
+  if (nlhs > 5) {
+    Wquanzhong2->canFreeData = false;
+    plhs[5] = h_emlrt_marshallOut(Wquanzhong2);
+  }
+  emxFree_real_T(&st, &Wquanzhong2);
+  emlrtHeapReferenceStackLeaveFcnR2012b(&st);
+}
+
+/*
+ * Arguments    : const mxArray * const prhs[5]
+ *                const mxArray **plhs
+ * Return Type  : void
+ */
+void YuanZhuJiaoDian_api(const mxArray *const prhs[5], const mxArray **plhs)
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  real_T(*Cross_point_data)[6];
+  real_T(*MTaon)[3];
+  real_T(*Mcenter)[3];
+  real_T(*Pin1)[3];
+  real_T(*Pin2)[3];
+  real_T Mradial;
+  int32_T Cross_point_size[2];
+  st.tls = emlrtRootTLSGlobal;
+  Cross_point_data = (real_T(*)[6])mxMalloc(sizeof(real_T[6]));
+  /* Marshall function inputs */
+  Mcenter = i_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "Mcenter");
+  MTaon = i_emlrt_marshallIn(&st, emlrtAlias(prhs[1]), "MTaon");
+  Mradial = emlrt_marshallIn(&st, emlrtAliasP(prhs[2]), "Mradial");
+  Pin1 = i_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "Pin1");
+  Pin2 = i_emlrt_marshallIn(&st, emlrtAlias(prhs[4]), "Pin2");
+  /* Invoke the target function */
+  YuanZhuJiaoDian(*Mcenter, *MTaon, Mradial, *Pin1, *Pin2, *Cross_point_data,
+                  Cross_point_size);
+  /* Marshall function outputs */
+  *plhs = l_emlrt_marshallOut(*Cross_point_data, Cross_point_size);
 }
 
 /*

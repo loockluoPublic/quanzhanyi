@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Sep-2024 23:23:36
+ * C/C++ source code generated on  : 29-Sep-2024 01:27:40
  */
 
 /*************************************************************************/
@@ -49,6 +49,8 @@
 #include "RepeatSurvey.h"
 #include "ShengDaoGaoDu.h"
 #include "ShengLuJiaoJiSuan.h"
+#include "YuanXingFuCe.h"
+#include "YuanZhuJiaoDian.h"
 #include "angle2point.h"
 #include "fitcircle.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
@@ -251,6 +253,8 @@ You can call entry-point functions multiple times. */
   main_RepeatSurvey();
   main_ShengDaoGaoDu();
   main_ShengLuJiaoJiSuan();
+  main_YuanXingFuCe();
+  main_YuanZhuJiaoDian();
   /* Terminate the application.
 You do not need to do this more than one time. */
   QuanZhanYi_terminate();
@@ -670,6 +674,67 @@ void main_ShengLuJiaoJiSuan(void)
   emxInitArray_real_T(&Ang, 2);
   ShengLuJiaoJiSuan(argInit_real_T(), Ang);
   emxDestroyArray_real_T(Ang);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+void main_YuanXingFuCe(void)
+{
+  emxArray_real_T *Distance;
+  emxArray_real_T *LTPY;
+  emxArray_real_T *PointIn;
+  emxArray_real_T *TiC;
+  emxArray_real_T *Wquanzhong1;
+  emxArray_real_T *Wquanzhong2;
+  emxArray_real_T *theta;
+  double Mcenter_tmp[3];
+  double shenglunum_tmp;
+  /* Initialize function 'YuanXingFuCe' input arguments. */
+  /* Initialize function input argument 'PointIn'. */
+  PointIn = argInit_3xUnbounded_real_T();
+  shenglunum_tmp = argInit_real_T();
+  /* Initialize function input argument 'Mcenter'. */
+  argInit_3x1_real_T(Mcenter_tmp);
+  /* Initialize function input argument 'MTaon'. */
+  /* Call the entry-point 'YuanXingFuCe'. */
+  emxInitArray_real_T(&Distance, 2);
+  emxInitArray_real_T(&theta, 2);
+  emxInitArray_real_T(&LTPY, 2);
+  emxInitArray_real_T(&TiC, 2);
+  emxInitArray_real_T(&Wquanzhong1, 1);
+  emxInitArray_real_T(&Wquanzhong2, 1);
+  YuanXingFuCe(PointIn, shenglunum_tmp, Mcenter_tmp, Mcenter_tmp,
+               shenglunum_tmp, shenglunum_tmp, Distance, theta, LTPY, TiC,
+               Wquanzhong1, Wquanzhong2);
+  emxDestroyArray_real_T(PointIn);
+  emxDestroyArray_real_T(Distance);
+  emxDestroyArray_real_T(theta);
+  emxDestroyArray_real_T(LTPY);
+  emxDestroyArray_real_T(TiC);
+  emxDestroyArray_real_T(Wquanzhong1);
+  emxDestroyArray_real_T(Wquanzhong2);
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+void main_YuanZhuJiaoDian(void)
+{
+  double Cross_point_data[6];
+  double Mcenter_tmp[3];
+  int Cross_point_size[2];
+  /* Initialize function 'YuanZhuJiaoDian' input arguments. */
+  /* Initialize function input argument 'Mcenter'. */
+  argInit_3x1_real_T(Mcenter_tmp);
+  /* Initialize function input argument 'MTaon'. */
+  /* Initialize function input argument 'Pin1'. */
+  /* Initialize function input argument 'Pin2'. */
+  /* Call the entry-point 'YuanZhuJiaoDian'. */
+  YuanZhuJiaoDian(Mcenter_tmp, Mcenter_tmp, argInit_real_T(), Mcenter_tmp,
+                  Mcenter_tmp, Cross_point_data, Cross_point_size);
 }
 
 /*
