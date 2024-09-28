@@ -21,13 +21,11 @@ combineVectorElements.obj
 Calculate_rectangle_from_vertex.obj
 norm.obj
 Calculate_rectangle_from_vertex8.obj
-validate_print_arguments.obj
 planefit8.obj
 nchoosek.obj
 find.obj
 mean.obj
 svd1.obj
-dot.obj
 polyfit.obj
 minOrMax.obj
 foot_of_perpendicular_from_a_point_to_a_line.obj
