@@ -152,7 +152,11 @@ export default function () {
     const AB = [
       ...data.AB.map((item) => item.pointA),
       ...data.AB.map((item) => item.pointB),
-    ].sort((a, b) => (`${a.label}${a.key}` > `${b.label}${b.key}` ? 1 : -1));
+    ].sort((a, b) => {
+      const nA = { A: 0, B: 100 }[a.label] + a.key;
+      const nB = { A: 0, B: 100 }[b.label] + b.key;
+      return nA - nB;
+    });
 
     console.log("%c Line:153 🍕 AB", "color:#ea7e5c", AB);
     const newTable = data.cubeAgainTable?.map((item, i) => {
