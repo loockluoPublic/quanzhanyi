@@ -174,4 +174,17 @@ interface ICube {
    * 塔尺高度
    */
   tcH: number;
+
+  /**
+   * 矩形拟合结果
+   */
+  cubeResult: {
+    pIn: CustomVector3;
+    pOut: CustomVector3;
+    UPP: CustomVector3;
+    b: number;
+    h: number;
+    w: number;
+    Tao: CustomVector3;
+  };
 }

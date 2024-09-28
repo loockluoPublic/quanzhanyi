@@ -18,7 +18,7 @@ import {
 import PointsVector3 from "../components/PointVector3";
 import { CustomVector3 } from "../class/CustomVector3";
 
-const SDFBOptions = (() => {
+export const SDFBOptions = (() => {
   const options: DefaultOptionType[] = [];
   for (let index = 2; index <= 10; index++) {
     options.push({ value: index, label: `${index}声道` });
@@ -26,7 +26,7 @@ const SDFBOptions = (() => {
   return options;
 })();
 
-const sdmOptions = [
+export const sdmOptions = [
   { label: "声道面A", value: "A" },
   { label: "声道面B", value: "B" },
 ];

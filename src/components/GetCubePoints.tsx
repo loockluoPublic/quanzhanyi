@@ -70,14 +70,13 @@ export default function () {
       ];
     }
     setPlaneFitLoadint(true);
+
     setTimeout(() => {
       const res: any = Planefit(
         data.hasChamfer ? MxPoint8Arr.map((item) => item.v) : MxPortsArr,
         ...data.firstPoints,
         data.distanceThreshold
       );
-
-      const cubeResult = CalculateRectangleFromVertex(res.trianglePoints);
 
       let MxPoints = {};
       if (data.hasChamfer) {
@@ -94,28 +93,47 @@ export default function () {
               [`m${i}`]: cur.v,
             };
           }, {});
-        console.log("%c Line:85 🥝 MxPoints", "color:#fca650", MxPoints);
-        //   .forEach((cur, index) => {
-        //     MxPoints[`m${cur.i}`] = res.MxPoints?.[index];
-        //   });
+
+        // 用户复测入参
+        const res8temp: any = Planefit(
+          MxPortsArr.slice(0, 4),
+          ...data.firstPoints,
+          data.distanceThreshold
+        );
+
+        const cubeResult8temp = CalculateRectangleFromVertex(
+          res8temp.trianglePoints
+        );
+
+        const newData = {
+          ...data,
+          ...res,
+          planeParaOut: res8temp.planeParaOut,
+          MxPoints,
+          cubeResult: cubeResult8temp,
+        };
+
+        setPlaneFitLoadint(false);
+        setData(newData);
       } else {
+        const cubeResult = CalculateRectangleFromVertex(res.trianglePoints);
+
         MxPoints = (res.MxPoints as any[]).reduce((acc, cur, i) => {
           return {
             ...acc,
             [`m${i}`]: cur,
           };
         }, {});
+        const newData = {
+          ...data,
+          ...res,
+          MxPoints,
+          cubeResult: cubeResult,
+        };
+
+        setPlaneFitLoadint(false);
+        setData(newData);
       }
-
-      const newData = {
-        ...data,
-        ...res,
-        MxPoints,
-        cubeResult: cubeResult,
-      };
-
-      setPlaneFitLoadint(false);
-      setData(newData);
     }, 500);
   };
 

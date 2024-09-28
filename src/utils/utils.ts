@@ -782,8 +782,9 @@ export const shengLuJiao2Ang = (numSL: number) => {
  * @param numSL
  * @returns
  */
-export const juXingFuCe = (
+export const juXingFuCeFn = (
   cubeRes: ReturnType<typeof CalculateRectangleFromVertex>,
+  planeParaOut: number[][],
   cubeAgainTable: { p1: CustomVector3; p2: CustomVector3 }[],
   sdfb: number
 ) => {
@@ -795,15 +796,81 @@ export const juXingFuCe = (
   );
   const Pin = new EmxArray_real_T(cubeRes.pIn);
   const Tao = new EmxArray_real_T(cubeRes.Tao);
-
+  const PlaneParaOut = new EmxArray_real_T(planeParaOut);
   // const PlaneParaOut8 = new EmxArray_real_T();
 
-  // _juXingFuCe(PointIn.ptr, sdfb, Pin.arrayPtr, Tao.arrayPtr, cubeRes.h);
-  // const res = angs.toJSON()?.[0]?.map((v) => {
-  //   return Number(rad2ang(v).toFixed(6));
-  // });
-  // angs.free();
-  // return res;
+  /*
+  emxArray_real_T *Distance    //  声道长
+  emxArray_real_T *theta,  //  声道角
+  emxArray_real_T *LTPY     //  LT偏移   1 * n
+  emxArray_real_T *TiC,  // 声道相对高度   1  *  2n
+  emxArray_real_T *Wquanzhong3,  // 高斯勒让德权重  1  *  2n
+  emxArray_real_T *Wquanzhong4  //  矩形优化权重 1  *  2n
+*/
+  const Distance = new EmxArray_real_T(sdfb, 1);
+  const theta = new EmxArray_real_T(sdfb, 1);
+  const LTPY = new EmxArray_real_T(sdfb, 1);
+  const TiC = new EmxArray_real_T([]);
+  const Wquanzhong3 = new EmxArray_real_T(sdfb * 2, 1);
+  const Wquanzhong4 = new EmxArray_real_T(sdfb * 2, 1);
+  _juXingFuCe(
+    PointIn.ptr,
+    sdfb,
+    Pin.arrayPtr,
+    Tao.arrayPtr,
+    cubeRes.h,
+    PlaneParaOut.ptr,
+    Distance.ptr,
+    theta.ptr,
+    LTPY.ptr,
+    TiC.ptr,
+    Wquanzhong3.ptr,
+    Wquanzhong4.ptr
+  );
+
+  const _Distance = Distance.toJSON()[0];
+  const _theta = theta.toJSON()[0];
+  const _LTPY = LTPY.toJSON()[0];
+  const _TiC = LTPY.toJSON()[0];
+  const _Wquanzhong3 = Wquanzhong3.toJSON()[0];
+  const _Wquanzhong4 = Wquanzhong4.toJSON()[0];
+
+  return _Distance.map((d, i) => {
+    return {
+      sdc: d,
+      sdj: _theta[i],
+      ltOffset: _LTPY[i],
+      sdH: _TiC[i],
+      Wquanzhong3: [_Wquanzhong3[2 * i], _Wquanzhong3[2 * i + 1]],
+      Wquanzhong4: [_Wquanzhong4[2 * i], _Wquanzhong4[2 * i + 1]],
+    };
+  });
+};
+
+export const juXingFuCe = (
+  cubeRes: ReturnType<typeof CalculateRectangleFromVertex>,
+  planeParaOut: number[][],
+  cubeAgainTable: { p1: CustomVector3; p2: CustomVector3 }[],
+  sdfb: number,
+  sdmNum: number
+) => {
+  if (sdmNum === 2) {
+    const resA = juXingFuCeFn(
+      cubeRes,
+      planeParaOut,
+      cubeAgainTable.slice(0, sdfb),
+      sdfb
+    );
+    const resB = juXingFuCeFn(
+      cubeRes,
+      planeParaOut,
+      cubeAgainTable.slice(sdfb),
+      sdfb
+    );
+    return [...resA, ...resB];
+  } else {
+    return juXingFuCeFn(cubeRes, planeParaOut, cubeAgainTable, sdfb);
+  }
 };
 
 /**
