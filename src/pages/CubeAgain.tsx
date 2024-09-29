@@ -1,11 +1,13 @@
 import { Button, Checkbox, Select, Table } from "antd";
 import { useRecoilState } from "recoil";
-import { Data } from "../atom/globalState";
+import { Data, getInitAgainTable } from "../atom/globalState";
 import CylinderModule from "../components/Module3D";
 import PointsVector3 from "../components/PointVector3";
 import { CustomVector3 } from "../class/CustomVector3";
 import { juXingFuCe, rad2ang } from "../utils/utils";
 import { SDFBOptions, sdmOptions } from "./CubeResult";
+import { useEffect } from "react";
+import CubeFitting from "../components/Module3D/CubeModule";
 
 export default function () {
   const [data, setData] = useRecoilState(Data);
@@ -198,6 +200,13 @@ export default function () {
     });
   };
 
+  useEffect(() => {
+    setData((d) => ({
+      ...d,
+      cubeAgainTable: getInitAgainTable(data.sdfb, data.sdm) as any,
+    }));
+  }, [data.sdfb, data.sdm]);
+
   const width = data?.cubeResult?.b?.toFixed(4);
   const hight = data?.cubeResult?.h?.toFixed(4);
   const comp = (
@@ -284,16 +293,31 @@ export default function () {
   );
 
   const mPoints = [];
+  const pA = [],
+    pB = [];
+
   data.cubeAgainTable?.forEach((item: any) => {
     item.p1 && mPoints.push(item.p1);
     item.p2 && mPoints.push(item.p2);
+    if (item.sdm === "A") {
+      pA.push(item.p1, item.p2);
+    } else {
+      pB.push(item.p1, item.p2);
+    }
   });
 
   return (
-    <CylinderModule
+    <CubeFitting
       component={comp}
+      firstPoints={data.firstPoints}
       trianglePoints={data.trianglePoints}
-      mPoints={mPoints}
-    ></CylinderModule>
+      AB={pA.map((item, i) => {
+        return {
+          pointA: item,
+          pointB: pB[i],
+        };
+      })}
+      sdm={data.sdm}
+    ></CubeFitting>
   );
 }

@@ -56,6 +56,7 @@ export const Data = atom<GlobalData>({
     layNum: 2,
     numPerLay: 3,
     mPoints: [],
+    sfType: "Wquanzhong3",
   }, // 默认值
 });
 
