@@ -1,6 +1,5 @@
 import EmxArray_real_T from "../class/EmxArray_real_T";
 import { CustomVector3 } from "../class/CustomVector3";
-import { data, p3array, p4array } from "./mockData";
 import { tableData } from "./config";
 
 const {
@@ -9,7 +8,6 @@ const {
   _CalculateAccurateCylindersFromMultipleMeasurementPoints,
   _CalculatAAndBPoints,
   _Repeat_Survey,
-  _Planefit,
   _offsetCalculate,
   _shengLuJiaoJiSuan,
   _shengDaoGaoDu,
@@ -19,6 +17,7 @@ const {
   _CalcJuXingAAndBPointsAfterOffest,
   _CalculateRectangleFromVertex8,
   _juXingFuCe,
+  _yuanXingFuCe,
 } = (window as any).Module;
 
 /**
@@ -782,7 +781,7 @@ export const shengLuJiao2Ang = (numSL: number) => {
  * @param numSL
  * @returns
  */
-export const juXingFuCeFn = (
+const juXingFuCeFn = (
   cubeRes: ReturnType<typeof CalculateRectangleFromVertex>,
   planeParaOut: number[][],
   cubeAgainTable: { p1: CustomVector3; p2: CustomVector3 }[],
@@ -810,7 +809,7 @@ export const juXingFuCeFn = (
   const Distance = new EmxArray_real_T(sdfb, 1);
   const theta = new EmxArray_real_T(sdfb, 1);
   const LTPY = new EmxArray_real_T(sdfb, 1);
-  const TiC = new EmxArray_real_T([]);
+  const TiC = new EmxArray_real_T(sdfb * 2, 1);
   const Wquanzhong3 = new EmxArray_real_T(sdfb * 2, 1);
   const Wquanzhong4 = new EmxArray_real_T(sdfb * 2, 1);
   _juXingFuCe(
@@ -831,16 +830,24 @@ export const juXingFuCeFn = (
   const _Distance = Distance.toJSON()[0];
   const _theta = theta.toJSON()[0];
   const _LTPY = LTPY.toJSON()[0];
-  const _TiC = LTPY.toJSON()[0];
+  const _TiC = TiC.toJSON()[0];
+  console.log("%c Line:834 🥒 _TiC", "color:#f5ce50", _TiC);
   const _Wquanzhong3 = Wquanzhong3.toJSON()[0];
   const _Wquanzhong4 = Wquanzhong4.toJSON()[0];
+
+  Distance.free();
+  theta.free();
+  LTPY.free();
+  TiC.free();
+  Wquanzhong3.free();
+  Wquanzhong4.free();
 
   return _Distance.map((d, i) => {
     return {
       sdc: d,
       sdj: _theta[i],
       ltOffset: _LTPY[i],
-      sdH: _TiC[i],
+      sdH: [_TiC[2 * i], _TiC[2 * i + 1]],
       Wquanzhong3: [_Wquanzhong3[2 * i], _Wquanzhong3[2 * i + 1]],
       Wquanzhong4: [_Wquanzhong4[2 * i], _Wquanzhong4[2 * i + 1]],
     };
@@ -870,6 +877,91 @@ export const juXingFuCe = (
     return [...resA, ...resB];
   } else {
     return juXingFuCeFn(cubeRes, planeParaOut, cubeAgainTable, sdfb);
+  }
+};
+
+const yuanXingFuCeFn = (
+  calulateRes: Awaited<
+    ReturnType<typeof CalculateAccurateCylindersFromMultipleMeasurementPoints>
+  >,
+  cylinderAgainTable: { p1: CustomVector3; p2: CustomVector3 }[],
+  sdfb: number,
+  sdj: number
+) => {
+  const PointIn = new EmxArray_real_T(
+    cylinderAgainTable?.reduce?.((acc, cur) => {
+      return [...acc, cur.p1, cur.p2];
+    }, []) ?? []
+  );
+
+  const Mcenter = new EmxArray_real_T(calulateRes.center);
+  const MTaon = new EmxArray_real_T(calulateRes.mTaon);
+
+  const Distance = new EmxArray_real_T(sdfb, 1);
+  const theta = new EmxArray_real_T(sdfb, 1);
+  const LTPY = new EmxArray_real_T(sdfb, 1);
+  const TiC = new EmxArray_real_T(sdfb * 2, 1);
+  const Wquanzhong3 = new EmxArray_real_T(sdfb * 2, 1);
+  const Wquanzhong4 = new EmxArray_real_T(sdfb * 2, 1);
+
+  _yuanXingFuCe(
+    PointIn.ptr,
+    sdfb,
+    Mcenter.arrayPtr,
+    MTaon.arrayPtr,
+    calulateRes.R,
+    sdj,
+    Distance.ptr,
+    theta.ptr,
+    LTPY.ptr,
+    TiC.ptr,
+    Wquanzhong3.ptr,
+    Wquanzhong4.ptr
+  );
+
+  const _Distance = Distance.toJSON()[0];
+  const _theta = theta.toJSON()[0];
+  const _LTPY = LTPY.toJSON()[0];
+  console.log("%c Line:925 🍅 _LTPY", "color:#4fff4B", _LTPY);
+  const _TiC = TiC.toJSON()[0];
+  console.log("%c Line:926 🍣 _TiC", "color:#465975", _TiC);
+  const _Wquanzhong3 = Wquanzhong3.toJSON()[0];
+  const _Wquanzhong4 = Wquanzhong4.toJSON()[0];
+
+  Distance.free();
+  theta.free();
+  LTPY.free();
+  TiC.free();
+  Wquanzhong3.free();
+  Wquanzhong4.free();
+
+  return _Distance.map((d, i) => {
+    return {
+      sdc: d,
+      sdj: _theta[i],
+      ltOffset: _LTPY[i],
+      sdH: [_TiC[2 * i], _TiC[2 * i + 1]],
+      Wquanzhong3: [_Wquanzhong3[2 * i], _Wquanzhong3[2 * i + 1]],
+      Wquanzhong4: [_Wquanzhong4[2 * i], _Wquanzhong4[2 * i + 1]],
+    };
+  });
+};
+
+export const yuanXingFuCe = (
+  calulateRes: Awaited<
+    ReturnType<typeof CalculateAccurateCylindersFromMultipleMeasurementPoints>
+  >,
+  cylinderAgainTable: { p1: CustomVector3; p2: CustomVector3 }[],
+  sdfb: number,
+  sdj: number,
+  sdmNum: number
+) => {
+  if (sdmNum === 2) {
+    const resA = yuanXingFuCeFn(calulateRes, cylinderAgainTable, sdfb, sdj);
+    const resB = yuanXingFuCeFn(calulateRes, cylinderAgainTable, sdfb, sdj);
+    return [...resA, ...resB];
+  } else {
+    return yuanXingFuCeFn(calulateRes, cylinderAgainTable, sdfb, sdj);
   }
 };
 

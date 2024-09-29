@@ -1,7 +1,6 @@
 import { Button, Checkbox, Select, Table } from "antd";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
-import { useMemo } from "react";
 import CylinderModule from "../components/Module3D";
 import PointsVector3 from "../components/PointVector3";
 import { CustomVector3 } from "../class/CustomVector3";
@@ -124,7 +123,7 @@ export default function () {
       key: "sdH",
       align: "right",
       render: (v) => {
-        return v?.toFixed(4);
+        return v?.map?.((item) => item?.toFixed(4))?.join?.("，");
       },
     },
     {

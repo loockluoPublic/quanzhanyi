@@ -16,6 +16,7 @@
 #include "ShengDaoGaoDu.h"
 #include "Calculate_rectangle_from_vertex8.h"
 #include "JuXingFuCe.h"
+#include "YuanXingFuCe.h"
 
 EMSCRIPTEN_KEEPALIVE
 void generateUnitCircleWithNormalVector(double azimuth, double elevation,
@@ -174,7 +175,6 @@ void CalculateRectangleFromVertex8(
     Calculate_rectangle_from_vertex8(side_faces_transformed1, side_faces_transformed2, side_faces_transformed3, side_faces_transformed4, side_faces_transformed5, side_faces_transformed6, side_faces_transformed7, side_faces_transformed8, P_bound1, P_bound2, PAB, phi, shenglunum, Ti, a, distanceThreshold, PointTable_A_off8, PointTable_B_off8, XieMianPianYi);
 }
 
-
 EMSCRIPTEN_KEEPALIVE
 void juXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
                 const double Pin[3], const double Tao[3], double h,
@@ -183,5 +183,16 @@ void juXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
                 emxArray_real_T *TiC, emxArray_real_T *Wquanzhong3,
                 emxArray_real_T *Wquanzhong4)
 {
-    JuXingFuCe(PointIn,shenglunum,Pin,Tao,h,PlaneParaOut8,Distance,theta,LTPY,TiC,Wquanzhong3,Wquanzhong4);
+    JuXingFuCe(PointIn, shenglunum, Pin, Tao, h, PlaneParaOut8, Distance, theta, LTPY, TiC, Wquanzhong3, Wquanzhong4);
+};
+
+EMSCRIPTEN_KEEPALIVE
+void yuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
+                  const double Mcenter[3], const double MTaon[3],
+                  double Mradial, double phi, emxArray_real_T *Distance,
+                  emxArray_real_T *theta, emxArray_real_T *LTPY,
+                  emxArray_real_T *TiC, emxArray_real_T *Wquanzhong1,
+                  emxArray_real_T *Wquanzhong2)
+{
+    YuanXingFuCe(PointIn, shenglunum, Mcenter, MTaon, Mradial, phi, Distance, theta, LTPY, TiC, Wquanzhong1, Wquanzhong2);
 };
