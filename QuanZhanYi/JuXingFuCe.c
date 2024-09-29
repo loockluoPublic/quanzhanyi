@@ -2,7 +2,7 @@
  * File: JuXingFuCe.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Sep-2024 23:23:36
+ * C/C++ source code generated on  : 29-Sep-2024 01:27:40
  */
 
 /* Include Files */
@@ -17,110 +17,9 @@
 #include "nchoosek.h"
 #include "prod.h"
 #include "rt_nonfinite.h"
-#include "rt_nonfinite.h"
 #include <math.h>
 
-/* Function Declarations */
-static void b_minus(emxArray_real_T *in1, const emxArray_real_T *in2);
-
-static double rt_powd_snf(double u0, double u1);
-
 /* Function Definitions */
-/*
- * Arguments    : emxArray_real_T *in1
- *                const emxArray_real_T *in2
- * Return Type  : void
- */
-static void b_minus(emxArray_real_T *in1, const emxArray_real_T *in2)
-{
-  emxArray_real_T *b_in2;
-  const double *in2_data;
-  double *b_in2_data;
-  double *in1_data;
-  int i;
-  int loop_ub;
-  int stride_0_1;
-  int stride_1_1;
-  in2_data = in2->data;
-  in1_data = in1->data;
-  emxInit_real_T(&b_in2, 2);
-  i = b_in2->size[0] * b_in2->size[1];
-  b_in2->size[0] = 1;
-  if (in1->size[1] == 1) {
-    loop_ub = in2->size[1];
-  } else {
-    loop_ub = in1->size[1];
-  }
-  b_in2->size[1] = loop_ub;
-  emxEnsureCapacity_real_T(b_in2, i);
-  b_in2_data = b_in2->data;
-  stride_0_1 = (in2->size[1] != 1);
-  stride_1_1 = (in1->size[1] != 1);
-  for (i = 0; i < loop_ub; i++) {
-    b_in2_data[i] = in2_data[i * stride_0_1] - in1_data[i * stride_1_1];
-  }
-  i = in1->size[0] * in1->size[1];
-  in1->size[0] = 1;
-  in1->size[1] = b_in2->size[1];
-  emxEnsureCapacity_real_T(in1, i);
-  in1_data = in1->data;
-  loop_ub = b_in2->size[1];
-  for (i = 0; i < loop_ub; i++) {
-    in1_data[i] = b_in2_data[i];
-  }
-  emxFree_real_T(&b_in2);
-}
-
-/*
- * Arguments    : double u0
- *                double u1
- * Return Type  : double
- */
-static double rt_powd_snf(double u0, double u1)
-{
-  double d;
-  double d1;
-  double y;
-  if (rtIsNaN(u0) || rtIsNaN(u1)) {
-    y = rtNaN;
-  } else {
-    d = fabs(u0);
-    d1 = fabs(u1);
-    if (rtIsInf(u1)) {
-      if (d == 1.0) {
-        y = 1.0;
-      } else if (d > 1.0) {
-        if (u1 > 0.0) {
-          y = rtInf;
-        } else {
-          y = 0.0;
-        }
-      } else if (u1 > 0.0) {
-        y = 0.0;
-      } else {
-        y = rtInf;
-      }
-    } else if (d1 == 0.0) {
-      y = 1.0;
-    } else if (d1 == 1.0) {
-      if (u1 > 0.0) {
-        y = u0;
-      } else {
-        y = 1.0 / u0;
-      }
-    } else if (u1 == 2.0) {
-      y = u0 * u0;
-    } else if ((u1 == 0.5) && (u0 >= 0.0)) {
-      y = sqrt(u0);
-    } else if ((u0 < 0.0) && (u1 > floor(u1))) {
-      y = rtNaN;
-    } else {
-      y = pow(u0, u1);
-    }
-  }
-  return y;
-}
-
 /*
  * 计算距离
  *
@@ -673,6 +572,51 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
     theta_data[b_i] = fabs(t_k_data[b_i]);
   }
   emxFree_real_T(&t_k);
+}
+
+/*
+ * Arguments    : emxArray_real_T *in1
+ *                const emxArray_real_T *in2
+ * Return Type  : void
+ */
+void b_minus(emxArray_real_T *in1, const emxArray_real_T *in2)
+{
+  emxArray_real_T *b_in2;
+  const double *in2_data;
+  double *b_in2_data;
+  double *in1_data;
+  int i;
+  int loop_ub;
+  int stride_0_1;
+  int stride_1_1;
+  in2_data = in2->data;
+  in1_data = in1->data;
+  emxInit_real_T(&b_in2, 2);
+  i = b_in2->size[0] * b_in2->size[1];
+  b_in2->size[0] = 1;
+  if (in1->size[1] == 1) {
+    loop_ub = in2->size[1];
+  } else {
+    loop_ub = in1->size[1];
+  }
+  b_in2->size[1] = loop_ub;
+  emxEnsureCapacity_real_T(b_in2, i);
+  b_in2_data = b_in2->data;
+  stride_0_1 = (in2->size[1] != 1);
+  stride_1_1 = (in1->size[1] != 1);
+  for (i = 0; i < loop_ub; i++) {
+    b_in2_data[i] = in2_data[i * stride_0_1] - in1_data[i * stride_1_1];
+  }
+  i = in1->size[0] * in1->size[1];
+  in1->size[0] = 1;
+  in1->size[1] = b_in2->size[1];
+  emxEnsureCapacity_real_T(in1, i);
+  in1_data = in1->data;
+  loop_ub = b_in2->size[1];
+  for (i = 0; i < loop_ub; i++) {
+    in1_data[i] = b_in2_data[i];
+  }
+  emxFree_real_T(&b_in2);
 }
 
 /*

@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Sep-2024 23:23:36
+ * C/C++ source code generated on  : 29-Sep-2024 01:27:40
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -145,6 +145,21 @@ void ShengDaoGaoDu_api(const mxArray *prhs, const mxArray **plhs);
 void ShengLuJiaoJiSuan(real_T numShengLu, emxArray_real_T *Ang);
 
 void ShengLuJiaoJiSuan_api(const mxArray *prhs, const mxArray **plhs);
+
+void YuanXingFuCe(emxArray_real_T *PointIn, real_T shenglunum,
+                  real_T Mcenter[3], real_T MTaon[3], real_T Mradial,
+                  real_T phi, emxArray_real_T *Distance, emxArray_real_T *theta,
+                  emxArray_real_T *LTPY, emxArray_real_T *TiC,
+                  emxArray_real_T *Wquanzhong1, emxArray_real_T *Wquanzhong2);
+
+void YuanXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
+                      const mxArray *plhs[6]);
+
+void YuanZhuJiaoDian(real_T Mcenter[3], real_T MTaon[3], real_T Mradial,
+                     real_T Pin1[3], real_T Pin2[3], real_T Cross_point_data[],
+                     int32_T Cross_point_size[2]);
+
+void YuanZhuJiaoDian_api(const mxArray *const prhs[5], const mxArray **plhs);
 
 void angle2point(real_T ANG, real_T a, real_T b, real_T c, real_T d,
                  real_T Mradial, real_T *x, real_T *y, real_T *z);

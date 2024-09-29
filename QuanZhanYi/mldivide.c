@@ -2,7 +2,7 @@
  * File: mldivide.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Sep-2024 23:23:36
+ * C/C++ source code generated on  : 29-Sep-2024 01:27:40
  */
 
 /* Include Files */
@@ -220,7 +220,7 @@ void d_mldivide(const double A[6], const double B[2], double Y[3])
       t = b_A[ii];
       kend = ii + 2;
       tau[0] = 0.0;
-      smax = f_xnrm2(b_A, ii + 2);
+      smax = g_xnrm2(b_A, ii + 2);
       if (smax != 0.0) {
         scale = rt_hypotd_snf(b_A[ii], smax);
         if (b_A[ii] >= 0.0) {
@@ -236,7 +236,7 @@ void d_mldivide(const double A[6], const double B[2], double Y[3])
             scale *= 9.9792015476736E+291;
             t *= 9.9792015476736E+291;
           } while ((fabs(scale) < 1.0020841800044864E-292) && (pvt < 20));
-          scale = rt_hypotd_snf(t, f_xnrm2(b_A, ii + 2));
+          scale = rt_hypotd_snf(t, g_xnrm2(b_A, ii + 2));
           if (t >= 0.0) {
             scale = -scale;
           }
@@ -342,7 +342,7 @@ void d_mldivide(const double A[6], const double B[2], double Y[3])
         scale = smax * (scale * scale);
         if (scale <= 1.4901161193847656E-8) {
           if (b_i + 1 < 2) {
-            absxk = f_xnrm2(b_A, pvt + 2);
+            absxk = g_xnrm2(b_A, pvt + 2);
             vn1[j - 1] = absxk;
             vn2[j - 1] = absxk;
           } else {

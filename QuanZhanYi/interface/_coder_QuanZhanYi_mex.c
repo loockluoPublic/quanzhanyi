@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Sep-2024 23:23:36
+ * C/C++ source code generated on  : 29-Sep-2024 01:27:40
  */
 
 /* Include Files */
@@ -20,7 +20,7 @@
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
-  static const char_T *emlrtEntryPoints[23] = {
+  static const char_T *emlrtEntryPoints[25] = {
       "angle2point",
       "Calculat_A_and_B_Points",
       "Calculat_A_and_B_Points_after_Offest2",
@@ -43,7 +43,9 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
       "planefit8",
       "RepeatSurvey",
       "ShengDaoGaoDu",
-      "ShengLuJiaoJiSuan"};
+      "ShengLuJiaoJiSuan",
+      "YuanXingFuCe",
+      "YuanZhuJiaoDian"};
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
@@ -55,7 +57,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   st.tls = emlrtRootTLSGlobal;
   /* Dispatch the entry-point. */
   switch (emlrtGetEntryPointIndexR2016a(
-      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 23)) {
+      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 25)) {
   case 0:
     unsafe_angle2point_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
@@ -133,6 +135,12 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
     break;
   case 22:
     unsafe_ShengLuJiaoJiSuan_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 23:
+    unsafe_YuanXingFuCe_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 24:
+    unsafe_YuanZhuJiaoDian_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   }
   /* Module termination. */
@@ -707,6 +715,86 @@ void unsafe_ShengLuJiaoJiSuan_mexFunction(int32_T nlhs, mxArray *plhs[1],
   }
   /* Call the function. */
   ShengLuJiaoJiSuan_api(prhs[0], &outputs);
+  /* Copy over outputs to the caller. */
+  emlrtReturnArrays(1, &plhs[0], &outputs);
+}
+
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[6]
+ *                int32_T nrhs
+ *                const mxArray *prhs[6]
+ * Return Type  : void
+ */
+void unsafe_YuanXingFuCe_mexFunction(int32_T nlhs, mxArray *plhs[6],
+                                     int32_T nrhs, const mxArray *prhs[6])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *b_prhs[6];
+  const mxArray *outputs[6];
+  int32_T i;
+  int32_T i1;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 6) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 6, 4,
+                        12, "YuanXingFuCe");
+  }
+  if (nlhs > 6) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 12,
+                        "YuanXingFuCe");
+  }
+  /* Call the function. */
+  for (i = 0; i < 6; i++) {
+    b_prhs[i] = prhs[i];
+  }
+  YuanXingFuCe_api(b_prhs, nlhs, outputs);
+  /* Copy over outputs to the caller. */
+  if (nlhs < 1) {
+    i1 = 1;
+  } else {
+    i1 = nlhs;
+  }
+  emlrtReturnArrays(i1, &plhs[0], &outputs[0]);
+}
+
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[1]
+ *                int32_T nrhs
+ *                const mxArray *prhs[5]
+ * Return Type  : void
+ */
+void unsafe_YuanZhuJiaoDian_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                        int32_T nrhs, const mxArray *prhs[5])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *b_prhs[5];
+  const mxArray *outputs;
+  int32_T i;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 5) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 5, 4,
+                        15, "YuanZhuJiaoDian");
+  }
+  if (nlhs > 1) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 15,
+                        "YuanZhuJiaoDian");
+  }
+  /* Call the function. */
+  for (i = 0; i < 5; i++) {
+    b_prhs[i] = prhs[i];
+  }
+  YuanZhuJiaoDian_api(b_prhs, &outputs);
   /* Copy over outputs to the caller. */
   emlrtReturnArrays(1, &plhs[0], &outputs);
 }

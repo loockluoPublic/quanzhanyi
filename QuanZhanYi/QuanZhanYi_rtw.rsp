@@ -6,6 +6,7 @@ QuanZhanYi_initialize.obj
 QuanZhanYi_terminate.obj
 angle2point.obj
 Calculat_A_and_B_Points.obj
+norm.obj
 pinv.obj
 svd.obj
 xnrm2.obj
@@ -19,7 +20,6 @@ mldivide.obj
 ixfun.obj
 combineVectorElements.obj
 Calculate_rectangle_from_vertex.obj
-norm.obj
 Calculate_rectangle_from_vertex8.obj
 planefit8.obj
 nchoosek.obj
@@ -45,11 +45,17 @@ planefit.obj
 RepeatSurvey.obj
 ShengDaoGaoDu.obj
 ShengLuJiaoJiSuan.obj
+YuanXingFuCe.obj
+YuanZhuJiaoDian.obj
+xgeev.obj
 xaxpy.obj
 xrotg.obj
 xrot.obj
 xswap.obj
 xgeqp3.obj
+xzgebal.obj
+xdlahqr.obj
+xzlascl.obj
 cat.obj
 unsafeSxfun.obj
 div.obj
