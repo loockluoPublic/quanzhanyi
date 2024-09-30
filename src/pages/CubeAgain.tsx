@@ -107,7 +107,7 @@ export default function () {
       key: "sdj",
       align: "right",
       render: (v) => {
-        return typeof v === "number" ? rad2ang(v)?.toFixed(2) : "";
+        return typeof v === "number" ? rad2ang(v, true)?.toFixed(2) : "";
       },
     },
     {
@@ -215,7 +215,7 @@ export default function () {
       <div className="q-flex q-justify-between">
         <div>
           <span>
-            声道面：{" "}
+            声道面：
             <Checkbox.Group
               value={data.sdm}
               options={sdmOptions}

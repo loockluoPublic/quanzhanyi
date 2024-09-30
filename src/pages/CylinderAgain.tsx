@@ -106,7 +106,7 @@ export default function () {
       key: "sdj",
       align: "right",
       render: (v) => {
-        return typeof v === "number" ? rad2ang(v)?.toFixed(2) : "";
+        return typeof v === "number" ? rad2ang(v, true)?.toFixed(2) : "";
       },
     },
     {

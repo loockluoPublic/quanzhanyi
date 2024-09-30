@@ -234,53 +234,6 @@ export const CalculatAAndBPoints = async (
   return res;
 };
 
-// /**
-//  * @description 矩形面拟合
-//  * @param Points 计算面的点
-//  * @param PlaneParaIn 已计算的平面参数
-//  * @param BoundPoint1 边界1
-//  * @param BoundPoint2 边界2
-//  * @param PlaneParaOut 输出平面参数
-//  * @param TrianglePoints 三角面的点
-//  * @returns
-//  */
-// export const Planefit = async (
-//   Points: CustomVector3[],
-//   PlaneParaIn: number[][],
-//   BoundPoint1: CustomVector3,
-//   BoundPoint2: CustomVector3
-// ) => {
-//   const plantNum = PlaneParaIn.length + 1;
-//   const points = new EmxArray_real_T(Points);
-//   const planeParaIn = new EmxArray_real_T(PlaneParaIn);
-//   const boundPoint1 = new EmxArray_real_T(BoundPoint1);
-//   const boundPoint2 = new EmxArray_real_T(BoundPoint2);
-//   const planeParaOut = new EmxArray_real_T(4, plantNum);
-//   const trianglePoints = new EmxArray_real_T(3, plantNum * 2 * 3);
-
-//   _Planefit(
-//     points.ptr,
-//     planeParaIn.ptr,
-//     boundPoint1.arrayPtr,
-//     boundPoint2.arrayPtr,
-//     planeParaOut.ptr,
-//     trianglePoints.ptr
-//   );
-//   trianglePoints.getSize();
-//   const res = {
-//     planeParaOut: planeParaOut.toJSON(),
-//     trianglePoints: trianglePoints.toVector3(),
-//   };
-
-//   points.free();
-//   planeParaIn.free();
-//   planeParaOut.free();
-//   boundPoint1.free();
-//   boundPoint2.free();
-//   trianglePoints.free();
-//   return res;
-// };
-
 /**
  * 复测计算声路角和生路长
  */
@@ -977,7 +930,14 @@ export const ang2rad = (ang: number) => ang * (Math.PI / 180);
  * @param rad 弧度
  * @returns
  */
-export const rad2ang = (rad: number) => rad * (180 / Math.PI);
+export const rad2ang = (rad: number, abs?: boolean) => {
+  const ang = rad * (180 / Math.PI);
+  if (abs && ang > 90) {
+    return 180 - ang;
+  } else {
+    return ang;
+  }
+};
 
 /**
  * 声道角 实际值转换为 可见值
