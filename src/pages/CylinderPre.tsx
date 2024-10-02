@@ -207,7 +207,7 @@ function CylinderPre() {
       <div className="q-my-1 q-flex ">
         <div className="q-fle1x">
           <span className="q-block">
-            边界点1：
+            上游边界点：
             <PointsVector3
               className="!q-inline-flex !q-my-1"
               value={data.firstPoints[0] as CustomVector3}
@@ -220,7 +220,7 @@ function CylinderPre() {
             />
           </span>
           <span className="q-block ">
-            边界点2：
+            下游边界点：
             <PointsVector3
               className="!q-inline-flex !q-my-1"
               value={data.firstPoints[1] as CustomVector3}

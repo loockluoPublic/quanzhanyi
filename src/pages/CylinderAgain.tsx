@@ -175,10 +175,16 @@ export default function () {
   };
 
   useEffect(() => {
-    setData((d) => ({
-      ...d,
-      cylinderAgainTable: getInitAgainTable(data.sdfb, data.sdm) as any,
-    }));
+    setData((d) => {
+      if (d.cylinderAgainTable) {
+        return d;
+      } else {
+        return {
+          ...d,
+          cylinderAgainTable: getInitAgainTable(data.sdfb, data.sdm) as any,
+        };
+      }
+    });
   }, [data.sdfb, data.sdm]);
 
   const calcFuCe = () => {

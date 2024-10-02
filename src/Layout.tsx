@@ -7,6 +7,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { downLoadFile } from "./utils/utils";
 import UploadFile from "./components/UploadFile";
 import zhCN from "antd/es/locale/zh_CN";
+import { transformJSON2Excel } from "./utils/exportExcel";
 
 const { Header, Content } = Layout;
 
@@ -57,6 +58,12 @@ const App: React.FC<PropsWithChildren> = (props) => {
                   setMode(v ? TMode.second : TMode.first);
                 }}
               />
+              <div
+                className=" q-text-white q-cursor-pointer q-ml-6"
+                onClick={() => transformJSON2Excel(data)}
+              >
+                导出excel
+              </div>
               <div
                 className=" q-text-white q-cursor-pointer q-ml-6"
                 onClick={() => downLoadFile(data)}

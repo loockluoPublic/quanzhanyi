@@ -11,7 +11,7 @@ export default function BoundPoints() {
   return (
     <div className="q-flex">
       <span>
-        边界点1：
+        上游边界点：
         <PointsVector3
           className="!q-inline-flex"
           value={boundPoints?.[0]}
@@ -24,7 +24,7 @@ export default function BoundPoints() {
         />
       </span>
       <span className="q-ml-8">
-        边界点2：
+        下游边界点：
         <PointsVector3
           className="!q-inline-flex"
           value={boundPoints?.[1]}
