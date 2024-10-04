@@ -1,14 +1,15 @@
 import { Canvas } from "@react-three/fiber";
-import { Html, OrbitControls } from "@react-three/drei";
+import { Html, Line, OrbitControls } from "@react-three/drei";
 
 import "./index.css";
 import "../../utils/utils";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
 import { CustomVector3 } from "../../class/CustomVector3";
 import PerspectiveCamera from "./PerspectiveCamera";
 import MyCylinder from "./MyCylinder";
 import React from "react";
+import { Spherical, Vector3 } from "three";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
@@ -37,6 +38,30 @@ function PointsLabel(props: {
     }
   });
 }
+
+const Direct = (props: { direct: number[] }) => {
+  const line = useMemo(() => {
+    if (
+      typeof props.direct[0] === "number" &&
+      typeof props.direct[1] === "number"
+    ) {
+      return [
+        new CustomVector3()
+          .fromSpherical(-1, props.direct[1], props.direct[0])
+          .toVector3(),
+        new CustomVector3()
+          .fromSpherical(1, props.direct[1], props.direct[0])
+          .toVector3(),
+      ];
+    } else {
+      return null;
+    }
+  }, [props.direct]);
+
+  if (!line) return null;
+
+  return <Line color="#778beb" points={line} />;
+};
 
 export default function Index(props: {
   className?: string;
@@ -80,6 +105,8 @@ export default function Index(props: {
             .filter((p) => p.enable)}
           color="#000"
         />
+
+        {props.direct && <Direct direct={props.direct} />}
 
         {props.firstPoints?.length > 0 && (
           <PointsLabel points={props.firstPoints} color="red" />

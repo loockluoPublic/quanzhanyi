@@ -7,7 +7,7 @@ export default function PointsVector2(props: {
   const value = props.value?.map((v) => rad2ang(v).toFixed(2));
   return (
     <span style={props.style}>
-      ( {value?.[0] ?? "--"}°, {value?.[1] ?? "--"}° )
+      (p: {value?.[0] ?? "--"}°，t: {value?.[1] ?? "--"}° )
     </span>
   );
 }

@@ -97,7 +97,7 @@ export default function () {
       key: "sdc",
       align: "right",
       render: (v) => {
-        return v?.toFixed(4);
+        return v?.toFixed?.(4);
       },
     },
     {
@@ -115,7 +115,7 @@ export default function () {
       key: "ltOffset",
       align: "right",
       render: (v) => {
-        return v?.toFixed(4);
+        return v?.toFixed?.(4);
       },
     },
     {
@@ -124,7 +124,7 @@ export default function () {
       key: "sdH",
       align: "right",
       render: (v) => {
-        return v?.map?.((item) => item?.toFixed(4))?.join?.("，");
+        return v?.toFixed?.(4);
       },
     },
     {
@@ -133,7 +133,7 @@ export default function () {
       key: "Wquanzhong3",
       align: "right",
       render: (v) => {
-        return v?.map?.((item) => item?.toFixed(4))?.join?.("，");
+        return v?.toFixed?.(4);
       },
     },
 
@@ -143,7 +143,7 @@ export default function () {
       key: "Wquanzhong4",
       align: "right",
       render: (v) => {
-        return v?.map?.((item) => item?.toFixed(4))?.join?.("，");
+        return v?.toFixed?.(4);
       },
     },
   ].filter((item) => item.key !== data.sfType);

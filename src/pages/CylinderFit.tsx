@@ -4,7 +4,7 @@ import { Data, getInitAgainTable } from "../atom/globalState";
 import { Checkbox, InputNumber, message, Table, Tooltip } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
 import { Point } from "./CalculateResultPoints";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Select, { DefaultOptionType } from "antd/es/select";
 import {
   CalculatAAndBPoints,

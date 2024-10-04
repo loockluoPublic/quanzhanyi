@@ -110,6 +110,14 @@ export class CustomVector3 extends Vector3 {
     return newCV3;
   }
 
+  fromSpherical(radius?: number, phi?: number, theta?: number, style?: any) {
+    // 计算笛卡尔坐标
+    var x = radius * Math.sin(phi) * Math.sin(theta);
+    var y = radius * Math.cos(phi);
+    var z = radius * Math.sin(phi) * Math.cos(theta);
+    return new CustomVector3(x, y, z, style);
+  }
+
   fromJSONArray(arr: any[]) {
     return arr.map(({ x, y, z, ...style }) => {
       return new CustomVector3(x, y, z, style);

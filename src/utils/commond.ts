@@ -20,7 +20,9 @@ export const sendText = (text): Promise<string> => {
           Math.random() * 10 - 5
         }`,
         "1004:0": "0",
-        "2107:1": "1.069995191213058,1.000012316348839",
+        "2107:1": `${Math.random() * 3.14 - 1.07},${
+          Math.random() * 3.14 - 1.07
+        }`,
       };
       setTimeout(() => {
         resolve(mockData[text]);

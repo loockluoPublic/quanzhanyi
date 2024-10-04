@@ -49,7 +49,11 @@ export const Data = atom<GlobalData>({
     sdm: ["A", "B"],
     MxPoints: {},
     hasChamfer: false,
-    firstPoints: [] as any,
+    firstPoints: [
+      new CustomVector3(1, 0, 1),
+      new CustomVector3(1, 0, -1),
+    ] as any,
+    direct: [0, 1.56],
     type: TType.cycle,
     distanceThreshold: 0.1,
     // centerPoint: new CustomVector3(-0.176, -0.06, 0.6),

@@ -749,22 +749,13 @@ const juXingFuCeFn = (
   const Pin = new EmxArray_real_T(cubeRes.pIn);
   const Tao = new EmxArray_real_T(cubeRes.Tao);
   const PlaneParaOut = new EmxArray_real_T(planeParaOut);
-  // const PlaneParaOut8 = new EmxArray_real_T();
 
-  /*
-  emxArray_real_T *Distance    //  声道长
-  emxArray_real_T *theta,  //  声道角
-  emxArray_real_T *LTPY     //  LT偏移   1 * n
-  emxArray_real_T *TiC,  // 声道相对高度   1  *  2n
-  emxArray_real_T *Wquanzhong3,  // 高斯勒让德权重  1  *  2n
-  emxArray_real_T *Wquanzhong4  //  矩形优化权重 1  *  2n
-*/
   const Distance = new EmxArray_real_T(sdfb, 1);
   const theta = new EmxArray_real_T(sdfb, 1);
   const LTPY = new EmxArray_real_T(sdfb, 1);
-  const TiC = new EmxArray_real_T(sdfb * 2, 1);
-  const Wquanzhong3 = new EmxArray_real_T(sdfb * 2, 1);
-  const Wquanzhong4 = new EmxArray_real_T(sdfb * 2, 1);
+  const TiC = new EmxArray_real_T(sdfb, 1);
+  const Wquanzhong3 = new EmxArray_real_T(sdfb, 1);
+  const Wquanzhong4 = new EmxArray_real_T(sdfb, 1);
   _juXingFuCe(
     PointIn.ptr,
     sdfb,
@@ -800,9 +791,9 @@ const juXingFuCeFn = (
       sdc: d,
       sdj: _theta[i],
       ltOffset: _LTPY[i],
-      sdH: [_TiC[2 * i], _TiC[2 * i + 1]],
-      Wquanzhong3: [_Wquanzhong3[2 * i], _Wquanzhong3[2 * i + 1]],
-      Wquanzhong4: [_Wquanzhong4[2 * i], _Wquanzhong4[2 * i + 1]],
+      sdH: _TiC[i],
+      Wquanzhong3: _Wquanzhong3[i],
+      Wquanzhong4: _Wquanzhong4[i],
     };
   });
 };
@@ -853,9 +844,9 @@ const yuanXingFuCeFn = (
   const Distance = new EmxArray_real_T(sdfb, 1);
   const theta = new EmxArray_real_T(sdfb, 1);
   const LTPY = new EmxArray_real_T(sdfb, 1);
-  const TiC = new EmxArray_real_T(sdfb * 2, 1);
-  const Wquanzhong3 = new EmxArray_real_T(sdfb * 2, 1);
-  const Wquanzhong4 = new EmxArray_real_T(sdfb * 2, 1);
+  const TiC = new EmxArray_real_T(sdfb, 1);
+  const Wquanzhong3 = new EmxArray_real_T(sdfb, 1);
+  const Wquanzhong4 = new EmxArray_real_T(sdfb, 1);
 
   _yuanXingFuCe(
     PointIn.ptr,
@@ -875,9 +866,7 @@ const yuanXingFuCeFn = (
   const _Distance = Distance.toJSON()[0];
   const _theta = theta.toJSON()[0];
   const _LTPY = LTPY.toJSON()[0];
-  console.log("%c Line:925 🍅 _LTPY", "color:#4fff4B", _LTPY);
   const _TiC = TiC.toJSON()[0];
-  console.log("%c Line:926 🍣 _TiC", "color:#465975", _TiC);
   const _Wquanzhong3 = Wquanzhong3.toJSON()[0];
   const _Wquanzhong4 = Wquanzhong4.toJSON()[0];
 
@@ -893,9 +882,9 @@ const yuanXingFuCeFn = (
       sdc: d,
       sdj: _theta[i],
       ltOffset: _LTPY[i],
-      sdH: [_TiC[2 * i], _TiC[2 * i + 1]],
-      Wquanzhong3: [_Wquanzhong3[2 * i], _Wquanzhong3[2 * i + 1]],
-      Wquanzhong4: [_Wquanzhong4[2 * i], _Wquanzhong4[2 * i + 1]],
+      sdH: _TiC[i],
+      Wquanzhong3: _Wquanzhong3[i],
+      Wquanzhong4: _Wquanzhong4[i],
     };
   });
 };

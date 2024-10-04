@@ -1,20 +1,12 @@
 import CylinderModule from "../components/Module3D";
 import { useRecoilState } from "recoil";
 import { Data, GlobalData } from "../atom/globalState";
-import { Button, Checkbox, InputNumber, message, Table, Tooltip } from "antd";
-import { SettingOutlined } from "@ant-design/icons";
-import { Point } from "./CalculateResultPoints";
-import React, { useEffect, useRef, useState } from "react";
-import Select, { DefaultOptionType } from "antd/es/select";
+import { Button, InputNumber, message } from "antd";
+import { useEffect, useState } from "react";
 import {
-  ang2rad,
-  CalcJuXingAAndBPointsAfterOffest,
   CalculateAccurateCylindersFromMultipleMeasurementPoints,
   calculateStandardDeviation,
-  cubeTOff,
   generateUnitCircleWithNormalVector,
-  rad2ang,
-  shengDaoGaoDu,
 } from "../utils/utils";
 import PointsVector3 from "../components/PointVector3";
 import { CustomVector3 } from "../class/CustomVector3";
@@ -24,19 +16,6 @@ import { getLine } from "../utils/commond";
 import mockData from "../utils/mockData";
 import useMeasure from "../utils/useMeasure";
 import CylinderTable from "../components/CylinderTable";
-
-const SDFBOptions = (() => {
-  const options: DefaultOptionType[] = [];
-  for (let index = 2; index <= 10; index++) {
-    options.push({ value: index, label: `${index}声道` });
-  }
-  return options;
-})();
-
-const sdmOptions = [
-  { label: "声道面A", value: "A" },
-  { label: "声道面B", value: "B" },
-];
 
 function CylinderPre() {
   const [data, setData] = useRecoilState(Data);
@@ -352,6 +331,7 @@ function CylinderPre() {
   );
   return (
     <CylinderModule
+      direct={data.direct}
       firstPoints={data.firstPoints}
       component={comp}
       mPoints={data.mPoints}

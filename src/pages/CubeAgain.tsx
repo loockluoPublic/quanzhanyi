@@ -1,7 +1,6 @@
 import { Button, Checkbox, Select, Table } from "antd";
 import { useRecoilState } from "recoil";
 import { Data, getInitAgainTable } from "../atom/globalState";
-import CylinderModule from "../components/Module3D";
 import PointsVector3 from "../components/PointVector3";
 import { CustomVector3 } from "../class/CustomVector3";
 import { juXingFuCe, rad2ang } from "../utils/utils";
@@ -98,7 +97,7 @@ export default function () {
       key: "sdc",
       align: "right",
       render: (v) => {
-        return v?.toFixed(4);
+        return v?.toFixed?.(4);
       },
     },
     {
@@ -116,7 +115,7 @@ export default function () {
       key: "ltOffset",
       align: "right",
       render: (v) => {
-        return v?.toFixed(4);
+        return v?.toFixed?.(4);
       },
     },
     {
@@ -125,7 +124,7 @@ export default function () {
       key: "sdH",
       align: "right",
       render: (v) => {
-        return v?.map?.((item) => item?.toFixed(4))?.join?.("，");
+        return v?.toFixed?.(4);
       },
     },
     {
@@ -134,7 +133,7 @@ export default function () {
       key: "Wquanzhong3",
       align: "right",
       render: (v) => {
-        return v?.map?.((item) => item?.toFixed(4))?.join?.("，");
+        return v?.toFixed?.(4);
       },
     },
 
@@ -144,7 +143,7 @@ export default function () {
       key: "Wquanzhong4",
       align: "right",
       render: (v) => {
-        return v?.map?.((item) => item?.toFixed(4))?.join?.("，");
+        return v?.toFixed?.(4);
       },
     },
   ].filter((item) => item.key !== data.sfType);
@@ -159,7 +158,6 @@ export default function () {
       return nA - nB;
     });
 
-    console.log("%c Line:153 🍕 AB", "color:#ea7e5c", AB);
     const newTable = data.cubeAgainTable?.map((item, i) => {
       return {
         ...item,
