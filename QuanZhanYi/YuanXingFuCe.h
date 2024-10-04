@@ -2,7 +2,7 @@
  * File: YuanXingFuCe.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 29-Sep-2024 01:27:40
+ * C/C++ source code generated on  : 04-Oct-2024 19:01:32
  */
 
 #ifndef YUANXINGFUCE_H
