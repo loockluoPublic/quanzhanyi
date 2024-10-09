@@ -6,7 +6,6 @@ QuanZhanYi_initialize.obj
 QuanZhanYi_terminate.obj
 angle2point.obj
 Calculat_A_and_B_Points.obj
-norm.obj
 pinv.obj
 svd.obj
 xnrm2.obj
@@ -20,6 +19,7 @@ mldivide.obj
 ixfun.obj
 combineVectorElements.obj
 Calculate_rectangle_from_vertex.obj
+norm.obj
 Calculate_rectangle_from_vertex8.obj
 planefit8.obj
 nchoosek.obj
@@ -37,7 +37,6 @@ Generate_multi_layered_measurement_points.obj
 generate_unit_circle_with_normal_vector.obj
 generate_unit_circle_with_normal_vector2.obj
 JuXingFuCe.obj
-mod.obj
 prod.obj
 myvrrotvec2mat.obj
 OffsetCalculate.obj
