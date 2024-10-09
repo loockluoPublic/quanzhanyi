@@ -11,6 +11,7 @@ import { InputNumber, Table, Tooltip } from "antd";
 import BaseInfo from "../components/BaseInfo";
 
 import { SettingOutlined } from "@ant-design/icons";
+import { goToCV } from "../utils/commond";
 
 export const Point = (props) => {
   const v = props.p;
@@ -24,7 +25,12 @@ export const Point = (props) => {
             3
           )})`}
         >
-          <a className="q-cursor-pointer">{name}</a>
+          <a
+            className="q-cursor-pointer visited:q-text-gray-50"
+            onClick={() => goToCV(v.x, v.y, v.z)}
+          >
+            {name}
+          </a>
         </Tooltip>
       </div>
     );

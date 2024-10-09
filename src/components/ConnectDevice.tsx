@@ -13,7 +13,7 @@ import { encode } from "../utils/secret";
 
 (window as any).commond = commond;
 export const serial = new SerialMonitor({ mode: "text", parseLines: true });
-window.serial = serial;
+
 export default function Connect() {
   const [deviceInfoData, setDeviceInfo] = useRecoilState(deviceInfo);
 

@@ -1,5 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Html, Line, OrbitControls } from "@react-three/drei";
+import * as THREE from "three";
 
 import "./index.css";
 import "../../utils/utils";
@@ -9,7 +10,6 @@ import { CustomVector3 } from "../../class/CustomVector3";
 import PerspectiveCamera from "./PerspectiveCamera";
 import MyCylinder from "./MyCylinder";
 import React from "react";
-import { Spherical, Vector3 } from "three";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
@@ -60,7 +60,10 @@ const Direct = (props: { direct: number[] }) => {
 
   if (!line) return null;
 
-  return <Line color="#778beb" points={line} />;
+  console.log("%c Line:64 🍻 line", "color:#93c0a4", line);
+  return (
+    <Line color="#778beb" points={line} side={THREE.DoubleSide} lineWidth={2} />
+  );
 };
 
 export default function Index(props: {
@@ -87,47 +90,49 @@ export default function Index(props: {
         className={`${props.className} q-grow q-cursor-pointer canvas-style`}
         style={{ height: h }}
       >
+        {/* {props.direct && <Direct direct={props.direct} />} */}
         <PerspectiveCamera />
-        <ambientLight intensity={Math.PI / 2} />
-        <axesHelper args={[10]} />
-        <spotLight
-          position={[10, 10, 10]}
-          angle={0.15}
-          penumbra={1}
-          decay={0}
-          intensity={Math.PI}
-        />
-        <MyCylinder {...props?.calulateRes} />
-
-        <PointsLabel
-          points={props?.mPoints?.filter?.((p) => p.enable)}
-          color="#000"
-        />
-        <PointsLabel
-          points={props?.mPoints?.filter?.((p) => !p.enable)}
-          color="#ccc"
-        />
-
-        {props.direct && <Direct direct={props.direct} />}
-
-        {props.firstPoints?.length > 0 && (
-          <PointsLabel points={props.firstPoints} color="red" />
-        )}
-
-        {props?.sdm?.includes("A") && (
-          <PointsLabel
-            points={props?.AB?.map?.((item) => item.pointA)}
-            color="red"
+        <group scale={[1, 1, -1]}>
+          <ambientLight intensity={Math.PI / 2} />
+          <spotLight
+            position={[10, 10, 10]}
+            angle={0.15}
+            penumbra={1}
+            decay={0}
+            intensity={Math.PI}
           />
-        )}
+          <axesHelper args={[10]} />
+          <MyCylinder {...props?.calulateRes} />
 
-        {props?.sdm?.includes("B") && (
           <PointsLabel
-            points={props?.AB?.map?.((item) => item.pointB)}
-            color="#fab005"
+            points={props?.mPoints?.filter?.((p) => p.enable)}
+            color="#000"
           />
-        )}
+          <PointsLabel
+            points={props?.mPoints?.filter?.((p) => !p.enable)}
+            color="#ccc"
+          />
 
+          {props.direct && <Direct direct={props.direct} />}
+
+          {props.firstPoints?.length > 0 && (
+            <PointsLabel points={props.firstPoints} color="red" />
+          )}
+
+          {props?.sdm?.includes("A") && (
+            <PointsLabel
+              points={props?.AB?.map?.((item) => item.pointA)}
+              color="red"
+            />
+          )}
+
+          {props?.sdm?.includes("B") && (
+            <PointsLabel
+              points={props?.AB?.map?.((item) => item.pointB)}
+              color="#fab005"
+            />
+          )}
+        </group>
         <OrbitControls />
       </Canvas>
       {props?.component && (

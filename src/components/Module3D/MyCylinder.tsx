@@ -34,12 +34,14 @@ const MyCylinder = (props: any) => {
       </Cylinder>
       {props?.Bottom_round_center && (
         <Line
+          side={THREE.DoubleSide}
           color="blue"
           points={
             props?.Bottom_round_center?.map((item: CustomVector3) =>
               item.toVector3()
             ) ?? []
           }
+          lineWidth={2}
         />
       )}
     </>

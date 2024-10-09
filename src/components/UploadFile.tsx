@@ -22,7 +22,9 @@ function AntdFileReader() {
         setTimeout(() => {
           setData(importData);
           if (step === 0) {
-            setStep(1);
+            setTimeout(() => {
+              setStep(1);
+            }, 200);
           }
         }, 100);
       }

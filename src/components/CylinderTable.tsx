@@ -61,6 +61,7 @@ export default function CylinderTable() {
       originDiff: renderStandardDeviation(item.originDiff),
       diff: renderStandardDeviation(item.difference),
       enable: item.enable,
+      id: `${item.label ?? ""}${item.key}-${item.x}-${item.y}-${item.z}`,
       key: `${item.label ?? ""}${item.key}`,
       label: item.label,
       x: item.x,
@@ -68,11 +69,11 @@ export default function CylinderTable() {
       z: item.z,
     };
   });
-  console.log("%c Line:60 🌮  data", "color:#ffdd4d", data);
+
   return (
     <div>
       <Table
-        rowKey={"key"}
+        rowKey={"id"}
         className="q-w-full"
         dataSource={data}
         columns={columns}

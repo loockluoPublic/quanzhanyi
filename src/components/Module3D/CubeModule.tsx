@@ -39,8 +39,6 @@ function PointsLabel(props: {
   color?: string;
 }) {
   return props?.points?.map((item) => {
-    console.log("%c Line:42 🍒 item", "color:#b03734", item);
-
     if (!item) return null;
     return (
       <Html position={item.toVector3()} key={item.key}>
@@ -111,41 +109,43 @@ export default function Index(props: {
         style={{ height: h }}
       >
         <PerspectiveCamera />
-        <ambientLight intensity={Math.PI / 2} />
-        <axesHelper args={[10]} />
-        <spotLight
-          position={[10, 10, 10]}
-          angle={0.15}
-          penumbra={1}
-          decay={0}
-          intensity={Math.PI}
-        />
-
-        <Rectangular
-          trianglePoints={props.trianglePoints as CustomVector3[]}
-        ></Rectangular>
-
-        {Object.values(props.MxPoints ?? [])?.map((pArr, i) => {
-          return <PointsLabel key={i} points={pArr} color={MxColor[i]} />;
-        })}
-
-        {props.firstPoints?.length > 0 && (
-          <PointsLabel points={props.firstPoints} color="red" />
-        )}
-
-        {props?.sdm?.includes("A") && (
-          <PointsLabel
-            points={props?.AB?.map?.((item) => item.pointA)}
-            color="red"
+        <group scale={[1, 1, -1]}>
+          <axesHelper args={[10]} />
+          <ambientLight intensity={Math.PI / 2} />
+          <spotLight
+            position={[10, 10, 10]}
+            angle={0.15}
+            penumbra={1}
+            decay={0}
+            intensity={Math.PI}
           />
-        )}
 
-        {props?.sdm?.includes("B") && (
-          <PointsLabel
-            points={props?.AB?.map?.((item) => item.pointB)}
-            color="#fab005"
-          />
-        )}
+          <Rectangular
+            trianglePoints={props.trianglePoints as CustomVector3[]}
+          ></Rectangular>
+
+          {Object.values(props.MxPoints ?? [])?.map((pArr, i) => {
+            return <PointsLabel key={i} points={pArr} color={MxColor[i]} />;
+          })}
+
+          {props.firstPoints?.length > 0 && (
+            <PointsLabel points={props.firstPoints} color="red" />
+          )}
+
+          {props?.sdm?.includes("A") && (
+            <PointsLabel
+              points={props?.AB?.map?.((item) => item.pointA)}
+              color="red"
+            />
+          )}
+
+          {props?.sdm?.includes("B") && (
+            <PointsLabel
+              points={props?.AB?.map?.((item) => item.pointB)}
+              color="#fab005"
+            />
+          )}
+        </group>
 
         <OrbitControls />
       </Canvas>

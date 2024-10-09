@@ -5,17 +5,11 @@ import { PerspectiveCamera as PerspectiveCameraType } from "three";
 import * as THREE from "three";
 import { getLine, goToCV, measureAndGetSimpleCoord } from "../../utils/commond";
 
+const leftHandedMatrix = new THREE.Matrix4();
+leftHandedMatrix.set(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -10, 0, 0, 0, 0, 1);
+
 export default function Perspective(props) {
   const camera = useRef<PerspectiveCameraType>();
-  // const { far, fov, near } = useControls("相机控制", {
-  //   fov: { value: 7, min: 1, max: 20 },
-  //   near: { value: 0.1, min: 0.1, max: 50 },
-  //   far: { value: 100, min: 0.1, max: 100 },
-  // });
-
-  useEffect(() => {
-    camera.current.updateProjectionMatrix();
-  }, []);
 
   return (
     <PerspectiveCamera
@@ -24,9 +18,7 @@ export default function Perspective(props) {
       // far={far}
       // fov={fov}
       // near={near}
-      position={[0, 10, 20]}
-      // updateProjectionMatrix={new THREE.Matrix4().makeScale(-1, 1, 1)}
-      // projectionMatrix={new THREE.Matrix4().makeScale(-1, -1, -1)}
+      position={[5, 5, -5]}
       ref={camera}
       {...props}
     />
