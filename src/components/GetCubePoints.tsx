@@ -240,10 +240,20 @@ export default function () {
           </>
         )}
       </div>
-      <div className="q-mt-4">
+      <div className="q-mt-2">
         <span className="q-flex q-items-center">
           拟合阈值：
-          {data.distanceThreshold ?? "--"}米
+          <InputNumber
+            step={0.001}
+            min={0.001}
+            max={0.1}
+            value={data.distanceThreshold}
+            style={{ width: 120 }}
+            onChange={(distanceThreshold) => {
+              setData({ ...data, distanceThreshold });
+            }}
+            addonAfter="米"
+          />
         </span>
       </div>
       <div className="q-mt-2 q-flex q-justify-end">

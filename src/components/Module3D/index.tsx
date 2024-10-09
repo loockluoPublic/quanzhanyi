@@ -10,34 +10,11 @@ import { CustomVector3 } from "../../class/CustomVector3";
 import PerspectiveCamera from "./PerspectiveCamera";
 import MyCylinder from "./MyCylinder";
 import React from "react";
+import PointsLabel from "./PointsLabel";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
 // import { button, useControls } from "leva";
-
-function PointsLabel(props: {
-  points: CustomVector3[];
-  style?: React.CSSProperties;
-  color?: string;
-}) {
-  return props?.points?.map((item, i) => {
-    if (item instanceof CustomVector3) {
-      return (
-        <Html position={item.toVector3()} key={`${item.key}_${i}`}>
-          <div
-            className="q-w-20 relative"
-            style={{ "--point-color": props.color } as any}
-          >
-            {item.label || ""}
-            {item.key}
-          </div>
-        </Html>
-      );
-    } else {
-      return null;
-    }
-  });
-}
 
 const Direct = (props: { direct: number[] }) => {
   const line = useMemo(() => {
@@ -105,12 +82,9 @@ export default function Index(props: {
           <MyCylinder {...props?.calulateRes} />
 
           <PointsLabel
-            points={props?.mPoints?.filter?.((p) => p.enable)}
+            points={props?.mPoints}
             color="#000"
-          />
-          <PointsLabel
-            points={props?.mPoints?.filter?.((p) => !p.enable)}
-            color="#ccc"
+            disabledColor="#ccc"
           />
 
           {props.direct && <Direct direct={props.direct} />}

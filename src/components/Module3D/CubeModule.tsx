@@ -37,14 +37,16 @@ function PointsLabel(props: {
   points: CustomVector3[];
   style?: React.CSSProperties;
   color?: string;
+  disabledColor?: string;
 }) {
   return props?.points?.map((item) => {
     if (!item) return null;
+    const color = item.enable ? props.color : props.disabledColor;
     return (
       <Html position={item.toVector3()} key={item.key}>
         <div
           className="q-w-20 relative"
-          style={{ "--point-color": props.color } as any}
+          style={{ "--point-color": color } as any}
         >
           {item.label || ""}
           {item.key}
@@ -65,8 +67,6 @@ export default function Index(props: {
   trianglePoints?: CustomVector3[];
   [k: string]: any;
 }) {
-  console.log("%c Line:68 🍢 props", "color:#f5ce50", props);
-
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
 
   const [h, setH] = useState(0);
@@ -125,7 +125,14 @@ export default function Index(props: {
           ></Rectangular>
 
           {Object.values(props.MxPoints ?? [])?.map((pArr, i) => {
-            return <PointsLabel key={i} points={pArr} color={MxColor[i]} />;
+            return (
+              <PointsLabel
+                key={i}
+                points={pArr}
+                color={MxColor[i]}
+                disabledColor="#ccc"
+              />
+            );
           })}
 
           {props.firstPoints?.length > 0 && (

@@ -181,7 +181,6 @@ export default function () {
     }
 
     for (const item of data.cubeAgainTable) {
-      console.log("%c Line:163 🥐 item", "color:#ea7e5c", item);
       if (!item.p1 || !item.p2) {
         message.warning(`第${(item as any).i}声道缺少复测点，请采集`);
         return;
