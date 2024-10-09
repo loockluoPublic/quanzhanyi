@@ -1,4 +1,4 @@
-import { Button, Checkbox, Select, Table } from "antd";
+import { Button, Checkbox, message, Select, Table } from "antd";
 import { useRecoilState } from "recoil";
 import { Data, getInitAgainTable } from "../atom/globalState";
 import PointsVector3 from "../components/PointVector3";
@@ -175,6 +175,19 @@ export default function () {
   };
 
   const calcFuCe = () => {
+    if (!data.cubeResult) {
+      message.warning("缺少拟合参数，请返回上一步");
+      return;
+    }
+
+    for (const item of data.cubeAgainTable) {
+      console.log("%c Line:163 🥐 item", "color:#ea7e5c", item);
+      if (!item.p1 || !item.p2) {
+        message.warning(`第${(item as any).i}声道缺少复测点，请采集`);
+        return;
+      }
+    }
+
     const res = juXingFuCe(
       data.cubeResult,
       data.planeParaOut,
@@ -197,13 +210,6 @@ export default function () {
       };
     });
   };
-
-  // useEffect(() => {
-  //   setData((d) => ({
-  //     ...d,
-  //     cubeAgainTable: getInitAgainTable(data.sdfb, data.sdm) as any,
-  //   }));
-  // }, [data.sdfb, data.sdm]);
 
   const width = data?.cubeResult?.b?.toFixed(4);
   const hight = data?.cubeResult?.h?.toFixed(4);

@@ -1,4 +1,4 @@
-import { Button, Checkbox, Select, Table } from "antd";
+import { Button, Checkbox, message, Select, Table } from "antd";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import CylinderModule from "../components/Module3D";
@@ -9,6 +9,12 @@ import { SDFBOptions, sdmOptions } from "./CubeResult";
 
 export default function () {
   const [data, setData] = useRecoilState(Data);
+
+  console.log(
+    "%c Line:16 🍡 data.cylinderAgainTable",
+    "color:#ea7e5c",
+    data.cylinderAgainTable
+  );
 
   const onChange = (v: CustomVector3, i: number, key: string) => {
     const tableData: any =
@@ -21,6 +27,7 @@ export default function () {
         }
         return newItem;
       }) ?? [];
+
     setData((d) => {
       return {
         ...d,
@@ -147,6 +154,19 @@ export default function () {
   ].filter((item) => item.key !== data.sfType);
 
   const calcFuCe = () => {
+    if (!data.calulateRes) {
+      message.warning("缺少拟合参数，请返回上一步");
+      return;
+    }
+
+    for (const item of data.cylinderAgainTable) {
+      console.log("%c Line:163 🥐 item", "color:#ea7e5c", item);
+      if (!item.p1 || !item.p2) {
+        message.warning(`第${(item as any).i}声道缺少复测点，请采集`);
+        return;
+      }
+    }
+
     const res = yuanXingFuCe(
       data.calulateRes,
       data.cylinderAgainTable,
@@ -224,7 +244,7 @@ export default function () {
       <div className=" q-my-4">
         <span>
           管道半径：
-          {data?.calulateRes?.R?.toFixed(4)} 米
+          {data?.calulateRes?.R?.toFixed(4) ?? "--"} 米
         </span>
         <span className="q-ml-8">
           声道配置： {data.sdm.length}E{data.sdfb}P

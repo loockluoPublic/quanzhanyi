@@ -114,6 +114,7 @@ function CylinderPre() {
       ...curData,
       mPoints: newMP,
     };
+
     setLoading(true);
     calculateCylinders(nD).finally(() => {
       setLoading(false);
