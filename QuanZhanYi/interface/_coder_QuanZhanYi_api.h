@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 09-Oct-2024 15:40:33
+ * C/C++ source code generated on  : 09-Oct-2024 23:17:42
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
