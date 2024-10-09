@@ -198,12 +198,12 @@ export default function () {
     });
   };
 
-  useEffect(() => {
-    setData((d) => ({
-      ...d,
-      cubeAgainTable: getInitAgainTable(data.sdfb, data.sdm) as any,
-    }));
-  }, [data.sdfb, data.sdm]);
+  // useEffect(() => {
+  //   setData((d) => ({
+  //     ...d,
+  //     cubeAgainTable: getInitAgainTable(data.sdfb, data.sdm) as any,
+  //   }));
+  // }, [data.sdfb, data.sdm]);
 
   const width = data?.cubeResult?.b?.toFixed(4);
   const hight = data?.cubeResult?.h?.toFixed(4);

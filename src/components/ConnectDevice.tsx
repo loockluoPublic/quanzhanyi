@@ -4,9 +4,7 @@ import { useRecoilState } from "recoil";
 import { deviceInfo } from "../atom/globalState";
 import * as commond from "../utils/commond";
 import { getDeviceInfo } from "../utils/commond";
-import { availablePorts } from "../utils/serialport";
-import Next from "./Next";
-import logo from "../assets/logo.png";
+
 import banner from "../assets/bg.jpg";
 import qzy from "../assets/qzy.png";
 import bgLogo from "../assets/bgLogo.png";
@@ -15,7 +13,7 @@ import { encode } from "../utils/secret";
 
 (window as any).commond = commond;
 export const serial = new SerialMonitor({ mode: "text", parseLines: true });
-
+window.serial = serial;
 export default function Connect() {
   const [deviceInfoData, setDeviceInfo] = useRecoilState(deviceInfo);
 
@@ -59,7 +57,9 @@ export default function Connect() {
               <Button
                 className="q-mt-2 q-mr-2"
                 onClick={() => {
-                  availablePorts();
+                  serial.disconnect().finally(() => {
+                    setDeviceInfo({});
+                  });
                 }}
               >
                 断开连接
@@ -93,8 +93,9 @@ export default function Connect() {
                   setDeviceInfo(res);
                   setPwd(encode(res?.SerialNo));
                 })
-                .catch(() => {
-                  console.log("Something went wrong...");
+                .catch((error) => {
+                  console.error("%c Line:97 🌮 error", "color:#e41a6a", error);
+                  message.error(error.message);
                 });
             }}
           >

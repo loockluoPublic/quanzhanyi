@@ -55,6 +55,7 @@ export default function CylinderTable() {
       return `-- δ`;
     }
   };
+
   const data = d.mPoints.map((item) => {
     return {
       originDiff: renderStandardDeviation(item.originDiff),
@@ -67,6 +68,7 @@ export default function CylinderTable() {
       z: item.z,
     };
   });
+  console.log("%c Line:60 🌮  data", "color:#ffdd4d", data);
   return (
     <div>
       <Table

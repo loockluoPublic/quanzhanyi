@@ -25,7 +25,6 @@ const items1: MenuProps["items"] = [
 const App: React.FC<PropsWithChildren> = (props) => {
   const [mode, setMode] = useRecoilState(Mode);
   const [data, setData] = useRecoilState(Data);
-  const setStep = useSetRecoilState(Step);
 
   return (
     <ConfigProvider locale={zhCN}>
@@ -36,7 +35,7 @@ const App: React.FC<PropsWithChildren> = (props) => {
               <Menu
                 theme="dark"
                 mode="horizontal"
-                defaultSelectedKeys={[data.type]}
+                selectedKeys={[data.type]}
                 items={items1}
                 style={{ flex: 1, minWidth: 0 }}
                 onClick={({ key }) => {

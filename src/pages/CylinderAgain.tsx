@@ -1,4 +1,4 @@
-import { Button, Checkbox, Select, Table } from "antd";
+import { Button, Checkbox, message, Select, Table } from "antd";
 import { useRecoilState } from "recoil";
 import { Data, getInitAgainTable } from "../atom/globalState";
 import CylinderModule from "../components/Module3D";
@@ -54,7 +54,6 @@ export default function () {
       key: "p1",
       align: "center",
       render: (_v, row, i) => {
-        console.log("%c Line:55 🍕 row", "color:#2eafb0", row.i, 2 * row.i - 1);
         return (
           <PointsVector3
             value={_v}
@@ -63,6 +62,7 @@ export default function () {
                 data.sdm?.length === 2 && row.sdm === "B"
                   ? row.i - data.sdfb
                   : row.i;
+              console.log("%c Line:63 🍏 slnum", "color:#6ec1c2", row.i, slnum);
               CustomVector3.setPublicInfo(row.sdm, 2 * slnum - 2);
             }}
             onChange={(v) => onChange(v, i, "p1")}
@@ -83,6 +83,7 @@ export default function () {
                 data.sdm?.length === 2 && row.sdm === "B"
                   ? row.i - data.sdfb
                   : row.i;
+              console.log("%c Line:63 🍏 slnum", "color:#6eeeef", row.i, slnum);
               CustomVector3.setPublicInfo(row.sdm, 2 * slnum - 1);
             }}
             value={_v}
@@ -173,19 +174,6 @@ export default function () {
       };
     });
   };
-
-  useEffect(() => {
-    setData((d) => {
-      if (d.cylinderAgainTable) {
-        return d;
-      } else {
-        return {
-          ...d,
-          cylinderAgainTable: getInitAgainTable(data.sdfb, data.sdm) as any,
-        };
-      }
-    });
-  }, [data.sdfb, data.sdm]);
 
   const calcFuCe = () => {
     const res = yuanXingFuCe(
