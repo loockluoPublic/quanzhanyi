@@ -50,7 +50,7 @@ function CylinderPre() {
   };
 
   useEffect(() => {
-    if (!loading && points.length > 0) {
+    if (points.length > 0) {
       setData({
         ...data,
         mPoints: points,
@@ -99,7 +99,7 @@ function CylinderPre() {
             reslove(nd);
           }, 200);
         });
-      }, 200);
+      }, 400);
     });
   };
 
@@ -115,7 +115,7 @@ function CylinderPre() {
       mPoints: newMP,
     };
     setLoading(true);
-    calculateCylinders(nD).then(() => {
+    calculateCylinders(nD).finally(() => {
       setLoading(false);
     });
   };
@@ -132,7 +132,6 @@ function CylinderPre() {
     )
       .then((newData: any) => {
         reRun(newData);
-        setLoading(false);
       })
       .catch((err) => {
         console.error("%c Line:80 🍺 err", "color:#93c0a4", err);
@@ -140,7 +139,6 @@ function CylinderPre() {
   };
 
   const disableFit = data.mPoints?.length > 0;
-  console.log("%c Line:176 🍧 data.mPoints", "color:#6ec1c2", data.mPoints);
 
   const comp = (
     <div>

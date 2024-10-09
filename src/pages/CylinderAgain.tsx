@@ -9,7 +9,6 @@ import { SDFBOptions, sdmOptions } from "./CubeResult";
 
 export default function () {
   const [data, setData] = useRecoilState(Data);
-  console.log("%c Line:7 🥃 data", "color:#42b983", data);
 
   const onChange = (v: CustomVector3, i: number, key: string) => {
     const tableData: any =
@@ -18,7 +17,6 @@ export default function () {
           ...item,
         };
         if (index === i) {
-          debugger;
           newItem[key] = v;
         }
         return newItem;
