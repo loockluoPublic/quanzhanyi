@@ -12,8 +12,6 @@ import PointsVector3 from "../components/PointVector3";
 import { CustomVector3 } from "../class/CustomVector3";
 import PointsVector2 from "../components/PointVector2";
 import { getLine } from "../utils/commond";
-
-import mockData from "../utils/mockData";
 import useMeasure from "../utils/useMeasure";
 import CylinderTable from "../components/CylinderTable";
 
@@ -48,16 +46,6 @@ function CylinderPre() {
         waitingPoints,
       });
       measure(waitingPoints);
-    });
-  };
-
-  const setMockData = () => {
-    CustomVector3.setPublicInfo("P", 0);
-    setData({
-      ...data,
-      mPoints: mockData.mPoints.map(
-        (item) => new CustomVector3(item.x, item.y, item.z)
-      ),
     });
   };
 
@@ -234,15 +222,6 @@ function CylinderPre() {
       </div>
       {/* <h3 className="border-top  q-mt-4 q-pt-2"></h3> */}
       <div className="q-my-1 q-flex q-justify-end">
-        <Button
-          type="dashed"
-          className="q-ml-2"
-          size="small"
-          onClick={setMockData}
-        >
-          测试数据
-        </Button>
-
         <Button
           className="q-ml q-ml-8"
           type="primary"

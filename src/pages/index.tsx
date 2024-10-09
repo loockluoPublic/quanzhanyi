@@ -17,6 +17,10 @@ import CylinderPre from "./CylinderPre";
 import CylinderFit from "./CylinderFit";
 import CubeAgain from "./CubeAgain";
 
+message.config({
+  maxCount: 1,
+});
+
 export default function Setting() {
   const deviceInfoData = useRecoilValue(deviceInfo);
   const data = useRecoilValue(Data);
@@ -45,10 +49,10 @@ export default function Setting() {
       title: "自动采点&管道拟合",
       components: <CylinderPre />,
     },
-    {
-      title: "安装点计算",
-      components: <CylinderFit />,
-    },
+    // {
+    //   title: "安装点计算",
+    //   components: <CylinderFit />,
+    // },
   ];
 
   if (mode === TMode.second) {
@@ -57,10 +61,10 @@ export default function Setting() {
       components: <CylinderAgain />,
     });
   } else {
-    // CycleSteps.push({
-    //   title: "安装点计算",
-    //   components: <CylinderFit />,
-    // });
+    CycleSteps.push({
+      title: "安装点计算",
+      components: <CylinderFit />,
+    });
   }
 
   const CubeSteps = [
@@ -72,10 +76,10 @@ export default function Setting() {
       title: "手动采点&方涵拟合",
       components: <CubePre />,
     },
-    {
-      title: "安装点计算",
-      components: <CubeFit />,
-    },
+    // {
+    //   title: "安装点计算",
+    //   components: <CubeFit />,
+    // },
   ];
 
   if (mode === TMode.second) {
@@ -84,10 +88,10 @@ export default function Setting() {
       components: <CubeAgain />,
     });
   } else {
-    // CubeSteps.push({
-    //   title: "安装点计算",
-    //   components: <CubeFit />,
-    // });
+    CubeSteps.push({
+      title: "安装点计算",
+      components: <CubeFit />,
+    });
   }
 
   let steps = data.type === TType.cube ? CubeSteps : CycleSteps;

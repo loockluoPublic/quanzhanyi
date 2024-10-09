@@ -1,14 +1,10 @@
-import { Button, Col, Form, InputNumber, Row, message } from "antd";
-// import Module3D from "./module3D";
-import PointsVector3 from "../components/PointVector3";
+import { Button } from "antd";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import { generateUnitCircleWithNormalVector } from "../utils/utils";
 import useMeasure from "../utils/useMeasure";
-import { useEffect, useRef } from "react";
-import { pointToAndMeasure } from "../utils/commond";
+import { useEffect } from "react";
 import Module3D from "../components/Module3D";
-import mockData from "../utils/mockData";
 import { CustomVector3 } from "../class/CustomVector3";
 
 export function MeasurePoints() {
@@ -31,16 +27,6 @@ export function MeasurePoints() {
         waitingPoints,
       });
       measure(waitingPoints);
-    });
-  };
-
-  const setMockData = () => {
-    CustomVector3.setPublicInfo("P", 0);
-    setData({
-      ...data,
-      mPoints: mockData.mPoints.map(
-        (item) => new CustomVector3(item.x, item.y, item.z)
-      ),
     });
   };
 
@@ -74,9 +60,6 @@ export function MeasurePoints() {
         <div className="options q-mb-4">
           <Button type="primary" loading={loading} onClick={run}>
             运行
-          </Button>
-          <Button className="q-ml-2" onClick={setMockData}>
-            测试数据
           </Button>
         </div>
       }

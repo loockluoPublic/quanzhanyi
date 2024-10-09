@@ -10,13 +10,6 @@ import { CustomVector3 } from "../class/CustomVector3";
 import { CalculateRectangleFromVertex, Planefit } from "../utils/utils";
 import CubeTable from "./CubeTable";
 
-const mx = [
-  mockData.cubePointsL,
-  mockData.cubePointsT,
-  mockData.cubePointsR,
-  mockData.cubePointsB,
-];
-
 export default function () {
   const [data, setData] = useRecoilState(Data);
 
@@ -279,51 +272,6 @@ export default function () {
         </span>
       </div>
       <div className="q-mt-2 q-flex q-justify-end">
-        <Button
-          size="small"
-          className="q-mt-2  q-ml-4"
-          onClick={setMock}
-          type="dashed"
-        >
-          全部模拟
-        </Button>
-        <Button
-          size="small"
-          type="dashed"
-          className=" q-mt-2  q-ml-4"
-          onClick={() => {
-            setData((d) => {
-              return {
-                ...d,
-                firstPoints: mockData.bounders as [
-                  CustomVector3,
-                  CustomVector3
-                ],
-              };
-            });
-          }}
-        >
-          模拟边界
-        </Button>
-        <Button
-          type="dashed"
-          size="small"
-          className="q-mt-2  q-mx-4"
-          onClick={() => {
-            setData((d) => {
-              return {
-                ...d,
-                MxPoints: {
-                  ...data.MxPoints,
-                  [`m${num}`]: cubePoints[num],
-                },
-              };
-            });
-          }}
-        >
-          模拟数据
-        </Button>
-
         <Button loading={loading} type="primary" onClick={getPoints}>
           采集点
         </Button>

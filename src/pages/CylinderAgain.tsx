@@ -1,12 +1,11 @@
-import { Button, Checkbox, message, Select, Table } from "antd";
+import { Button, Checkbox, Select, Table } from "antd";
 import { useRecoilState } from "recoil";
-import { Data, getInitAgainTable } from "../atom/globalState";
+import { Data } from "../atom/globalState";
 import CylinderModule from "../components/Module3D";
 import PointsVector3 from "../components/PointVector3";
 import { CustomVector3 } from "../class/CustomVector3";
 import { rad2ang, yuanXingFuCe } from "../utils/utils";
 import { SDFBOptions, sdmOptions } from "./CubeResult";
-import { useEffect } from "react";
 
 export default function () {
   const [data, setData] = useRecoilState(Data);
@@ -149,32 +148,6 @@ export default function () {
     },
   ].filter((item) => item.key !== data.sfType);
 
-  const setMockData = () => {
-    const AB = [
-      ...data.AB.map((item) => item.pointA),
-      ...data.AB.map((item) => item.pointB),
-    ].sort((a, b) => {
-      const nA = { A: 0, B: 100 }[a.label] + a.key;
-      const nB = { A: 0, B: 100 }[b.label] + b.key;
-      return nA - nB;
-    });
-
-    const newTable = data.cylinderAgainTable?.map((item, i) => {
-      return {
-        ...item,
-        p1: AB[2 * i],
-        p2: AB[2 * i + 1],
-      };
-    });
-
-    setData((d) => {
-      return {
-        ...d,
-        cylinderAgainTable: newTable,
-      };
-    });
-  };
-
   const calcFuCe = () => {
     const res = yuanXingFuCe(
       data.calulateRes,
@@ -262,13 +235,13 @@ export default function () {
       <h3 className="border-top q-pt-4">
         复测结果：
         <div className="q-float-right q-mb-2">
-          <Button onClick={setMockData}>模拟数据</Button>
           <Button type="primary" onClick={calcFuCe}>
             计算
           </Button>
         </div>
       </h3>
       <Table
+        rowKey={"i"}
         columns={columns}
         dataSource={data.cylinderAgainTable}
         pagination={{

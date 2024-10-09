@@ -261,9 +261,9 @@ export default function () {
       <div className=" q-my-4">
         <span>
           方涵宽度：
-          {width} 米
+          {width ?? "--"} 米
         </span>
-        <span className="q-ml-8">方涵高度：{hight} 米</span>
+        <span className="q-ml-8">方涵高度：{hight ?? "--"} 米</span>
         <span className="q-ml-8">
           声道配置： {data.sdm.length}E{data.sdfb}P
         </span>
@@ -271,13 +271,13 @@ export default function () {
       <h3 className="border-top q-pt-4">
         复测结果：
         <div className="q-float-right q-mb-2">
-          <Button onClick={setMockData}>模拟数据</Button>
           <Button type="primary" onClick={calcFuCe}>
             计算
           </Button>
         </div>
       </h3>
       <Table
+        rowKey={"id"}
         columns={columns}
         dataSource={data.cubeAgainTable}
         pagination={{
