@@ -2,7 +2,7 @@
  * File: YuanXingFuCe.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 09-Oct-2024 11:13:17
+ * C/C++ source code generated on  : 09-Oct-2024 15:40:33
  */
 
 /* Include Files */
@@ -20,6 +20,7 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <stdio.h>
 
 /* Function Definitions */
 /*
@@ -311,6 +312,9 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   for (i = 0; i < b_absxk_tmp; i++) {
     Distance_data[i] = -TiC_data[i];
   }
+  printf("%f,%f,%f,%f", Distance_data[0], Distance_data[1], Distance_data[2],
+         Distance_data[3]);
+  fflush(stdout);
   if (rtIsInf(shenglunum)) {
     t = rtNaN;
   } else if (shenglunum == 0.0) {
