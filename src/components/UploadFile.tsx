@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { Upload, Button, message } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { Upload } from "antd";
+import { useRecoilState } from "recoil";
 import { Data, Step } from "../atom/globalState";
 import { loadFile } from "../utils/utils";
 

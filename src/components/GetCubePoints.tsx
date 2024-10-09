@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import { measureAndGetSimpleCoord } from "../utils/commond";
-
-import * as mockData from "../utils/cubeMockData";
-import { cubePoints } from "../utils/cubeMockData8";
 import { CustomVector3 } from "../class/CustomVector3";
 import { CalculateRectangleFromVertex, Planefit } from "../utils/utils";
 import CubeTable from "./CubeTable";
@@ -166,28 +163,6 @@ export default function () {
       .finally(() => {
         setLoading(false);
       });
-  };
-
-  const setMock = () => {
-    CustomVector3.setPublicInfo("P", 0);
-    setData((d) => {
-      return {
-        ...d,
-        firstPoints: mockData.bounders as [CustomVector3, CustomVector3],
-      };
-    });
-
-    const MxPoints: any = {};
-    for (let i = 0; i < options.length; i++) {
-      MxPoints[`m${i}`] = cubePoints[i].slice(0, 50);
-    }
-
-    setData((d) => {
-      return {
-        ...d,
-        MxPoints,
-      };
-    });
   };
 
   useEffect(() => {
