@@ -100,10 +100,12 @@ export default function Index(props: {
         <MyCylinder {...props?.calulateRes} />
 
         <PointsLabel
-          points={props?.mPoints
-            ?.filter?.((p) => p.enable)
-            .filter((p) => p.enable)}
+          points={props?.mPoints?.filter?.((p) => p.enable)}
           color="#000"
+        />
+        <PointsLabel
+          points={props?.mPoints?.filter?.((p) => !p.enable)}
+          color="#ccc"
         />
 
         {props.direct && <Direct direct={props.direct} />}

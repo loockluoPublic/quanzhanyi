@@ -70,6 +70,7 @@ export default function CylinderTable() {
   return (
     <div>
       <Table
+        rowKey={"key"}
         className="q-w-full"
         dataSource={data}
         columns={columns}
