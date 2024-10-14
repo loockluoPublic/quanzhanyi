@@ -10,12 +10,6 @@ import { SDFBOptions, sdmOptions } from "./CubeResult";
 export default function () {
   const [data, setData] = useRecoilState(Data);
 
-  console.log(
-    "%c Line:16 🍡 data.cylinderAgainTable",
-    "color:#ea7e5c",
-    data.cylinderAgainTable
-  );
-
   const onChange = (v: CustomVector3, i: number, key: string) => {
     const tableData: any =
       data.cylinderAgainTable?.map?.((item, index) => {

@@ -111,7 +111,7 @@ export default function Index(props: {
       </Canvas>
       {props?.component && (
         <div
-          style={{ maxHeight: h, overflow: "scroll" }}
+          style={{ maxHeight: h, overflow: "auto" }}
           className="q-flex-shrink-0 q-flex-grow-0 border-style"
         >
           {props?.component}
