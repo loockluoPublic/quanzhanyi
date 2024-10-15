@@ -81,7 +81,7 @@ export default function () {
                 data.sdm?.length === 2 && row.sdm === "B"
                   ? row.i - data.sdfb
                   : row.i;
-              console.log("%c Line:63 🍏 slnum", "color:#6eeeef", row.i, slnum);
+
               CustomVector3.setPublicInfo(row.sdm, 2 * slnum - 1);
             }}
             value={_v}
@@ -121,9 +121,12 @@ export default function () {
       title: "声道相对高度",
       dataIndex: "sdH",
       key: "sdH",
-      align: "right",
+      align: "center",
       render: (v) => {
-        return v?.toFixed?.(4);
+        if (isNaN((data?.calulateRes?.R / 2) * v)) return "";
+        return `${(data?.calulateRes?.R * v)?.toFixed?.(4)}米 ${v?.toFixed?.(
+          4
+        )} `;
       },
     },
     {

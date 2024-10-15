@@ -38,7 +38,7 @@ export default function PointsVector3(props: {
     !props.value && props.autoMeasure && getPoints();
   }, []);
 
-  let w = 230;
+  let w = 200;
 
   if (showGetPoints) {
     w = w + 50;
@@ -49,7 +49,7 @@ export default function PointsVector3(props: {
 
   return (
     <div
-      className={" q-inline-flex q-justify-between q-my-2 " + props.className}
+      className={" q-inline-flex q-justify-end q-my-2 " + props.className}
       style={{ minWidth: `${w}px` }}
     >
       <span style={props.style}>
@@ -74,7 +74,6 @@ export default function PointsVector3(props: {
 
           {showGetPoints && (
             <Button
-              style={{ marginLeft: "10px" }}
               type="primary"
               onClick={getPoints}
               loading={loading}

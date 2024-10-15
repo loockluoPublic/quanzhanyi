@@ -12,6 +12,9 @@ export default function () {
   const [data, setData] = useRecoilState(Data);
   console.log("%c Line:7 🥃 data", "color:#42b983", data);
 
+  const width = data?.cubeResult?.b?.toFixed(4);
+  const hight = data?.cubeResult?.h?.toFixed(4);
+
   const onChange = (v: CustomVector3, i: number, key: string) => {
     const tableData: any =
       data.cubeAgainTable?.map?.((item, index) => {
@@ -124,7 +127,10 @@ export default function () {
       key: "sdH",
       align: "right",
       render: (v) => {
-        return v?.toFixed?.(4);
+        if (isNaN((data?.cubeResult?.h / 2) * v)) return "";
+        return `${((data?.cubeResult?.h / 2) * v)?.toFixed?.(
+          4
+        )}米 ${v?.toFixed?.(4)} `;
       },
     },
     {
@@ -210,8 +216,6 @@ export default function () {
     });
   };
 
-  const width = data?.cubeResult?.b?.toFixed(4);
-  const hight = data?.cubeResult?.h?.toFixed(4);
   const comp = (
     <div>
       <h3>参数设置：</h3>
