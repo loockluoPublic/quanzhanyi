@@ -174,6 +174,9 @@ export default function () {
     data.distanceThreshold
   );
 
+  const width = data?.cubeResult?.b?.toFixed(4);
+  const hight = data?.cubeResult?.h?.toFixed(4);
+
   return (
     <div>
       <div className="q-mt-2">
@@ -256,18 +259,28 @@ export default function () {
           />
         </span>
       </div>
-      <div className="q-mt-2 q-flex q-justify-end">
-        <Button loading={loading} type="primary" onClick={getPoints}>
-          采集点
-        </Button>
-        <Button
-          className="q-ml-4"
-          type="primary"
-          loading={planeFitLoading}
-          onClick={planeFit}
-        >
-          方涵拟合
-        </Button>
+
+      <div className="q-mt-2 q-flex q-justify-between">
+        <div className="q-mt-2">
+          <span>
+            方涵宽度：
+            {width ?? "--"} 米
+          </span>
+          <span className="q-ml-8">方涵高度：{hight ?? "--"} 米</span>
+        </div>
+        <div>
+          <Button loading={loading} type="primary" onClick={getPoints}>
+            采集点
+          </Button>
+          <Button
+            className="q-ml-4"
+            type="primary"
+            loading={planeFitLoading}
+            onClick={planeFit}
+          >
+            方涵拟合
+          </Button>
+        </div>
       </div>
       <h3 className="q-mt-4 border-top q-pt-2">{options[num].label}采集点：</h3>
       <CubeTable points={points} num={num} />

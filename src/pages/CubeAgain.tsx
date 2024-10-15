@@ -49,7 +49,7 @@ export default function () {
       },
     },
     {
-      title: "声道点1",
+      title: "下游换能器",
       dataIndex: "p1",
       key: "p1",
       align: "center",
@@ -71,7 +71,7 @@ export default function () {
       },
     },
     {
-      title: "声道点2",
+      title: "上游换能器",
       dataIndex: "p2",
       key: "p3",
       align: "center",
@@ -245,7 +245,7 @@ export default function () {
             />
           </span>
           <span className="q-ml-8">
-            优化方法：
+            积分方法：
             <Select
               value={data.sfType}
               className=" !q-w-40"
