@@ -2,7 +2,7 @@
  * File: xdlahqr.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 10-Oct-2024 00:11:45
+ * C/C++ source code generated on  : 16-Oct-2024 02:36:46
  */
 
 #ifndef XDLAHQR_H

@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 10-Oct-2024 00:11:45
+ * C/C++ source code generated on  : 16-Oct-2024 02:36:46
  */
 
 /* Include Files */
@@ -193,52 +193,65 @@ void Calculate_rectangle_from_vertex8(
     PP16[3 * i + 1] = XieMianPianYi_data[PP16_tmp + 1];
     PP16[3 * i + 2] = XieMianPianYi_data[PP16_tmp + 2];
   }
-  foot_of_perpendicular_from_a_point_to_a_line(&PP16[3], &PP16[0], &PP16[9],
+  foot_of_perpendicular_from_a_point_to_a_line(&PP16[0], &PP16[3], &PP16[18],
                                                &ab4, &ab3, &TiYuZhi4);
-  b_dir_vec_tmp = PP16[0] - PP16[9];
+  b_dir_vec_tmp = PP16[3] - PP16[18];
   dir_vec[0] = b_dir_vec_tmp;
-  dir_vec_tmp = PP16[1] - PP16[10];
+  dir_vec_tmp = PP16[4] - PP16[19];
   dir_vec[1] = dir_vec_tmp;
-  temp = PP16[2] - PP16[11];
+  temp = PP16[5] - PP16[20];
   dir_vec[2] = temp;
   ab1 = b_norm(dir_vec) / 2.0;
-  dir_vec[0] = PP16[0] - ab4;
-  dir_vec[1] = PP16[1] - ab3;
-  dir_vec[2] = PP16[2] - TiYuZhi4;
+  dir_vec[0] = PP16[3] - ab4;
+  dir_vec[1] = PP16[4] - ab3;
+  dir_vec[2] = PP16[5] - TiYuZhi4;
   TiYuZhi1 = (ab1 - b_norm(dir_vec)) / ab1;
-  foot_of_perpendicular_from_a_point_to_a_line(&PP16[18], &PP16[21], &PP16[12],
+  foot_of_perpendicular_from_a_point_to_a_line(&PP16[9], &PP16[6], &PP16[15],
                                                &TiYuZhi4, &ab1, &ab4);
-  ab3 = PP16[21] - PP16[12];
+  ab3 = PP16[6] - PP16[15];
   dir_vec[0] = ab3;
-  c_dir_vec_tmp = PP16[22] - PP16[13];
+  c_dir_vec_tmp = PP16[7] - PP16[16];
   dir_vec[1] = c_dir_vec_tmp;
-  d_dir_vec_tmp = PP16[23] - PP16[14];
+  d_dir_vec_tmp = PP16[8] - PP16[17];
   dir_vec[2] = d_dir_vec_tmp;
   ab2 = b_norm(dir_vec) / 2.0;
-  dir_vec[0] = PP16[21] - TiYuZhi4;
-  dir_vec[1] = PP16[22] - ab1;
-  dir_vec[2] = PP16[23] - ab4;
+  dir_vec[0] = PP16[6] - TiYuZhi4;
+  dir_vec[1] = PP16[7] - ab1;
+  dir_vec[2] = PP16[8] - ab4;
   TiYuZhi2 = (ab2 - b_norm(dir_vec)) / ab2;
-  foot_of_perpendicular_from_a_point_to_a_line(&PP16[15], &PP16[21], &PP16[12],
+  foot_of_perpendicular_from_a_point_to_a_line(&PP16[12], &PP16[6], &PP16[15],
                                                &TiYuZhi4, &ab1, &ab4);
   dir_vec[0] = ab3;
   dir_vec[1] = c_dir_vec_tmp;
   dir_vec[2] = d_dir_vec_tmp;
   ab3 = b_norm(dir_vec) / 2.0;
-  dir_vec[0] = PP16[21] - TiYuZhi4;
-  dir_vec[1] = PP16[22] - ab1;
-  dir_vec[2] = PP16[23] - ab4;
+  dir_vec[0] = PP16[6] - TiYuZhi4;
+  dir_vec[1] = PP16[7] - ab1;
+  dir_vec[2] = PP16[8] - ab4;
   TiYuZhi3 = (ab3 - b_norm(dir_vec)) / ab3;
-  foot_of_perpendicular_from_a_point_to_a_line(&PP16[6], &PP16[0], &PP16[9],
+  foot_of_perpendicular_from_a_point_to_a_line(&PP16[21], &PP16[3], &PP16[18],
                                                &TiYuZhi4, &ab1, &ab2);
   dir_vec[0] = b_dir_vec_tmp;
   dir_vec[1] = dir_vec_tmp;
   dir_vec[2] = temp;
   ab4 = b_norm(dir_vec) / 2.0;
-  dir_vec[0] = PP16[0] - TiYuZhi4;
-  dir_vec[1] = PP16[1] - ab1;
-  dir_vec[2] = PP16[2] - ab2;
+  dir_vec[0] = PP16[3] - TiYuZhi4;
+  dir_vec[1] = PP16[4] - ab1;
+  dir_vec[2] = PP16[5] - ab2;
   TiYuZhi4 = (ab4 - b_norm(dir_vec)) / ab4;
+  /*  a1 = PP16(:,1); */
+  /*  b1 = PP16(:,8); */
+  /*  c1 = PP16(:,2); */
+  /*  d1 = PP16(:,7); */
+  /*  TiYuZhi1 = norm(a1-b1)./norm(c1-d1); */
+  /*  TiYuZhi4 = norm(a1-b1)./norm(c1-d1); */
+  /*   */
+  /*  a1 = PP16(:,4); */
+  /*  b1 = PP16(:,5); */
+  /*  c1 = PP16(:,3); */
+  /*  d1 = PP16(:,6); */
+  /*  TiYuZhi2 = norm(a1-b1)./norm(c1-d1); */
+  /*  TiYuZhi3 = norm(a1-b1)./norm(c1-d1); */
   /* %%%%%%%%%%%%%%%%%%%%%  判断点是否在斜面上（利用阈值）
    * %%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
   temp = shenglunum / 2.0;
