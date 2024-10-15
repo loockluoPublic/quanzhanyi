@@ -15,7 +15,36 @@ export const export2excel = (data: (string | number)[][]) => {
   // 移除a标签
   link.remove();
 };
+const getDatas = (arr, res, title: string) => {
+  const x = ["x"],
+    y = ["y"],
+    z = ["z"],
+    label = [title];
 
+  arr.forEach((item) => {
+    label.push(`${item.label}${item.key}`);
+    x.push(item.x);
+    y.push(item.y);
+    z.push(item.z);
+  });
+  res.push([], label, x, y, z);
+};
+
+const options = [
+  { value: 0, label: "左面", pK: "L" },
+  { value: 1, label: "顶面", pK: "T" },
+  { value: 2, label: "右面", pK: "R" },
+  { value: 3, label: "底面", pK: "B" },
+  { value: 4, label: "左下面", pK: "LB" },
+  { value: 5, label: "左上面", pK: "LT" },
+  { value: 6, label: "右上面", pK: "RT" },
+  { value: 7, label: "右下面", pK: "RB" },
+].reduce((acc, cur) => {
+  return {
+    ...acc,
+    [`m${cur.value}`]: cur.label,
+  };
+}, {});
 export const transformJSON2Excel = (data: any) => {
   const csvData = [];
   if (data?.firstPoints?.[0] && data?.firstPoints?.[1]) {
@@ -43,18 +72,29 @@ export const transformJSON2Excel = (data: any) => {
     csvData.push([], label, x, y, z);
   }
 
-  if (data?.cylinderAgainTable?.length > 0) {
+  if (data.type === "cube" && data?.MxPoints) {
+    Object.keys(data?.MxPoints).forEach((k) => {
+      getDatas(data?.MxPoints?.[k], csvData, options[k]);
+    });
+  }
+
+  const againTable =
+    data.type === "cube" ? data?.cubeAgainTable : data?.cylinderAgainTable;
+
+  if (againTable?.length > 0) {
     const label = ["复测采集点"],
       x = ["x"],
       y = ["y"],
       z = ["z"];
 
-    data?.cylinderAgainTable.forEach((item) => {
+    againTable.forEach((item) => {
       [item.p1, item.p2].forEach((p) => {
-        label.push(`${p.label}${p.key}`);
-        x.push(p.x);
-        y.push(p.y);
-        z.push(p.z);
+        if (p) {
+          label.push(`${p.label}${p.key}`);
+          x.push(p.x);
+          y.push(p.y);
+          z.push(p.z);
+        }
       });
     });
     csvData.push([], label, x, y, z);
