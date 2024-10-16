@@ -15,21 +15,6 @@ export const export2excel = (data: (string | number)[][]) => {
   // 移除a标签
   link.remove();
 };
-const getDatas = (arr, res, title: string) => {
-  const x = ["x"],
-    y = ["y"],
-    z = ["z"],
-    label = [title];
-
-  arr.forEach((item) => {
-    label.push(`${item.label}${item.key}`);
-    x.push(item.x);
-    y.push(item.y);
-    z.push(item.z);
-  });
-  res.push([], label, x, y, z);
-};
-
 const options = [
   { value: 0, label: "左面", pK: "L" },
   { value: 1, label: "顶面", pK: "T" },
@@ -47,14 +32,28 @@ const options = [
 }, {});
 export const transformJSON2Excel = (data: any) => {
   const csvData = [];
-  if (data?.firstPoints?.[0] && data?.firstPoints?.[1]) {
-    csvData.push(
-      ...data?.firstPoints?.map((item) => [item.label, item.x, item.y, item.z])
-    );
+
+  const getDatas = (arr, title: string = "") => {
+    const x = ["x"],
+      y = ["y"],
+      z = ["z"],
+      label = [title];
+
+    arr.forEach((item) => {
+      label.push(`${item.label}${item.key}`);
+      x.push(item.x);
+      y.push(item.y);
+      z.push(item.z);
+    });
+    csvData.push([], label, x, y, z);
+  };
+
+  if (data.centerPoint) {
+    getDatas([data.centerPoint], "AB面交点");
   }
 
   if (data?.direct?.length > 0) {
-    csvData.push(["轴线方向"], [data?.direct?.[0], data?.direct?.[1]]);
+    csvData.push([], ["轴线方向"], [data?.direct?.[0], data?.direct?.[1]]);
   }
 
   if (data?.mPoints?.length > 0) {
@@ -74,7 +73,7 @@ export const transformJSON2Excel = (data: any) => {
 
   if (data.type === "cube" && data?.MxPoints) {
     Object.keys(data?.MxPoints).forEach((k) => {
-      getDatas(data?.MxPoints?.[k], csvData, options[k]);
+      getDatas(data?.MxPoints?.[k], options[k]);
     });
   }
 

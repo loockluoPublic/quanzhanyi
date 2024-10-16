@@ -12,6 +12,7 @@ import PerspectiveCamera from "./PerspectiveCamera";
 
 import React from "react";
 import Rectangular from "../Rectangular";
+import PointsLabel from "./PointsLabel";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
@@ -33,28 +34,28 @@ for (let i = 0; i < 10; i++) {
   pointsData.push(new THREE.Vector2(Math.sin(i * 0.2) * 3 + 5, (i - 5) * 2));
 }
 
-function PointsLabel(props: {
-  points: CustomVector3[];
-  style?: React.CSSProperties;
-  color?: string;
-  disabledColor?: string;
-}) {
-  return props?.points?.map((item) => {
-    if (!item) return null;
-    const color = item.enable ? props.color : props.disabledColor;
-    return (
-      <Html position={item.toVector3()} key={item.key}>
-        <div
-          className="q-w-20 relative"
-          style={{ "--point-color": color } as any}
-        >
-          {item.label || ""}
-          {item.key}
-        </div>
-      </Html>
-    );
-  });
-}
+// function PointsLabel(props: {
+//   points: CustomVector3[];
+//   style?: React.CSSProperties;
+//   color?: string;
+//   disabledColor?: string;
+// }) {
+//   return props?.points?.map((item) => {
+//     if (!item) return null;
+//     const color = item.enable ? props.color : props.disabledColor;
+//     return (
+//       <Html position={item.toVector3()} key={item.key}>
+//         <div
+//           className="q-w-20 relative"
+//           style={{ "--point-color": color } as any}
+//         >
+//           {item.label || ""}
+//           {item.key}
+//         </div>
+//       </Html>
+//     );
+//   });
+// }
 
 export default function Index(props: {
   className?: string;

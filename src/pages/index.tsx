@@ -24,6 +24,7 @@ message.config({
 export default function Setting() {
   const deviceInfoData = useRecoilValue(deviceInfo);
   const data = useRecoilValue(Data);
+  console.log("%c Line:27 🌭 data", "color:#ed9ec7", data);
   const [step, setStep] = useRecoilState(Step);
   const [mode] = useRecoilState(Mode);
 

@@ -19,6 +19,7 @@ export default function BoundPoints() {
             CustomVector3.setPublicInfo("上游点", 0);
           }}
           onChange={(v) => {
+            v.color = "blue";
             setData({ ...data, firstPoints: [v, boundPoints?.[1]] });
           }}
         />

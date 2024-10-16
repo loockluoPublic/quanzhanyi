@@ -9,7 +9,7 @@ export default function PointsLabel(props: {
 }) {
   return props?.points?.map((item) => {
     if (!item) return null;
-    const color = item.enable ? props.color : props.disabledColor;
+    const color = item.enable ? item.color || props.color : props.disabledColor;
     return (
       <Html position={item.toVector3()} key={item.key}>
         <div
