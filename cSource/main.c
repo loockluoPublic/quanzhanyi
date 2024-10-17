@@ -139,10 +139,10 @@ void Planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
 };
 
 EMSCRIPTEN_KEEPALIVE
-void Planefit8(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
-               const emxArray_real_T *Points3, const emxArray_real_T *Points4,
-               const emxArray_real_T *Points5, const emxArray_real_T *Points6,
-               const emxArray_real_T *Points7, const emxArray_real_T *Points8,
+void Planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
+               const emxArray_real_T *Points3, emxArray_real_T *Points4,
+               const emxArray_real_T *Points5, emxArray_real_T *Points6,
+               const emxArray_real_T *Points7, emxArray_real_T *Points8,
                const double BoundPoint1[3], const double BoundPoint2[3],
                double distanceThreshold,
                emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints,
