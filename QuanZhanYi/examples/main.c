@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 16-Oct-2024 02:36:46
+ * C/C++ source code generated on  : 17-Oct-2024 10:45:45
  */
 
 /*************************************************************************/
@@ -440,7 +440,7 @@ void main_Calculate_rectangle_from_vertex8(void)
   emxArray_real_T *side_faces_transformed7;
   emxArray_real_T *side_faces_transformed8;
   double P_bound1_tmp[3];
-  double dv[3];
+  double b_dv[3];
   double phi_tmp;
   /* Initialize function 'Calculate_rectangle_from_vertex8' input arguments. */
   /* Initialize function input argument 'side_faces_transformed1'. */
@@ -472,12 +472,12 @@ void main_Calculate_rectangle_from_vertex8(void)
   emxInitArray_real_T(&PointTable_A_off8, 2);
   emxInitArray_real_T(&PointTable_B_off8, 2);
   emxInitArray_real_T(&XieMianPianYi, 2);
-  argInit_3x1_real_T(dv);
+  argInit_3x1_real_T(b_dv);
   Calculate_rectangle_from_vertex8(
       side_faces_transformed1, side_faces_transformed2, side_faces_transformed3,
       side_faces_transformed4, side_faces_transformed5, side_faces_transformed6,
       side_faces_transformed7, side_faces_transformed8, P_bound1_tmp,
-      P_bound1_tmp, dv, phi_tmp, phi_tmp, Ti, a, phi_tmp, PointTable_A_off8,
+      P_bound1_tmp, b_dv, phi_tmp, phi_tmp, Ti, a, phi_tmp, PointTable_A_off8,
       PointTable_B_off8, XieMianPianYi);
   emxDestroyArray_real_T(a);
   emxDestroyArray_real_T(Ti);
@@ -518,9 +518,9 @@ void main_CrossLine(void)
 void main_GenerateTrianglePoints(void)
 {
   double PointTri[6];
-  double dv[4];
+  double b_dv[4];
   double BoundPoint1_tmp[3];
-  double dv1[3];
+  double b_dv1[3];
   /* Initialize function 'GenerateTrianglePoints' input arguments. */
   /* Initialize function input argument 'PlaneParaIn'. */
   /* Initialize function input argument 'BoundPoint1'. */
@@ -528,9 +528,10 @@ void main_GenerateTrianglePoints(void)
   /* Initialize function input argument 'P0'. */
   /* Initialize function input argument 'Direction'. */
   /* Call the entry-point 'GenerateTrianglePoints'. */
-  argInit_4x1_real_T(dv);
-  argInit_3x1_real_T(dv1);
-  GenerateTrianglePoints(dv, BoundPoint1_tmp, BoundPoint1_tmp, dv1, PointTri);
+  argInit_4x1_real_T(b_dv);
+  argInit_3x1_real_T(b_dv1);
+  GenerateTrianglePoints(b_dv, BoundPoint1_tmp, BoundPoint1_tmp, b_dv1,
+                         PointTri);
 }
 
 /*
@@ -840,12 +841,12 @@ void main_generate_unit_circle_with_normal_vector2(void)
 void main_myvrrotvec2mat(void)
 {
   double m[9];
-  double dv[4];
+  double b_dv[4];
   /* Initialize function 'myvrrotvec2mat' input arguments. */
   /* Initialize function input argument 'r'. */
   /* Call the entry-point 'myvrrotvec2mat'. */
-  argInit_4x1_real_T(dv);
-  myvrrotvec2mat(dv, m);
+  argInit_4x1_real_T(b_dv);
+  myvrrotvec2mat(b_dv, m);
 }
 
 /*

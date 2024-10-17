@@ -2,7 +2,7 @@
  * File: YuanXingFuCe.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 16-Oct-2024 02:36:46
+ * C/C++ source code generated on  : 17-Oct-2024 10:45:45
  */
 
 /* Include Files */
@@ -45,9 +45,10 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
                   emxArray_real_T *TiC, emxArray_real_T *Wquanzhong1,
                   emxArray_real_T *Wquanzhong2)
 {
-  static const double dv[5] = {1.570796, 0.392699, 0.19635, 0.122718, 0.085903};
-  static const double dv1[5] = {1.513365, 0.360325, 0.174351, 0.106311,
-                                0.072959};
+  static const double b_dv[5] = {1.570796, 0.392699, 0.19635, 0.122718,
+                                 0.085903};
+  static const double b_dv1[5] = {1.513365, 0.360325, 0.174351, 0.106311,
+                                  0.072959};
   emxArray_real_T *TiYiCe;
   emxArray_real_T *r;
   emxArray_real_T *r1;
@@ -511,7 +512,7 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
       b_nchoosek(t_k, (shenglunum + 1.0) - 2.0 * ((double)b_absxk_tmp + 1.0),
                  r);
       prod(r, r1);
-      Wquanzhong2_data[b_i] += dv[b_absxk_tmp] * -combineVectorElements(r1);
+      Wquanzhong2_data[b_i] += b_dv[b_absxk_tmp] * -combineVectorElements(r1);
     }
     mul = 1.0;
     for (b_absxk_tmp = 0; b_absxk_tmp < loop_ub_tmp; b_absxk_tmp++) {
@@ -571,7 +572,7 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
       b_nchoosek(t_k, (shenglunum + 1.0) - 2.0 * ((double)b_absxk_tmp + 1.0),
                  r);
       prod(r, r1);
-      Wquanzhong2_data[b_i] += dv1[b_absxk_tmp] * -combineVectorElements(r1);
+      Wquanzhong2_data[b_i] += b_dv1[b_absxk_tmp] * -combineVectorElements(r1);
     }
     mul = 1.0;
     for (b_absxk_tmp = 0; b_absxk_tmp < loop_ub_tmp; b_absxk_tmp++) {

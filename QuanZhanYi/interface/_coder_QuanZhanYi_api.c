@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 16-Oct-2024 02:36:46
+ * C/C++ source code generated on  : 17-Oct-2024 10:45:45
  */
 
 /* Include Files */
@@ -2124,6 +2124,10 @@ void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
   emxArray_real_T *Points8;
   emxArray_real_T *TrianglePoints;
   emxArray_real_T *distancesFianal;
+  const mxArray *prhs_copy_idx_1;
+  const mxArray *prhs_copy_idx_3;
+  const mxArray *prhs_copy_idx_5;
+  const mxArray *prhs_copy_idx_7;
   real_T(*MaxDis)[8];
   real_T(*P_bound1)[3];
   real_T(*P_bound2)[3];
@@ -2131,31 +2135,35 @@ void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
   st.tls = emlrtRootTLSGlobal;
   MaxDis = (real_T(*)[8])mxMalloc(sizeof(real_T[8]));
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
+  prhs_copy_idx_1 = emlrtProtectR2012b(prhs[1], 1, false, -1);
+  prhs_copy_idx_3 = emlrtProtectR2012b(prhs[3], 3, false, -1);
+  prhs_copy_idx_5 = emlrtProtectR2012b(prhs[5], 5, false, -1);
+  prhs_copy_idx_7 = emlrtProtectR2012b(prhs[7], 7, false, -1);
   /* Marshall function inputs */
   emxInit_real_T(&st, &Points1, 2);
   Points1->canFreeData = false;
   g_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "Points1", Points1);
   emxInit_real_T(&st, &Points2, 2);
   Points2->canFreeData = false;
-  g_emlrt_marshallIn(&st, emlrtAlias(prhs[1]), "Points2", Points2);
+  g_emlrt_marshallIn(&st, emlrtAlias(prhs_copy_idx_1), "Points2", Points2);
   emxInit_real_T(&st, &Points3, 2);
   Points3->canFreeData = false;
   g_emlrt_marshallIn(&st, emlrtAlias(prhs[2]), "Points3", Points3);
   emxInit_real_T(&st, &Points4, 2);
   Points4->canFreeData = false;
-  g_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "Points4", Points4);
+  g_emlrt_marshallIn(&st, emlrtAlias(prhs_copy_idx_3), "Points4", Points4);
   emxInit_real_T(&st, &Points5, 2);
   Points5->canFreeData = false;
   g_emlrt_marshallIn(&st, emlrtAlias(prhs[4]), "Points5", Points5);
   emxInit_real_T(&st, &Points6, 2);
   Points6->canFreeData = false;
-  g_emlrt_marshallIn(&st, emlrtAlias(prhs[5]), "Points6", Points6);
+  g_emlrt_marshallIn(&st, emlrtAlias(prhs_copy_idx_5), "Points6", Points6);
   emxInit_real_T(&st, &Points7, 2);
   Points7->canFreeData = false;
   g_emlrt_marshallIn(&st, emlrtAlias(prhs[6]), "Points7", Points7);
   emxInit_real_T(&st, &Points8, 2);
   Points8->canFreeData = false;
-  g_emlrt_marshallIn(&st, emlrtAlias(prhs[7]), "Points8", Points8);
+  g_emlrt_marshallIn(&st, emlrtAlias(prhs_copy_idx_7), "Points8", Points8);
   P_bound1 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[8]), "P_bound1");
   P_bound2 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[9]), "P_bound2");
   distanceThreshold =

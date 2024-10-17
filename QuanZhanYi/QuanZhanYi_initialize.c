@@ -2,12 +2,13 @@
  * File: QuanZhanYi_initialize.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 16-Oct-2024 02:36:46
+ * C/C++ source code generated on  : 17-Oct-2024 10:45:45
  */
 
 /* Include Files */
 #include "QuanZhanYi_initialize.h"
 #include "QuanZhanYi_data.h"
+#include "eml_rand_mt19937ar_stateful.h"
 #include "rt_nonfinite.h"
 
 /* Function Definitions */
@@ -18,6 +19,7 @@
 void QuanZhanYi_initialize(void)
 {
   rt_InitInfAndNaN();
+  c_eml_rand_mt19937ar_stateful_i();
   isInitialized_QuanZhanYi = true;
 }
 
