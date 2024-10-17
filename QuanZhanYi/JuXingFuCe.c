@@ -2,7 +2,7 @@
  * File: JuXingFuCe.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 16-Oct-2024 02:36:46
+ * C/C++ source code generated on  : 17-Oct-2024 10:45:45
  */
 
 /* Include Files */
@@ -93,10 +93,10 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
                 emxArray_real_T *TiC, emxArray_real_T *Wquanzhong3,
                 emxArray_real_T *Wquanzhong4)
 {
-  static const double dv[5] = {2.0, 0.66666666666666663, 0.4,
-                               0.2857142857142857, 0.22222222222222221};
-  static const double dv1[5] = {1.838286, 0.556753, 0.315143, 0.215852,
-                                0.162469};
+  static const double b_dv[5] = {2.0, 0.66666666666666663, 0.4,
+                                 0.2857142857142857, 0.22222222222222221};
+  static const double b_dv1[5] = {1.838286, 0.556753, 0.315143, 0.215852,
+                                  0.162469};
   emxArray_real_T *TiYiCe;
   emxArray_real_T *r;
   emxArray_real_T *r1;
@@ -467,7 +467,7 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
     for (absxk_tmp = 0; absxk_tmp < i; absxk_tmp++) {
       b_nchoosek(t_k, (shenglunum + 1.0) - 2.0 * ((double)absxk_tmp + 1.0), r);
       prod(r, r1);
-      w_data[b_i] += dv[absxk_tmp] * -combineVectorElements(r1);
+      w_data[b_i] += b_dv[absxk_tmp] * -combineVectorElements(r1);
     }
     b_scale = 1.0;
     for (absxk_tmp = 0; absxk_tmp < loop_ub_tmp; absxk_tmp++) {
@@ -526,7 +526,7 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
     for (absxk_tmp = 0; absxk_tmp < i; absxk_tmp++) {
       b_nchoosek(t_k, (shenglunum + 1.0) - 2.0 * ((double)absxk_tmp + 1.0), r);
       prod(r, r1);
-      w_data[b_i] += dv1[absxk_tmp] * -combineVectorElements(r1);
+      w_data[b_i] += b_dv1[absxk_tmp] * -combineVectorElements(r1);
     }
     b_scale = 1.0;
     for (absxk_tmp = 0; absxk_tmp < loop_ub_tmp; absxk_tmp++) {

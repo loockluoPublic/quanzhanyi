@@ -2,7 +2,7 @@
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 16-Oct-2024 02:36:46
+ * C/C++ source code generated on  : 17-Oct-2024 10:45:45
  */
 
 /* Include Files */
@@ -62,8 +62,8 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   emxArray_real_T *x_contents;
   emxArray_real_T *y;
   double V[16];
-  double dv[9];
-  double dv1[9];
+  double b_dv[9];
+  double b_dv1[9];
   double s_data[4];
   double b_n[3];
   double h[3];
@@ -215,23 +215,23 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         b_n[2] = Merr / norm_vec;
       }
       absx = (1.0 - c) * b_n[0];
-      dv[0] = absx * b_n[0] + c;
+      b_dv[0] = absx * b_n[0] + c;
       norm_vec = absx * b_n[1];
       Merr = s * b_n[2];
-      dv[3] = norm_vec - Merr;
+      b_dv[3] = norm_vec - Merr;
       absx *= b_n[2];
       rcoselev = s * b_n[1];
-      dv[6] = absx + rcoselev;
-      dv[1] = norm_vec + Merr;
+      b_dv[6] = absx + rcoselev;
+      b_dv[1] = norm_vec + Merr;
       norm_vec = (1.0 - c) * b_n[1];
-      dv[4] = norm_vec * b_n[1] + c;
+      b_dv[4] = norm_vec * b_n[1] + c;
       norm_vec *= b_n[2];
       Merr = s * b_n[0];
-      dv[7] = norm_vec - Merr;
-      dv[2] = absx - rcoselev;
-      dv[5] = norm_vec + Merr;
-      dv[8] = (1.0 - c) * b_n[2] * b_n[2] + c;
-      mtimes(points, dv, P);
+      b_dv[7] = norm_vec - Merr;
+      b_dv[2] = absx - rcoselev;
+      b_dv[5] = norm_vec + Merr;
+      b_dv[8] = (1.0 - c) * b_n[2] * b_n[2] + c;
+      mtimes(points, b_dv, P);
       P_data = P->data;
       xi = x_contents->size[0] * x_contents->size[1];
       x_contents->size[0] = 2;
@@ -622,27 +622,27 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     b_n[2] = Merr / norm_vec;
   }
   d1 = (1.0 - c) * b_n[0];
-  dv[0] = d1 * b_n[0] + c;
+  b_dv[0] = d1 * b_n[0] + c;
   d2 = d1 * b_n[1];
   absx = s * b_n[2];
-  dv[3] = d2 - absx;
+  b_dv[3] = d2 - absx;
   d1 *= b_n[2];
   norm_vec = s * b_n[1];
-  dv[6] = d1 + norm_vec;
-  dv[1] = d2 + absx;
+  b_dv[6] = d1 + norm_vec;
+  b_dv[1] = d2 + absx;
   d2 = (1.0 - c) * b_n[1];
-  dv[4] = d2 * b_n[1] + c;
+  b_dv[4] = d2 * b_n[1] + c;
   d2 *= b_n[2];
   absx = s * b_n[0];
-  dv[7] = d2 - absx;
-  dv[2] = d1 - norm_vec;
-  dv[5] = d2 + absx;
-  dv[8] = (1.0 - c) * b_n[2] * b_n[2] + c;
-  pinv(dv, dv1);
+  b_dv[7] = d2 - absx;
+  b_dv[2] = d1 - norm_vec;
+  b_dv[5] = d2 + absx;
+  b_dv[8] = (1.0 - c) * b_n[2] * b_n[2] + c;
+  pinv(b_dv, b_dv1);
   for (xi = 0; xi < 3; xi++) {
     Mcenter[xi] =
-        (OptPara_idx_0 * dv1[3 * xi] + OptPara_idx_1 * dv1[3 * xi + 1]) +
-        0.0 * dv1[3 * xi + 2];
+        (OptPara_idx_0 * b_dv1[3 * xi] + OptPara_idx_1 * b_dv1[3 * xi + 1]) +
+        0.0 * b_dv1[3 * xi + 2];
   }
   xi = Err_every->size[0] * Err_every->size[1];
   Err_every->size[0] = 1;

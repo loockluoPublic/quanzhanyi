@@ -1,15 +1,14 @@
 /*
- * File: prod.h
+ * File: eml_rand_mt19937ar_stateful.h
  *
  * MATLAB Coder version            : 23.2
  * C/C++ source code generated on  : 17-Oct-2024 10:45:45
  */
 
-#ifndef PROD_H
-#define PROD_H
+#ifndef EML_RAND_MT19937AR_STATEFUL_H
+#define EML_RAND_MT19937AR_STATEFUL_H
 
 /* Include Files */
-#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -19,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void prod(const emxArray_real_T *x, emxArray_real_T *y);
+void c_eml_rand_mt19937ar_stateful_i(void);
 
 #ifdef __cplusplus
 }
@@ -27,7 +26,7 @@ void prod(const emxArray_real_T *x, emxArray_real_T *y);
 
 #endif
 /*
- * File trailer for prod.h
+ * File trailer for eml_rand_mt19937ar_stateful.h
  *
  * [EOF]
  */
