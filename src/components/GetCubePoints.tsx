@@ -34,10 +34,10 @@ export default function () {
     for (const item of options) {
       const key = `m${item.value}`;
       if (item.value < 4) {
-        if (data.MxPoints[key]?.length > 9) {
+        if (data.MxPoints[key]?.length > 4) {
           MxPortsArr.push(data.MxPoints[key]);
         } else {
-          message.error(`【${item.label}】采集点少于10个，请补充采集点`);
+          message.error(`【${item.label}】采集点少于5个，请补充采集点`);
           return;
         }
       } else {

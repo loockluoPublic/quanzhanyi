@@ -31,7 +31,7 @@ export const sendText = (text): Promise<string> => {
     }
     const flag = setTimeout(() => {
       resolve("");
-    }, 12000);
+    }, 8000);
     const handleSerialEvent = (event) => {
       console.log(
         `发送 ：%R1Q,${text}`,
