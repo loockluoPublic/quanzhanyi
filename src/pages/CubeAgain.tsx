@@ -134,7 +134,7 @@ export default function () {
       },
     },
     {
-      title: "高斯勒让德权重",
+      title: "高斯-勒让德",
       dataIndex: "Wquanzhong3",
       key: "Wquanzhong3",
       align: "right",
@@ -144,7 +144,7 @@ export default function () {
     },
 
     {
-      title: "矩形优化权重",
+      title: "矩形优化",
       dataIndex: "Wquanzhong4",
       key: "Wquanzhong4",
       align: "right",
@@ -252,10 +252,10 @@ export default function () {
             积分方法：
             <Select
               value={data.sfType}
-              className=" !q-w-40"
+              className=" !q-w-30"
               options={[
-                { label: "高斯勒让德权重", value: "Wquanzhong4" },
-                { label: "矩形优化权重", value: "Wquanzhong3" },
+                { label: "高斯-勒让德", value: "Wquanzhong4" },
+                { label: "矩形优化法", value: "Wquanzhong3" },
               ]}
               onChange={(sfType) => {
                 setData({
