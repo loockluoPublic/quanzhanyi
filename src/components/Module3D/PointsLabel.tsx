@@ -11,7 +11,7 @@ export default function PointsLabel(props: {
     if (!item) return null;
     const color = item.enable ? item.color || props.color : props.disabledColor;
     return (
-      <Html position={item.toVector3()} key={item.key}>
+      <Html position={item.toVector3()} key={`${item.key}${Math.random()}`}>
         <div
           className="q-w-20 relative"
           style={{ "--point-color": color } as any}

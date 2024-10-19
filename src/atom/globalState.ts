@@ -1,6 +1,4 @@
 import { atom } from "recoil";
-import mockData from "../utils/mockData";
-import { CustomVector3 } from "../class/CustomVector3";
 import { BaseInfo, ICube, ICycle, ICycleBase } from "./type";
 
 export enum TType {
@@ -50,7 +48,6 @@ export const Data = atom<GlobalData>({
     MxPoints: {},
     hasChamfer: false,
     firstPoints: [] as any,
-    // direct: [],
     type: TType.cycle,
     distanceThreshold: 0.1,
     layNum: 2,

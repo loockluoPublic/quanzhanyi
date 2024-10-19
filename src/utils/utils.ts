@@ -1,6 +1,7 @@
 import EmxArray_real_T from "../class/EmxArray_real_T";
 import { CustomVector3 } from "../class/CustomVector3";
 import { tableData } from "./config";
+import { ICycle } from "../atom/type";
 
 const {
   _generateUnitCircleWithNormalVector,
@@ -159,6 +160,18 @@ export const CalculateAccurateCylindersFromMultipleMeasurementPoints = async (
   return result;
 };
 
+const fitArr = (arr: any[]) => {
+  return [...arr, ...arr.reverse()];
+};
+
+const toSd = (array: any) => {
+  const res: any[] = [];
+  for (let index = 0; index < array.length; index = index + 2) {
+    res.push([array[index], array[index + 1]]);
+  }
+  return res;
+};
+
 /**
  * @description 计算AB面点
  * @param MTaon 圆柱轴线方向向量
@@ -178,14 +191,34 @@ export const CalculatAAndBPoints = async (
   R: number,
   PAB: CustomVector3,
   phi: number,
-  ang: number[],
-  tOff: number[],
-  rOff: number[]
+  resultTable: ICycle["resultTable"]
+  // ang: number[]
+  // tOff: number[],
+  // rOff: number[]
 ) => {
+  console.log("%c Line:187 🥤 resultTable", "color:#e41a6a", resultTable);
+  const tOff = fitArr(
+    resultTable?.map?.((item) => {
+      return item.tOff;
+    }) ?? []
+  );
+
+  const rOff = fitArr(
+    resultTable?.map?.((item) => {
+      return item.rOff;
+    }) ?? []
+  );
+
+  const ang = fitArr(
+    resultTable?.map?.((item) => {
+      return ang2rad(item.ang);
+    }) ?? []
+  );
+
   const mTaon = new EmxArray_real_T(MTaon);
   const mCenter = new EmxArray_real_T(Mcenter);
   const _PAB = new EmxArray_real_T(PAB);
-  const _ang = new EmxArray_real_T(ang.map(ang2rad));
+  const _ang = new EmxArray_real_T(ang);
   const _tOff = new EmxArray_real_T(tOff);
   const _rOff = new EmxArray_real_T(rOff);
   const A = new EmxArray_real_T(3, ang.length);
@@ -206,23 +239,31 @@ export const CalculatAAndBPoints = async (
 
   CustomVector3.setPublicInfo("A", 0);
   const bottomA = A.toVector3();
+  console.log("%c Line:209 🍰 bottomA", "color:#2eafb0", bottomA);
   for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
     bottomA[i].key = 2 * i + 1;
     bottomA[j].key = 2 * i + 2;
   }
+  bottomA
+    .sort((a, b) => a.key - b.key)
+    .forEach((p) => {
+      p.color = "red";
+    });
+
   CustomVector3.setPublicInfo("B", 0);
   const bottomB = B.toVector3();
   for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
     bottomB[i].key = 2 * i + 1;
     bottomB[j].key = 2 * i + 2;
   }
+  bottomB
+    .sort((a, b) => a.key - b.key)
+    .forEach((p) => {
+      p.color = "#fab005";
+    });
 
-  const res = bottomA.map((a, i) => {
-    return {
-      pointA: a,
-      pointB: bottomB[i],
-    };
-  });
+  const res = { bottomA: toSd(bottomA), bottomB: toSd(bottomB) };
+
   mTaon.free();
   mCenter.free();
   _PAB.free();
@@ -706,14 +747,22 @@ export const CalcJuXingAAndBPointsAfterOffest = (
  * @param numSL
  * @returns
  */
+
 export const shengLuJiao2Ang = (numSL: number) => {
-  const angs = new EmxArray_real_T(2 * numSL, 1);
+  const angs = new EmxArray_real_T(numSL * 2, 1);
   _shengLuJiaoJiSuan(numSL, angs.ptr);
   const res = angs.toJSON()?.[0]?.map((v) => {
     return Number(rad2ang(v).toFixed(6));
   });
   angs.free();
-  return res;
+  console.log("%c Line:727 🥐 res", "color:#465975", res);
+  const nw: any = [];
+  for (let i = res.length / 2; i < res.length; i++) {
+    // const element = array[index];
+    nw.push(res[i]);
+  }
+  console.log("%c Line:728 🥐 nw", "color:#b03734", nw);
+  return nw;
 };
 
 /**

@@ -125,7 +125,15 @@ interface ICycle {
   /**
    * 计算参数Table
    */
-  resultTable: { ang: number; a: number; tOff: number; rOff: number }[];
+  resultTable: {
+    i: number;
+    ang: number;
+    a: number;
+    tOff: number;
+    rOff: number;
+    sdm: "A" | "B";
+    points?: CustomVector3[];
+  }[];
 
   /**
    * 安装点位置

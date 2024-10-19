@@ -93,7 +93,11 @@ export default function Index(props: {
             <PointsLabel points={props.firstPoints} color="red" />
           )}
 
-          {props?.sdm?.includes("A") && (
+          {props.points?.length > 0 && (
+            <PointsLabel points={props.points} color="red" />
+          )}
+
+          {/* {props?.sdm?.includes("A") && (
             <PointsLabel
               points={props?.AB?.map?.((item) => item.pointA)}
               color="red"
@@ -105,7 +109,7 @@ export default function Index(props: {
               points={props?.AB?.map?.((item) => item.pointB)}
               color="#fab005"
             />
-          )}
+          )} */}
         </group>
         <OrbitControls />
       </Canvas>

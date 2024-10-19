@@ -15,6 +15,7 @@ import {
 } from "../utils/utils";
 import PointsVector3 from "../components/PointVector3";
 import { CustomVector3 } from "../class/CustomVector3";
+import CylinderAgainTable from "../components/CylinderAgainTable";
 
 const SDFBOptions = (() => {
   const options: DefaultOptionType[] = [];
@@ -32,7 +33,7 @@ const sdmOptions = [
 function CylinderFit() {
   const [data, setData] = useRecoilState(Data);
 
-  const sdfbPreRef = useRef<any>();
+  const sdfbPreRef = useRef<any>("");
 
   const onChange = (v: number, i: number, key: string) => {
     const tableData = data.resultTable.map((item, index) => {
@@ -72,6 +73,21 @@ function CylinderFit() {
 
   const columns: any = [
     {
+      title: "声道面",
+      dataIndex: "sdm",
+      align: "center",
+      key: "sdm",
+    },
+    {
+      title: "声道",
+      dataIndex: "i",
+      align: "center",
+      key: "i",
+      render: (i, _i) => {
+        return <>第{i}声道</>;
+      },
+    },
+    {
       title: "插入深度",
       dataIndex: "a",
       key: "a",
@@ -84,10 +100,10 @@ function CylinderFit() {
             onChange={(v) => onChange(v, i, "a")}
             addonAfter={
               <div>
-                米{" "}
+                米
                 <Tooltip title="应用到全部" className="q-cursor-pointer">
                   <SettingOutlined onClick={() => setA(i)} />
-                </Tooltip>{" "}
+                </Tooltip>
               </div>
             }
           />
@@ -115,7 +131,7 @@ function CylinderFit() {
       key: "rOff",
       align: "center",
       render: (v) => {
-        return <>{v?.toFixed?.(3) ?? "--"}米</>;
+        return <>{v?.toFixed?.(4) ?? "--"}米</>;
       },
     },
     {
@@ -124,49 +140,93 @@ function CylinderFit() {
       key: "tOff",
       align: "center",
       render: (v) => {
-        return <>{v?.toFixed?.(3) ?? "--"}米</>;
+        return <>{v?.toFixed?.(4) ?? "--"}米</>;
       },
     },
-
     {
       title: "安装点",
-      width: 100,
-      dataIndex: "AB",
-      key: "AB",
+      dataIndex: "points",
+      key: "points",
       align: "center",
       render: (v) => {
-        console.log("%c Line:148 🥖 v", "color:#3f7cff", v);
         return (
           <div className="q-flex q-justify-center">
-            {data?.sdm?.includes("A") && <Point p={v?.pointA} />}
-            {data?.sdm?.includes("B") && (
-              <Point className="q-ml-2" p={v?.pointB} />
-            )}
+            {v?.map?.((p) => (
+              <Point
+                className={`${p.key % 2 === 0 ? "q-ml-2" : ""}`}
+                key={`${p.label}${p.key}`}
+                p={p}
+              />
+            ))}
           </div>
         );
       },
     },
   ];
 
-  useEffect(() => {
-    if (
-      (typeof data?.resultTable?.[0]?.ang !== "number" &&
-        typeof data.sdfb === "number") ||
-      data.sdfb !== sdfbPreRef.current
-    ) {
-      const resultTable = shengLuJiao2Ang(data.sdfb).map((ang) => {
-        return { ang, a: 0.015, tOff: 0, rOff: 0 };
+  const updateOffset2 = (_data, _resultTable) => {
+    const paramAng =
+      _resultTable?.map?.((item) => {
+        return item.ang;
+      }) ?? [];
+    const paramA =
+      _resultTable?.map?.((item) => {
+        return item.a;
+      }) ?? [];
+
+    console.log("%c Line:199 🥥 res", "color:#3f7cff");
+    if (!_data.centerPoint || !paramAng || !paramA) return;
+    if (!(_resultTable?.length > 0)) return;
+    if (!_data?.calulateRes?.R) return;
+
+    const res = offsetCalculate(
+      _data.calulateRes.R,
+      _data.sdj,
+      paramAng,
+      paramA
+    ) ?? [[], []];
+    console.log("%c Line:199 🥥 res", "color:#3f7cff", res);
+
+    return _resultTable.map((item, i) => {
+      const newItem = {
+        ...item,
+        rOff: res[i][0],
+        tOff: res[i][1],
+      };
+
+      return newItem;
+    });
+  };
+
+  const key = `${data.sdfb}${data.sdm?.join("")}`;
+  const init = () => {
+    if (sdfbPreRef.current === "" && data.resultTable?.length > 0) return;
+    if (key !== sdfbPreRef.current) {
+      const plant = shengLuJiao2Ang(data.sdfb).map((ang) => {
+        return { ang, a: 0.015 };
+      });
+
+      const resultTable: any = [];
+
+      data.sdm?.forEach?.((m) => {
+        plant.forEach((item, i) => {
+          resultTable.push({ ...item, sdm: m, i: i + 1 });
+        });
       });
 
       setData((d) => {
         return {
           ...d,
-          resultTable,
+          resultTable: updateOffset2(data, resultTable),
         };
       });
     }
-    sdfbPreRef.current = data.sdfb;
-  }, [data.sdfb, data?.resultTable?.[0]?.ang]);
+  };
+
+  useEffect(() => {
+    init();
+    sdfbPreRef.current = key;
+  }, [key]);
 
   const paramAng =
     data.resultTable?.map?.((item) => {
@@ -177,37 +237,14 @@ function CylinderFit() {
       return item.a;
     }) ?? [];
 
-  const updateOffset = () => {
-    if (!data.centerPoint || !paramAng || !paramA) return;
-    if (!(data.resultTable?.length > 0)) return;
-    if (!data?.calulateRes?.R) return;
-
-    const res = offsetCalculate(
-      data.calulateRes.R,
-      data.sdj,
-      paramAng,
-      paramA
-    ) ?? [[], []];
-
-    const tableData = data.resultTable.map((item, i) => {
-      const newItem = {
-        ...item,
-        rOff: res[i][0],
-        tOff: res[i][1],
-      };
-
-      return newItem;
-    });
-    setData((d) => {
-      return {
-        ...d,
-        resultTable: tableData,
-      };
-    });
-  };
-
   useEffect(() => {
-    updateOffset();
+    if (sdfbPreRef.current !== "")
+      setData((d) => {
+        return {
+          ...d,
+          resultTable: updateOffset2(d, d.resultTable),
+        };
+      });
   }, [[...paramAng, ...paramA, data.sdj].join(",")]);
 
   const tOff =
@@ -235,14 +272,17 @@ function CylinderFit() {
         calulateRes.R,
         data.centerPoint,
         data.sdj,
-        paramAng,
-        tOff,
-        rOff
+        data.resultTable?.filter((item) => item.sdm === data.sdm[0])
       ).then((AB) => {
+        const resultTable = data.resultTable.map((row) => {
+          console.log("%c Line:264 🥛 sdm,i", "color:#4fff4B", row.sdm, row.i);
+          return { ...row, points: AB?.[`bottom${row.sdm}`]?.[row.i - 1] };
+        });
+
         setData((d) => {
           return {
             ...d,
-            AB,
+            resultTable,
           };
         });
       });
@@ -252,19 +292,6 @@ function CylinderFit() {
   useEffect(() => {
     if (data.centerPoint) calcPoint();
   }, [[...rOff, ...tOff].join(","), data.centerPoint]);
-
-  useEffect(() => {
-    setData((d) => {
-      if (d.cylinderAgainTable) {
-        return d;
-      } else {
-        return {
-          ...d,
-          cylinderAgainTable: getInitAgainTable(data.sdfb, data.sdm) as any,
-        };
-      }
-    });
-  }, [data.sdfb, data.sdm]);
 
   const comp = (
     <div>
@@ -302,7 +329,7 @@ function CylinderFit() {
       </div>
       <div className="q-my-1">
         <span>
-          声道面：{" "}
+          声道面：
           <Checkbox.Group
             value={data.sdm}
             options={sdmOptions as any}
@@ -333,28 +360,26 @@ function CylinderFit() {
         <Table
           size="small"
           key={data.sdfb}
-          dataSource={
-            data.resultTable?.map((item, i) => {
-              return {
-                ...item,
-                key: i,
-                AB: data.AB?.[i],
-              };
-            }) ?? []
-          }
+          dataSource={data.resultTable ?? []}
           columns={columns}
           pagination={{ hideOnSinglePage: true }}
         />
       </div>
     </div>
   );
+
+  const points = data?.resultTable?.reduce((acc, cur) => {
+    acc.push(...(cur?.points ?? []));
+    return [...acc, ...(cur?.points ?? [])];
+  }, []);
+
   return (
     <CylinderModule
       component={comp}
       firstPoints={data.firstPoints}
       calulateRes={data.calulateRes}
       sdm={data.sdm}
-      AB={data.AB}
+      points={points}
     ></CylinderModule>
   );
 }
