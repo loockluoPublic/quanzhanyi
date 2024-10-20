@@ -7,11 +7,8 @@ import { Point } from "../components/Point";
 import { useEffect, useRef } from "react";
 import Select, { DefaultOptionType } from "antd/es/select";
 import {
-  ang2rad,
-  CalcJuXingAAndBPointsAfterOffest,
   CalculatAAndBPoints4,
   CalculatAAndBPoints8,
-  CalculateRectangleFromVertex8,
   cubeTOff,
   sdj_n2v,
   sdj_v2n,
