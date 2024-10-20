@@ -1,8 +1,8 @@
 /*
  * File: Calculat_A_and_B_Points.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Sep-2024 14:25:16
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 20-Oct-2024 13:46:16
  */
 
 /* Include Files */
@@ -56,7 +56,6 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
   double d_A2x[15];
   double c_A2x[12];
   double b_A2x[9];
-  double b_b[9];
   double rot1[9];
   double A2x[6];
   double C[3];
@@ -96,6 +95,7 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
   double *PointTable_A_data;
   double *result_data;
   int PointTable2DT_A_size_idx_0;
+  int b_PointTable2DT_A_size_idx_0;
   int boffset;
   int i;
   int ibmat;
@@ -378,12 +378,12 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
   A1x = Mradial * cos(D_idx_2);
   A1y = Mradial * sin(D_idx_2);
   A1z = -((E_idx_1 + C[0] * A1x) + C[1] * A1y) / C[2];
-  jcol = 10;
+  PointTable2DT_A_size_idx_0 = 10;
   memset(&PointTable2DT_A_data[0], 0, 30U * sizeof(double));
   /*  根据声路数画出测点 */
   switch ((int)numShengLu) {
   case 1:
-    jcol = 1;
+    PointTable2DT_A_size_idx_0 = 1;
     PointTable2DT_A_data[0] = A1x;
     PointTable2DT_A_data[1] = A1y;
     PointTable2DT_A_data[2] = A1z;
@@ -399,7 +399,7 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     A2x[1] = A3x;
     A2x[3] = A3y;
     A2x[5] = A3z;
-    jcol = 2;
+    PointTable2DT_A_size_idx_0 = 2;
     for (itilerow = 0; itilerow < 6; itilerow++) {
       PointTable2DT_A_data[itilerow] = A2x[itilerow];
     }
@@ -418,7 +418,7 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     b_A2x[2] = A3x;
     b_A2x[5] = A3y;
     b_A2x[8] = A3z;
-    jcol = 3;
+    PointTable2DT_A_size_idx_0 = 3;
     memcpy(&PointTable2DT_A_data[0], &b_A2x[0], 9U * sizeof(double));
     break;
   case 4:
@@ -442,7 +442,7 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     c_A2x[3] = A5x;
     c_A2x[7] = A5y;
     c_A2x[11] = A5z;
-    jcol = 4;
+    PointTable2DT_A_size_idx_0 = 4;
     memcpy(&PointTable2DT_A_data[0], &c_A2x[0], 12U * sizeof(double));
     break;
   case 5:
@@ -469,7 +469,7 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     d_A2x[4] = A5x;
     d_A2x[9] = A5y;
     d_A2x[14] = A5z;
-    jcol = 5;
+    PointTable2DT_A_size_idx_0 = 5;
     memcpy(&PointTable2DT_A_data[0], &d_A2x[0], 15U * sizeof(double));
     break;
   case 6:
@@ -503,7 +503,7 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     e_A2x[5] = A1z;
     e_A2x[11] = c;
     e_A2x[17] = s;
-    jcol = 6;
+    PointTable2DT_A_size_idx_0 = 6;
     memcpy(&PointTable2DT_A_data[0], &e_A2x[0], 18U * sizeof(double));
     break;
   case 7:
@@ -542,7 +542,7 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     f_A2x[6] = scale;
     f_A2x[13] = t;
     f_A2x[20] = A8z;
-    jcol = 7;
+    PointTable2DT_A_size_idx_0 = 7;
     memcpy(&PointTable2DT_A_data[0], &f_A2x[0], 21U * sizeof(double));
     break;
   case 8:
@@ -586,7 +586,7 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     g_A2x[7] = absxk;
     g_A2x[15] = absxk_tmp;
     g_A2x[23] = b_absxk_tmp;
-    jcol = 8;
+    PointTable2DT_A_size_idx_0 = 8;
     memcpy(&PointTable2DT_A_data[0], &g_A2x[0], 24U * sizeof(double));
     break;
   case 9:
@@ -635,7 +635,7 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     h_A2x[8] = C_tmp;
     h_A2x[17] = zN1;
     h_A2x[26] = b_C_tmp;
-    jcol = 9;
+    PointTable2DT_A_size_idx_0 = 9;
     memcpy(&PointTable2DT_A_data[0], &h_A2x[0], 27U * sizeof(double));
     break;
   case 10:
@@ -694,106 +694,96 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
   }
   /* 计算2D A面测点 */
   A8z = 2.0 * Prot[0];
-  boffset = jcol - 1;
   A1x = 2.0 * Prot[5];
+  boffset = PointTable2DT_A_size_idx_0 - 1;
   A1z = 2.0 * Prot[10];
-  PointTable2DT_A_size_idx_0 = jcol + jcol;
+  b_PointTable2DT_A_size_idx_0 =
+      PointTable2DT_A_size_idx_0 + PointTable2DT_A_size_idx_0;
   for (itilerow = 0; itilerow < 3; itilerow++) {
-    for (ibmat = 0; ibmat < jcol; ibmat++) {
-      b_PointTable2DT_A_data[ibmat + PointTable2DT_A_size_idx_0 * itilerow] =
-          PointTable2DT_A_data[ibmat + jcol * itilerow];
+    for (ibmat = 0; ibmat < PointTable2DT_A_size_idx_0; ibmat++) {
+      b_PointTable2DT_A_data[ibmat + b_PointTable2DT_A_size_idx_0 * itilerow] =
+          PointTable2DT_A_data[ibmat + PointTable2DT_A_size_idx_0 * itilerow];
     }
   }
-  for (itilerow = 0; itilerow <= boffset; itilerow++) {
-    b_PointTable2DT_A_data[itilerow + jcol] =
+  for (itilerow = 0; itilerow < PointTable2DT_A_size_idx_0; itilerow++) {
+    b_PointTable2DT_A_data[itilerow + PointTable2DT_A_size_idx_0] =
         A8z - PointTable2DT_A_data[itilerow];
   }
   for (itilerow = 0; itilerow <= boffset; itilerow++) {
-    ibmat = itilerow + jcol;
-    b_PointTable2DT_A_data[ibmat + PointTable2DT_A_size_idx_0] =
+    ibmat = itilerow + PointTable2DT_A_size_idx_0;
+    b_PointTable2DT_A_data[ibmat + b_PointTable2DT_A_size_idx_0] =
         A1x - PointTable2DT_A_data[ibmat];
   }
   for (itilerow = 0; itilerow <= boffset; itilerow++) {
-    b_PointTable2DT_A_data[(itilerow + jcol) + PointTable2DT_A_size_idx_0 * 2] =
-        A1z - PointTable2DT_A_data[itilerow + jcol * 2];
+    b_PointTable2DT_A_data[(itilerow + PointTable2DT_A_size_idx_0) +
+                           b_PointTable2DT_A_size_idx_0 * 2] =
+        A1z - PointTable2DT_A_data[itilerow + PointTable2DT_A_size_idx_0 * 2];
   }
-  ibmat = PointTable2DT_A_size_idx_0 * 3;
+  PointTable2DT_A_size_idx_0 = b_PointTable2DT_A_size_idx_0 * 3;
   memcpy(&PointTable2DT_A_data[0], &b_PointTable2DT_A_data[0],
-         ibmat * sizeof(double));
+         (unsigned int)PointTable2DT_A_size_idx_0 * sizeof(double));
   emxInit_real_T(&varargin_2, 1);
   itilerow = varargin_2->size[0];
-  varargin_2->size[0] = PointTable2DT_A_size_idx_0;
+  varargin_2->size[0] = b_PointTable2DT_A_size_idx_0;
   emxEnsureCapacity_real_T(varargin_2, itilerow);
   PointTable_A_data = varargin_2->data;
-  for (itilerow = 0; itilerow < PointTable2DT_A_size_idx_0; itilerow++) {
-    PointTable_A_data[itilerow] = -PointTable2DT_A_data[itilerow];
-  }
   emxInit_real_T(&result, 2);
   itilerow = result->size[0] * result->size[1];
-  result->size[0] = PointTable2DT_A_size_idx_0;
+  result->size[0] = b_PointTable2DT_A_size_idx_0;
   result->size[1] = 3;
   emxEnsureCapacity_real_T(result, itilerow);
   result_data = result->data;
-  for (itilerow = 0; itilerow < PointTable2DT_A_size_idx_0; itilerow++) {
+  for (itilerow = 0; itilerow < b_PointTable2DT_A_size_idx_0; itilerow++) {
+    PointTable_A_data[itilerow] = -PointTable2DT_A_data[itilerow];
     result_data[itilerow] =
-        PointTable2DT_A_data[itilerow + PointTable2DT_A_size_idx_0];
+        PointTable2DT_A_data[itilerow + b_PointTable2DT_A_size_idx_0];
   }
   ibmat = varargin_2->size[0];
+  boffset = b_PointTable2DT_A_size_idx_0 - 1;
   for (itilerow = 0; itilerow < ibmat; itilerow++) {
     result_data[itilerow + result->size[0]] = PointTable_A_data[itilerow];
-  }
-  for (itilerow = 0; itilerow < PointTable2DT_A_size_idx_0; itilerow++) {
     result_data[itilerow + result->size[0] * 2] =
-        PointTable2DT_A_data[itilerow + PointTable2DT_A_size_idx_0 * 2];
-  }
-  boffset = PointTable2DT_A_size_idx_0 - 1;
-  for (itilerow = 0; itilerow <= boffset; itilerow++) {
+        PointTable2DT_A_data[itilerow + b_PointTable2DT_A_size_idx_0 * 2];
     b_PointTable2DT_A_data[itilerow] =
-        PointTable2DT_A_data[itilerow + PointTable2DT_A_size_idx_0];
-  }
-  ibmat = varargin_2->size[0];
-  for (itilerow = 0; itilerow < ibmat; itilerow++) {
-    b_PointTable2DT_A_data[itilerow + PointTable2DT_A_size_idx_0] =
+        PointTable2DT_A_data[itilerow + b_PointTable2DT_A_size_idx_0];
+    b_PointTable2DT_A_data[itilerow + b_PointTable2DT_A_size_idx_0] =
         PointTable_A_data[itilerow];
   }
   emxFree_real_T(&varargin_2);
   for (itilerow = 0; itilerow <= boffset; itilerow++) {
-    b_PointTable2DT_A_data[itilerow + PointTable2DT_A_size_idx_0 * 2] =
-        PointTable2DT_A_data[itilerow + PointTable2DT_A_size_idx_0 * 2];
+    b_PointTable2DT_A_data[itilerow + b_PointTable2DT_A_size_idx_0 * 2] =
+        PointTable2DT_A_data[itilerow + b_PointTable2DT_A_size_idx_0 * 2];
   }
-  ibmat = PointTable2DT_A_size_idx_0 * 3;
   memcpy(&PointTable2DT_A_data[0], &b_PointTable2DT_A_data[0],
-         ibmat * sizeof(double));
-  emxInit_real_T(&b, 2);
+         (unsigned int)PointTable2DT_A_size_idx_0 * sizeof(double));
   /* 计算2D B面测点 */
   /* 2D AB面测点 转3D */
   pinv(rot1, b_A2x);
-  pinv(rot1, b_b);
   C[0] = P2D[0];
   C[1] = P2D[5];
   C[2] = 0.0;
+  emxInit_real_T(&b, 2);
   itilerow = b->size[0] * b->size[1];
-  b->size[0] = PointTable2DT_A_size_idx_0;
+  b->size[0] = b_PointTable2DT_A_size_idx_0;
   b->size[1] = 3;
   emxEnsureCapacity_real_T(b, itilerow);
   PointTable_A_data = b->data;
   for (jcol = 0; jcol < 3; jcol++) {
-    ibmat = jcol * PointTable2DT_A_size_idx_0;
-    for (itilerow = 0; itilerow < PointTable2DT_A_size_idx_0; itilerow++) {
+    ibmat = jcol * b_PointTable2DT_A_size_idx_0;
+    for (itilerow = 0; itilerow < b_PointTable2DT_A_size_idx_0; itilerow++) {
       PointTable_A_data[ibmat + itilerow] = C[jcol];
     }
   }
-  ibmat = result->size[0] * 3;
   itilerow = b->size[0] * b->size[1];
   b->size[0] = result->size[0];
   b->size[1] = 3;
   emxEnsureCapacity_real_T(b, itilerow);
   PointTable_A_data = b->data;
-  for (itilerow = 0; itilerow < ibmat; itilerow++) {
+  for (itilerow = 0; itilerow < PointTable2DT_A_size_idx_0; itilerow++) {
     PointTable_A_data[itilerow] += result_data[itilerow];
   }
-  emxInit_real_T(&b_C, 2);
   jcol = b->size[0];
+  emxInit_real_T(&b_C, 2);
   itilerow = b_C->size[0] * b_C->size[1];
   b_C->size[0] = b->size[0];
   b_C->size[1] = 3;
@@ -830,29 +820,24 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
   PointTable_A_data = b->data;
   boffset = result->size[0];
   for (jcol = 0; jcol < 3; jcol++) {
-    ibmat = jcol * boffset;
+    ibmat = jcol * result->size[0];
     for (itilerow = 0; itilerow < boffset; itilerow++) {
       PointTable_A_data[ibmat + itilerow] = C[jcol];
     }
   }
-  ibmat = result->size[0];
-  memcpy(&b_PointTable2DT_A_data[0], &PointTable2DT_A_data[0],
-         PointTable2DT_A_size_idx_0 * sizeof(double));
-  for (itilerow = 0; itilerow < PointTable2DT_A_size_idx_0; itilerow++) {
-    b_PointTable2DT_A_data[itilerow + PointTable2DT_A_size_idx_0] =
-        PointTable2DT_A_data[itilerow + PointTable2DT_A_size_idx_0];
-  }
-  for (itilerow = 0; itilerow < ibmat; itilerow++) {
-    b_PointTable2DT_A_data[itilerow + PointTable2DT_A_size_idx_0 * 2] =
+  for (itilerow = 0; itilerow < b_PointTable2DT_A_size_idx_0; itilerow++) {
+    b_PointTable2DT_A_data[itilerow] = PointTable2DT_A_data[itilerow];
+    b_PointTable2DT_A_data[itilerow + b_PointTable2DT_A_size_idx_0] =
+        PointTable2DT_A_data[itilerow + b_PointTable2DT_A_size_idx_0];
+    b_PointTable2DT_A_data[itilerow + b_PointTable2DT_A_size_idx_0 * 2] =
         A1z - result_data[itilerow + result->size[0] * 2];
   }
   itilerow = result->size[0] * result->size[1];
-  result->size[0] = PointTable2DT_A_size_idx_0;
+  result->size[0] = b_PointTable2DT_A_size_idx_0;
   result->size[1] = 3;
   emxEnsureCapacity_real_T(result, itilerow);
   result_data = result->data;
-  ibmat = PointTable2DT_A_size_idx_0 * 3;
-  for (itilerow = 0; itilerow < ibmat; itilerow++) {
+  for (itilerow = 0; itilerow < PointTable2DT_A_size_idx_0; itilerow++) {
     result_data[itilerow] =
         b_PointTable2DT_A_data[itilerow] + PointTable_A_data[itilerow];
   }
@@ -868,9 +853,9 @@ void Calculat_A_and_B_Points(const double MTaon[3], const double Mcenter[3],
     boffset = itilerow * 3;
     for (i = 0; i < jcol; i++) {
       C_data[ibmat + i] =
-          (result_data[i] * b_b[boffset] +
-           result_data[result->size[0] + i] * b_b[boffset + 1]) +
-          result_data[(result->size[0] << 1) + i] * b_b[boffset + 2];
+          (result_data[i] * b_A2x[boffset] +
+           result_data[result->size[0] + i] * b_A2x[boffset + 1]) +
+          result_data[(result->size[0] << 1) + i] * b_A2x[boffset + 2];
     }
   }
   emxFree_real_T(&result);

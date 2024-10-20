@@ -1,8 +1,8 @@
 /*
  * File: QuanZhanYi_emxutil.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Sep-2024 14:25:16
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 20-Oct-2024 13:46:16
  */
 
 #ifndef QUANZHANYI_EMXUTIL_H
@@ -64,9 +64,11 @@ extern void emxInitStruct_cell_wrap_4(cell_wrap_4 *pStruct);
 
 extern void emxInit_boolean_T(emxArray_boolean_T **pEmxArray);
 
-extern void emxInit_int32_T(emxArray_int32_T **pEmxArray, int numDimensions);
+extern void emxInit_int32_T(emxArray_int32_T **pEmxArray);
 
 extern void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions);
+
+extern void emxReserve_real_T(emxArray_real_T *emxArray);
 
 #ifdef __cplusplus
 }

@@ -1,8 +1,8 @@
 /*
  * File: svd1.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Sep-2024 14:25:16
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 20-Oct-2024 13:46:16
  */
 
 /* Include Files */
@@ -10,7 +10,7 @@
 #include "QuanZhanYi_emxutil.h"
 #include "QuanZhanYi_types.h"
 #include "rt_nonfinite.h"
-#include "svd.h"
+#include "xzsvdc.h"
 #include "rt_nonfinite.h"
 
 /* Function Definitions */
@@ -21,11 +21,12 @@
  *                double V[9]
  * Return Type  : void
  */
-void c_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *S,
+void b_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *S,
            double V[9])
 {
+  static const signed char b_V[9] = {1, 0, 0, 0, 1, 0, 0, 0, 1};
   emxArray_real_T *U1;
-  emxArray_real_T *r;
+  emxArray_real_T *b_A;
   double V1[9];
   double s_data[3];
   const double *A_data;
@@ -42,28 +43,62 @@ void c_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *S,
       p = false;
     }
   }
+  emxInit_real_T(&b_A, 2);
   if (p) {
-    d_svd(A, U, s_data, &k, V);
-  } else {
-    emxInit_real_T(&r, 2);
-    i = r->size[0] * r->size[1];
-    r->size[0] = A->size[0];
-    r->size[1] = 3;
-    emxEnsureCapacity_real_T(r, i);
-    U_data = r->data;
-    nx = A->size[0] * 3;
-    for (i = 0; i < nx; i++) {
-      U_data[i] = 0.0;
+    if (A->size[0] == 0) {
+      U->size[0] = 0;
+      U->size[1] = 0;
+      k = 0;
+      for (i = 0; i < 9; i++) {
+        V[i] = b_V[i];
+      }
+    } else {
+      i = b_A->size[0] * b_A->size[1];
+      b_A->size[0] = A->size[0];
+      b_A->size[1] = 3;
+      emxEnsureCapacity_real_T(b_A, i);
+      U_data = b_A->data;
+      nx = A->size[0] * A->size[1] - 1;
+      for (i = 0; i <= nx; i++) {
+        U_data[i] = A_data[i];
+      }
+      k = b_xzsvdc(b_A, U, s_data, V);
     }
+  } else {
     emxInit_real_T(&U1, 2);
-    d_svd(r, U1, s_data, &k, V1);
+    if (A->size[0] == 0) {
+      i = U1->size[0] * U1->size[1];
+      U1->size[0] = A->size[0];
+      U1->size[1] = A->size[0];
+      emxEnsureCapacity_real_T(U1, i);
+      U_data = U1->data;
+      nx = A->size[0] * A->size[0];
+      for (i = 0; i < nx; i++) {
+        U_data[i] = 0.0;
+      }
+      i = A->size[0];
+      for (nx = 0; nx < i; nx++) {
+        U_data[nx + U1->size[0] * nx] = 1.0;
+      }
+      k = 0;
+    } else {
+      i = b_A->size[0] * b_A->size[1];
+      b_A->size[0] = A->size[0];
+      b_A->size[1] = 3;
+      emxEnsureCapacity_real_T(b_A, i);
+      U_data = b_A->data;
+      nx = A->size[0] * 3;
+      for (i = 0; i < nx; i++) {
+        U_data[i] = 0.0;
+      }
+      k = b_xzsvdc(b_A, U1, s_data, V1);
+    }
     i = U->size[0] * U->size[1];
     U->size[0] = U1->size[0];
     U->size[1] = U1->size[1];
     emxEnsureCapacity_real_T(U, i);
     U_data = U->data;
     nx = U1->size[0] * U1->size[1];
-    emxFree_real_T(&r);
     emxFree_real_T(&U1);
     for (i = 0; i < nx; i++) {
       U_data[i] = rtNaN;
@@ -75,6 +110,7 @@ void c_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *S,
       V[i] = rtNaN;
     }
   }
+  emxFree_real_T(&b_A);
   i = S->size[0] * S->size[1];
   S->size[0] = U->size[1];
   S->size[1] = 3;

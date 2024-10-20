@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_mex.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Sep-2024 14:25:16
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 20-Oct-2024 13:46:16
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -54,6 +54,9 @@ void unsafe_GenerateTrianglePoints_mexFunction(int32_T nlhs, mxArray *plhs[1],
 void unsafe_Generate_multi_layered_measurement_points_mexFunction(
     int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[5]);
 
+void unsafe_JuXingFuCe_mexFunction(int32_T nlhs, mxArray *plhs[6], int32_T nrhs,
+                                   const mxArray *prhs[6]);
+
 void unsafe_OffsetCalculate_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                         int32_T nrhs, const mxArray *prhs[4]);
 
@@ -65,6 +68,12 @@ void unsafe_ShengDaoGaoDu_mexFunction(int32_T nlhs, mxArray *plhs[1],
 
 void unsafe_ShengLuJiaoJiSuan_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                           int32_T nrhs, const mxArray *prhs[1]);
+
+void unsafe_YuanXingFuCe_mexFunction(int32_T nlhs, mxArray *plhs[6],
+                                     int32_T nrhs, const mxArray *prhs[6]);
+
+void unsafe_YuanZhuJiaoDian_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                        int32_T nrhs, const mxArray *prhs[5]);
 
 void unsafe_angle2point_mexFunction(int32_T nlhs, mxArray *plhs[3],
                                     int32_T nrhs, const mxArray *prhs[6]);
