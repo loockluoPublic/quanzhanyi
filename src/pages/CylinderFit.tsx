@@ -9,8 +9,6 @@ import Select, { DefaultOptionType } from "antd/es/select";
 import {
   CalculatAAndBPoints,
   offsetCalculate,
-  sdj_n2v,
-  sdj_v2n,
   shengLuJiao2Ang,
 } from "../utils/utils";
 import PointsVector3 from "../components/PointVector3";

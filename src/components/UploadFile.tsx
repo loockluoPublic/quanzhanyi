@@ -31,6 +31,7 @@ function AntdFileReader() {
 
   return (
     <Upload
+      accept=".json"
       className=" q-inline-block"
       beforeUpload={handleFileChange} // 阻止自动上传
       showUploadList={false} // 隐藏上传列表

@@ -3,11 +3,11 @@ import type { MenuProps } from "antd";
 import { ConfigProvider, Layout, Menu, Switch } from "antd";
 import { BrowserRouter as Router, Routes } from "react-router-dom";
 import { Data, Mode, Step, TMode, TType } from "./atom/globalState";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { downLoadFile } from "./utils/utils";
 import UploadFile from "./components/UploadFile";
 import zhCN from "antd/es/locale/zh_CN";
-import { transformJSON2Excel } from "./utils/exportExcel";
+import { exportExcel, transformJSON2Excel } from "./utils/exportExcel";
 
 const { Header, Content } = Layout;
 
@@ -24,7 +24,10 @@ const items1: MenuProps["items"] = [
 
 const App: React.FC<PropsWithChildren> = (props) => {
   const [mode, setMode] = useRecoilState(Mode);
+  const step = useRecoilValue(Step);
   const [data, setData] = useRecoilState(Data);
+
+  const showExportExcel = step === 2 && mode === TMode.second;
 
   return (
     <ConfigProvider locale={zhCN}>
@@ -61,8 +64,17 @@ const App: React.FC<PropsWithChildren> = (props) => {
                 className=" q-text-white q-cursor-pointer q-ml-6"
                 onClick={() => transformJSON2Excel(data)}
               >
-                导出excel
+                导出测试
               </div>
+              {showExportExcel && (
+                <div
+                  className=" q-text-white q-cursor-pointer q-ml-6"
+                  onClick={() => exportExcel(data)}
+                >
+                  导出Excel
+                </div>
+              )}
+
               <div
                 className=" q-text-white q-cursor-pointer q-ml-6"
                 onClick={() => downLoadFile(data)}

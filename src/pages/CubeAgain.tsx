@@ -154,32 +154,6 @@ export default function () {
     },
   ].filter((item) => item.key !== data.sfType);
 
-  const setMockData = () => {
-    const AB = [
-      ...data.AB.map((item) => item.pointA),
-      ...data.AB.map((item) => item.pointB),
-    ].sort((a, b) => {
-      const nA = { A: 0, B: 100 }[a.label] + a.key;
-      const nB = { A: 0, B: 100 }[b.label] + b.key;
-      return nA - nB;
-    });
-
-    const newTable = data.cubeAgainTable?.map((item, i) => {
-      return {
-        ...item,
-        p1: AB[2 * i],
-        p2: AB[2 * i + 1],
-      };
-    });
-
-    setData((d) => {
-      return {
-        ...d,
-        cubeAgainTable: newTable,
-      };
-    });
-  };
-
   const calcFuCe = () => {
     if (!data.cubeResult) {
       message.warning("缺少拟合参数，请返回上一步");
