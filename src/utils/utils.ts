@@ -214,14 +214,22 @@ const CalculatAAndBPointsFn = (
     }) ?? []
   );
 
+  console.log("%c Line:218 🍒 MTaon", "color:#2eafb0", MTaon);
   const mTaon = new EmxArray_real_T(MTaon);
+  console.log("%c Line:220 🍒 Mcenter", "color:#fca650", Mcenter);
   const mCenter = new EmxArray_real_T(Mcenter);
+  console.log("%c Line:222 🍒 PAB", "color:#6ec1c2", PAB);
   const _PAB = new EmxArray_real_T(PAB);
   const _ang = new EmxArray_real_T(ang);
+  console.log("%c Line:224 🍒 ang", "color:#465975", ang);
   const _tOff = new EmxArray_real_T(tOff);
+  console.log("%c Line:226 🍒 tOff", "color:#465975", tOff);
   const _rOff = new EmxArray_real_T(rOff);
+  console.log("%c Line:228 🍒 rOff", "color:#ffdd4d", rOff);
   const A = new EmxArray_real_T(3, ang.length);
   const B = new EmxArray_real_T(3, ang.length);
+  console.log("%c Line:236 🍒 R", "color:#4fff4B", R);
+  console.log("%c Line:239 🍒 ang2rad(phi)", "color:#465975", ang2rad(phi));
 
   _CalculatAAndBPoints(
     mTaon.arrayPtr,
@@ -238,7 +246,6 @@ const CalculatAAndBPointsFn = (
 
   CustomVector3.setPublicInfo("A", 0);
   const bottomA = A.toVector3();
-  console.log("%c Line:209 🍰 bottomA", "color:#2eafb0", bottomA);
   for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
     bottomA[i].key = 2 * i + 1;
     bottomA[j].key = 2 * i + 2;
@@ -255,6 +262,7 @@ const CalculatAAndBPointsFn = (
     bottomB[i].key = 2 * i + 1;
     bottomB[j].key = 2 * i + 2;
   }
+
   bottomB
     .sort((a, b) => a.key - b.key)
     .forEach((p) => {
@@ -304,9 +312,7 @@ export const CalculatAAndBPoints = async (
   return res;
 };
 
-
-export const CalculatAAndBPointsJ = () => {};
-
+export const CalculatAAndBPointsJx = () => {};
 
 /**
  * 复测计算声路角和生路长
