@@ -1,8 +1,8 @@
 /*
  * File: QuanZhanYi_emxAPI.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 17-Oct-2024 11:31:37
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 27-Sep-2024 14:25:16
  */
 
 /* Include Files */
@@ -29,7 +29,7 @@ emxArray_real_T *emxCreateND_real_T(int numDimensions, const int *size)
     numEl *= size[i];
     emx->size[i] = size[i];
   }
-  emx->data = (double *)malloc((unsigned int)numEl * sizeof(double));
+  emx->data = (double *)calloc((unsigned int)numEl, sizeof(double));
   emx->numDimensions = numDimensions;
   emx->allocatedSize = numEl;
   return emx;
@@ -92,7 +92,7 @@ emxArray_real_T *emxCreate_real_T(int rows, int cols)
   emx->size[0] = rows;
   numEl = rows * cols;
   emx->size[1] = cols;
-  emx->data = (double *)malloc((unsigned int)numEl * sizeof(double));
+  emx->data = (double *)calloc((unsigned int)numEl, sizeof(double));
   emx->numDimensions = 2;
   emx->allocatedSize = numEl;
   return emx;

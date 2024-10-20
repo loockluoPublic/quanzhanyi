@@ -1,8 +1,8 @@
 /*
  * File: minOrMax.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 17-Oct-2024 11:31:37
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 27-Sep-2024 14:25:16
  */
 
 /* Include Files */
@@ -30,11 +30,11 @@ double b_maximum(const emxArray_real_T *x)
   if (x->size[0] <= 2) {
     if (x->size[0] == 1) {
       ex = x_data[0];
-    } else {
+    } else if ((x_data[0] < x_data[x->size[0] - 1]) ||
+               (rtIsNaN(x_data[0]) && (!rtIsNaN(x_data[x->size[0] - 1])))) {
       ex = x_data[x->size[0] - 1];
-      if ((!(x_data[0] < ex)) && ((!rtIsNaN(x_data[0])) || rtIsNaN(ex))) {
-        ex = x_data[0];
-      }
+    } else {
+      ex = x_data[0];
     }
   } else {
     if (!rtIsNaN(x_data[0])) {
@@ -86,11 +86,11 @@ double maximum(const emxArray_real_T *x)
   if (x->size[1] <= 2) {
     if (x->size[1] == 1) {
       ex = x_data[0];
-    } else {
+    } else if ((x_data[0] < x_data[x->size[1] - 1]) ||
+               (rtIsNaN(x_data[0]) && (!rtIsNaN(x_data[x->size[1] - 1])))) {
       ex = x_data[x->size[1] - 1];
-      if ((!(x_data[0] < ex)) && ((!rtIsNaN(x_data[0])) || rtIsNaN(ex))) {
-        ex = x_data[0];
-      }
+    } else {
+      ex = x_data[0];
     }
   } else {
     if (!rtIsNaN(x_data[0])) {
@@ -142,11 +142,11 @@ double minimum(const emxArray_real_T *x)
   if (x->size[0] <= 2) {
     if (x->size[0] == 1) {
       ex = x_data[0];
-    } else {
+    } else if ((x_data[0] > x_data[x->size[0] - 1]) ||
+               (rtIsNaN(x_data[0]) && (!rtIsNaN(x_data[x->size[0] - 1])))) {
       ex = x_data[x->size[0] - 1];
-      if ((!(x_data[0] > ex)) && ((!rtIsNaN(x_data[0])) || rtIsNaN(ex))) {
-        ex = x_data[0];
-      }
+    } else {
+      ex = x_data[0];
     }
   } else {
     if (!rtIsNaN(x_data[0])) {

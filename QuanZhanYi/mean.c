@@ -1,8 +1,8 @@
 /*
  * File: mean.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 17-Oct-2024 11:31:37
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 27-Sep-2024 14:25:16
  */
 
 /* Include Files */
@@ -41,7 +41,7 @@ void b_mean(const emxArray_real_T *x, double y[3])
       nblocks = 1;
     } else {
       firstBlockLength = 1024;
-      nblocks = (int)((unsigned int)x->size[0] >> 10);
+      nblocks = x->size[0] / 1024;
       lastBlockLength = x->size[0] - (nblocks << 10);
       if (lastBlockLength > 0) {
         nblocks++;
@@ -76,27 +76,6 @@ void b_mean(const emxArray_real_T *x, double y[3])
 }
 
 /*
- * Arguments    : const double x[24]
- *                double y[3]
- * Return Type  : void
- */
-void c_mean(const double x[24], double y[3])
-{
-  double d;
-  int k;
-  int xi;
-  int xpageoffset;
-  for (xi = 0; xi < 3; xi++) {
-    xpageoffset = xi << 3;
-    d = x[xpageoffset];
-    for (k = 0; k < 7; k++) {
-      d += x[(xpageoffset + k) + 1];
-    }
-    y[xi] = d / 8.0;
-  }
-}
-
-/*
  * Arguments    : const emxArray_real_T *x
  * Return Type  : double
  */
@@ -121,7 +100,7 @@ double mean(const emxArray_real_T *x)
       nblocks = 1;
     } else {
       firstBlockLength = 1024;
-      nblocks = (int)((unsigned int)x->size[1] >> 10);
+      nblocks = x->size[1] / 1024;
       lastBlockLength = x->size[1] - (nblocks << 10);
       if (lastBlockLength > 0) {
         nblocks++;
