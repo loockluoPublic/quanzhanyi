@@ -1,8 +1,8 @@
 /*
  * File: Generate_multi_layered_measurement_points.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Sep-2024 14:25:16
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 20-Oct-2024 13:46:16
  */
 
 /* Include Files */
@@ -80,30 +80,24 @@ void Generate_multi_layered_measurement_points(const emxArray_real_T *Point_out,
   }
   Point_out_data = Point_out->data;
   emxInit_real_T(&x, 1);
-  loop_ub = Point_out->size[1];
   i = x->size[0];
   x->size[0] = Point_out->size[1];
   emxEnsureCapacity_real_T(x, i);
   x_data = x->data;
-  for (i = 0; i < loop_ub; i++) {
-    x_data[i] = Point_out_data[3 * i];
-  }
-  emxInit_real_T(&y, 1);
   loop_ub = Point_out->size[1];
+  emxInit_real_T(&y, 1);
   i = y->size[0];
   y->size[0] = Point_out->size[1];
   emxEnsureCapacity_real_T(y, i);
   y_data = y->data;
-  for (i = 0; i < loop_ub; i++) {
-    y_data[i] = Point_out_data[3 * i + 1];
-  }
   emxInit_real_T(&z, 1);
-  loop_ub = Point_out->size[1];
   i = z->size[0];
   z->size[0] = Point_out->size[1];
   emxEnsureCapacity_real_T(z, i);
   z_data = z->data;
   for (i = 0; i < loop_ub; i++) {
+    x_data[i] = Point_out_data[3 * i];
+    y_data[i] = Point_out_data[3 * i + 1];
     z_data[i] = Point_out_data[3 * i + 2];
   }
   /*  [s1,s2,s3,xcenter,ycenter,zcenter] =
@@ -166,24 +160,20 @@ void Generate_multi_layered_measurement_points(const emxArray_real_T *Point_out,
     t = absxk / scale;
     p12f_idx_1 += t * t;
   }
-  emxInit_real_T(&Dist, 2);
   p12f_idx_1 = scale * sqrt(p12f_idx_1);
   pf_idx_0 /= p12f_idx_1;
   pf_idx_1 /= p12f_idx_1;
   pf_idx_2 /= p12f_idx_1;
   /* %%%%%%%%%%%%%%%%%%% */
   /*  -----------------------------计算参数------------------------------- */
+  emxInit_real_T(&Dist, 2);
   i = Dist->size[0] * Dist->size[1];
   Dist->size[0] = 1;
   Dist->size[1] = x->size[0];
   emxEnsureCapacity_real_T(Dist, i);
   Dist_data = Dist->data;
   loop_ub = x->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    Dist_data[i] = 0.0;
-  }
-  i = x->size[0];
-  for (b_i = 0; b_i < i; b_i++) {
+  for (b_i = 0; b_i < loop_ub; b_i++) {
     p12f_idx_1 = x_data[b_i] - p23_idx_0;
     p2_idx_2 = y_data[b_i] - p23_idx_1;
     ds = z_data[b_i] - p12f_idx_0;
@@ -263,41 +253,35 @@ void Generate_multi_layered_measurement_points(const emxArray_real_T *Point_out,
     t = absxk / scale;
     ds += t * t;
   }
-  emxInit_real_T(&Point_out1, 2);
   ds = scale * sqrt(ds);
   /*  -----------------------------生成抽样点------------------------------- */
+  emxInit_real_T(&Point_out1, 2);
   generate_unit_circle_with_normal_vector(
       rt_atan2d_snf(pf_idx_0, sqrt(S_idx_0 * S_idx_0 + p23_idx_0 * p23_idx_0)),
       rt_atan2d_snf(p23_idx_0, S_idx_0), num, Point_out1);
   Point_out1_data = Point_out1->data;
   /*  ----------------------------移动到原点------------------------------- */
-  loop_ub = Point_out1->size[1];
   i = Dist->size[0] * Dist->size[1];
   Dist->size[0] = 1;
   Dist->size[1] = Point_out1->size[1];
   emxEnsureCapacity_real_T(Dist, i);
   Dist_data = Dist->data;
-  for (i = 0; i < loop_ub; i++) {
-    Dist_data[i] = Point_out1_data[3 * i] * Radius + p12f_idx_1;
-  }
-  emxInit_real_T(&Ylay0, 2);
   loop_ub = Point_out1->size[1];
+  emxInit_real_T(&Ylay0, 2);
   i = Ylay0->size[0] * Ylay0->size[1];
   Ylay0->size[0] = 1;
   Ylay0->size[1] = Point_out1->size[1];
   emxEnsureCapacity_real_T(Ylay0, i);
   Ylay0_data = Ylay0->data;
-  for (i = 0; i < loop_ub; i++) {
-    Ylay0_data[i] = Point_out1_data[3 * i + 1] * Radius + p2_idx_2;
-  }
   emxInit_real_T(&Zlay0, 2);
-  loop_ub = Point_out1->size[1];
   i = Zlay0->size[0] * Zlay0->size[1];
   Zlay0->size[0] = 1;
   Zlay0->size[1] = Point_out1->size[1];
   emxEnsureCapacity_real_T(Zlay0, i);
   Zlay0_data = Zlay0->data;
   for (i = 0; i < loop_ub; i++) {
+    Dist_data[i] = Point_out1_data[3 * i] * Radius + p12f_idx_1;
+    Ylay0_data[i] = Point_out1_data[3 * i + 1] * Radius + p2_idx_2;
     Zlay0_data[i] = Point_out1_data[3 * i + 2] * Radius + p12f_idx_0;
   }
   emxFree_real_T(&Point_out1);
@@ -324,14 +308,14 @@ void Generate_multi_layered_measurement_points(const emxArray_real_T *Point_out,
       if (Layer->size[1] >= 2) {
         Point_out1_data[0] = p2_idx_2;
         if (Layer->size[1] >= 3) {
-          if ((p2_idx_2 == -p12f_idx_1) && ((int)ds > 2)) {
-            p12f_idx_1 /= (double)(int)ds - 1.0;
+          if (p2_idx_2 == -p12f_idx_1) {
+            p12f_idx_1 /= (double)Layer->size[1] - 1.0;
             for (k = 2; k <= loop_ub; k++) {
               Point_out1_data[k - 1] =
-                  (double)(((k << 1) - (int)ds) - 1) * p12f_idx_1;
+                  (double)(((k << 1) - Layer->size[1]) - 1) * p12f_idx_1;
             }
-            if (((int)ds & 1) == 1) {
-              Point_out1_data[(int)ds >> 1] = 0.0;
+            if ((Layer->size[1] & 1) == 1) {
+              Point_out1_data[Layer->size[1] >> 1] = 0.0;
             }
           } else {
             p12f_idx_1 =

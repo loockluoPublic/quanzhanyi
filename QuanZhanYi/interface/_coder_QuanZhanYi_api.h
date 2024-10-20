@@ -1,8 +1,8 @@
 /*
  * File: _coder_QuanZhanYi_api.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Sep-2024 14:25:16
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 20-Oct-2024 13:46:16
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -10,6 +10,7 @@
 
 /* Include Files */
 #include "emlrt.h"
+#include "mex.h"
 #include "tmwtypes.h"
 #include <string.h>
 
@@ -105,6 +106,15 @@ void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
                                                real_T P3[3], real_T P4[3],
                                                emxArray_real_T *Point_test);
 
+void JuXingFuCe(emxArray_real_T *PointIn, real_T shenglunum, real_T Pin[3],
+                real_T Tao[3], real_T h, emxArray_real_T *PlaneParaOut4,
+                emxArray_real_T *Distance, emxArray_real_T *theta,
+                emxArray_real_T *LTPY, emxArray_real_T *TiC,
+                emxArray_real_T *Wquanzhong3, emxArray_real_T *Wquanzhong4);
+
+void JuXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
+                    const mxArray *plhs[6]);
+
 void OffsetCalculate(real_T Mradial, real_T phi, emxArray_real_T *Ang,
                      emxArray_real_T *a, emxArray_real_T *OffsetOut);
 
@@ -135,6 +145,21 @@ void ShengDaoGaoDu_api(const mxArray *prhs, const mxArray **plhs);
 void ShengLuJiaoJiSuan(real_T numShengLu, emxArray_real_T *Ang);
 
 void ShengLuJiaoJiSuan_api(const mxArray *prhs, const mxArray **plhs);
+
+void YuanXingFuCe(emxArray_real_T *PointIn, real_T shenglunum,
+                  real_T Mcenter[3], real_T MTaon[3], real_T Mradial,
+                  real_T phi, emxArray_real_T *Distance, emxArray_real_T *theta,
+                  emxArray_real_T *LTPY, emxArray_real_T *TiC,
+                  emxArray_real_T *Wquanzhong1, emxArray_real_T *Wquanzhong2);
+
+void YuanXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
+                      const mxArray *plhs[6]);
+
+void YuanZhuJiaoDian(real_T Mcenter[3], real_T MTaon[3], real_T Mradial,
+                     real_T Pin1[3], real_T Pin2[3], real_T Cross_point_data[],
+                     int32_T Cross_point_size[2]);
+
+void YuanZhuJiaoDian_api(const mxArray *const prhs[5], const mxArray **plhs);
 
 void angle2point(real_T ANG, real_T a, real_T b, real_T c, real_T d,
                  real_T Mradial, real_T *x, real_T *y, real_T *z);

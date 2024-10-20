@@ -1,8 +1,8 @@
 /*
  * File: ShengLuJiaoJiSuan.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Sep-2024 14:25:16
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 20-Oct-2024 13:46:16
  */
 
 /* Include Files */
@@ -59,13 +59,13 @@ void ShengLuJiaoJiSuan(double numShengLu, emxArray_real_T *Ang)
                                  0.52359877559829893, 0.52359877559829893,
                                  1.0471975511965979,  1.5707963267948966,
                                  2.0943951023931953,  2.617993877991494};
-  static const double dv1[8] = {2.5132741228718345,  1.8849555921538759,
-                                1.2566370614359172,  0.62831853071795862,
-                                0.62831853071795862, 1.2566370614359172,
-                                1.8849555921538759,  2.5132741228718345};
-  static const double dv[6] = {2.3561944901923448,  1.5707963267948966,
-                               0.78539816339744828, 0.78539816339744828,
-                               1.5707963267948966,  2.3561944901923448};
+  static const double b_dv1[8] = {2.5132741228718345,  1.8849555921538759,
+                                  1.2566370614359172,  0.62831853071795862,
+                                  0.62831853071795862, 1.2566370614359172,
+                                  1.8849555921538759,  2.5132741228718345};
+  static const double b_dv[6] = {2.3561944901923448,  1.5707963267948966,
+                                 0.78539816339744828, 0.78539816339744828,
+                                 1.5707963267948966,  2.3561944901923448};
   double *Ang_data;
   int i;
   int loop_ub;
@@ -109,7 +109,7 @@ void ShengLuJiaoJiSuan(double numShengLu, emxArray_real_T *Ang)
     emxEnsureCapacity_real_T(Ang, i);
     Ang_data = Ang->data;
     for (i = 0; i < 6; i++) {
-      Ang_data[i] = dv[i];
+      Ang_data[i] = b_dv[i];
     }
     break;
   case 4:
@@ -119,7 +119,7 @@ void ShengLuJiaoJiSuan(double numShengLu, emxArray_real_T *Ang)
     emxEnsureCapacity_real_T(Ang, i);
     Ang_data = Ang->data;
     for (i = 0; i < 8; i++) {
-      Ang_data[i] = dv1[i];
+      Ang_data[i] = b_dv1[i];
     }
     break;
   case 5:

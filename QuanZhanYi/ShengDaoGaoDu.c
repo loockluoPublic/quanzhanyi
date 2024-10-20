@@ -1,8 +1,8 @@
 /*
  * File: ShengDaoGaoDu.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 27-Sep-2024 14:25:16
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 20-Oct-2024 13:46:16
  */
 
 /* Include Files */
@@ -24,9 +24,9 @@ static int div_s32(int numerator, int denominator);
  */
 static int div_s32(int numerator, int denominator)
 {
-  unsigned int b_denominator;
-  unsigned int b_numerator;
   int quotient;
+  unsigned int tempAbsQuotient;
+  unsigned int u;
   if (denominator == 0) {
     if (numerator >= 0) {
       quotient = MAX_int32_T;
@@ -35,20 +35,20 @@ static int div_s32(int numerator, int denominator)
     }
   } else {
     if (numerator < 0) {
-      b_numerator = ~(unsigned int)numerator + 1U;
+      tempAbsQuotient = ~(unsigned int)numerator + 1U;
     } else {
-      b_numerator = (unsigned int)numerator;
+      tempAbsQuotient = (unsigned int)numerator;
     }
     if (denominator < 0) {
-      b_denominator = ~(unsigned int)denominator + 1U;
+      u = ~(unsigned int)denominator + 1U;
     } else {
-      b_denominator = (unsigned int)denominator;
+      u = (unsigned int)denominator;
     }
-    b_numerator /= b_denominator;
+    tempAbsQuotient /= u;
     if ((numerator < 0) != (denominator < 0)) {
-      quotient = -(int)b_numerator;
+      quotient = -(int)tempAbsQuotient;
     } else {
-      quotient = (int)b_numerator;
+      quotient = (int)tempAbsQuotient;
     }
   }
   return quotient;
@@ -70,9 +70,9 @@ void ShengDaoGaoDu(double numShengLu, emxArray_real_T *Ti)
                                 0.183435, 0.525532,  0.796666,  0.96029};
   static const double dv2[7] = {-0.949108, -0.741531, -0.405845, 0.0,
                                 0.405845,  0.741531,  0.949108};
-  static const double dv1[6] = {-0.93247, -0.661209, -0.238619,
-                                0.238619, 0.661209,  0.93247};
-  static const double dv[5] = {-0.90618, -0.538469, 0.0, 0.538469, 0.90618};
+  static const double b_dv1[6] = {-0.93247, -0.661209, -0.238619,
+                                  0.238619, 0.661209,  0.93247};
+  static const double b_dv[5] = {-0.90618, -0.538469, 0.0, 0.538469, 0.90618};
   emxArray_real_T *Ti1;
   double *Ti1_data;
   double *Ti_data;
@@ -140,7 +140,7 @@ void ShengDaoGaoDu(double numShengLu, emxArray_real_T *Ti)
     emxEnsureCapacity_real_T(Ti1, i);
     Ti1_data = Ti1->data;
     for (i = 0; i < 5; i++) {
-      Ti1_data[i] = dv[i];
+      Ti1_data[i] = b_dv[i];
     }
     break;
   case 6:
@@ -150,7 +150,7 @@ void ShengDaoGaoDu(double numShengLu, emxArray_real_T *Ti)
     emxEnsureCapacity_real_T(Ti1, i);
     Ti1_data = Ti1->data;
     for (i = 0; i < 6; i++) {
-      Ti1_data[i] = dv1[i];
+      Ti1_data[i] = b_dv1[i];
     }
     break;
   case 7:
