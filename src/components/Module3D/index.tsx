@@ -11,6 +11,9 @@ import PerspectiveCamera from "./PerspectiveCamera";
 import MyCylinder from "./MyCylinder";
 import React from "react";
 import PointsLabel from "./PointsLabel";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { ShowLabel } from "../../atom/globalState";
+import { Switch } from "antd";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
@@ -52,6 +55,7 @@ export default function Index(props: {
   component?: ReactNode;
   [k: string]: any;
 }) {
+  const [v, setV] = useRecoilState(ShowLabel);
   const [h, setH] = useState(0);
 
   const ref = useRef<any>();
@@ -61,13 +65,15 @@ export default function Index(props: {
   }, []);
 
   return (
-    <div className=" q-flex q-w-full q-h-full q-overflow-hidden" ref={ref}>
+    <div
+      className=" q-flex q-w-full q-h-full q-overflow-hidden q-relative"
+      ref={ref}
+    >
       <Canvas
         dpr={window.devicePixelRatio}
         className={`${props.className} q-grow q-cursor-pointer canvas-style`}
         style={{ height: h }}
       >
-        {/* {props.direct && <Direct direct={props.direct} />} */}
         <PerspectiveCamera />
         <group scale={[1, 1, -1]}>
           <ambientLight intensity={Math.PI / 2} />
@@ -85,31 +91,18 @@ export default function Index(props: {
             points={props?.mPoints}
             color="#000"
             disabledColor="#ccc"
+            showLabel={v}
           />
 
           {props.direct && <Direct direct={props.direct} />}
 
           {props.firstPoints?.length > 0 && (
-            <PointsLabel points={props.firstPoints} color="red" />
+            <PointsLabel points={props.firstPoints} color="red" showLabel={v} />
           )}
 
           {props.points?.length > 0 && (
-            <PointsLabel points={props.points} color="red" />
+            <PointsLabel points={props.points} color="red" showLabel={v} />
           )}
-
-          {/* {props?.sdm?.includes("A") && (
-            <PointsLabel
-              points={props?.AB?.map?.((item) => item.pointA)}
-              color="red"
-            />
-          )}
-
-          {props?.sdm?.includes("B") && (
-            <PointsLabel
-              points={props?.AB?.map?.((item) => item.pointB)}
-              color="#fab005"
-            />
-          )} */}
         </group>
         <OrbitControls />
       </Canvas>
@@ -121,6 +114,16 @@ export default function Index(props: {
           {props?.component}
         </div>
       )}
+      <div className="q-absolute q-bottom-0 q-left-0 q-p-2">
+        <Switch
+          checkedChildren="标签"
+          unCheckedChildren="标签"
+          checked={v}
+          onChange={(v) => {
+            setV(v);
+          }}
+        />
+      </div>
     </div>
   );
 }

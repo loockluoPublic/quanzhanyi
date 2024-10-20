@@ -9,6 +9,8 @@ import Select, { DefaultOptionType } from "antd/es/select";
 import {
   ang2rad,
   CalcJuXingAAndBPointsAfterOffest,
+  CalculatAAndBPoints4,
+  CalculatAAndBPoints8,
   CalculateRectangleFromVertex8,
   cubeTOff,
   sdj_n2v,
@@ -33,22 +35,33 @@ export const sdmOptions = [
 const defaultA = 0.015;
 function CubeResult() {
   const [data, setData] = useRecoilState(Data);
-  console.log("%c Line:32 🍰 data", "color:#f5ce50", data);
 
-  const sdfbPreRef = useRef(0);
+  const sdfbPreRef = useRef("");
 
-  useEffect(() => {
-    if (typeof data.sdfb === "number" && data.sdfb !== sdfbPreRef.current) {
-      const cubeTable = shengDaoGaoDu(data.sdfb).map((ti, i) => {
-        const sign = i < data.sdfb ? -1 : 1;
-        const h = Number(ti.toFixed(6));
-        return {
-          h,
-          a: defaultA,
-          tOff: cubeTOff(defaultA, data.sdj, sign),
-          sign,
-        };
+  const key = `${data.sdfb}${data.sdm?.join("")}`;
+
+  const init = () => {
+    if (sdfbPreRef.current === "" && data.cubeTable?.length > 0) return;
+
+    if (key !== sdfbPreRef.current) {
+      const sdgd = shengDaoGaoDu(data.sdfb);
+
+      const cubeTable: any = [];
+
+      data.sdm?.forEach?.((m) => {
+        sdgd.forEach((ti, i) => {
+          const h = Number(ti.toFixed(6));
+          cubeTable.push({
+            ...ti,
+            sdm: m,
+            i: i + 1,
+            h,
+            a: defaultA,
+            tOff: cubeTOff(defaultA, data.sdj),
+          });
+        });
       });
+
       setData((d) => {
         return {
           ...d,
@@ -56,8 +69,12 @@ function CubeResult() {
         };
       });
     }
-    sdfbPreRef.current = data.sdfb;
-  }, [data.sdfb, data?.cubeTable]);
+  };
+
+  useEffect(() => {
+    init();
+    sdfbPreRef.current = key;
+  }, [key]);
 
   const updateOffset = () => {
     if (!(data.cubeTable?.length > 0)) return;
@@ -65,7 +82,7 @@ function CubeResult() {
     const tableData = data.cubeTable.map((item) => {
       const newItem = {
         ...item,
-        tOff: cubeTOff(item.a, data.sdj, item.sign),
+        tOff: cubeTOff(item.a, data.sdj),
       };
 
       return newItem;
@@ -98,6 +115,7 @@ function CubeResult() {
     }) ?? [];
 
   const calcPoint = () => {
+    console.log("%c Line:127 🍡", "color:#e41a6a");
     if (!data.centerPoint) {
       message.error("请采集AB面交点");
       return;
@@ -110,59 +128,42 @@ function CubeResult() {
 
     if (tOff.length > 0 && Ti.length > 0) {
       try {
-        let AB;
+        let points;
 
         if (data.hasChamfer) {
           let MxPortsArr: CustomVector3[][] = [];
-          for (let i = 0; i < 8; i++) {
+          for (let i = 0; i < 9; i++) {
             const key = `m${i}`;
-            if (data.MxPoints[key]?.length > 9) {
-              MxPortsArr.push(data.MxPoints[key].slice(0, 50));
+            if (i < 4) {
+              if (data.MxPoints[key]?.length > 4) {
+                MxPortsArr.push(data.MxPoints[key]);
+              } else {
+                message.error(`${key}面采集点少于4个，请补充采集点`);
+                return;
+              }
             } else {
-              message.error(`${key}面采集点少于10个，请补充采集点`);
-              return;
+              MxPortsArr.push(data.MxPoints[key]);
             }
           }
 
-          const [l, t, r, b, lb, lt, rt, rb] = MxPortsArr;
+          const [l, t, r, b, lb = [], lt = [], rt = [], rb = []] = MxPortsArr;
+
           MxPortsArr = [l, lt, t, rt, r, rb, b, lb];
 
-          AB = CalculateRectangleFromVertex8(
-            MxPortsArr,
-            data.firstPoints[0],
-            data.firstPoints[1],
-            data.centerPoint,
-            ang2rad(data.sdj),
-            data.sdfb,
-            Ti,
-            a,
-            data.distanceThreshold
-          );
+          points = CalculatAAndBPoints8(data, MxPortsArr);
         } else {
-          AB = CalcJuXingAAndBPointsAfterOffest(
-            data.cubeResult,
-            data.centerPoint,
-            ang2rad(data.sdj),
-            data.sdfb,
-            Ti,
-            tOff
-          );
+          points = CalculatAAndBPoints4(data);
         }
 
-        const tableData = data.cubeTable.map((item, i) => {
-          const newItem = {
-            ...item,
-            AB: AB[i],
-            rOff: AB?.[i]?.rOff,
-          };
-
-          return newItem;
-        });
         setData((d) => {
           return {
             ...d,
-            AB,
-            cubeTable: tableData,
+            cubeTable: d?.cubeTable?.map((item, i) => {
+              return {
+                ...item,
+                points: points[i],
+              };
+            }),
           };
         });
       } catch (error) {
@@ -177,6 +178,7 @@ function CubeResult() {
   };
 
   useEffect(() => {
+    console.log("%c Line:194 🍅 a", "color:#33a5ff", a);
     if (data.centerPoint) calcPoint();
   }, [[...Ti, ...tOff, ...a].join(","), data.centerPoint]);
 
@@ -189,7 +191,7 @@ function CubeResult() {
       if (index === i) {
         newItem[key] = v;
         if (key === "a") {
-          newItem.tOff = cubeTOff(newItem.a, data.sdj, item.sign);
+          newItem.tOff = cubeTOff(newItem.a, data.sdj);
         }
       }
       return newItem;
@@ -226,6 +228,21 @@ function CubeResult() {
   };
 
   const columns: any = [
+    {
+      title: "声道面",
+      dataIndex: "sdm",
+      align: "center",
+      key: "sdm",
+    },
+    {
+      title: "声道",
+      dataIndex: "i",
+      align: "center",
+      key: "i",
+      render: (i, _i) => {
+        return <>第{i}声道</>;
+      },
+    },
     {
       title: "声道相对高度",
       dataIndex: "h",
@@ -273,24 +290,32 @@ function CubeResult() {
       dataIndex: "rOff",
       key: "rOff",
       align: "center",
-      render: (v) => {
-        return <>{v?.toFixed?.(3) ?? "--"}米</>;
+      render: (_, row) => {
+        return row?.points?.map?.((p, i) => {
+          return (
+            <span className={`${i % 2 === 1 ? "q-ml-2" : ""}`}>
+              {p?.difference?.toFixed?.(3) ?? "--"}米
+            </span>
+          );
+        });
       },
     },
 
     {
       title: "安装点",
-      width: 100,
-      dataIndex: "AB",
-      key: "AB",
+      dataIndex: "points",
+      key: "points",
       align: "center",
       render: (v) => {
         return (
           <div className="q-flex q-justify-center">
-            {data?.sdm?.includes("A") && <Point p={v?.pointA} />}
-            {data?.sdm?.includes("B") && (
-              <Point className="q-ml-2" p={v?.pointB} />
-            )}
+            {v?.map?.((p) => (
+              <Point
+                className={`${p.key % 2 === 0 ? "q-ml-2" : ""}`}
+                key={`${p.label}${p.key}`}
+                p={p}
+              />
+            ))}
           </div>
         );
       },
@@ -378,12 +403,18 @@ function CubeResult() {
       </div>
     </div>
   );
+
+  const points = data?.cubeTable?.reduce((acc, cur) => {
+    acc.push(...(cur?.points ?? []));
+    return [...acc, ...(cur?.points ?? [])];
+  }, []);
+
   return (
     <CubeFitting
       component={comp}
       firstPoints={data.firstPoints}
       trianglePoints={data.trianglePoints}
-      AB={data.AB}
+      points={points}
       sdm={data.sdm}
     ></CubeFitting>
   );

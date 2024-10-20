@@ -195,7 +195,6 @@ const CalculatAAndBPointsFn = (
   resultTable: ICycle["resultTable"],
   sdm: "A" | "B"
 ) => {
-  console.log("%c Line:187 🥤 resultTable", "color:#e41a6a", resultTable);
   const tOff = fitArr(
     resultTable?.map?.((item) => {
       return item.tOff;
@@ -312,7 +311,75 @@ export const CalculatAAndBPoints = async (
   return res;
 };
 
-export const CalculatAAndBPointsJx = () => {};
+export const CalculatAAndBPoints4 = (data) => {
+  const res = _.partition(data.cubeTable, (t) => {
+    return t.sdm === "A";
+  }).reduce((acc, cur) => {
+    if (cur?.length === 0) return acc;
+    const tOff =
+      cur?.map?.((item) => {
+        return item.tOff;
+      }) ?? [];
+
+    const Ti =
+      cur?.map?.((item) => {
+        return item.h;
+      }) ?? [];
+
+    return [
+      ...acc,
+      ...CalcJuXingAAndBPointsAfterOffest(
+        data.cubeResult,
+        data.centerPoint,
+        ang2rad(data.sdj),
+        data.sdfb,
+        Ti,
+        tOff,
+        cur[0].sdm
+      ),
+      // ...CalculatAAndBPointsFn(MTaon, Mcenter, R, PAB, phi, cur, cur[0].sdm),
+    ];
+  }, []);
+  console.log("%c Line:326 🍅 res", "color:#f5ce50", res);
+
+  return res;
+};
+
+export const CalculatAAndBPoints8 = (data, MxPortsArr) => {
+  const res = _.partition(data.cubeTable, (t) => {
+    return t.sdm === "A";
+  }).reduce((acc, cur) => {
+    if (cur?.length === 0) return acc;
+    const a =
+      cur?.map?.((item) => {
+        return item.a;
+      }) ?? [];
+
+    const Ti =
+      cur?.map?.((item) => {
+        return item.h;
+      }) ?? [];
+
+    console.log("%c Line:367 🍓 MxPortsArr", "color:#6ec1c2", MxPortsArr);
+    return [
+      ...acc,
+      ...CalculateRectangleFromVertex8(
+        MxPortsArr,
+        data.firstPoints[0],
+        data.firstPoints[1],
+        data.centerPoint,
+        ang2rad(data.sdj),
+        data.sdfb,
+        Ti,
+        a,
+        data.distanceThreshold,
+        cur[0].sdm
+      ),
+    ];
+  }, []);
+
+  return res;
+};
 
 /**
  * 复测计算声路角和生路长
@@ -600,16 +667,13 @@ export const CalculateRectangleFromVertex8 = (
   PAB: CustomVector3,
   phi: number,
   sdfb: number,
-  ti: number[],
-  a: number[],
-  distanceThreshold: number
+  _ti: number[],
+  __a: number[],
+  distanceThreshold: number,
+  sdm: "A" | "B"
 ) => {
-  const len = MPoints.length;
-
-  if (len !== 8) {
-    console.error("采集面需要8个面的点");
-    return {};
-  }
+  const ti = fitArr(_ti);
+  const a = fitArr(__a);
 
   let totalPoints = 0;
   const mP = MPoints.map((item) => {
@@ -643,29 +707,42 @@ export const CalculateRectangleFromVertex8 = (
     A.ptr,
     XieMianPianYi.ptr
   );
-
-  CustomVector3.setPublicInfo("A", 0);
-  const bottomA = A.toVector3();
-  for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
-    bottomA[i].key = 2 * i + 1;
-    bottomA[j].key = 2 * i + 2;
-  }
-  CustomVector3.setPublicInfo("B", 0);
-
-  const bottomB = B.toVector3();
-  for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
-    bottomB[i].key = 2 * i + 1;
-    bottomB[j].key = 2 * i + 2;
-  }
-
   const rOff = XieMianPianYi.toJSON()[0];
-  const res = bottomA.map((a, i) => {
-    return {
-      pointA: a,
-      pointB: bottomB[i],
-      rOff: rOff[i],
-    };
-  });
+  let res = [];
+  if (sdm === "A") {
+    CustomVector3.setPublicInfo("A", 0);
+    const bottomA = A.toVector3();
+    for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
+      bottomA[i].key = 2 * i + 1;
+      bottomA[j].key = 2 * i + 2;
+
+      bottomA[i].difference = rOff[i];
+      bottomA[j].difference = rOff[j];
+    }
+    bottomA
+      .sort((a, b) => a.key - b.key)
+      .forEach((p) => {
+        p.color = "red";
+      });
+    res = toSd(bottomA);
+  } else {
+    CustomVector3.setPublicInfo("B", 0);
+
+    const bottomB = B.toVector3();
+    for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
+      bottomB[i].key = 2 * i + 1;
+      bottomB[j].key = 2 * i + 2;
+
+      bottomB[i].difference = rOff[i];
+      bottomB[j].difference = rOff[j];
+    }
+    bottomB
+      .sort((a, b) => a.key - b.key)
+      .forEach((p) => {
+        p.color = "#fab005";
+      });
+    res = toSd(bottomB);
+  }
 
   mP.map((p) => p.free());
 
@@ -693,9 +770,10 @@ export const shengDaoGaoDu = (numShengLu: number) => {
   _shengDaoGaoDu(numShengLu, ti.ptr);
 
   const res = ti.toJSON();
+  console.log("%c Line:696 🥖 res", "color:#42b983", res);
 
   ti.free();
-  return res;
+  return res.slice(0, res.length / 2);
 };
 
 /**
@@ -705,8 +783,9 @@ export const shengDaoGaoDu = (numShengLu: number) => {
  * @param sign 符号
  * @returns
  */
-export const cubeTOff = (a: number, sdj: number, sign: number) => {
-  return Number(((a / Math.tan(ang2rad(sdj))) * sign).toFixed(4));
+export const cubeTOff = (a: number, sdj: number) => {
+  console.log("%c Line:710 🍤 90 - sdj", "color:#f5ce50", 90 - sdj);
+  return Number((a / Math.tan(ang2rad(90 - sdj))).toFixed(4));
 };
 
 /**
@@ -721,9 +800,14 @@ export const CalcJuXingAAndBPointsAfterOffest = (
   PAB: CustomVector3,
   sdj: number,
   sdfb: number,
-  Ti: number[],
-  TOff: number[]
+  _Ti: number[],
+  _TOff: number[],
+  sdm: "A" | "B"
 ) => {
+  const Ti = fitArr(_Ti);
+
+  const TOff = [..._TOff?.map((n) => -n), ..._TOff.reverse()];
+
   const Pin = new EmxArray_real_T(cubeRes.pIn);
   const UPP = new EmxArray_real_T(cubeRes.UPP);
   const Tao = new EmxArray_real_T(cubeRes.Tao);
@@ -745,29 +829,37 @@ export const CalcJuXingAAndBPointsAfterOffest = (
     sdfb,
     ti.ptr,
     tOff.ptr,
-    A.ptr,
-    B.ptr
+    B.ptr,
+    A.ptr
   );
 
-  CustomVector3.setPublicInfo("A", 0);
-  const bottomA = A.toVector3();
-  for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
-    bottomA[i].key = 2 * i + 1;
-    bottomA[j].key = 2 * i + 2;
+  let res: any[] = [];
+  CustomVector3.setPublicInfo(sdm, 0);
+  if (sdm === "A") {
+    const bottomA = A.toVector3();
+    for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
+      bottomA[i].key = 2 * i + 1;
+      bottomA[j].key = 2 * i + 2;
+    }
+    bottomA
+      .sort((a, b) => a.key - b.key)
+      .forEach((p) => {
+        p.color = "red";
+      });
+    res = toSd(bottomA);
+  } else {
+    const bottomB = B.toVector3();
+    for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
+      bottomB[i].key = 2 * i + 1;
+      bottomB[j].key = 2 * i + 2;
+    }
+    bottomB
+      .sort((a, b) => a.key - b.key)
+      .forEach((p) => {
+        p.color = "#fab005";
+      });
+    res = toSd(bottomB);
   }
-  CustomVector3.setPublicInfo("B", 0);
-  const bottomB = B.toVector3();
-  for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
-    bottomB[i].key = 2 * i + 1;
-    bottomB[j].key = 2 * i + 2;
-  }
-
-  const res = bottomA.map((a, i) => {
-    return {
-      pointA: a,
-      pointB: bottomB[i],
-    };
-  });
 
   Pin.free();
   UPP.free();
@@ -1014,3 +1106,5 @@ export const sdj_n2v = (n: number) => 90 - n;
  * @param n
  */
 export const sdj_v2n = (v: number) => 90 - v;
+
+// export jux

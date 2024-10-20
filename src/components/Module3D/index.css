@@ -1,10 +1,11 @@
 .relative::before {
+    --point-size: 5px;
     content: "";
     display: block;
-    width: 6px;
-    height: 6px;
+    width: var(--point-size, 4px);
+    height: var(--point-size, 4px);
     background-color: var(--point-color, red);
     position: absolute;
-    transform: translate(-3px, -3px);
+    transform: translate(calc(var(--point-size, 4px)/-2), calc(var(--point-size, 4px) / -2));
     border-radius: 50%;
 }

@@ -135,6 +135,15 @@ interface ICycle {
     points?: CustomVector3[];
   }[];
 
+  cubeTable: {
+    i: number;
+    ang: number;
+    a: number;
+    tOff: number;
+    h: number;
+    sdm: "A" | "B";
+    points?: CustomVector3[];
+  }[];
   /**
    * 安装点位置
    */

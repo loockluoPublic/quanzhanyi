@@ -6,6 +6,7 @@ export default function PointsLabel(props: {
   style?: React.CSSProperties;
   color?: string;
   disabledColor?: string;
+  showLabel?: boolean;
 }) {
   return props?.points?.map((item) => {
     if (!item) return null;
@@ -16,8 +17,14 @@ export default function PointsLabel(props: {
           className="q-w-20 relative"
           style={{ "--point-color": color } as any}
         >
-          {item.label || ""}
-          {item.key}
+          {props.showLabel ? (
+            <>
+              {item.label || ""}
+              {item.key}
+            </>
+          ) : (
+            ""
+          )}
         </div>
       </Html>
     );

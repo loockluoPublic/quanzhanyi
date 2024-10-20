@@ -1,5 +1,6 @@
 import { atom } from "recoil";
 import { BaseInfo, ICube, ICycle, ICycleBase } from "./type";
+import { CustomVector3 } from "../class/CustomVector3";
 
 export enum TType {
   cycle = "cycle",
@@ -69,4 +70,9 @@ export const Mode = atom<TMode>({
 export const Step = atom<number>({
   key: "stop",
   default: 0,
+});
+
+export const ShowLabel = atom<boolean>({
+  key: "showLabel",
+  default: true,
 });

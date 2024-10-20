@@ -13,6 +13,9 @@ import PerspectiveCamera from "./PerspectiveCamera";
 import React from "react";
 import Rectangular from "../Rectangular";
 import PointsLabel from "./PointsLabel";
+import { Switch } from "antd";
+import { useRecoilState } from "recoil";
+import { ShowLabel } from "../../atom/globalState";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
@@ -34,29 +37,6 @@ for (let i = 0; i < 10; i++) {
   pointsData.push(new THREE.Vector2(Math.sin(i * 0.2) * 3 + 5, (i - 5) * 2));
 }
 
-// function PointsLabel(props: {
-//   points: CustomVector3[];
-//   style?: React.CSSProperties;
-//   color?: string;
-//   disabledColor?: string;
-// }) {
-//   return props?.points?.map((item) => {
-//     if (!item) return null;
-//     const color = item.enable ? props.color : props.disabledColor;
-//     return (
-//       <Html position={item.toVector3()} key={item.key}>
-//         <div
-//           className="q-w-20 relative"
-//           style={{ "--point-color": color } as any}
-//         >
-//           {item.label || ""}
-//           {item.key}
-//         </div>
-//       </Html>
-//     );
-//   });
-// }
-
 export default function Index(props: {
   className?: string;
   MxPoints?: Record<string, CustomVector3[]>;
@@ -68,6 +48,7 @@ export default function Index(props: {
   trianglePoints?: CustomVector3[];
   [k: string]: any;
 }) {
+  const [v, setV] = useRecoilState(ShowLabel);
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
 
   const [h, setH] = useState(0);
@@ -103,7 +84,10 @@ export default function Index(props: {
   }, []);
 
   return (
-    <div className=" q-flex q-w-full q-h-full q-overflow-hidden" ref={ref}>
+    <div
+      className=" q-flex q-w-full q-h-full q-overflow-hidden q-relative"
+      ref={ref}
+    >
       <Canvas
         dpr={window.devicePixelRatio}
         className={`${props.className} q-grow q-cursor-pointer canvas-style`}
@@ -132,26 +116,17 @@ export default function Index(props: {
                 points={pArr}
                 color={MxColor[i]}
                 disabledColor="#ccc"
+                showLabel={v}
               />
             );
           })}
 
           {props.firstPoints?.length > 0 && (
-            <PointsLabel points={props.firstPoints} color="red" />
+            <PointsLabel points={props.firstPoints} color="red" showLabel={v} />
           )}
 
-          {props?.sdm?.includes("A") && (
-            <PointsLabel
-              points={props?.AB?.map?.((item) => item.pointA)}
-              color="red"
-            />
-          )}
-
-          {props?.sdm?.includes("B") && (
-            <PointsLabel
-              points={props?.AB?.map?.((item) => item.pointB)}
-              color="#fab005"
-            />
+          {props.points?.length > 0 && (
+            <PointsLabel points={props.points} color="red" showLabel={v} />
           )}
         </group>
 
@@ -165,6 +140,16 @@ export default function Index(props: {
           {props?.component}
         </div>
       )}
+      <div className="q-absolute q-bottom-0 q-left-0 q-p-2">
+        <Switch
+          checkedChildren="标签"
+          unCheckedChildren="标签"
+          checked={v}
+          onChange={(v) => {
+            setV(v);
+          }}
+        />
+      </div>
     </div>
   );
 }
