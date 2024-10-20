@@ -3,7 +3,7 @@ import type { MenuProps } from "antd";
 import { ConfigProvider, Layout, Menu, Switch } from "antd";
 import { BrowserRouter as Router, Routes } from "react-router-dom";
 import { Data, Mode, Step, TMode, TType } from "./atom/globalState";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { downLoadFile } from "./utils/utils";
 import UploadFile from "./components/UploadFile";
 import zhCN from "antd/es/locale/zh_CN";

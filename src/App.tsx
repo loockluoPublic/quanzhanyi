@@ -9,7 +9,6 @@ export default function App() {
   useGlobalEffect();
   return (
     <Layout>
-      <Route path="/secret" element={<Index />}></Route>
       <Route path="/" element={<Index />}></Route>
     </Layout>
   );
