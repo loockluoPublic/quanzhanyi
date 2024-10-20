@@ -24,7 +24,6 @@ message.config({
 export default function Setting() {
   const deviceInfoData = useRecoilValue(deviceInfo);
   const data = useRecoilValue(Data);
-  console.log("%c Line:27 🌭 data", "color:#ed9ec7", data);
   const [step, setStep] = useRecoilState(Step);
   const [mode] = useRecoilState(Mode);
 
@@ -33,12 +32,11 @@ export default function Setting() {
   }, [data.type]);
 
   const onChange = (value: number) => {
-    setStep(value);
-    // if (deviceInfoData.auth || location.search.includes("mock")) {
-    //   setStep(value);
-    // } else {
-    //   message.error("请验证秘钥");
-    // }
+    if (deviceInfoData.auth || location.search.includes("mock")) {
+      setStep(value);
+    } else {
+      message.error("请验证秘钥");
+    }
   };
 
   const CycleSteps = [
