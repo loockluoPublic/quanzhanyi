@@ -313,14 +313,14 @@ function CylinderFit() {
         <span className="q-ml-8">
           声道角：
           <InputNumber
-            value={sdj_n2v(data.sdj)}
+            value={data.sdj}
             addonAfter="度"
             min={0}
             max={90}
             onChange={(sdj) => {
               setData({
                 ...data,
-                sdj: sdj_v2n(sdj),
+                sdj,
               });
             }}
           />

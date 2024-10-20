@@ -47,24 +47,6 @@ export default function BaseInfo(props: { hideMode?: boolean }) {
       </Item>
 
       {!props.hideMode && <Next className="q-mt-4" />}
-
-      {/* <Item
-        label="轴向偏移"
-        name="tOff"
-        rules={[{ required: true }]}
-        initialValue={0.01}
-      >
-        <InputNumber addonAfter="米" />
-      </Item>
-
-      <Item
-        label="周向偏移"
-        name="rOff"
-        rules={[{ required: true }]}
-        initialValue={0.02}
-      >
-        <InputNumber addonAfter="米" />
-      </Item> */}
     </>
   );
 }
