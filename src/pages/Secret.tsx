@@ -27,7 +27,7 @@ export default function Secret() {
       style={{ backgroundImage: `url(${banner})` }}
       className="q-w-full q-h-full q-bg-no-repeat q-bg-center q-bg-cover q-shadow-lg q-rounded-lg"
     >
-      <div className="q-absolute q-w-[320px] q-p-10 q-shadow-md q-rounded-xl q-mt-48 q-left-1/2 q-ml-[-160px] q-text-center q-bg-[#e9ecef88]">
+      <div className="q-z-10 q-absolute q-w-[320px] q-p-10 q-shadow-md q-rounded-xl q-mt-48 q-left-1/2 q-ml-[-160px] q-text-center q-bg-[#e9ecef88]">
         <div className="q-text-center  ">
           <div>
             <div className="q-w-[4em] q-inline-block q-text-black">
