@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import { Data } from "../atom/globalState";
 import { Checkbox, InputNumber, message, Table, Tooltip } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
-import { Point } from "../components/Point";
+
 import { useEffect, useRef } from "react";
 import Select, { DefaultOptionType } from "antd/es/select";
 import {
@@ -15,6 +15,7 @@ import {
 } from "../utils/utils";
 import PointsVector3 from "../components/PointVector3";
 import { CustomVector3 } from "../class/CustomVector3";
+import { Point } from "../components/Point";
 
 const SDFBOptions = (() => {
   const options: DefaultOptionType[] = [];
@@ -259,6 +260,11 @@ function CylinderFit() {
   const calcPoint = () => {
     const { calulateRes } = data;
 
+    if (!data.centerPoint) {
+      message.error("请采集AB面交点");
+      return;
+    }
+
     if (!calulateRes) {
       message.error("缺少拟合参数，请退回上一步");
       return;
@@ -271,11 +277,11 @@ function CylinderFit() {
         calulateRes.R,
         data.centerPoint,
         data.sdj,
-        data.resultTable
+        data.resultTable?.filter((item) => item.sdm === data.sdm[0])
       ).then((AB) => {
-        const resultTable = data.resultTable.map((row, i) => {
+        const resultTable = data.resultTable.map((row) => {
           console.log("%c Line:264 🥛 sdm,i", "color:#4fff4B", row.sdm, row.i);
-          return { ...row, points: AB?.[i] };
+          return { ...row, points: AB?.[`bottom${row.sdm}`]?.[row.i - 1] };
         });
 
         setData((d) => {

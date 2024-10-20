@@ -2,6 +2,7 @@ import EmxArray_real_T from "../class/EmxArray_real_T";
 import { CustomVector3 } from "../class/CustomVector3";
 import { tableData } from "./config";
 import { ICycle } from "../atom/type";
+import _ from "loadsh";
 
 const {
   _generateUnitCircleWithNormalVector,
@@ -185,16 +186,14 @@ const toSd = (array: any) => {
  * @param rOff  径向位移
  * @returns
  */
-export const CalculatAAndBPoints = async (
+const CalculatAAndBPointsFn = (
   MTaon: CustomVector3,
   Mcenter: CustomVector3,
   R: number,
   PAB: CustomVector3,
   phi: number,
-  resultTable: ICycle["resultTable"]
-  // ang: number[]
-  // tOff: number[],
-  // rOff: number[]
+  resultTable: ICycle["resultTable"],
+  sdm: "A" | "B"
 ) => {
   console.log("%c Line:187 🥤 resultTable", "color:#e41a6a", resultTable);
   const tOff = fitArr(
@@ -262,7 +261,7 @@ export const CalculatAAndBPoints = async (
       p.color = "#fab005";
     });
 
-  const res = { bottomA: toSd(bottomA), bottomB: toSd(bottomB) };
+  const res = sdm === "A" ? toSd(bottomA) : toSd(bottomB);
 
   mTaon.free();
   mCenter.free();
@@ -274,6 +273,40 @@ export const CalculatAAndBPoints = async (
   B.free();
   return res;
 };
+
+/**
+ * @description 计算AB面点
+ * @param MTaon 圆柱轴线方向向量
+ * @param Mcenter 圆柱中心点
+ * @param R 圆半径
+ * @param PAB AB面交点垂直面所在点
+ * @param phi 声路角
+ * @returns
+ */
+export const CalculatAAndBPoints = async (
+  MTaon: CustomVector3,
+  Mcenter: CustomVector3,
+  R: number,
+  PAB: CustomVector3,
+  phi: number,
+  resultTable: ICycle["resultTable"]
+) => {
+  const res = _.partition(resultTable, (t) => {
+    return t.sdm === "A";
+  }).reduce((acc, cur) => {
+    if (cur?.length === 0) return acc;
+    return [
+      ...acc,
+      ...CalculatAAndBPointsFn(MTaon, Mcenter, R, PAB, phi, cur, cur[0].sdm),
+    ];
+  }, []);
+
+  return res;
+};
+
+
+export const CalculatAAndBPointsJ = () => {};
+
 
 /**
  * 复测计算声路角和生路长

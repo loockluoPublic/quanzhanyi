@@ -1,9 +1,9 @@
 import CubeFitting from "../components/Module3D/CubeModule";
 import { useRecoilState } from "recoil";
-import { Data, getInitAgainTable } from "../atom/globalState";
+import { Data } from "../atom/globalState";
 import { Checkbox, InputNumber, message, Table, Tooltip } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
-import { Point } from "./CalculateResultPoints";
+import { Point } from "../components/Point";
 import { useEffect, useRef } from "react";
 import Select, { DefaultOptionType } from "antd/es/select";
 import {
@@ -268,7 +268,6 @@ function CubeResult() {
         return <>{v?.toFixed?.(3) ?? "--"}米</>;
       },
     },
-
     {
       title: "斜面偏移",
       dataIndex: "rOff",
@@ -299,13 +298,6 @@ function CubeResult() {
   ].filter((item) => {
     return (!data.hasChamfer && item.key !== "rOff") || data.hasChamfer;
   });
-
-  useEffect(() => {
-    setData((d) => ({
-      ...d,
-      cubeAgainTable: getInitAgainTable(data.sdfb, data.sdm) as any,
-    }));
-  }, [data.sdfb, data.sdm]);
 
   const comp = (
     <div>
