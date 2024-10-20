@@ -1,8 +1,8 @@
 /*
  * File: Calculat_JuXing_A_and_B_Points_after_Offest.c
  *
- * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 17-Oct-2024 11:31:37
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 27-Sep-2024 14:25:16
  */
 
 /* Include Files */
@@ -18,10 +18,10 @@
 #include <math.h>
 
 /* Function Declarations */
-static void binary_expand_op_2(emxArray_real_T *in1, const emxArray_real_T *in2,
+static void c_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
                                const emxArray_real_T *in3);
 
-static void binary_expand_op_4(emxArray_real_T *in1, double in2, double in3,
+static void d_binary_expand_op(emxArray_real_T *in1, double in2, double in3,
                                double in4, double in5,
                                const emxArray_real_T *in6);
 
@@ -32,7 +32,7 @@ static void binary_expand_op_4(emxArray_real_T *in1, double in2, double in3,
  *                const emxArray_real_T *in3
  * Return Type  : void
  */
-static void binary_expand_op_2(emxArray_real_T *in1, const emxArray_real_T *in2,
+static void c_binary_expand_op(emxArray_real_T *in1, const emxArray_real_T *in2,
                                const emxArray_real_T *in3)
 {
   const double *in2_data;
@@ -48,20 +48,22 @@ static void binary_expand_op_2(emxArray_real_T *in1, const emxArray_real_T *in2,
   in2_data = in2->data;
   i = in1->size[0] * in1->size[1];
   in1->size[0] = 3;
-  emxEnsureCapacity_real_T(in1, i);
   if (in3->size[0] == 1) {
-    loop_ub = in2->size[0];
+    in1->size[1] = in2->size[0];
   } else {
-    loop_ub = in3->size[0];
+    in1->size[1] = in3->size[0];
   }
-  i = in1->size[0] * in1->size[1];
-  in1->size[1] = loop_ub;
   emxEnsureCapacity_real_T(in1, i);
   in1_data = in1->data;
   stride_0_1 = (in2->size[0] != 1);
   stride_1_1 = (in3->size[0] != 1);
   aux_0_1 = 0;
   aux_1_1 = 0;
+  if (in3->size[0] == 1) {
+    loop_ub = in2->size[0];
+  } else {
+    loop_ub = in3->size[0];
+  }
   for (i = 0; i < loop_ub; i++) {
     in1_data[3 * i] = in2_data[aux_0_1] + in3_data[aux_1_1];
     in1_data[3 * i + 1] =
@@ -82,7 +84,7 @@ static void binary_expand_op_2(emxArray_real_T *in1, const emxArray_real_T *in2,
  *                const emxArray_real_T *in6
  * Return Type  : void
  */
-static void binary_expand_op_4(emxArray_real_T *in1, double in2, double in3,
+static void d_binary_expand_op(emxArray_real_T *in1, double in2, double in3,
                                double in4, double in5,
                                const emxArray_real_T *in6)
 {
@@ -91,7 +93,7 @@ static void binary_expand_op_4(emxArray_real_T *in1, double in2, double in3,
   double *b_in1_data;
   double *in1_data;
   int i;
-  int loop_ub_tmp;
+  int loop_ub;
   int stride_0_1;
   int stride_1_1;
   in6_data = in6->data;
@@ -100,27 +102,32 @@ static void binary_expand_op_4(emxArray_real_T *in1, double in2, double in3,
   in1->size[1] = (int)in5 + (int)in5;
   emxEnsureCapacity_real_T(in1, i);
   in1_data = in1->data;
-  loop_ub_tmp = (int)in5;
-  for (i = 0; i < loop_ub_tmp; i++) {
+  loop_ub = (int)in5;
+  for (i = 0; i < loop_ub; i++) {
     in1_data[i] = in2 / 2.0 * in3 + in4;
   }
-  for (i = 0; i < loop_ub_tmp; i++) {
+  loop_ub = (int)in5;
+  for (i = 0; i < loop_ub; i++) {
     in1_data[i + (int)in5] = -in2 / 2.0 * in3 + in4;
   }
   emxInit_real_T(&b_in1, 2);
   i = b_in1->size[0] * b_in1->size[1];
   b_in1->size[0] = 1;
   if (in6->size[1] == 1) {
-    loop_ub_tmp = in1->size[1];
+    b_in1->size[1] = in1->size[1];
   } else {
-    loop_ub_tmp = in6->size[1];
+    b_in1->size[1] = in6->size[1];
   }
-  b_in1->size[1] = loop_ub_tmp;
   emxEnsureCapacity_real_T(b_in1, i);
   b_in1_data = b_in1->data;
   stride_0_1 = (in1->size[1] != 1);
   stride_1_1 = (in6->size[1] != 1);
-  for (i = 0; i < loop_ub_tmp; i++) {
+  if (in6->size[1] == 1) {
+    loop_ub = in1->size[1];
+  } else {
+    loop_ub = in6->size[1];
+  }
+  for (i = 0; i < loop_ub; i++) {
     b_in1_data[i] = in1_data[i * stride_0_1] + in6_data[i * stride_1_1];
   }
   i = in1->size[0] * in1->size[1];
@@ -128,8 +135,8 @@ static void binary_expand_op_4(emxArray_real_T *in1, double in2, double in3,
   in1->size[1] = b_in1->size[1];
   emxEnsureCapacity_real_T(in1, i);
   in1_data = in1->data;
-  loop_ub_tmp = b_in1->size[1];
-  for (i = 0; i < loop_ub_tmp; i++) {
+  loop_ub = b_in1->size[1];
+  for (i = 0; i < loop_ub; i++) {
     in1_data[i] = b_in1_data[i];
   }
   emxFree_real_T(&b_in1);
@@ -162,11 +169,11 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
   emxArray_real_T *Ay;
   emxArray_real_T *Az;
   emxArray_real_T *b_Axoff;
-  emxArray_real_T *b_b;
+  emxArray_real_T *c_b;
   emxArray_real_T *r;
   emxArray_real_T *r2;
   double ROT[9];
-  double b_dv[9];
+  double b_b[9];
   double rot1[9];
   double UPPmove[3];
   double theta1_tmp[3];
@@ -191,7 +198,7 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
   int i;
   int ibmat;
   int itilerow;
-  int loop_ub;
+  int jcol;
   if (!isInitialized_QuanZhanYi) {
     QuanZhanYi_initialize();
   }
@@ -226,10 +233,10 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
   t = theta1_tmp[2] / scale;
   b_theta1_tmp += t * t;
   b_theta1_tmp = scale * sqrt(b_theta1_tmp);
-  r_idx_2 = rt_atan2d_snf(b_theta1_tmp,
-                          (0.0 * UPPmove[0] + 0.0 * UPPmove[1]) + UPPmove[2]);
-  s = sin(r_idx_2);
-  c = cos(r_idx_2);
+  t = rt_atan2d_snf(b_theta1_tmp,
+                    (0.0 * UPPmove[0] + 0.0 * UPPmove[1]) + UPPmove[2]);
+  s = sin(t);
+  c = cos(t);
   /* SL3DNORMALIZE Normalize a vector. */
   /*    Y = SL3DNORMALIZE(X,MAXZERO) returns a unit vector Y parallel to the */
   /*    input vector X. Input X can be vector of any size. If the modulus of */
@@ -278,24 +285,24 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
   t = s * UPPmove[2];
   rot1[3] = absxk - t;
   scale *= UPPmove[2];
-  r_idx_2 = s * UPPmove[1];
-  rot1[6] = scale + r_idx_2;
+  b_theta1_tmp = s * UPPmove[1];
+  rot1[6] = scale + b_theta1_tmp;
   rot1[1] = absxk + t;
   absxk = (1.0 - c) * UPPmove[1];
   rot1[4] = absxk * UPPmove[1] + c;
   absxk *= UPPmove[2];
   t = s * UPPmove[0];
   rot1[7] = absxk - t;
-  rot1[2] = scale - r_idx_2;
+  rot1[2] = scale - b_theta1_tmp;
   rot1[5] = absxk + t;
   rot1[8] = (1.0 - c) * UPPmove[2] * UPPmove[2] + c;
   /*  Tao旋转rot1 */
-  r_idx_2 = Tao[0];
+  t = Tao[0];
   scale = Tao[1];
   absxk = Tao[2];
   for (i = 0; i < 3; i++) {
-    UPPmove[i] = (r_idx_2 * rot1[3 * i] + scale * rot1[3 * i + 1]) +
-                 absxk * rot1[3 * i + 2];
+    UPPmove[i] =
+        (t * rot1[3 * i] + scale * rot1[3 * i + 1]) + absxk * rot1[3 * i + 2];
   }
   /*  构建旋转矩阵2,taorot1转到x轴 */
   theta1_tmp[0] = 0.0 * UPPmove[2] - 0.0 * UPPmove[1];
@@ -324,10 +331,10 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
   }
   b_theta1_tmp = scale * sqrt(b_theta1_tmp);
   /*  总的旋转矩阵 ROT */
-  r_idx_2 = rt_atan2d_snf(b_theta1_tmp,
-                          (UPPmove[0] + 0.0 * UPPmove[1]) + 0.0 * UPPmove[2]);
-  s = sin(r_idx_2);
-  c = cos(r_idx_2);
+  t = rt_atan2d_snf(b_theta1_tmp,
+                    (UPPmove[0] + 0.0 * UPPmove[1]) + 0.0 * UPPmove[2]);
+  s = sin(t);
+  c = cos(t);
   /* SL3DNORMALIZE Normalize a vector. */
   /*    Y = SL3DNORMALIZE(X,MAXZERO) returns a unit vector Y parallel to the */
   /*    input vector X. Input X can be vector of any size. If the modulus of */
@@ -371,59 +378,59 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     UPPmove[1] = r_idx_1 / norm_vec;
     UPPmove[2] = r_idx_2 / norm_vec;
   }
-  r_idx_2 = (1.0 - c) * UPPmove[0];
-  b_dv[0] = r_idx_2 * UPPmove[0] + c;
-  scale = r_idx_2 * UPPmove[1];
-  absxk = s * UPPmove[2];
-  b_dv[3] = scale - absxk;
-  r_idx_2 *= UPPmove[2];
-  t = s * UPPmove[1];
-  b_dv[6] = r_idx_2 + t;
-  b_dv[1] = scale + absxk;
-  scale = (1.0 - c) * UPPmove[1];
-  b_dv[4] = scale * UPPmove[1] + c;
+  scale = (1.0 - c) * UPPmove[0];
+  b_b[0] = scale * UPPmove[0] + c;
+  absxk = scale * UPPmove[1];
+  t = s * UPPmove[2];
+  b_b[3] = absxk - t;
   scale *= UPPmove[2];
-  absxk = s * UPPmove[0];
-  b_dv[7] = scale - absxk;
-  b_dv[2] = r_idx_2 - t;
-  b_dv[5] = scale + absxk;
-  b_dv[8] = (1.0 - c) * UPPmove[2] * UPPmove[2] + c;
+  b_theta1_tmp = s * UPPmove[1];
+  b_b[6] = scale + b_theta1_tmp;
+  b_b[1] = absxk + t;
+  absxk = (1.0 - c) * UPPmove[1];
+  b_b[4] = absxk * UPPmove[1] + c;
+  absxk *= UPPmove[2];
+  t = s * UPPmove[0];
+  b_b[7] = absxk - t;
+  b_b[2] = scale - b_theta1_tmp;
+  b_b[5] = absxk + t;
+  b_b[8] = (1.0 - c) * UPPmove[2] * UPPmove[2] + c;
   /*  计算A点 */
   /*  在PABrot的基础上增量xyz */
   /*  x为b*tan(phi) */
   /*  y为b */
   /*  z为Ti*h */
   for (i = 0; i < 3; i++) {
-    r_idx_2 = rot1[i];
+    t = rot1[i];
     scale = rot1[i + 3];
     absxk = rot1[i + 6];
-    for (itilerow = 0; itilerow < 3; itilerow++) {
-      ROT[i + 3 * itilerow] =
-          (r_idx_2 * b_dv[3 * itilerow] + scale * b_dv[3 * itilerow + 1]) +
-          absxk * b_dv[3 * itilerow + 2];
+    for (jcol = 0; jcol < 3; jcol++) {
+      ROT[i + 3 * jcol] = (t * b_b[3 * jcol] + scale * b_b[3 * jcol + 1]) +
+                          absxk * b_b[3 * jcol + 2];
     }
     UPPmove[i] = PAB[i] - Pin[i];
   }
-  r_idx_2 = UPPmove[0];
+  t = UPPmove[0];
   scale = UPPmove[1];
   absxk = UPPmove[2];
   for (i = 0; i < 3; i++) {
-    theta1_tmp[i] = (r_idx_2 * ROT[3 * i] + scale * ROT[3 * i + 1]) +
-                    absxk * ROT[3 * i + 2];
+    theta1_tmp[i] =
+        (t * ROT[3 * i] + scale * ROT[3 * i + 1]) + absxk * ROT[3 * i + 2];
   }
+  emxInit_real_T(&Ay, 2);
   scale = theta1_tmp[0];
   absxk = tan(phi);
-  emxInit_real_T(&Ay, 2);
   i = Ay->size[0] * Ay->size[1];
   Ay->size[0] = 1;
-  itilerow = (int)shenglunum + (int)shenglunum;
-  Ay->size[1] = itilerow;
+  jcol = (int)shenglunum + (int)shenglunum;
+  Ay->size[1] = jcol;
   emxEnsureCapacity_real_T(Ay, i);
   Ay_data = Ay->data;
   ibmat = (int)shenglunum;
   for (i = 0; i < ibmat; i++) {
     Ay_data[i] = b / 2.0;
   }
+  ibmat = (int)shenglunum;
   for (i = 0; i < ibmat; i++) {
     Ay_data[i + (int)shenglunum] = -b / 2.0;
   }
@@ -433,70 +440,73 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
   Az->size[1] = Ti->size[1];
   emxEnsureCapacity_real_T(Az, i);
   Az_data = Az->data;
-  loop_ub = Ti->size[1];
-  for (i = 0; i < loop_ub; i++) {
+  ibmat = Ti->size[1];
+  for (i = 0; i < ibmat; i++) {
     Az_data[i] = Ti_data[i] * h / 2.0;
   }
   /*  计算并偏移 */
   emxInit_real_T(&Axoff, 2);
-  if (itilerow == toff->size[1]) {
-    emxInit_real_T(&b_b, 2);
-    i = b_b->size[0] * b_b->size[1];
-    b_b->size[0] = 1;
-    b_b->size[1] = itilerow;
-    emxEnsureCapacity_real_T(b_b, i);
-    PointTable_A_off_data = b_b->data;
+  if (jcol == toff->size[1]) {
+    emxInit_real_T(&c_b, 2);
+    i = c_b->size[0] * c_b->size[1];
+    c_b->size[0] = 1;
+    c_b->size[1] = jcol;
+    emxEnsureCapacity_real_T(c_b, i);
+    PointTable_A_off_data = c_b->data;
+    ibmat = (int)shenglunum;
     for (i = 0; i < ibmat; i++) {
       PointTable_A_off_data[i] = b / 2.0 * absxk + scale;
     }
+    ibmat = (int)shenglunum;
     for (i = 0; i < ibmat; i++) {
       PointTable_A_off_data[i + (int)shenglunum] = -b / 2.0 * absxk + scale;
     }
     i = Axoff->size[0] * Axoff->size[1];
     Axoff->size[0] = 1;
-    Axoff->size[1] = b_b->size[1];
+    Axoff->size[1] = c_b->size[1];
     emxEnsureCapacity_real_T(Axoff, i);
     Axoff_data = Axoff->data;
-    loop_ub = b_b->size[1];
-    for (i = 0; i < loop_ub; i++) {
+    ibmat = c_b->size[1];
+    for (i = 0; i < ibmat; i++) {
       Axoff_data[i] = PointTable_A_off_data[i] + toff_data[i];
     }
-    emxFree_real_T(&b_b);
+    emxFree_real_T(&c_b);
   } else {
-    binary_expand_op_4(Axoff, b, absxk, theta1_tmp[0], shenglunum, toff);
+    d_binary_expand_op(Axoff, b, absxk, theta1_tmp[0], shenglunum, toff);
     Axoff_data = Axoff->data;
   }
+  emxInit_real_T(&r, 2);
   /*  旋转平移回去 */
   pinv(ROT, rot1);
-  emxInit_real_T(&r, 2);
   i = (int)(2.0 * shenglunum);
-  itilerow = r->size[0] * r->size[1];
+  jcol = r->size[0] * r->size[1];
   r->size[0] = i;
   r->size[1] = 3;
-  emxEnsureCapacity_real_T(r, itilerow);
+  emxEnsureCapacity_real_T(r, jcol);
   r1 = r->data;
-  for (loop_ub = 0; loop_ub < 3; loop_ub++) {
-    ibmat = loop_ub * i;
+  for (jcol = 0; jcol < 3; jcol++) {
+    ibmat = jcol * i;
     for (itilerow = 0; itilerow < i; itilerow++) {
-      r1[ibmat + itilerow] = Pin[loop_ub];
+      r1[ibmat + itilerow] = Pin[jcol];
     }
   }
   emxInit_real_T(&b_Axoff, 2);
+  pinv(ROT, b_b);
   i = b_Axoff->size[0] * b_Axoff->size[1];
   b_Axoff->size[0] = 3;
   b_Axoff->size[1] = Axoff->size[1];
   emxEnsureCapacity_real_T(b_Axoff, i);
   PointTable_A_off_data = b_Axoff->data;
-  loop_ub = Axoff->size[1];
-  for (i = 0; i < loop_ub; i++) {
+  ibmat = Axoff->size[1];
+  for (i = 0; i < ibmat; i++) {
     PointTable_A_off_data[3 * i] = Axoff_data[i];
   }
-  loop_ub = Ay->size[1];
-  for (i = 0; i < loop_ub; i++) {
+  ibmat = Ay->size[1];
+  for (i = 0; i < ibmat; i++) {
     PointTable_A_off_data[3 * i + 1] = Ay_data[i];
   }
-  loop_ub = Az->size[1];
-  for (i = 0; i < loop_ub; i++) {
+  ibmat = Az->size[1];
+  for (i = 0; i < ibmat; i++) {
     PointTable_A_off_data[3 * i + 2] = Az_data[i];
   }
   emxInit_real_T(&r2, 2);
@@ -508,8 +518,8 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     PointTable_A_off->size[1] = r2->size[0];
     emxEnsureCapacity_real_T(PointTable_A_off, i);
     PointTable_A_off_data = PointTable_A_off->data;
-    loop_ub = r2->size[0];
-    for (i = 0; i < loop_ub; i++) {
+    ibmat = r2->size[0];
+    for (i = 0; i < ibmat; i++) {
       PointTable_A_off_data[3 * i] = r3[i] + r1[i];
       PointTable_A_off_data[3 * i + 1] =
           r3[i + r2->size[0]] + r1[i + r->size[0]];
@@ -517,29 +527,29 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
           r3[i + r2->size[0] * 2] + r1[i + r->size[0] * 2];
     }
   } else {
-    binary_expand_op_2(PointTable_A_off, r2, r);
+    c_binary_expand_op(PointTable_A_off, r2, r);
   }
   i = b_Axoff->size[0] * b_Axoff->size[1];
   b_Axoff->size[0] = 3;
   b_Axoff->size[1] = Axoff->size[1];
   emxEnsureCapacity_real_T(b_Axoff, i);
   PointTable_A_off_data = b_Axoff->data;
-  loop_ub = Axoff->size[1];
-  for (i = 0; i < loop_ub; i++) {
+  ibmat = Axoff->size[1];
+  for (i = 0; i < ibmat; i++) {
     PointTable_A_off_data[3 * i] = Axoff_data[i];
   }
   emxFree_real_T(&Axoff);
-  loop_ub = Ay->size[1];
-  for (i = 0; i < loop_ub; i++) {
+  ibmat = Ay->size[1];
+  for (i = 0; i < ibmat; i++) {
     PointTable_A_off_data[3 * i + 1] = -Ay_data[i];
   }
   emxFree_real_T(&Ay);
-  loop_ub = Az->size[1];
-  for (i = 0; i < loop_ub; i++) {
+  ibmat = Az->size[1];
+  for (i = 0; i < ibmat; i++) {
     PointTable_A_off_data[3 * i + 2] = Az_data[i];
   }
   emxFree_real_T(&Az);
-  mtimes(b_Axoff, rot1, r2);
+  mtimes(b_Axoff, b_b, r2);
   r3 = r2->data;
   emxFree_real_T(&b_Axoff);
   if (r2->size[0] == r->size[0]) {
@@ -548,8 +558,8 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     PointTable_B_off->size[1] = r2->size[0];
     emxEnsureCapacity_real_T(PointTable_B_off, i);
     PointTable_A_off_data = PointTable_B_off->data;
-    loop_ub = r2->size[0];
-    for (i = 0; i < loop_ub; i++) {
+    ibmat = r2->size[0];
+    for (i = 0; i < ibmat; i++) {
       PointTable_A_off_data[3 * i] = r3[i] + r1[i];
       PointTable_A_off_data[3 * i + 1] =
           r3[i + r2->size[0]] + r1[i + r->size[0]];
@@ -557,7 +567,7 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
           r3[i + r2->size[0] * 2] + r1[i + r->size[0] * 2];
     }
   } else {
-    binary_expand_op_2(PointTable_B_off, r2, r);
+    c_binary_expand_op(PointTable_B_off, r2, r);
   }
   emxFree_real_T(&r2);
   emxFree_real_T(&r);
