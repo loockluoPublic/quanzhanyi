@@ -18,6 +18,11 @@ const MyCylinder = (props: any) => {
     props?.Bottom_round_center?.[1]
   );
 
+  console.log(
+    "%c Line:26 🍰 props?.center?.toVector3()",
+    "color:#6ec1c2",
+    props
+  );
   return (
     <>
       <Cylinder

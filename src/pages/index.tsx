@@ -42,7 +42,13 @@ export default function Setting() {
   const CycleSteps = [
     {
       title: "设备连接",
-      components: <Connect />,
+      components: (
+        <Connect
+          next={() => {
+            setStep(step + 1);
+          }}
+        />
+      ),
     },
     {
       title: "自动采点&管道拟合",

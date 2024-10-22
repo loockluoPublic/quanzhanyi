@@ -171,10 +171,9 @@ function CylinderFit() {
         return item.a;
       }) ?? [];
 
-    console.log("%c Line:199 🥥 res", "color:#3f7cff");
-    if (!_data.centerPoint || !paramAng || !paramA) return;
-    if (!(_resultTable?.length > 0)) return;
-    if (!_data?.calulateRes?.R) return;
+    if (!paramAng || !paramA) return _resultTable;
+    if (!(_resultTable?.length > 0)) return _resultTable;
+    if (!_data?.calulateRes?.R) return _resultTable;
 
     const res = offsetCalculate(
       _data.calulateRes.R,
@@ -182,7 +181,6 @@ function CylinderFit() {
       paramAng,
       paramA
     ) ?? [[], []];
-    console.log("%c Line:199 🥥 res", "color:#3f7cff", res);
 
     return _resultTable.map((item, i) => {
       const newItem = {
@@ -197,7 +195,13 @@ function CylinderFit() {
 
   const key = `${data.sdfb}${data.sdm?.join("")}`;
   const init = () => {
-    if (sdfbPreRef.current === "" && data.resultTable?.length > 0) return;
+    if (
+      sdfbPreRef.current === "" &&
+      data.resultTable?.length > 0 &&
+      data.resultTable[0].tOff !== undefined
+    )
+      return;
+
     if (key !== sdfbPreRef.current) {
       const plant = shengLuJiao2Ang(data.sdfb).map((ang) => {
         return { ang, a: 0.015 };
@@ -235,13 +239,12 @@ function CylinderFit() {
     }) ?? [];
 
   useEffect(() => {
-    if (sdfbPreRef.current !== "")
-      setData((d) => {
-        return {
-          ...d,
-          resultTable: updateOffset2(d, d.resultTable),
-        };
-      });
+    setData((d) => {
+      return {
+        ...d,
+        resultTable: updateOffset2(d, d.resultTable),
+      };
+    });
   }, [[...paramAng, ...paramA, data.sdj].join(",")]);
 
   const tOff =
@@ -262,33 +265,38 @@ function CylinderFit() {
       return;
     }
 
-    if (tOff.length > 0) {
-      CalculatAAndBPoints(
-        calulateRes.mTaon,
-        calulateRes.center,
-        calulateRes.R,
-        data.centerPoint,
-        data.sdj,
-        data.resultTable
-      ).then((AB) => {
-        const resultTable = data.resultTable.map((row, i) => {
-          console.log("%c Line:264 🥛 sdm,i", "color:#4fff4B", row.sdm, row.i);
-          return { ...row, points: AB?.[i] };
-        });
-
-        setData((d) => {
-          return {
-            ...d,
-            resultTable,
-          };
-        });
-      });
+    let tableData = data.resultTable;
+    if (tOff[0] === undefined) {
+      tableData = updateOffset2(data, data.resultTable);
     }
+    CalculatAAndBPoints(
+      calulateRes.mTaon,
+      calulateRes.center,
+      calulateRes.R,
+      data.centerPoint,
+      data.sdj,
+      tableData
+    ).then((AB) => {
+      const resultTable = tableData.map((row, i) => {
+        console.log("%c Line:264 🥛 sdm,i", "color:#4fff4B", row.sdm, row.i);
+        return { ...row, points: AB?.[i] };
+      });
+
+      setData((d) => {
+        return {
+          ...d,
+          resultTable,
+        };
+      });
+    });
   };
 
   useEffect(() => {
     if (data.centerPoint) calcPoint();
-  }, [[...rOff, ...tOff].join(","), data.centerPoint]);
+    else {
+      message.warning("请采集AB面交点");
+    }
+  }, [data.centerPoint]);
 
   const comp = (
     <div>

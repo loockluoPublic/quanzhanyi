@@ -118,15 +118,15 @@ export default function () {
       },
     },
     {
-      title: "声道相对高度",
+      title: "声道高度",
       dataIndex: "sdH",
       key: "sdH",
       align: "center",
       render: (v) => {
         if (isNaN((data?.calulateRes?.R / 2) * v)) return "";
-        return `${(data?.calulateRes?.R * v)?.toFixed?.(4)}米 ${v?.toFixed?.(
+        return `${(data?.calulateRes?.R * v)?.toFixed?.(4)}米 （${v?.toFixed?.(
           4
-        )} `;
+        )}）`;
       },
     },
     {
@@ -135,7 +135,7 @@ export default function () {
       key: "Wquanzhong3",
       align: "right",
       render: (v) => {
-        return v?.toFixed?.(4);
+        return v?.toFixed?.(6);
       },
     },
 
@@ -145,7 +145,7 @@ export default function () {
       key: "Wquanzhong4",
       align: "right",
       render: (v) => {
-        return v?.toFixed?.(4);
+        return v?.toFixed?.(6);
       },
     },
   ].filter((item) => item.key !== data.sfType);

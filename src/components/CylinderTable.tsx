@@ -19,7 +19,7 @@ const columns: any = [
     },
   },
   {
-    title: "点",
+    title: "采样点坐标",
     dataIndex: "x",
     align: "left",
     key: "x",

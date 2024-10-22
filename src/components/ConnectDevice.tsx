@@ -14,7 +14,7 @@ import { encode } from "../utils/secret";
 (window as any).commond = commond;
 export const serial = new SerialMonitor({ mode: "text", parseLines: true });
 
-export default function Connect() {
+export default function Connect(props: { next: () => void }) {
   const [deviceInfoData, setDeviceInfo] = useRecoilState(deviceInfo);
 
   const [pwd, setPwd] = useState("");
@@ -70,6 +70,7 @@ export default function Connect() {
                 onClick={() => {
                   if (pwd === encode(deviceInfoData?.SerialNo)) {
                     setDeviceInfo({ ...deviceInfoData, auth: true });
+                    props.next();
                     message.success("秘钥验证成功");
                   } else {
                     message.error("秘钥验证错误，请确定秘钥与设备是否对应");

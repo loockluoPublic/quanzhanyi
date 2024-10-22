@@ -34,7 +34,7 @@ const App: React.FC<PropsWithChildren> = (props) => {
       <Router>
         <Layout>
           <Header style={{ display: "flex", alignItems: "center" }}>
-            <div>
+            <div className="q-contents">
               <Menu
                 theme="dark"
                 mode="horizontal"
@@ -45,11 +45,6 @@ const App: React.FC<PropsWithChildren> = (props) => {
                   setData({ ...data, type: key as TType });
                 }}
               />
-            </div>
-            <div className="q-text-white q-flex-1 q-text-center">
-              <h2>超声换能器自动测算系统</h2>
-            </div>
-            <div className="q-inline-flex q-items-center">
               <Switch
                 className="h-button"
                 checkedChildren="复测"
@@ -60,6 +55,11 @@ const App: React.FC<PropsWithChildren> = (props) => {
                   setMode(v ? TMode.second : TMode.first);
                 }}
               />
+            </div>
+            <div className="q-text-white q-flex-1 q-text-center">
+              <h2>超声换能器自动测算系统</h2>
+            </div>
+            <div className="q-inline-flex q-items-center">
               <div
                 className=" q-text-white q-cursor-pointer q-ml-6"
                 onClick={() => transformJSON2Excel(data)}

@@ -127,7 +127,7 @@ export class CustomVector3 extends Vector3 {
   calcRotation() {
     return [
       Math.atan2(this.y, this.z),
-      -Math.atan2(this.z, this.x),
+      Math.atan2(this.z, this.x),
       Math.atan2(this.x, this.y),
     ];
   }

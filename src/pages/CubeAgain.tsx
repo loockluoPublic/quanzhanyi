@@ -139,7 +139,7 @@ export default function () {
       key: "Wquanzhong3",
       align: "right",
       render: (v) => {
-        return v?.toFixed?.(4);
+        return v?.toFixed?.(6);
       },
     },
 
@@ -149,7 +149,7 @@ export default function () {
       key: "Wquanzhong4",
       align: "right",
       render: (v) => {
-        return v?.toFixed?.(4);
+        return v?.toFixed?.(6);
       },
     },
   ].filter((item) => item.key !== data.sfType);
