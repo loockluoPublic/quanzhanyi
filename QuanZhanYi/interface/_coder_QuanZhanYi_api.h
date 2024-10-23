@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Oct-2024 13:46:16
+ * C/C++ source code generated on  : 23-Oct-2024 12:51:01
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -104,6 +104,7 @@ void GenerateTrianglePoints_api(const mxArray *const prhs[4],
 void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
                                                real_T num, real_T laynum,
                                                real_T P3[3], real_T P4[3],
+                                               real_T r,
                                                emxArray_real_T *Point_test);
 
 void JuXingFuCe(emxArray_real_T *PointIn, real_T shenglunum, real_T Pin[3],
@@ -179,19 +180,19 @@ void c_Calculate_accurate_cylinders_(const mxArray *const prhs[3], int32_T nlhs,
 void c_Calculate_rectangle_from_vert(const mxArray *prhs, int32_T nlhs,
                                      const mxArray *plhs[8]);
 
-void c_Generate_multi_layered_measur(const mxArray *const prhs[5],
+void c_Generate_multi_layered_measur(const mxArray *const prhs[6],
                                      const mxArray **plhs);
 
 void c_foot_of_perpendicular_from_a_(const mxArray *const prhs[3], int32_T nlhs,
                                      const mxArray *plhs[3]);
 
-void c_generate_unit_circle_with_nor(const mxArray *const prhs[3],
+void c_generate_unit_circle_with_nor(const mxArray *const prhs[4],
                                      const mxArray **plhs);
 
 void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
                                      int32_T nlhs, const mxArray *plhs[3]);
 
-void d_generate_unit_circle_with_nor(const mxArray *const prhs[6],
+void d_generate_unit_circle_with_nor(const mxArray *const prhs[7],
                                      const mxArray **plhs);
 
 void fitcircle(emxArray_real_T *x, real_T z[2], real_T *r, real_T *residual);
@@ -205,12 +206,13 @@ void foot_of_perpendicular_from_a_point_to_a_line(real_T P_outer[3],
                                                   real_T *zN1);
 
 void generate_unit_circle_with_normal_vector(real_T azimuth, real_T elevation,
-                                             real_T num,
+                                             real_T num, real_T r,
                                              emxArray_real_T *Point_out);
 
 void generate_unit_circle_with_normal_vector2(real_T azimuth, real_T elevation,
                                               real_T num, real_T laynum,
                                               real_T P1[3], real_T P2[3],
+                                              real_T r,
                                               emxArray_real_T *Point_out);
 
 void myvrrotvec2mat(real_T r[4], real_T m[9]);

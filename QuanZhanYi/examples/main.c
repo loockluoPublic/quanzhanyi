@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Oct-2024 13:46:16
+ * C/C++ source code generated on  : 23-Oct-2024 12:51:01
  */
 
 /*************************************************************************/
@@ -555,7 +555,7 @@ void main_Generate_multi_layered_measurement_points(void)
   /* Call the entry-point 'Generate_multi_layered_measurement_points'. */
   emxInitArray_real_T(&Point_test, 2);
   Generate_multi_layered_measurement_points(Point_out, num_tmp, num_tmp, P3_tmp,
-                                            P3_tmp, Point_test);
+                                            P3_tmp, num_tmp, Point_test);
   emxDestroyArray_real_T(Point_out);
   emxDestroyArray_real_T(Point_test);
 }
@@ -807,7 +807,7 @@ void main_generate_unit_circle_with_normal_vector(void)
   /* Call the entry-point 'generate_unit_circle_with_normal_vector'. */
   emxInitArray_real_T(&Point_out, 2);
   generate_unit_circle_with_normal_vector(azimuth_tmp, azimuth_tmp, azimuth_tmp,
-                                          Point_out);
+                                          azimuth_tmp, Point_out);
   emxDestroyArray_real_T(Point_out);
 }
 
@@ -830,7 +830,7 @@ void main_generate_unit_circle_with_normal_vector2(void)
   emxInitArray_real_T(&Point_out, 2);
   generate_unit_circle_with_normal_vector2(azimuth_tmp, azimuth_tmp,
                                            azimuth_tmp, azimuth_tmp, P1_tmp,
-                                           P1_tmp, Point_out);
+                                           P1_tmp, azimuth_tmp, Point_out);
   emxDestroyArray_real_T(Point_out);
 }
 
