@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Oct-2024 13:46:16
+ * C/C++ source code generated on  : 23-Oct-2024 12:51:01
  */
 
 /* Include Files */
@@ -1692,11 +1692,11 @@ void c_Calculate_rectangle_from_vert(const mxArray *prhs, int32_T nlhs,
 }
 
 /*
- * Arguments    : const mxArray * const prhs[5]
+ * Arguments    : const mxArray * const prhs[6]
  *                const mxArray **plhs
  * Return Type  : void
  */
-void c_Generate_multi_layered_measur(const mxArray *const prhs[5],
+void c_Generate_multi_layered_measur(const mxArray *const prhs[6],
                                      const mxArray **plhs)
 {
   emlrtStack st = {
@@ -1710,6 +1710,7 @@ void c_Generate_multi_layered_measur(const mxArray *const prhs[5],
   real_T(*P4)[3];
   real_T laynum;
   real_T num;
+  real_T r;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   /* Marshall function inputs */
@@ -1720,9 +1721,10 @@ void c_Generate_multi_layered_measur(const mxArray *const prhs[5],
   laynum = emlrt_marshallIn(&st, emlrtAliasP(prhs[2]), "laynum");
   P3 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "P3");
   P4 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[4]), "P4");
+  r = emlrt_marshallIn(&st, emlrtAliasP(prhs[5]), "r");
   /* Invoke the target function */
   emxInit_real_T(&st, &Point_test, 2);
-  Generate_multi_layered_measurement_points(Point_out, num, laynum, *P3, *P4,
+  Generate_multi_layered_measurement_points(Point_out, num, laynum, *P3, *P4, r,
                                             Point_test);
   emxFree_real_T(&st, &Point_out);
   /* Marshall function outputs */
@@ -1771,11 +1773,11 @@ void c_foot_of_perpendicular_from_a_(const mxArray *const prhs[3], int32_T nlhs,
 }
 
 /*
- * Arguments    : const mxArray * const prhs[3]
+ * Arguments    : const mxArray * const prhs[4]
  *                const mxArray **plhs
  * Return Type  : void
  */
-void c_generate_unit_circle_with_nor(const mxArray *const prhs[3],
+void c_generate_unit_circle_with_nor(const mxArray *const prhs[4],
                                      const mxArray **plhs)
 {
   emlrtStack st = {
@@ -1787,15 +1789,18 @@ void c_generate_unit_circle_with_nor(const mxArray *const prhs[3],
   real_T azimuth;
   real_T elevation;
   real_T num;
+  real_T r;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   /* Marshall function inputs */
   azimuth = emlrt_marshallIn(&st, emlrtAliasP(prhs[0]), "azimuth");
   elevation = emlrt_marshallIn(&st, emlrtAliasP(prhs[1]), "elevation");
   num = emlrt_marshallIn(&st, emlrtAliasP(prhs[2]), "num");
+  r = emlrt_marshallIn(&st, emlrtAliasP(prhs[3]), "r");
   /* Invoke the target function */
   emxInit_real_T(&st, &Point_out, 2);
-  generate_unit_circle_with_normal_vector(azimuth, elevation, num, Point_out);
+  generate_unit_circle_with_normal_vector(azimuth, elevation, num, r,
+                                          Point_out);
   /* Marshall function outputs */
   Point_out->canFreeData = false;
   *plhs = b_emlrt_marshallOut(Point_out);
@@ -1922,11 +1927,11 @@ void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
 }
 
 /*
- * Arguments    : const mxArray * const prhs[6]
+ * Arguments    : const mxArray * const prhs[7]
  *                const mxArray **plhs
  * Return Type  : void
  */
-void d_generate_unit_circle_with_nor(const mxArray *const prhs[6],
+void d_generate_unit_circle_with_nor(const mxArray *const prhs[7],
                                      const mxArray **plhs)
 {
   emlrtStack st = {
@@ -1941,6 +1946,7 @@ void d_generate_unit_circle_with_nor(const mxArray *const prhs[6],
   real_T elevation;
   real_T laynum;
   real_T num;
+  real_T r;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   /* Marshall function inputs */
@@ -1950,10 +1956,11 @@ void d_generate_unit_circle_with_nor(const mxArray *const prhs[6],
   laynum = emlrt_marshallIn(&st, emlrtAliasP(prhs[3]), "laynum");
   P1 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[4]), "P1");
   P2 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[5]), "P2");
+  r = emlrt_marshallIn(&st, emlrtAliasP(prhs[6]), "r");
   /* Invoke the target function */
   emxInit_real_T(&st, &Point_out, 2);
   generate_unit_circle_with_normal_vector2(azimuth, elevation, num, laynum, *P1,
-                                           *P2, Point_out);
+                                           *P2, r, Point_out);
   /* Marshall function outputs */
   Point_out->canFreeData = false;
   *plhs = b_emlrt_marshallOut(Point_out);
