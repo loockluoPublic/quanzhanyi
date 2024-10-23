@@ -39,8 +39,14 @@ function CylinderPre() {
       data.numPerLay,
       data.layNum,
       data?.firstPoints?.[0],
-      data?.firstPoints?.[1]
+      data?.firstPoints?.[1],
+      data.virtualR
     ).then((waitingPoints) => {
+      console.log(
+        "%c Line:45 🥤 waitingPoints",
+        "color:#4fff4B",
+        waitingPoints
+      );
       setData({
         ...data,
         waitingPoints,
@@ -164,6 +170,17 @@ function CylinderPre() {
             max={50}
             onChange={(v) => {
               setData({ ...data, numPerLay: v });
+            }}
+          />
+        </span>
+        <span className="q-ml-8">
+          预估半径：
+          <InputNumber
+            value={data.virtualR}
+            min={0.1}
+            max={50}
+            onChange={(virtualR) => {
+              setData({ ...data, virtualR });
             }}
           />
         </span>

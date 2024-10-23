@@ -50,6 +50,11 @@ interface AgainTable {
 
 interface ICycleBase {
   /**
+   * 预估半径
+   */
+  virtualR: number;
+
+  /**
    * 采样层数
    */
   layNum: number;

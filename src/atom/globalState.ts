@@ -43,6 +43,7 @@ export const getInitAgainTable = (sdfb: number, sdm: string[]): any => {
 export const Data = atom<GlobalData>({
   key: "data", // 唯一标识这个状态
   default: {
+    virtualR: 1,
     sdfb: 4,
     sdj: 45,
     sdm: ["A", "B"],

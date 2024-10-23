@@ -1408,7 +1408,6 @@ var _malloc = Module['_malloc'] = createExportWrapper('malloc');
 var _free = Module['_free'] = createExportWrapper('free');
 var _fflush = createExportWrapper('fflush');
 var _generateUnitCircleWithNormalVector = Module['_generateUnitCircleWithNormalVector'] = createExportWrapper('generateUnitCircleWithNormalVector');
-var _GenerateMultiLayeredMeasurementPoints = Module['_GenerateMultiLayeredMeasurementPoints'] = createExportWrapper('GenerateMultiLayeredMeasurementPoints');
 var _CalculateAccurateCylindersFromMultipleMeasurementPoints = Module['_CalculateAccurateCylindersFromMultipleMeasurementPoints'] = createExportWrapper('CalculateAccurateCylindersFromMultipleMeasurementPoints');
 var _CalculatAAndBPoints = Module['_CalculatAAndBPoints'] = createExportWrapper('CalculatAAndBPoints');
 var _Repeat_Survey = Module['_Repeat_Survey'] = createExportWrapper('Repeat_Survey');

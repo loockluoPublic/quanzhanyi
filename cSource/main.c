@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include "QuanZhanYi_types.h"
 #include "generate_unit_circle_with_normal_vector2.h"
-#include "Generate_multi_layered_measurement_points.h"
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
 #include "Calculat_A_and_B_Points_after_Offest2.h"
 #include "RepeatSurvey.h"
@@ -22,23 +21,11 @@ EMSCRIPTEN_KEEPALIVE
 void generateUnitCircleWithNormalVector(double azimuth, double elevation,
                                         double num, double laynum, const double P1[3],
                                         const double P2[3],
+                                        const double r,
                                         emxArray_real_T *Point_out)
 {
-    printf("generateUnitCircleWithNormalVector %f %f %f \n", azimuth, elevation, num);
-    printf("P3: %f,%f,%f \n", P1[0], P1[1], P1[2]);
-    generate_unit_circle_with_normal_vector2(azimuth, elevation, num, laynum, P1, P2, Point_out);
-}
 
-EMSCRIPTEN_KEEPALIVE
-void GenerateMultiLayeredMeasurementPoints(
-    const emxArray_real_T *Point_out,
-    double num,
-    double laynum,
-    const double P3[3],
-    const double P4[3],
-    emxArray_real_T *Point_test)
-{
-    Generate_multi_layered_measurement_points(Point_out, num, laynum, P3, P4, Point_test);
+    generate_unit_circle_with_normal_vector2(azimuth, elevation, num, laynum, P1, P2, r, Point_out);
 }
 
 EMSCRIPTEN_KEEPALIVE

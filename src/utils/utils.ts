@@ -6,7 +6,6 @@ import _ from "loadsh";
 
 const {
   _generateUnitCircleWithNormalVector,
-  _GenerateMultiLayeredMeasurementPoints,
   _CalculateAccurateCylindersFromMultipleMeasurementPoints,
   _CalculatAAndBPoints,
   _Repeat_Survey,
@@ -38,11 +37,13 @@ export const generateUnitCircleWithNormalVector = async (
   numPerLay: number,
   laynum: number,
   P1: CustomVector3,
-  P2: CustomVector3
+  P2: CustomVector3,
+  r: number
 ): Promise<CustomVector3[]> => {
   const points = new EmxArray_real_T(3, numPerLay * laynum);
   const p3 = new EmxArray_real_T(P1);
   const p4 = new EmxArray_real_T(P2);
+  console.log("%c Line:55 🥓 r", "color:#6ec1c2", r);
   _generateUnitCircleWithNormalVector(
     azimuth,
     elevation,
@@ -50,66 +51,14 @@ export const generateUnitCircleWithNormalVector = async (
     laynum,
     p3.arrayPtr,
     p4.arrayPtr,
+    r,
     points.ptr
   );
   const res = points.toVector3();
-  console.log(
-    "%c Line:22 🥝 _generateUnitCircleWithNormalVector",
-    "color:#93c0a4",
-    azimuth,
-    elevation,
-    numPerLay,
-    laynum,
-    P1,
-    P2,
-    res
-  );
+
   console.table(res);
   points.free();
   return res;
-};
-
-export const GenerateMultiLayeredMeasurementPoints = (
-  Points: CustomVector3[],
-  numPerLay: number,
-  laynum: number,
-  P1: CustomVector3,
-  P2: CustomVector3
-) => {
-  const points = new EmxArray_real_T(Points);
-  const p3 = new EmxArray_real_T(P1);
-  const p4 = new EmxArray_real_T(P2);
-  const resultPoints = new EmxArray_real_T(3, numPerLay * laynum);
-  console.group("GenerateMultiLayeredMeasurementPoints");
-
-  console.log(
-    "%c Line:40 🥪 num",
-    "color:#93c0a4",
-    numPerLay,
-    laynum,
-    p3.toVector3(),
-    p4.toVector3()
-  );
-  _GenerateMultiLayeredMeasurementPoints(
-    points.ptr,
-    numPerLay,
-    laynum,
-    p3.arrayPtr,
-    p4.arrayPtr,
-    resultPoints.ptr
-  );
-  console.log(
-    "%c Line:45 🥥 GenerateMultiLayeredMeasurementPoints resultPoints",
-    "color:#ea7e5c",
-    resultPoints.toVector3()
-  );
-  console.groupEnd();
-  const resoult = resultPoints.toVector3();
-  points.free();
-  resultPoints.free();
-  p3.free();
-  p4.free();
-  return resoult;
 };
 
 /**

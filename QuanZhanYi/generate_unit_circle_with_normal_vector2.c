@@ -136,6 +136,7 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
                                               const double P2[3], double r,
                                               emxArray_real_T *Point_out)
 {
+
   emxArray_real_T *deltx;
   emxArray_real_T *delty;
   emxArray_real_T *deltz;
