@@ -75,7 +75,13 @@ export default function Setting() {
   const CubeSteps = [
     {
       title: "设备连接",
-      components: <Connect />,
+      components: (
+        <Connect
+          next={() => {
+            setStep(step + 1);
+          }}
+        />
+      ),
     },
     {
       title: "手动采点&方涵拟合",
