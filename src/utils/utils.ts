@@ -286,10 +286,8 @@ export const CalculatAAndBPoints4 = (data) => {
         tOff,
         cur[0].sdm
       ),
-      // ...CalculatAAndBPointsFn(MTaon, Mcenter, R, PAB, phi, cur, cur[0].sdm),
     ];
   }, []);
-  console.log("%c Line:326 🍅 res", "color:#f5ce50", res);
 
   return res;
 };
@@ -309,7 +307,6 @@ export const CalculatAAndBPoints8 = (data, MxPortsArr) => {
         return item.h;
       }) ?? [];
 
-    console.log("%c Line:367 🍓 MxPortsArr", "color:#6ec1c2", MxPortsArr);
     return [
       ...acc,
       ...CalculateRectangleFromVertex8(
