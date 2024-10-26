@@ -174,10 +174,10 @@ export const getSimpleCoord = (): Promise<CustomVector3> => {
   const getSimpleCoordFn = (): Promise<CustomVector3> =>
     sendText(`2116:1500,1`)
       .then((res) => {
-        if (res.startsWith("%R1P,0,0:") || res === "") {
+        if (res?.startsWith?.("%R1P,0,0:") || res === "") {
           throw new Error("获取笛卡尔坐标失败");
         }
-        const d = res.split(",")?.map((i) => parseFloat(i));
+        const d = res?.split(",")?.map((i) => parseFloat(i));
         if (d?.length === 3) return new CustomVector3(d[0], d[2], d[1]);
       })
       .catch((err) => {
@@ -233,6 +233,11 @@ export const pointToAndMeasure = (v: CustomVector3) => {
  * @returns Promise<CustomVector3>
  */
 export const measureAndGetSimpleCoord = () => {
+  console.log(
+    "%c Line:237 🍺 location.search",
+    "color:#33a5ff",
+    location.search
+  );
   if (location.search.includes("mock"))
     return Promise.resolve(
       new CustomVector3(Math.random(), Math.random(), Math.random())

@@ -242,6 +242,7 @@ function CylinderFit() {
     setData((d) => {
       return {
         ...d,
+        key: Math.random(),
         resultTable: updateOffset2(d, d.resultTable),
       };
     });
@@ -296,7 +297,7 @@ function CylinderFit() {
     else {
       message.warning("请采集AB面交点");
     }
-  }, [data.centerPoint]);
+  }, [data.centerPoint, data.key]);
 
   const comp = (
     <div>

@@ -33,7 +33,6 @@ const columns: any = [
   {
     title: "初始标准差倍数",
     dataIndex: "originDiff",
-    tip: "asda",
     key: "originDiff",
     align: "right",
   },
@@ -42,6 +41,9 @@ const columns: any = [
     dataIndex: "diff",
     key: "difference",
     align: "right",
+    render: (v, row) => {
+      return row.enable && v;
+    },
   },
 ];
 
