@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points_after_Offest2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 26-Oct-2024 23:45:56
+ * C/C++ source code generated on  : 27-Oct-2024 00:22:21
  */
 
 /* Include Files */
@@ -466,7 +466,7 @@ void Calculat_A_and_B_Points_after_Offest2(
   /*  起始角度 */
   norm_vec = atan(Prot[5] / Prot[2]);
   /*  !!!!!!!后面的点以这个为基础 */
-  if (norm_vec > 3.1415926535897931) {
+  if (E_idx_2 > 0.0) {
     norm_vec = 3.1415926535897931 - norm_vec;
   }
   /*  第一步修正 */
