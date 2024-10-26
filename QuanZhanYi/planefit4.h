@@ -2,7 +2,7 @@
  * File: planefit4.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Oct-2024 12:51:01
+ * C/C++ source code generated on  : 26-Oct-2024 23:45:56
  */
 
 #ifndef PLANEFIT4_H
