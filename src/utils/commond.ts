@@ -197,6 +197,9 @@ export const getSimpleCoord = (): Promise<CustomVector3> => {
       .then((res) => {
         reslove(res);
       })
+      .catch((err) => {
+        reject(err);
+      })
       .finally(() => {
         clearTimeout(flag);
       });

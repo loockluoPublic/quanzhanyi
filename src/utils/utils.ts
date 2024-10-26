@@ -162,22 +162,14 @@ const CalculatAAndBPointsFn = (
     }) ?? []
   );
 
-  console.log("%c Line:218 🍒 MTaon", "color:#2eafb0", MTaon);
   const mTaon = new EmxArray_real_T(MTaon);
-  console.log("%c Line:220 🍒 Mcenter", "color:#fca650", Mcenter);
   const mCenter = new EmxArray_real_T(Mcenter);
-  console.log("%c Line:222 🍒 PAB", "color:#6ec1c2", PAB);
   const _PAB = new EmxArray_real_T(PAB);
   const _ang = new EmxArray_real_T(ang);
-  console.log("%c Line:224 🍒 ang", "color:#465975", ang);
   const _tOff = new EmxArray_real_T(tOff);
-  console.log("%c Line:226 🍒 tOff", "color:#465975", tOff);
   const _rOff = new EmxArray_real_T(rOff);
-  console.log("%c Line:228 🍒 rOff", "color:#ffdd4d", rOff);
   const A = new EmxArray_real_T(3, ang.length);
   const B = new EmxArray_real_T(3, ang.length);
-  console.log("%c Line:236 🍒 R", "color:#4fff4B", R);
-  console.log("%c Line:239 🍒 ang2rad(phi)", "color:#465975", ang2rad(phi));
 
   _CalculatAAndBPoints(
     mTaon.arrayPtr,
@@ -188,8 +180,8 @@ const CalculatAAndBPointsFn = (
     _ang.ptr,
     _tOff.ptr,
     _rOff.ptr,
-    A.ptr,
-    B.ptr
+    B.ptr,
+    A.ptr
   );
 
   CustomVector3.setPublicInfo("A", 0);
