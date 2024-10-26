@@ -21,7 +21,9 @@ export default function useMeasure() {
     setPoints([]);
     CustomVector3.setPublicInfo("P", 0);
     for await (const p of ps) {
-      const np = await pointToAndMeasure(p);
+      const np = await pointToAndMeasure(p).catch((err) => {
+        console.log("%c Line:25 🌭 err", "color:#ffdd4d", err);
+      });
       if (np) {
         addPoint?.(np);
         onData?.(np);
