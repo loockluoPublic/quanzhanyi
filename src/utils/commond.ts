@@ -169,24 +169,25 @@ export const measure = () =>
  */
 
 export const getSimpleCoord = (): Promise<CustomVector3> => {
-  // let count = 0;
+  let count = 0;
 
   const getSimpleCoordFn = (): Promise<CustomVector3> =>
-    sendText(`2116:1500,1`).then((res) => {
-      if (res.startsWith("%R1P,0,0:") || res === "") {
-        throw new Error("获取笛卡尔坐标失败");
-      }
-      const d = res.split(",")?.map((i) => parseFloat(i));
-      if (d?.length === 3) return new CustomVector3(d[0], d[2], d[1]);
-    });
-  // .catch((err) => {
-  //   console.error("%c Line:174 🍕 err", "color:#465975", err);
-  //   if (count++ < 1) {
-  //     return getSimpleCoordFn();
-  //   } else {
-  //     throw err;
-  //   }
-  // });
+    sendText(`2116:1500,1`)
+      .then((res) => {
+        if (res.startsWith("%R1P,0,0:") || res === "") {
+          throw new Error("获取笛卡尔坐标失败");
+        }
+        const d = res.split(",")?.map((i) => parseFloat(i));
+        if (d?.length === 3) return new CustomVector3(d[0], d[2], d[1]);
+      })
+      .catch((err) => {
+        console.error("%c Line:174 🍕 err", "color:#465975", err);
+        if (count++ < 2) {
+          return getSimpleCoordFn();
+        } else {
+          throw err;
+        }
+      });
 
   return new Promise((reslove, reject) => {
     const flag = setTimeout(() => {
