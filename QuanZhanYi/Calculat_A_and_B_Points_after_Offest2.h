@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points_after_Offest2.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Oct-2024 12:51:01
+ * C/C++ source code generated on  : 26-Oct-2024 23:45:56
  */
 
 #ifndef CALCULAT_A_AND_B_POINTS_AFTER_OFFEST2_H
