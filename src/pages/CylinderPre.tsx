@@ -4,9 +4,11 @@ import { Data, GlobalData } from "../atom/globalState";
 import { Button, InputNumber, message } from "antd";
 import { useEffect, useState } from "react";
 import {
+  ang2rad,
   CalculateAccurateCylindersFromMultipleMeasurementPoints,
   calculateStandardDeviation,
   generateUnitCircleWithNormalVector,
+  rad2ang,
 } from "../utils/utils";
 import PointsVector3 from "../components/PointVector3";
 import { CustomVector3 } from "../class/CustomVector3";
@@ -227,6 +229,9 @@ function CylinderPre() {
               type="primary"
               onClick={() => {
                 getLine().then((direct) => {
+                  if (rad2ang(direct[1]) > 180) {
+                    direct[1] = ang2rad(360 - rad2ang(direct[1]));
+                  }
                   setData({ ...data, direct });
                 });
               }}

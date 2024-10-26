@@ -1,6 +1,7 @@
 import { Cylinder, Line } from "@react-three/drei";
 import * as THREE from "three";
 import { CustomVector3 } from "../../class/CustomVector3";
+import { useMemo } from "react";
 
 const MyCylinder = (props: any) => {
   console.log("%c Line:7 🍪 props", "color:#33a5ff", props);
@@ -13,6 +14,20 @@ const MyCylinder = (props: any) => {
     props?.Bottom_round_center?.[0]?.toVector3(),
     props?.Bottom_round_center?.[1]?.toVector3()
   );
+
+  const center = useMemo(() => {
+    return new CustomVector3(
+      (props?.Bottom_round_center?.[0]?.x +
+        props?.Bottom_round_center?.[1]?.x) /
+        2,
+      (props?.Bottom_round_center?.[0]?.y +
+        props?.Bottom_round_center?.[1]?.y) /
+        2,
+      (props?.Bottom_round_center?.[0]?.z +
+        props?.Bottom_round_center?.[1]?.z) /
+        2
+    );
+  }, [props?.Bottom_round_center]);
 
   const height = (props?.Bottom_round_center?.[0] as CustomVector3).distanceTo(
     props?.Bottom_round_center?.[1]
@@ -27,7 +42,7 @@ const MyCylinder = (props: any) => {
     <>
       <Cylinder
         args={[props.R, props.R, height * 1.2, 32, 1, true]}
-        position={props?.center?.toVector3() || []} // 设置位置
+        position={center?.toVector3()} // 设置位置
         rotation={midpoint?.calcRotation() as any} // 设置旋转
       >
         <meshStandardMaterial
