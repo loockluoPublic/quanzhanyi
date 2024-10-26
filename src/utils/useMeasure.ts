@@ -13,13 +13,19 @@ export default function useMeasure() {
     });
   };
 
-  const measure = async (ps: CustomVector3[]) => {
+  const measure = async (
+    ps: CustomVector3[],
+    onData?: (p: CustomVector3) => void
+  ) => {
     setTrue();
     setPoints([]);
     CustomVector3.setPublicInfo("P", 0);
     for await (const p of ps) {
       const np = await pointToAndMeasure(p);
-      np && addPoint(np);
+      if (np) {
+        addPoint?.(np);
+        onData?.(np);
+      }
     }
     setFalse();
   };

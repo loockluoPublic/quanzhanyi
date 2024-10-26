@@ -6,12 +6,16 @@ import { measureAndGetSimpleCoord } from "../utils/commond";
 import { CustomVector3 } from "../class/CustomVector3";
 import { CalculateRectangleFromVertex, Planefit } from "../utils/utils";
 import CubeTable from "./CubeTable";
+import { generateUniformPointsInPolygonWithSort } from "../utils/genCubePoints";
+import useMeasure from "../utils/useMeasure";
 
 export default function () {
   const [data, setData] = useRecoilState(Data);
 
   const [loading, setLoading] = useState(false);
   const [planeFitLoading, setPlaneFitLoadint] = useState(false);
+
+  const autoMeasure = useMeasure();
 
   const options = [
     { value: 0, label: "左面", pK: "L" },
@@ -131,6 +135,21 @@ export default function () {
     }, 500);
   };
 
+  // useEffect(() => {
+  //   const p = [
+  //     [0, 0, 0],
+  //     [1, 0, 0],
+  //     [1, 1, 1],
+  //     [0, 1, 1],
+  //   ].map((arr) => new CustomVector3(...arr));
+
+  //   const res = generateUniformPointsInPolygonWithSort(p, 20);
+
+  //   setData((d) => {
+  //     return { ...d, MxPoints: { m0: [...p, ...res] } };
+  //   });
+  // }, []);
+
   const [num, setNum] = useState(0);
 
   const points = data.MxPoints?.[`m${num}`];
@@ -172,11 +191,17 @@ export default function () {
   useEffect(() => {
     CustomVector3.setPublicInfo("P", 0);
   }, []);
-  console.log(
-    "%c Line:227 🥟 data.distanceThreshold",
-    "color:#33a5ff",
-    data.distanceThreshold
-  );
+
+  const autoMeasureCube = () => {
+    const bounder = data.MxPoints[`m${num}`];
+    if (bounder.length > 3) {
+      const res = generateUniformPointsInPolygonWithSort(bounder, 20);
+
+      autoMeasure.measure(res);
+    } else {
+      message.warning("请顺时针或者逆时针采集矩形4个顶点，后开始自动采集");
+    }
+  };
 
   const width = data?.cubeResult?.b?.toFixed(4);
   const hight = data?.cubeResult?.h?.toFixed(4);
@@ -274,7 +299,15 @@ export default function () {
         </div>
         <div>
           <Button loading={loading} type="primary" onClick={getPoints}>
-            采集点
+            手动采点
+          </Button>
+          <Button
+            className="q-ml-4"
+            type="primary"
+            loading={autoMeasure.loading}
+            onClick={planeFit}
+          >
+            自动采点
           </Button>
           <Button
             className="q-ml-4"
