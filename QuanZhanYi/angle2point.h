@@ -2,7 +2,7 @@
  * File: angle2point.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 01:08:49
+ * C/C++ source code generated on  : 27-Oct-2024 01:21:10
  */
 
 #ifndef ANGLE2POINT_H
