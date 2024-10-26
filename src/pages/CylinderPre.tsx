@@ -112,6 +112,7 @@ function CylinderPre() {
   };
 
   const reRun = (curData: GlobalData) => {
+    console.log("%c Line:115 🍫 curData", "color:#465975", curData);
     const newMP = curData.mPoints.map((item) => {
       return item
         .fromCustomVector3()
@@ -308,6 +309,12 @@ function CylinderPre() {
             style={{ width: "200px" }}
             value={customStandardDeviation}
             onChange={(standardDeviation) => {
+              // setData(() => {
+              //   return {
+              //     ...data,
+              //     // standardDeviation:standardDeviation*
+              //   };
+              // });
               setStandardDeviation(standardDeviation);
             }}
             addonAfter="δ"
