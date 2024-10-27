@@ -66,7 +66,7 @@ export const transformJSON2Excel = (data: GlobalData, type = false) => {
       z = ["z"],
       label = ["拟合采集点"];
 
-    data?.mPoints.forEach((item) => {
+    data?.mPoints.forEach((item: any) => {
       label.push(`${item.label}${item.key}`);
       x.push(item.x);
       y.push(item.y);
