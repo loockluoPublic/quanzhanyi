@@ -34,7 +34,7 @@ const options = [
     [`m${cur.value}`]: cur.label,
   };
 }, {});
-export const transformJSON2Excel = (data: any, type = false) => {
+export const transformJSON2Excel = (data: GlobalData, type = false) => {
   const csvData = [];
 
   const getDatas = (arr, title: string = "") => {
@@ -73,6 +73,15 @@ export const transformJSON2Excel = (data: any, type = false) => {
       z.push(item.z);
     });
     csvData.push([], label, x, y, z);
+  }
+
+  if (data.type === TType.cycle) {
+    if (data.calulateRes.mTaon)
+      csvData.push(getDatas(data.calulateRes.mTaon, "mTaon"));
+    if (data.calulateRes.center)
+      csvData.push(getDatas(data.calulateRes.center, "center"));
+
+    csvData.push([[], ["声道角", data.sdj]]);
   }
 
   if (data.type === "cube" && data?.MxPoints) {
