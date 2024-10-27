@@ -19,7 +19,6 @@ xzsvdc.obj
 mldivide.obj
 ixfun.obj
 combineVectorElements.obj
-ifWhileCond.obj
 Calculate_rectangle_from_vertex.obj
 Calculate_rectangle_from_vertex8.obj
 planefit8.obj

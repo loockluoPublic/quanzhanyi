@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points_after_Offest2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 10:51:24
+ * C/C++ source code generated on  : 27-Oct-2024 11:38:12
  */
 
 /* Include Files */
@@ -465,24 +465,27 @@ void Calculat_A_and_B_Points_after_Offest2(
   fflush(stdout);
   /*  第一步修正 */
   if (Ang->size[1] == roff->size[1]) {
-    ibmat = Ang->size[1] - 1;
+    ntilerows = Ang->size[1] - 1;
     itilerow = Ang->size[0] * Ang->size[1];
     Ang->size[0] = 1;
     emxEnsureCapacity_real_T(Ang, itilerow);
     Ang_data = Ang->data;
-    for (itilerow = 0; itilerow <= ibmat; itilerow++) {
+    for (itilerow = 0; itilerow <= ntilerows; itilerow++) {
       Ang_data[itilerow] += roff_data[itilerow] / Mradial;
     }
   } else {
     binary_expand_op_1(Ang, roff, Mradial);
+    Ang_data = Ang->data;
   }
-  itilerow = Ang->size[0] * Ang->size[1];
-  Ang->size[0] = 1;
-  emxEnsureCapacity_real_T(Ang, itilerow);
-  Ang_data = Ang->data;
-  loop_ub_tmp = Ang->size[1] - 1;
-  for (itilerow = 0; itilerow <= loop_ub_tmp; itilerow++) {
-    Ang_data[itilerow] += 3.1415926535897931;
+  if (E_idx_2 > 0.0) {
+    itilerow = Ang->size[0] * Ang->size[1];
+    Ang->size[0] = 1;
+    emxEnsureCapacity_real_T(Ang, itilerow);
+    Ang_data = Ang->data;
+    ntilerows = Ang->size[1] - 1;
+    for (itilerow = 0; itilerow <= ntilerows; itilerow++) {
+      Ang_data[itilerow] += 3.1415926535897931;
+    }
   }
   /*  第二步处理 */
   emxInit_real_T(&AngProcess, 2);
@@ -491,16 +494,16 @@ void Calculat_A_and_B_Points_after_Offest2(
   AngProcess->size[1] = Ang->size[1];
   emxEnsureCapacity_real_T(AngProcess, itilerow);
   AngProcess_data = AngProcess->data;
-  ibmat = Ang->size[1];
-  for (itilerow = 0; itilerow < ibmat; itilerow++) {
+  ntilerows = Ang->size[1];
+  for (itilerow = 0; itilerow < ntilerows; itilerow++) {
     AngProcess_data[itilerow] = 0.0;
   }
   if (numShengLu < 1.0) {
-    ibmat = 0;
+    ntilerows = 0;
   } else {
-    ibmat = (int)numShengLu;
+    ntilerows = (int)numShengLu;
   }
-  for (itilerow = 0; itilerow < ibmat; itilerow++) {
+  for (itilerow = 0; itilerow < ntilerows; itilerow++) {
     AngProcess_data[itilerow] = norm_vec - Ang_data[itilerow];
   }
   d = 2.0 * numShengLu;
@@ -512,13 +515,13 @@ void Calculat_A_and_B_Points_after_Offest2(
     jcol = (int)d;
   }
   if (numShengLu + 1.0 > 2.0 * numShengLu) {
-    ntilerows = 1;
+    ibmat = 1;
   } else {
-    ntilerows = (int)(numShengLu + 1.0);
+    ibmat = (int)(numShengLu + 1.0);
   }
-  ibmat = jcol - itilerow;
-  for (jcol = 0; jcol < ibmat; jcol++) {
-    AngProcess_data[(ntilerows + jcol) - 1] =
+  ntilerows = jcol - itilerow;
+  for (jcol = 0; jcol < ntilerows; jcol++) {
+    AngProcess_data[(ibmat + jcol) - 1] =
         (norm_vec + 3.1415926535897931) + Ang_data[itilerow + jcol];
   }
   /*  调用计算坐标 */
@@ -528,20 +531,21 @@ void Calculat_A_and_B_Points_after_Offest2(
   x->size[1] = AngProcess->size[1];
   emxEnsureCapacity_real_T(x, itilerow);
   Ang_data = x->data;
-  ibmat = AngProcess->size[1];
-  for (ntilerows = 0; ntilerows < ibmat; ntilerows++) {
-    Ang_data[ntilerows] = cos(AngProcess_data[ntilerows]);
+  ntilerows = AngProcess->size[1];
+  for (jcol = 0; jcol < ntilerows; jcol++) {
+    Ang_data[jcol] = cos(AngProcess_data[jcol]);
   }
   itilerow = x->size[0] * x->size[1];
   x->size[0] = 1;
   emxEnsureCapacity_real_T(x, itilerow);
   Ang_data = x->data;
+  loop_ub_tmp = x->size[1] - 1;
   for (itilerow = 0; itilerow <= loop_ub_tmp; itilerow++) {
     Ang_data[itilerow] *= Mradial;
   }
   ibmat = AngProcess->size[1];
-  for (ntilerows = 0; ntilerows < ibmat; ntilerows++) {
-    AngProcess_data[ntilerows] = sin(AngProcess_data[ntilerows]);
+  for (jcol = 0; jcol < ibmat; jcol++) {
+    AngProcess_data[jcol] = sin(AngProcess_data[jcol]);
   }
   itilerow = AngProcess->size[0] * AngProcess->size[1];
   AngProcess->size[0] = 1;
@@ -557,8 +561,8 @@ void Calculat_A_and_B_Points_after_Offest2(
     PointTable2DT_A->size[1] = 3;
     emxEnsureCapacity_real_T(PointTable2DT_A, itilerow);
     PointTable2DT_A_data = PointTable2DT_A->data;
-    ibmat = x->size[1];
-    for (itilerow = 0; itilerow < ibmat; itilerow++) {
+    ntilerows = x->size[1];
+    for (itilerow = 0; itilerow < ntilerows; itilerow++) {
       d = Ang_data[itilerow];
       PointTable2DT_A_data[itilerow] = d;
       c_idx_0 = AngProcess_data[itilerow];
@@ -620,8 +624,8 @@ void Calculat_A_and_B_Points_after_Offest2(
   PointTable2DT_B->size[1] = 3;
   emxEnsureCapacity_real_T(PointTable2DT_B, itilerow);
   Ang_data = PointTable2DT_B->data;
-  ibmat = PointTable2DT_A->size[0];
-  for (itilerow = 0; itilerow < ibmat; itilerow++) {
+  ntilerows = PointTable2DT_A->size[0];
+  for (itilerow = 0; itilerow < ntilerows; itilerow++) {
     Ang_data[itilerow] = PointTable2DT_A_data[itilerow];
     Ang_data[itilerow + PointTable2DT_B->size[0]] =
         PointTable2DT_A_data[itilerow + PointTable2DT_A->size[0]];
@@ -682,8 +686,8 @@ void Calculat_A_and_B_Points_after_Offest2(
   PointTable_A_off->size[1] = b->size[0];
   emxEnsureCapacity_real_T(PointTable_A_off, itilerow);
   AngProcess_data = PointTable_A_off->data;
-  ibmat = b->size[0];
-  for (itilerow = 0; itilerow < ibmat; itilerow++) {
+  ntilerows = b->size[0];
+  for (itilerow = 0; itilerow < ntilerows; itilerow++) {
     AngProcess_data[3 * itilerow] = b_data[itilerow];
     AngProcess_data[3 * itilerow + 1] = b_data[itilerow + b->size[0]];
     AngProcess_data[3 * itilerow + 2] = b_data[itilerow + b->size[0] * 2];
@@ -737,8 +741,8 @@ void Calculat_A_and_B_Points_after_Offest2(
   PointTable_B_off->size[1] = b->size[0];
   emxEnsureCapacity_real_T(PointTable_B_off, itilerow);
   Ang_data = PointTable_B_off->data;
-  ibmat = b->size[0];
-  for (itilerow = 0; itilerow < ibmat; itilerow++) {
+  ntilerows = b->size[0];
+  for (itilerow = 0; itilerow < ntilerows; itilerow++) {
     Ang_data[3 * itilerow] = b_data[itilerow];
     Ang_data[3 * itilerow + 1] = b_data[itilerow + b->size[0]];
     Ang_data[3 * itilerow + 2] = b_data[itilerow + b->size[0] * 2];
