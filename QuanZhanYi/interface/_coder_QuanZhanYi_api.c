@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 12:33:43
+ * C/C++ source code generated on  : 27-Oct-2024 17:56:29
  */
 
 /* Include Files */
@@ -2109,11 +2109,11 @@ void planefit4_api(const mxArray *const prhs[7], int32_T nlhs,
 /*
  * Arguments    : const mxArray * const prhs[11]
  *                int32_T nlhs
- *                const mxArray *plhs[4]
+ *                const mxArray *plhs[5]
  * Return Type  : void
  */
 void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
-                   const mxArray *plhs[4])
+                   const mxArray *plhs[5])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -2135,12 +2135,14 @@ void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
   const mxArray *prhs_copy_idx_3;
   const mxArray *prhs_copy_idx_5;
   const mxArray *prhs_copy_idx_7;
+  real_T(*LenDaoJiao)[8];
   real_T(*MaxDis)[8];
   real_T(*P_bound1)[3];
   real_T(*P_bound2)[3];
   real_T distanceThreshold;
   st.tls = emlrtRootTLSGlobal;
   MaxDis = (real_T(*)[8])mxMalloc(sizeof(real_T[8]));
+  LenDaoJiao = (real_T(*)[8])mxMalloc(sizeof(real_T[8]));
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   prhs_copy_idx_1 = emlrtProtectR2012b(prhs[1], 1, false, -1);
   prhs_copy_idx_3 = emlrtProtectR2012b(prhs[3], 3, false, -1);
@@ -2181,7 +2183,7 @@ void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
   emxInit_real_T(&st, &distancesFianal, 2);
   planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7,
             Points8, *P_bound1, *P_bound2, distanceThreshold, PlaneParaOut,
-            TrianglePoints, *MaxDis, distancesFianal);
+            TrianglePoints, *MaxDis, distancesFianal, *LenDaoJiao);
   emxFree_real_T(&st, &Points8);
   emxFree_real_T(&st, &Points7);
   emxFree_real_T(&st, &Points6);
@@ -2207,6 +2209,9 @@ void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
     plhs[3] = b_emlrt_marshallOut(distancesFianal);
   }
   emxFree_real_T(&st, &distancesFianal);
+  if (nlhs > 4) {
+    plhs[4] = k_emlrt_marshallOut(*LenDaoJiao);
+  }
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 

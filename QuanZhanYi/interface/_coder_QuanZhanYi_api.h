@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 12:33:43
+ * C/C++ source code generated on  : 27-Oct-2024 17:56:29
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -239,10 +239,11 @@ void planefit8(emxArray_real_T *Points1, emxArray_real_T *Points2,
                emxArray_real_T *Points7, emxArray_real_T *Points8,
                real_T P_bound1[3], real_T P_bound2[3], real_T distanceThreshold,
                emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints,
-               real_T MaxDis[8], emxArray_real_T *distancesFianal);
+               real_T MaxDis[8], emxArray_real_T *distancesFianal,
+               real_T LenDaoJiao[8]);
 
 void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
-                   const mxArray *plhs[4]);
+                   const mxArray *plhs[5]);
 
 void planefit_api(const mxArray *const prhs[4], int32_T nlhs,
                   const mxArray *plhs[2]);

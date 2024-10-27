@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 12:33:43
+ * C/C++ source code generated on  : 27-Oct-2024 17:56:29
  */
 
 /* Include Files */
@@ -1073,12 +1073,12 @@ void unsafe_planefit4_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
 
 /*
  * Arguments    : int32_T nlhs
- *                mxArray *plhs[4]
+ *                mxArray *plhs[5]
  *                int32_T nrhs
  *                const mxArray *prhs[11]
  * Return Type  : void
  */
-void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
+void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[5], int32_T nrhs,
                                   const mxArray *prhs[11])
 {
   emlrtStack st = {
@@ -1087,7 +1087,7 @@ void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
       NULL  /* prev */
   };
   const mxArray *b_prhs[11];
-  const mxArray *outputs[4];
+  const mxArray *outputs[5];
   int32_T i;
   int32_T i1;
   st.tls = emlrtRootTLSGlobal;
@@ -1096,7 +1096,7 @@ void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
     emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 11, 4,
                         9, "planefit8");
   }
-  if (nlhs > 4) {
+  if (nlhs > 5) {
     emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 9,
                         "planefit8");
   }
