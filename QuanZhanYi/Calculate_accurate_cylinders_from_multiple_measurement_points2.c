@@ -2,7 +2,7 @@
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 10:51:24
+ * C/C++ source code generated on  : 27-Oct-2024 11:38:12
  */
 
 /* Include Files */
@@ -15,7 +15,6 @@
 #include "cat.h"
 #include "combineVectorElements.h"
 #include "fitcircle.h"
-#include "ifWhileCond.h"
 #include "ixfun.h"
 #include "mldivide.h"
 #include "mtimes.h"
@@ -64,7 +63,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   emxArray_real_T *y;
   double V[16];
   double b_dv[9];
-  double b_x[9];
+  double b_dv1[9];
   double s_data[4];
   double b_n[3];
   double h[3];
@@ -95,7 +94,6 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   double *x_contents_data;
   double *y_data;
   int outsize[2];
-  int b_i;
   int i;
   int j;
   int m_contents;
@@ -103,7 +101,6 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   int npages;
   int nx;
   int xi;
-  boolean_T c_n[3];
   boolean_T exitg1;
   boolean_T p;
   if (!isInitialized_QuanZhanYi) {
@@ -116,13 +113,13 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   OptPara_idx_1 = 0.0;
   *Mradial = 0.0;
   emxInit_real_T(&OptAllErr, 1);
-  i = OptAllErr->size[0];
+  xi = OptAllErr->size[0];
   OptAllErr->size[0] = points->size[1];
-  emxEnsureCapacity_real_T(OptAllErr, i);
+  emxEnsureCapacity_real_T(OptAllErr, xi);
   OptAllErr_data = OptAllErr->data;
   nx = points->size[1];
-  for (i = 0; i < nx; i++) {
-    OptAllErr_data[i] = 0.0;
+  for (xi = 0; xi < nx; xi++) {
+    OptAllErr_data[xi] = 0.0;
   }
   emxInit_real_T(&P, 2);
   emxInit_real_T(&err, 1);
@@ -137,8 +134,8 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   emxInit_real_T(&n, 2);
   emxInit_real_T(&b_y, 1);
   emxInit_real_T(&b_A, 2);
-  for (b_i = 0; b_i < 180; b_i++) {
-    d = 0.035101593894858021 * (double)b_i;
+  for (i = 0; i < 180; i++) {
+    d = 0.035101593894858021 * (double)i;
     d1 = cos(d);
     d2 = sin(d);
     for (j = 0; j < 180; j++) {
@@ -235,48 +232,48 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
       b_dv[8] = (1.0 - c) * b_n[2] * b_n[2] + c;
       mtimes(points, b_dv, P);
       P_data = P->data;
-      i = x_contents->size[0] * x_contents->size[1];
+      xi = x_contents->size[0] * x_contents->size[1];
       x_contents->size[0] = 2;
       x_contents->size[1] = P->size[0];
-      emxEnsureCapacity_real_T(x_contents, i);
+      emxEnsureCapacity_real_T(x_contents, xi);
       x_contents_data = x_contents->data;
       nx = P->size[0];
-      for (i = 0; i < nx; i++) {
-        x_contents_data[2 * i] = P_data[i];
-        x_contents_data[2 * i + 1] = P_data[i + P->size[0]];
+      for (xi = 0; xi < nx; xi++) {
+        x_contents_data[2 * xi] = P_data[xi];
+        x_contents_data[2 * xi + 1] = P_data[xi + P->size[0]];
       }
       m_contents = x_contents->size[1];
-      i = err->size[0];
+      xi = err->size[0];
       err->size[0] = x_contents->size[1];
-      emxEnsureCapacity_real_T(err, i);
+      emxEnsureCapacity_real_T(err, xi);
       err_data = err->data;
       nx = x_contents->size[1];
-      i = x2_contents->size[0];
+      xi = x2_contents->size[0];
       x2_contents->size[0] = x_contents->size[1];
-      emxEnsureCapacity_real_T(x2_contents, i);
+      emxEnsureCapacity_real_T(x2_contents, xi);
       x2_contents_data = x2_contents->data;
-      for (i = 0; i < nx; i++) {
-        err_data[i] = x_contents_data[2 * i];
-        x2_contents_data[i] = x_contents_data[2 * i + 1];
+      for (xi = 0; xi < nx; xi++) {
+        err_data[xi] = x_contents_data[2 * xi];
+        x2_contents_data[xi] = x_contents_data[2 * xi + 1];
       }
       /*  Form the coefficient matrix */
       /*  Least squares estimate is right singular vector corresp. to smallest
        */
       /*  singular value of B */
       if (err->size[0] == x2_contents->size[0]) {
-        i = A->size[0] * A->size[1];
+        xi = A->size[0] * A->size[1];
         A->size[0] = err->size[0];
         A->size[1] = 4;
-        emxEnsureCapacity_real_T(A, i);
+        emxEnsureCapacity_real_T(A, xi);
         Err_every_data = A->data;
         nx = err->size[0];
-        for (i = 0; i < nx; i++) {
-          absx = err_data[i];
-          norm_vec = x2_contents_data[i];
-          Err_every_data[i] = absx * absx + norm_vec * norm_vec;
-          Err_every_data[i + A->size[0]] = x_contents_data[2 * i];
-          Err_every_data[i + A->size[0] * 2] = x_contents_data[2 * i + 1];
-          Err_every_data[i + A->size[0] * 3] = 1.0;
+        for (xi = 0; xi < nx; xi++) {
+          absx = err_data[xi];
+          norm_vec = x2_contents_data[xi];
+          Err_every_data[xi] = absx * absx + norm_vec * norm_vec;
+          Err_every_data[xi + A->size[0]] = x_contents_data[2 * xi];
+          Err_every_data[xi + A->size[0] * 2] = x_contents_data[2 * xi + 1];
+          Err_every_data[xi + A->size[0] * 3] = 1.0;
         }
       } else {
         binary_expand_op_8(A, err, x2_contents, x_contents);
@@ -292,24 +289,24 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
       }
       if (p) {
         if (A->size[0] == 0) {
-          for (i = 0; i < 16; i++) {
-            V[i] = b_V[i];
+          for (xi = 0; xi < 16; xi++) {
+            V[xi] = b_V[xi];
           }
         } else {
-          i = b_A->size[0] * b_A->size[1];
+          xi = b_A->size[0] * b_A->size[1];
           b_A->size[0] = A->size[0];
           b_A->size[1] = 4;
-          emxEnsureCapacity_real_T(b_A, i);
+          emxEnsureCapacity_real_T(b_A, xi);
           denom_data = b_A->data;
           nx = A->size[0] * A->size[1] - 1;
-          for (i = 0; i <= nx; i++) {
-            denom_data[i] = Err_every_data[i];
+          for (xi = 0; xi <= nx; xi++) {
+            denom_data[xi] = Err_every_data[xi];
           }
           xzsvdc(b_A, U, s_data, V);
         }
       } else {
-        for (i = 0; i < 16; i++) {
-          V[i] = rtNaN;
+        for (xi = 0; xi < 16; xi++) {
+          V[xi] = rtNaN;
         }
       }
       /*  For clarity, set the quadratic form variables */
@@ -354,10 +351,10 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         /* function is the distance to each point from the fitted circle */
         /* contained in u */
         /*  Objective function */
-        i = x->size[0] * x->size[1];
+        xi = x->size[0] * x->size[1];
         x->size[0] = 2;
         x->size[1] = m_contents;
-        emxEnsureCapacity_real_T(x, i);
+        emxEnsureCapacity_real_T(x, xi);
         Err_every_data = x->data;
         for (npages = 0; npages < m_contents; npages++) {
           nx = npages << 1;
@@ -366,15 +363,15 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         }
         /*  Jacobian */
         if (err->size[0] == x2_contents->size[0]) {
-          i = denom->size[0];
+          xi = denom->size[0];
           denom->size[0] = err->size[0];
-          emxEnsureCapacity_real_T(denom, i);
+          emxEnsureCapacity_real_T(denom, xi);
           denom_data = denom->data;
           nx = err->size[0];
-          for (i = 0; i < nx; i++) {
-            absx = b_n[0] - err_data[i];
-            norm_vec = b_n[1] - x2_contents_data[i];
-            denom_data[i] = absx * absx + norm_vec * norm_vec;
+          for (xi = 0; xi < nx; xi++) {
+            absx = b_n[0] - err_data[xi];
+            norm_vec = b_n[1] - x2_contents_data[xi];
+            denom_data[xi] = absx * absx + norm_vec * norm_vec;
           }
         } else {
           binary_expand_op_7(denom, b_n, err, x2_contents);
@@ -388,13 +385,13 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         /*  Solve for the step and update u */
         if (x->size[1] == x_contents->size[1]) {
           nx = x->size[1] << 1;
-          i = x->size[0] * x->size[1];
+          xi = x->size[0] * x->size[1];
           x->size[0] = 2;
-          emxEnsureCapacity_real_T(x, i);
+          emxEnsureCapacity_real_T(x, xi);
           Err_every_data = x->data;
-          for (i = 0; i < nx; i++) {
-            absx = Err_every_data[i] - x_contents_data[i];
-            Err_every_data[i] = absx * absx;
+          for (xi = 0; xi < nx; xi++) {
+            absx = Err_every_data[xi] - x_contents_data[xi];
+            Err_every_data[xi] = absx * absx;
           }
         } else {
           binary_expand_op_6(x, x_contents);
@@ -405,10 +402,10 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
           y->size[1] = 0;
         } else {
           npages = x->size[1];
-          i = y->size[0] * y->size[1];
+          xi = y->size[0] * y->size[1];
           y->size[0] = 1;
           y->size[1] = x->size[1];
-          emxEnsureCapacity_real_T(y, i);
+          emxEnsureCapacity_real_T(y, xi);
           y_data = y->data;
           for (xi = 0; xi < npages; xi++) {
             nx = xi << 1;
@@ -421,30 +418,30 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         }
         if ((err->size[0] == denom->size[0]) &&
             (x2_contents->size[0] == denom->size[0])) {
-          i = n->size[0] * n->size[1];
+          xi = n->size[0] * n->size[1];
           n->size[0] = err->size[0];
           n->size[1] = 3;
-          emxEnsureCapacity_real_T(n, i);
+          emxEnsureCapacity_real_T(n, xi);
           Err_every_data = n->data;
           nx = err->size[0];
-          for (i = 0; i < nx; i++) {
-            Err_every_data[i] = -((b_n[0] - err_data[i]) / denom_data[i]);
+          for (xi = 0; xi < nx; xi++) {
+            Err_every_data[xi] = -((b_n[0] - err_data[xi]) / denom_data[xi]);
           }
           nx = x2_contents->size[0];
-          for (i = 0; i < nx; i++) {
-            Err_every_data[i + n->size[0]] =
-                -((b_n[1] - x2_contents_data[i]) / denom_data[i]);
+          for (xi = 0; xi < nx; xi++) {
+            Err_every_data[xi + n->size[0]] =
+                -((b_n[1] - x2_contents_data[xi]) / denom_data[xi]);
           }
-          for (i = 0; i < m_contents; i++) {
-            Err_every_data[i + n->size[0] * 2] = 1.0;
+          for (xi = 0; xi < m_contents; xi++) {
+            Err_every_data[xi + n->size[0] * 2] = 1.0;
           }
-          i = b_y->size[0];
+          xi = b_y->size[0];
           b_y->size[0] = y->size[1];
-          emxEnsureCapacity_real_T(b_y, i);
+          emxEnsureCapacity_real_T(b_y, xi);
           Err_every_data = b_y->data;
           nx = y->size[1];
-          for (i = 0; i < nx; i++) {
-            Err_every_data[i] = y_data[i] - b_n[2];
+          for (xi = 0; xi < nx; xi++) {
+            Err_every_data[xi] = y_data[xi] - b_n[2];
           }
           mldivide(n, b_y, h);
         } else {
@@ -480,46 +477,46 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
       /*  sys */
       /*      end % fitcircle_geometric */
       /*  END NESTED FUNCTIONS */
-      i = denom->size[0];
+      xi = denom->size[0];
       denom->size[0] = P->size[0];
-      emxEnsureCapacity_real_T(denom, i);
+      emxEnsureCapacity_real_T(denom, xi);
       denom_data = denom->data;
       nx = P->size[0];
-      i = b_y->size[0];
+      xi = b_y->size[0];
       b_y->size[0] = P->size[0];
-      emxEnsureCapacity_real_T(b_y, i);
+      emxEnsureCapacity_real_T(b_y, xi);
       Err_every_data = b_y->data;
-      for (i = 0; i < nx; i++) {
-        denom_data[i] = P_data[i] - b_n[0];
-        Err_every_data[i] = P_data[i + P->size[0]] - b_n[1];
+      for (xi = 0; xi < nx; xi++) {
+        denom_data[xi] = P_data[xi] - b_n[0];
+        Err_every_data[xi] = P_data[xi + P->size[0]] - b_n[1];
       }
       if (denom->size[0] == b_y->size[0]) {
-        i = err->size[0];
+        xi = err->size[0];
         err->size[0] = denom->size[0];
-        emxEnsureCapacity_real_T(err, i);
+        emxEnsureCapacity_real_T(err, xi);
         err_data = err->data;
         nx = denom->size[0];
-        for (i = 0; i < nx; i++) {
-          absx = denom_data[i];
-          r_idx_1 = Err_every_data[i];
-          err_data[i] = rt_hypotd_snf(absx, r_idx_1);
+        for (xi = 0; xi < nx; xi++) {
+          absx = denom_data[xi];
+          r_idx_1 = Err_every_data[xi];
+          err_data[xi] = rt_hypotd_snf(absx, r_idx_1);
         }
       } else {
         expand_hypot(denom, b_y, err);
         err_data = err->data;
       }
       nx = err->size[0];
-      for (i = 0; i < nx; i++) {
-        err_data[i] -= b_n[2];
+      for (xi = 0; xi < nx; xi++) {
+        err_data[xi] -= b_n[2];
       }
-      i = b_y->size[0];
+      xi = b_y->size[0];
       b_y->size[0] = err->size[0];
-      emxEnsureCapacity_real_T(b_y, i);
+      emxEnsureCapacity_real_T(b_y, xi);
       Err_every_data = b_y->data;
       nx = err->size[0];
-      for (i = 0; i < nx; i++) {
-        absx = err_data[i];
-        Err_every_data[i] = absx * absx;
+      for (xi = 0; xi < nx; xi++) {
+        absx = err_data[xi];
+        Err_every_data[xi] = absx * absx;
       }
       absxk = sqrt(combineVectorElements(b_y) / (double)b_y->size[0]);
       if (absxk < OptErr) {
@@ -527,13 +524,13 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         OptPara_idx_0 = b_n[0];
         OptPara_idx_1 = b_n[1];
         *Mradial = b_n[2];
-        i = OptAllErr->size[0];
+        xi = OptAllErr->size[0];
         OptAllErr->size[0] = err->size[0];
-        emxEnsureCapacity_real_T(OptAllErr, i);
+        emxEnsureCapacity_real_T(OptAllErr, xi);
         OptAllErr_data = OptAllErr->data;
         nx = err->size[0];
-        for (i = 0; i < nx; i++) {
-          OptAllErr_data[i] = err_data[i];
+        for (xi = 0; xi < nx; xi++) {
+          OptAllErr_data[xi] = err_data[xi];
         }
         OptAngle_idx_0 = d;
         OptAngle_idx_1 = rcoselev_tmp;
@@ -640,44 +637,27 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   b_dv[2] = d1 - norm_vec;
   b_dv[5] = d2 + r_idx_1;
   b_dv[8] = (1.0 - c) * b_n[2] * b_n[2] + c;
-  pinv(b_dv, b_x);
-  d1 = P_bound2[0] - P_bound1[0];
-  d2 = P_bound2[1] - P_bound1[1];
-  r_idx_1 = P_bound2[2] - P_bound1[2];
+  pinv(b_dv, b_dv1);
   for (xi = 0; xi < 3; xi++) {
-    i = 3 * xi + 1;
-    nx = 3 * xi + 2;
     Mcenter[xi] =
-        (OptPara_idx_0 * b_x[3 * xi] + OptPara_idx_1 * b_x[i]) + 0.0 * b_x[nx];
-    norm_vec = MTaon[xi];
-    absxk = norm_vec * d1;
-    b_x[3 * xi] = absxk;
-    rcoselev = norm_vec * d2;
-    b_x[i] = rcoselev;
-    norm_vec *= r_idx_1;
-    b_x[nx] = norm_vec;
-    c_n[xi] = ((absxk + rcoselev) + norm_vec < 0.0);
+        (OptPara_idx_0 * b_dv1[3 * xi] + OptPara_idx_1 * b_dv1[3 * xi + 1]) +
+        0.0 * b_dv1[3 * xi + 2];
   }
-  if (ifWhileCond(c_n)) {
-    MTaon[0] = -MTaon[0];
-    MTaon[1] = -MTaon[1];
-    MTaon[2] = -d;
-  }
-  i = Err_every->size[0] * Err_every->size[1];
+  xi = Err_every->size[0] * Err_every->size[1];
   Err_every->size[0] = 1;
   Err_every->size[1] = OptAllErr->size[0];
-  emxEnsureCapacity_real_T(Err_every, i);
+  emxEnsureCapacity_real_T(Err_every, xi);
   Err_every_data = Err_every->data;
   nx = OptAllErr->size[0];
-  for (i = 0; i < nx; i++) {
-    Err_every_data[i] = OptAllErr_data[i];
+  for (xi = 0; xi < nx; xi++) {
+    Err_every_data[xi] = OptAllErr_data[xi];
   }
   emxFree_real_T(&OptAllErr);
   /*  三个点定义 */
   /*  斜率计算 */
   rcoselev = (Mcenter[0] + MTaon[0]) - Mcenter[0];
   norm_vec = (Mcenter[1] + MTaon[1]) - Mcenter[1];
-  r_idx_1 = (Mcenter[2] + MTaon[2]) - Mcenter[2];
+  r_idx_1 = (Mcenter[2] + d) - Mcenter[2];
   absxk = (rcoselev * rcoselev + norm_vec * norm_vec) + r_idx_1 * r_idx_1;
   absx = -(((Mcenter[0] - P_bound1[0]) * rcoselev +
             (Mcenter[1] - P_bound1[1]) * norm_vec) +
@@ -698,6 +678,11 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   Bottom_round_center2[1] = absxk * norm_vec + Mcenter[1];
   Bottom_round_center2[2] = absxk * r_idx_1 + Mcenter[2];
   /*  ！  需求1  判断方向 ，改法向量方向 */
+  if (Bottom_round_center2[2] - Bottom_round_center1[2] > 0.0) {
+    MTaon[0] = -MTaon[0];
+    MTaon[1] = -MTaon[1];
+    MTaon[2] = -d;
+  }
 }
 
 /*
