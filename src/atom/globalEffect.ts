@@ -1,9 +1,8 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import { Data, getInitAgainTable, Mode, TType } from "./globalState";
+import { useRecoilState } from "recoil";
+import { Data, getInitAgainTable, TType } from "./globalState";
 import { useEffect } from "react";
 
 export function useGlobalEffect() {
-  const mode = useRecoilValue(Mode);
   const [data, setData] = useRecoilState(Data);
 
   useEffect(() => {
