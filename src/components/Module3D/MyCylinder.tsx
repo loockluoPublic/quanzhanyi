@@ -4,8 +4,6 @@ import { CustomVector3 } from "../../class/CustomVector3";
 import { useMemo } from "react";
 
 const MyCylinder = (props: any) => {
-  console.log("%c Line:7 🍪 props", "color:#33a5ff", props);
-
   if (!props?.Bottom_round_center) return null;
 
   const midpoint = new CustomVector3();
@@ -33,17 +31,19 @@ const MyCylinder = (props: any) => {
     props?.Bottom_round_center?.[1]
   );
 
-  console.log(
-    "%c Line:26 🍰 props?.center?.toVector3()",
-    "color:#6ec1c2",
-    props
+  // 计算旋转四元数
+  const axis = new THREE.Vector3(0, 1, 0); // 默认朝向为 y 轴
+  const quaternion = new THREE.Quaternion().setFromUnitVectors(
+    axis,
+    midpoint.clone().normalize()
   );
+
   return (
     <>
       <Cylinder
         args={[props.R, props.R, height * 1.2, 32, 1, true]}
         position={center?.toVector3()} // 设置位置
-        rotation={midpoint?.calcRotation() as any} // 设置旋转
+        quaternion={quaternion}
       >
         <meshStandardMaterial
           color={"#00aec7"}
