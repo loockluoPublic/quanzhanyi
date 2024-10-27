@@ -6,7 +6,6 @@ import { measureAndGetSimpleCoord } from "../utils/commond";
 import { CustomVector3 } from "../class/CustomVector3";
 import { CalculateRectangleFromVertex, Planefit } from "../utils/utils";
 import CubeTable from "./CubeTable";
-import { generateUniformPointsInPolygonWithSort } from "../utils/genCubePoints";
 
 export default function () {
   const [data, setData] = useRecoilState(Data);

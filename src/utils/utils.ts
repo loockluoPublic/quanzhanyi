@@ -522,7 +522,7 @@ export const Planefit = (
   const trianglePoints = new EmxArray_real_T(3, len * 2 * 3);
   const MaxDis = new EmxArray_real_T(len, 1);
 
-  const LenDaoJiao = new EmxArray_real_T(8, 1);
+  const LenDaoJiao = new EmxArray_real_T(new Array(8).fill(-1), 1);
 
   const distancesFianal = new EmxArray_real_T(totalPoints, 1);
 
@@ -887,8 +887,10 @@ const juXingFuCeFn = (
   const theta = new EmxArray_real_T(sdfb, 1);
   const LTPY = new EmxArray_real_T(sdfb, 1);
   const TiC = new EmxArray_real_T(sdfb, 1);
+  const LenDaoJiao = new EmxArray_real_T(cubeRes.LenDaoJiao);
   const Wquanzhong3 = new EmxArray_real_T(sdfb, 1);
   const Wquanzhong4 = new EmxArray_real_T(sdfb, 1);
+
   _juXingFuCe(
     PointIn.ptr,
     sdfb,
@@ -896,6 +898,7 @@ const juXingFuCeFn = (
     Tao.arrayPtr,
     cubeRes.h,
     PlaneParaOut.ptr,
+    LenDaoJiao.arrayPtr,
     Distance.ptr,
     theta.ptr,
     LTPY.ptr,

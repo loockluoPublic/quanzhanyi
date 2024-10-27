@@ -165,12 +165,12 @@ void CalculateRectangleFromVertex8(
 EMSCRIPTEN_KEEPALIVE
 void juXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
                 const double Pin[3], const double Tao[3], double h,
-                const emxArray_real_T *PlaneParaOut8, emxArray_real_T *Distance,
+                const emxArray_real_T *PlaneParaOut8, const double LenDaoJiao[8], emxArray_real_T *Distance,
                 emxArray_real_T *theta, emxArray_real_T *LTPY,
                 emxArray_real_T *TiC, emxArray_real_T *Wquanzhong3,
                 emxArray_real_T *Wquanzhong4)
 {
-    JuXingFuCe(PointIn, shenglunum, Pin, Tao, h, PlaneParaOut8, Distance, theta, LTPY, TiC, Wquanzhong3, Wquanzhong4);
+    JuXingFuCe(PointIn, shenglunum, Pin, Tao, h, PlaneParaOut8, LenDaoJiao, Distance, theta, LTPY, TiC, Wquanzhong3, Wquanzhong4);
 };
 
 EMSCRIPTEN_KEEPALIVE

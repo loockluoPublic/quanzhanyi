@@ -208,5 +208,6 @@ interface ICube {
     h: number;
     w: number;
     Tao: CustomVector3;
+    LenDaoJiao: number[];
   };
 }
