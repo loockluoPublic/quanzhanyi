@@ -195,6 +195,7 @@ function CylinderPre() {
           <span className="q-block">
             上游边界点：
             <PointsVector3
+              hideLabel
               className="!q-inline-flex !q-my-1"
               value={data.firstPoints[0] as CustomVector3}
               before={() => {
@@ -209,6 +210,7 @@ function CylinderPre() {
           <span className="q-block ">
             下游边界点：
             <PointsVector3
+              hideLabel
               className="!q-inline-flex !q-my-1"
               value={data.firstPoints[1] as CustomVector3}
               before={() => {

@@ -115,7 +115,7 @@ function CubeResult() {
   const calcPoint = () => {
     console.log("%c Line:127 🍡", "color:#e41a6a");
     if (!data.centerPoint) {
-      message.error("请采集AB面交点");
+      message.error("请采集中心点");
       return;
     }
 
@@ -376,8 +376,9 @@ function CubeResult() {
           ></Checkbox.Group>
         </span>
         <span className="q-ml-8">
-          AB面交点：
+          中心点：
           <PointsVector3
+            hideLabel
             className="!q-inline-flex"
             value={data.centerPoint as CustomVector3}
             onChange={(v) => {

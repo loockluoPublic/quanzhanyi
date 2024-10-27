@@ -75,7 +75,7 @@ interface ICycleBase {
   firstPoints: [CustomVector3, CustomVector3];
 
   /**
-   * AB面交点
+   * 中心点
    */
   centerPoint: CustomVector3;
 }

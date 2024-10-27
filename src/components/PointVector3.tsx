@@ -5,6 +5,7 @@ import { MinusCircleOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 
 export default function PointsVector3(props: {
+  hideLabel?: boolean;
   value?: CustomVector3;
   style?: React.CSSProperties;
   showGetPoints?: boolean;
@@ -48,13 +49,20 @@ export default function PointsVector3(props: {
     w = w + 30;
   }
 
+  if (props.hideLabel) w = -30;
+
   return (
     <div
       className={" q-inline-flex q-justify-end q-my-2 " + props.className}
       style={{ minWidth: `${w}px` }}
     >
       <span style={props.style}>
-        <span>{`${props?.value?.label || ""}${props?.value?.key ?? ""}`}</span>
+        {!props.hideLabel && (
+          <span>{`${props?.value?.label || ""}${
+            props?.value?.key ?? ""
+          }`}</span>
+        )}
+
         <span>
           （
           {`${props?.value?.x?.toFixed(3) ?? "--"}, ${

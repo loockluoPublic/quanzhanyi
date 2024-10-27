@@ -53,7 +53,7 @@ export const transformJSON2Excel = (data: GlobalData, type = false) => {
   };
 
   if (data.centerPoint) {
-    getDatas([data.centerPoint], "AB面交点");
+    getDatas([data.centerPoint], "中心点");
   }
 
   if (data?.direct?.length > 0) {

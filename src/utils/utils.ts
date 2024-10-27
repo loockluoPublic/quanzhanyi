@@ -127,7 +127,7 @@ const toSd = (array: any) => {
  * @param MTaon 圆柱轴线方向向量
  * @param Mcenter 圆柱中心点
  * @param R 圆半径
- * @param PAB AB面交点垂直面所在点
+ * @param PAB 中心点垂直面所在点
  * @param phi 声路角
  * 下面是三个1*2n的参数
  * @param ang   手动修正角度
@@ -228,7 +228,7 @@ const CalculatAAndBPointsFn = (
  * @param MTaon 圆柱轴线方向向量
  * @param Mcenter 圆柱中心点
  * @param R 圆半径
- * @param PAB AB面交点垂直面所在点
+ * @param PAB 中心点垂直面所在点
  * @param phi 声路角
  * @returns
  */
@@ -740,7 +740,7 @@ export const cubeTOff = (a: number, sdj: number) => {
 /**
  * 计算矩形安装位置
  * @param cubeRes
- * @param PAB AB面交点
+ * @param PAB 中心点
  * @param sdj 声道角
  * @param sdfb 声道分布
  */

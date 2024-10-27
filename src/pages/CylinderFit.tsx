@@ -315,7 +315,7 @@ function CylinderFit() {
   useEffect(() => {
     if (data.centerPoint) calcPoint();
     else {
-      message.warning("请采集AB面交点");
+      message.warning("请采集中心点");
     }
   }, [data.centerPoint, data.key]);
 
@@ -368,8 +368,9 @@ function CylinderFit() {
           ></Checkbox.Group>
         </span>
         <span className="q-ml-8">
-          AB面交点：
+          中心点：
           <PointsVector3
+            hideLabel
             className="!q-inline-flex"
             value={data.centerPoint as CustomVector3}
             before={() => {
