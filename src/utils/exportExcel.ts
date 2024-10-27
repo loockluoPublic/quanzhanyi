@@ -43,7 +43,7 @@ export const transformJSON2Excel = (data: GlobalData, type = false) => {
       z = ["z"],
       label = [title];
 
-    arr.forEach((item) => {
+    arr?.forEach?.((item) => {
       label.push(`${item.label}${item.key}`);
       x.push(item.x);
       y.push(item.y);
@@ -66,7 +66,7 @@ export const transformJSON2Excel = (data: GlobalData, type = false) => {
       z = ["z"],
       label = ["拟合采集点"];
 
-    data?.mPoints.forEach((item: any) => {
+    data?.mPoints?.forEach?.((item: any) => {
       label.push(`${item.label}${item.key}`);
       x.push(item.x);
       y.push(item.y);
@@ -85,7 +85,7 @@ export const transformJSON2Excel = (data: GlobalData, type = false) => {
   }
 
   if (data.type === "cube" && data?.MxPoints) {
-    Object.keys(data?.MxPoints).forEach((k) => {
+    Object.keys(data?.MxPoints)?.forEach?.((k) => {
       getDatas(data?.MxPoints?.[k], options[k]);
     });
   }
@@ -99,8 +99,8 @@ export const transformJSON2Excel = (data: GlobalData, type = false) => {
       y = ["y"],
       z = ["z"];
 
-    againTable.forEach((item) => {
-      [item.p1, item.p2].forEach((p) => {
+    againTable?.forEach?.((item) => {
+      [item.p1, item.p2].forEach?.((p) => {
         if (p) {
           label.push(`${p.label}${p.key}`);
           x.push(p.x);
@@ -125,7 +125,7 @@ const tableRender = (
 ) => {
   const csvData: any[] = [];
   csvData.push(columns?.map((item) => item.title));
-  data?.forEach((row) => {
+  data?.forEach?.((row) => {
     csvData.push(columns?.map((item) => item.render(row)));
   });
 
