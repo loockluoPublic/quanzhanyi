@@ -522,18 +522,34 @@ export const Planefit = (
   const trianglePoints = new EmxArray_real_T(3, len * 2 * 3);
   const MaxDis = new EmxArray_real_T(len, 1);
 
+  const LenDaoJiao = new EmxArray_real_T(8, 1);
+
   const distancesFianal = new EmxArray_real_T(totalPoints, 1);
-  const fn = len === 4 ? _Planefit4 : _Planefit8;
-  fn(
-    ...mP.map((p) => p.ptr),
-    boundPoint1.arrayPtr,
-    boundPoint2.arrayPtr,
-    distanceThreshold,
-    planeParaOut.ptr,
-    trianglePoints.ptr,
-    MaxDis.arrayPtr,
-    distancesFianal.ptr
-  );
+
+  if (len === 4) {
+    _Planefit4(
+      ...mP.map((p) => p.ptr),
+      boundPoint1.arrayPtr,
+      boundPoint2.arrayPtr,
+      distanceThreshold,
+      planeParaOut.ptr,
+      trianglePoints.ptr,
+      MaxDis.arrayPtr,
+      distancesFianal.ptr
+    );
+  } else {
+    _Planefit8(
+      ...mP.map((p) => p.ptr),
+      boundPoint1.arrayPtr,
+      boundPoint2.arrayPtr,
+      distanceThreshold,
+      planeParaOut.ptr,
+      trianglePoints.ptr,
+      MaxDis.arrayPtr,
+      distancesFianal.ptr,
+      LenDaoJiao.arrayPtr
+    );
+  }
 
   const _max = Number(Math.max(...MaxDis.toJSON()?.[0]).toFixed(4));
 
@@ -554,6 +570,7 @@ export const Planefit = (
         return newP;
       });
     }),
+    LenDaoJiao: LenDaoJiao.toJSON()?.[0],
   };
 
   mP.forEach((p) => p.free()), boundPoint1.free();

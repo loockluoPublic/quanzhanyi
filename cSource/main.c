@@ -133,9 +133,9 @@ void Planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
                const double BoundPoint1[3], const double BoundPoint2[3],
                double distanceThreshold,
                emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints,
-               double MaxDis[4], emxArray_real_T *distancesFianal)
+               double MaxDis[4], emxArray_real_T *distancesFianal, double LenDaoJiao[8])
 {
-    planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7, Points8, BoundPoint1, BoundPoint2, distanceThreshold, PlaneParaOut, TrianglePoints, MaxDis, distancesFianal);
+    planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7, Points8, BoundPoint1, BoundPoint2, distanceThreshold, PlaneParaOut, TrianglePoints, MaxDis, distancesFianal, LenDaoJiao);
 };
 
 EMSCRIPTEN_KEEPALIVE
