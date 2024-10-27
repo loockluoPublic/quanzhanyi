@@ -1,12 +1,12 @@
 /*
- * File: xgeev.h
+ * File: ifWhileCond.h
  *
  * MATLAB Coder version            : 23.2
  * C/C++ source code generated on  : 27-Oct-2024 10:09:52
  */
 
-#ifndef XGEEV_H
-#define XGEEV_H
+#ifndef IFWHILECOND_H
+#define IFWHILECOND_H
 
 /* Include Files */
 #include "rtwtypes.h"
@@ -18,8 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-int xgeev(const double A_data[], const int A_size[2], creal_T W_data[],
-          int *W_size);
+boolean_T ifWhileCond(const boolean_T x[3]);
 
 #ifdef __cplusplus
 }
@@ -27,7 +26,7 @@ int xgeev(const double A_data[], const int A_size[2], creal_T W_data[],
 
 #endif
 /*
- * File trailer for xgeev.h
+ * File trailer for ifWhileCond.h
  *
  * [EOF]
  */

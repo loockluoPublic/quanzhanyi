@@ -2,7 +2,7 @@
  * File: xrotg.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 09:05:44
+ * C/C++ source code generated on  : 27-Oct-2024 10:09:52
  */
 
 #ifndef XROTG_H
