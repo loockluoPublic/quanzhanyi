@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 17:56:29
+ * C/C++ source code generated on  : 27-Oct-2024 18:06:09
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -55,7 +55,7 @@ void unsafe_Generate_multi_layered_measurement_points_mexFunction(
     int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[6]);
 
 void unsafe_JuXingFuCe_mexFunction(int32_T nlhs, mxArray *plhs[6], int32_T nrhs,
-                                   const mxArray *prhs[6]);
+                                   const mxArray *prhs[7]);
 
 void unsafe_OffsetCalculate_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                         int32_T nrhs, const mxArray *prhs[4]);

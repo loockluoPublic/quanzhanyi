@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 17:56:29
+ * C/C++ source code generated on  : 27-Oct-2024 18:06:09
  */
 
 /*************************************************************************/
@@ -63,6 +63,8 @@
 #include "rt_nonfinite.h"
 
 /* Function Declarations */
+static void argInit_1x8_real_T(double result[8]);
+
 static emxArray_real_T *argInit_1xUnbounded_real_T(void);
 
 static void argInit_3x1_real_T(double result[3]);
@@ -78,6 +80,21 @@ static emxArray_real_T *argInit_Unboundedx2_real_T(void);
 static double argInit_real_T(void);
 
 /* Function Definitions */
+/*
+ * Arguments    : double result[8]
+ * Return Type  : void
+ */
+static void argInit_1x8_real_T(double result[8])
+{
+  int idx1;
+  /* Loop over the array to initialize each element. */
+  for (idx1 = 0; idx1 < 8; idx1++) {
+    /* Set the value of the array element.
+Change this value to the value that the application requires. */
+    result[idx1] = argInit_real_T();
+  }
+}
+
 /*
  * Arguments    : void
  * Return Type  : emxArray_real_T *
@@ -574,6 +591,7 @@ void main_JuXingFuCe(void)
   emxArray_real_T *Wquanzhong3;
   emxArray_real_T *Wquanzhong4;
   emxArray_real_T *theta;
+  double b_dv[8];
   double Pin_tmp[3];
   double shenglunum_tmp;
   /* Initialize function 'JuXingFuCe' input arguments. */
@@ -585,6 +603,7 @@ void main_JuXingFuCe(void)
   /* Initialize function input argument 'Tao'. */
   /* Initialize function input argument 'PlaneParaOut4'. */
   PlaneParaOut4 = argInit_4xUnbounded_real_T();
+  /* Initialize function input argument 'LenDaoJiao'. */
   /* Call the entry-point 'JuXingFuCe'. */
   emxInitArray_real_T(&Distance, 2);
   emxInitArray_real_T(&theta, 2);
@@ -592,8 +611,9 @@ void main_JuXingFuCe(void)
   emxInitArray_real_T(&TiC, 2);
   emxInitArray_real_T(&Wquanzhong3, 1);
   emxInitArray_real_T(&Wquanzhong4, 1);
+  argInit_1x8_real_T(b_dv);
   JuXingFuCe(PointIn, shenglunum_tmp, Pin_tmp, Pin_tmp, shenglunum_tmp,
-             PlaneParaOut4, Distance, theta, LTPY, TiC, Wquanzhong3,
+             PlaneParaOut4, b_dv, Distance, theta, LTPY, TiC, Wquanzhong3,
              Wquanzhong4);
   emxDestroyArray_real_T(PlaneParaOut4);
   emxDestroyArray_real_T(PointIn);

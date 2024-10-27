@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 17:56:29
+ * C/C++ source code generated on  : 27-Oct-2024 18:06:09
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -109,11 +109,12 @@ void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
 
 void JuXingFuCe(emxArray_real_T *PointIn, real_T shenglunum, real_T Pin[3],
                 real_T Tao[3], real_T h, emxArray_real_T *PlaneParaOut4,
-                emxArray_real_T *Distance, emxArray_real_T *theta,
-                emxArray_real_T *LTPY, emxArray_real_T *TiC,
-                emxArray_real_T *Wquanzhong3, emxArray_real_T *Wquanzhong4);
+                real_T LenDaoJiao[8], emxArray_real_T *Distance,
+                emxArray_real_T *theta, emxArray_real_T *LTPY,
+                emxArray_real_T *TiC, emxArray_real_T *Wquanzhong3,
+                emxArray_real_T *Wquanzhong4);
 
-void JuXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
+void JuXingFuCe_api(const mxArray *const prhs[7], int32_T nlhs,
                     const mxArray *plhs[6]);
 
 void OffsetCalculate(real_T Mradial, real_T phi, emxArray_real_T *Ang,

@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 17:56:29
+ * C/C++ source code generated on  : 27-Oct-2024 18:06:09
  */
 
 /* Include Files */
@@ -341,10 +341,10 @@ mxArray *emlrtMexFcnProperties(void)
   emlrtSetField(xEntryPoints, 13, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 13, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 6);
+  xInputs = emlrtCreateLogicalMatrix(1, 7);
   emlrtSetField(xEntryPoints, 14, "Name", emlrtMxCreateString("JuXingFuCe"));
   emlrtSetField(xEntryPoints, 14, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(6.0));
+                emlrtMxCreateDoubleScalar(7.0));
   emlrtSetField(xEntryPoints, 14, "NumberOfOutputs",
                 emlrtMxCreateDoubleScalar(6.0));
   emlrtSetField(xEntryPoints, 14, "ConstantInputs", xInputs);
@@ -352,7 +352,7 @@ mxArray *emlrtMexFcnProperties(void)
                 emlrtMxCreateString(
                     "C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\JuXingFuCe.m"));
   emlrtSetField(xEntryPoints, 14, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739535.00758101849));
+                emlrtMxCreateDoubleScalar(739552.75370370375));
   emlrtSetField(xEntryPoints, 14, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 14, "Visible", emlrtMxCreateLogicalScalar(true));
