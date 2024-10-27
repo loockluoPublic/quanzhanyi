@@ -2,7 +2,7 @@
  * File: planefit8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 12:33:43
+ * C/C++ source code generated on  : 27-Oct-2024 17:56:29
  */
 
 /* Include Files */
@@ -1351,6 +1351,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Points8_data[3 * i + 1] = PP[i2 + 16];
     Points8_data[3 * i + 2] = PP[i2 + 32];
   }
+  /*  倒角计算 */
 }
 
 /*
@@ -1375,6 +1376,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
  *                emxArray_real_T *TrianglePoints
  *                double MaxDis[8]
  *                emxArray_real_T *distancesFianal
+ *                double LenDaoJiao[8]
  * Return Type  : void
  */
 void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
@@ -1384,7 +1386,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
                const double P_bound1[3], const double P_bound2[3],
                double distanceThreshold, emxArray_real_T *PlaneParaOut,
                emxArray_real_T *TrianglePoints, double MaxDis[8],
-               emxArray_real_T *distancesFianal)
+               emxArray_real_T *distancesFianal, double LenDaoJiao[8])
 {
   static const signed char b_iv[8] = {0, 1, 2, 5, 8, 11, 14, 17};
   cell_wrap_1 distancesFianal1[8];
@@ -2669,6 +2671,8 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Points8_data[3 * i + 1] = PP[i2 + 16];
     Points8_data[3 * i + 2] = PP[i2 + 32];
   }
+  /*  倒角计算 */
+  memset(&LenDaoJiao[0], 0, 8U * sizeof(double));
 }
 
 /*

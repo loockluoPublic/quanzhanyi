@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 12:33:43
+ * C/C++ source code generated on  : 27-Oct-2024 17:56:29
  */
 
 /*************************************************************************/
@@ -939,6 +939,7 @@ void main_planefit8(void)
   emxArray_real_T *Points8;
   emxArray_real_T *TrianglePoints;
   emxArray_real_T *distancesFianal;
+  double LenDaoJiao[8];
   double MaxDis[8];
   double P_bound1_tmp[3];
   /* Initialize function 'planefit8' input arguments. */
@@ -967,7 +968,7 @@ void main_planefit8(void)
   emxInitArray_real_T(&distancesFianal, 2);
   planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7,
             Points8, P_bound1_tmp, P_bound1_tmp, argInit_real_T(), PlaneParaOut,
-            TrianglePoints, MaxDis, distancesFianal);
+            TrianglePoints, MaxDis, distancesFianal, LenDaoJiao);
   emxDestroyArray_real_T(Points8);
   emxDestroyArray_real_T(Points7);
   emxDestroyArray_real_T(Points6);
