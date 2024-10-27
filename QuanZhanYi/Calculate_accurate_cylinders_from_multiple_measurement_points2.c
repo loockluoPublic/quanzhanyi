@@ -2,7 +2,7 @@
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 10:30:42
+ * C/C++ source code generated on  : 27-Oct-2024 10:51:24
  */
 
 /* Include Files */
@@ -656,7 +656,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     b_x[i] = rcoselev;
     norm_vec *= r_idx_1;
     b_x[nx] = norm_vec;
-    c_n[xi] = ((absxk + rcoselev) + norm_vec > 0.0);
+    c_n[xi] = ((absxk + rcoselev) + norm_vec < 0.0);
   }
   if (ifWhileCond(c_n)) {
     MTaon[0] = -MTaon[0];
