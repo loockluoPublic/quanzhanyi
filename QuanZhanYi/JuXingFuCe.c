@@ -2,7 +2,7 @@
  * File: JuXingFuCe.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 17:56:29
+ * C/C++ source code generated on  : 27-Oct-2024 18:06:09
  */
 
 /* Include Files */
@@ -78,6 +78,7 @@ static void b_minus(emxArray_real_T *in1, const emxArray_real_T *in2)
  *                const double Tao[3]
  *                double h
  *                const emxArray_real_T *PlaneParaOut4
+ *                const double LenDaoJiao[8]
  *                emxArray_real_T *Distance
  *                emxArray_real_T *theta
  *                emxArray_real_T *LTPY
@@ -88,7 +89,8 @@ static void b_minus(emxArray_real_T *in1, const emxArray_real_T *in2)
  */
 void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
                 const double Pin[3], const double Tao[3], double h,
-                const emxArray_real_T *PlaneParaOut4, emxArray_real_T *Distance,
+                const emxArray_real_T *PlaneParaOut4,
+                const double LenDaoJiao[8], emxArray_real_T *Distance,
                 emxArray_real_T *theta, emxArray_real_T *LTPY,
                 emxArray_real_T *TiC, emxArray_real_T *Wquanzhong3,
                 emxArray_real_T *Wquanzhong4)
@@ -128,6 +130,7 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   int i;
   int loop_ub_tmp;
   int nx;
+  (void)LenDaoJiao;
   if (!isInitialized_QuanZhanYi) {
     QuanZhanYi_initialize();
   }

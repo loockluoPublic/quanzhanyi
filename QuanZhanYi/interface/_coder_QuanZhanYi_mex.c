@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 17:56:29
+ * C/C++ source code generated on  : 27-Oct-2024 18:06:09
  */
 
 /* Include Files */
@@ -536,25 +536,25 @@ void unsafe_Generate_multi_layered_measurement_points_mexFunction(
  * Arguments    : int32_T nlhs
  *                mxArray *plhs[6]
  *                int32_T nrhs
- *                const mxArray *prhs[6]
+ *                const mxArray *prhs[7]
  * Return Type  : void
  */
 void unsafe_JuXingFuCe_mexFunction(int32_T nlhs, mxArray *plhs[6], int32_T nrhs,
-                                   const mxArray *prhs[6])
+                                   const mxArray *prhs[7])
 {
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[6];
+  const mxArray *b_prhs[7];
   const mxArray *outputs[6];
   int32_T i;
   int32_T i1;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 6) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 6, 4,
+  if (nrhs != 7) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 7, 4,
                         10, "JuXingFuCe");
   }
   if (nlhs > 6) {
@@ -562,7 +562,7 @@ void unsafe_JuXingFuCe_mexFunction(int32_T nlhs, mxArray *plhs[6], int32_T nrhs,
                         "JuXingFuCe");
   }
   /* Call the function. */
-  for (i = 0; i < 6; i++) {
+  for (i = 0; i < 7; i++) {
     b_prhs[i] = prhs[i];
   }
   JuXingFuCe_api(b_prhs, nlhs, outputs);
