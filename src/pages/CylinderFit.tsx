@@ -30,6 +30,22 @@ const sdmOptions = [
 function CylinderFit() {
   const [data, setData] = useRecoilState(Data);
 
+  const getSign = () => {
+    const zx = new CustomVector3();
+    zx.subVectors(
+      data.calulateRes.Bottom_round_center?.[0]?.toVector3(),
+      data.calulateRes.Bottom_round_center?.[1]?.toVector3()
+    );
+
+    const direct = new CustomVector3().fromSpherical(
+      1,
+      data.direct[1],
+      data.direct[0]
+    );
+
+    return zx.dot(direct) > 0;
+  };
+
   const sdfbPreRef = useRef<any>("");
 
   const onChange = (v: number, i: number, key: string) => {
@@ -270,13 +286,17 @@ function CylinderFit() {
     if (tOff[0] === undefined) {
       tableData = updateOffset2(data, data.resultTable);
     }
+
+    console.log("%c Line:291 🥤 getSign", "color:#42b983", getSign());
+
     CalculatAAndBPoints(
       calulateRes.mTaon,
       calulateRes.center,
       calulateRes.R,
       data.centerPoint,
       data.sdj,
-      tableData
+      tableData,
+      getSign()
     ).then((AB) => {
       const resultTable = tableData.map((row, i) => {
         console.log("%c Line:264 🥛 sdm,i", "color:#4fff4B", row.sdm, row.i);

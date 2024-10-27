@@ -142,7 +142,8 @@ const CalculatAAndBPointsFn = (
   PAB: CustomVector3,
   phi: number,
   resultTable: ICycle["resultTable"],
-  sdm: "A" | "B"
+  sdm: "A" | "B",
+  sign: boolean
 ) => {
   const tOff = fitArr(
     resultTable?.map?.((item) => {
@@ -180,8 +181,8 @@ const CalculatAAndBPointsFn = (
     _ang.ptr,
     _tOff.ptr,
     _rOff.ptr,
-    B.ptr,
-    A.ptr
+    sign ? B.ptr : A.ptr,
+    sign ? A.ptr : B.ptr
   );
 
   CustomVector3.setPublicInfo("A", 0);
@@ -237,7 +238,8 @@ export const CalculatAAndBPoints = async (
   R: number,
   PAB: CustomVector3,
   phi: number,
-  resultTable: ICycle["resultTable"]
+  resultTable: ICycle["resultTable"],
+  sign: boolean
 ) => {
   const res = _.partition(resultTable, (t) => {
     return t.sdm === "A";
@@ -245,7 +247,16 @@ export const CalculatAAndBPoints = async (
     if (cur?.length === 0) return acc;
     return [
       ...acc,
-      ...CalculatAAndBPointsFn(MTaon, Mcenter, R, PAB, phi, cur, cur[0].sdm),
+      ...CalculatAAndBPointsFn(
+        MTaon,
+        Mcenter,
+        R,
+        PAB,
+        phi,
+        cur,
+        cur[0].sdm,
+        sign
+      ),
     ];
   }, []);
 
