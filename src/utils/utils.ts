@@ -522,7 +522,7 @@ export const Planefit = (
   const trianglePoints = new EmxArray_real_T(3, len * 2 * 3);
   const MaxDis = new EmxArray_real_T(len, 1);
 
-  const LenDaoJiao = new EmxArray_real_T(new Array(8).fill(-1), 1);
+  const LenDaoJiao = new EmxArray_real_T(8, 1);
 
   const distancesFianal = new EmxArray_real_T(totalPoints, 1);
 
@@ -557,6 +557,11 @@ export const Planefit = (
 
   let i = 0;
 
+  console.log(
+    "%c Line:574 🍺 LenDaoJiao.toJSON()",
+    "color:#ffdd4d",
+    LenDaoJiao.toJSON()
+  );
   const res = {
     planeParaOut: planeParaOut.toJSON(),
     trianglePoints: trianglePoints.toVector3(),
@@ -868,7 +873,9 @@ export const shengLuJiao2Ang = (numSL: number) => {
  * @returns
  */
 const juXingFuCeFn = (
-  cubeRes: ReturnType<typeof CalculateRectangleFromVertex>,
+  cubeRes: ReturnType<typeof CalculateRectangleFromVertex> & {
+    LenDaoJiao: number[];
+  },
   planeParaOut: number[][],
   cubeAgainTable: { p1: CustomVector3; p2: CustomVector3 }[],
   sdfb: number
@@ -935,7 +942,9 @@ const juXingFuCeFn = (
 };
 
 export const juXingFuCe = (
-  cubeRes: ReturnType<typeof CalculateRectangleFromVertex>,
+  cubeRes: ReturnType<typeof CalculateRectangleFromVertex> & {
+    LenDaoJiao: number[];
+  },
   planeParaOut: number[][],
   cubeAgainTable: { p1: CustomVector3; p2: CustomVector3 }[],
   sdfb: number,

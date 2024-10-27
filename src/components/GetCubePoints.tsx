@@ -104,7 +104,7 @@ export default function () {
           ...res,
           planeParaOut: res8temp.planeParaOut,
           MxPoints,
-          cubeResult: cubeResult8temp,
+          cubeResult: { ...cubeResult8temp, LenDaoJiao: res8temp.LenDaoJiao },
         };
 
         setPlaneFitLoadint(false);
