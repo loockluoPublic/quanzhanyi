@@ -94,7 +94,7 @@ export const transformJSON2Excel = (data: GlobalData, type = false) => {
     data.type === "cube" ? data?.cubeAgainTable : data?.cylinderAgainTable;
 
   if (againTable?.length > 0) {
-    const label = ["复测采集点"],
+    const label = ["声道采集点"],
       x = ["x"],
       y = ["y"],
       z = ["z"];
@@ -137,7 +137,7 @@ const exportCylinder = (data: GlobalData) => {
 
   csvData.push([], ["声道面", data.sdm?.join(",")]);
 
-  csvData.push([], ["声分布", data.sdfb]);
+  csvData.push([], ["声道分布", data.sdfb]);
 
   csvData.push([], ["管道半径", data.calulateRes?.R]);
 
@@ -194,7 +194,7 @@ const exportCube = (data: GlobalData) => {
 
   csvData.push([], ["声道面", data.sdm?.join(",")]);
 
-  csvData.push([], ["声分布", data.sdfb]);
+  csvData.push([], ["声道分布", data.sdfb]);
 
   csvData.push([], ["方涵宽度", data?.cubeResult?.b]);
 
