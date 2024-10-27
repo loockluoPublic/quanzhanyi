@@ -2,7 +2,7 @@
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 11:38:12
+ * C/C++ source code generated on  : 27-Oct-2024 12:26:34
  */
 
 /* Include Files */
@@ -67,6 +67,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   double s_data[4];
   double b_n[3];
   double h[3];
+  double Merr;
   double OptAngle_idx_0;
   double OptAngle_idx_1;
   double OptErr;
@@ -79,12 +80,12 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   double d1;
   double d2;
   double norm_vec;
-  double r_idx_1;
   double rcoselev;
   double rcoselev_tmp;
   double s;
   double scale;
   double t;
+  double theta_tmp;
   double *Err_every_data;
   double *OptAllErr_data;
   double *P_data;
@@ -141,33 +142,33 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     for (j = 0; j < 180; j++) {
       rcoselev_tmp = 0.035101593894858021 * (double)j;
       rcoselev = cos(rcoselev_tmp);
-      r_idx_1 = sin(rcoselev_tmp);
+      absx = sin(rcoselev_tmp);
       b_n[0] = rcoselev * d1;
       b_n[1] = rcoselev * d2;
-      h[0] = 0.0 * r_idx_1 - b_n[1];
-      h[1] = b_n[0] - 0.0 * r_idx_1;
+      h[0] = 0.0 * absx - b_n[1];
+      h[1] = b_n[0] - 0.0 * absx;
       scale = 3.3121686421112381E-170;
       absxk = fabs(h[0]);
       if (absxk > 3.3121686421112381E-170) {
-        absx = 1.0;
+        theta_tmp = 1.0;
         scale = absxk;
       } else {
         t = absxk / 3.3121686421112381E-170;
-        absx = t * t;
+        theta_tmp = t * t;
       }
       absxk = fabs(h[1]);
       if (absxk > scale) {
         t = scale / absxk;
-        absx = absx * t * t + 1.0;
+        theta_tmp = theta_tmp * t * t + 1.0;
         scale = absxk;
       } else {
         t = absxk / scale;
-        absx += t * t;
+        theta_tmp += t * t;
       }
-      absx = scale * sqrt(absx);
-      r_idx_1 = rt_atan2d_snf(absx, r_idx_1);
-      s = sin(r_idx_1);
-      c = cos(r_idx_1);
+      theta_tmp = scale * sqrt(theta_tmp);
+      absx = rt_atan2d_snf(theta_tmp, absx);
+      s = sin(absx);
+      c = cos(absx);
       /* SL3DNORMALIZE Normalize a vector. */
       /*    Y = SL3DNORMALIZE(X,MAXZERO) returns a unit vector Y parallel to the
        */
@@ -179,9 +180,9 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
       /*    Not to be called directly. */
       /*    Copyright 1998-2008 HUMUSOFT s.r.o. and The MathWorks, Inc. */
       scale = 3.3121686421112381E-170;
-      absxk = h[0] / absx;
-      rcoselev = absxk;
-      absxk = fabs(absxk);
+      Merr = h[0] / theta_tmp;
+      rcoselev = Merr;
+      absxk = fabs(Merr);
       if (absxk > 3.3121686421112381E-170) {
         norm_vec = 1.0;
         scale = absxk;
@@ -189,9 +190,9 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         t = absxk / 3.3121686421112381E-170;
         norm_vec = t * t;
       }
-      absxk = h[1] / absx;
-      r_idx_1 = absxk;
-      absxk = fabs(absxk);
+      Merr = h[1] / theta_tmp;
+      absx = Merr;
+      absxk = fabs(Merr);
       if (absxk > scale) {
         t = scale / absxk;
         norm_vec = norm_vec * t * t + 1.0;
@@ -200,8 +201,8 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         t = absxk / scale;
         norm_vec += t * t;
       }
-      absxk = (0.0 * b_n[1] - 0.0 * b_n[0]) / absx;
-      t = absxk / scale;
+      Merr = (0.0 * b_n[1] - 0.0 * b_n[0]) / theta_tmp;
+      t = Merr / scale;
       norm_vec += t * t;
       norm_vec = scale * sqrt(norm_vec);
       if (norm_vec <= 1.0E-12) {
@@ -210,25 +211,25 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         b_n[2] = 0.0;
       } else {
         b_n[0] = rcoselev / norm_vec;
-        b_n[1] = r_idx_1 / norm_vec;
-        b_n[2] = absxk / norm_vec;
+        b_n[1] = absx / norm_vec;
+        b_n[2] = Merr / norm_vec;
       }
-      r_idx_1 = (1.0 - c) * b_n[0];
-      b_dv[0] = r_idx_1 * b_n[0] + c;
-      norm_vec = r_idx_1 * b_n[1];
-      absxk = s * b_n[2];
-      b_dv[3] = norm_vec - absxk;
-      r_idx_1 *= b_n[2];
+      absx = (1.0 - c) * b_n[0];
+      b_dv[0] = absx * b_n[0] + c;
+      norm_vec = absx * b_n[1];
+      Merr = s * b_n[2];
+      b_dv[3] = norm_vec - Merr;
+      absx *= b_n[2];
       rcoselev = s * b_n[1];
-      b_dv[6] = r_idx_1 + rcoselev;
-      b_dv[1] = norm_vec + absxk;
+      b_dv[6] = absx + rcoselev;
+      b_dv[1] = norm_vec + Merr;
       norm_vec = (1.0 - c) * b_n[1];
       b_dv[4] = norm_vec * b_n[1] + c;
       norm_vec *= b_n[2];
-      absxk = s * b_n[0];
-      b_dv[7] = norm_vec - absxk;
-      b_dv[2] = r_idx_1 - rcoselev;
-      b_dv[5] = norm_vec + absxk;
+      Merr = s * b_n[0];
+      b_dv[7] = norm_vec - Merr;
+      b_dv[2] = absx - rcoselev;
+      b_dv[5] = norm_vec + Merr;
       b_dv[8] = (1.0 - c) * b_n[2] * b_n[2] + c;
       mtimes(points, b_dv, P);
       P_data = P->data;
@@ -268,9 +269,9 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         Err_every_data = A->data;
         nx = err->size[0];
         for (xi = 0; xi < nx; xi++) {
-          absx = err_data[xi];
-          norm_vec = x2_contents_data[xi];
-          Err_every_data[xi] = absx * absx + norm_vec * norm_vec;
+          norm_vec = err_data[xi];
+          absx = x2_contents_data[xi];
+          Err_every_data[xi] = norm_vec * norm_vec + absx * absx;
           Err_every_data[xi + A->size[0]] = x_contents_data[2 * xi];
           Err_every_data[xi + A->size[0] * 2] = x_contents_data[2 * xi + 1];
           Err_every_data[xi + A->size[0] * 3] = 1.0;
@@ -319,29 +320,29 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
       /*      function [z, r, residual] = fitcircle_geometric(x, z0, r0) */
       /*  Use a simple Gauss Newton method to minimize the geometric error */
       /*  Set initial u */
-      r_idx_1 = 2.0 * V[12];
+      absx = 2.0 * V[12];
       absxk = fabs(V[13]);
       if (absxk > 3.3121686421112381E-170) {
-        rcoselev = 1.0;
+        Merr = 1.0;
         scale = absxk;
       } else {
         t = absxk / 3.3121686421112381E-170;
-        rcoselev = t * t;
+        Merr = t * t;
       }
-      b_n[0] = -V[13] / r_idx_1;
+      b_n[0] = -V[13] / absx;
       absxk = fabs(V[14]);
       if (absxk > scale) {
         t = scale / absxk;
-        rcoselev = rcoselev * t * t + 1.0;
+        Merr = Merr * t * t + 1.0;
         scale = absxk;
       } else {
         t = absxk / scale;
-        rcoselev += t * t;
+        Merr += t * t;
       }
-      b_n[1] = -V[14] / r_idx_1;
-      rcoselev = scale * sqrt(rcoselev);
-      absxk = rcoselev / (2.0 * V[12]);
-      b_n[2] = sqrt(absxk * absxk - V[15] / V[12]);
+      b_n[1] = -V[14] / absx;
+      Merr = scale * sqrt(Merr);
+      Merr /= 2.0 * V[12];
+      b_n[2] = sqrt(Merr * Merr - V[15] / V[12]);
       /*  Delta is the norm of current step, scaled by the norm of u */
       nIts = 0;
       exitg1 = false;
@@ -369,9 +370,9 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
           denom_data = denom->data;
           nx = err->size[0];
           for (xi = 0; xi < nx; xi++) {
-            absx = b_n[0] - err_data[xi];
-            norm_vec = b_n[1] - x2_contents_data[xi];
-            denom_data[xi] = absx * absx + norm_vec * norm_vec;
+            norm_vec = b_n[0] - err_data[xi];
+            absx = b_n[1] - x2_contents_data[xi];
+            denom_data[xi] = norm_vec * norm_vec + absx * absx;
           }
         } else {
           binary_expand_op_7(denom, b_n, err, x2_contents);
@@ -390,8 +391,8 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
           emxEnsureCapacity_real_T(x, xi);
           Err_every_data = x->data;
           for (xi = 0; xi < nx; xi++) {
-            absx = Err_every_data[xi] - x_contents_data[xi];
-            Err_every_data[xi] = absx * absx;
+            norm_vec = Err_every_data[xi] - x_contents_data[xi];
+            Err_every_data[xi] = norm_vec * norm_vec;
           }
         } else {
           binary_expand_op_6(x, x_contents);
@@ -448,22 +449,22 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
           binary_expand_op_5(b_n, err, denom, x2_contents, outsize, y, h);
         }
         /*  Check for convergence */
-        rcoselev = 0.0;
+        Merr = 0.0;
         absxk = 0.0;
         for (npages = 0; npages < 3; npages++) {
-          r_idx_1 = h[npages];
-          norm_vec = b_n[npages] + r_idx_1;
+          absx = h[npages];
+          norm_vec = b_n[npages] + absx;
           b_n[npages] = norm_vec;
-          absx = fabs(r_idx_1);
-          if (rtIsNaN(absx) || (absx > rcoselev)) {
-            rcoselev = absx;
+          absx = fabs(absx);
+          if (rtIsNaN(absx) || (absx > Merr)) {
+            Merr = absx;
           }
           absx = fabs(norm_vec);
           if (rtIsNaN(absx) || (absx > absxk)) {
             absxk = absx;
           }
         }
-        if (rcoselev / absxk < 1.0E-5) {
+        if (Merr / absxk < 1.0E-5) {
           exitg1 = true;
         } else {
           nIts++;
@@ -497,9 +498,9 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         err_data = err->data;
         nx = denom->size[0];
         for (xi = 0; xi < nx; xi++) {
-          absx = denom_data[xi];
-          r_idx_1 = Err_every_data[xi];
-          err_data[xi] = rt_hypotd_snf(absx, r_idx_1);
+          norm_vec = denom_data[xi];
+          absx = Err_every_data[xi];
+          err_data[xi] = rt_hypotd_snf(norm_vec, absx);
         }
       } else {
         expand_hypot(denom, b_y, err);
@@ -515,12 +516,12 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
       Err_every_data = b_y->data;
       nx = err->size[0];
       for (xi = 0; xi < nx; xi++) {
-        absx = err_data[xi];
-        Err_every_data[xi] = absx * absx;
+        norm_vec = err_data[xi];
+        Err_every_data[xi] = norm_vec * norm_vec;
       }
-      absxk = sqrt(combineVectorElements(b_y) / (double)b_y->size[0]);
-      if (absxk < OptErr) {
-        OptErr = absxk;
+      Merr = sqrt(combineVectorElements(b_y) / (double)b_y->size[0]);
+      if (Merr < OptErr) {
+        OptErr = Merr;
         OptPara_idx_0 = b_n[0];
         OptPara_idx_1 = b_n[1];
         *Mradial = b_n[2];
@@ -559,23 +560,23 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   scale = 3.3121686421112381E-170;
   absxk = fabs(h[0]);
   if (absxk > 3.3121686421112381E-170) {
-    absx = 1.0;
+    theta_tmp = 1.0;
     scale = absxk;
   } else {
     t = absxk / 3.3121686421112381E-170;
-    absx = t * t;
+    theta_tmp = t * t;
   }
   absxk = fabs(h[1]);
   if (absxk > scale) {
     t = scale / absxk;
-    absx = absx * t * t + 1.0;
+    theta_tmp = theta_tmp * t * t + 1.0;
     scale = absxk;
   } else {
     t = absxk / scale;
-    absx += t * t;
+    theta_tmp += t * t;
   }
-  absx = scale * sqrt(absx);
-  d1 = rt_atan2d_snf(absx, d);
+  theta_tmp = scale * sqrt(theta_tmp);
+  d1 = rt_atan2d_snf(theta_tmp, d);
   s = sin(d1);
   c = cos(d1);
   /* SL3DNORMALIZE Normalize a vector. */
@@ -586,9 +587,9 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   /*    Not to be called directly. */
   /*    Copyright 1998-2008 HUMUSOFT s.r.o. and The MathWorks, Inc. */
   scale = 3.3121686421112381E-170;
-  absxk = h[0] / absx;
-  rcoselev = absxk;
-  absxk = fabs(absxk);
+  Merr = h[0] / theta_tmp;
+  rcoselev = Merr;
+  absxk = fabs(Merr);
   if (absxk > 3.3121686421112381E-170) {
     norm_vec = 1.0;
     scale = absxk;
@@ -596,9 +597,9 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     t = absxk / 3.3121686421112381E-170;
     norm_vec = t * t;
   }
-  absxk = h[1] / absx;
-  r_idx_1 = absxk;
-  absxk = fabs(absxk);
+  Merr = h[1] / theta_tmp;
+  absx = Merr;
+  absxk = fabs(Merr);
   if (absxk > scale) {
     t = scale / absxk;
     norm_vec = norm_vec * t * t + 1.0;
@@ -607,8 +608,8 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     t = absxk / scale;
     norm_vec += t * t;
   }
-  absxk = (0.0 * MTaon[1] - 0.0 * MTaon[0]) / absx;
-  t = absxk / scale;
+  Merr = (0.0 * MTaon[1] - 0.0 * MTaon[0]) / theta_tmp;
+  t = Merr / scale;
   norm_vec += t * t;
   norm_vec = scale * sqrt(norm_vec);
   if (norm_vec <= 1.0E-12) {
@@ -617,25 +618,25 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
     b_n[2] = 0.0;
   } else {
     b_n[0] = rcoselev / norm_vec;
-    b_n[1] = r_idx_1 / norm_vec;
-    b_n[2] = absxk / norm_vec;
+    b_n[1] = absx / norm_vec;
+    b_n[2] = Merr / norm_vec;
   }
   d1 = (1.0 - c) * b_n[0];
   b_dv[0] = d1 * b_n[0] + c;
   d2 = d1 * b_n[1];
-  r_idx_1 = s * b_n[2];
-  b_dv[3] = d2 - r_idx_1;
+  absx = s * b_n[2];
+  b_dv[3] = d2 - absx;
   d1 *= b_n[2];
   norm_vec = s * b_n[1];
   b_dv[6] = d1 + norm_vec;
-  b_dv[1] = d2 + r_idx_1;
+  b_dv[1] = d2 + absx;
   d2 = (1.0 - c) * b_n[1];
   b_dv[4] = d2 * b_n[1] + c;
   d2 *= b_n[2];
-  r_idx_1 = s * b_n[0];
-  b_dv[7] = d2 - r_idx_1;
+  absx = s * b_n[0];
+  b_dv[7] = d2 - absx;
   b_dv[2] = d1 - norm_vec;
-  b_dv[5] = d2 + r_idx_1;
+  b_dv[5] = d2 + absx;
   b_dv[8] = (1.0 - c) * b_n[2] * b_n[2] + c;
   pinv(b_dv, b_dv1);
   for (xi = 0; xi < 3; xi++) {
@@ -655,34 +656,29 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   emxFree_real_T(&OptAllErr);
   /*  三个点定义 */
   /*  斜率计算 */
-  rcoselev = (Mcenter[0] + MTaon[0]) - Mcenter[0];
-  norm_vec = (Mcenter[1] + MTaon[1]) - Mcenter[1];
-  r_idx_1 = (Mcenter[2] + d) - Mcenter[2];
-  absxk = (rcoselev * rcoselev + norm_vec * norm_vec) + r_idx_1 * r_idx_1;
-  absx = -(((Mcenter[0] - P_bound1[0]) * rcoselev +
-            (Mcenter[1] - P_bound1[1]) * norm_vec) +
-           (Mcenter[2] - P_bound1[2]) * r_idx_1) /
-         absxk;
+  norm_vec = (Mcenter[0] + MTaon[0]) - Mcenter[0];
+  absxk = (Mcenter[1] + MTaon[1]) - Mcenter[1];
+  rcoselev = (Mcenter[2] + d) - Mcenter[2];
+  Merr = (norm_vec * norm_vec + absxk * absxk) + rcoselev * rcoselev;
+  absx = -(((Mcenter[0] - P_bound1[0]) * norm_vec +
+            (Mcenter[1] - P_bound1[1]) * absxk) +
+           (Mcenter[2] - P_bound1[2]) * rcoselev) /
+         Merr;
   /*  P1点在轴线上的投影坐标 */
   /*  三个点定义 */
   /*  斜率计算 */
-  absxk = -(((Mcenter[0] - P_bound2[0]) * rcoselev +
-             (Mcenter[1] - P_bound2[1]) * norm_vec) +
-            (Mcenter[2] - P_bound2[2]) * r_idx_1) /
-          absxk;
+  Merr = -(((Mcenter[0] - P_bound2[0]) * norm_vec +
+            (Mcenter[1] - P_bound2[1]) * absxk) +
+           (Mcenter[2] - P_bound2[2]) * rcoselev) /
+         Merr;
   /*  P1点在轴线上的投影坐标 */
-  Bottom_round_center1[0] = absx * rcoselev + Mcenter[0];
-  Bottom_round_center1[1] = absx * norm_vec + Mcenter[1];
-  Bottom_round_center1[2] = absx * r_idx_1 + Mcenter[2];
-  Bottom_round_center2[0] = absxk * rcoselev + Mcenter[0];
-  Bottom_round_center2[1] = absxk * norm_vec + Mcenter[1];
-  Bottom_round_center2[2] = absxk * r_idx_1 + Mcenter[2];
+  Bottom_round_center1[0] = absx * norm_vec + Mcenter[0];
+  Bottom_round_center1[1] = absx * absxk + Mcenter[1];
+  Bottom_round_center1[2] = absx * rcoselev + Mcenter[2];
+  Bottom_round_center2[0] = Merr * norm_vec + Mcenter[0];
+  Bottom_round_center2[1] = Merr * absxk + Mcenter[1];
+  Bottom_round_center2[2] = Merr * rcoselev + Mcenter[2];
   /*  ！  需求1  判断方向 ，改法向量方向 */
-  if (Bottom_round_center2[2] - Bottom_round_center1[2] > 0.0) {
-    MTaon[0] = -MTaon[0];
-    MTaon[1] = -MTaon[1];
-    MTaon[2] = -d;
-  }
 }
 
 /*

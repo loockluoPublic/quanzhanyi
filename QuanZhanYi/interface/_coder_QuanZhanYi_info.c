@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 11:38:12
+ * C/C++ source code generated on  : 27-Oct-2024 12:26:34
  */
 
 /* Include Files */
@@ -148,7 +148,7 @@ mxArray *emlrtMexFcnProperties(void)
       emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\Calculat_A_"
                           "and_B_Points_after_Offest2.m"));
   emlrtSetField(xEntryPoints, 2, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739552.46550925926));
+                emlrtMxCreateDoubleScalar(739552.5183217593));
   emlrtSetField(xEntryPoints, 2, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 2, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -185,7 +185,7 @@ mxArray *emlrtMexFcnProperties(void)
                     "C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\Calculate_"
                     "accurate_cylinders_from_multiple_measurement_points2.m"));
   emlrtSetField(xEntryPoints, 4, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739552.47427083331));
+                emlrtMxCreateDoubleScalar(739552.50386574073));
   emlrtSetField(xEntryPoints, 4, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 4, "Visible", emlrtMxCreateLogicalScalar(true));
