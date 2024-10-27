@@ -2,7 +2,7 @@
  * File: mtimes.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 18:06:09
+ * C/C++ source code generated on  : 27-Oct-2024 18:52:15
  */
 
 #ifndef MTIMES_H
@@ -19,6 +19,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+void b_mtimes(const double A[4], const emxArray_real_T *B, emxArray_real_T *C);
+
 void mtimes(const emxArray_real_T *A, const double B[9], emxArray_real_T *C);
 
 #ifdef __cplusplus
