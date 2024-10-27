@@ -105,17 +105,17 @@ function CylinderFit() {
       dataIndex: "a",
       key: "a",
       align: "center",
-      render: (v, _, i) => {
+      render: (v, row) => {
         return (
           <InputNumber
             step={0.01}
             value={v}
-            onChange={(v) => onChange(v, i, "a")}
+            onChange={(v) => onChange(v, row.updateIndex, "a")}
             addonAfter={
               <div>
                 米
                 <Tooltip title="应用到全部" className="q-cursor-pointer">
-                  <SettingOutlined onClick={() => setA(i)} />
+                  <SettingOutlined onClick={() => setA(row.updateIndex)} />
                 </Tooltip>
               </div>
             }
@@ -128,11 +128,11 @@ function CylinderFit() {
       dataIndex: "ang",
       key: "ang",
       align: "center",
-      render: (v, _, i) => {
+      render: (v, row) => {
         return (
           <InputNumber
             value={v}
-            onChange={(v) => onChange(v, i, "ang")}
+            onChange={(v) => onChange(v, row.updateIndex, "ang")}
             addonAfter={`度`}
           />
         );
@@ -225,9 +225,14 @@ function CylinderFit() {
 
       const resultTable: any = [];
 
-      data.sdm?.forEach?.((m) => {
+      data.sdm?.forEach?.((m, page) => {
         plant.forEach((item, i) => {
-          resultTable.push({ ...item, sdm: m, i: i + 1 });
+          resultTable.push({
+            ...item,
+            sdm: m,
+            i: i + 1,
+            updateIndex: i + page * plant.length,
+          });
         });
       });
 
@@ -267,11 +272,6 @@ function CylinderFit() {
   const tOff =
     data.resultTable?.map?.((item) => {
       return item.tOff;
-    }) ?? [];
-
-  const rOff =
-    data.resultTable?.map?.((item) => {
-      return item.rOff;
     }) ?? [];
 
   const calcPoint = () => {

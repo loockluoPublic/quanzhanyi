@@ -45,13 +45,14 @@ function CubeResult() {
 
       const cubeTable: any = [];
 
-      data.sdm?.forEach?.((m) => {
+      data.sdm?.forEach?.((m, p) => {
         sdgd.forEach((ti, i) => {
           const h = Number(ti.toFixed(6));
           cubeTable.push({
             ...ti,
             sdm: m,
             i: i + 1,
+            updateIndex: p * sdgd.length + i,
             h,
             a: defaultA,
             tOff: cubeTOff(defaultA, data.sdj),
@@ -245,8 +246,13 @@ function CubeResult() {
       dataIndex: "h",
       key: "h",
       align: "center",
-      render: (v, _, i) => {
-        return <InputNumber value={v} onChange={(v) => onChange(v, i, "h")} />;
+      render: (v, row) => {
+        return (
+          <InputNumber
+            value={v}
+            onChange={(v) => onChange(v, row.updateIndex, "h")}
+          />
+        );
       },
     },
     {
@@ -262,7 +268,7 @@ function CubeResult() {
             onChange={(v) => onChange(v, i, "a")}
             addonAfter={
               <div>
-                米{" "}
+                米
                 <Tooltip title="应用到全部" className="q-cursor-pointer">
                   <SettingOutlined onClick={() => setA(i)} />
                 </Tooltip>

@@ -135,21 +135,6 @@ export default function () {
     }, 500);
   };
 
-  // useEffect(() => {
-  //   const p = [
-  //     [0, 0, 0],
-  //     [1, 0, 0],
-  //     [1, 1, 1],
-  //     [0, 1, 1],
-  //   ].map((arr) => new CustomVector3(...arr));
-
-  //   const res = generateUniformPointsInPolygonWithSort(p, 20);
-
-  //   setData((d) => {
-  //     return { ...d, MxPoints: { m0: [...p, ...res] } };
-  //   });
-  // }, []);
-
   const [num, setNum] = useState(0);
 
   const points = data.MxPoints?.[`m${num}`];
