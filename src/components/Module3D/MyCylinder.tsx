@@ -41,7 +41,7 @@ const MyCylinder = (props: any) => {
   return (
     <>
       <Cylinder
-        args={[props.R, props.R, height * 1.2, 32, 1, true]}
+        args={[props.R, props.R, height, 32, 1, true]}
         position={center?.toVector3()} // 设置位置
         quaternion={quaternion}
       >

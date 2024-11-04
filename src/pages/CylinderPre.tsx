@@ -116,7 +116,7 @@ function CylinderPre() {
     const newMP = curData.mPoints.map((item) => {
       return item
         .fromCustomVector3()
-        .setEnable(Math.abs(item.difference) < curData.standardDeviation);
+        .setEnable(Math.abs(item.originDiff) < curData.standardDeviation);
     });
 
     const nD = {
@@ -136,7 +136,7 @@ function CylinderPre() {
     calculateCylinders(
       {
         ...data,
-        mPoints: data.mPoints.map((d) => d.fromCustomVector3()),
+        mPoints: data.mPoints.map((d) => d.fromCustomVector3().setEnable(true)),
       },
       true
     )
@@ -325,10 +325,16 @@ function CylinderPre() {
             className="q-float-right q-ml-4"
             loading={cyLoading}
             onClick={() => {
+              console.log(
+                "%c Line:332 🥛 customStandardDeviation * data.originStandardDeviation",
+                "color:#2eafb0",
+                customStandardDeviation,
+                data.originStandardDeviation
+              );
               reRun({
                 ...data,
                 standardDeviation:
-                  customStandardDeviation * data.standardDeviation,
+                  customStandardDeviation * data.originStandardDeviation,
               });
             }}
           >

@@ -94,7 +94,7 @@ export default function Index(props: {
             showLabel={v}
           />
 
-          {props.direct && <Direct direct={props.direct} />}
+          {/* {props.direct && <Direct direct={props.direct} />} */}
 
           {props.firstPoints?.length > 0 && (
             <PointsLabel points={props.firstPoints} color="red" showLabel={v} />

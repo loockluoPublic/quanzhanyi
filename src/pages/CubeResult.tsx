@@ -381,6 +381,9 @@ function CubeResult() {
             hideLabel
             className="!q-inline-flex"
             value={data.centerPoint as CustomVector3}
+            before={() => {
+              CustomVector3.setPublicInfo("AB", 0);
+            }}
             onChange={(v) => {
               setData({ ...data, centerPoint: v });
             }}

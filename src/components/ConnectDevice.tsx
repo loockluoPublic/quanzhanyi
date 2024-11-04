@@ -24,7 +24,7 @@ export default function Connect(props: { next: () => void }) {
       style={{ backgroundImage: `url(${banner})` }}
       className="q-w-full q-bg-no-repeat q-bg-center q-bg-cover q-shadow-lg q-rounded-lg"
     >
-      <div className="q-absolute q-w-[320px] q-p-6 q-shadow-md q-rounded-xl q-mt-32 q-left-1/2 q-ml-[-160px] q-text-center q-bg-[#e9ecef88]">
+      <div className="q-z-50 q-absolute q-w-[320px] q-p-6 q-shadow-md q-rounded-xl q-mt-32 q-left-1/2 q-ml-[-160px] q-text-center q-bg-[#e9ecef88]">
         <table className="q-mb-4 q-m-auto">
           <tbody>
             <tr>
