@@ -2,7 +2,7 @@
  * File: ShengDaoGaoDu.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 18:52:15
+ * C/C++ source code generated on  : 04-Nov-2024 20:42:34
  */
 
 /* Include Files */
@@ -10,50 +10,11 @@
 #include "QuanZhanYi_data.h"
 #include "QuanZhanYi_emxutil.h"
 #include "QuanZhanYi_initialize.h"
+#include "QuanZhanYi_rtwutil.h"
 #include "QuanZhanYi_types.h"
 #include "rt_nonfinite.h"
 
-/* Function Declarations */
-static int div_s32(int numerator, int denominator);
-
 /* Function Definitions */
-/*
- * Arguments    : int numerator
- *                int denominator
- * Return Type  : int
- */
-static int div_s32(int numerator, int denominator)
-{
-  int quotient;
-  unsigned int tempAbsQuotient;
-  unsigned int u;
-  if (denominator == 0) {
-    if (numerator >= 0) {
-      quotient = MAX_int32_T;
-    } else {
-      quotient = MIN_int32_T;
-    }
-  } else {
-    if (numerator < 0) {
-      tempAbsQuotient = ~(unsigned int)numerator + 1U;
-    } else {
-      tempAbsQuotient = (unsigned int)numerator;
-    }
-    if (denominator < 0) {
-      u = ~(unsigned int)denominator + 1U;
-    } else {
-      u = (unsigned int)denominator;
-    }
-    tempAbsQuotient /= u;
-    if ((numerator < 0) != (denominator < 0)) {
-      quotient = -(int)tempAbsQuotient;
-    } else {
-      quotient = (int)tempAbsQuotient;
-    }
-  }
-  return quotient;
-}
-
 /*
  * Arguments    : double numShengLu
  *                emxArray_real_T *Ti

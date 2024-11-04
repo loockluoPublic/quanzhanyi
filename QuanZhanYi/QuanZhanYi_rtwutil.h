@@ -2,7 +2,7 @@
  * File: QuanZhanYi_rtwutil.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 27-Oct-2024 18:52:15
+ * C/C++ source code generated on  : 04-Nov-2024 20:42:34
  */
 
 #ifndef QUANZHANYI_RTWUTIL_H
@@ -18,6 +18,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+extern int div_s32(int numerator, int denominator);
+
 extern double rt_atan2d_snf(double u0, double u1);
 
 extern double rt_hypotd_snf(double u0, double u1);
