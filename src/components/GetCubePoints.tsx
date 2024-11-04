@@ -16,8 +16,6 @@ import { CalculateRectangleFromVertex, Planefit } from "../utils/utils";
 import CubeTable from "./CubeTable";
 
 export default function () {
-  const [showCube, setShowCube] = useRecoilState(ShowCube);
-
   const [data, setData] = useRecoilState(Data);
 
   const [loading, setLoading] = useState(false);
@@ -278,16 +276,6 @@ export default function () {
             {width ?? "--"} 米
           </span>
           <span className="q-ml-8">方涵高度：{hight ?? "--"} 米</span>
-          <span className="q-ml-8">
-            <Switch
-              checkedChildren="横截面"
-              unCheckedChildren="横截面"
-              checked={showCube}
-              onChange={(v) => {
-                setShowCube(v);
-              }}
-            />
-          </span>
         </div>
         <div className="q-ml-8">
           <Button loading={loading} type="primary" onClick={getPoints}>

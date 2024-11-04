@@ -13,7 +13,7 @@ import PerspectiveCamera from "./PerspectiveCamera";
 import React from "react";
 import Rectangular from "../Rectangular";
 import PointsLabel from "./PointsLabel";
-import { Switch } from "antd";
+import { Radio, Segmented, Switch } from "antd";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Data, ShowCube, ShowLabel } from "../../atom/globalState";
 import Cube2D from "../Cube2D";
@@ -49,8 +49,8 @@ export default function Index(props: {
   trianglePoints?: CustomVector3[];
   [k: string]: any;
 }) {
+  const [showCube, setShowCube] = useRecoilState(ShowCube);
   const [data] = useRecoilState(Data);
-  const showCube = useRecoilValue(ShowCube);
   const [v, setV] = useRecoilState(ShowLabel);
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
 
@@ -142,6 +142,7 @@ export default function Index(props: {
         </Canvas>
       ) : (
         <Cube2D
+          containerHeight={h}
           width={data.cubeResult?.b}
           height={data.cubeResult?.h}
           tris={data.cubeResult?.LenDaoJiao}
@@ -157,30 +158,33 @@ export default function Index(props: {
         </div>
       )}
       <div className="q-absolute q-bottom-0 q-left-0 q-p-2">
-        <Switch
-          checkedChildren="标签"
-          unCheckedChildren="标签"
-          checked={v}
-          onChange={(v) => {
-            setV(v);
-          }}
-        />
+        <span className="q-ml-2">
+          <Radio.Group
+            options={[
+              { label: "三维", value: true },
+              { label: "二维", value: false },
+            ]}
+            value={showCube}
+            onChange={(e) => {
+              setShowCube(e.target.value);
+            }}
+            optionType="button"
+            buttonStyle="solid"
+            size="small"
+          />
+        </span>
+        {showCube && (
+          <Switch
+            className="q-ml-4"
+            checkedChildren="标签"
+            unCheckedChildren="标签"
+            checked={v}
+            onChange={(v) => {
+              setV(v);
+            }}
+          />
+        )}
       </div>
     </div>
   );
 }
-
-// export default () => {
-//   const [data] = useRecoilState(Data);
-//   const [showCube] = useRecoilState(ShowCube);
-
-//   if (showCube) return <Index />;
-
-//   return (
-//     <Cube2D
-//       width={data.cubeResult.b}
-//       height={data.cubeResult.w}
-//       tris={data.cubeResult.LenDaoJiao}
-//     />
-//   );
-// };

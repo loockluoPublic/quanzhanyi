@@ -24,7 +24,7 @@ const ArrowLine = ({
   const angle = Math.atan2(dy, dx);
 
   // 计算线段长度
-  const length = (Math.sqrt(dx * dx + dy * dy) / curCsale).toFixed(2);
+  const length = (Math.sqrt(dx * dx + dy * dy) / curCsale).toFixed(3);
 
   // 字号
   const fontSize = 20;
@@ -81,7 +81,7 @@ const ArrowLine = ({
             x2={bx}
             y2={by}
             stroke="green"
-            strokeWidth={2}
+            strokeWidth={1}
           />
 
           {/* 标注线EF，颜色为绿色 */}

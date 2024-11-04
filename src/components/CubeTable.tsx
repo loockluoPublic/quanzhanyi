@@ -9,7 +9,6 @@ export default function CubeTable(props: {
   points: CustomVector3[];
   num: number;
 }) {
-  // const data = props?.points;
   const [data, setData] = useRecoilState(Data);
   const remove = (i) => {
     const m = [...data.MxPoints?.[`m${props.num}`]];
@@ -41,11 +40,10 @@ export default function CubeTable(props: {
       },
     },
     {
-      title: "点",
+      title: "采集点",
       dataIndex: "x",
       align: "left",
       key: "x",
-
       render: (_, item, i) => {
         return (
           <PointsVector3
@@ -66,16 +64,10 @@ export default function CubeTable(props: {
         return <>{item.difference?.toFixed?.(6) ?? "--"}米</>;
       },
     },
-    // {
-    //   title: "当前标准差倍数",
-    //   dataIndex: "diff",
-    //   key: "difference",
-    //   align: "right",
-    // },
   ];
 
   return (
-    <div>
+    <div className="cube-table">
       <Table
         className="q-w-full"
         dataSource={props?.points ?? []}

@@ -1,14 +1,14 @@
 import React from "react";
 
-const SvgCanvas = ({ children, viewBox }) => {
+const SvgCanvas: React.FC<
+  React.PropsWithChildren<{ viewBox: string; maxHeight: number }>
+> = ({ children, viewBox, maxHeight }) => {
   return (
-    <div style={{ width: "500px", height: "500px", border: "1px solid black" }}>
-      <svg
-        width="100%"
-        height="100%"
-        viewBox={viewBox}
-        preserveAspectRatio="xMidYMid meet"
-      >
+    <div
+      className="canvas-style q-flex q-w-full q-h-full q-overflow-hidden q-relative"
+      style={{ maxHeight }}
+    >
+      <svg width="100%" height="100%" viewBox={viewBox}>
         {children}
       </svg>
     </div>

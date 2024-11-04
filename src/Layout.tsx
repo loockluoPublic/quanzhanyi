@@ -60,12 +60,12 @@ const App: React.FC<PropsWithChildren> = (props) => {
               <h2>超声换能器自动测算系统</h2>
             </div>
             <div className="q-inline-flex q-items-center">
-              <div
+              {/* <div
                 className=" q-text-white q-cursor-pointer q-ml-6"
                 onClick={() => transformJSON2Excel(data)}
               >
                 导出测试
-              </div>
+              </div> */}
               {showExportExcel && (
                 <div
                   className=" q-text-white q-cursor-pointer q-ml-6"

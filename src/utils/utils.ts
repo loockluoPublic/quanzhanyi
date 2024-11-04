@@ -3,6 +3,8 @@ import { CustomVector3 } from "../class/CustomVector3";
 import { tableData } from "./config";
 import { ICycle } from "../atom/type";
 import _ from "loadsh";
+import { TType } from "../atom/globalState";
+import dayjs from "dayjs";
 
 const {
   _generateUnitCircleWithNormalVector,
@@ -404,7 +406,12 @@ export const getDataFromTable = (sdfb: number, index: number) => {
   });
 };
 
-export const downLoadFile = (data, filename = "data.json") => {
+export const downLoadFile = (data) => {
+  const filename =
+    data.type === TType.cube
+      ? `方涵${dayjs().format("_YYYY_MM_DD")}.json`
+      : `管道${dayjs().format("_YYYY_MM_DD")}.json`;
+
   // 将JSON对象转换为字符串
   const jsonString = JSON.stringify(data, null, 2);
 

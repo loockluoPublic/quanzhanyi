@@ -200,6 +200,19 @@ const exportCube = (data: GlobalData) => {
 
   csvData.push([], ["方涵高度", data?.cubeResult?.h]);
 
+  csvData.push([], ["导角参数"]);
+
+  const djKey = [],
+    djValue = [];
+  data?.cubeResult?.LenDaoJiao?.forEach?.((value, index) => {
+    djKey.push(`L${index + 1}`);
+    djValue.push(value);
+  });
+
+  if (data?.cubeResult?.LenDaoJiao?.length > 0) {
+    csvData.push(djKey, djValue);
+  }
+
   csvData.push([], ["复测结果"]);
 
   const tableData = tableRender(

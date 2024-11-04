@@ -6,19 +6,27 @@ const containerWidth = 500;
 export default function Cube2D(props: {
   width: number;
   height: number;
+  containerHeight: number;
   tris: number[];
 }) {
-  console.log("%c Line:5 🥪 props", "color:#465975", props);
-
   const tris = props.tris ?? new Array(8).fill(0);
-  const { width: w = 2, height: h = 1 } = props;
+  const { width: w = 0, height: h = 0 } = props;
 
   const max = Math.max(w, h);
   const scale = containerWidth / max;
-  console.log("%c Line:18 🍊 scale", "color:#ffdd4d", scale);
+
+  if (max <= 0)
+    return (
+      <SvgCanvas
+        viewBox={`-100 -100 700 700`}
+        maxHeight={props.containerHeight}
+      >
+        {null}
+      </SvgCanvas>
+    );
 
   return (
-    <SvgCanvas viewBox={`-100 -100 700 700`}>
+    <SvgCanvas viewBox={`-100 -100 700 700`} maxHeight={props.containerHeight}>
       {/* 宽 */}
       <ArrowLine
         points={[
@@ -155,7 +163,7 @@ export default function Cube2D(props: {
       <ArrowLine
         points={[
           { x: tris[6], y: h },
-          { x: 0, y: h - tris[0] },
+          { x: 0, y: h - tris[7] },
         ]}
         scale={scale}
         showLabel={false}
@@ -172,7 +180,7 @@ export default function Cube2D(props: {
       <ArrowLine
         points={[
           { x: 0, y: h },
-          { x: 0, y: h - tris[0] },
+          { x: 0, y: h - tris[7] },
         ]}
         scale={scale}
         showLabel={true}
@@ -181,7 +189,7 @@ export default function Cube2D(props: {
       {/* 左边 */}
       <ArrowLine
         points={[
-          { x: 0, y: h - tris[0] },
+          { x: 0, y: h - tris[7] },
           { x: 0, y: tris[0] },
         ]}
         scale={scale}

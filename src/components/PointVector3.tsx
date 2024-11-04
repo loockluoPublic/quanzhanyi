@@ -20,7 +20,6 @@ export default function PointsVector3(props: {
   const [loading, setLoading] = useState(false);
 
   const getPoints = () => {
-    console.log("%c Line:22 🥑 getPoints", "color:#2eafb0", getPoints);
     setLoading(true);
     props?.before?.();
     measureAndGetSimpleCoord()
