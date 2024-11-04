@@ -71,6 +71,7 @@ export default function Connect(props: { next: () => void }) {
                   if (pwd === encode(deviceInfoData?.SerialNo)) {
                     setDeviceInfo({ ...deviceInfoData, auth: true });
                     props.next();
+                    (window as any).mock = false;
                     message.success("秘钥验证成功");
                   } else {
                     message.error("秘钥验证错误，请确定秘钥与设备是否对应");
@@ -92,7 +93,7 @@ export default function Connect(props: { next: () => void }) {
                 })
                 .then((res) => {
                   setDeviceInfo(res);
-                  setPwd(encode(res?.SerialNo));
+                  // setPwd(encode(res?.SerialNo));
                 })
                 .catch((error) => {
                   console.error("%c Line:97 🌮 error", "color:#e41a6a", error);

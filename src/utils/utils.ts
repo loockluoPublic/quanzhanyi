@@ -413,7 +413,7 @@ export const downLoadFile = (data) => {
       : `管道${dayjs().format("_YYYY_MM_DD")}.json`;
 
   // 将JSON对象转换为字符串
-  const jsonString = JSON.stringify(data, null, 2);
+  const jsonString = JSON.stringify({ ...data, import: true }, null, 2);
 
   // 创建一个Blob对象
   const blob = new Blob([jsonString], { type: "application/json" });

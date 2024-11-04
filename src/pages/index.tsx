@@ -32,7 +32,7 @@ export default function Setting() {
   }, [data.type]);
 
   const onChange = (value: number) => {
-    if (deviceInfoData.auth || location.search.includes("mock")) {
+    if (deviceInfoData.auth || (window as any).mock) {
       setStep(value);
     } else {
       message.error("请验证秘钥");
@@ -54,10 +54,6 @@ export default function Setting() {
       title: "自动采点&管道拟合",
       components: <CylinderPre />,
     },
-    // {
-    //   title: "安装点计算",
-    //   components: <CylinderFit />,
-    // },
   ];
 
   if (mode === TMode.second) {

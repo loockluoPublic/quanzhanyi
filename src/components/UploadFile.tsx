@@ -15,6 +15,7 @@ function AntdFileReader() {
     reader.readAsText(file);
     reader.onload = () => {
       const importData = loadFile((reader.result as string) || "{}");
+      (window as any).mock = true;
       setStep(1);
       setData(importData);
       if (!compareSdcs(data, importData)) {
