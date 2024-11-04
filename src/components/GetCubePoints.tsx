@@ -1,13 +1,23 @@
-import { Badge, Button, Checkbox, InputNumber, message, Select } from "antd";
+import {
+  Badge,
+  Button,
+  Checkbox,
+  InputNumber,
+  message,
+  Select,
+  Switch,
+} from "antd";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { Data } from "../atom/globalState";
+import { Data, ShowCube } from "../atom/globalState";
 import { measureAndGetSimpleCoord } from "../utils/commond";
 import { CustomVector3 } from "../class/CustomVector3";
 import { CalculateRectangleFromVertex, Planefit } from "../utils/utils";
 import CubeTable from "./CubeTable";
 
 export default function () {
+  const [showCube, setShowCube] = useRecoilState(ShowCube);
+
   const [data, setData] = useRecoilState(Data);
 
   const [loading, setLoading] = useState(false);
@@ -104,8 +114,10 @@ export default function () {
           ...res,
           planeParaOut: res8temp.planeParaOut,
           MxPoints,
-          cubeResult: { ...cubeResult8temp, LenDaoJiao: res8temp.LenDaoJiao },
+          cubeResult: { ...cubeResult8temp, LenDaoJiao: res.LenDaoJiao },
         };
+
+        delete newData.LenDaoJiao;
 
         setPlaneFitLoadint(false);
         setData(newData);
@@ -266,8 +278,18 @@ export default function () {
             {width ?? "--"} 米
           </span>
           <span className="q-ml-8">方涵高度：{hight ?? "--"} 米</span>
+          <span className="q-ml-8">
+            <Switch
+              checkedChildren="横截面"
+              unCheckedChildren="横截面"
+              checked={showCube}
+              onChange={(v) => {
+                setShowCube(v);
+              }}
+            />
+          </span>
         </div>
-        <div>
+        <div className="q-ml-8">
           <Button loading={loading} type="primary" onClick={getPoints}>
             手动采点
           </Button>

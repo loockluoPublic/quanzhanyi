@@ -557,11 +557,6 @@ export const Planefit = (
 
   let i = 0;
 
-  console.log(
-    "%c Line:574 🍺 LenDaoJiao.toJSON()",
-    "color:#ffdd4d",
-    LenDaoJiao.toJSON()
-  );
   const res = {
     planeParaOut: planeParaOut.toJSON(),
     trianglePoints: trianglePoints.toVector3(),
@@ -880,7 +875,7 @@ const juXingFuCeFn = (
   cubeAgainTable: { p1: CustomVector3; p2: CustomVector3 }[],
   sdfb: number
 ) => {
-  console.log("%c Line:780 🍒 sdfb", "color:#33a5ff", sdfb);
+  console.log("%c Line:780 🍒 sdfb", "color:#33a5ff", cubeRes.LenDaoJiao);
   const PointIn = new EmxArray_real_T(
     cubeAgainTable?.reduce?.((acc, cur) => {
       return [...acc, cur.p1, cur.p2];

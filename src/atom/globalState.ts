@@ -77,3 +77,8 @@ export const ShowLabel = atom<boolean>({
   key: "showLabel",
   default: true,
 });
+
+export const ShowCube = atom<boolean>({
+  key: "showCube",
+  default: true,
+});
