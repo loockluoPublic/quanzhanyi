@@ -26,7 +26,7 @@ export default function PointsVector3(props: {
     setLoading(true);
     props?.before?.();
     measureAndGetSimpleCoord()
-      .then((res) => {
+      .then((res: any) => {
         props.onChange?.(res);
       })
       .catch((err) => {

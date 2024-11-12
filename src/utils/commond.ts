@@ -245,12 +245,7 @@ export const pointToAndMeasure = (v: CustomVector3) => {
  * @param v
  * @returns Promise<CustomVector3>
  */
-export const measureAndGetSimpleCoord = () => {
-  console.log(
-    "%c Line:237 🍺 location.search",
-    "color:#33a5ff",
-    location.search
-  );
+export const measureAndGetSimpleCoord = (): Promise<CustomVector3> => {
   if (location.search.includes("mock")) {
     return new Promise((resolve) => {
       setTimeout(() => {
