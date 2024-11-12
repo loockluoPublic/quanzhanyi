@@ -279,7 +279,7 @@ export default function () {
         </div>
         <div className="q-ml-8">
           <Button loading={loading} type="primary" onClick={getPoints}>
-            手动采点
+            手动采集
           </Button>
           <Button
             className="q-ml-4"

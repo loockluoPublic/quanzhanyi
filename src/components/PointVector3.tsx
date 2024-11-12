@@ -14,6 +14,9 @@ export default function PointsVector3(props: {
   remove?: () => void;
   autoMeasure?: boolean;
   className?: string;
+  type?: "button";
+  buttonText?: string;
+  buttonProps?: any;
 }) {
   const { showGetPoints = true, value } = props;
 
@@ -49,6 +52,22 @@ export default function PointsVector3(props: {
   }
 
   if (props.hideLabel) w = -30;
+
+  const buttonText = props.buttonText || "采集";
+
+  console.log("%c Line:64 🥥 loading", "color:#ea7e5c", loading);
+  if (props.type === "button")
+    return (
+      <Button
+        type="primary"
+        onClick={getPoints}
+        loading={loading}
+        size="small"
+        {...props.buttonProps}
+      >
+        {buttonText}
+      </Button>
+    );
 
   return (
     <div
@@ -87,7 +106,7 @@ export default function PointsVector3(props: {
               loading={loading}
               size="small"
             >
-              采集
+              {buttonText}
             </Button>
           )}
         </span>

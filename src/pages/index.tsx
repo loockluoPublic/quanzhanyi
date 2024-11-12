@@ -80,7 +80,7 @@ export default function Setting() {
       ),
     },
     {
-      title: "手动采点&方涵拟合",
+      title: "手动采集&方涵拟合",
       components: <CubePre />,
     },
     // {

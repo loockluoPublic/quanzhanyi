@@ -253,8 +253,31 @@ function CylinderPre() {
           loading={loading}
           onClick={autoGetPoints}
         >
-          开始采集
+          自动采集
         </Button>
+
+        <PointsVector3
+          type="button"
+          buttonProps={{
+            className: "q-ml q-ml-8",
+            size: "middle",
+          }}
+          buttonText="手动采集"
+          before={() => {
+            const maxKey = Math.max(
+              0,
+              ...data.mPoints?.map((item) => item.key)
+            );
+
+            CustomVector3.setPublicInfo("P", maxKey);
+          }}
+          onChange={(v) => {
+            setData((d) => ({
+              ...d,
+              mPoints: [v, ...d.mPoints],
+            }));
+          }}
+        />
 
         <Button
           className=" q-ml-8 "

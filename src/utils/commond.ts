@@ -251,9 +251,13 @@ export const measureAndGetSimpleCoord = () => {
     "color:#33a5ff",
     location.search
   );
-  if (location.search.includes("mock"))
-    return Promise.resolve(
-      new CustomVector3(Math.random(), Math.random(), Math.random())
-    );
+  if (location.search.includes("mock")) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(new CustomVector3(Math.random(), Math.random(), Math.random()));
+      }, 500);
+    });
+  }
+
   return measure().then(getSimpleCoord);
 };
