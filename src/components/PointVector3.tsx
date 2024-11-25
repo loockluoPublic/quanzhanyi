@@ -19,6 +19,7 @@ export default function PointsVector3(props: {
   buttonProps?: any;
 }) {
   const { showGetPoints = true, value } = props;
+  console.log("%c Line:22 🥑 props", "color:#42b983", props);
 
   const [loading, setLoading] = useState(false);
 
