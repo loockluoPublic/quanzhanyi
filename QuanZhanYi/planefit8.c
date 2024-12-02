@@ -2,7 +2,7 @@
  * File: planefit8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Nov-2024 20:42:34
+ * C/C++ source code generated on  : 02-Dec-2024 23:37:52
  */
 
 /* Include Files */
@@ -74,33 +74,33 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
                  emxArray_real_T *distancesFianal)
 {
   static const signed char b_iv[8] = {0, 1, 2, 5, 8, 11, 14, 17};
-  cell_wrap_1 distancesFianal1[8];
-  cell_wrap_1 inlierIdxFinal[8];
-  cell_wrap_1 r10;
-  cell_wrap_1 r11;
-  cell_wrap_1 r12;
-  cell_wrap_1 r13;
-  cell_wrap_1 r14;
-  cell_wrap_1 r15;
-  cell_wrap_1 r16;
-  cell_wrap_1 r17;
-  cell_wrap_1 r18;
-  cell_wrap_1 r19;
-  cell_wrap_1 r20;
-  cell_wrap_1 r21;
-  cell_wrap_1 r22;
-  cell_wrap_1 r23;
-  cell_wrap_1 r8;
-  cell_wrap_1 r9;
-  cell_wrap_4 PointAll[8];
-  cell_wrap_4 r;
-  cell_wrap_4 r1;
-  cell_wrap_4 r2;
-  cell_wrap_4 r3;
-  cell_wrap_4 r4;
-  cell_wrap_4 r5;
-  cell_wrap_4 r6;
-  cell_wrap_4 r7;
+  cell_wrap_5 distancesFianal1[8];
+  cell_wrap_5 inlierIdxFinal[8];
+  cell_wrap_5 r10;
+  cell_wrap_5 r11;
+  cell_wrap_5 r12;
+  cell_wrap_5 r13;
+  cell_wrap_5 r14;
+  cell_wrap_5 r15;
+  cell_wrap_5 r16;
+  cell_wrap_5 r17;
+  cell_wrap_5 r18;
+  cell_wrap_5 r19;
+  cell_wrap_5 r20;
+  cell_wrap_5 r21;
+  cell_wrap_5 r22;
+  cell_wrap_5 r23;
+  cell_wrap_5 r8;
+  cell_wrap_5 r9;
+  cell_wrap_8 PointAll[8];
+  cell_wrap_8 r;
+  cell_wrap_8 r1;
+  cell_wrap_8 r2;
+  cell_wrap_8 r3;
+  cell_wrap_8 r4;
+  cell_wrap_8 r5;
+  cell_wrap_8 r6;
+  cell_wrap_8 r7;
   emxArray_boolean_T *b_distances;
   emxArray_int32_T *r24;
   emxArray_real_T *B;
@@ -494,7 +494,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
       Points8_data[i] = Tpoints[i];
     }
   }
-  emxInitStruct_cell_wrap_4(&r);
+  emxInitStruct_cell_wrap_8(&r);
   i = r.f1->size[0] * r.f1->size[1];
   r.f1->size[0] = 3;
   r.f1->size[1] = Points1->size[1];
@@ -503,7 +503,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r.f1->data[i] = Points1_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r1);
+  emxInitStruct_cell_wrap_8(&r1);
   i = r1.f1->size[0] * r1.f1->size[1];
   r1.f1->size[0] = 3;
   r1.f1->size[1] = Points2->size[1];
@@ -512,7 +512,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r1.f1->data[i] = Points2_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r2);
+  emxInitStruct_cell_wrap_8(&r2);
   i = r2.f1->size[0] * r2.f1->size[1];
   r2.f1->size[0] = 3;
   r2.f1->size[1] = Points3->size[1];
@@ -521,7 +521,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r2.f1->data[i] = Points3_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r3);
+  emxInitStruct_cell_wrap_8(&r3);
   i = r3.f1->size[0] * r3.f1->size[1];
   r3.f1->size[0] = 3;
   r3.f1->size[1] = Points4->size[1];
@@ -530,7 +530,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r3.f1->data[i] = Points4_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r4);
+  emxInitStruct_cell_wrap_8(&r4);
   i = r4.f1->size[0] * r4.f1->size[1];
   r4.f1->size[0] = 3;
   r4.f1->size[1] = Points5->size[1];
@@ -539,7 +539,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r4.f1->data[i] = Points5_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r5);
+  emxInitStruct_cell_wrap_8(&r5);
   i = r5.f1->size[0] * r5.f1->size[1];
   r5.f1->size[0] = 3;
   r5.f1->size[1] = Points6->size[1];
@@ -548,7 +548,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r5.f1->data[i] = Points6_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r6);
+  emxInitStruct_cell_wrap_8(&r6);
   i = r6.f1->size[0] * r6.f1->size[1];
   r6.f1->size[0] = 3;
   r6.f1->size[1] = Points7->size[1];
@@ -557,7 +557,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r6.f1->data[i] = Points7_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r7);
+  emxInitStruct_cell_wrap_8(&r7);
   i = r7.f1->size[0] * r7.f1->size[1];
   r7.f1->size[0] = 3;
   r7.f1->size[1] = Points8->size[1];
@@ -566,23 +566,23 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r7.f1->data[i] = Points8_data[i];
   }
-  emxInitMatrix_cell_wrap_4(PointAll);
-  emxCopyStruct_cell_wrap_4(&PointAll[0], &r);
-  emxFreeStruct_cell_wrap_4(&r);
-  emxCopyStruct_cell_wrap_4(&PointAll[1], &r1);
-  emxFreeStruct_cell_wrap_4(&r1);
-  emxCopyStruct_cell_wrap_4(&PointAll[2], &r2);
-  emxFreeStruct_cell_wrap_4(&r2);
-  emxCopyStruct_cell_wrap_4(&PointAll[3], &r3);
-  emxFreeStruct_cell_wrap_4(&r3);
-  emxCopyStruct_cell_wrap_4(&PointAll[4], &r4);
-  emxFreeStruct_cell_wrap_4(&r4);
-  emxCopyStruct_cell_wrap_4(&PointAll[5], &r5);
-  emxFreeStruct_cell_wrap_4(&r5);
-  emxCopyStruct_cell_wrap_4(&PointAll[6], &r6);
-  emxFreeStruct_cell_wrap_4(&r6);
-  emxCopyStruct_cell_wrap_4(&PointAll[7], &r7);
-  emxFreeStruct_cell_wrap_4(&r7);
+  emxInitMatrix_cell_wrap_8(PointAll);
+  emxCopyStruct_cell_wrap_8(&PointAll[0], &r);
+  emxFreeStruct_cell_wrap_8(&r);
+  emxCopyStruct_cell_wrap_8(&PointAll[1], &r1);
+  emxFreeStruct_cell_wrap_8(&r1);
+  emxCopyStruct_cell_wrap_8(&PointAll[2], &r2);
+  emxFreeStruct_cell_wrap_8(&r2);
+  emxCopyStruct_cell_wrap_8(&PointAll[3], &r3);
+  emxFreeStruct_cell_wrap_8(&r3);
+  emxCopyStruct_cell_wrap_8(&PointAll[4], &r4);
+  emxFreeStruct_cell_wrap_8(&r4);
+  emxCopyStruct_cell_wrap_8(&PointAll[5], &r5);
+  emxFreeStruct_cell_wrap_8(&r5);
+  emxCopyStruct_cell_wrap_8(&PointAll[6], &r6);
+  emxFreeStruct_cell_wrap_8(&r6);
+  emxCopyStruct_cell_wrap_8(&PointAll[7], &r7);
+  emxFreeStruct_cell_wrap_8(&r7);
   i = PlaneParaOut->size[0] * PlaneParaOut->size[1];
   PlaneParaOut->size[0] = 4;
   PlaneParaOut->size[1] = 8;
@@ -591,143 +591,143 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < 32; i++) {
     PlaneParaOut_data[i] = 0.0;
   }
-  emxInitStruct_cell_wrap_1(&r8);
+  emxInitStruct_cell_wrap_5(&r8);
   i = r8.f1->size[0] * r8.f1->size[1];
   r8.f1->size[0] = 1;
   r8.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r8.f1, i);
   r8.f1->data[0] = 1.0;
-  emxInitStruct_cell_wrap_1(&r9);
+  emxInitStruct_cell_wrap_5(&r9);
   i = r9.f1->size[0] * r9.f1->size[1];
   r9.f1->size[0] = 1;
   r9.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r9.f1, i);
   r9.f1->data[0] = 2.0;
-  emxInitStruct_cell_wrap_1(&r10);
+  emxInitStruct_cell_wrap_5(&r10);
   i = r10.f1->size[0] * r10.f1->size[1];
   r10.f1->size[0] = 1;
   r10.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r10.f1, i);
   r10.f1->data[0] = 3.0;
-  emxInitStruct_cell_wrap_1(&r11);
+  emxInitStruct_cell_wrap_5(&r11);
   i = r11.f1->size[0] * r11.f1->size[1];
   r11.f1->size[0] = 1;
   r11.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r11.f1, i);
   r11.f1->data[0] = 4.0;
-  emxInitStruct_cell_wrap_1(&r12);
+  emxInitStruct_cell_wrap_5(&r12);
   i = r12.f1->size[0] * r12.f1->size[1];
   r12.f1->size[0] = 1;
   r12.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r12.f1, i);
   r12.f1->data[0] = 5.0;
-  emxInitStruct_cell_wrap_1(&r13);
+  emxInitStruct_cell_wrap_5(&r13);
   i = r13.f1->size[0] * r13.f1->size[1];
   r13.f1->size[0] = 1;
   r13.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r13.f1, i);
   r13.f1->data[0] = 6.0;
-  emxInitStruct_cell_wrap_1(&r14);
+  emxInitStruct_cell_wrap_5(&r14);
   i = r14.f1->size[0] * r14.f1->size[1];
   r14.f1->size[0] = 1;
   r14.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r14.f1, i);
   r14.f1->data[0] = 7.0;
-  emxInitStruct_cell_wrap_1(&r15);
+  emxInitStruct_cell_wrap_5(&r15);
   i = r15.f1->size[0] * r15.f1->size[1];
   r15.f1->size[0] = 1;
   r15.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r15.f1, i);
   r15.f1->data[0] = 8.0;
-  emxInitMatrix_cell_wrap_1(inlierIdxFinal);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[0], &r8);
-  emxFreeStruct_cell_wrap_1(&r8);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[1], &r9);
-  emxFreeStruct_cell_wrap_1(&r9);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[2], &r10);
-  emxFreeStruct_cell_wrap_1(&r10);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[3], &r11);
-  emxFreeStruct_cell_wrap_1(&r11);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[4], &r12);
-  emxFreeStruct_cell_wrap_1(&r12);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[5], &r13);
-  emxFreeStruct_cell_wrap_1(&r13);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[6], &r14);
-  emxFreeStruct_cell_wrap_1(&r14);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[7], &r15);
-  emxFreeStruct_cell_wrap_1(&r15);
-  emxInitStruct_cell_wrap_1(&r16);
+  emxInitMatrix_cell_wrap_5(inlierIdxFinal);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[0], &r8);
+  emxFreeStruct_cell_wrap_5(&r8);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[1], &r9);
+  emxFreeStruct_cell_wrap_5(&r9);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[2], &r10);
+  emxFreeStruct_cell_wrap_5(&r10);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[3], &r11);
+  emxFreeStruct_cell_wrap_5(&r11);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[4], &r12);
+  emxFreeStruct_cell_wrap_5(&r12);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[5], &r13);
+  emxFreeStruct_cell_wrap_5(&r13);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[6], &r14);
+  emxFreeStruct_cell_wrap_5(&r14);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[7], &r15);
+  emxFreeStruct_cell_wrap_5(&r15);
+  emxInitStruct_cell_wrap_5(&r16);
   i = r16.f1->size[0] * r16.f1->size[1];
   r16.f1->size[0] = 1;
   r16.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r16.f1, i);
   r16.f1->data[0] = 1.0;
-  emxInitStruct_cell_wrap_1(&r17);
+  emxInitStruct_cell_wrap_5(&r17);
   i = r17.f1->size[0] * r17.f1->size[1];
   r17.f1->size[0] = 1;
   r17.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r17.f1, i);
   r17.f1->data[0] = 2.0;
-  emxInitStruct_cell_wrap_1(&r18);
+  emxInitStruct_cell_wrap_5(&r18);
   i = r18.f1->size[0] * r18.f1->size[1];
   r18.f1->size[0] = 1;
   r18.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r18.f1, i);
   r18.f1->data[0] = 3.0;
-  emxInitStruct_cell_wrap_1(&r19);
+  emxInitStruct_cell_wrap_5(&r19);
   i = r19.f1->size[0] * r19.f1->size[1];
   r19.f1->size[0] = 1;
   r19.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r19.f1, i);
   r19.f1->data[0] = 4.0;
-  emxInitStruct_cell_wrap_1(&r20);
+  emxInitStruct_cell_wrap_5(&r20);
   i = r20.f1->size[0] * r20.f1->size[1];
   r20.f1->size[0] = 1;
   r20.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r20.f1, i);
   r20.f1->data[0] = 5.0;
-  emxInitStruct_cell_wrap_1(&r21);
+  emxInitStruct_cell_wrap_5(&r21);
   i = r21.f1->size[0] * r21.f1->size[1];
   r21.f1->size[0] = 1;
   r21.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r21.f1, i);
   r21.f1->data[0] = 6.0;
-  emxInitStruct_cell_wrap_1(&r22);
+  emxInitStruct_cell_wrap_5(&r22);
   i = r22.f1->size[0] * r22.f1->size[1];
   r22.f1->size[0] = 1;
   r22.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r22.f1, i);
   r22.f1->data[0] = 7.0;
-  emxInitStruct_cell_wrap_1(&r23);
+  emxInitStruct_cell_wrap_5(&r23);
   i = r23.f1->size[0] * r23.f1->size[1];
   r23.f1->size[0] = 1;
   r23.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r23.f1, i);
   r23.f1->data[0] = 8.0;
-  emxInitMatrix_cell_wrap_1(distancesFianal1);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[0], &r16);
-  emxFreeStruct_cell_wrap_1(&r16);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[1], &r17);
-  emxFreeStruct_cell_wrap_1(&r17);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[2], &r18);
-  emxFreeStruct_cell_wrap_1(&r18);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[3], &r19);
-  emxFreeStruct_cell_wrap_1(&r19);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[4], &r20);
-  emxFreeStruct_cell_wrap_1(&r20);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[5], &r21);
-  emxFreeStruct_cell_wrap_1(&r21);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[6], &r22);
-  emxFreeStruct_cell_wrap_1(&r22);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[7], &r23);
-  emxFreeStruct_cell_wrap_1(&r23);
+  emxInitMatrix_cell_wrap_5(distancesFianal1);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[0], &r16);
+  emxFreeStruct_cell_wrap_5(&r16);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[1], &r17);
+  emxFreeStruct_cell_wrap_5(&r17);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[2], &r18);
+  emxFreeStruct_cell_wrap_5(&r18);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[3], &r19);
+  emxFreeStruct_cell_wrap_5(&r19);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[4], &r20);
+  emxFreeStruct_cell_wrap_5(&r20);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[5], &r21);
+  emxFreeStruct_cell_wrap_5(&r21);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[6], &r22);
+  emxFreeStruct_cell_wrap_5(&r22);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[7], &r23);
+  emxFreeStruct_cell_wrap_5(&r23);
   emxInit_real_T(&pointss, 2);
   emxInit_real_T(&C, 2);
   emxInit_real_T(&distances, 2);
   emxInit_real_T(&inlierPoints, 2);
   emxInit_real_T(&a__4, 2);
   emxInit_real_T(&B, 2);
-  emxInit_int32_T(&r24);
+  emxInit_int32_T(&r24, 2);
   emxInit_real_T(&b_inlierPoints, 1);
   emxInit_real_T(&c_inlierPoints, 1);
   emxInit_boolean_T(&b_distances);
@@ -1042,7 +1042,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   emxFree_real_T(&b_inlierPoints);
   emxFree_int32_T(&r24);
   emxFree_real_T(&B);
-  emxFreeMatrix_cell_wrap_4(PointAll);
+  emxFreeMatrix_cell_wrap_8(PointAll);
   emxFree_real_T(&a__4);
   emxFree_real_T(&inlierPoints);
   emxFree_real_T(&C);
@@ -1133,7 +1133,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Points8_data[i] =
         distancesFianal1[7].f1->data[(int)inlierIdxFinal[7].f1->data[i] - 1];
   }
-  emxFreeMatrix_cell_wrap_1(inlierIdxFinal);
+  emxFreeMatrix_cell_wrap_5(inlierIdxFinal);
   MaxDis[0] = maximum(Cnum);
   emxFree_real_T(&Cnum);
   MaxDis[1] = maximum(distances);
@@ -1212,7 +1212,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
                  distancesFianal1[6].f1->size[1]] =
         distancesFianal1[7].f1->data[i];
   }
-  emxFreeMatrix_cell_wrap_1(distancesFianal1);
+  emxFreeMatrix_cell_wrap_5(distancesFianal1);
   emxInit_real_T(&b_PlaneParaOut, 2);
   i = b_PlaneParaOut->size[0] * b_PlaneParaOut->size[1];
   b_PlaneParaOut->size[0] = 8;
@@ -1391,33 +1391,33 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
                emxArray_real_T *distancesFianal, double LenDaoJiao[8])
 {
   static const signed char b_iv[8] = {0, 1, 2, 5, 8, 11, 14, 17};
-  cell_wrap_1 distancesFianal1[8];
-  cell_wrap_1 inlierIdxFinal[8];
-  cell_wrap_1 r10;
-  cell_wrap_1 r11;
-  cell_wrap_1 r12;
-  cell_wrap_1 r13;
-  cell_wrap_1 r14;
-  cell_wrap_1 r15;
-  cell_wrap_1 r16;
-  cell_wrap_1 r17;
-  cell_wrap_1 r18;
-  cell_wrap_1 r19;
-  cell_wrap_1 r20;
-  cell_wrap_1 r21;
-  cell_wrap_1 r22;
-  cell_wrap_1 r23;
-  cell_wrap_1 r8;
-  cell_wrap_1 r9;
-  cell_wrap_4 PointAll[8];
-  cell_wrap_4 r;
-  cell_wrap_4 r1;
-  cell_wrap_4 r2;
-  cell_wrap_4 r3;
-  cell_wrap_4 r4;
-  cell_wrap_4 r5;
-  cell_wrap_4 r6;
-  cell_wrap_4 r7;
+  cell_wrap_5 distancesFianal1[8];
+  cell_wrap_5 inlierIdxFinal[8];
+  cell_wrap_5 r10;
+  cell_wrap_5 r11;
+  cell_wrap_5 r12;
+  cell_wrap_5 r13;
+  cell_wrap_5 r14;
+  cell_wrap_5 r15;
+  cell_wrap_5 r16;
+  cell_wrap_5 r17;
+  cell_wrap_5 r18;
+  cell_wrap_5 r19;
+  cell_wrap_5 r20;
+  cell_wrap_5 r21;
+  cell_wrap_5 r22;
+  cell_wrap_5 r23;
+  cell_wrap_5 r8;
+  cell_wrap_5 r9;
+  cell_wrap_8 PointAll[8];
+  cell_wrap_8 r;
+  cell_wrap_8 r1;
+  cell_wrap_8 r2;
+  cell_wrap_8 r3;
+  cell_wrap_8 r4;
+  cell_wrap_8 r5;
+  cell_wrap_8 r6;
+  cell_wrap_8 r7;
   emxArray_boolean_T *b_distances;
   emxArray_int32_T *r24;
   emxArray_real_T *C;
@@ -1823,7 +1823,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
       Points8_data[i] = Tpoints[i];
     }
   }
-  emxInitStruct_cell_wrap_4(&r);
+  emxInitStruct_cell_wrap_8(&r);
   i = r.f1->size[0] * r.f1->size[1];
   r.f1->size[0] = 3;
   r.f1->size[1] = Points1->size[1];
@@ -1832,7 +1832,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r.f1->data[i] = Points1_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r1);
+  emxInitStruct_cell_wrap_8(&r1);
   i = r1.f1->size[0] * r1.f1->size[1];
   r1.f1->size[0] = 3;
   r1.f1->size[1] = Points2->size[1];
@@ -1841,7 +1841,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r1.f1->data[i] = Points2_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r2);
+  emxInitStruct_cell_wrap_8(&r2);
   i = r2.f1->size[0] * r2.f1->size[1];
   r2.f1->size[0] = 3;
   r2.f1->size[1] = Points3->size[1];
@@ -1850,7 +1850,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r2.f1->data[i] = Points3_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r3);
+  emxInitStruct_cell_wrap_8(&r3);
   i = r3.f1->size[0] * r3.f1->size[1];
   r3.f1->size[0] = 3;
   r3.f1->size[1] = Points4->size[1];
@@ -1859,7 +1859,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r3.f1->data[i] = Points4_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r4);
+  emxInitStruct_cell_wrap_8(&r4);
   i = r4.f1->size[0] * r4.f1->size[1];
   r4.f1->size[0] = 3;
   r4.f1->size[1] = Points5->size[1];
@@ -1868,7 +1868,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r4.f1->data[i] = Points5_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r5);
+  emxInitStruct_cell_wrap_8(&r5);
   i = r5.f1->size[0] * r5.f1->size[1];
   r5.f1->size[0] = 3;
   r5.f1->size[1] = Points6->size[1];
@@ -1877,7 +1877,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r5.f1->data[i] = Points6_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r6);
+  emxInitStruct_cell_wrap_8(&r6);
   i = r6.f1->size[0] * r6.f1->size[1];
   r6.f1->size[0] = 3;
   r6.f1->size[1] = Points7->size[1];
@@ -1886,7 +1886,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r6.f1->data[i] = Points7_data[i];
   }
-  emxInitStruct_cell_wrap_4(&r7);
+  emxInitStruct_cell_wrap_8(&r7);
   i = r7.f1->size[0] * r7.f1->size[1];
   r7.f1->size[0] = 3;
   r7.f1->size[1] = Points8->size[1];
@@ -1895,23 +1895,23 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < loop_ub; i++) {
     r7.f1->data[i] = Points8_data[i];
   }
-  emxInitMatrix_cell_wrap_4(PointAll);
-  emxCopyStruct_cell_wrap_4(&PointAll[0], &r);
-  emxFreeStruct_cell_wrap_4(&r);
-  emxCopyStruct_cell_wrap_4(&PointAll[1], &r1);
-  emxFreeStruct_cell_wrap_4(&r1);
-  emxCopyStruct_cell_wrap_4(&PointAll[2], &r2);
-  emxFreeStruct_cell_wrap_4(&r2);
-  emxCopyStruct_cell_wrap_4(&PointAll[3], &r3);
-  emxFreeStruct_cell_wrap_4(&r3);
-  emxCopyStruct_cell_wrap_4(&PointAll[4], &r4);
-  emxFreeStruct_cell_wrap_4(&r4);
-  emxCopyStruct_cell_wrap_4(&PointAll[5], &r5);
-  emxFreeStruct_cell_wrap_4(&r5);
-  emxCopyStruct_cell_wrap_4(&PointAll[6], &r6);
-  emxFreeStruct_cell_wrap_4(&r6);
-  emxCopyStruct_cell_wrap_4(&PointAll[7], &r7);
-  emxFreeStruct_cell_wrap_4(&r7);
+  emxInitMatrix_cell_wrap_8(PointAll);
+  emxCopyStruct_cell_wrap_8(&PointAll[0], &r);
+  emxFreeStruct_cell_wrap_8(&r);
+  emxCopyStruct_cell_wrap_8(&PointAll[1], &r1);
+  emxFreeStruct_cell_wrap_8(&r1);
+  emxCopyStruct_cell_wrap_8(&PointAll[2], &r2);
+  emxFreeStruct_cell_wrap_8(&r2);
+  emxCopyStruct_cell_wrap_8(&PointAll[3], &r3);
+  emxFreeStruct_cell_wrap_8(&r3);
+  emxCopyStruct_cell_wrap_8(&PointAll[4], &r4);
+  emxFreeStruct_cell_wrap_8(&r4);
+  emxCopyStruct_cell_wrap_8(&PointAll[5], &r5);
+  emxFreeStruct_cell_wrap_8(&r5);
+  emxCopyStruct_cell_wrap_8(&PointAll[6], &r6);
+  emxFreeStruct_cell_wrap_8(&r6);
+  emxCopyStruct_cell_wrap_8(&PointAll[7], &r7);
+  emxFreeStruct_cell_wrap_8(&r7);
   i = PlaneParaOut->size[0] * PlaneParaOut->size[1];
   PlaneParaOut->size[0] = 4;
   PlaneParaOut->size[1] = 8;
@@ -1920,142 +1920,142 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < 32; i++) {
     PlaneParaOut_data[i] = 0.0;
   }
-  emxInitStruct_cell_wrap_1(&r8);
+  emxInitStruct_cell_wrap_5(&r8);
   i = r8.f1->size[0] * r8.f1->size[1];
   r8.f1->size[0] = 1;
   r8.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r8.f1, i);
   r8.f1->data[0] = 1.0;
-  emxInitStruct_cell_wrap_1(&r9);
+  emxInitStruct_cell_wrap_5(&r9);
   i = r9.f1->size[0] * r9.f1->size[1];
   r9.f1->size[0] = 1;
   r9.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r9.f1, i);
   r9.f1->data[0] = 2.0;
-  emxInitStruct_cell_wrap_1(&r10);
+  emxInitStruct_cell_wrap_5(&r10);
   i = r10.f1->size[0] * r10.f1->size[1];
   r10.f1->size[0] = 1;
   r10.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r10.f1, i);
   r10.f1->data[0] = 3.0;
-  emxInitStruct_cell_wrap_1(&r11);
+  emxInitStruct_cell_wrap_5(&r11);
   i = r11.f1->size[0] * r11.f1->size[1];
   r11.f1->size[0] = 1;
   r11.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r11.f1, i);
   r11.f1->data[0] = 4.0;
-  emxInitStruct_cell_wrap_1(&r12);
+  emxInitStruct_cell_wrap_5(&r12);
   i = r12.f1->size[0] * r12.f1->size[1];
   r12.f1->size[0] = 1;
   r12.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r12.f1, i);
   r12.f1->data[0] = 5.0;
-  emxInitStruct_cell_wrap_1(&r13);
+  emxInitStruct_cell_wrap_5(&r13);
   i = r13.f1->size[0] * r13.f1->size[1];
   r13.f1->size[0] = 1;
   r13.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r13.f1, i);
   r13.f1->data[0] = 6.0;
-  emxInitStruct_cell_wrap_1(&r14);
+  emxInitStruct_cell_wrap_5(&r14);
   i = r14.f1->size[0] * r14.f1->size[1];
   r14.f1->size[0] = 1;
   r14.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r14.f1, i);
   r14.f1->data[0] = 7.0;
-  emxInitStruct_cell_wrap_1(&r15);
+  emxInitStruct_cell_wrap_5(&r15);
   i = r15.f1->size[0] * r15.f1->size[1];
   r15.f1->size[0] = 1;
   r15.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r15.f1, i);
   r15.f1->data[0] = 8.0;
-  emxInitMatrix_cell_wrap_1(inlierIdxFinal);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[0], &r8);
-  emxFreeStruct_cell_wrap_1(&r8);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[1], &r9);
-  emxFreeStruct_cell_wrap_1(&r9);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[2], &r10);
-  emxFreeStruct_cell_wrap_1(&r10);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[3], &r11);
-  emxFreeStruct_cell_wrap_1(&r11);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[4], &r12);
-  emxFreeStruct_cell_wrap_1(&r12);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[5], &r13);
-  emxFreeStruct_cell_wrap_1(&r13);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[6], &r14);
-  emxFreeStruct_cell_wrap_1(&r14);
-  emxCopyStruct_cell_wrap_1(&inlierIdxFinal[7], &r15);
-  emxFreeStruct_cell_wrap_1(&r15);
-  emxInitStruct_cell_wrap_1(&r16);
+  emxInitMatrix_cell_wrap_5(inlierIdxFinal);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[0], &r8);
+  emxFreeStruct_cell_wrap_5(&r8);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[1], &r9);
+  emxFreeStruct_cell_wrap_5(&r9);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[2], &r10);
+  emxFreeStruct_cell_wrap_5(&r10);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[3], &r11);
+  emxFreeStruct_cell_wrap_5(&r11);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[4], &r12);
+  emxFreeStruct_cell_wrap_5(&r12);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[5], &r13);
+  emxFreeStruct_cell_wrap_5(&r13);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[6], &r14);
+  emxFreeStruct_cell_wrap_5(&r14);
+  emxCopyStruct_cell_wrap_5(&inlierIdxFinal[7], &r15);
+  emxFreeStruct_cell_wrap_5(&r15);
+  emxInitStruct_cell_wrap_5(&r16);
   i = r16.f1->size[0] * r16.f1->size[1];
   r16.f1->size[0] = 1;
   r16.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r16.f1, i);
   r16.f1->data[0] = 1.0;
-  emxInitStruct_cell_wrap_1(&r17);
+  emxInitStruct_cell_wrap_5(&r17);
   i = r17.f1->size[0] * r17.f1->size[1];
   r17.f1->size[0] = 1;
   r17.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r17.f1, i);
   r17.f1->data[0] = 2.0;
-  emxInitStruct_cell_wrap_1(&r18);
+  emxInitStruct_cell_wrap_5(&r18);
   i = r18.f1->size[0] * r18.f1->size[1];
   r18.f1->size[0] = 1;
   r18.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r18.f1, i);
   r18.f1->data[0] = 3.0;
-  emxInitStruct_cell_wrap_1(&r19);
+  emxInitStruct_cell_wrap_5(&r19);
   i = r19.f1->size[0] * r19.f1->size[1];
   r19.f1->size[0] = 1;
   r19.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r19.f1, i);
   r19.f1->data[0] = 4.0;
-  emxInitStruct_cell_wrap_1(&r20);
+  emxInitStruct_cell_wrap_5(&r20);
   i = r20.f1->size[0] * r20.f1->size[1];
   r20.f1->size[0] = 1;
   r20.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r20.f1, i);
   r20.f1->data[0] = 5.0;
-  emxInitStruct_cell_wrap_1(&r21);
+  emxInitStruct_cell_wrap_5(&r21);
   i = r21.f1->size[0] * r21.f1->size[1];
   r21.f1->size[0] = 1;
   r21.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r21.f1, i);
   r21.f1->data[0] = 6.0;
-  emxInitStruct_cell_wrap_1(&r22);
+  emxInitStruct_cell_wrap_5(&r22);
   i = r22.f1->size[0] * r22.f1->size[1];
   r22.f1->size[0] = 1;
   r22.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r22.f1, i);
   r22.f1->data[0] = 7.0;
-  emxInitStruct_cell_wrap_1(&r23);
+  emxInitStruct_cell_wrap_5(&r23);
   i = r23.f1->size[0] * r23.f1->size[1];
   r23.f1->size[0] = 1;
   r23.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r23.f1, i);
   r23.f1->data[0] = 8.0;
-  emxInitMatrix_cell_wrap_1(distancesFianal1);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[0], &r16);
-  emxFreeStruct_cell_wrap_1(&r16);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[1], &r17);
-  emxFreeStruct_cell_wrap_1(&r17);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[2], &r18);
-  emxFreeStruct_cell_wrap_1(&r18);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[3], &r19);
-  emxFreeStruct_cell_wrap_1(&r19);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[4], &r20);
-  emxFreeStruct_cell_wrap_1(&r20);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[5], &r21);
-  emxFreeStruct_cell_wrap_1(&r21);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[6], &r22);
-  emxFreeStruct_cell_wrap_1(&r22);
-  emxCopyStruct_cell_wrap_1(&distancesFianal1[7], &r23);
-  emxFreeStruct_cell_wrap_1(&r23);
+  emxInitMatrix_cell_wrap_5(distancesFianal1);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[0], &r16);
+  emxFreeStruct_cell_wrap_5(&r16);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[1], &r17);
+  emxFreeStruct_cell_wrap_5(&r17);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[2], &r18);
+  emxFreeStruct_cell_wrap_5(&r18);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[3], &r19);
+  emxFreeStruct_cell_wrap_5(&r19);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[4], &r20);
+  emxFreeStruct_cell_wrap_5(&r20);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[5], &r21);
+  emxFreeStruct_cell_wrap_5(&r21);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[6], &r22);
+  emxFreeStruct_cell_wrap_5(&r22);
+  emxCopyStruct_cell_wrap_5(&distancesFianal1[7], &r23);
+  emxFreeStruct_cell_wrap_5(&r23);
   emxInit_real_T(&pointss, 2);
   emxInit_real_T(&C, 2);
   emxInit_real_T(&distances, 2);
   emxInit_real_T(&inlierPoints, 2);
   emxInit_real_T(&a__4, 2);
-  emxInit_int32_T(&r24);
+  emxInit_int32_T(&r24, 2);
   emxInit_real_T(&b_inlierPoints, 1);
   emxInit_real_T(&c_inlierPoints, 1);
   emxInit_real_T(&b_pointss, 2);
@@ -2179,7 +2179,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
           Points8_data[i1 + b_pointss->size[0] * result_idx_1] = 1.0;
         }
       }
-      b_mtimes(Isempty, b_pointss, Cnum);
+      c_mtimes(Isempty, b_pointss, Cnum);
       Points8_data = Cnum->data;
       nx = Cnum->size[1];
       i = distances->size[0] * distances->size[1];
@@ -2361,7 +2361,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   emxFree_real_T(&c_inlierPoints);
   emxFree_real_T(&b_inlierPoints);
   emxFree_int32_T(&r24);
-  emxFreeMatrix_cell_wrap_4(PointAll);
+  emxFreeMatrix_cell_wrap_8(PointAll);
   emxFree_real_T(&a__4);
   emxFree_real_T(&inlierPoints);
   emxFree_real_T(&C);
@@ -2452,7 +2452,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Points8_data[i] =
         distancesFianal1[7].f1->data[(int)inlierIdxFinal[7].f1->data[i] - 1];
   }
-  emxFreeMatrix_cell_wrap_1(inlierIdxFinal);
+  emxFreeMatrix_cell_wrap_5(inlierIdxFinal);
   MaxDis[0] = maximum(Cnum);
   emxFree_real_T(&Cnum);
   MaxDis[1] = maximum(distances);
@@ -2531,7 +2531,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
                  distancesFianal1[6].f1->size[1]] =
         distancesFianal1[7].f1->data[i];
   }
-  emxFreeMatrix_cell_wrap_1(distancesFianal1);
+  emxFreeMatrix_cell_wrap_5(distancesFianal1);
   emxInit_real_T(&b_PlaneParaOut, 2);
   i = b_PlaneParaOut->size[0] * b_PlaneParaOut->size[1];
   b_PlaneParaOut->size[0] = 8;

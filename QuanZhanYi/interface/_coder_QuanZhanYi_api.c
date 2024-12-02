@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Nov-2024 20:42:34
+ * C/C++ source code generated on  : 02-Dec-2024 23:37:52
  */
 
 /* Include Files */
@@ -1503,13 +1503,13 @@ void angle2point_api(const mxArray *const prhs[6], int32_T nlhs,
 }
 
 /*
- * Arguments    : const mxArray * const prhs[8]
+ * Arguments    : const mxArray * const prhs[10]
  *                int32_T nlhs
- *                const mxArray *plhs[2]
+ *                const mxArray *plhs[3]
  * Return Type  : void
  */
-void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[8], int32_T nlhs,
-                                     const mxArray *plhs[2])
+void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[10],
+                                     int32_T nlhs, const mxArray *plhs[3])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -1517,11 +1517,14 @@ void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[8], int32_T nlhs,
       NULL  /* prev */
   };
   emxArray_real_T *Ang;
+  emxArray_real_T *BianHao;
   emxArray_real_T *PointTable_A_off;
   emxArray_real_T *PointTable_B_off;
   emxArray_real_T *roff;
   emxArray_real_T *toff;
-  const mxArray *prhs_copy_idx_5;
+  const mxArray *prhs_copy_idx_7;
+  real_T(*Bottom_round_center1)[3];
+  real_T(*Bottom_round_center2)[3];
   real_T(*MTaon)[3];
   real_T(*Mcenter)[3];
   real_T(*PAB)[3];
@@ -1529,28 +1532,33 @@ void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[8], int32_T nlhs,
   real_T phi;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  prhs_copy_idx_5 = emlrtProtectR2012b(prhs[5], 5, false, -1);
+  prhs_copy_idx_7 = emlrtProtectR2012b(prhs[7], 7, false, -1);
   /* Marshall function inputs */
-  MTaon = c_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "MTaon");
-  Mcenter = c_emlrt_marshallIn(&st, emlrtAlias(prhs[1]), "Mcenter");
-  Mradial = emlrt_marshallIn(&st, emlrtAliasP(prhs[2]), "Mradial");
-  PAB = c_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "PAB");
-  phi = emlrt_marshallIn(&st, emlrtAliasP(prhs[4]), "phi");
+  Bottom_round_center1 =
+      c_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "Bottom_round_center1");
+  Bottom_round_center2 =
+      c_emlrt_marshallIn(&st, emlrtAlias(prhs[1]), "Bottom_round_center2");
+  MTaon = c_emlrt_marshallIn(&st, emlrtAlias(prhs[2]), "MTaon");
+  Mcenter = c_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "Mcenter");
+  Mradial = emlrt_marshallIn(&st, emlrtAliasP(prhs[4]), "Mradial");
+  PAB = c_emlrt_marshallIn(&st, emlrtAlias(prhs[5]), "PAB");
+  phi = emlrt_marshallIn(&st, emlrtAliasP(prhs[6]), "phi");
   emxInit_real_T(&st, &Ang, 2);
   Ang->canFreeData = false;
-  e_emlrt_marshallIn(&st, emlrtAlias(prhs_copy_idx_5), "Ang", Ang);
+  e_emlrt_marshallIn(&st, emlrtAlias(prhs_copy_idx_7), "Ang", Ang);
   emxInit_real_T(&st, &toff, 2);
   toff->canFreeData = false;
-  e_emlrt_marshallIn(&st, emlrtAlias(prhs[6]), "toff", toff);
+  e_emlrt_marshallIn(&st, emlrtAlias(prhs[8]), "toff", toff);
   emxInit_real_T(&st, &roff, 2);
   roff->canFreeData = false;
-  e_emlrt_marshallIn(&st, emlrtAlias(prhs[7]), "roff", roff);
+  e_emlrt_marshallIn(&st, emlrtAlias(prhs[9]), "roff", roff);
   /* Invoke the target function */
   emxInit_real_T(&st, &PointTable_A_off, 2);
   emxInit_real_T(&st, &PointTable_B_off, 2);
-  Calculat_A_and_B_Points_after_Offest2(*MTaon, *Mcenter, Mradial, *PAB, phi,
-                                        Ang, toff, roff, PointTable_A_off,
-                                        PointTable_B_off);
+  emxInit_real_T(&st, &BianHao, 2);
+  Calculat_A_and_B_Points_after_Offest2(
+      *Bottom_round_center1, *Bottom_round_center2, *MTaon, *Mcenter, Mradial,
+      *PAB, phi, Ang, toff, roff, PointTable_A_off, PointTable_B_off, BianHao);
   emxFree_real_T(&st, &roff);
   emxFree_real_T(&st, &toff);
   emxFree_real_T(&st, &Ang);
@@ -1563,6 +1571,11 @@ void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[8], int32_T nlhs,
     plhs[1] = b_emlrt_marshallOut(PointTable_B_off);
   }
   emxFree_real_T(&st, &PointTable_B_off);
+  if (nlhs > 2) {
+    BianHao->canFreeData = false;
+    plhs[2] = b_emlrt_marshallOut(BianHao);
+  }
+  emxFree_real_T(&st, &BianHao);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 
@@ -1992,11 +2005,11 @@ void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
 }
 
 /*
- * Arguments    : const mxArray * const prhs[7]
+ * Arguments    : const mxArray * const prhs[6]
  *                const mxArray **plhs
  * Return Type  : void
  */
-void d_generate_unit_circle_with_nor(const mxArray *const prhs[7],
+void d_generate_unit_circle_with_nor(const mxArray *const prhs[6],
                                      const mxArray **plhs)
 {
   emlrtStack st = {
@@ -2011,7 +2024,6 @@ void d_generate_unit_circle_with_nor(const mxArray *const prhs[7],
   real_T elevation;
   real_T laynum;
   real_T num;
-  real_T r;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   /* Marshall function inputs */
@@ -2021,11 +2033,10 @@ void d_generate_unit_circle_with_nor(const mxArray *const prhs[7],
   laynum = emlrt_marshallIn(&st, emlrtAliasP(prhs[3]), "laynum");
   P1 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[4]), "P1");
   P2 = c_emlrt_marshallIn(&st, emlrtAlias(prhs[5]), "P2");
-  r = emlrt_marshallIn(&st, emlrtAliasP(prhs[6]), "r");
   /* Invoke the target function */
   emxInit_real_T(&st, &Point_out, 2);
   generate_unit_circle_with_normal_vector2(azimuth, elevation, num, laynum, *P1,
-                                           *P2, r, Point_out);
+                                           *P2, Point_out);
   /* Marshall function outputs */
   Point_out->canFreeData = false;
   *plhs = b_emlrt_marshallOut(Point_out);

@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Nov-2024 20:42:34
+ * C/C++ source code generated on  : 02-Dec-2024 23:37:52
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -24,7 +24,7 @@ MEXFUNCTION_LINKAGE void mexFunction(int32_T nlhs, mxArray *plhs[],
 emlrtCTX mexFunctionCreateRootTLS(void);
 
 void unsafe_Calculat_A_and_B_Points_after_Offest2_mexFunction(
-    int32_T nlhs, mxArray *plhs[2], int32_T nrhs, const mxArray *prhs[8]);
+    int32_T nlhs, mxArray *plhs[3], int32_T nrhs, const mxArray *prhs[10]);
 
 void unsafe_Calculat_A_and_B_Points_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                                 int32_T nrhs,
@@ -85,7 +85,7 @@ void unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
     int32_T nlhs, mxArray *plhs[3], int32_T nrhs, const mxArray *prhs[3]);
 
 void unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
-    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[7]);
+    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[6]);
 
 void unsafe_generate_unit_circle_with_normal_vector_mexFunction(
     int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[4]);

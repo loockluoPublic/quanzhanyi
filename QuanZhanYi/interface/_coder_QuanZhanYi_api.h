@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Nov-2024 20:42:34
+ * C/C++ source code generated on  : 02-Dec-2024 23:37:52
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -46,13 +46,12 @@ void Calculat_A_and_B_Points(real_T MTaon[3], real_T Mcenter[3], real_T Mradial,
                              emxArray_real_T *PointTable_A,
                              emxArray_real_T *PointTable_B);
 
-void Calculat_A_and_B_Points_after_Offest2(real_T MTaon[3], real_T Mcenter[3],
-                                           real_T Mradial, real_T PAB[3],
-                                           real_T phi, emxArray_real_T *Ang,
-                                           emxArray_real_T *toff,
-                                           emxArray_real_T *roff,
-                                           emxArray_real_T *PointTable_A_off,
-                                           emxArray_real_T *PointTable_B_off);
+void Calculat_A_and_B_Points_after_Offest2(
+    real_T Bottom_round_center1[3], real_T Bottom_round_center2[3],
+    real_T MTaon[3], real_T Mcenter[3], real_T Mradial, real_T PAB[3],
+    real_T phi, emxArray_real_T *Ang, emxArray_real_T *toff,
+    emxArray_real_T *roff, emxArray_real_T *PointTable_A_off,
+    emxArray_real_T *PointTable_B_off, emxArray_real_T *BianHao);
 
 void Calculat_A_and_B_Points_api(const mxArray *const prhs[8], int32_T nlhs,
                                  const mxArray *plhs[2]);
@@ -169,8 +168,8 @@ void angle2point(real_T ANG, real_T a, real_T b, real_T c, real_T d,
 void angle2point_api(const mxArray *const prhs[6], int32_T nlhs,
                      const mxArray *plhs[3]);
 
-void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[8], int32_T nlhs,
-                                     const mxArray *plhs[2]);
+void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[10],
+                                     int32_T nlhs, const mxArray *plhs[3]);
 
 void c_Calculat_JuXing_A_and_B_Point(const mxArray *const prhs[10],
                                      int32_T nlhs, const mxArray *plhs[2]);
@@ -193,7 +192,7 @@ void c_generate_unit_circle_with_nor(const mxArray *const prhs[4],
 void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
                                      int32_T nlhs, const mxArray *plhs[3]);
 
-void d_generate_unit_circle_with_nor(const mxArray *const prhs[7],
+void d_generate_unit_circle_with_nor(const mxArray *const prhs[6],
                                      const mxArray **plhs);
 
 void fitcircle(emxArray_real_T *x, real_T z[2], real_T *r, real_T *residual);
@@ -213,7 +212,6 @@ void generate_unit_circle_with_normal_vector(real_T azimuth, real_T elevation,
 void generate_unit_circle_with_normal_vector2(real_T azimuth, real_T elevation,
                                               real_T num, real_T laynum,
                                               real_T P1[3], real_T P2[3],
-                                              real_T r,
                                               emxArray_real_T *Point_out);
 
 void myvrrotvec2mat(real_T r[4], real_T m[9]);

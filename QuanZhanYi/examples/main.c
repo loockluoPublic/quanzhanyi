@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Nov-2024 20:42:34
+ * C/C++ source code generated on  : 02-Dec-2024 23:37:52
  */
 
 /*************************************************************************/
@@ -313,16 +313,19 @@ void main_Calculat_A_and_B_Points(void)
 void main_Calculat_A_and_B_Points_after_Offest2(void)
 {
   emxArray_real_T *Ang;
+  emxArray_real_T *BianHao;
   emxArray_real_T *PointTable_A_off;
   emxArray_real_T *PointTable_B_off;
   emxArray_real_T *roff;
   emxArray_real_T *toff;
-  double MTaon_tmp[3];
+  double Bottom_round_center1_tmp[3];
   double Mradial_tmp;
   /* Initialize function 'Calculat_A_and_B_Points_after_Offest2' input
    * arguments. */
+  /* Initialize function input argument 'Bottom_round_center1'. */
+  argInit_3x1_real_T(Bottom_round_center1_tmp);
+  /* Initialize function input argument 'Bottom_round_center2'. */
   /* Initialize function input argument 'MTaon'. */
-  argInit_3x1_real_T(MTaon_tmp);
   /* Initialize function input argument 'Mcenter'. */
   Mradial_tmp = argInit_real_T();
   /* Initialize function input argument 'PAB'. */
@@ -335,14 +338,18 @@ void main_Calculat_A_and_B_Points_after_Offest2(void)
   /* Call the entry-point 'Calculat_A_and_B_Points_after_Offest2'. */
   emxInitArray_real_T(&PointTable_A_off, 2);
   emxInitArray_real_T(&PointTable_B_off, 2);
-  Calculat_A_and_B_Points_after_Offest2(MTaon_tmp, MTaon_tmp, Mradial_tmp,
-                                        MTaon_tmp, Mradial_tmp, Ang, toff, roff,
-                                        PointTable_A_off, PointTable_B_off);
+  emxInitArray_real_T(&BianHao, 2);
+  Calculat_A_and_B_Points_after_Offest2(
+      Bottom_round_center1_tmp, Bottom_round_center1_tmp,
+      Bottom_round_center1_tmp, Bottom_round_center1_tmp, Mradial_tmp,
+      Bottom_round_center1_tmp, Mradial_tmp, Ang, toff, roff, PointTable_A_off,
+      PointTable_B_off, BianHao);
   emxDestroyArray_real_T(roff);
   emxDestroyArray_real_T(toff);
   emxDestroyArray_real_T(Ang);
   emxDestroyArray_real_T(PointTable_A_off);
   emxDestroyArray_real_T(PointTable_B_off);
+  emxDestroyArray_real_T(BianHao);
 }
 
 /*
@@ -850,7 +857,7 @@ void main_generate_unit_circle_with_normal_vector2(void)
   emxInitArray_real_T(&Point_out, 2);
   generate_unit_circle_with_normal_vector2(azimuth_tmp, azimuth_tmp,
                                            azimuth_tmp, azimuth_tmp, P1_tmp,
-                                           P1_tmp, azimuth_tmp, Point_out);
+                                           P1_tmp, Point_out);
   emxDestroyArray_real_T(Point_out);
 }
 

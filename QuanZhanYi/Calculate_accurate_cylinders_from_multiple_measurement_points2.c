@@ -2,7 +2,7 @@
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Nov-2024 20:42:34
+ * C/C++ source code generated on  : 02-Dec-2024 23:37:52
  */
 
 /* Include Files */
@@ -231,7 +231,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
       b_dv[2] = absx - rcoselev;
       b_dv[5] = norm_vec + Merr;
       b_dv[8] = (1.0 - c) * b_n[2] * b_n[2] + c;
-      mtimes(points, b_dv, P);
+      b_mtimes(points, b_dv, P);
       P_data = P->data;
       xi = x_contents->size[0] * x_contents->size[1];
       x_contents->size[0] = 2;
@@ -277,7 +277,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
           Err_every_data[xi + A->size[0] * 3] = 1.0;
         }
       } else {
-        binary_expand_op_8(A, err, x2_contents, x_contents);
+        binary_expand_op_10(A, err, x2_contents, x_contents);
         Err_every_data = A->data;
       }
       nx = A->size[0] << 2;
@@ -375,7 +375,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
             denom_data[xi] = norm_vec * norm_vec + absx * absx;
           }
         } else {
-          binary_expand_op_7(denom, b_n, err, x2_contents);
+          binary_expand_op_9(denom, b_n, err, x2_contents);
           denom_data = denom->data;
         }
         nx = denom->size[0];
@@ -395,7 +395,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
             Err_every_data[xi] = norm_vec * norm_vec;
           }
         } else {
-          binary_expand_op_6(x, x_contents);
+          binary_expand_op_8(x, x_contents);
           Err_every_data = x->data;
         }
         if (x->size[1] == 0) {
@@ -446,7 +446,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
           }
           mldivide(n, b_y, h);
         } else {
-          binary_expand_op_5(b_n, err, denom, x2_contents, outsize, y, h);
+          binary_expand_op_7(b_n, err, denom, x2_contents, outsize, y, h);
         }
         /*  Check for convergence */
         Merr = 0.0;
