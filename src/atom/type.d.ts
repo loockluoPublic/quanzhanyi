@@ -163,6 +163,7 @@ interface ICycle {
   cylinderAgainTable: {
     p1: CustomVector3;
     p2: CustomVector3;
+    sdm?: "A" | "B";
   }[];
 }
 

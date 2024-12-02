@@ -407,10 +407,11 @@ export const getDataFromTable = (sdfb: number, index: number) => {
 };
 
 export const downLoadFile = (data) => {
+  const mode = { second: "复测", first: "定位" }[data.mode];
   const filename =
     data.type === TType.cube
-      ? `方涵${dayjs().format("_YYYY_MM_DD")}.json`
-      : `管道${dayjs().format("_YYYY_MM_DD")}.json`;
+      ? `方涵-${mode}_${dayjs().format("_YYYY_MM_DD")}.json`
+      : `管道-${mode}_${dayjs().format("_YYYY_MM_DD")}.json`;
 
   // 将JSON对象转换为字符串
   const jsonString = JSON.stringify({ ...data, import: true }, null, 2);

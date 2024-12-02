@@ -77,7 +77,7 @@ const App: React.FC<PropsWithChildren> = (props) => {
 
               <div
                 className=" q-text-white q-cursor-pointer q-ml-6"
-                onClick={() => downLoadFile(data)}
+                onClick={() => downLoadFile({ ...data, mode })}
               >
                 导出
               </div>
