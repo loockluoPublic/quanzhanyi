@@ -11,6 +11,8 @@
     "build": "tsc && vite build",
     "electron": "electron .",
     "tauri:dev": "pnpm tauri dev",
+    "tauri:build":"pnpm tauri build",
+    "tauri": "tauri",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "preview": "vite preview"
   },
