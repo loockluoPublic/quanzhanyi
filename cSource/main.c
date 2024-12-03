@@ -24,7 +24,6 @@ void generateUnitCircleWithNormalVector(double azimuth, double elevation,
                                         const double r,
                                         emxArray_real_T *Point_out)
 {
-
     generate_unit_circle_with_normal_vector2(azimuth, elevation, num, laynum, P1, P2, r, Point_out);
 }
 
