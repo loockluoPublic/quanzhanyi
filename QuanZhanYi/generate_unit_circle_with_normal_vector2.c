@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Nov-2024 20:42:34
+ * C/C++ source code generated on  : 02-Dec-2024 23:37:52
  */
 
 /* Include Files */
@@ -16,12 +16,12 @@
 #include <math.h>
 
 /* Function Declarations */
-static void binary_expand_op_13(emxArray_real_T *in1,
+static void binary_expand_op_15(emxArray_real_T *in1,
                                 const emxArray_real_T *in2, const double in3[3],
                                 const emxArray_real_T *in4,
                                 const double in5[3]);
 
-static void binary_expand_op_14(emxArray_real_T *in1,
+static void binary_expand_op_16(emxArray_real_T *in1,
                                 const emxArray_real_T *in2, const double in3[3],
                                 const emxArray_real_T *in4,
                                 const double in5[3]);
@@ -35,7 +35,7 @@ static void binary_expand_op_14(emxArray_real_T *in1,
  *                const double in5[3]
  * Return Type  : void
  */
-static void binary_expand_op_13(emxArray_real_T *in1,
+static void binary_expand_op_15(emxArray_real_T *in1,
                                 const emxArray_real_T *in2, const double in3[3],
                                 const emxArray_real_T *in4, const double in5[3])
 {
@@ -80,7 +80,7 @@ static void binary_expand_op_13(emxArray_real_T *in1,
  *                const double in5[3]
  * Return Type  : void
  */
-static void binary_expand_op_14(emxArray_real_T *in1,
+static void binary_expand_op_16(emxArray_real_T *in1,
                                 const emxArray_real_T *in2, const double in3[3],
                                 const emxArray_real_T *in4, const double in5[3])
 {
@@ -118,22 +118,19 @@ static void binary_expand_op_14(emxArray_real_T *in1,
 }
 
 /*
- * r = 0.6;
- *
  * Arguments    : double azimuth
  *                double elevation
  *                double num
  *                double laynum
  *                const double P1[3]
  *                const double P2[3]
- *                double r
  *                emxArray_real_T *Point_out
  * Return Type  : void
  */
 void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
                                               double num, double laynum,
                                               const double P1[3],
-                                              const double P2[3], double r,
+                                              const double P2[3],
                                               emxArray_real_T *Point_out)
 {
 
@@ -172,10 +169,10 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   if (!isInitialized_QuanZhanYi) {
     QuanZhanYi_initialize();
   }
-  delta1 = r * cos(azimuth);
+  delta1 = cos(azimuth);
+  Pl2_idx_2 = sin(azimuth);
   Pl2_idx_0 = delta1 * cos(elevation);
   Pl2_idx_1 = delta1 * sin(elevation);
-  Pl2_idx_2 = r * sin(azimuth);
   /*  三个点定义 */
   /*  斜率计算 */
   delta1 =
@@ -319,13 +316,10 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   v[1] /= delta1;
   v[2] /= delta1;
   /*  归一化向量 */
+  u[0] = v[1] * Pl2_idx_2 - Pl2_idx_1 * v[2];
+  u[1] = Pl2_idx_0 * v[2] - v[0] * Pl2_idx_2;
+  u[2] = v[0] * Pl2_idx_1 - Pl2_idx_0 * v[1];
   /*  创建另一个垂直向量 */
-  u[0] = (v[1] * Pl2_idx_2 - Pl2_idx_1 * v[2]) * r;
-  u[1] = (Pl2_idx_0 * v[2] - v[0] * Pl2_idx_2) * r;
-  u[2] = (v[0] * Pl2_idx_1 - Pl2_idx_0 * v[1]) * r;
-  v[0] *= r;
-  v[1] *= r;
-  v[2] *= r;
   /*  使用参数方程生成单位圆上的点 */
   emxInit_real_T(&theta, 2);
   theta_data = theta->data;
@@ -408,7 +402,7 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
       x_circle_data[i] = z_circle_data[i] * v[0] + theta_data[i] * u[0];
     }
   } else {
-    binary_expand_op_14(x_circle, z_circle, v, theta, u);
+    binary_expand_op_16(x_circle, z_circle, v, theta, u);
     x_circle_data = x_circle->data;
   }
   emxInit_real_T(&y_circle, 2);
@@ -423,7 +417,7 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
       y_circle_data[i] = z_circle_data[i] * v[1] + theta_data[i] * u[1];
     }
   } else {
-    binary_expand_op_13(y_circle, z_circle, v, theta, u);
+    binary_expand_op_15(y_circle, z_circle, v, theta, u);
     y_circle_data = y_circle->data;
   }
   if (z_circle->size[1] == theta->size[1]) {
@@ -436,7 +430,7 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
       z_circle_data[i] = z_circle_data[i] * v[2] + theta_data[i] * u[2];
     }
   } else {
-    binary_expand_op_9(z_circle, v, theta, u);
+    binary_expand_op_11(z_circle, v, theta, u);
     z_circle_data = z_circle->data;
   }
   emxFree_real_T(&theta);

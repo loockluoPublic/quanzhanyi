@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Nov-2024 20:42:34
+ * C/C++ source code generated on  : 02-Dec-2024 23:37:52
  */
 
 /* Include Files */
@@ -136,20 +136,20 @@ mxArray *emlrtMexFcnProperties(void)
   emlrtSetField(xEntryPoints, 1, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 1, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 8);
+  xInputs = emlrtCreateLogicalMatrix(1, 10);
   emlrtSetField(xEntryPoints, 2, "Name",
                 emlrtMxCreateString("Calculat_A_and_B_Points_after_Offest2"));
   emlrtSetField(xEntryPoints, 2, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(8.0));
+                emlrtMxCreateDoubleScalar(10.0));
   emlrtSetField(xEntryPoints, 2, "NumberOfOutputs",
-                emlrtMxCreateDoubleScalar(2.0));
+                emlrtMxCreateDoubleScalar(3.0));
   emlrtSetField(xEntryPoints, 2, "ConstantInputs", xInputs);
   emlrtSetField(
       xEntryPoints, 2, "FullPath",
       emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\Calculat_A_"
                           "and_B_Points_after_Offest2.m"));
   emlrtSetField(xEntryPoints, 2, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739552.52135416667));
+                emlrtMxCreateDoubleScalar(739588.98458333337));
   emlrtSetField(xEntryPoints, 2, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 2, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -307,12 +307,12 @@ mxArray *emlrtMexFcnProperties(void)
   emlrtSetField(xEntryPoints, 11, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 11, "Visible", emlrtMxCreateLogicalScalar(true));
-  xInputs = emlrtCreateLogicalMatrix(1, 7);
+  xInputs = emlrtCreateLogicalMatrix(1, 6);
   emlrtSetField(
       xEntryPoints, 12, "Name",
       emlrtMxCreateString("generate_unit_circle_with_normal_vector2"));
   emlrtSetField(xEntryPoints, 12, "NumberOfInputs",
-                emlrtMxCreateDoubleScalar(7.0));
+                emlrtMxCreateDoubleScalar(6.0));
   emlrtSetField(xEntryPoints, 12, "NumberOfOutputs",
                 emlrtMxCreateDoubleScalar(1.0));
   emlrtSetField(xEntryPoints, 12, "ConstantInputs", xInputs);
@@ -321,7 +321,7 @@ mxArray *emlrtMexFcnProperties(void)
       emlrtMxCreateString("C:\\Users\\XWT\\Desktop\\zongQZY\\test3\\generate_"
                           "unit_circle_with_normal_vector2.m"));
   emlrtSetField(xEntryPoints, 12, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739548.53032407409));
+                emlrtMxCreateDoubleScalar(739587.79815972224));
   emlrtSetField(xEntryPoints, 12, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 12, "Visible", emlrtMxCreateLogicalScalar(true));

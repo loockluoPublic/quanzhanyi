@@ -1,14 +1,15 @@
 /*
- * File: rand.h
+ * File: sortrows.h
  *
  * MATLAB Coder version            : 23.2
  * C/C++ source code generated on  : 02-Dec-2024 23:37:52
  */
 
-#ifndef RAND_H
-#define RAND_H
+#ifndef SORTROWS_H
+#define SORTROWS_H
 
 /* Include Files */
+#include "QuanZhanYi_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -18,7 +19,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double b_rand(void);
+void b_sortrows(emxArray_real_T *y);
+
+void sortrows(emxArray_real_T *y);
 
 #ifdef __cplusplus
 }
@@ -26,7 +29,7 @@ double b_rand(void);
 
 #endif
 /*
- * File trailer for rand.h
+ * File trailer for sortrows.h
  *
  * [EOF]
  */

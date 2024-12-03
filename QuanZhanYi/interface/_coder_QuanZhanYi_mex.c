@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Nov-2024 20:42:34
+ * C/C++ source code generated on  : 02-Dec-2024 23:37:52
  */
 
 /* Include Files */
@@ -160,35 +160,35 @@ emlrtCTX mexFunctionCreateRootTLS(void)
 
 /*
  * Arguments    : int32_T nlhs
- *                mxArray *plhs[2]
+ *                mxArray *plhs[3]
  *                int32_T nrhs
- *                const mxArray *prhs[8]
+ *                const mxArray *prhs[10]
  * Return Type  : void
  */
 void unsafe_Calculat_A_and_B_Points_after_Offest2_mexFunction(
-    int32_T nlhs, mxArray *plhs[2], int32_T nrhs, const mxArray *prhs[8])
+    int32_T nlhs, mxArray *plhs[3], int32_T nrhs, const mxArray *prhs[10])
 {
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[8];
-  const mxArray *outputs[2];
+  const mxArray *b_prhs[10];
+  const mxArray *outputs[3];
   int32_T i;
   int32_T i1;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 8) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 8, 4,
+  if (nrhs != 10) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 10, 4,
                         37, "Calculat_A_and_B_Points_after_Offest2");
   }
-  if (nlhs > 2) {
+  if (nlhs > 3) {
     emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 37,
                         "Calculat_A_and_B_Points_after_Offest2");
   }
   /* Call the function. */
-  for (i = 0; i < 8; i++) {
+  for (i = 0; i < 10; i++) {
     b_prhs[i] = prhs[i];
   }
   c_Calculat_A_and_B_Points_after(b_prhs, nlhs, outputs);
@@ -926,24 +926,24 @@ void unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
  * Arguments    : int32_T nlhs
  *                mxArray *plhs[1]
  *                int32_T nrhs
- *                const mxArray *prhs[7]
+ *                const mxArray *prhs[6]
  * Return Type  : void
  */
 void unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
-    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[7])
+    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[6])
 {
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[7];
+  const mxArray *b_prhs[6];
   const mxArray *outputs;
   int32_T i;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 7) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 7, 4,
+  if (nrhs != 6) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 6, 4,
                         40, "generate_unit_circle_with_normal_vector2");
   }
   if (nlhs > 1) {
@@ -951,7 +951,7 @@ void unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
                         "generate_unit_circle_with_normal_vector2");
   }
   /* Call the function. */
-  for (i = 0; i < 7; i++) {
+  for (i = 0; i < 6; i++) {
     b_prhs[i] = prhs[i];
   }
   d_generate_unit_circle_with_nor(b_prhs, &outputs);

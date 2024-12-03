@@ -2,7 +2,7 @@
  * File: Calculat_JuXing_A_and_B_Points_after_Offest.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Nov-2024 20:42:34
+ * C/C++ source code generated on  : 02-Dec-2024 23:37:52
  */
 
 /* Include Files */
@@ -18,10 +18,10 @@
 #include <math.h>
 
 /* Function Declarations */
-static void binary_expand_op_2(emxArray_real_T *in1, const emxArray_real_T *in2,
+static void binary_expand_op_4(emxArray_real_T *in1, const emxArray_real_T *in2,
                                const emxArray_real_T *in3);
 
-static void binary_expand_op_4(emxArray_real_T *in1, double in2, double in3,
+static void binary_expand_op_6(emxArray_real_T *in1, double in2, double in3,
                                double in4, double in5,
                                const emxArray_real_T *in6);
 
@@ -32,7 +32,7 @@ static void binary_expand_op_4(emxArray_real_T *in1, double in2, double in3,
  *                const emxArray_real_T *in3
  * Return Type  : void
  */
-static void binary_expand_op_2(emxArray_real_T *in1, const emxArray_real_T *in2,
+static void binary_expand_op_4(emxArray_real_T *in1, const emxArray_real_T *in2,
                                const emxArray_real_T *in3)
 {
   const double *in2_data;
@@ -82,7 +82,7 @@ static void binary_expand_op_2(emxArray_real_T *in1, const emxArray_real_T *in2,
  *                const emxArray_real_T *in6
  * Return Type  : void
  */
-static void binary_expand_op_4(emxArray_real_T *in1, double in2, double in3,
+static void binary_expand_op_6(emxArray_real_T *in1, double in2, double in3,
                                double in4, double in5,
                                const emxArray_real_T *in6)
 {
@@ -463,7 +463,7 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     }
     emxFree_real_T(&b_b);
   } else {
-    binary_expand_op_4(Axoff, b, absxk, theta1_tmp[0], shenglunum, toff);
+    binary_expand_op_6(Axoff, b, absxk, theta1_tmp[0], shenglunum, toff);
     Axoff_data = Axoff->data;
   }
   /*  旋转平移回去 */
@@ -500,7 +500,7 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     PointTable_A_off_data[3 * i + 2] = Az_data[i];
   }
   emxInit_real_T(&r2, 2);
-  mtimes(b_Axoff, rot1, r2);
+  b_mtimes(b_Axoff, rot1, r2);
   r3 = r2->data;
   if (r2->size[0] == r->size[0]) {
     i = PointTable_A_off->size[0] * PointTable_A_off->size[1];
@@ -517,7 +517,7 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
           r3[i + r2->size[0] * 2] + r1[i + r->size[0] * 2];
     }
   } else {
-    binary_expand_op_2(PointTable_A_off, r2, r);
+    binary_expand_op_4(PointTable_A_off, r2, r);
   }
   i = b_Axoff->size[0] * b_Axoff->size[1];
   b_Axoff->size[0] = 3;
@@ -539,7 +539,7 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     PointTable_A_off_data[3 * i + 2] = Az_data[i];
   }
   emxFree_real_T(&Az);
-  mtimes(b_Axoff, rot1, r2);
+  b_mtimes(b_Axoff, rot1, r2);
   r3 = r2->data;
   emxFree_real_T(&b_Axoff);
   if (r2->size[0] == r->size[0]) {
@@ -557,7 +557,7 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
           r3[i + r2->size[0] * 2] + r1[i + r->size[0] * 2];
     }
   } else {
-    binary_expand_op_2(PointTable_B_off, r2, r);
+    binary_expand_op_4(PointTable_B_off, r2, r);
   }
   emxFree_real_T(&r2);
   emxFree_real_T(&r);
