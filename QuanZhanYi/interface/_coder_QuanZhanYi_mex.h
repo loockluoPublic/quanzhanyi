@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 21:15:29
+ * C/C++ source code generated on  : 03-Dec-2024 21:37:33
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -55,7 +55,7 @@ void unsafe_Generate_multi_layered_measurement_points_mexFunction(
     int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[6]);
 
 void unsafe_JuXingFuCe_mexFunction(int32_T nlhs, mxArray *plhs[6], int32_T nrhs,
-                                   const mxArray *prhs[7]);
+                                   const mxArray *prhs[6]);
 
 void unsafe_OffsetCalculate_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                         int32_T nrhs, const mxArray *prhs[4]);
@@ -85,7 +85,7 @@ void unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
     int32_T nlhs, mxArray *plhs[3], int32_T nrhs, const mxArray *prhs[3]);
 
 void unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
-    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[6]);
+    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[7]);
 
 void unsafe_generate_unit_circle_with_normal_vector_mexFunction(
     int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[4]);
@@ -96,7 +96,7 @@ void unsafe_myvrrotvec2mat_mexFunction(int32_T nlhs, mxArray *plhs[1],
 void unsafe_planefit4_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
                                   const mxArray *prhs[7]);
 
-void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[5], int32_T nrhs,
+void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
                                   const mxArray *prhs[11]);
 
 void unsafe_planefit_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,

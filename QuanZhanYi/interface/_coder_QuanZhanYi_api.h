@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 21:15:29
+ * C/C++ source code generated on  : 03-Dec-2024 21:37:33
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -108,12 +108,11 @@ void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
 
 void JuXingFuCe(emxArray_real_T *PointIn, real_T shenglunum, real_T Pin[3],
                 real_T Tao[3], real_T h, emxArray_real_T *PlaneParaOut4,
-                real_T LenDaoJiao[8], emxArray_real_T *Distance,
-                emxArray_real_T *theta, emxArray_real_T *LTPY,
-                emxArray_real_T *TiC, emxArray_real_T *Wquanzhong3,
-                emxArray_real_T *Wquanzhong4);
+                emxArray_real_T *Distance, emxArray_real_T *theta,
+                emxArray_real_T *LTPY, emxArray_real_T *TiC,
+                emxArray_real_T *Wquanzhong3, emxArray_real_T *Wquanzhong4);
 
-void JuXingFuCe_api(const mxArray *const prhs[7], int32_T nlhs,
+void JuXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
                     const mxArray *plhs[6]);
 
 void OffsetCalculate(real_T Mradial, real_T phi, emxArray_real_T *Ang,
@@ -192,7 +191,7 @@ void c_generate_unit_circle_with_nor(const mxArray *const prhs[4],
 void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
                                      int32_T nlhs, const mxArray *plhs[3]);
 
-void d_generate_unit_circle_with_nor(const mxArray *const prhs[6],
+void d_generate_unit_circle_with_nor(const mxArray *const prhs[7],
                                      const mxArray **plhs);
 
 void fitcircle(emxArray_real_T *x, real_T z[2], real_T *r, real_T *residual);
@@ -212,6 +211,7 @@ void generate_unit_circle_with_normal_vector(real_T azimuth, real_T elevation,
 void generate_unit_circle_with_normal_vector2(real_T azimuth, real_T elevation,
                                               real_T num, real_T laynum,
                                               real_T P1[3], real_T P2[3],
+                                              real_T r,
                                               emxArray_real_T *Point_out);
 
 void myvrrotvec2mat(real_T r[4], real_T m[9]);
@@ -238,11 +238,10 @@ void planefit8(emxArray_real_T *Points1, emxArray_real_T *Points2,
                emxArray_real_T *Points7, emxArray_real_T *Points8,
                real_T P_bound1[3], real_T P_bound2[3], real_T distanceThreshold,
                emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints,
-               real_T MaxDis[8], emxArray_real_T *distancesFianal,
-               real_T LenDaoJiao[8]);
+               real_T MaxDis[8], emxArray_real_T *distancesFianal);
 
 void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
-                   const mxArray *plhs[5]);
+                   const mxArray *plhs[4]);
 
 void planefit_api(const mxArray *const prhs[4], int32_T nlhs,
                   const mxArray *plhs[2]);

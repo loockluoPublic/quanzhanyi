@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 21:15:29
+ * C/C++ source code generated on  : 03-Dec-2024 21:37:33
  */
 
 /* Include Files */
@@ -118,19 +118,22 @@ static void binary_expand_op_16(emxArray_real_T *in1,
 }
 
 /*
+ * r = 0.6;
+ *
  * Arguments    : double azimuth
  *                double elevation
  *                double num
  *                double laynum
  *                const double P1[3]
  *                const double P2[3]
+ *                double r
  *                emxArray_real_T *Point_out
  * Return Type  : void
  */
 void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
                                               double num, double laynum,
                                               const double P1[3],
-                                              const double P2[3],
+                                              const double P2[3], double r,
                                               emxArray_real_T *Point_out)
 {
   emxArray_real_T *deltx;
@@ -168,10 +171,10 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   if (!isInitialized_QuanZhanYi) {
     QuanZhanYi_initialize();
   }
-  delta1 = cos(azimuth);
-  Pl2_idx_2 = sin(azimuth);
+  delta1 = r * cos(azimuth);
   Pl2_idx_0 = delta1 * cos(elevation);
   Pl2_idx_1 = delta1 * sin(elevation);
+  Pl2_idx_2 = r * sin(azimuth);
   /*  三个点定义 */
   /*  斜率计算 */
   delta1 =
@@ -315,10 +318,13 @@ void generate_unit_circle_with_normal_vector2(double azimuth, double elevation,
   v[1] /= delta1;
   v[2] /= delta1;
   /*  归一化向量 */
-  u[0] = v[1] * Pl2_idx_2 - Pl2_idx_1 * v[2];
-  u[1] = Pl2_idx_0 * v[2] - v[0] * Pl2_idx_2;
-  u[2] = v[0] * Pl2_idx_1 - Pl2_idx_0 * v[1];
   /*  创建另一个垂直向量 */
+  u[0] = (v[1] * Pl2_idx_2 - Pl2_idx_1 * v[2]) * r;
+  u[1] = (Pl2_idx_0 * v[2] - v[0] * Pl2_idx_2) * r;
+  u[2] = (v[0] * Pl2_idx_1 - Pl2_idx_0 * v[1]) * r;
+  v[0] *= r;
+  v[1] *= r;
+  v[2] *= r;
   /*  使用参数方程生成单位圆上的点 */
   emxInit_real_T(&theta, 2);
   theta_data = theta->data;
