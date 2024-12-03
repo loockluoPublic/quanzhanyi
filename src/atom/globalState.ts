@@ -82,3 +82,8 @@ export const ShowCube = atom<boolean>({
   key: "showCube",
   default: true,
 });
+
+export const Auth = atom<boolean>({
+  key: "auth",
+  default: false,
+});

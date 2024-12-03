@@ -3,6 +3,8 @@ import { CustomVector3 } from "../class/CustomVector3";
 import { measureAndGetSimpleCoord } from "../utils/commond";
 import { MinusCircleOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { Auth } from "../atom/globalState";
 
 export default function PointsVector3(props: {
   hideLabel?: boolean;
@@ -19,6 +21,7 @@ export default function PointsVector3(props: {
   buttonProps?: any;
 }) {
   const { showGetPoints = true, value } = props;
+  const auth = useRecoilValue(Auth);
   console.log("%c Line:22 🥑 props", "color:#42b983", props);
 
   const [loading, setLoading] = useState(false);
@@ -64,6 +67,7 @@ export default function PointsVector3(props: {
         onClick={getPoints}
         loading={loading}
         size="small"
+        disabled={!auth}
         {...props.buttonProps}
       >
         {buttonText}
@@ -106,6 +110,7 @@ export default function PointsVector3(props: {
               onClick={getPoints}
               loading={loading}
               size="small"
+              disabled={!auth}
             >
               {buttonText}
             </Button>

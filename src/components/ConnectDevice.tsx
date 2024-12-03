@@ -1,7 +1,7 @@
 import SerialMonitor from "@ridge18/web-serial-monitor";
 import { Button, Input, message } from "antd";
 import { useRecoilState } from "recoil";
-import { deviceInfo } from "../atom/globalState";
+import { Auth, deviceInfo } from "../atom/globalState";
 import * as commond from "../utils/commond";
 import { getDeviceInfo } from "../utils/commond";
 
@@ -16,6 +16,7 @@ export const serial = new SerialMonitor({ mode: "text", parseLines: true });
 
 export default function Connect(props: { next: () => void }) {
   const [deviceInfoData, setDeviceInfo] = useRecoilState(deviceInfo);
+  const [_, setAuth] = useRecoilState(Auth);
 
   const [pwd, setPwd] = useState("");
 
@@ -59,6 +60,7 @@ export default function Connect(props: { next: () => void }) {
                 onClick={() => {
                   serial.disconnect().finally(() => {
                     setDeviceInfo({});
+                    setAuth(false);
                   });
                 }}
               >
@@ -70,8 +72,8 @@ export default function Connect(props: { next: () => void }) {
                 onClick={() => {
                   if (pwd === encode(deviceInfoData?.SerialNo)) {
                     setDeviceInfo({ ...deviceInfoData, auth: true });
+                    setAuth(true);
                     props.next();
-                    (window as any).mock = false;
                     message.success("秘钥验证成功");
                   } else {
                     message.error("秘钥验证错误，请确定秘钥与设备是否对应");

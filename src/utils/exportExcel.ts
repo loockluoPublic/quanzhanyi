@@ -3,7 +3,11 @@ import { GlobalData, TType } from "../atom/globalState";
 
 export const export2excel = (data: (string | number)[][], filename: string) => {
   // 构造数据字符，换行需要用\r\n
-  let CsvString = data.map((data) => data.join(",")).join("\r\n");
+  let CsvString = data
+    .map((d) => {
+      return d?.join?.(",");
+    })
+    .join("\r\n");
   // 加上 CSV 文件头标识
   CsvString =
     "data:application/vnd.ms-excel;charset=utf-8,\uFEFF" +

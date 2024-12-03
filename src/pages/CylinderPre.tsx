@@ -1,6 +1,6 @@
 import CylinderModule from "../components/Module3D";
-import { useRecoilState } from "recoil";
-import { Data, GlobalData } from "../atom/globalState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Auth, Data, GlobalData } from "../atom/globalState";
 import { Button, InputNumber, message } from "antd";
 import { useEffect, useState } from "react";
 import {
@@ -19,6 +19,7 @@ import CylinderTable from "../components/CylinderTable";
 
 function CylinderPre() {
   const [data, setData] = useRecoilState(Data);
+  const auth = useRecoilValue(Auth);
 
   const { measure, loading, points } = useMeasure();
 
@@ -228,6 +229,7 @@ function CylinderPre() {
           <span>
             <PointsVector2 value={data.direct} />
             <Button
+              disabled={!auth}
               style={{ marginLeft: "10px" }}
               type="primary"
               onClick={() => {
@@ -252,6 +254,7 @@ function CylinderPre() {
           type="primary"
           loading={loading}
           onClick={autoGetPoints}
+          disabled={!auth}
         >
           自动采集
         </Button>

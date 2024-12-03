@@ -8,8 +8,8 @@ import {
   Switch,
 } from "antd";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { Data, ShowCube } from "../atom/globalState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Auth, Data, ShowCube } from "../atom/globalState";
 import { measureAndGetSimpleCoord } from "../utils/commond";
 import { CustomVector3 } from "../class/CustomVector3";
 import { CalculateRectangleFromVertex, Planefit } from "../utils/utils";
@@ -20,6 +20,8 @@ export default function () {
 
   const [loading, setLoading] = useState(false);
   const [planeFitLoading, setPlaneFitLoadint] = useState(false);
+
+  const auth = useRecoilValue(Auth);
 
   const options = [
     { value: 0, label: "左面", pK: "L" },
@@ -278,7 +280,12 @@ export default function () {
           <span className="q-ml-8">方涵高度：{hight ?? "--"} 米</span>
         </div>
         <div className="q-ml-8">
-          <Button loading={loading} type="primary" onClick={getPoints}>
+          <Button
+            loading={loading}
+            type="primary"
+            onClick={getPoints}
+            disabled={!auth}
+          >
             手动采集
           </Button>
           <Button

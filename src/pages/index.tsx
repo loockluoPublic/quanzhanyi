@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Connect from "../components/ConnectDevice";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
+  Auth,
   Data,
   deviceInfo,
   Mode,
@@ -26,13 +27,14 @@ export default function Setting() {
   const data = useRecoilValue(Data);
   const [step, setStep] = useRecoilState(Step);
   const [mode] = useRecoilState(Mode);
+  const auth = useRecoilValue(Auth);
 
   useEffect(() => {
     setStep(0);
   }, [data.type]);
 
   const onChange = (value: number) => {
-    if (deviceInfoData.auth || (window as any).mock) {
+    if (auth || deviceInfoData.auth || (window as any).mock) {
       setStep(value);
     } else {
       message.error("请验证秘钥");

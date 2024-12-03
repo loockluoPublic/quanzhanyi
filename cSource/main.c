@@ -42,21 +42,27 @@ void CalculateAccurateCylindersFromMultipleMeasurementPoints(
 {
     Calculate_accurate_cylinders_from_multiple_measurement_points2(points, P_bound1, P_bound2, Mcenter, MTaon, Mradial, Err_every, Bottom_round_center1, Bottom_round_center2);
 }
-
+// void Calculat_A_and_B_Points_after_Offest2(
+//     const double Bottom_round_center1[3], const double Bottom_round_center2[3],
+//     const double MTaon[3], const double Mcenter[3], double Mradial,
+//     const double PAB[3], double phi, emxArray_real_T *Ang,
+//     const emxArray_real_T *toff, const emxArray_real_T *roff,
+//     emxArray_real_T *PointTable_A_off, emxArray_real_T *PointTable_B_off,
+//     emxArray_real_T *BianHao)
 EMSCRIPTEN_KEEPALIVE
-void CalculatAAndBPoints(const double MTaon[3],
+void CalculatAAndBPoints(const double Bottom_round_center1[3], const double Bottom_round_center2[3], const double MTaon[3],
                          const double Mcenter[3],
                          double Mradial, const double PAB[3],
                          double phi, emxArray_real_T *Ang,
                          const emxArray_real_T *toff,
                          const emxArray_real_T *roff,
-                         emxArray_real_T *PointTable_A_off, emxArray_real_T *PointTable_B_off)
+                         emxArray_real_T *PointTable_A_off, emxArray_real_T *PointTable_B_off, emxArray_real_T *BianHao)
 {
-    Calculat_A_and_B_Points_after_Offest2(MTaon, Mcenter, Mradial,
+    Calculat_A_and_B_Points_after_Offest2(Bottom_round_center1, Bottom_round_center2, MTaon, Mcenter, Mradial,
                                           PAB,
                                           phi,
                                           Ang,
-                                          toff, roff, PointTable_A_off, PointTable_B_off);
+                                          toff, roff, PointTable_A_off, PointTable_B_off, BianHao);
 }
 
 EMSCRIPTEN_KEEPALIVE
