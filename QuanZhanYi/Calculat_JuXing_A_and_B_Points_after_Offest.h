@@ -2,7 +2,7 @@
  * File: Calculat_JuXing_A_and_B_Points_after_Offest.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 21:47:53
+ * C/C++ source code generated on  : 03-Dec-2024 23:44:43
  */
 
 #ifndef CALCULAT_JUXING_A_AND_B_POINTS_AFTER_OFFEST_H
