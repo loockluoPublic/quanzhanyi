@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 02-Dec-2024 23:37:52
+ * C/C++ source code generated on  : 03-Dec-2024 20:45:04
  */
 
 /* Include Files */
@@ -184,17 +184,14 @@ void binary_expand_op_11(emxArray_real_T *in1, const double in2[3],
 }
 
 /*
- * r = 1;
- *
  * Arguments    : double azimuth
  *                double elevation
  *                double num
- *                double r
  *                emxArray_real_T *Point_out
  * Return Type  : void
  */
 void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
-                                             double num, double r,
+                                             double num,
                                              emxArray_real_T *Point_out)
 {
   emxArray_real_T *theta;
@@ -221,11 +218,11 @@ void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
   if (!isInitialized_QuanZhanYi) {
     QuanZhanYi_initialize();
   }
+  delta1 = cos(azimuth);
   /*  定义法向量 */
-  delta1 = r * cos(azimuth);
   normal_vector_idx_0 = delta1 * cos(elevation);
   normal_vector_idx_1 = delta1 * sin(elevation);
-  normal_vector_idx_2 = r * sin(azimuth);
+  normal_vector_idx_2 = sin(azimuth);
   /*  检查法向量是否是单位向量，如果不是则归一化 */
   scale = 3.3121686421112381E-170;
   absxk = fabs(normal_vector_idx_0);
@@ -350,13 +347,10 @@ void generate_unit_circle_with_normal_vector(double azimuth, double elevation,
   v[1] /= delta1;
   v[2] /= delta1;
   /*  归一化向量 */
+  u[0] = v[1] * normal_vector_idx_2 - normal_vector_idx_1 * v[2];
+  u[1] = normal_vector_idx_0 * v[2] - v[0] * normal_vector_idx_2;
+  u[2] = v[0] * normal_vector_idx_1 - normal_vector_idx_0 * v[1];
   /*  创建另一个垂直向量 */
-  u[0] = (v[1] * normal_vector_idx_2 - normal_vector_idx_1 * v[2]) * r;
-  u[1] = (normal_vector_idx_0 * v[2] - v[0] * normal_vector_idx_2) * r;
-  u[2] = (v[0] * normal_vector_idx_1 - normal_vector_idx_0 * v[1]) * r;
-  v[0] *= r;
-  v[1] *= r;
-  v[2] *= r;
   /*  单位圆的参数方程 */
   emxInit_real_T(&x_circle, 2);
   i = x_circle->size[0] * x_circle->size[1];

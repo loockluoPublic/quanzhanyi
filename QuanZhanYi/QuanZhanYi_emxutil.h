@@ -2,7 +2,7 @@
  * File: QuanZhanYi_emxutil.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 02-Dec-2024 23:37:52
+ * C/C++ source code generated on  : 03-Dec-2024 20:45:04
  */
 
 #ifndef QUANZHANYI_EMXUTIL_H
@@ -67,8 +67,6 @@ extern void emxInit_boolean_T(emxArray_boolean_T **pEmxArray);
 extern void emxInit_int32_T(emxArray_int32_T **pEmxArray, int numDimensions);
 
 extern void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions);
-
-extern void emxReserve_real_T(emxArray_real_T *emxArray);
 
 #ifdef __cplusplus
 }

@@ -2,7 +2,7 @@
  * File: mean.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 02-Dec-2024 23:37:52
+ * C/C++ source code generated on  : 03-Dec-2024 20:45:04
  */
 
 /* Include Files */
@@ -73,27 +73,6 @@ void b_mean(const emxArray_real_T *x, double y[3])
   y[0] /= (double)x->size[0];
   y[1] /= (double)x->size[0];
   y[2] /= (double)x->size[0];
-}
-
-/*
- * Arguments    : const double x[24]
- *                double y[3]
- * Return Type  : void
- */
-void c_mean(const double x[24], double y[3])
-{
-  double d;
-  int k;
-  int xi;
-  int xpageoffset;
-  for (xi = 0; xi < 3; xi++) {
-    xpageoffset = xi << 3;
-    d = x[xpageoffset];
-    for (k = 0; k < 7; k++) {
-      d += x[(xpageoffset + k) + 1];
-    }
-    y[xi] = d / 8.0;
-  }
 }
 
 /*
