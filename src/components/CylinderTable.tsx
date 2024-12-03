@@ -48,6 +48,7 @@ export default function CylinderTable() {
       key: "x",
 
       render: (_, item, i) => {
+        console.log("%c Line:51 🥪 item", "color:#ea7e5c", item);
         return (
           <PointsVector3
             value={item}
@@ -82,7 +83,7 @@ export default function CylinderTable() {
       diff: renderStandardDeviation(item.difference),
       enable: item.enable,
       id: `${item.label ?? ""}${item.key}-${item.x}-${item.y}-${item.z}`,
-      key: `${item.label ?? ""}${item.key}`,
+      key: item.key,
       label: item.label,
       x: item.x,
       y: item.y,
