@@ -2,7 +2,7 @@
  * File: xzsvdc.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 20:45:04
+ * C/C++ source code generated on  : 03-Dec-2024 21:15:29
  */
 
 /* Include Files */
@@ -162,7 +162,7 @@ int b_xzsvdc(emxArray_real_T *A, emxArray_real_T *U, double S_data[],
         }
       }
       if (q + 1 <= 1) {
-        nrm = d_xnrm2(e);
+        nrm = e_xnrm2(e);
         if (nrm == 0.0) {
           e[0] = 0.0;
         } else {

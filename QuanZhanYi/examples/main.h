@@ -2,7 +2,7 @@
  * File: main.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 20:45:04
+ * C/C++ source code generated on  : 03-Dec-2024 21:15:29
  */
 
 /*************************************************************************/
@@ -73,6 +73,10 @@ extern void main_RepeatSurvey(void);
 extern void main_ShengDaoGaoDu(void);
 
 extern void main_ShengLuJiaoJiSuan(void);
+
+extern void main_YuanXingFuCe(void);
+
+extern void main_YuanZhuJiaoDian(void);
 
 extern void main_angle2point(void);
 

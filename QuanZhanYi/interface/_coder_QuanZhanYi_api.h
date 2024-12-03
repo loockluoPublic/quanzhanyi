@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 20:45:04
+ * C/C++ source code generated on  : 03-Dec-2024 21:15:29
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -103,15 +103,17 @@ void GenerateTrianglePoints_api(const mxArray *const prhs[4],
 void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
                                                real_T num, real_T laynum,
                                                real_T P3[3], real_T P4[3],
+                                               real_T r,
                                                emxArray_real_T *Point_test);
 
 void JuXingFuCe(emxArray_real_T *PointIn, real_T shenglunum, real_T Pin[3],
                 real_T Tao[3], real_T h, emxArray_real_T *PlaneParaOut4,
-                emxArray_real_T *Distance, emxArray_real_T *theta,
-                emxArray_real_T *LTPY, emxArray_real_T *TiC,
-                emxArray_real_T *Wquanzhong3, emxArray_real_T *Wquanzhong4);
+                real_T LenDaoJiao[8], emxArray_real_T *Distance,
+                emxArray_real_T *theta, emxArray_real_T *LTPY,
+                emxArray_real_T *TiC, emxArray_real_T *Wquanzhong3,
+                emxArray_real_T *Wquanzhong4);
 
-void JuXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
+void JuXingFuCe_api(const mxArray *const prhs[7], int32_T nlhs,
                     const mxArray *plhs[6]);
 
 void OffsetCalculate(real_T Mradial, real_T phi, emxArray_real_T *Ang,
@@ -145,6 +147,21 @@ void ShengLuJiaoJiSuan(real_T numShengLu, emxArray_real_T *Ang);
 
 void ShengLuJiaoJiSuan_api(const mxArray *prhs, const mxArray **plhs);
 
+void YuanXingFuCe(emxArray_real_T *PointIn, real_T shenglunum,
+                  real_T Mcenter[3], real_T MTaon[3], real_T Mradial,
+                  real_T phi, emxArray_real_T *Distance, emxArray_real_T *theta,
+                  emxArray_real_T *LTPY, emxArray_real_T *TiC,
+                  emxArray_real_T *Wquanzhong1, emxArray_real_T *Wquanzhong2);
+
+void YuanXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
+                      const mxArray *plhs[6]);
+
+void YuanZhuJiaoDian(real_T Mcenter[3], real_T MTaon[3], real_T Mradial,
+                     real_T Pin1[3], real_T Pin2[3], real_T Cross_point_data[],
+                     int32_T Cross_point_size[2]);
+
+void YuanZhuJiaoDian_api(const mxArray *const prhs[5], const mxArray **plhs);
+
 void angle2point(real_T ANG, real_T a, real_T b, real_T c, real_T d,
                  real_T Mradial, real_T *x, real_T *y, real_T *z);
 
@@ -163,13 +180,13 @@ void c_Calculate_accurate_cylinders_(const mxArray *const prhs[3], int32_T nlhs,
 void c_Calculate_rectangle_from_vert(const mxArray *prhs, int32_T nlhs,
                                      const mxArray *plhs[8]);
 
-void c_Generate_multi_layered_measur(const mxArray *const prhs[5],
+void c_Generate_multi_layered_measur(const mxArray *const prhs[6],
                                      const mxArray **plhs);
 
 void c_foot_of_perpendicular_from_a_(const mxArray *const prhs[3], int32_T nlhs,
                                      const mxArray *plhs[3]);
 
-void c_generate_unit_circle_with_nor(const mxArray *const prhs[3],
+void c_generate_unit_circle_with_nor(const mxArray *const prhs[4],
                                      const mxArray **plhs);
 
 void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
@@ -189,7 +206,7 @@ void foot_of_perpendicular_from_a_point_to_a_line(real_T P_outer[3],
                                                   real_T *zN1);
 
 void generate_unit_circle_with_normal_vector(real_T azimuth, real_T elevation,
-                                             real_T num,
+                                             real_T num, real_T r,
                                              emxArray_real_T *Point_out);
 
 void generate_unit_circle_with_normal_vector2(real_T azimuth, real_T elevation,
@@ -221,10 +238,11 @@ void planefit8(emxArray_real_T *Points1, emxArray_real_T *Points2,
                emxArray_real_T *Points7, emxArray_real_T *Points8,
                real_T P_bound1[3], real_T P_bound2[3], real_T distanceThreshold,
                emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints,
-               real_T MaxDis[8], emxArray_real_T *distancesFianal);
+               real_T MaxDis[8], emxArray_real_T *distancesFianal,
+               real_T LenDaoJiao[8]);
 
 void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
-                   const mxArray *plhs[4]);
+                   const mxArray *plhs[5]);
 
 void planefit_api(const mxArray *const prhs[4], int32_T nlhs,
                   const mxArray *plhs[2]);
