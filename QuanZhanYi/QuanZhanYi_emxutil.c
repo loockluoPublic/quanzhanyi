@@ -2,7 +2,7 @@
  * File: QuanZhanYi_emxutil.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 02-Dec-2024 23:37:52
+ * C/C++ source code generated on  : 03-Dec-2024 20:45:04
  */
 
 /* Include Files */
@@ -425,33 +425,6 @@ void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions)
   emxArray->canFreeData = true;
   for (i = 0; i < numDimensions; i++) {
     emxArray->size[i] = 0;
-  }
-}
-
-/*
- * Arguments    : emxArray_real_T *emxArray
- * Return Type  : void
- */
-void emxReserve_real_T(emxArray_real_T *emxArray)
-{
-  int i;
-  int numel;
-  void *newData;
-  if (emxArray->allocatedSize < 4) {
-    numel = 1;
-    for (i = 0; i < emxArray->numDimensions; i++) {
-      numel *= emxArray->size[i];
-    }
-    newData = malloc(4U * sizeof(double));
-    if (emxArray->data != NULL) {
-      memcpy(newData, emxArray->data, sizeof(double) * (unsigned int)numel);
-      if (emxArray->canFreeData) {
-        free(emxArray->data);
-      }
-    }
-    emxArray->data = (double *)newData;
-    emxArray->allocatedSize = 4;
-    emxArray->canFreeData = true;
   }
 }
 

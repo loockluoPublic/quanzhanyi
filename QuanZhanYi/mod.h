@@ -1,12 +1,12 @@
 /*
- * File: rand.h
+ * File: mod.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 02-Dec-2024 23:37:52
+ * C/C++ source code generated on  : 03-Dec-2024 20:45:04
  */
 
-#ifndef RAND_H
-#define RAND_H
+#ifndef MOD_H
+#define MOD_H
 
 /* Include Files */
 #include "rtwtypes.h"
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double b_rand(void);
+double b_mod(double x);
 
 #ifdef __cplusplus
 }
@@ -26,7 +26,7 @@ double b_rand(void);
 
 #endif
 /*
- * File trailer for rand.h
+ * File trailer for mod.h
  *
  * [EOF]
  */

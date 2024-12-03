@@ -2,7 +2,7 @@
  * File: Calculat_JuXing_A_and_B_Points_after_Offest.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 02-Dec-2024 23:37:52
+ * C/C++ source code generated on  : 03-Dec-2024 20:45:04
  */
 
 /* Include Files */
@@ -166,7 +166,7 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
   emxArray_real_T *r;
   emxArray_real_T *r2;
   double ROT[9];
-  double b_dv[9];
+  double dv[9];
   double rot1[9];
   double UPPmove[3];
   double theta1_tmp[3];
@@ -372,22 +372,22 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     UPPmove[2] = r_idx_2 / norm_vec;
   }
   r_idx_2 = (1.0 - c) * UPPmove[0];
-  b_dv[0] = r_idx_2 * UPPmove[0] + c;
+  dv[0] = r_idx_2 * UPPmove[0] + c;
   scale = r_idx_2 * UPPmove[1];
   absxk = s * UPPmove[2];
-  b_dv[3] = scale - absxk;
+  dv[3] = scale - absxk;
   r_idx_2 *= UPPmove[2];
   t = s * UPPmove[1];
-  b_dv[6] = r_idx_2 + t;
-  b_dv[1] = scale + absxk;
+  dv[6] = r_idx_2 + t;
+  dv[1] = scale + absxk;
   scale = (1.0 - c) * UPPmove[1];
-  b_dv[4] = scale * UPPmove[1] + c;
+  dv[4] = scale * UPPmove[1] + c;
   scale *= UPPmove[2];
   absxk = s * UPPmove[0];
-  b_dv[7] = scale - absxk;
-  b_dv[2] = r_idx_2 - t;
-  b_dv[5] = scale + absxk;
-  b_dv[8] = (1.0 - c) * UPPmove[2] * UPPmove[2] + c;
+  dv[7] = scale - absxk;
+  dv[2] = r_idx_2 - t;
+  dv[5] = scale + absxk;
+  dv[8] = (1.0 - c) * UPPmove[2] * UPPmove[2] + c;
   /*  计算A点 */
   /*  在PABrot的基础上增量xyz */
   /*  x为b*tan(phi) */
@@ -399,8 +399,8 @@ void Calculat_JuXing_A_and_B_Points_after_Offest(
     absxk = rot1[i + 6];
     for (itilerow = 0; itilerow < 3; itilerow++) {
       ROT[i + 3 * itilerow] =
-          (r_idx_2 * b_dv[3 * itilerow] + scale * b_dv[3 * itilerow + 1]) +
-          absxk * b_dv[3 * itilerow + 2];
+          (r_idx_2 * dv[3 * itilerow] + scale * dv[3 * itilerow + 1]) +
+          absxk * dv[3 * itilerow + 2];
     }
     UPPmove[i] = PAB[i] - Pin[i];
   }

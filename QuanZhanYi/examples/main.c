@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 02-Dec-2024 23:37:52
+ * C/C++ source code generated on  : 03-Dec-2024 20:45:04
  */
 
 /*************************************************************************/
@@ -49,8 +49,6 @@
 #include "RepeatSurvey.h"
 #include "ShengDaoGaoDu.h"
 #include "ShengLuJiaoJiSuan.h"
-#include "YuanXingFuCe.h"
-#include "YuanZhuJiaoDian.h"
 #include "angle2point.h"
 #include "fitcircle.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
@@ -63,8 +61,6 @@
 #include "rt_nonfinite.h"
 
 /* Function Declarations */
-static void argInit_1x8_real_T(double result[8]);
-
 static emxArray_real_T *argInit_1xUnbounded_real_T(void);
 
 static void argInit_3x1_real_T(double result[3]);
@@ -80,21 +76,6 @@ static emxArray_real_T *argInit_Unboundedx2_real_T(void);
 static double argInit_real_T(void);
 
 /* Function Definitions */
-/*
- * Arguments    : double result[8]
- * Return Type  : void
- */
-static void argInit_1x8_real_T(double result[8])
-{
-  int idx1;
-  /* Loop over the array to initialize each element. */
-  for (idx1 = 0; idx1 < 8; idx1++) {
-    /* Set the value of the array element.
-Change this value to the value that the application requires. */
-    result[idx1] = argInit_real_T();
-  }
-}
-
 /*
  * Arguments    : void
  * Return Type  : emxArray_real_T *
@@ -270,8 +251,6 @@ You can call entry-point functions multiple times. */
   main_RepeatSurvey();
   main_ShengDaoGaoDu();
   main_ShengLuJiaoJiSuan();
-  main_YuanXingFuCe();
-  main_YuanZhuJiaoDian();
   /* Terminate the application.
 You do not need to do this more than one time. */
   QuanZhanYi_terminate();
@@ -464,7 +443,7 @@ void main_Calculate_rectangle_from_vertex8(void)
   emxArray_real_T *side_faces_transformed7;
   emxArray_real_T *side_faces_transformed8;
   double P_bound1_tmp[3];
-  double b_dv[3];
+  double dv[3];
   double phi_tmp;
   /* Initialize function 'Calculate_rectangle_from_vertex8' input arguments. */
   /* Initialize function input argument 'side_faces_transformed1'. */
@@ -496,12 +475,12 @@ void main_Calculate_rectangle_from_vertex8(void)
   emxInitArray_real_T(&PointTable_A_off8, 2);
   emxInitArray_real_T(&PointTable_B_off8, 2);
   emxInitArray_real_T(&XieMianPianYi, 2);
-  argInit_3x1_real_T(b_dv);
+  argInit_3x1_real_T(dv);
   Calculate_rectangle_from_vertex8(
       side_faces_transformed1, side_faces_transformed2, side_faces_transformed3,
       side_faces_transformed4, side_faces_transformed5, side_faces_transformed6,
       side_faces_transformed7, side_faces_transformed8, P_bound1_tmp,
-      P_bound1_tmp, b_dv, phi_tmp, phi_tmp, Ti, a, phi_tmp, PointTable_A_off8,
+      P_bound1_tmp, dv, phi_tmp, phi_tmp, Ti, a, phi_tmp, PointTable_A_off8,
       PointTable_B_off8, XieMianPianYi);
   emxDestroyArray_real_T(a);
   emxDestroyArray_real_T(Ti);
@@ -542,9 +521,9 @@ void main_CrossLine(void)
 void main_GenerateTrianglePoints(void)
 {
   double PointTri[6];
-  double b_dv[4];
+  double dv[4];
   double BoundPoint1_tmp[3];
-  double b_dv1[3];
+  double dv1[3];
   /* Initialize function 'GenerateTrianglePoints' input arguments. */
   /* Initialize function input argument 'PlaneParaIn'. */
   /* Initialize function input argument 'BoundPoint1'. */
@@ -552,10 +531,9 @@ void main_GenerateTrianglePoints(void)
   /* Initialize function input argument 'P0'. */
   /* Initialize function input argument 'Direction'. */
   /* Call the entry-point 'GenerateTrianglePoints'. */
-  argInit_4x1_real_T(b_dv);
-  argInit_3x1_real_T(b_dv1);
-  GenerateTrianglePoints(b_dv, BoundPoint1_tmp, BoundPoint1_tmp, b_dv1,
-                         PointTri);
+  argInit_4x1_real_T(dv);
+  argInit_3x1_real_T(dv1);
+  GenerateTrianglePoints(dv, BoundPoint1_tmp, BoundPoint1_tmp, dv1, PointTri);
 }
 
 /*
@@ -579,7 +557,7 @@ void main_Generate_multi_layered_measurement_points(void)
   /* Call the entry-point 'Generate_multi_layered_measurement_points'. */
   emxInitArray_real_T(&Point_test, 2);
   Generate_multi_layered_measurement_points(Point_out, num_tmp, num_tmp, P3_tmp,
-                                            P3_tmp, num_tmp, Point_test);
+                                            P3_tmp, Point_test);
   emxDestroyArray_real_T(Point_out);
   emxDestroyArray_real_T(Point_test);
 }
@@ -598,7 +576,6 @@ void main_JuXingFuCe(void)
   emxArray_real_T *Wquanzhong3;
   emxArray_real_T *Wquanzhong4;
   emxArray_real_T *theta;
-  double b_dv[8];
   double Pin_tmp[3];
   double shenglunum_tmp;
   /* Initialize function 'JuXingFuCe' input arguments. */
@@ -610,7 +587,6 @@ void main_JuXingFuCe(void)
   /* Initialize function input argument 'Tao'. */
   /* Initialize function input argument 'PlaneParaOut4'. */
   PlaneParaOut4 = argInit_4xUnbounded_real_T();
-  /* Initialize function input argument 'LenDaoJiao'. */
   /* Call the entry-point 'JuXingFuCe'. */
   emxInitArray_real_T(&Distance, 2);
   emxInitArray_real_T(&theta, 2);
@@ -618,9 +594,8 @@ void main_JuXingFuCe(void)
   emxInitArray_real_T(&TiC, 2);
   emxInitArray_real_T(&Wquanzhong3, 1);
   emxInitArray_real_T(&Wquanzhong4, 1);
-  argInit_1x8_real_T(b_dv);
   JuXingFuCe(PointIn, shenglunum_tmp, Pin_tmp, Pin_tmp, shenglunum_tmp,
-             PlaneParaOut4, b_dv, Distance, theta, LTPY, TiC, Wquanzhong3,
+             PlaneParaOut4, Distance, theta, LTPY, TiC, Wquanzhong3,
              Wquanzhong4);
   emxDestroyArray_real_T(PlaneParaOut4);
   emxDestroyArray_real_T(PointIn);
@@ -708,67 +683,6 @@ void main_ShengLuJiaoJiSuan(void)
  * Arguments    : void
  * Return Type  : void
  */
-void main_YuanXingFuCe(void)
-{
-  emxArray_real_T *Distance;
-  emxArray_real_T *LTPY;
-  emxArray_real_T *PointIn;
-  emxArray_real_T *TiC;
-  emxArray_real_T *Wquanzhong1;
-  emxArray_real_T *Wquanzhong2;
-  emxArray_real_T *theta;
-  double Mcenter_tmp[3];
-  double shenglunum_tmp;
-  /* Initialize function 'YuanXingFuCe' input arguments. */
-  /* Initialize function input argument 'PointIn'. */
-  PointIn = argInit_3xUnbounded_real_T();
-  shenglunum_tmp = argInit_real_T();
-  /* Initialize function input argument 'Mcenter'. */
-  argInit_3x1_real_T(Mcenter_tmp);
-  /* Initialize function input argument 'MTaon'. */
-  /* Call the entry-point 'YuanXingFuCe'. */
-  emxInitArray_real_T(&Distance, 2);
-  emxInitArray_real_T(&theta, 2);
-  emxInitArray_real_T(&LTPY, 2);
-  emxInitArray_real_T(&TiC, 2);
-  emxInitArray_real_T(&Wquanzhong1, 1);
-  emxInitArray_real_T(&Wquanzhong2, 1);
-  YuanXingFuCe(PointIn, shenglunum_tmp, Mcenter_tmp, Mcenter_tmp,
-               shenglunum_tmp, shenglunum_tmp, Distance, theta, LTPY, TiC,
-               Wquanzhong1, Wquanzhong2);
-  emxDestroyArray_real_T(PointIn);
-  emxDestroyArray_real_T(Distance);
-  emxDestroyArray_real_T(theta);
-  emxDestroyArray_real_T(LTPY);
-  emxDestroyArray_real_T(TiC);
-  emxDestroyArray_real_T(Wquanzhong1);
-  emxDestroyArray_real_T(Wquanzhong2);
-}
-
-/*
- * Arguments    : void
- * Return Type  : void
- */
-void main_YuanZhuJiaoDian(void)
-{
-  double Cross_point_data[6];
-  double Mcenter_tmp[3];
-  int Cross_point_size[2];
-  /* Initialize function 'YuanZhuJiaoDian' input arguments. */
-  /* Initialize function input argument 'Mcenter'. */
-  argInit_3x1_real_T(Mcenter_tmp);
-  /* Initialize function input argument 'MTaon'. */
-  /* Initialize function input argument 'Pin1'. */
-  /* Initialize function input argument 'Pin2'. */
-  /* Call the entry-point 'YuanZhuJiaoDian'. */
-  YuanZhuJiaoDian(Mcenter_tmp, Mcenter_tmp, argInit_real_T(), Mcenter_tmp,
-                  Mcenter_tmp, Cross_point_data, Cross_point_size);
-}
-
-/*
- * Arguments    : void
- * Return Type  : void
- */
 void main_angle2point(void)
 {
   double ANG_tmp;
@@ -834,7 +748,7 @@ void main_generate_unit_circle_with_normal_vector(void)
   /* Call the entry-point 'generate_unit_circle_with_normal_vector'. */
   emxInitArray_real_T(&Point_out, 2);
   generate_unit_circle_with_normal_vector(azimuth_tmp, azimuth_tmp, azimuth_tmp,
-                                          azimuth_tmp, Point_out);
+                                          Point_out);
   emxDestroyArray_real_T(Point_out);
 }
 
@@ -868,12 +782,12 @@ void main_generate_unit_circle_with_normal_vector2(void)
 void main_myvrrotvec2mat(void)
 {
   double m[9];
-  double b_dv[4];
+  double dv[4];
   /* Initialize function 'myvrrotvec2mat' input arguments. */
   /* Initialize function input argument 'r'. */
   /* Call the entry-point 'myvrrotvec2mat'. */
-  argInit_4x1_real_T(b_dv);
-  myvrrotvec2mat(b_dv, m);
+  argInit_4x1_real_T(dv);
+  myvrrotvec2mat(dv, m);
 }
 
 /*
@@ -966,7 +880,6 @@ void main_planefit8(void)
   emxArray_real_T *Points8;
   emxArray_real_T *TrianglePoints;
   emxArray_real_T *distancesFianal;
-  double LenDaoJiao[8];
   double MaxDis[8];
   double P_bound1_tmp[3];
   /* Initialize function 'planefit8' input arguments. */
@@ -995,7 +908,7 @@ void main_planefit8(void)
   emxInitArray_real_T(&distancesFianal, 2);
   planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7,
             Points8, P_bound1_tmp, P_bound1_tmp, argInit_real_T(), PlaneParaOut,
-            TrianglePoints, MaxDis, distancesFianal, LenDaoJiao);
+            TrianglePoints, MaxDis, distancesFianal);
   emxDestroyArray_real_T(Points8);
   emxDestroyArray_real_T(Points7);
   emxDestroyArray_real_T(Points6);
