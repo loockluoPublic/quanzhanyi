@@ -7,11 +7,8 @@ import { Point } from "../components/Point";
 import { useEffect, useRef } from "react";
 import Select, { DefaultOptionType } from "antd/es/select";
 import {
-  ang2rad,
-  CalcJuXingAAndBPointsAfterOffest,
   CalculatAAndBPoints4,
   CalculatAAndBPoints8,
-  CalculateRectangleFromVertex8,
   cubeTOff,
   sdj_n2v,
   sdj_v2n,
@@ -48,13 +45,14 @@ function CubeResult() {
 
       const cubeTable: any = [];
 
-      data.sdm?.forEach?.((m) => {
+      data.sdm?.forEach?.((m, p) => {
         sdgd.forEach((ti, i) => {
           const h = Number(ti.toFixed(6));
           cubeTable.push({
             ...ti,
             sdm: m,
             i: i + 1,
+            updateIndex: p * sdgd.length + i,
             h,
             a: defaultA,
             tOff: cubeTOff(defaultA, data.sdj),
@@ -117,7 +115,7 @@ function CubeResult() {
   const calcPoint = () => {
     console.log("%c Line:127 🍡", "color:#e41a6a");
     if (!data.centerPoint) {
-      message.error("请采集AB面交点");
+      message.error("请采集中心点");
       return;
     }
 
@@ -248,8 +246,13 @@ function CubeResult() {
       dataIndex: "h",
       key: "h",
       align: "center",
-      render: (v, _, i) => {
-        return <InputNumber value={v} onChange={(v) => onChange(v, i, "h")} />;
+      render: (v, row) => {
+        return (
+          <InputNumber
+            value={v}
+            onChange={(v) => onChange(v, row.updateIndex, "h")}
+          />
+        );
       },
     },
     {
@@ -265,7 +268,7 @@ function CubeResult() {
             onChange={(v) => onChange(v, i, "a")}
             addonAfter={
               <div>
-                米{" "}
+                米
                 <Tooltip title="应用到全部" className="q-cursor-pointer">
                   <SettingOutlined onClick={() => setA(i)} />
                 </Tooltip>
@@ -373,10 +376,14 @@ function CubeResult() {
           ></Checkbox.Group>
         </span>
         <span className="q-ml-8">
-          AB面交点：
+          中心点：
           <PointsVector3
+            hideLabel
             className="!q-inline-flex"
             value={data.centerPoint as CustomVector3}
+            before={() => {
+              CustomVector3.setPublicInfo("AB", 0);
+            }}
             onChange={(v) => {
               setData({ ...data, centerPoint: v });
             }}

@@ -3,8 +3,11 @@ import { CustomVector3 } from "../class/CustomVector3";
 import { measureAndGetSimpleCoord } from "../utils/commond";
 import { MinusCircleOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { Auth } from "../atom/globalState";
 
 export default function PointsVector3(props: {
+  hideLabel?: boolean;
   value?: CustomVector3;
   style?: React.CSSProperties;
   showGetPoints?: boolean;
@@ -13,8 +16,13 @@ export default function PointsVector3(props: {
   remove?: () => void;
   autoMeasure?: boolean;
   className?: string;
+  type?: "button";
+  buttonText?: string;
+  buttonProps?: any;
 }) {
   const { showGetPoints = true, value } = props;
+  const auth = useRecoilValue(Auth);
+  console.log("%c Line:22 🥑 props", "color:#42b983", props);
 
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +30,7 @@ export default function PointsVector3(props: {
     setLoading(true);
     props?.before?.();
     measureAndGetSimpleCoord()
-      .then((res) => {
+      .then((res: any) => {
         props.onChange?.(res);
       })
       .catch((err) => {
@@ -47,13 +55,37 @@ export default function PointsVector3(props: {
     w = w + 30;
   }
 
+  if (props.hideLabel) w = -30;
+
+  const buttonText = props.buttonText || "采集";
+
+  console.log("%c Line:64 🥥 loading", "color:#ea7e5c", loading);
+  if (props.type === "button")
+    return (
+      <Button
+        type="primary"
+        onClick={getPoints}
+        loading={loading}
+        size="small"
+        disabled={!auth}
+        {...props.buttonProps}
+      >
+        {buttonText}
+      </Button>
+    );
+
   return (
     <div
       className={" q-inline-flex q-justify-end q-my-2 " + props.className}
       style={{ minWidth: `${w}px` }}
     >
       <span style={props.style}>
-        <span>{`${props?.value?.label || ""}${props?.value?.key ?? ""}`}</span>
+        {!props.hideLabel && (
+          <span>{`${props?.value?.label || ""}${
+            props?.value?.key ?? ""
+          }`}</span>
+        )}
+
         <span>
           （
           {`${props?.value?.x?.toFixed(3) ?? "--"}, ${
@@ -78,8 +110,9 @@ export default function PointsVector3(props: {
               onClick={getPoints}
               loading={loading}
               size="small"
+              disabled={!auth}
             >
-              采集
+              {buttonText}
             </Button>
           )}
         </span>

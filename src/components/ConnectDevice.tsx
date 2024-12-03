@@ -1,7 +1,7 @@
 import SerialMonitor from "@ridge18/web-serial-monitor";
 import { Button, Input, message } from "antd";
 import { useRecoilState } from "recoil";
-import { deviceInfo } from "../atom/globalState";
+import { Auth, deviceInfo } from "../atom/globalState";
 import * as commond from "../utils/commond";
 import { getDeviceInfo } from "../utils/commond";
 
@@ -14,8 +14,9 @@ import { encode } from "../utils/secret";
 (window as any).commond = commond;
 export const serial = new SerialMonitor({ mode: "text", parseLines: true });
 
-export default function Connect() {
+export default function Connect(props: { next: () => void }) {
   const [deviceInfoData, setDeviceInfo] = useRecoilState(deviceInfo);
+  const [_, setAuth] = useRecoilState(Auth);
 
   const [pwd, setPwd] = useState("");
 
@@ -24,7 +25,7 @@ export default function Connect() {
       style={{ backgroundImage: `url(${banner})` }}
       className="q-w-full q-bg-no-repeat q-bg-center q-bg-cover q-shadow-lg q-rounded-lg"
     >
-      <div className="q-absolute q-w-[320px] q-p-6 q-shadow-md q-rounded-xl q-mt-32 q-left-1/2 q-ml-[-160px] q-text-center q-bg-[#e9ecef88]">
+      <div className="q-z-50 q-absolute q-w-[320px] q-p-6 q-shadow-md q-rounded-xl q-mt-32 q-left-1/2 q-ml-[-160px] q-text-center q-bg-[#e9ecef88]">
         <table className="q-mb-4 q-m-auto">
           <tbody>
             <tr>
@@ -59,6 +60,7 @@ export default function Connect() {
                 onClick={() => {
                   serial.disconnect().finally(() => {
                     setDeviceInfo({});
+                    setAuth(false);
                   });
                 }}
               >
@@ -70,6 +72,8 @@ export default function Connect() {
                 onClick={() => {
                   if (pwd === encode(deviceInfoData?.SerialNo)) {
                     setDeviceInfo({ ...deviceInfoData, auth: true });
+                    setAuth(true);
+                    props.next();
                     message.success("秘钥验证成功");
                   } else {
                     message.error("秘钥验证错误，请确定秘钥与设备是否对应");
@@ -91,7 +95,7 @@ export default function Connect() {
                 })
                 .then((res) => {
                   setDeviceInfo(res);
-                  setPwd(encode(res?.SerialNo));
+                  // setPwd(encode(res?.SerialNo));
                 })
                 .catch((error) => {
                   console.error("%c Line:97 🌮 error", "color:#e41a6a", error);

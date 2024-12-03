@@ -3,10 +3,11 @@ import { CustomVector3 } from "../class/CustomVector3";
 import { tableData } from "./config";
 import { ICycle } from "../atom/type";
 import _ from "loadsh";
+import { TType } from "../atom/globalState";
+import dayjs from "dayjs";
 
 const {
   _generateUnitCircleWithNormalVector,
-  _GenerateMultiLayeredMeasurementPoints,
   _CalculateAccurateCylindersFromMultipleMeasurementPoints,
   _CalculatAAndBPoints,
   _Repeat_Survey,
@@ -38,11 +39,13 @@ export const generateUnitCircleWithNormalVector = async (
   numPerLay: number,
   laynum: number,
   P1: CustomVector3,
-  P2: CustomVector3
+  P2: CustomVector3,
+  r: number
 ): Promise<CustomVector3[]> => {
   const points = new EmxArray_real_T(3, numPerLay * laynum);
   const p3 = new EmxArray_real_T(P1);
   const p4 = new EmxArray_real_T(P2);
+  console.log("%c Line:55 🥓 r", "color:#6ec1c2", r);
   _generateUnitCircleWithNormalVector(
     azimuth,
     elevation,
@@ -50,66 +53,14 @@ export const generateUnitCircleWithNormalVector = async (
     laynum,
     p3.arrayPtr,
     p4.arrayPtr,
+    r,
     points.ptr
   );
   const res = points.toVector3();
-  console.log(
-    "%c Line:22 🥝 _generateUnitCircleWithNormalVector",
-    "color:#93c0a4",
-    azimuth,
-    elevation,
-    numPerLay,
-    laynum,
-    P1,
-    P2,
-    res
-  );
+
   console.table(res);
   points.free();
   return res;
-};
-
-export const GenerateMultiLayeredMeasurementPoints = (
-  Points: CustomVector3[],
-  numPerLay: number,
-  laynum: number,
-  P1: CustomVector3,
-  P2: CustomVector3
-) => {
-  const points = new EmxArray_real_T(Points);
-  const p3 = new EmxArray_real_T(P1);
-  const p4 = new EmxArray_real_T(P2);
-  const resultPoints = new EmxArray_real_T(3, numPerLay * laynum);
-  console.group("GenerateMultiLayeredMeasurementPoints");
-
-  console.log(
-    "%c Line:40 🥪 num",
-    "color:#93c0a4",
-    numPerLay,
-    laynum,
-    p3.toVector3(),
-    p4.toVector3()
-  );
-  _GenerateMultiLayeredMeasurementPoints(
-    points.ptr,
-    numPerLay,
-    laynum,
-    p3.arrayPtr,
-    p4.arrayPtr,
-    resultPoints.ptr
-  );
-  console.log(
-    "%c Line:45 🥥 GenerateMultiLayeredMeasurementPoints resultPoints",
-    "color:#ea7e5c",
-    resultPoints.toVector3()
-  );
-  console.groupEnd();
-  const resoult = resultPoints.toVector3();
-  points.free();
-  resultPoints.free();
-  p3.free();
-  p4.free();
-  return resoult;
 };
 
 /**
@@ -178,7 +129,7 @@ const toSd = (array: any) => {
  * @param MTaon 圆柱轴线方向向量
  * @param Mcenter 圆柱中心点
  * @param R 圆半径
- * @param PAB AB面交点垂直面所在点
+ * @param PAB 中心点垂直面所在点
  * @param phi 声路角
  * 下面是三个1*2n的参数
  * @param ang   手动修正角度
@@ -193,7 +144,8 @@ const CalculatAAndBPointsFn = (
   PAB: CustomVector3,
   phi: number,
   resultTable: ICycle["resultTable"],
-  sdm: "A" | "B"
+  sdm: "A" | "B",
+  sign: boolean
 ) => {
   const tOff = fitArr(
     resultTable?.map?.((item) => {
@@ -213,22 +165,14 @@ const CalculatAAndBPointsFn = (
     }) ?? []
   );
 
-  console.log("%c Line:218 🍒 MTaon", "color:#2eafb0", MTaon);
   const mTaon = new EmxArray_real_T(MTaon);
-  console.log("%c Line:220 🍒 Mcenter", "color:#fca650", Mcenter);
   const mCenter = new EmxArray_real_T(Mcenter);
-  console.log("%c Line:222 🍒 PAB", "color:#6ec1c2", PAB);
   const _PAB = new EmxArray_real_T(PAB);
   const _ang = new EmxArray_real_T(ang);
-  console.log("%c Line:224 🍒 ang", "color:#465975", ang);
   const _tOff = new EmxArray_real_T(tOff);
-  console.log("%c Line:226 🍒 tOff", "color:#465975", tOff);
   const _rOff = new EmxArray_real_T(rOff);
-  console.log("%c Line:228 🍒 rOff", "color:#ffdd4d", rOff);
   const A = new EmxArray_real_T(3, ang.length);
   const B = new EmxArray_real_T(3, ang.length);
-  console.log("%c Line:236 🍒 R", "color:#4fff4B", R);
-  console.log("%c Line:239 🍒 ang2rad(phi)", "color:#465975", ang2rad(phi));
 
   _CalculatAAndBPoints(
     mTaon.arrayPtr,
@@ -239,8 +183,8 @@ const CalculatAAndBPointsFn = (
     _ang.ptr,
     _tOff.ptr,
     _rOff.ptr,
-    A.ptr,
-    B.ptr
+    sign ? B.ptr : A.ptr,
+    sign ? A.ptr : B.ptr
   );
 
   CustomVector3.setPublicInfo("A", 0);
@@ -286,7 +230,7 @@ const CalculatAAndBPointsFn = (
  * @param MTaon 圆柱轴线方向向量
  * @param Mcenter 圆柱中心点
  * @param R 圆半径
- * @param PAB AB面交点垂直面所在点
+ * @param PAB 中心点垂直面所在点
  * @param phi 声路角
  * @returns
  */
@@ -296,7 +240,8 @@ export const CalculatAAndBPoints = async (
   R: number,
   PAB: CustomVector3,
   phi: number,
-  resultTable: ICycle["resultTable"]
+  resultTable: ICycle["resultTable"],
+  sign: boolean
 ) => {
   const res = _.partition(resultTable, (t) => {
     return t.sdm === "A";
@@ -304,7 +249,16 @@ export const CalculatAAndBPoints = async (
     if (cur?.length === 0) return acc;
     return [
       ...acc,
-      ...CalculatAAndBPointsFn(MTaon, Mcenter, R, PAB, phi, cur, cur[0].sdm),
+      ...CalculatAAndBPointsFn(
+        MTaon,
+        Mcenter,
+        R,
+        PAB,
+        phi,
+        cur,
+        cur[0].sdm,
+        sign
+      ),
     ];
   }, []);
 
@@ -337,10 +291,8 @@ export const CalculatAAndBPoints4 = (data) => {
         tOff,
         cur[0].sdm
       ),
-      // ...CalculatAAndBPointsFn(MTaon, Mcenter, R, PAB, phi, cur, cur[0].sdm),
     ];
   }, []);
-  console.log("%c Line:326 🍅 res", "color:#f5ce50", res);
 
   return res;
 };
@@ -360,7 +312,6 @@ export const CalculatAAndBPoints8 = (data, MxPortsArr) => {
         return item.h;
       }) ?? [];
 
-    console.log("%c Line:367 🍓 MxPortsArr", "color:#6ec1c2", MxPortsArr);
     return [
       ...acc,
       ...CalculateRectangleFromVertex8(
@@ -455,9 +406,15 @@ export const getDataFromTable = (sdfb: number, index: number) => {
   });
 };
 
-export const downLoadFile = (data, filename = "data.json") => {
+export const downLoadFile = (data) => {
+  const mode = { second: "复测", first: "定位" }[data.mode];
+  const filename =
+    data.type === TType.cube
+      ? `方涵-${mode}_${dayjs().format("_YYYY_MM_DD")}.json`
+      : `管道-${mode}_${dayjs().format("_YYYY_MM_DD")}.json`;
+
   // 将JSON对象转换为字符串
-  const jsonString = JSON.stringify(data, null, 2);
+  const jsonString = JSON.stringify({ ...data, import: true }, null, 2);
 
   // 创建一个Blob对象
   const blob = new Blob([jsonString], { type: "application/json" });
@@ -573,18 +530,34 @@ export const Planefit = (
   const trianglePoints = new EmxArray_real_T(3, len * 2 * 3);
   const MaxDis = new EmxArray_real_T(len, 1);
 
+  const LenDaoJiao = new EmxArray_real_T(8, 1);
+
   const distancesFianal = new EmxArray_real_T(totalPoints, 1);
-  const fn = len === 4 ? _Planefit4 : _Planefit8;
-  fn(
-    ...mP.map((p) => p.ptr),
-    boundPoint1.arrayPtr,
-    boundPoint2.arrayPtr,
-    distanceThreshold,
-    planeParaOut.ptr,
-    trianglePoints.ptr,
-    MaxDis.arrayPtr,
-    distancesFianal.ptr
-  );
+
+  if (len === 4) {
+    _Planefit4(
+      ...mP.map((p) => p.ptr),
+      boundPoint1.arrayPtr,
+      boundPoint2.arrayPtr,
+      distanceThreshold,
+      planeParaOut.ptr,
+      trianglePoints.ptr,
+      MaxDis.arrayPtr,
+      distancesFianal.ptr
+    );
+  } else {
+    _Planefit8(
+      ...mP.map((p) => p.ptr),
+      boundPoint1.arrayPtr,
+      boundPoint2.arrayPtr,
+      distanceThreshold,
+      planeParaOut.ptr,
+      trianglePoints.ptr,
+      MaxDis.arrayPtr,
+      distancesFianal.ptr,
+      LenDaoJiao.arrayPtr
+    );
+  }
 
   const _max = Number(Math.max(...MaxDis.toJSON()?.[0]).toFixed(4));
 
@@ -605,6 +578,7 @@ export const Planefit = (
         return newP;
       });
     }),
+    LenDaoJiao: LenDaoJiao.toJSON()?.[0],
   };
 
   mP.forEach((p) => p.free()), boundPoint1.free();
@@ -791,7 +765,7 @@ export const cubeTOff = (a: number, sdj: number) => {
 /**
  * 计算矩形安装位置
  * @param cubeRes
- * @param PAB AB面交点
+ * @param PAB 中心点
  * @param sdj 声道角
  * @param sdfb 声道分布
  */
@@ -902,12 +876,14 @@ export const shengLuJiao2Ang = (numSL: number) => {
  * @returns
  */
 const juXingFuCeFn = (
-  cubeRes: ReturnType<typeof CalculateRectangleFromVertex>,
+  cubeRes: ReturnType<typeof CalculateRectangleFromVertex> & {
+    LenDaoJiao: number[];
+  },
   planeParaOut: number[][],
   cubeAgainTable: { p1: CustomVector3; p2: CustomVector3 }[],
   sdfb: number
 ) => {
-  console.log("%c Line:780 🍒 sdfb", "color:#33a5ff", sdfb);
+  console.log("%c Line:780 🍒 sdfb", "color:#33a5ff", cubeRes.LenDaoJiao);
   const PointIn = new EmxArray_real_T(
     cubeAgainTable?.reduce?.((acc, cur) => {
       return [...acc, cur.p1, cur.p2];
@@ -921,8 +897,10 @@ const juXingFuCeFn = (
   const theta = new EmxArray_real_T(sdfb, 1);
   const LTPY = new EmxArray_real_T(sdfb, 1);
   const TiC = new EmxArray_real_T(sdfb, 1);
+  const LenDaoJiao = new EmxArray_real_T(cubeRes.LenDaoJiao);
   const Wquanzhong3 = new EmxArray_real_T(sdfb, 1);
   const Wquanzhong4 = new EmxArray_real_T(sdfb, 1);
+
   _juXingFuCe(
     PointIn.ptr,
     sdfb,
@@ -930,6 +908,7 @@ const juXingFuCeFn = (
     Tao.arrayPtr,
     cubeRes.h,
     PlaneParaOut.ptr,
+    LenDaoJiao.arrayPtr,
     Distance.ptr,
     theta.ptr,
     LTPY.ptr,
@@ -966,7 +945,9 @@ const juXingFuCeFn = (
 };
 
 export const juXingFuCe = (
-  cubeRes: ReturnType<typeof CalculateRectangleFromVertex>,
+  cubeRes: ReturnType<typeof CalculateRectangleFromVertex> & {
+    LenDaoJiao: number[];
+  },
   planeParaOut: number[][],
   cubeAgainTable: { p1: CustomVector3; p2: CustomVector3 }[],
   sdfb: number,

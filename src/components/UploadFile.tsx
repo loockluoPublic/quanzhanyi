@@ -15,6 +15,8 @@ function AntdFileReader() {
     reader.readAsText(file);
     reader.onload = () => {
       const importData = loadFile((reader.result as string) || "{}");
+      (window as any).mock = true;
+      setStep(1);
       setData(importData);
       if (!compareSdcs(data, importData)) {
         setTimeout(() => {
@@ -31,6 +33,7 @@ function AntdFileReader() {
 
   return (
     <Upload
+      accept=".json"
       className=" q-inline-block"
       beforeUpload={handleFileChange} // 阻止自动上传
       showUploadList={false} // 隐藏上传列表

@@ -3,13 +3,25 @@ import { serial } from "../components/ConnectDevice";
 
 const mock = new URLSearchParams(location.search).has("mock");
 (window as any).mock = mock;
+
+(window as any).unlock = false;
+
+const authCmd = ["2107", "2116", "9027", "2008"];
+
 export const sendText = (text): Promise<string> => {
+  const cmd = text.split(":")?.[0];
+  console.log("%c Line:13 🥓 cmd", "color:#6ec1c2", text, cmd);
+
+  // if (!(window as any).unlock && authCmd.includes(cmd)) {
+  //   return Promise.reject("");
+  // }
+
   return new Promise((resolve) => {
     if (mock) {
       const mockData = {
         "2023:": "0",
         "5003:": "3216936",
-        "5004:": '"TS16 A 1" R500"',
+        "5004:": `TS16 A 1 R500.${Math.random().toFixed(3)}`,
         "5008:": "2024,'03','13','05','16','0e'",
         "5034:": "4,11,489",
         "2009:": "1.4878,1.9127,-1.0183,0",
@@ -29,6 +41,7 @@ export const sendText = (text): Promise<string> => {
       }, 500);
       return;
     }
+
     const flag = setTimeout(() => {
       resolve("");
     }, 8000);
@@ -174,15 +187,15 @@ export const getSimpleCoord = (): Promise<CustomVector3> => {
   const getSimpleCoordFn = (): Promise<CustomVector3> =>
     sendText(`2116:1500,1`)
       .then((res) => {
-        if (res.startsWith("%R1P,0,0:")) {
+        if (res?.startsWith?.("%R1P,0,0:") || res === "") {
           throw new Error("获取笛卡尔坐标失败");
         }
-        const d = res.split(",")?.map((i) => parseFloat(i));
+        const d = res?.split(",")?.map((i) => parseFloat(i));
         if (d?.length === 3) return new CustomVector3(d[0], d[2], d[1]);
       })
       .catch((err) => {
         console.error("%c Line:174 🍕 err", "color:#465975", err);
-        if (count++ < 3) {
+        if (count++ < 2) {
           return getSimpleCoordFn();
         } else {
           throw err;
@@ -197,6 +210,9 @@ export const getSimpleCoord = (): Promise<CustomVector3> => {
     getSimpleCoordFn()
       .then((res) => {
         reslove(res);
+      })
+      .catch((err) => {
+        reject(err);
       })
       .finally(() => {
         clearTimeout(flag);
@@ -229,10 +245,14 @@ export const pointToAndMeasure = (v: CustomVector3) => {
  * @param v
  * @returns Promise<CustomVector3>
  */
-export const measureAndGetSimpleCoord = () => {
-  if (location.search.includes("mock"))
-    return Promise.resolve(
-      new CustomVector3(Math.random(), Math.random(), Math.random())
-    );
+export const measureAndGetSimpleCoord = (): Promise<CustomVector3> => {
+  if (location.search.includes("mock")) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(new CustomVector3(Math.random(), Math.random(), Math.random()));
+      }, 500);
+    });
+  }
+
   return measure().then(getSimpleCoord);
 };

@@ -139,7 +139,7 @@ export default function () {
       key: "Wquanzhong3",
       align: "right",
       render: (v) => {
-        return v?.toFixed?.(4);
+        return v?.toFixed?.(6);
       },
     },
 
@@ -149,36 +149,10 @@ export default function () {
       key: "Wquanzhong4",
       align: "right",
       render: (v) => {
-        return v?.toFixed?.(4);
+        return v?.toFixed?.(6);
       },
     },
   ].filter((item) => item.key !== data.sfType);
-
-  const setMockData = () => {
-    const AB = [
-      ...data.AB.map((item) => item.pointA),
-      ...data.AB.map((item) => item.pointB),
-    ].sort((a, b) => {
-      const nA = { A: 0, B: 100 }[a.label] + a.key;
-      const nB = { A: 0, B: 100 }[b.label] + b.key;
-      return nA - nB;
-    });
-
-    const newTable = data.cubeAgainTable?.map((item, i) => {
-      return {
-        ...item,
-        p1: AB[2 * i],
-        p2: AB[2 * i + 1],
-      };
-    });
-
-    setData((d) => {
-      return {
-        ...d,
-        cubeAgainTable: newTable,
-      };
-    });
-  };
 
   const calcFuCe = () => {
     if (!data.cubeResult) {

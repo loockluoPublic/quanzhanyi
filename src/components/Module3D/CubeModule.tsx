@@ -13,9 +13,10 @@ import PerspectiveCamera from "./PerspectiveCamera";
 import React from "react";
 import Rectangular from "../Rectangular";
 import PointsLabel from "./PointsLabel";
-import { Switch } from "antd";
-import { useRecoilState } from "recoil";
-import { ShowLabel } from "../../atom/globalState";
+import { Radio, Segmented, Switch } from "antd";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Data, ShowCube, ShowLabel } from "../../atom/globalState";
+import Cube2D from "../Cube2D";
 
 // https://demo.vidol.chat/demos/leva
 // https://github.com/rdmclin2/fe-demos/blob/master/src/pages/demos/leva/panel.tsx
@@ -48,6 +49,8 @@ export default function Index(props: {
   trianglePoints?: CustomVector3[];
   [k: string]: any;
 }) {
+  const [showCube, setShowCube] = useRecoilState(ShowCube);
+  const [data] = useRecoilState(Data);
   const [v, setV] = useRecoilState(ShowLabel);
   const [showPoints, setPoints] = useState<CustomVector3[]>([]);
 
@@ -88,50 +91,64 @@ export default function Index(props: {
       className=" q-flex q-w-full q-h-full q-overflow-hidden q-relative"
       ref={ref}
     >
-      <Canvas
-        dpr={window.devicePixelRatio}
-        className={`${props.className} q-grow q-cursor-pointer canvas-style`}
-        style={{ height: h }}
-      >
-        <PerspectiveCamera />
-        <group scale={[1, 1, -1]}>
-          <axesHelper args={[10]} />
-          <ambientLight intensity={Math.PI / 2} />
-          <spotLight
-            position={[10, 10, 10]}
-            angle={0.15}
-            penumbra={1}
-            decay={0}
-            intensity={Math.PI}
-          />
+      {showCube ? (
+        <Canvas
+          dpr={window.devicePixelRatio}
+          className={`${props.className} q-grow q-cursor-pointer canvas-style`}
+          style={{ height: h }}
+        >
+          <PerspectiveCamera />
+          <group scale={[1, 1, -1]}>
+            <axesHelper args={[10]} />
+            <ambientLight intensity={Math.PI / 2} />
+            <spotLight
+              position={[10, 10, 10]}
+              angle={0.15}
+              penumbra={1}
+              decay={0}
+              intensity={Math.PI}
+            />
 
-          <Rectangular
-            trianglePoints={props.trianglePoints as CustomVector3[]}
-          ></Rectangular>
+            <Rectangular
+              trianglePoints={props.trianglePoints as CustomVector3[]}
+            ></Rectangular>
 
-          {Object.values(props.MxPoints ?? [])?.map((pArr, i) => {
-            return (
+            {Object.values(props.MxPoints ?? [])?.map((pArr, i) => {
+              return (
+                <PointsLabel
+                  key={i}
+                  points={pArr}
+                  color={MxColor[i]}
+                  disabledColor="#ccc"
+                  showLabel={v}
+                />
+              );
+            })}
+
+            {props.firstPoints?.length > 0 && (
               <PointsLabel
-                key={i}
-                points={pArr}
-                color={MxColor[i]}
-                disabledColor="#ccc"
+                points={props.firstPoints}
+                color="red"
                 showLabel={v}
               />
-            );
-          })}
+            )}
 
-          {props.firstPoints?.length > 0 && (
-            <PointsLabel points={props.firstPoints} color="red" showLabel={v} />
-          )}
+            {props.points?.length > 0 && (
+              <PointsLabel points={props.points} color="red" showLabel={v} />
+            )}
+          </group>
 
-          {props.points?.length > 0 && (
-            <PointsLabel points={props.points} color="red" showLabel={v} />
-          )}
-        </group>
+          <OrbitControls />
+        </Canvas>
+      ) : (
+        <Cube2D
+          containerHeight={h}
+          width={data.cubeResult?.b}
+          height={data.cubeResult?.h}
+          tris={data.cubeResult?.LenDaoJiao}
+        />
+      )}
 
-        <OrbitControls />
-      </Canvas>
       {props?.component && (
         <div
           style={{ maxHeight: h, overflow: "scroll" }}
@@ -141,14 +158,32 @@ export default function Index(props: {
         </div>
       )}
       <div className="q-absolute q-bottom-0 q-left-0 q-p-2">
-        <Switch
-          checkedChildren="标签"
-          unCheckedChildren="标签"
-          checked={v}
-          onChange={(v) => {
-            setV(v);
-          }}
-        />
+        <span className="q-ml-2">
+          <Radio.Group
+            options={[
+              { label: "三维", value: true },
+              { label: "二维", value: false },
+            ]}
+            value={showCube}
+            onChange={(e) => {
+              setShowCube(e.target.value);
+            }}
+            optionType="button"
+            buttonStyle="solid"
+            size="small"
+          />
+        </span>
+        {showCube && (
+          <Switch
+            className="q-ml-4"
+            checkedChildren="标签"
+            unCheckedChildren="标签"
+            checked={v}
+            onChange={(v) => {
+              setV(v);
+            }}
+          />
+        )}
       </div>
     </div>
   );

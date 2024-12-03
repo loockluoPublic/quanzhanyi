@@ -2,7 +2,7 @@
  * File: QuanZhanYi_rtwutil.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Oct-2024 13:46:16
+ * C/C++ source code generated on  : 03-Dec-2024 21:47:53
  */
 
 /* Include Files */
@@ -13,6 +13,43 @@
 #include <math.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : int numerator
+ *                int denominator
+ * Return Type  : int
+ */
+int div_s32(int numerator, int denominator)
+{
+  int quotient;
+  unsigned int tempAbsQuotient;
+  unsigned int u;
+  if (denominator == 0) {
+    if (numerator >= 0) {
+      quotient = MAX_int32_T;
+    } else {
+      quotient = MIN_int32_T;
+    }
+  } else {
+    if (numerator < 0) {
+      tempAbsQuotient = ~(unsigned int)numerator + 1U;
+    } else {
+      tempAbsQuotient = (unsigned int)numerator;
+    }
+    if (denominator < 0) {
+      u = ~(unsigned int)denominator + 1U;
+    } else {
+      u = (unsigned int)denominator;
+    }
+    tempAbsQuotient /= u;
+    if ((numerator < 0) != (denominator < 0)) {
+      quotient = -(int)tempAbsQuotient;
+    } else {
+      quotient = (int)tempAbsQuotient;
+    }
+  }
+  return quotient;
+}
+
 /*
  * Arguments    : double u0
  *                double u1

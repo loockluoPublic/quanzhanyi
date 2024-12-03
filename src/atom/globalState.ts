@@ -43,6 +43,7 @@ export const getInitAgainTable = (sdfb: number, sdm: string[]): any => {
 export const Data = atom<GlobalData>({
   key: "data", // 唯一标识这个状态
   default: {
+    virtualR: 0.6,
     sdfb: 4,
     sdj: 45,
     sdm: ["A", "B"],
@@ -75,4 +76,14 @@ export const Step = atom<number>({
 export const ShowLabel = atom<boolean>({
   key: "showLabel",
   default: true,
+});
+
+export const ShowCube = atom<boolean>({
+  key: "showCube",
+  default: true,
+});
+
+export const Auth = atom<boolean>({
+  key: "auth",
+  default: false,
 });

@@ -1,12 +1,14 @@
 import CylinderModule from "../components/Module3D";
-import { useRecoilState } from "recoil";
-import { Data, GlobalData } from "../atom/globalState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Auth, Data, GlobalData } from "../atom/globalState";
 import { Button, InputNumber, message } from "antd";
 import { useEffect, useState } from "react";
 import {
+  ang2rad,
   CalculateAccurateCylindersFromMultipleMeasurementPoints,
   calculateStandardDeviation,
   generateUnitCircleWithNormalVector,
+  rad2ang,
 } from "../utils/utils";
 import PointsVector3 from "../components/PointVector3";
 import { CustomVector3 } from "../class/CustomVector3";
@@ -17,6 +19,7 @@ import CylinderTable from "../components/CylinderTable";
 
 function CylinderPre() {
   const [data, setData] = useRecoilState(Data);
+  const auth = useRecoilValue(Auth);
 
   const { measure, loading, points } = useMeasure();
 
@@ -39,8 +42,14 @@ function CylinderPre() {
       data.numPerLay,
       data.layNum,
       data?.firstPoints?.[0],
-      data?.firstPoints?.[1]
+      data?.firstPoints?.[1],
+      data.virtualR
     ).then((waitingPoints) => {
+      console.log(
+        "%c Line:45 🥤 waitingPoints",
+        "color:#4fff4B",
+        waitingPoints
+      );
       setData({
         ...data,
         waitingPoints,
@@ -104,10 +113,11 @@ function CylinderPre() {
   };
 
   const reRun = (curData: GlobalData) => {
+    console.log("%c Line:115 🍫 curData", "color:#465975", curData);
     const newMP = curData.mPoints.map((item) => {
       return item
         .fromCustomVector3()
-        .setEnable(Math.abs(item.difference) < curData.standardDeviation);
+        .setEnable(Math.abs(item.originDiff) < curData.standardDeviation);
     });
 
     const nD = {
@@ -127,7 +137,7 @@ function CylinderPre() {
     calculateCylinders(
       {
         ...data,
-        mPoints: data.mPoints.map((d) => d.fromCustomVector3()),
+        mPoints: data.mPoints.map((d) => d.fromCustomVector3().setEnable(true)),
       },
       true
     )
@@ -167,6 +177,17 @@ function CylinderPre() {
             }}
           />
         </span>
+        <span className="q-ml-8">
+          预估半径：
+          <InputNumber
+            value={data.virtualR}
+            min={0.1}
+            max={50}
+            onChange={(virtualR) => {
+              setData({ ...data, virtualR });
+            }}
+          />
+        </span>
       </div>
 
       <h3 className="border-top  q-mt-4 q-pt-2"></h3>
@@ -175,6 +196,7 @@ function CylinderPre() {
           <span className="q-block">
             上游边界点：
             <PointsVector3
+              hideLabel
               className="!q-inline-flex !q-my-1"
               value={data.firstPoints[0] as CustomVector3}
               before={() => {
@@ -189,6 +211,7 @@ function CylinderPre() {
           <span className="q-block ">
             下游边界点：
             <PointsVector3
+              hideLabel
               className="!q-inline-flex !q-my-1"
               value={data.firstPoints[1] as CustomVector3}
               before={() => {
@@ -206,10 +229,14 @@ function CylinderPre() {
           <span>
             <PointsVector2 value={data.direct} />
             <Button
+              disabled={!auth}
               style={{ marginLeft: "10px" }}
               type="primary"
               onClick={() => {
                 getLine().then((direct) => {
+                  if (rad2ang(direct[1]) > 180) {
+                    direct[1] = ang2rad(360 - rad2ang(direct[1]));
+                  }
                   setData({ ...data, direct });
                 });
               }}
@@ -227,9 +254,33 @@ function CylinderPre() {
           type="primary"
           loading={loading}
           onClick={autoGetPoints}
+          disabled={!auth}
         >
-          开始采集
+          自动采集
         </Button>
+
+        <PointsVector3
+          type="button"
+          buttonProps={{
+            className: "q-ml q-ml-8",
+            size: "middle",
+          }}
+          buttonText="手动采集"
+          before={() => {
+            const maxKey = Math.max(
+              0,
+              ...data.mPoints?.map((item) => item.key)
+            );
+
+            CustomVector3.setPublicInfo("P", maxKey);
+          }}
+          onChange={(v) => {
+            setData((d) => ({
+              ...d,
+              mPoints: [v, ...d.mPoints],
+            }));
+          }}
+        />
 
         <Button
           className=" q-ml-8 "
@@ -286,6 +337,12 @@ function CylinderPre() {
             style={{ width: "200px" }}
             value={customStandardDeviation}
             onChange={(standardDeviation) => {
+              // setData(() => {
+              //   return {
+              //     ...data,
+              //     // standardDeviation:standardDeviation*
+              //   };
+              // });
               setStandardDeviation(standardDeviation);
             }}
             addonAfter="δ"
@@ -294,10 +351,16 @@ function CylinderPre() {
             className="q-float-right q-ml-4"
             loading={cyLoading}
             onClick={() => {
+              console.log(
+                "%c Line:332 🥛 customStandardDeviation * data.originStandardDeviation",
+                "color:#2eafb0",
+                customStandardDeviation,
+                data.originStandardDeviation
+              );
               reRun({
                 ...data,
                 standardDeviation:
-                  customStandardDeviation * data.standardDeviation,
+                  customStandardDeviation * data.originStandardDeviation,
               });
             }}
           >

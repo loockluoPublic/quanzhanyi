@@ -2,7 +2,7 @@
  * File: div.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Oct-2024 13:46:16
+ * C/C++ source code generated on  : 03-Dec-2024 21:47:53
  */
 
 /* Include Files */
@@ -18,7 +18,7 @@
  *                const emxArray_real_T *in3
  * Return Type  : void
  */
-void binary_expand_op_16(emxArray_real_T *in1, double in2,
+void binary_expand_op_18(emxArray_real_T *in1, double in2,
                          const emxArray_real_T *in3)
 {
   emxArray_real_T *b_in2;

@@ -3,11 +3,11 @@ import type { MenuProps } from "antd";
 import { ConfigProvider, Layout, Menu, Switch } from "antd";
 import { BrowserRouter as Router, Routes } from "react-router-dom";
 import { Data, Mode, Step, TMode, TType } from "./atom/globalState";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { downLoadFile } from "./utils/utils";
 import UploadFile from "./components/UploadFile";
 import zhCN from "antd/es/locale/zh_CN";
-import { transformJSON2Excel } from "./utils/exportExcel";
+import { exportExcel, transformJSON2Excel } from "./utils/exportExcel";
 
 const { Header, Content } = Layout;
 
@@ -24,14 +24,17 @@ const items1: MenuProps["items"] = [
 
 const App: React.FC<PropsWithChildren> = (props) => {
   const [mode, setMode] = useRecoilState(Mode);
+  const step = useRecoilValue(Step);
   const [data, setData] = useRecoilState(Data);
+
+  const showExportExcel = step === 2 && mode === TMode.second;
 
   return (
     <ConfigProvider locale={zhCN}>
       <Router>
         <Layout>
           <Header style={{ display: "flex", alignItems: "center" }}>
-            <div>
+            <div className="q-contents">
               <Menu
                 theme="dark"
                 mode="horizontal"
@@ -42,11 +45,6 @@ const App: React.FC<PropsWithChildren> = (props) => {
                   setData({ ...data, type: key as TType });
                 }}
               />
-            </div>
-            <div className="q-text-white q-flex-1 q-text-center">
-              <h2>超声换能器自动测算系统</h2>
-            </div>
-            <div className="q-inline-flex q-items-center">
               <Switch
                 className="h-button"
                 checkedChildren="复测"
@@ -57,15 +55,29 @@ const App: React.FC<PropsWithChildren> = (props) => {
                   setMode(v ? TMode.second : TMode.first);
                 }}
               />
-              <div
+            </div>
+            <div className="q-text-white q-flex-1 q-text-center">
+              <h2>超声换能器自动测算系统</h2>
+            </div>
+            <div className="q-inline-flex q-items-center">
+              {/* <div
                 className=" q-text-white q-cursor-pointer q-ml-6"
                 onClick={() => transformJSON2Excel(data)}
               >
-                导出excel
-              </div>
+                导出测试
+              </div> */}
+              {showExportExcel && (
+                <div
+                  className=" q-text-white q-cursor-pointer q-ml-6"
+                  onClick={() => exportExcel(data)}
+                >
+                  导出Excel
+                </div>
+              )}
+
               <div
                 className=" q-text-white q-cursor-pointer q-ml-6"
-                onClick={() => downLoadFile(data)}
+                onClick={() => downLoadFile({ ...data, mode })}
               >
                 导出
               </div>

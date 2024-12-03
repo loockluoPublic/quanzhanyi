@@ -1,52 +1,11 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { Table } from "antd";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { Data } from "../atom/globalState";
-
-const columns: any = [
-  {
-    title: "",
-    dataIndex: "enable",
-    key: "enable",
-    with: 10,
-    align: "center",
-    render: (enable) => {
-      return enable ? (
-        <CheckCircleOutlined style={{ color: "#40c057" }} />
-      ) : (
-        <CloseCircleOutlined style={{ color: "" }} />
-      );
-    },
-  },
-  {
-    title: "点",
-    dataIndex: "x",
-    align: "left",
-    key: "x",
-
-    render: (_, item) => {
-      return `${item.key} ( ${item?.x?.toFixed?.(4)}, ${item.y?.toFixed?.(
-        3
-      )}, ${item.z?.toFixed?.(4)} )`;
-    },
-  },
-  {
-    title: "初始标准差倍数",
-    dataIndex: "originDiff",
-    tip: "asda",
-    key: "originDiff",
-    align: "right",
-  },
-  {
-    title: "当前标准差倍数",
-    dataIndex: "diff",
-    key: "difference",
-    align: "right",
-  },
-];
+import PointsVector3 from "./PointVector3";
 
 export default function CylinderTable() {
-  const d = useRecoilValue(Data);
+  const [d, sd] = useRecoilState(Data);
   const originStandardDeviation = d.originStandardDeviation;
   const renderStandardDeviation = (v) => {
     if (typeof v === "number") {
@@ -55,6 +14,67 @@ export default function CylinderTable() {
       return `-- δ`;
     }
   };
+
+  const remove = (i) => {
+    const m = [...d.mPoints];
+    m.splice(i, 1);
+    sd((d) => {
+      return {
+        ...d,
+        mPoints: m,
+      };
+    });
+  };
+
+  const columns: any = [
+    {
+      title: "",
+      dataIndex: "enable",
+      key: "enable",
+      with: 10,
+      align: "center",
+      render: (enable) => {
+        return enable ? (
+          <CheckCircleOutlined style={{ color: "#40c057" }} />
+        ) : (
+          <CloseCircleOutlined style={{ color: "" }} />
+        );
+      },
+    },
+    {
+      title: "采样点坐标",
+      dataIndex: "x",
+      align: "left",
+      key: "x",
+
+      render: (_, item, i) => {
+        return (
+          <PointsVector3
+            value={item}
+            showGetPoints={false}
+            remove={() => {
+              remove(i);
+            }}
+          />
+        );
+      },
+    },
+    {
+      title: "初始标准差倍数",
+      dataIndex: "originDiff",
+      key: "originDiff",
+      align: "right",
+    },
+    {
+      title: "当前标准差倍数",
+      dataIndex: "diff",
+      key: "difference",
+      align: "right",
+      render: (v, row) => {
+        return row.enable && v;
+      },
+    },
+  ];
 
   const data = d.mPoints.map((item) => {
     return {

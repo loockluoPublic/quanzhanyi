@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include "QuanZhanYi_types.h"
 #include "generate_unit_circle_with_normal_vector2.h"
-#include "Generate_multi_layered_measurement_points.h"
 #include "Calculate_accurate_cylinders_from_multiple_measurement_points2.h"
 #include "Calculat_A_and_B_Points_after_Offest2.h"
 #include "RepeatSurvey.h"
@@ -22,23 +21,10 @@ EMSCRIPTEN_KEEPALIVE
 void generateUnitCircleWithNormalVector(double azimuth, double elevation,
                                         double num, double laynum, const double P1[3],
                                         const double P2[3],
+                                        const double r,
                                         emxArray_real_T *Point_out)
 {
-    printf("generateUnitCircleWithNormalVector %f %f %f \n", azimuth, elevation, num);
-    printf("P3: %f,%f,%f \n", P1[0], P1[1], P1[2]);
-    generate_unit_circle_with_normal_vector2(azimuth, elevation, num, laynum, P1, P2, Point_out);
-}
-
-EMSCRIPTEN_KEEPALIVE
-void GenerateMultiLayeredMeasurementPoints(
-    const emxArray_real_T *Point_out,
-    double num,
-    double laynum,
-    const double P3[3],
-    const double P4[3],
-    emxArray_real_T *Point_test)
-{
-    Generate_multi_layered_measurement_points(Point_out, num, laynum, P3, P4, Point_test);
+    generate_unit_circle_with_normal_vector2(azimuth, elevation, num, laynum, P1, P2, r, Point_out);
 }
 
 EMSCRIPTEN_KEEPALIVE
@@ -55,21 +41,27 @@ void CalculateAccurateCylindersFromMultipleMeasurementPoints(
 {
     Calculate_accurate_cylinders_from_multiple_measurement_points2(points, P_bound1, P_bound2, Mcenter, MTaon, Mradial, Err_every, Bottom_round_center1, Bottom_round_center2);
 }
-
+// void Calculat_A_and_B_Points_after_Offest2(
+//     const double Bottom_round_center1[3], const double Bottom_round_center2[3],
+//     const double MTaon[3], const double Mcenter[3], double Mradial,
+//     const double PAB[3], double phi, emxArray_real_T *Ang,
+//     const emxArray_real_T *toff, const emxArray_real_T *roff,
+//     emxArray_real_T *PointTable_A_off, emxArray_real_T *PointTable_B_off,
+//     emxArray_real_T *BianHao)
 EMSCRIPTEN_KEEPALIVE
-void CalculatAAndBPoints(const double MTaon[3],
+void CalculatAAndBPoints(const double Bottom_round_center1[3], const double Bottom_round_center2[3], const double MTaon[3],
                          const double Mcenter[3],
                          double Mradial, const double PAB[3],
                          double phi, emxArray_real_T *Ang,
                          const emxArray_real_T *toff,
                          const emxArray_real_T *roff,
-                         emxArray_real_T *PointTable_A_off, emxArray_real_T *PointTable_B_off)
+                         emxArray_real_T *PointTable_A_off, emxArray_real_T *PointTable_B_off, emxArray_real_T *BianHao)
 {
-    Calculat_A_and_B_Points_after_Offest2(MTaon, Mcenter, Mradial,
+    Calculat_A_and_B_Points_after_Offest2(Bottom_round_center1, Bottom_round_center2, MTaon, Mcenter, Mradial,
                                           PAB,
                                           phi,
                                           Ang,
-                                          toff, roff, PointTable_A_off, PointTable_B_off);
+                                          toff, roff, PointTable_A_off, PointTable_B_off, BianHao);
 }
 
 EMSCRIPTEN_KEEPALIVE
@@ -146,9 +138,9 @@ void Planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
                const double BoundPoint1[3], const double BoundPoint2[3],
                double distanceThreshold,
                emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints,
-               double MaxDis[4], emxArray_real_T *distancesFianal)
+               double MaxDis[4], emxArray_real_T *distancesFianal, double LenDaoJiao[8])
 {
-    planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7, Points8, BoundPoint1, BoundPoint2, distanceThreshold, PlaneParaOut, TrianglePoints, MaxDis, distancesFianal);
+    planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7, Points8, BoundPoint1, BoundPoint2, distanceThreshold, PlaneParaOut, TrianglePoints, MaxDis, distancesFianal, LenDaoJiao);
 };
 
 EMSCRIPTEN_KEEPALIVE
@@ -178,12 +170,12 @@ void CalculateRectangleFromVertex8(
 EMSCRIPTEN_KEEPALIVE
 void juXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
                 const double Pin[3], const double Tao[3], double h,
-                const emxArray_real_T *PlaneParaOut8, emxArray_real_T *Distance,
+                const emxArray_real_T *PlaneParaOut8, const double LenDaoJiao[8], emxArray_real_T *Distance,
                 emxArray_real_T *theta, emxArray_real_T *LTPY,
                 emxArray_real_T *TiC, emxArray_real_T *Wquanzhong3,
                 emxArray_real_T *Wquanzhong4)
 {
-    JuXingFuCe(PointIn, shenglunum, Pin, Tao, h, PlaneParaOut8, Distance, theta, LTPY, TiC, Wquanzhong3, Wquanzhong4);
+    JuXingFuCe(PointIn, shenglunum, Pin, Tao, h, PlaneParaOut8, LenDaoJiao, Distance, theta, LTPY, TiC, Wquanzhong3, Wquanzhong4);
 };
 
 EMSCRIPTEN_KEEPALIVE

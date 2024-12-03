@@ -13,6 +13,7 @@ export default function BoundPoints() {
       <span>
         上游边界点：
         <PointsVector3
+          hideLabel
           className="!q-inline-flex"
           value={boundPoints?.[0]}
           before={() => {
@@ -27,6 +28,7 @@ export default function BoundPoints() {
       <span className="q-ml-8">
         下游边界点：
         <PointsVector3
+          hideLabel
           className="!q-inline-flex"
           value={boundPoints?.[1]}
           before={() => {

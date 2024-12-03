@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Oct-2024 13:46:16
+ * C/C++ source code generated on  : 03-Dec-2024 21:47:53
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -46,13 +46,12 @@ void Calculat_A_and_B_Points(real_T MTaon[3], real_T Mcenter[3], real_T Mradial,
                              emxArray_real_T *PointTable_A,
                              emxArray_real_T *PointTable_B);
 
-void Calculat_A_and_B_Points_after_Offest2(real_T MTaon[3], real_T Mcenter[3],
-                                           real_T Mradial, real_T PAB[3],
-                                           real_T phi, emxArray_real_T *Ang,
-                                           emxArray_real_T *toff,
-                                           emxArray_real_T *roff,
-                                           emxArray_real_T *PointTable_A_off,
-                                           emxArray_real_T *PointTable_B_off);
+void Calculat_A_and_B_Points_after_Offest2(
+    real_T Bottom_round_center1[3], real_T Bottom_round_center2[3],
+    real_T MTaon[3], real_T Mcenter[3], real_T Mradial, real_T PAB[3],
+    real_T phi, emxArray_real_T *Ang, emxArray_real_T *toff,
+    emxArray_real_T *roff, emxArray_real_T *PointTable_A_off,
+    emxArray_real_T *PointTable_B_off, emxArray_real_T *BianHao);
 
 void Calculat_A_and_B_Points_api(const mxArray *const prhs[8], int32_T nlhs,
                                  const mxArray *plhs[2]);
@@ -104,15 +103,17 @@ void GenerateTrianglePoints_api(const mxArray *const prhs[4],
 void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
                                                real_T num, real_T laynum,
                                                real_T P3[3], real_T P4[3],
+                                               real_T r,
                                                emxArray_real_T *Point_test);
 
 void JuXingFuCe(emxArray_real_T *PointIn, real_T shenglunum, real_T Pin[3],
                 real_T Tao[3], real_T h, emxArray_real_T *PlaneParaOut4,
-                emxArray_real_T *Distance, emxArray_real_T *theta,
-                emxArray_real_T *LTPY, emxArray_real_T *TiC,
-                emxArray_real_T *Wquanzhong3, emxArray_real_T *Wquanzhong4);
+                real_T LenDaoJiao[8], emxArray_real_T *Distance,
+                emxArray_real_T *theta, emxArray_real_T *LTPY,
+                emxArray_real_T *TiC, emxArray_real_T *Wquanzhong3,
+                emxArray_real_T *Wquanzhong4);
 
-void JuXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
+void JuXingFuCe_api(const mxArray *const prhs[7], int32_T nlhs,
                     const mxArray *plhs[6]);
 
 void OffsetCalculate(real_T Mradial, real_T phi, emxArray_real_T *Ang,
@@ -167,8 +168,8 @@ void angle2point(real_T ANG, real_T a, real_T b, real_T c, real_T d,
 void angle2point_api(const mxArray *const prhs[6], int32_T nlhs,
                      const mxArray *plhs[3]);
 
-void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[8], int32_T nlhs,
-                                     const mxArray *plhs[2]);
+void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[10],
+                                     int32_T nlhs, const mxArray *plhs[3]);
 
 void c_Calculat_JuXing_A_and_B_Point(const mxArray *const prhs[10],
                                      int32_T nlhs, const mxArray *plhs[2]);
@@ -179,19 +180,19 @@ void c_Calculate_accurate_cylinders_(const mxArray *const prhs[3], int32_T nlhs,
 void c_Calculate_rectangle_from_vert(const mxArray *prhs, int32_T nlhs,
                                      const mxArray *plhs[8]);
 
-void c_Generate_multi_layered_measur(const mxArray *const prhs[5],
+void c_Generate_multi_layered_measur(const mxArray *const prhs[6],
                                      const mxArray **plhs);
 
 void c_foot_of_perpendicular_from_a_(const mxArray *const prhs[3], int32_T nlhs,
                                      const mxArray *plhs[3]);
 
-void c_generate_unit_circle_with_nor(const mxArray *const prhs[3],
+void c_generate_unit_circle_with_nor(const mxArray *const prhs[4],
                                      const mxArray **plhs);
 
 void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
                                      int32_T nlhs, const mxArray *plhs[3]);
 
-void d_generate_unit_circle_with_nor(const mxArray *const prhs[6],
+void d_generate_unit_circle_with_nor(const mxArray *const prhs[7],
                                      const mxArray **plhs);
 
 void fitcircle(emxArray_real_T *x, real_T z[2], real_T *r, real_T *residual);
@@ -205,12 +206,13 @@ void foot_of_perpendicular_from_a_point_to_a_line(real_T P_outer[3],
                                                   real_T *zN1);
 
 void generate_unit_circle_with_normal_vector(real_T azimuth, real_T elevation,
-                                             real_T num,
+                                             real_T num, real_T r,
                                              emxArray_real_T *Point_out);
 
 void generate_unit_circle_with_normal_vector2(real_T azimuth, real_T elevation,
                                               real_T num, real_T laynum,
                                               real_T P1[3], real_T P2[3],
+                                              real_T r,
                                               emxArray_real_T *Point_out);
 
 void myvrrotvec2mat(real_T r[4], real_T m[9]);
@@ -237,10 +239,11 @@ void planefit8(emxArray_real_T *Points1, emxArray_real_T *Points2,
                emxArray_real_T *Points7, emxArray_real_T *Points8,
                real_T P_bound1[3], real_T P_bound2[3], real_T distanceThreshold,
                emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints,
-               real_T MaxDis[8], emxArray_real_T *distancesFianal);
+               real_T MaxDis[8], emxArray_real_T *distancesFianal,
+               real_T LenDaoJiao[8]);
 
 void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
-                   const mxArray *plhs[4]);
+                   const mxArray *plhs[5]);
 
 void planefit_api(const mxArray *const prhs[4], int32_T nlhs,
                   const mxArray *plhs[2]);

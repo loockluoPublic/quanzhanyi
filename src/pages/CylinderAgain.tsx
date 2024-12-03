@@ -7,6 +7,8 @@ import { CustomVector3 } from "../class/CustomVector3";
 import { rad2ang, yuanXingFuCe } from "../utils/utils";
 import { SDFBOptions, sdmOptions } from "./CubeResult";
 
+const colorMap = { A: "red", B: "#fab005" };
+
 export default function () {
   const [data, setData] = useRecoilState(Data);
 
@@ -60,10 +62,13 @@ export default function () {
                 data.sdm?.length === 2 && row.sdm === "B"
                   ? row.i - data.sdfb
                   : row.i;
-              console.log("%c Line:63 🍏 slnum", "color:#6ec1c2", row.i, slnum);
+
               CustomVector3.setPublicInfo(row.sdm, 2 * slnum - 2);
             }}
-            onChange={(v) => onChange(v, i, "p1")}
+            onChange={(v) => {
+              v.color = colorMap[row.sdm];
+              onChange(v, i, "p1");
+            }}
           />
         );
       },
@@ -85,7 +90,10 @@ export default function () {
               CustomVector3.setPublicInfo(row.sdm, 2 * slnum - 1);
             }}
             value={_v}
-            onChange={(v) => onChange(v, i, "p2")}
+            onChange={(v) => {
+              v.color = colorMap[row.sdm];
+              onChange(v, i, "p2");
+            }}
           />
         );
       },
@@ -118,15 +126,15 @@ export default function () {
       },
     },
     {
-      title: "声道相对高度",
+      title: "声道高度",
       dataIndex: "sdH",
       key: "sdH",
       align: "center",
       render: (v) => {
         if (isNaN((data?.calulateRes?.R / 2) * v)) return "";
-        return `${(data?.calulateRes?.R * v)?.toFixed?.(4)}米 ${v?.toFixed?.(
+        return `${(data?.calulateRes?.R * v)?.toFixed?.(4)}米 （${v?.toFixed?.(
           4
-        )} `;
+        )}）`;
       },
     },
     {
@@ -135,7 +143,7 @@ export default function () {
       key: "Wquanzhong3",
       align: "right",
       render: (v) => {
-        return v?.toFixed?.(4);
+        return v?.toFixed?.(6);
       },
     },
 
@@ -145,7 +153,7 @@ export default function () {
       key: "Wquanzhong4",
       align: "right",
       render: (v) => {
-        return v?.toFixed?.(4);
+        return v?.toFixed?.(6);
       },
     },
   ].filter((item) => item.key !== data.sfType);
@@ -269,31 +277,18 @@ export default function () {
     </div>
   );
 
-  const mPoints = [];
-  const pA = [],
-    pB = [];
+  const points = data.cylinderAgainTable?.reduce((acc, cur) => {
+    console.log("%c Line:273 🍺 cur", "color:#e41a6a", cur);
 
-  data.cylinderAgainTable?.forEach((item: any) => {
-    item.p1 && mPoints.push(item.p1);
-    item.p2 && mPoints.push(item.p2);
-    if (item.sdm === "A") {
-      pA.push(item.p1, item.p2);
-    } else {
-      pB.push(item.p1, item.p2);
-    }
-  });
-
+    acc.push(cur.p1, cur.p2);
+    return acc;
+  }, []);
   return (
     <CylinderModule
       component={comp}
       trianglePoints={data.trianglePoints}
       calulateRes={data.calulateRes}
-      AB={pA.map((item, i) => {
-        return {
-          pointA: item,
-          pointB: pB[i],
-        };
-      })}
+      points={points}
       sdm={data.sdm}
     ></CylinderModule>
   );

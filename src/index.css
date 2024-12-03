@@ -78,6 +78,7 @@ button {
 
 .h-button {
   outline: 4px auto -webkit-focus-ring-color;
+  margin-left: 20px;
 }
 
 .options {
@@ -103,4 +104,9 @@ header {
 h3 {
   margin-top: 4px;
   margin-bottom: 4px;
+}
+
+table .q-my-2 {
+  margin-top: 0;
+  margin-bottom: 0;
 }

@@ -2,7 +2,7 @@
  * File: Generate_multi_layered_measurement_points.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Oct-2024 13:46:16
+ * C/C++ source code generated on  : 03-Dec-2024 21:47:53
  */
 
 /* Include Files */
@@ -27,13 +27,14 @@
  *                double laynum
  *                const double P3[3]
  *                const double P4[3]
+ *                double r
  *                emxArray_real_T *Point_test
  * Return Type  : void
  */
 void Generate_multi_layered_measurement_points(const emxArray_real_T *Point_out,
                                                double num, double laynum,
                                                const double P3[3],
-                                               const double P4[3],
+                                               const double P4[3], double r,
                                                emxArray_real_T *Point_test)
 {
   emxArray_real_T *Dist;
@@ -258,7 +259,7 @@ void Generate_multi_layered_measurement_points(const emxArray_real_T *Point_out,
   emxInit_real_T(&Point_out1, 2);
   generate_unit_circle_with_normal_vector(
       rt_atan2d_snf(pf_idx_0, sqrt(S_idx_0 * S_idx_0 + p23_idx_0 * p23_idx_0)),
-      rt_atan2d_snf(p23_idx_0, S_idx_0), num, Point_out1);
+      rt_atan2d_snf(p23_idx_0, S_idx_0), num, r, Point_out1);
   Point_out1_data = Point_out1->data;
   /*  ----------------------------移动到原点------------------------------- */
   i = Dist->size[0] * Dist->size[1];

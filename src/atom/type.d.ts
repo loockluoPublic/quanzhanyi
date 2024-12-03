@@ -50,6 +50,11 @@ interface AgainTable {
 
 interface ICycleBase {
   /**
+   * 预估半径
+   */
+  virtualR: number;
+
+  /**
    * 采样层数
    */
   layNum: number;
@@ -70,7 +75,7 @@ interface ICycleBase {
   firstPoints: [CustomVector3, CustomVector3];
 
   /**
-   * AB面交点
+   * 中心点
    */
   centerPoint: CustomVector3;
 }
@@ -158,6 +163,7 @@ interface ICycle {
   cylinderAgainTable: {
     p1: CustomVector3;
     p2: CustomVector3;
+    sdm?: "A" | "B";
   }[];
 }
 
@@ -203,5 +209,6 @@ interface ICube {
     h: number;
     w: number;
     Tao: CustomVector3;
+    LenDaoJiao: number[];
   };
 }

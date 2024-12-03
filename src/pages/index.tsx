@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Connect from "../components/ConnectDevice";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
+  Auth,
   Data,
   deviceInfo,
   Mode,
@@ -24,36 +25,37 @@ message.config({
 export default function Setting() {
   const deviceInfoData = useRecoilValue(deviceInfo);
   const data = useRecoilValue(Data);
-  console.log("%c Line:27 🌭 data", "color:#ed9ec7", data);
   const [step, setStep] = useRecoilState(Step);
   const [mode] = useRecoilState(Mode);
+  const auth = useRecoilValue(Auth);
 
   useEffect(() => {
     setStep(0);
   }, [data.type]);
 
   const onChange = (value: number) => {
-    setStep(value);
-    // if (deviceInfoData.auth || location.search.includes("mock")) {
-    //   setStep(value);
-    // } else {
-    //   message.error("请验证秘钥");
-    // }
+    if (auth || deviceInfoData.auth || (window as any).mock) {
+      setStep(value);
+    } else {
+      message.error("请验证秘钥");
+    }
   };
 
   const CycleSteps = [
     {
       title: "设备连接",
-      components: <Connect />,
+      components: (
+        <Connect
+          next={() => {
+            setStep(step + 1);
+          }}
+        />
+      ),
     },
     {
       title: "自动采点&管道拟合",
       components: <CylinderPre />,
     },
-    // {
-    //   title: "安装点计算",
-    //   components: <CylinderFit />,
-    // },
   ];
 
   if (mode === TMode.second) {
@@ -71,10 +73,16 @@ export default function Setting() {
   const CubeSteps = [
     {
       title: "设备连接",
-      components: <Connect />,
+      components: (
+        <Connect
+          next={() => {
+            setStep(step + 1);
+          }}
+        />
+      ),
     },
     {
-      title: "手动采点&方涵拟合",
+      title: "手动采集&方涵拟合",
       components: <CubePre />,
     },
     // {

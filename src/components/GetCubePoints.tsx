@@ -1,7 +1,15 @@
-import { Badge, Button, Checkbox, InputNumber, message, Select } from "antd";
+import {
+  Badge,
+  Button,
+  Checkbox,
+  InputNumber,
+  message,
+  Select,
+  Switch,
+} from "antd";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { Data } from "../atom/globalState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Auth, Data, ShowCube } from "../atom/globalState";
 import { measureAndGetSimpleCoord } from "../utils/commond";
 import { CustomVector3 } from "../class/CustomVector3";
 import { CalculateRectangleFromVertex, Planefit } from "../utils/utils";
@@ -12,6 +20,8 @@ export default function () {
 
   const [loading, setLoading] = useState(false);
   const [planeFitLoading, setPlaneFitLoadint] = useState(false);
+
+  const auth = useRecoilValue(Auth);
 
   const options = [
     { value: 0, label: "左面", pK: "L" },
@@ -104,8 +114,10 @@ export default function () {
           ...res,
           planeParaOut: res8temp.planeParaOut,
           MxPoints,
-          cubeResult: cubeResult8temp,
+          cubeResult: { ...cubeResult8temp, LenDaoJiao: res.LenDaoJiao },
         };
+
+        delete newData.LenDaoJiao;
 
         setPlaneFitLoadint(false);
         setData(newData);
@@ -172,11 +184,6 @@ export default function () {
   useEffect(() => {
     CustomVector3.setPublicInfo("P", 0);
   }, []);
-  console.log(
-    "%c Line:227 🥟 data.distanceThreshold",
-    "color:#33a5ff",
-    data.distanceThreshold
-  );
 
   const width = data?.cubeResult?.b?.toFixed(4);
   const hight = data?.cubeResult?.h?.toFixed(4);
@@ -272,9 +279,14 @@ export default function () {
           </span>
           <span className="q-ml-8">方涵高度：{hight ?? "--"} 米</span>
         </div>
-        <div>
-          <Button loading={loading} type="primary" onClick={getPoints}>
-            采集点
+        <div className="q-ml-8">
+          <Button
+            loading={loading}
+            type="primary"
+            onClick={getPoints}
+            disabled={!auth}
+          >
+            手动采集
           </Button>
           <Button
             className="q-ml-4"

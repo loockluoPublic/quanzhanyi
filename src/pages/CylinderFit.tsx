@@ -9,8 +9,6 @@ import Select, { DefaultOptionType } from "antd/es/select";
 import {
   CalculatAAndBPoints,
   offsetCalculate,
-  sdj_n2v,
-  sdj_v2n,
   shengLuJiao2Ang,
 } from "../utils/utils";
 import PointsVector3 from "../components/PointVector3";
@@ -31,6 +29,22 @@ const sdmOptions = [
 
 function CylinderFit() {
   const [data, setData] = useRecoilState(Data);
+
+  const getSign = () => {
+    const zx = new CustomVector3();
+    zx.subVectors(
+      data.calulateRes.Bottom_round_center?.[0]?.toVector3(),
+      data.calulateRes.Bottom_round_center?.[1]?.toVector3()
+    );
+
+    const direct = new CustomVector3().fromSpherical(
+      1,
+      data.direct[1],
+      data.direct[0]
+    );
+
+    return zx.dot(direct) > 0;
+  };
 
   const sdfbPreRef = useRef<any>("");
 
@@ -91,17 +105,17 @@ function CylinderFit() {
       dataIndex: "a",
       key: "a",
       align: "center",
-      render: (v, _, i) => {
+      render: (v, row) => {
         return (
           <InputNumber
             step={0.01}
             value={v}
-            onChange={(v) => onChange(v, i, "a")}
+            onChange={(v) => onChange(v, row.updateIndex, "a")}
             addonAfter={
               <div>
                 米
                 <Tooltip title="应用到全部" className="q-cursor-pointer">
-                  <SettingOutlined onClick={() => setA(i)} />
+                  <SettingOutlined onClick={() => setA(row.updateIndex)} />
                 </Tooltip>
               </div>
             }
@@ -114,11 +128,11 @@ function CylinderFit() {
       dataIndex: "ang",
       key: "ang",
       align: "center",
-      render: (v, _, i) => {
+      render: (v, row) => {
         return (
           <InputNumber
             value={v}
-            onChange={(v) => onChange(v, i, "ang")}
+            onChange={(v) => onChange(v, row.updateIndex, "ang")}
             addonAfter={`度`}
           />
         );
@@ -173,10 +187,9 @@ function CylinderFit() {
         return item.a;
       }) ?? [];
 
-    console.log("%c Line:199 🥥 res", "color:#3f7cff");
-    if (!_data.centerPoint || !paramAng || !paramA) return;
-    if (!(_resultTable?.length > 0)) return;
-    if (!_data?.calulateRes?.R) return;
+    if (!paramAng || !paramA) return _resultTable;
+    if (!(_resultTable?.length > 0)) return _resultTable;
+    if (!_data?.calulateRes?.R) return _resultTable;
 
     const res = offsetCalculate(
       _data.calulateRes.R,
@@ -184,7 +197,6 @@ function CylinderFit() {
       paramAng,
       paramA
     ) ?? [[], []];
-    console.log("%c Line:199 🥥 res", "color:#3f7cff", res);
 
     return _resultTable.map((item, i) => {
       const newItem = {
@@ -199,7 +211,13 @@ function CylinderFit() {
 
   const key = `${data.sdfb}${data.sdm?.join("")}`;
   const init = () => {
-    if (sdfbPreRef.current === "" && data.resultTable?.length > 0) return;
+    if (
+      sdfbPreRef.current === "" &&
+      data.resultTable?.length > 0 &&
+      data.resultTable[0].tOff !== undefined
+    )
+      return;
+
     if (key !== sdfbPreRef.current) {
       const plant = shengLuJiao2Ang(data.sdfb).map((ang) => {
         return { ang, a: 0.015 };
@@ -207,9 +225,14 @@ function CylinderFit() {
 
       const resultTable: any = [];
 
-      data.sdm?.forEach?.((m) => {
+      data.sdm?.forEach?.((m, page) => {
         plant.forEach((item, i) => {
-          resultTable.push({ ...item, sdm: m, i: i + 1 });
+          resultTable.push({
+            ...item,
+            sdm: m,
+            i: i + 1,
+            updateIndex: i + page * plant.length,
+          });
         });
       });
 
@@ -237,23 +260,18 @@ function CylinderFit() {
     }) ?? [];
 
   useEffect(() => {
-    if (sdfbPreRef.current !== "")
-      setData((d) => {
-        return {
-          ...d,
-          resultTable: updateOffset2(d, d.resultTable),
-        };
-      });
+    setData((d) => {
+      return {
+        ...d,
+        key: Math.random(),
+        resultTable: updateOffset2(d, d.resultTable),
+      };
+    });
   }, [[...paramAng, ...paramA, data.sdj].join(",")]);
 
   const tOff =
     data.resultTable?.map?.((item) => {
       return item.tOff;
-    }) ?? [];
-
-  const rOff =
-    data.resultTable?.map?.((item) => {
-      return item.rOff;
     }) ?? [];
 
   const calcPoint = () => {
@@ -264,33 +282,42 @@ function CylinderFit() {
       return;
     }
 
-    if (tOff.length > 0) {
-      CalculatAAndBPoints(
-        calulateRes.mTaon,
-        calulateRes.center,
-        calulateRes.R,
-        data.centerPoint,
-        data.sdj,
-        data.resultTable
-      ).then((AB) => {
-        const resultTable = data.resultTable.map((row, i) => {
-          console.log("%c Line:264 🥛 sdm,i", "color:#4fff4B", row.sdm, row.i);
-          return { ...row, points: AB?.[i] };
-        });
-
-        setData((d) => {
-          return {
-            ...d,
-            resultTable,
-          };
-        });
-      });
+    let tableData = data.resultTable;
+    if (tOff[0] === undefined) {
+      tableData = updateOffset2(data, data.resultTable);
     }
+
+    console.log("%c Line:291 🥤 getSign", "color:#42b983", getSign());
+
+    CalculatAAndBPoints(
+      calulateRes.mTaon,
+      calulateRes.center,
+      calulateRes.R,
+      data.centerPoint,
+      data.sdj,
+      tableData,
+      getSign()
+    ).then((AB) => {
+      const resultTable = tableData.map((row, i) => {
+        console.log("%c Line:264 🥛 sdm,i", "color:#4fff4B", row.sdm, row.i);
+        return { ...row, points: AB?.[i] };
+      });
+
+      setData((d) => {
+        return {
+          ...d,
+          resultTable,
+        };
+      });
+    });
   };
 
   useEffect(() => {
     if (data.centerPoint) calcPoint();
-  }, [[...rOff, ...tOff].join(","), data.centerPoint]);
+    else {
+      message.warning("请采集中心点");
+    }
+  }, [data.centerPoint, data.key]);
 
   const comp = (
     <div>
@@ -313,14 +340,14 @@ function CylinderFit() {
         <span className="q-ml-8">
           声道角：
           <InputNumber
-            value={sdj_n2v(data.sdj)}
+            value={data.sdj}
             addonAfter="度"
             min={0}
             max={90}
             onChange={(sdj) => {
               setData({
                 ...data,
-                sdj: sdj_v2n(sdj),
+                sdj,
               });
             }}
           />
@@ -341,8 +368,9 @@ function CylinderFit() {
           ></Checkbox.Group>
         </span>
         <span className="q-ml-8">
-          AB面交点：
+          中心点：
           <PointsVector3
+            hideLabel
             className="!q-inline-flex"
             value={data.centerPoint as CustomVector3}
             before={() => {

@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Oct-2024 13:46:16
+ * C/C++ source code generated on  : 03-Dec-2024 21:47:53
  */
 
 /*************************************************************************/
@@ -63,6 +63,8 @@
 #include "rt_nonfinite.h"
 
 /* Function Declarations */
+static void argInit_1x8_real_T(double result[8]);
+
 static emxArray_real_T *argInit_1xUnbounded_real_T(void);
 
 static void argInit_3x1_real_T(double result[3]);
@@ -78,6 +80,21 @@ static emxArray_real_T *argInit_Unboundedx2_real_T(void);
 static double argInit_real_T(void);
 
 /* Function Definitions */
+/*
+ * Arguments    : double result[8]
+ * Return Type  : void
+ */
+static void argInit_1x8_real_T(double result[8])
+{
+  int idx1;
+  /* Loop over the array to initialize each element. */
+  for (idx1 = 0; idx1 < 8; idx1++) {
+    /* Set the value of the array element.
+Change this value to the value that the application requires. */
+    result[idx1] = argInit_real_T();
+  }
+}
+
 /*
  * Arguments    : void
  * Return Type  : emxArray_real_T *
@@ -296,16 +313,19 @@ void main_Calculat_A_and_B_Points(void)
 void main_Calculat_A_and_B_Points_after_Offest2(void)
 {
   emxArray_real_T *Ang;
+  emxArray_real_T *BianHao;
   emxArray_real_T *PointTable_A_off;
   emxArray_real_T *PointTable_B_off;
   emxArray_real_T *roff;
   emxArray_real_T *toff;
-  double MTaon_tmp[3];
+  double Bottom_round_center1_tmp[3];
   double Mradial_tmp;
   /* Initialize function 'Calculat_A_and_B_Points_after_Offest2' input
    * arguments. */
+  /* Initialize function input argument 'Bottom_round_center1'. */
+  argInit_3x1_real_T(Bottom_round_center1_tmp);
+  /* Initialize function input argument 'Bottom_round_center2'. */
   /* Initialize function input argument 'MTaon'. */
-  argInit_3x1_real_T(MTaon_tmp);
   /* Initialize function input argument 'Mcenter'. */
   Mradial_tmp = argInit_real_T();
   /* Initialize function input argument 'PAB'. */
@@ -318,14 +338,18 @@ void main_Calculat_A_and_B_Points_after_Offest2(void)
   /* Call the entry-point 'Calculat_A_and_B_Points_after_Offest2'. */
   emxInitArray_real_T(&PointTable_A_off, 2);
   emxInitArray_real_T(&PointTable_B_off, 2);
-  Calculat_A_and_B_Points_after_Offest2(MTaon_tmp, MTaon_tmp, Mradial_tmp,
-                                        MTaon_tmp, Mradial_tmp, Ang, toff, roff,
-                                        PointTable_A_off, PointTable_B_off);
+  emxInitArray_real_T(&BianHao, 2);
+  Calculat_A_and_B_Points_after_Offest2(
+      Bottom_round_center1_tmp, Bottom_round_center1_tmp,
+      Bottom_round_center1_tmp, Bottom_round_center1_tmp, Mradial_tmp,
+      Bottom_round_center1_tmp, Mradial_tmp, Ang, toff, roff, PointTable_A_off,
+      PointTable_B_off, BianHao);
   emxDestroyArray_real_T(roff);
   emxDestroyArray_real_T(toff);
   emxDestroyArray_real_T(Ang);
   emxDestroyArray_real_T(PointTable_A_off);
   emxDestroyArray_real_T(PointTable_B_off);
+  emxDestroyArray_real_T(BianHao);
 }
 
 /*
@@ -555,7 +579,7 @@ void main_Generate_multi_layered_measurement_points(void)
   /* Call the entry-point 'Generate_multi_layered_measurement_points'. */
   emxInitArray_real_T(&Point_test, 2);
   Generate_multi_layered_measurement_points(Point_out, num_tmp, num_tmp, P3_tmp,
-                                            P3_tmp, Point_test);
+                                            P3_tmp, num_tmp, Point_test);
   emxDestroyArray_real_T(Point_out);
   emxDestroyArray_real_T(Point_test);
 }
@@ -574,6 +598,7 @@ void main_JuXingFuCe(void)
   emxArray_real_T *Wquanzhong3;
   emxArray_real_T *Wquanzhong4;
   emxArray_real_T *theta;
+  double b_dv[8];
   double Pin_tmp[3];
   double shenglunum_tmp;
   /* Initialize function 'JuXingFuCe' input arguments. */
@@ -585,6 +610,7 @@ void main_JuXingFuCe(void)
   /* Initialize function input argument 'Tao'. */
   /* Initialize function input argument 'PlaneParaOut4'. */
   PlaneParaOut4 = argInit_4xUnbounded_real_T();
+  /* Initialize function input argument 'LenDaoJiao'. */
   /* Call the entry-point 'JuXingFuCe'. */
   emxInitArray_real_T(&Distance, 2);
   emxInitArray_real_T(&theta, 2);
@@ -592,8 +618,9 @@ void main_JuXingFuCe(void)
   emxInitArray_real_T(&TiC, 2);
   emxInitArray_real_T(&Wquanzhong3, 1);
   emxInitArray_real_T(&Wquanzhong4, 1);
+  argInit_1x8_real_T(b_dv);
   JuXingFuCe(PointIn, shenglunum_tmp, Pin_tmp, Pin_tmp, shenglunum_tmp,
-             PlaneParaOut4, Distance, theta, LTPY, TiC, Wquanzhong3,
+             PlaneParaOut4, b_dv, Distance, theta, LTPY, TiC, Wquanzhong3,
              Wquanzhong4);
   emxDestroyArray_real_T(PlaneParaOut4);
   emxDestroyArray_real_T(PointIn);
@@ -807,7 +834,7 @@ void main_generate_unit_circle_with_normal_vector(void)
   /* Call the entry-point 'generate_unit_circle_with_normal_vector'. */
   emxInitArray_real_T(&Point_out, 2);
   generate_unit_circle_with_normal_vector(azimuth_tmp, azimuth_tmp, azimuth_tmp,
-                                          Point_out);
+                                          azimuth_tmp, Point_out);
   emxDestroyArray_real_T(Point_out);
 }
 
@@ -830,7 +857,7 @@ void main_generate_unit_circle_with_normal_vector2(void)
   emxInitArray_real_T(&Point_out, 2);
   generate_unit_circle_with_normal_vector2(azimuth_tmp, azimuth_tmp,
                                            azimuth_tmp, azimuth_tmp, P1_tmp,
-                                           P1_tmp, Point_out);
+                                           P1_tmp, azimuth_tmp, Point_out);
   emxDestroyArray_real_T(Point_out);
 }
 
@@ -939,6 +966,7 @@ void main_planefit8(void)
   emxArray_real_T *Points8;
   emxArray_real_T *TrianglePoints;
   emxArray_real_T *distancesFianal;
+  double LenDaoJiao[8];
   double MaxDis[8];
   double P_bound1_tmp[3];
   /* Initialize function 'planefit8' input arguments. */
@@ -967,7 +995,7 @@ void main_planefit8(void)
   emxInitArray_real_T(&distancesFianal, 2);
   planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7,
             Points8, P_bound1_tmp, P_bound1_tmp, argInit_real_T(), PlaneParaOut,
-            TrianglePoints, MaxDis, distancesFianal);
+            TrianglePoints, MaxDis, distancesFianal, LenDaoJiao);
   emxDestroyArray_real_T(Points8);
   emxDestroyArray_real_T(Points7);
   emxDestroyArray_real_T(Points6);

@@ -2,7 +2,7 @@
  * File: nchoosek.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Oct-2024 13:46:16
+ * C/C++ source code generated on  : 03-Dec-2024 21:47:53
  */
 
 /* Include Files */
@@ -210,7 +210,7 @@ void b_nchoosek(const emxArray_real_T *x, double k, emxArray_real_T *y)
     } else {
       n = kint;
     }
-    emxInit_int32_T(&comb);
+    emxInit_int32_T(&comb, 2);
     yk = comb->size[0] * comb->size[1];
     comb->size[0] = 1;
     comb->size[1] = n;
