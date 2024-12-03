@@ -2,7 +2,7 @@
  * File: JuXingFuCe.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 21:15:29
+ * C/C++ source code generated on  : 03-Dec-2024 21:37:33
  */
 
 #ifndef JUXINGFUCE_H
@@ -22,9 +22,9 @@ extern "C" {
 extern void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
                        const double Pin[3], const double Tao[3], double h,
                        const emxArray_real_T *PlaneParaOut4,
-                       const double LenDaoJiao[8], emxArray_real_T *Distance,
-                       emxArray_real_T *theta, emxArray_real_T *LTPY,
-                       emxArray_real_T *TiC, emxArray_real_T *Wquanzhong3,
+                       emxArray_real_T *Distance, emxArray_real_T *theta,
+                       emxArray_real_T *LTPY, emxArray_real_T *TiC,
+                       emxArray_real_T *Wquanzhong3,
                        emxArray_real_T *Wquanzhong4);
 
 #ifdef __cplusplus

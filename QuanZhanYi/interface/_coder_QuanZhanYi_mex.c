@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 21:15:29
+ * C/C++ source code generated on  : 03-Dec-2024 21:37:33
  */
 
 /* Include Files */
@@ -536,25 +536,25 @@ void unsafe_Generate_multi_layered_measurement_points_mexFunction(
  * Arguments    : int32_T nlhs
  *                mxArray *plhs[6]
  *                int32_T nrhs
- *                const mxArray *prhs[7]
+ *                const mxArray *prhs[6]
  * Return Type  : void
  */
 void unsafe_JuXingFuCe_mexFunction(int32_T nlhs, mxArray *plhs[6], int32_T nrhs,
-                                   const mxArray *prhs[7])
+                                   const mxArray *prhs[6])
 {
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[7];
+  const mxArray *b_prhs[6];
   const mxArray *outputs[6];
   int32_T i;
   int32_T i1;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 7) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 7, 4,
+  if (nrhs != 6) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 6, 4,
                         10, "JuXingFuCe");
   }
   if (nlhs > 6) {
@@ -562,7 +562,7 @@ void unsafe_JuXingFuCe_mexFunction(int32_T nlhs, mxArray *plhs[6], int32_T nrhs,
                         "JuXingFuCe");
   }
   /* Call the function. */
-  for (i = 0; i < 7; i++) {
+  for (i = 0; i < 6; i++) {
     b_prhs[i] = prhs[i];
   }
   JuXingFuCe_api(b_prhs, nlhs, outputs);
@@ -926,24 +926,24 @@ void unsafe_foot_of_perpendicular_from_a_point_to_a_line_mexFunction(
  * Arguments    : int32_T nlhs
  *                mxArray *plhs[1]
  *                int32_T nrhs
- *                const mxArray *prhs[6]
+ *                const mxArray *prhs[7]
  * Return Type  : void
  */
 void unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
-    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[6])
+    int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[7])
 {
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[6];
+  const mxArray *b_prhs[7];
   const mxArray *outputs;
   int32_T i;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 6) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 6, 4,
+  if (nrhs != 7) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 7, 4,
                         40, "generate_unit_circle_with_normal_vector2");
   }
   if (nlhs > 1) {
@@ -951,7 +951,7 @@ void unsafe_generate_unit_circle_with_normal_vector2_mexFunction(
                         "generate_unit_circle_with_normal_vector2");
   }
   /* Call the function. */
-  for (i = 0; i < 6; i++) {
+  for (i = 0; i < 7; i++) {
     b_prhs[i] = prhs[i];
   }
   d_generate_unit_circle_with_nor(b_prhs, &outputs);
@@ -1073,12 +1073,12 @@ void unsafe_planefit4_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
 
 /*
  * Arguments    : int32_T nlhs
- *                mxArray *plhs[5]
+ *                mxArray *plhs[4]
  *                int32_T nrhs
  *                const mxArray *prhs[11]
  * Return Type  : void
  */
-void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[5], int32_T nrhs,
+void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
                                   const mxArray *prhs[11])
 {
   emlrtStack st = {
@@ -1087,7 +1087,7 @@ void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[5], int32_T nrhs,
       NULL  /* prev */
   };
   const mxArray *b_prhs[11];
-  const mxArray *outputs[5];
+  const mxArray *outputs[4];
   int32_T i;
   int32_T i1;
   st.tls = emlrtRootTLSGlobal;
@@ -1096,7 +1096,7 @@ void unsafe_planefit8_mexFunction(int32_T nlhs, mxArray *plhs[5], int32_T nrhs,
     emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 11, 4,
                         9, "planefit8");
   }
-  if (nlhs > 5) {
+  if (nlhs > 4) {
     emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 9,
                         "planefit8");
   }

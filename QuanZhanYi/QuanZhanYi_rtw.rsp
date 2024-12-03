@@ -7,7 +7,6 @@ QuanZhanYi_terminate.obj
 angle2point.obj
 Calculat_A_and_B_Points.obj
 norm.obj
-dot.obj
 pinv.obj
 svd.obj
 xnrm2.obj
@@ -28,11 +27,11 @@ nchoosek.obj
 find.obj
 mean.obj
 svd1.obj
+dot.obj
 polyfit.obj
 minOrMax.obj
 CrossLine.obj
 GenerateTrianglePoints.obj
-validate_print_arguments.obj
 rand.obj
 foot_of_perpendicular_from_a_point_to_a_line.obj
 fitcircle.obj
