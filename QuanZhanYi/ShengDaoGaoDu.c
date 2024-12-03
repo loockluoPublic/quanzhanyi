@@ -2,7 +2,7 @@
  * File: ShengDaoGaoDu.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 20:45:04
+ * C/C++ source code generated on  : 03-Dec-2024 21:15:29
  */
 
 /* Include Files */
@@ -31,9 +31,9 @@ void ShengDaoGaoDu(double numShengLu, emxArray_real_T *Ti)
                                 0.183435, 0.525532,  0.796666,  0.96029};
   static const double dv2[7] = {-0.949108, -0.741531, -0.405845, 0.0,
                                 0.405845,  0.741531,  0.949108};
-  static const double dv1[6] = {-0.93247, -0.661209, -0.238619,
-                                0.238619, 0.661209,  0.93247};
-  static const double dv[5] = {-0.90618, -0.538469, 0.0, 0.538469, 0.90618};
+  static const double b_dv1[6] = {-0.93247, -0.661209, -0.238619,
+                                  0.238619, 0.661209,  0.93247};
+  static const double b_dv[5] = {-0.90618, -0.538469, 0.0, 0.538469, 0.90618};
   emxArray_real_T *Ti1;
   double *Ti1_data;
   double *Ti_data;
@@ -101,7 +101,7 @@ void ShengDaoGaoDu(double numShengLu, emxArray_real_T *Ti)
     emxEnsureCapacity_real_T(Ti1, i);
     Ti1_data = Ti1->data;
     for (i = 0; i < 5; i++) {
-      Ti1_data[i] = dv[i];
+      Ti1_data[i] = b_dv[i];
     }
     break;
   case 6:
@@ -111,7 +111,7 @@ void ShengDaoGaoDu(double numShengLu, emxArray_real_T *Ti)
     emxEnsureCapacity_real_T(Ti1, i);
     Ti1_data = Ti1->data;
     for (i = 0; i < 6; i++) {
-      Ti1_data[i] = dv1[i];
+      Ti1_data[i] = b_dv1[i];
     }
     break;
   case 7:

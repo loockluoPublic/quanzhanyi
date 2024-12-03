@@ -2,7 +2,7 @@
  * File: svd.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 20:45:04
+ * C/C++ source code generated on  : 03-Dec-2024 21:15:29
  */
 
 /* Include Files */
@@ -65,7 +65,7 @@ void c_svd(const double A[8], double U[4], double s[2], double V[16])
     qq = qp1jj + 1;
     apply_transform = false;
     if (q + 1 <= 1) {
-      nrm = e_xnrm2(b_A, qp1jj + 1);
+      nrm = f_xnrm2(b_A, qp1jj + 1);
       if (nrm > 0.0) {
         apply_transform = true;
         if (b_A[qp1jj] < 0.0) {
@@ -472,7 +472,7 @@ void svd(const double A[9], double U[9], double s[3], double V[9])
       U[kase] = b_A[kase];
     }
     if (q + 1 <= 1) {
-      nrm = d_xnrm2(e);
+      nrm = e_xnrm2(e);
       if (nrm == 0.0) {
         e[0] = 0.0;
       } else {
