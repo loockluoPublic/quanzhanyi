@@ -138,6 +138,7 @@ const toSd = (array: any) => {
  * @returns
  */
 const CalculatAAndBPointsFn = (
+  BottomRoundCenter: CustomVector3[],
   MTaon: CustomVector3,
   Mcenter: CustomVector3,
   R: number,
@@ -165,6 +166,8 @@ const CalculatAAndBPointsFn = (
     }) ?? []
   );
 
+  const B1 = new EmxArray_real_T(BottomRoundCenter[0]);
+  const B2 = new EmxArray_real_T(BottomRoundCenter[1]);
   const mTaon = new EmxArray_real_T(MTaon);
   const mCenter = new EmxArray_real_T(Mcenter);
   const _PAB = new EmxArray_real_T(PAB);
@@ -173,8 +176,11 @@ const CalculatAAndBPointsFn = (
   const _rOff = new EmxArray_real_T(rOff);
   const A = new EmxArray_real_T(3, ang.length);
   const B = new EmxArray_real_T(3, ang.length);
+  const bh = new EmxArray_real_T(2, ang.length);
 
   _CalculatAAndBPoints(
+    B1.arrayPtr,
+    B2.arrayPtr,
     mTaon.arrayPtr,
     mCenter.arrayPtr,
     R,
@@ -184,33 +190,32 @@ const CalculatAAndBPointsFn = (
     _tOff.ptr,
     _rOff.ptr,
     sign ? B.ptr : A.ptr,
-    sign ? A.ptr : B.ptr
+    sign ? A.ptr : B.ptr,
+    bh.ptr
   );
 
+  const bhKeys = bh.toJSON();
+  console.log("%c Line:198 🍎 bhKeys", "color:#b03734", bhKeys);
+
   CustomVector3.setPublicInfo("A", 0);
+
   const bottomA = A.toVector3();
-  for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
-    bottomA[i].key = 2 * i + 1;
-    bottomA[j].key = 2 * i + 2;
-  }
-  bottomA
-    .sort((a, b) => a.key - b.key)
-    .forEach((p) => {
-      p.color = "red";
-    });
+
+  bottomA.map((p, i) => {
+    p.color = "red";
+    p.key = bhKeys[i][0];
+    return p;
+  });
+  // .sort((a, b) => a.key - b.key);
 
   CustomVector3.setPublicInfo("B", 0);
   const bottomB = B.toVector3();
-  for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
-    bottomB[i].key = 2 * i + 1;
-    bottomB[j].key = 2 * i + 2;
-  }
 
-  bottomB
-    .sort((a, b) => a.key - b.key)
-    .forEach((p) => {
-      p.color = "#fab005";
-    });
+  bottomB.map((p, i) => {
+    p.color = "#fab005";
+    p.key = bhKeys[i][1];
+    return p;
+  });
 
   const res = sdm === "A" ? toSd(bottomA) : toSd(bottomB);
 
@@ -235,6 +240,7 @@ const CalculatAAndBPointsFn = (
  * @returns
  */
 export const CalculatAAndBPoints = async (
+  BottomRoundCenter: CustomVector3[],
   MTaon: CustomVector3,
   Mcenter: CustomVector3,
   R: number,
@@ -250,6 +256,7 @@ export const CalculatAAndBPoints = async (
     return [
       ...acc,
       ...CalculatAAndBPointsFn(
+        BottomRoundCenter,
         MTaon,
         Mcenter,
         R,

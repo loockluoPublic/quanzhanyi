@@ -274,6 +274,7 @@ function CylinderFit() {
       return item.tOff;
     }) ?? [];
 
+  console.log("%c Line:292 🍆 calulateRes", "color:#ed9ec7", data.calulateRes);
   const calcPoint = () => {
     const { calulateRes } = data;
 
@@ -287,9 +288,8 @@ function CylinderFit() {
       tableData = updateOffset2(data, data.resultTable);
     }
 
-    console.log("%c Line:291 🥤 getSign", "color:#42b983", getSign());
-
     CalculatAAndBPoints(
+      calulateRes.Bottom_round_center,
       calulateRes.mTaon,
       calulateRes.center,
       calulateRes.R,
