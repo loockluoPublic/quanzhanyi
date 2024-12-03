@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 21:37:33
+ * C/C++ source code generated on  : 03-Dec-2024 21:47:53
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -108,11 +108,12 @@ void Generate_multi_layered_measurement_points(emxArray_real_T *Point_out,
 
 void JuXingFuCe(emxArray_real_T *PointIn, real_T shenglunum, real_T Pin[3],
                 real_T Tao[3], real_T h, emxArray_real_T *PlaneParaOut4,
-                emxArray_real_T *Distance, emxArray_real_T *theta,
-                emxArray_real_T *LTPY, emxArray_real_T *TiC,
-                emxArray_real_T *Wquanzhong3, emxArray_real_T *Wquanzhong4);
+                real_T LenDaoJiao[8], emxArray_real_T *Distance,
+                emxArray_real_T *theta, emxArray_real_T *LTPY,
+                emxArray_real_T *TiC, emxArray_real_T *Wquanzhong3,
+                emxArray_real_T *Wquanzhong4);
 
-void JuXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
+void JuXingFuCe_api(const mxArray *const prhs[7], int32_T nlhs,
                     const mxArray *plhs[6]);
 
 void OffsetCalculate(real_T Mradial, real_T phi, emxArray_real_T *Ang,
@@ -238,10 +239,11 @@ void planefit8(emxArray_real_T *Points1, emxArray_real_T *Points2,
                emxArray_real_T *Points7, emxArray_real_T *Points8,
                real_T P_bound1[3], real_T P_bound2[3], real_T distanceThreshold,
                emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints,
-               real_T MaxDis[8], emxArray_real_T *distancesFianal);
+               real_T MaxDis[8], emxArray_real_T *distancesFianal,
+               real_T LenDaoJiao[8]);
 
 void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
-                   const mxArray *plhs[4]);
+                   const mxArray *plhs[5]);
 
 void planefit_api(const mxArray *const prhs[4], int32_T nlhs,
                   const mxArray *plhs[2]);

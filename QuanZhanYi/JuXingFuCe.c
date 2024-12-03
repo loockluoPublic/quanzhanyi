@@ -2,7 +2,7 @@
  * File: JuXingFuCe.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 21:37:33
+ * C/C++ source code generated on  : 03-Dec-2024 21:47:53
  */
 
 /* Include Files */
@@ -78,6 +78,7 @@ static void b_minus(emxArray_real_T *in1, const emxArray_real_T *in2)
  *                const double Tao[3]
  *                double h
  *                const emxArray_real_T *PlaneParaOut4
+ *                const double LenDaoJiao[8]
  *                emxArray_real_T *Distance
  *                emxArray_real_T *theta
  *                emxArray_real_T *LTPY
@@ -88,7 +89,8 @@ static void b_minus(emxArray_real_T *in1, const emxArray_real_T *in2)
  */
 void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
                 const double Pin[3], const double Tao[3], double h,
-                const emxArray_real_T *PlaneParaOut4, emxArray_real_T *Distance,
+                const emxArray_real_T *PlaneParaOut4,
+                const double LenDaoJiao[8], emxArray_real_T *Distance,
                 emxArray_real_T *theta, emxArray_real_T *LTPY,
                 emxArray_real_T *TiC, emxArray_real_T *Wquanzhong3,
                 emxArray_real_T *Wquanzhong4)
@@ -109,6 +111,7 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   double a;
   double absxk;
   double b_scale;
+  double b_y;
   double c;
   double d;
   double scale;
@@ -119,15 +122,17 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   double z_intersect1;
   double *Distance_data;
   double *TiC_data;
+  double *t_k_data;
   double *theta_data;
-  double *w_data;
-  int absxk_tmp;
   int b_i;
   int b_loop_ub_tmp;
   unsigned int count_tk;
   int i;
+  int i1;
+  int idx;
   int loop_ub_tmp;
-  int nx;
+  int na;
+  (void)LenDaoJiao;
   if (!isInitialized_QuanZhanYi) {
     QuanZhanYi_initialize();
   }
@@ -142,35 +147,35 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   for (b_i = 0; b_i < loop_ub_tmp; b_i++) {
     d = 2.0 * ((double)b_i + 1.0);
     scale = 3.3121686421112381E-170;
-    nx = 3 * ((int)(d - 1.0) - 1);
-    absxk_tmp = 3 * ((int)d - 1);
-    absxk = fabs(PointIn_data[nx] - PointIn_data[absxk_tmp]);
+    idx = 3 * ((int)(d - 1.0) - 1);
+    na = 3 * ((int)d - 1);
+    absxk = fabs(PointIn_data[idx] - PointIn_data[na]);
     if (absxk > 3.3121686421112381E-170) {
-      x_intersect1 = 1.0;
+      y = 1.0;
       scale = absxk;
     } else {
       t = absxk / 3.3121686421112381E-170;
-      x_intersect1 = t * t;
+      y = t * t;
     }
-    absxk = fabs(PointIn_data[nx + 1] - PointIn_data[absxk_tmp + 1]);
+    absxk = fabs(PointIn_data[idx + 1] - PointIn_data[na + 1]);
     if (absxk > scale) {
       t = scale / absxk;
-      x_intersect1 = x_intersect1 * t * t + 1.0;
+      y = y * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      x_intersect1 += t * t;
+      y += t * t;
     }
-    absxk = fabs(PointIn_data[nx + 2] - PointIn_data[absxk_tmp + 2]);
+    absxk = fabs(PointIn_data[idx + 2] - PointIn_data[na + 2]);
     if (absxk > scale) {
       t = scale / absxk;
-      x_intersect1 = x_intersect1 * t * t + 1.0;
+      y = y * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      x_intersect1 += t * t;
+      y += t * t;
     }
-    Distance_data[b_i] = scale * sqrt(x_intersect1);
+    Distance_data[b_i] = scale * sqrt(y);
   }
   /*  计算声道角度 */
   i = theta->size[0] * theta->size[1];
@@ -185,68 +190,68 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
     scale = 3.3121686421112381E-170;
     b_scale = 3.3121686421112381E-170;
     i = 3 * ((int)d - 1);
-    nx = 3 * ((int)(d - 1.0) - 1);
-    d = PointIn_data[i] - PointIn_data[nx];
+    i1 = 3 * ((int)(d - 1.0) - 1);
+    d = PointIn_data[i] - PointIn_data[i1];
     c = Tao[0] * d;
     absxk = fabs(Tao[0]);
     if (absxk > 3.3121686421112381E-170) {
-      x_intersect1 = 1.0;
-      scale = absxk;
-    } else {
-      t = absxk / 3.3121686421112381E-170;
-      x_intersect1 = t * t;
-    }
-    absxk = fabs(d);
-    if (absxk > 3.3121686421112381E-170) {
       y = 1.0;
-      b_scale = absxk;
+      scale = absxk;
     } else {
       t = absxk / 3.3121686421112381E-170;
       y = t * t;
     }
-    d = PointIn_data[i + 1] - PointIn_data[nx + 1];
+    absxk = fabs(d);
+    if (absxk > 3.3121686421112381E-170) {
+      b_y = 1.0;
+      b_scale = absxk;
+    } else {
+      t = absxk / 3.3121686421112381E-170;
+      b_y = t * t;
+    }
+    d = PointIn_data[i + 1] - PointIn_data[i1 + 1];
     c += Tao[1] * d;
     absxk = fabs(Tao[1]);
     if (absxk > scale) {
       t = scale / absxk;
-      x_intersect1 = x_intersect1 * t * t + 1.0;
+      y = y * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      x_intersect1 += t * t;
+      y += t * t;
     }
     absxk = fabs(d);
     if (absxk > b_scale) {
       t = b_scale / absxk;
-      y = y * t * t + 1.0;
+      b_y = b_y * t * t + 1.0;
       b_scale = absxk;
     } else {
       t = absxk / b_scale;
-      y += t * t;
+      b_y += t * t;
     }
-    d = PointIn_data[i + 2] - PointIn_data[nx + 2];
+    d = PointIn_data[i + 2] - PointIn_data[i1 + 2];
     c += Tao[2] * d;
     absxk = fabs(Tao[2]);
     if (absxk > scale) {
       t = scale / absxk;
-      x_intersect1 = x_intersect1 * t * t + 1.0;
+      y = y * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      x_intersect1 += t * t;
+      y += t * t;
     }
     absxk = fabs(d);
     if (absxk > b_scale) {
       t = b_scale / absxk;
-      y = y * t * t + 1.0;
+      b_y = b_y * t * t + 1.0;
       b_scale = absxk;
     } else {
       t = absxk / b_scale;
-      y += t * t;
+      b_y += t * t;
     }
-    x_intersect1 = scale * sqrt(x_intersect1);
-    y = b_scale * sqrt(y);
-    theta_data[b_i] = acos(c / (x_intersect1 * y));
+    y = scale * sqrt(y);
+    b_y = b_scale * sqrt(b_y);
+    theta_data[b_i] = acos(c / (y * b_y));
   }
   i = theta->size[0] * theta->size[1];
   theta->size[0] = 1;
@@ -267,11 +272,11 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   }
   for (b_i = 0; b_i < loop_ub_tmp; b_i++) {
     d = 2.0 * ((double)b_i + 1.0);
-    nx = 3 * ((int)d - 1);
-    absxk_tmp = 3 * ((int)(d - 1.0) - 1);
-    shengdao2[0] = PointIn_data[nx] - PointIn_data[absxk_tmp];
-    shengdao2[1] = PointIn_data[nx + 1] - PointIn_data[absxk_tmp + 1];
-    shengdao2[2] = PointIn_data[nx + 2] - PointIn_data[absxk_tmp + 2];
+    idx = 3 * ((int)d - 1);
+    na = 3 * ((int)(d - 1.0) - 1);
+    shengdao2[0] = PointIn_data[idx] - PointIn_data[na];
+    shengdao2[1] = PointIn_data[idx + 1] - PointIn_data[na + 1];
+    shengdao2[2] = PointIn_data[idx + 2] - PointIn_data[na + 2];
     /*  计算方向向量 */
     a = PlaneParaOut4_data[0];
     b_scale = PlaneParaOut4_data[1];
@@ -279,53 +284,53 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
     /*  将直线方程代入平面方程，求解参数 t */
     i = ((b_i + 1) << 1) - 2;
     d = PointIn_data[3 * i];
-    y = PointIn_data[3 * i + 1];
-    absxk = PointIn_data[3 * i + 2];
-    t = -(((a * d + b_scale * y) + c * absxk) + PlaneParaOut4_data[3]) /
+    absxk = PointIn_data[3 * i + 1];
+    y = PointIn_data[3 * i + 2];
+    t = -(((a * d + b_scale * absxk) + c * y) + PlaneParaOut4_data[3]) /
         ((a * shengdao2[0] + b_scale * shengdao2[1]) + c * shengdao2[2]);
     /*  计算交点 */
     x_intersect1 = d + t * shengdao2[0];
-    y_intersect1 = y + t * shengdao2[1];
-    z_intersect1 = absxk + t * shengdao2[2];
+    y_intersect1 = absxk + t * shengdao2[1];
+    z_intersect1 = y + t * shengdao2[2];
     /*  计算方向向量 */
     a = PlaneParaOut4_data[8];
     b_scale = PlaneParaOut4_data[9];
     c = PlaneParaOut4_data[10];
     /*  将直线方程代入平面方程，求解参数 t */
-    t = -(((a * d + b_scale * y) + c * absxk) + PlaneParaOut4_data[11]) /
+    t = -(((a * d + b_scale * absxk) + c * y) + PlaneParaOut4_data[11]) /
         ((a * shengdao2[0] + b_scale * shengdao2[1]) + c * shengdao2[2]);
     /*  计算交点 */
     b_scale = d + t * shengdao2[0];
-    a = y + t * shengdao2[1];
-    y = absxk + t * shengdao2[2];
+    a = absxk + t * shengdao2[1];
+    b_y = y + t * shengdao2[2];
     scale = 3.3121686421112381E-170;
     absxk = fabs(b_scale - x_intersect1);
     if (absxk > 3.3121686421112381E-170) {
-      x_intersect1 = 1.0;
+      y = 1.0;
       scale = absxk;
     } else {
       t = absxk / 3.3121686421112381E-170;
-      x_intersect1 = t * t;
+      y = t * t;
     }
     absxk = fabs(a - y_intersect1);
     if (absxk > scale) {
       t = scale / absxk;
-      x_intersect1 = x_intersect1 * t * t + 1.0;
+      y = y * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      x_intersect1 += t * t;
+      y += t * t;
     }
-    absxk = fabs(y - z_intersect1);
+    absxk = fabs(b_y - z_intersect1);
     if (absxk > scale) {
       t = scale / absxk;
-      x_intersect1 = x_intersect1 * t * t + 1.0;
+      y = y * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      x_intersect1 += t * t;
+      y += t * t;
     }
-    theta_data[b_i] = scale * sqrt(x_intersect1);
+    theta_data[b_i] = scale * sqrt(y);
   }
   if (Distance->size[1] == LTPY->size[1]) {
     i = LTPY->size[0] * LTPY->size[1];
@@ -352,61 +357,61 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   }
   for (b_i = 0; b_i < loop_ub_tmp; b_i++) {
     d = 2.0 * ((double)b_i + 1.0);
-    nx = 3 * ((int)(d - 1.0) - 1);
-    absxk_tmp = 3 * ((int)d - 1);
-    shengdao1[0] = (PointIn_data[nx] + PointIn_data[absxk_tmp]) / 2.0;
-    shengdao1[1] = (PointIn_data[nx + 1] + PointIn_data[absxk_tmp + 1]) / 2.0;
-    shengdao1[2] = (PointIn_data[nx + 2] + PointIn_data[absxk_tmp + 2]) / 2.0;
+    idx = 3 * ((int)(d - 1.0) - 1);
+    na = 3 * ((int)d - 1);
+    shengdao1[0] = (PointIn_data[idx] + PointIn_data[na]) / 2.0;
+    shengdao1[1] = (PointIn_data[idx + 1] + PointIn_data[na + 1]) / 2.0;
+    shengdao1[2] = (PointIn_data[idx + 2] + PointIn_data[na + 2]) / 2.0;
     foot_of_perpendicular_from_a_point_to_a_line(shengdao1, Pin, shengdao2,
-                                                 &b_scale, &y, &a);
+                                                 &b_scale, &b_y, &a);
     scale = 3.3121686421112381E-170;
     absxk = fabs(shengdao1[0] - b_scale);
     if (absxk > 3.3121686421112381E-170) {
-      x_intersect1 = 1.0;
+      y = 1.0;
       scale = absxk;
     } else {
       t = absxk / 3.3121686421112381E-170;
-      x_intersect1 = t * t;
+      y = t * t;
     }
-    absxk = fabs(shengdao1[1] - y);
+    absxk = fabs(shengdao1[1] - b_y);
     if (absxk > scale) {
       t = scale / absxk;
-      x_intersect1 = x_intersect1 * t * t + 1.0;
+      y = y * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      x_intersect1 += t * t;
+      y += t * t;
     }
     absxk = fabs(shengdao1[2] - a);
     if (absxk > scale) {
       t = scale / absxk;
-      x_intersect1 = x_intersect1 * t * t + 1.0;
+      y = y * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      x_intersect1 += t * t;
+      y += t * t;
     }
-    x_intersect1 = scale * sqrt(x_intersect1);
-    TiC_data[b_i] = 2.0 * x_intersect1 / h;
+    y = scale * sqrt(y);
+    TiC_data[b_i] = 2.0 * y / h;
   }
   /*  alphaA = asin(TiC); */
   d = floor(shenglunum / 2.0);
   if (d < 1.0) {
-    nx = 0;
+    idx = 0;
   } else {
-    nx = (int)d;
+    idx = (int)d;
   }
   emxInit_real_T(&TiYiCe, 2);
   i = TiYiCe->size[0] * TiYiCe->size[1];
   TiYiCe->size[0] = 1;
-  TiYiCe->size[1] = nx;
+  TiYiCe->size[1] = idx;
   emxEnsureCapacity_real_T(TiYiCe, i);
   theta_data = TiYiCe->data;
-  for (i = 0; i < nx; i++) {
+  for (i = 0; i < idx; i++) {
     theta_data[i] = -TiC_data[i];
   }
-  nx = TiYiCe->size[1];
-  for (i = 0; i < nx; i++) {
+  idx = TiYiCe->size[1];
+  for (i = 0; i < idx; i++) {
     TiC_data[i] = theta_data[i];
   }
   /*  计算权重 */
@@ -416,14 +421,22 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   /*  gk2 = [1.513365,0.360325,0.174351,0.106311,0.072959]; */
   /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    */
-  i = TiYiCe->size[0] * TiYiCe->size[1];
+  absxk = 2.0 * shenglunum;
+  if (absxk < 1.0) {
+    i = 1;
+    i1 = -1;
+  } else {
+    i = 2;
+    i1 = (int)absxk - 1;
+  }
+  b_i = TiYiCe->size[0] * TiYiCe->size[1];
   TiYiCe->size[0] = 1;
-  TiYiCe->size[1] = TiC->size[1];
-  emxEnsureCapacity_real_T(TiYiCe, i);
+  idx = div_s32(i1, i);
+  TiYiCe->size[1] = idx + 1;
+  emxEnsureCapacity_real_T(TiYiCe, b_i);
   theta_data = TiYiCe->data;
-  nx = TiC->size[1];
-  for (i = 0; i < nx; i++) {
-    theta_data[i] = TiC_data[i];
+  for (i1 = 0; i1 <= idx; i1++) {
+    theta_data[i1] = TiC_data[i * i1];
   }
   if (rtIsInf(shenglunum)) {
     y = rtNaN;
@@ -441,115 +454,145 @@ void JuXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   i = t_k->size[0];
   t_k->size[0] = (int)(shenglunum - 1.0);
   emxEnsureCapacity_real_T(t_k, i);
-  Distance_data = t_k->data;
+  t_k_data = t_k->data;
   for (i = 0; i < b_loop_ub_tmp; i++) {
-    Distance_data[i] = 0.0;
+    t_k_data[i] = 0.0;
   }
   emxInit_real_T(&w, 1);
   i = w->size[0];
   w->size[0] = (int)shenglunum;
   emxEnsureCapacity_real_T(w, i);
-  w_data = w->data;
+  Distance_data = w->data;
   for (i = 0; i < loop_ub_tmp; i++) {
-    w_data[i] = 0.0;
+    Distance_data[i] = 0.0;
   }
   emxInit_real_T(&r, 2);
   emxInit_real_T(&r1, 1);
   for (b_i = 0; b_i < loop_ub_tmp; b_i++) {
     count_tk = 1U;
-    for (absxk_tmp = 0; absxk_tmp < loop_ub_tmp; absxk_tmp++) {
-      if ((unsigned int)absxk_tmp != (unsigned int)b_i) {
-        Distance_data[(int)count_tk - 1] = theta_data[absxk_tmp];
+    for (idx = 0; idx < loop_ub_tmp; idx++) {
+      if ((unsigned int)idx != (unsigned int)b_i) {
+        t_k_data[(int)count_tk - 1] = theta_data[idx];
         count_tk++;
       }
     }
     i = (int)((shenglunum + 1.0) / 2.0);
-    for (absxk_tmp = 0; absxk_tmp < i; absxk_tmp++) {
-      b_nchoosek(t_k, (shenglunum + 1.0) - 2.0 * ((double)absxk_tmp + 1.0), r);
+    for (idx = 0; idx < i; idx++) {
+      b_nchoosek(t_k, (shenglunum + 1.0) - 2.0 * ((double)idx + 1.0), r);
       prod(r, r1);
-      w_data[b_i] += b_dv[absxk_tmp] * -combineVectorElements(r1);
+      Distance_data[b_i] += b_dv[idx] * -combineVectorElements(r1);
     }
     b_scale = 1.0;
-    for (absxk_tmp = 0; absxk_tmp < loop_ub_tmp; absxk_tmp++) {
-      if ((unsigned int)absxk_tmp != (unsigned int)b_i) {
-        b_scale *= theta_data[b_i] - theta_data[absxk_tmp];
+    for (idx = 0; idx < loop_ub_tmp; idx++) {
+      if ((unsigned int)idx != (unsigned int)b_i) {
+        b_scale *= theta_data[b_i] - theta_data[idx];
       }
     }
-    absxk = theta_data[b_i];
-    w_data[b_i] /= rt_powd_snf(1.0 - absxk * absxk, 0.0) * b_scale;
+    b_y = theta_data[b_i];
+    Distance_data[b_i] /= rt_powd_snf(1.0 - b_y * b_y, 0.0) * b_scale;
   }
-  nx = w->size[0];
-  i = Wquanzhong3->size[0];
-  Wquanzhong3->size[0] = w->size[0];
-  emxEnsureCapacity_real_T(Wquanzhong3, i);
+  na = w->size[0];
+  i = w->size[0] << 1;
+  i1 = t_k->size[0];
+  t_k->size[0] = i;
+  emxEnsureCapacity_real_T(t_k, i1);
+  t_k_data = t_k->data;
+  idx = -1;
+  for (b_i = 0; b_i < na; b_i++) {
+    t_k_data[idx + 1] = Distance_data[b_i];
+    t_k_data[idx + 2] = Distance_data[b_i];
+    idx += 2;
+  }
+  na = t_k->size[0];
+  i1 = Wquanzhong3->size[0];
+  Wquanzhong3->size[0] = t_k->size[0];
+  emxEnsureCapacity_real_T(Wquanzhong3, i1);
   theta_data = Wquanzhong3->data;
-  for (absxk_tmp = 0; absxk_tmp < nx; absxk_tmp++) {
-    theta_data[absxk_tmp] = fabs(w_data[absxk_tmp]);
+  for (b_i = 0; b_i < na; b_i++) {
+    theta_data[b_i] = fabs(t_k_data[b_i]);
   }
   /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-  i = TiYiCe->size[0] * TiYiCe->size[1];
+  if (absxk < 1.0) {
+    i1 = 1;
+    b_i = -1;
+  } else {
+    i1 = 2;
+    b_i = (int)absxk - 1;
+  }
+  na = TiYiCe->size[0] * TiYiCe->size[1];
   TiYiCe->size[0] = 1;
-  TiYiCe->size[1] = TiC->size[1];
-  emxEnsureCapacity_real_T(TiYiCe, i);
+  idx = div_s32(b_i, i1);
+  TiYiCe->size[1] = idx + 1;
+  emxEnsureCapacity_real_T(TiYiCe, na);
   theta_data = TiYiCe->data;
-  nx = TiC->size[1];
-  for (i = 0; i < nx; i++) {
-    theta_data[i] = TiC_data[i];
+  for (b_i = 0; b_i <= idx; b_i++) {
+    theta_data[b_i] = TiC_data[i1 * b_i];
   }
   if (y == 1.0) {
     /* 奇数 */
     theta_data[(int)(unsigned int)d] = 0.0;
   }
-  i = t_k->size[0];
+  i1 = t_k->size[0];
   t_k->size[0] = (int)(shenglunum - 1.0);
-  emxEnsureCapacity_real_T(t_k, i);
-  Distance_data = t_k->data;
-  for (i = 0; i < b_loop_ub_tmp; i++) {
-    Distance_data[i] = 0.0;
+  emxEnsureCapacity_real_T(t_k, i1);
+  t_k_data = t_k->data;
+  for (i1 = 0; i1 < b_loop_ub_tmp; i1++) {
+    t_k_data[i1] = 0.0;
   }
-  i = w->size[0];
+  i1 = w->size[0];
   w->size[0] = (int)shenglunum;
-  emxEnsureCapacity_real_T(w, i);
-  w_data = w->data;
-  for (i = 0; i < loop_ub_tmp; i++) {
-    w_data[i] = 0.0;
+  emxEnsureCapacity_real_T(w, i1);
+  Distance_data = w->data;
+  for (i1 = 0; i1 < loop_ub_tmp; i1++) {
+    Distance_data[i1] = 0.0;
   }
   for (b_i = 0; b_i < loop_ub_tmp; b_i++) {
     count_tk = 1U;
-    for (absxk_tmp = 0; absxk_tmp < loop_ub_tmp; absxk_tmp++) {
-      if ((unsigned int)absxk_tmp != (unsigned int)b_i) {
-        Distance_data[(int)count_tk - 1] = theta_data[absxk_tmp];
+    for (idx = 0; idx < loop_ub_tmp; idx++) {
+      if ((unsigned int)idx != (unsigned int)b_i) {
+        t_k_data[(int)count_tk - 1] = theta_data[idx];
         count_tk++;
       }
     }
-    i = (int)((shenglunum + 1.0) / 2.0);
-    for (absxk_tmp = 0; absxk_tmp < i; absxk_tmp++) {
-      b_nchoosek(t_k, (shenglunum + 1.0) - 2.0 * ((double)absxk_tmp + 1.0), r);
+    i1 = (int)((shenglunum + 1.0) / 2.0);
+    for (idx = 0; idx < i1; idx++) {
+      b_nchoosek(t_k, (shenglunum + 1.0) - 2.0 * ((double)idx + 1.0), r);
       prod(r, r1);
-      w_data[b_i] += b_dv1[absxk_tmp] * -combineVectorElements(r1);
+      Distance_data[b_i] += b_dv1[idx] * -combineVectorElements(r1);
     }
     b_scale = 1.0;
-    for (absxk_tmp = 0; absxk_tmp < loop_ub_tmp; absxk_tmp++) {
-      if ((unsigned int)absxk_tmp != (unsigned int)b_i) {
-        b_scale *= theta_data[b_i] - theta_data[absxk_tmp];
+    for (idx = 0; idx < loop_ub_tmp; idx++) {
+      if ((unsigned int)idx != (unsigned int)b_i) {
+        b_scale *= theta_data[b_i] - theta_data[idx];
       }
     }
     d = theta_data[b_i];
-    w_data[b_i] /= rt_powd_snf(1.0 - d * d, 0.15) * b_scale;
+    Distance_data[b_i] /= rt_powd_snf(1.0 - d * d, 0.15) * b_scale;
   }
   emxFree_real_T(&r1);
   emxFree_real_T(&r);
-  emxFree_real_T(&t_k);
   emxFree_real_T(&TiYiCe);
-  nx = w->size[0];
-  i = Wquanzhong4->size[0];
-  Wquanzhong4->size[0] = w->size[0];
-  emxEnsureCapacity_real_T(Wquanzhong4, i);
-  theta_data = Wquanzhong4->data;
-  for (absxk_tmp = 0; absxk_tmp < nx; absxk_tmp++) {
-    theta_data[absxk_tmp] = fabs(w_data[absxk_tmp]);
+  na = w->size[0];
+  i1 = t_k->size[0];
+  t_k->size[0] = i;
+  emxEnsureCapacity_real_T(t_k, i1);
+  t_k_data = t_k->data;
+  idx = -1;
+  for (b_i = 0; b_i < na; b_i++) {
+    t_k_data[idx + 1] = Distance_data[b_i];
+    t_k_data[idx + 2] = Distance_data[b_i];
+    idx += 2;
   }
   emxFree_real_T(&w);
+  na = t_k->size[0];
+  i = Wquanzhong4->size[0];
+  Wquanzhong4->size[0] = t_k->size[0];
+  emxEnsureCapacity_real_T(Wquanzhong4, i);
+  theta_data = Wquanzhong4->data;
+  for (b_i = 0; b_i < na; b_i++) {
+    theta_data[b_i] = fabs(t_k_data[b_i]);
+  }
+  emxFree_real_T(&t_k);
 }
 
 /*
