@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 08-Dec-2024 20:49:37
+ * C/C++ source code generated on  : 08-Dec-2024 23:03:47
  */
 
 /* Include Files */
@@ -1379,8 +1379,8 @@ void YuanXingFuCe_api(const mxArray *const prhs[6], int32_T nlhs,
   PointIn->canFreeData = false;
   g_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "PointIn", PointIn);
   shenglunum = emlrt_marshallIn(&st, emlrtAliasP(prhs[1]), "shenglunum");
-  Mcenter = i_emlrt_marshallIn(&st, emlrtAlias(prhs[2]), "Mcenter");
-  MTaon = i_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "MTaon");
+  Mcenter = c_emlrt_marshallIn(&st, emlrtAlias(prhs[2]), "Mcenter");
+  MTaon = c_emlrt_marshallIn(&st, emlrtAlias(prhs[3]), "MTaon");
   Mradial = emlrt_marshallIn(&st, emlrtAliasP(prhs[4]), "Mradial");
   phi = emlrt_marshallIn(&st, emlrtAliasP(prhs[5]), "phi");
   /* Invoke the target function */
