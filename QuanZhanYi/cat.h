@@ -2,7 +2,7 @@
  * File: cat.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Dec-2024 00:07:23
+ * C/C++ source code generated on  : 08-Dec-2024 18:46:28
  */
 
 #ifndef CAT_H
@@ -19,10 +19,6 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void binary_expand_op_10(emxArray_real_T *in1, const emxArray_real_T *in3,
-                         const emxArray_real_T *in4,
-                         const emxArray_real_T *in5);
-
 void binary_expand_op_17(emxArray_real_T *in1, double in2,
                          const emxArray_real_T *in3, double in4,
                          const emxArray_real_T *in5, const emxArray_real_T *in6,

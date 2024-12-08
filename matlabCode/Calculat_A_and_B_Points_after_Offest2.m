@@ -114,7 +114,7 @@ Pxy2 = Bottom_round_center2;
 Pup3 = Bottom_round_center1 + [1, 0, 0];
 Pup4 = Bottom_round_center2 + [1, 0, 0];
 DirZX = Psy1 - Pxy2; % 向上游
-Dirup = [1,0,0];
+Dirup = [1, 0, 0];
 distance = ones(1,numShengLu);
 rightflag = -1*ones(1,2*numShengLu);
 
