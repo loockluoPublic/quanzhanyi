@@ -2,7 +2,7 @@
  * File: fitcircle.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Dec-2024 00:07:23
+ * C/C++ source code generated on  : 08-Dec-2024 18:46:28
  */
 
 #ifndef FITCIRCLE_H
@@ -19,6 +19,10 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+void binary_expand_op_10(const emxArray_real_T *in2, const emxArray_real_T *in3,
+                         const emxArray_real_T *in4, emxArray_real_T *in5,
+                         emxArray_real_T *in6, double in7[16]);
+
 void binary_expand_op_7(const double in2[3], const emxArray_real_T *in3,
                         const emxArray_real_T *in4, const emxArray_real_T *in5,
                         const int in6[2], const emxArray_real_T *in7,

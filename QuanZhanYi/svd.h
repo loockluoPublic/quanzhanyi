@@ -2,7 +2,7 @@
  * File: svd.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Dec-2024 00:07:23
+ * C/C++ source code generated on  : 08-Dec-2024 18:46:28
  */
 
 #ifndef SVD_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void c_svd(const double A[8], double U[4], double s[2], double V[16]);
+void d_svd(const double A[8], double U[4], double s[2], double V[16]);
 
 void svd(const double A[9], double U[9], double s[3], double V[9]);
 
