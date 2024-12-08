@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points_after_Offest2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 08-Dec-2024 19:01:03
+ * C/C++ source code generated on  : 08-Dec-2024 20:49:37
  */
 
 /* Include Files */
@@ -793,8 +793,8 @@ void Calculat_A_and_B_Points_after_Offest2(
   emxInit_real_T(&TTTemp, 2);
   for (ntilerows = 0; ntilerows < loop_ub_tmp; ntilerows++) {
     ibmat = ((ntilerows + 1) << 1) - 1;
-    Ang_data[ibmat - 1] = RightPoint_data[ntilerows];
-    Ang_data[ibmat] = PointTable2DT_A_data[ntilerows];
+    Ang_data[ibmat - 1] = PointTable2DT_A_data[ntilerows];
+    Ang_data[ibmat] = RightPoint_data[ntilerows];
     i = TTTemp->size[0] * TTTemp->size[1];
     TTTemp->size[0] = BianHaoTemp->size[0];
     TTTemp->size[1] = 2;
@@ -1011,8 +1011,8 @@ void Calculat_A_and_B_Points_after_Offest2(
   }
   for (ntilerows = 0; ntilerows < loop_ub_tmp; ntilerows++) {
     ibmat = ((ntilerows + 1) << 1) - 1;
-    Ang_data[ibmat - 1] = PointTable2DT_A_data[ntilerows];
-    Ang_data[ibmat] = RightPoint_data[ntilerows];
+    Ang_data[ibmat - 1] = RightPoint_data[ntilerows];
+    Ang_data[ibmat] = PointTable2DT_A_data[ntilerows];
     if (b_b < 1) {
       AngProcess->size[0] = 1;
       AngProcess->size[1] = 0;
