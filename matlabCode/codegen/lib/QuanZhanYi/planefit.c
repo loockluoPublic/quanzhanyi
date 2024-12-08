@@ -2,7 +2,7 @@
  * File: planefit.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 21:47:53
+ * C/C++ source code generated on  : 08-Dec-2024 23:03:47
  */
 
 /* Include Files */
@@ -148,7 +148,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     }
   }
   emxInit_real_T(&a__1, 2);
-  b_svd(pointss, a__1, b_pointss, V);
+  c_svd(pointss, a__1, b_pointss, V);
   emxFree_real_T(&b_pointss);
   emxFree_real_T(&a__1);
   /*  Normal vector of the plane */

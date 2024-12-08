@@ -2,7 +2,7 @@
  * File: cat.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 21:47:53
+ * C/C++ source code generated on  : 08-Dec-2024 23:03:47
  */
 
 /* Include Files */
@@ -12,66 +12,6 @@
 #include "rt_nonfinite.h"
 
 /* Function Definitions */
-/*
- * Arguments    : emxArray_real_T *in1
- *                const emxArray_real_T *in3
- *                const emxArray_real_T *in4
- *                const emxArray_real_T *in5
- * Return Type  : void
- */
-void binary_expand_op_10(emxArray_real_T *in1, const emxArray_real_T *in3,
-                         const emxArray_real_T *in4, const emxArray_real_T *in5)
-{
-  emxArray_real_T *r;
-  const double *in3_data;
-  const double *in4_data;
-  const double *in5_data;
-  double b_varargin_1;
-  double varargin_1;
-  double *in1_data;
-  double *r1;
-  int i;
-  int loop_ub;
-  int stride_0_0;
-  int stride_1_0;
-  in5_data = in5->data;
-  in4_data = in4->data;
-  in3_data = in3->data;
-  emxInit_real_T(&r, 1);
-  if (in4->size[0] == 1) {
-    loop_ub = in3->size[0];
-  } else {
-    loop_ub = in4->size[0];
-  }
-  i = r->size[0];
-  r->size[0] = loop_ub;
-  emxEnsureCapacity_real_T(r, i);
-  r1 = r->data;
-  stride_0_0 = (in3->size[0] != 1);
-  stride_1_0 = (in4->size[0] != 1);
-  for (i = 0; i < loop_ub; i++) {
-    varargin_1 = in3_data[i * stride_0_0];
-    b_varargin_1 = in4_data[i * stride_1_0];
-    r1[i] = varargin_1 * varargin_1 + b_varargin_1 * b_varargin_1;
-  }
-  i = in1->size[0] * in1->size[1];
-  in1->size[0] = r->size[0];
-  in1->size[1] = 4;
-  emxEnsureCapacity_real_T(in1, i);
-  in1_data = in1->data;
-  loop_ub = r->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    in1_data[i] = r1[i];
-  }
-  emxFree_real_T(&r);
-  loop_ub = in5->size[1];
-  for (i = 0; i < loop_ub; i++) {
-    in1_data[i + in1->size[0]] = in5_data[2 * i];
-    in1_data[i + in1->size[0] * 2] = in5_data[2 * i + 1];
-    in1_data[i + in1->size[0] * 3] = 1.0;
-  }
-}
-
 /*
  * Arguments    : emxArray_real_T *in1
  *                double in2
