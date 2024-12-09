@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points_after_Offest2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Dec-2024 21:47:53
+ * C/C++ source code generated on  : 08-Dec-2024 23:03:47
  */
 
 /* Include Files */
@@ -592,9 +592,9 @@ void Calculat_A_and_B_Points_after_Offest2(
     a = Bottom_round_center2[0] - Bottom_round_center1[0];
     b_a = Bottom_round_center2[1] - Bottom_round_center1[1];
     c_a = Bottom_round_center2[2] - Bottom_round_center1[2];
-    c[0] = E[1] * 0.0 - E[2] * 0.0;
-    c[1] = E[2] - E[0] * 0.0;
-    c[2] = E[0] * 0.0 - E[1];
+    c[0] = E[1] * 0.0 - E[2];
+    c[1] = E[2] * 0.0 - E[0] * 0.0;
+    c[2] = E[0] - E[1] * 0.0;
   }
   for (itilerow = 0; itilerow < jcol; itilerow++) {
     /*  计算方向 */
@@ -618,9 +618,9 @@ void Calculat_A_and_B_Points_after_Offest2(
            PointTable_A_off_data[3 * itilerow];
     D[1] = (K * dd + Bottom_round_center1[1]) - PointTable_A_off_data[ibmat];
     D[2] = (K * t + Bottom_round_center1[2]) - PointTable_A_off_data[ntilerows];
-    C[0] = D[1] * 0.0 - 0.0 * D[2];
-    C[1] = D[2] - D[0] * 0.0;
-    C[2] = D[0] * 0.0 - D[1];
+    C[0] = D[1] * 0.0 - D[2];
+    C[1] = 0.0 * D[2] - D[0] * 0.0;
+    C[2] = D[0] - 0.0 * D[1];
     /*  夹角（弧度） */
     /*  判断左右 */
     norm_vec = 3.3121686421112381E-170;
@@ -793,8 +793,8 @@ void Calculat_A_and_B_Points_after_Offest2(
   emxInit_real_T(&TTTemp, 2);
   for (ntilerows = 0; ntilerows < loop_ub_tmp; ntilerows++) {
     ibmat = ((ntilerows + 1) << 1) - 1;
-    Ang_data[ibmat - 1] = RightPoint_data[ntilerows];
-    Ang_data[ibmat] = PointTable2DT_A_data[ntilerows];
+    Ang_data[ibmat - 1] = PointTable2DT_A_data[ntilerows];
+    Ang_data[ibmat] = RightPoint_data[ntilerows];
     i = TTTemp->size[0] * TTTemp->size[1];
     TTTemp->size[0] = BianHaoTemp->size[0];
     TTTemp->size[1] = 2;
@@ -831,9 +831,9 @@ void Calculat_A_and_B_Points_after_Offest2(
     d_a = Bottom_round_center2[0] - Bottom_round_center1[0];
     e_a = Bottom_round_center2[1] - Bottom_round_center1[1];
     f_a = Bottom_round_center2[2] - Bottom_round_center1[2];
-    c[0] = E[1] * 0.0 - E[2] * 0.0;
-    c[1] = E[2] - E[0] * 0.0;
-    c[2] = E[0] * 0.0 - E[1];
+    c[0] = E[1] * 0.0 - E[2];
+    c[1] = E[2] * 0.0 - E[0] * 0.0;
+    c[2] = E[0] - E[1] * 0.0;
   }
   for (itilerow = 0; itilerow < jcol; itilerow++) {
     /*  计算方向 */
@@ -856,9 +856,9 @@ void Calculat_A_and_B_Points_after_Offest2(
            PointTable_B_off_data[3 * itilerow];
     D[1] = (K * dd + Bottom_round_center1[1]) - PointTable_B_off_data[ibmat];
     D[2] = (K * t + Bottom_round_center1[2]) - PointTable_B_off_data[ntilerows];
-    C[0] = D[1] * 0.0 - 0.0 * D[2];
-    C[1] = D[2] - D[0] * 0.0;
-    C[2] = D[0] * 0.0 - D[1];
+    C[0] = D[1] * 0.0 - D[2];
+    C[1] = 0.0 * D[2] - D[0] * 0.0;
+    C[2] = D[0] - 0.0 * D[1];
     /*  夹角（弧度） */
     /*  判断左右 */
     norm_vec = 3.3121686421112381E-170;
@@ -1011,8 +1011,8 @@ void Calculat_A_and_B_Points_after_Offest2(
   }
   for (ntilerows = 0; ntilerows < loop_ub_tmp; ntilerows++) {
     ibmat = ((ntilerows + 1) << 1) - 1;
-    Ang_data[ibmat - 1] = PointTable2DT_A_data[ntilerows];
-    Ang_data[ibmat] = RightPoint_data[ntilerows];
+    Ang_data[ibmat - 1] = RightPoint_data[ntilerows];
+    Ang_data[ibmat] = PointTable2DT_A_data[ntilerows];
     if (b_b < 1) {
       AngProcess->size[0] = 1;
       AngProcess->size[1] = 0;
