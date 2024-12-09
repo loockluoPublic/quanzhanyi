@@ -71,7 +71,8 @@ Bottom_round_center1 = [xxN1,yyN1,zzN1];
 Bottom_round_center2 = [xxN2,yyN2,zzN2];
 
 % ！  需求1  判断方向 ，改法向量方向
-
+tempp = Bottom_round_center1 - Bottom_round_center2;
+MTaon = tempp./norm(tempp);
 
 end
 

@@ -22,30 +22,6 @@ theta(theta>pi./2) = pi- theta(theta>pi./2);
 % rad2deg(theta)
 
 
-%% 计算LT
-LTPY = zeros(1,shenglunum);
-
-for i = 1:shenglunum
-    shengdao1 = PointIn(:,2*i-1);
-    shengdao2 = PointIn(:,2*i);
-    Cross_point = YuanZhuJiaoDian(Mcenter,MTaon,Mradial,shengdao1',shengdao2');
-
-    LT1 = norm(shengdao1'-Cross_point(2,:));
-    LT2 = norm(shengdao1'-Cross_point(1,:));
-
-    if LT1<LT2
-        LTF = norm(shengdao1'-Cross_point(2,:));
-        LTR = norm(shengdao2'-Cross_point(1,:));
-        LThalf = min([LTF,LTR]);
-    else
-        LTF = norm(shengdao2'-Cross_point(2,:));
-        LTR = norm(shengdao1'-Cross_point(1,:));
-        LThalf = min([LTF,LTR]);
-    end
-    LTPY(i) = LThalf.*2;
-
-end
-
 
 %% 相对高度计算
 
@@ -68,6 +44,38 @@ end
 
 % alphaA = asin(TiC);
 TiC(1:floor(shenglunum./2)) = - TiC(1:floor(shenglunum./2));
+
+%% 计算LT
+% % % LTPY = zeros(1,shenglunum);
+% % % for i = 1:shenglunum
+% % %     shengdao1 = PointIn(:,2*i-1);
+% % %     shengdao2 = PointIn(:,2*i);
+% % %     Cross_point = YuanZhuJiaoDian(Mcenter,MTaon,Mradial,shengdao1',shengdao2');
+% % % 
+% % %     LT1 = norm(shengdao1'-Cross_point(2,:));
+% % %     LT2 = norm(shengdao1'-Cross_point(1,:));
+% % % 
+% % %     if LT1<LT2
+% % %         LTF = norm(shengdao1'-Cross_point(2,:));
+% % %         LTR = norm(shengdao2'-Cross_point(1,:));
+% % %         LThalf = min([LTF,LTR]);
+% % %     else
+% % %         LTF = norm(shengdao2'-Cross_point(2,:));
+% % %         LTR = norm(shengdao1'-Cross_point(1,:));
+% % %         LThalf = min([LTF,LTR]);
+% % %     end
+% % %     LTPY(i) = LThalf.*2;
+% % % 
+% % % end
+
+LTPY = zeros(1,shenglunum);
+for i =  1:shenglunum
+    TempT = TiC(i);
+    TempA = theta(i);
+    DisL = 2*sqrt(1 - TempT.^2).*Mradial;
+    DisX = DisL./sin(TempA);
+    LTPY(1,i) = (Distance(i)-DisX)./2;
+end
 
 
 

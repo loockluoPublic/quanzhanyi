@@ -111,10 +111,10 @@ PointTable_B_off = PointTable_B1';
 
 Psy1 = Bottom_round_center1;
 Pxy2 = Bottom_round_center2;
-Pup3 = Bottom_round_center1 + [1, 0, 0];
-Pup4 = Bottom_round_center2 + [1, 0, 0];
+Pup3 = Bottom_round_center1 + [0, 1, 0];
+Pup4 = Bottom_round_center2 + [0, 1, 0];
 DirZX = Psy1 - Pxy2; % 向上游
-Dirup = [1, 0, 0];
+Dirup = [0, 1, 0];
 distance = ones(1,numShengLu);
 rightflag = -1*ones(1,2*numShengLu);
 
@@ -180,7 +180,7 @@ BianHaoTemp = zeros(2*numShengLu,1);
 BianHao1 = zeros(1,2*numShengLu);
 for  hhh = 1:numShengLu
 
-BianHaoTemp(hhh*2-1:hhh*2,1) = [RightPoint(hhh,1),LeftPoint(hhh,1)];
+BianHaoTemp(hhh*2-1:hhh*2,1) = [LeftPoint(hhh,1),RightPoint(hhh,1)];
 TTemp = [BianHaoTemp,(1:2*numShengLu)'];
 TTTemp = sortrows(TTemp,1);
 
@@ -249,7 +249,7 @@ BianHaoTemp = zeros(2*numShengLu,1);
 BianHao2 = zeros(1,2*numShengLu);
 for  hhh = 1:numShengLu
 
-    BianHaoTemp(hhh*2-1:hhh*2,1) = [LeftPoint(hhh,1),RightPoint(hhh,1)];
+    BianHaoTemp(hhh*2-1:hhh*2,1) = [RightPoint(hhh,1),LeftPoint(hhh,1)];
     TTemp = [BianHaoTemp,(1:2*numShengLu)'];
     TTTemp = sortrows(TTemp,1);
     
