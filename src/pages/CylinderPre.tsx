@@ -112,12 +112,12 @@ function CylinderPre() {
     });
   };
 
-  const reRun = (curData: GlobalData) => {
-    console.log("%c Line:115 🍫 curData", "color:#465975", curData);
+  const reRun = (curData: GlobalData,isFirst=false) => {
+    console.log("%c Line:115 🍫 curData", "color:#465975",  curData.standardDeviation,data.standardDeviation);
     const newMP = curData.mPoints.map((item) => {
       return item
         .fromCustomVector3()
-        .setEnable(Math.abs(item.originDiff) < curData.standardDeviation);
+        .setEnable(Math.abs(item.originDiff) < (isFirst? 3*curData.standardDeviation:curData.standardDeviation));
     });
 
     const nD = {
@@ -142,7 +142,7 @@ function CylinderPre() {
       true
     )
       .then((newData: any) => {
-        reRun(newData);
+        reRun(newData,true);
       })
       .catch((err) => {
         console.error("%c Line:80 🍺 err", "color:#93c0a4", err);

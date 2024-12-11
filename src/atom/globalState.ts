@@ -46,6 +46,7 @@ export const Data = atom<GlobalData>({
     virtualR: 0.6,
     sdfb: 4,
     sdj: 45,
+    customStandardDeviation:3,
     sdm: ["A", "B"],
     MxPoints: {},
     hasChamfer: false,

@@ -1,6 +1,6 @@
 import { Upload } from "antd";
 import { useRecoilState } from "recoil";
-import { Data, Step } from "../atom/globalState";
+import { Data, Mode, Step } from "../atom/globalState";
 import { loadFile } from "../utils/utils";
 
 const compareSdcs = (data: any, old: any) => {
@@ -10,6 +10,7 @@ const compareSdcs = (data: any, old: any) => {
 function AntdFileReader() {
   const [data, setData] = useRecoilState(Data);
   const [step, setStep] = useRecoilState(Step);
+  const [_, setMode] = useRecoilState(Mode);
   const handleFileChange = (file) => {
     const reader = new FileReader();
     reader.readAsText(file);
@@ -18,6 +19,8 @@ function AntdFileReader() {
       (window as any).mock = true;
       setStep(1);
       setData(importData);
+      setMode(importData.mode);
+    
       if (!compareSdcs(data, importData)) {
         setTimeout(() => {
           setData(importData);
