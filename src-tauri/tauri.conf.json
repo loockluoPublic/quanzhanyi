@@ -91,7 +91,9 @@
     },
     "windows": [
       {
-        "fullscreen": true,
+        "maximizable": true,
+        "maximized": true,
+        "fullscreen": false,
         "height": 600,
         "resizable": true,
         "title": "超声换能器自动测算系统",
