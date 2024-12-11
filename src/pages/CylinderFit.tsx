@@ -299,7 +299,13 @@ function CylinderFit() {
       getSign()
     ).then((AB) => {
       const resultTable = tableData.map((row, i) => {
-        console.log("%c Line:264 🥛 sdm,i", "color:#4fff4B", row.sdm, row.i);
+        console.log(
+          "%c Line:264 🥛 sdm,i",
+          "color:#4fff4B",
+          row.sdm,
+          row.i,
+          AB
+        );
         return { ...row, points: AB?.[i] };
       });
 

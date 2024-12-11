@@ -118,9 +118,10 @@ const fitArr = (arr: any[]) => {
 
 const toSd = (array: any) => {
   const res: any[] = [];
-  for (let index = 0; index < array.length; index = index + 2) {
-    res.push([array[index], array[index + 1]]);
+  for (let i = 0, j = array.length - 1; i < j; i++, j--) {
+    res.push([array[i], array[j]].sort((a, b) => a.key - b.key));
   }
+
   return res;
 };
 
@@ -195,7 +196,14 @@ const CalculatAAndBPointsFn = (
   );
 
   const bhKeys = bh.toJSON();
-  console.log("%c Line:198 🍎 bhKeys", "color:#b03734", bhKeys);
+  console.log(
+    "%c Line:198 🍎 bhKeys",
+    "color:#b03734",
+    resultTable?.map?.((item) => {
+      return item.ang;
+    }) ?? [],
+    bhKeys
+  );
 
   CustomVector3.setPublicInfo("A", 0);
 
