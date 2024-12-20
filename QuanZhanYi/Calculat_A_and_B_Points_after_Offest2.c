@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points_after_Offest2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Dec-2024 23:43:24
+ * C/C++ source code generated on  : 21-Dec-2024 00:53:50
  */
 
 /* Include Files */
@@ -128,12 +128,12 @@ void Calculat_A_and_B_Points_after_Offest2(
   double b_a;
   double c_a;
   double d_a;
+  double dd;
   double e_a;
   double f_a;
   double norm_vec;
   double numShengLu;
   double s;
-  double scale;
   double t;
   double xN1;
   double yN1;
@@ -204,13 +204,13 @@ void Calculat_A_and_B_Points_after_Offest2(
   c[0] = s;
   c[1] = C_tmp;
   c[2] = b_C_tmp;
-  scale = (Mcenter[0] + MTaon[0]) - Mcenter[0];
+  dd = (Mcenter[0] + MTaon[0]) - Mcenter[0];
   t = (Mcenter[1] + MTaon[1]) - Mcenter[1];
   a_tmp = (Mcenter[2] + MTaon[2]) - Mcenter[2];
-  K = -(((Mcenter[0] - PAB[0]) * scale + (Mcenter[1] - PAB[1]) * t) +
+  K = -(((Mcenter[0] - PAB[0]) * dd + (Mcenter[1] - PAB[1]) * t) +
         (Mcenter[2] - PAB[2]) * a_tmp) /
-      ((scale * scale + t * t) + a_tmp * a_tmp);
-  xN1 = K * scale + Mcenter[0];
+      ((dd * dd + t * t) + a_tmp * a_tmp);
+  xN1 = K * dd + Mcenter[0];
   yN1 = K * t + Mcenter[1];
   zN1 = K * a_tmp + Mcenter[2];
   t = b_norm(c);
@@ -242,21 +242,21 @@ void Calculat_A_and_B_Points_after_Offest2(
     C[1] = r[1] / norm_vec;
     C[2] = r[2] / norm_vec;
   }
-  scale = (1.0 - K) * C[0];
-  rot1[0] = scale * C[0] + K;
-  t = scale * C[1];
+  dd = (1.0 - K) * C[0];
+  rot1[0] = dd * C[0] + K;
+  t = dd * C[1];
   norm_vec = s * C[2];
   rot1[3] = t - norm_vec;
-  scale *= C[2];
+  dd *= C[2];
   a_tmp = s * C[1];
-  rot1[6] = scale + a_tmp;
+  rot1[6] = dd + a_tmp;
   rot1[1] = t + norm_vec;
   t = (1.0 - K) * C[1];
   rot1[4] = t * C[1] + K;
   t *= C[2];
   norm_vec = s * C[0];
   rot1[7] = t - norm_vec;
-  rot1[2] = scale - a_tmp;
+  rot1[2] = dd - a_tmp;
   rot1[5] = t + norm_vec;
   rot1[8] = (1.0 - K) * C[2] * C[2] + K;
   /*  选择旋转点集合 */
@@ -276,10 +276,10 @@ void Calculat_A_and_B_Points_after_Offest2(
   for (i = 0; i < 3; i++) {
     t = Prot[3 * i];
     a_tmp = Prot[3 * i + 1];
-    scale = Prot[3 * i + 2];
+    norm_vec = Prot[3 * i + 2];
     for (jj = 0; jj < 3; jj++) {
       P2D[i + 3 * jj] = (t * rot1[3 * jj] + a_tmp * rot1[3 * jj + 1]) +
-                        scale * rot1[3 * jj + 2];
+                        norm_vec * rot1[3 * jj + 2];
     }
   }
   D[0] = P2D[0];
@@ -300,11 +300,11 @@ void Calculat_A_and_B_Points_after_Offest2(
   C[1] = Prot[4] - Prot[3];
   C[2] = Prot[7] - Prot[6];
   /*  法平面参数 aa,bb,cc,dd 过点 P2DT(1,:) ，法向量Tao3 */
-  norm_vec = -((C[0] * Prot[0] + C[1] * Prot[3]) + C[2] * Prot[6]);
+  dd = -((C[0] * Prot[0] + C[1] * Prot[3]) + C[2] * Prot[6]);
   /*  起始角度 */
-  scale = atan(Prot[5] / Prot[2]);
+  norm_vec = atan(Prot[5] / Prot[2]);
   /*  !!!!!!!后面的点以这个为基础 */
-  printf("AngOring: %f\n", scale + 1.5707963267948966);
+  printf("AngOring: %f\n", norm_vec);
   fflush(stdout);
   /*  第一步修正 */
   if (Ang->size[1] == roff->size[1]) {
@@ -347,7 +347,7 @@ void Calculat_A_and_B_Points_after_Offest2(
     jcol = (int)numShengLu;
   }
   for (i = 0; i < jcol; i++) {
-    AngProcess_data[i] = (scale + 1.5707963267948966) - Ang_data[i];
+    AngProcess_data[i] = norm_vec - Ang_data[i];
   }
   t = 2.0 * numShengLu;
   if (numShengLu + 1.0 > t) {
@@ -365,8 +365,9 @@ void Calculat_A_and_B_Points_after_Offest2(
   jcol = jj - i;
   for (jj = 0; jj < jcol; jj++) {
     AngProcess_data[(ibmat + jj) - 1] =
-        ((scale + 1.5707963267948966) + 3.1415926535897931) + Ang_data[i + jj];
+        (norm_vec + 3.1415926535897931) + Ang_data[i + jj];
   }
+  /*  AngProcess = AngProcess + pi./2; */
   /*  调用计算坐标 */
   emxInit_real_T(&x, 2);
   i = x->size[0] * x->size[1];
@@ -411,10 +412,10 @@ void Calculat_A_and_B_Points_after_Offest2(
       a_tmp = AngProcess_data[i];
       PointTable2DT_A_data[i + PointTable2DT_A->size[0]] = a_tmp;
       PointTable2DT_A_data[i + PointTable2DT_A->size[0] * 2] =
-          -((norm_vec + C[0] * t) + C[1] * a_tmp) / C[2];
+          -((dd + C[0] * t) + C[1] * a_tmp) / C[2];
     }
   } else {
-    binary_expand_op_2(PointTable2DT_A, x, AngProcess, norm_vec, C);
+    binary_expand_op_2(PointTable2DT_A, x, AngProcess, dd, C);
     PointTable2DT_A_data = PointTable2DT_A->data;
   }
   i = PointTable2DT_A->size[0];
@@ -570,66 +571,65 @@ void Calculat_A_and_B_Points_after_Offest2(
     a = Bottom_round_center2[0] - Bottom_round_center1[0];
     b_a = Bottom_round_center2[1] - Bottom_round_center1[1];
     c_a = Bottom_round_center2[2] - Bottom_round_center1[2];
-    c[0] = E[1] * 0.0 - E[2] * 0.0;
-    c[1] = E[2] - E[0] * 0.0;
-    c[2] = E[0] * 0.0 - E[1];
+    c[0] = E[1] - E[2] * 0.0;
+    c[1] = E[2] * 0.0 - E[0];
+    c[2] = E[0] * 0.0 - E[1] * 0.0;
   }
   for (jj = 0; jj < jcol; jj++) {
     /*  计算方向 */
     /*  右侧 */
     /*  三个点定义 */
     /*  斜率计算 */
-    scale = Bottom_round_center2[0] - Bottom_round_center1[0];
-    norm_vec = Bottom_round_center2[1] - Bottom_round_center1[1];
+    norm_vec = Bottom_round_center2[0] - Bottom_round_center1[0];
+    dd = Bottom_round_center2[1] - Bottom_round_center1[1];
     t = Bottom_round_center2[2] - Bottom_round_center1[2];
     ibmat = 3 * jj + 1;
     ntilerows = 3 * jj + 2;
-    K = -(((Bottom_round_center1[0] - PointTable_A_off_data[3 * jj]) * scale +
-           (Bottom_round_center1[1] - PointTable_A_off_data[ibmat]) *
-               norm_vec) +
+    K = -(((Bottom_round_center1[0] - PointTable_A_off_data[3 * jj]) *
+               norm_vec +
+           (Bottom_round_center1[1] - PointTable_A_off_data[ibmat]) * dd) +
           (Bottom_round_center1[2] - PointTable_A_off_data[ntilerows]) * t) /
         ((a * a + b_a * b_a) + c_a * c_a);
     /*  P1点在轴线上的投影坐标 */
     /*  指向垂足 */
     /*  计算夹角 */
-    D[0] =
-        (K * scale + Bottom_round_center1[0]) - PointTable_A_off_data[3 * jj];
-    D[1] =
-        (K * norm_vec + Bottom_round_center1[1]) - PointTable_A_off_data[ibmat];
+    D[0] = (K * norm_vec + Bottom_round_center1[0]) -
+           PointTable_A_off_data[3 * jj];
+    D[1] = (K * dd + Bottom_round_center1[1]) - PointTable_A_off_data[ibmat];
     D[2] = (K * t + Bottom_round_center1[2]) - PointTable_A_off_data[ntilerows];
-    C[0] = D[1] * 0.0 - 0.0 * D[2];
-    C[1] = D[2] - D[0] * 0.0;
-    C[2] = D[0] * 0.0 - D[1];
+    C[0] = D[1] - 0.0 * D[2];
+    C[1] = 0.0 * D[2] - D[0];
+    C[2] = D[0] * 0.0 - 0.0 * D[1];
     /*  夹角（弧度） */
     /*  判断左右 */
-    scale = 3.3121686421112381E-170;
-    norm_vec = fabs(E[0]);
-    if (norm_vec > 3.3121686421112381E-170) {
+    norm_vec = 3.3121686421112381E-170;
+    dd = fabs(E[0]);
+    if (dd > 3.3121686421112381E-170) {
       a_tmp = 1.0;
-      scale = norm_vec;
+      norm_vec = dd;
     } else {
-      t = norm_vec / 3.3121686421112381E-170;
+      t = dd / 3.3121686421112381E-170;
       a_tmp = t * t;
     }
-    norm_vec = fabs(E[1]);
-    if (norm_vec > scale) {
-      t = scale / norm_vec;
+    dd = fabs(E[1]);
+    if (dd > norm_vec) {
+      t = norm_vec / dd;
       a_tmp = a_tmp * t * t + 1.0;
-      scale = norm_vec;
+      norm_vec = dd;
     } else {
-      t = norm_vec / scale;
+      t = dd / norm_vec;
       a_tmp += t * t;
     }
-    norm_vec = fabs(E[2]);
-    if (norm_vec > scale) {
-      t = scale / norm_vec;
+    dd = fabs(E[2]);
+    if (dd > norm_vec) {
+      t = norm_vec / dd;
       a_tmp = a_tmp * t * t + 1.0;
-      scale = norm_vec;
+      norm_vec = dd;
     } else {
-      t = norm_vec / scale;
+      t = dd / norm_vec;
       a_tmp += t * t;
     }
-    a_tmp = scale * sqrt(a_tmp);
+    a_tmp = norm_vec * sqrt(a_tmp);
     AngProcess_data[jj] = !(
         57.295779513082323 * acos(((E[0] * C[0] + E[1] * C[1]) + E[2] * C[2]) /
                                   (a_tmp * b_norm(C))) >
@@ -810,65 +810,64 @@ void Calculat_A_and_B_Points_after_Offest2(
     d_a = Bottom_round_center2[0] - Bottom_round_center1[0];
     e_a = Bottom_round_center2[1] - Bottom_round_center1[1];
     f_a = Bottom_round_center2[2] - Bottom_round_center1[2];
-    c[0] = E[1] * 0.0 - E[2] * 0.0;
-    c[1] = E[2] - E[0] * 0.0;
-    c[2] = E[0] * 0.0 - E[1];
+    c[0] = E[1] - E[2] * 0.0;
+    c[1] = E[2] * 0.0 - E[0];
+    c[2] = E[0] * 0.0 - E[1] * 0.0;
   }
   for (jj = 0; jj < jcol; jj++) {
     /*  计算方向 */
     /*  三个点定义 */
     /*  斜率计算 */
-    scale = Bottom_round_center2[0] - Bottom_round_center1[0];
-    norm_vec = Bottom_round_center2[1] - Bottom_round_center1[1];
+    norm_vec = Bottom_round_center2[0] - Bottom_round_center1[0];
+    dd = Bottom_round_center2[1] - Bottom_round_center1[1];
     t = Bottom_round_center2[2] - Bottom_round_center1[2];
     ibmat = 3 * jj + 1;
     ntilerows = 3 * jj + 2;
-    K = -(((Bottom_round_center1[0] - PointTable_B_off_data[3 * jj]) * scale +
-           (Bottom_round_center1[1] - PointTable_B_off_data[ibmat]) *
-               norm_vec) +
+    K = -(((Bottom_round_center1[0] - PointTable_B_off_data[3 * jj]) *
+               norm_vec +
+           (Bottom_round_center1[1] - PointTable_B_off_data[ibmat]) * dd) +
           (Bottom_round_center1[2] - PointTable_B_off_data[ntilerows]) * t) /
         ((d_a * d_a + e_a * e_a) + f_a * f_a);
     /*  P1点在轴线上的投影坐标 */
     /*  指向垂足 */
     /*  计算夹角 */
-    D[0] =
-        (K * scale + Bottom_round_center1[0]) - PointTable_B_off_data[3 * jj];
-    D[1] =
-        (K * norm_vec + Bottom_round_center1[1]) - PointTable_B_off_data[ibmat];
+    D[0] = (K * norm_vec + Bottom_round_center1[0]) -
+           PointTable_B_off_data[3 * jj];
+    D[1] = (K * dd + Bottom_round_center1[1]) - PointTable_B_off_data[ibmat];
     D[2] = (K * t + Bottom_round_center1[2]) - PointTable_B_off_data[ntilerows];
-    C[0] = D[1] * 0.0 - 0.0 * D[2];
-    C[1] = D[2] - D[0] * 0.0;
-    C[2] = D[0] * 0.0 - D[1];
+    C[0] = D[1] - 0.0 * D[2];
+    C[1] = 0.0 * D[2] - D[0];
+    C[2] = D[0] * 0.0 - 0.0 * D[1];
     /*  夹角（弧度） */
     /*  判断左右 */
-    scale = 3.3121686421112381E-170;
-    norm_vec = fabs(E[0]);
-    if (norm_vec > 3.3121686421112381E-170) {
+    norm_vec = 3.3121686421112381E-170;
+    dd = fabs(E[0]);
+    if (dd > 3.3121686421112381E-170) {
       a_tmp = 1.0;
-      scale = norm_vec;
+      norm_vec = dd;
     } else {
-      t = norm_vec / 3.3121686421112381E-170;
+      t = dd / 3.3121686421112381E-170;
       a_tmp = t * t;
     }
-    norm_vec = fabs(E[1]);
-    if (norm_vec > scale) {
-      t = scale / norm_vec;
+    dd = fabs(E[1]);
+    if (dd > norm_vec) {
+      t = norm_vec / dd;
       a_tmp = a_tmp * t * t + 1.0;
-      scale = norm_vec;
+      norm_vec = dd;
     } else {
-      t = norm_vec / scale;
+      t = dd / norm_vec;
       a_tmp += t * t;
     }
-    norm_vec = fabs(E[2]);
-    if (norm_vec > scale) {
-      t = scale / norm_vec;
+    dd = fabs(E[2]);
+    if (dd > norm_vec) {
+      t = norm_vec / dd;
       a_tmp = a_tmp * t * t + 1.0;
-      scale = norm_vec;
+      norm_vec = dd;
     } else {
-      t = norm_vec / scale;
+      t = dd / norm_vec;
       a_tmp += t * t;
     }
-    a_tmp = scale * sqrt(a_tmp);
+    a_tmp = norm_vec * sqrt(a_tmp);
     AngProcess_data[jj] = !(
         57.295779513082323 * acos(((E[0] * C[0] + E[1] * C[1]) + E[2] * C[2]) /
                                   (a_tmp * b_norm(C))) >
