@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Dec-2024 22:58:37
+ * C/C++ source code generated on  : 20-Dec-2024 23:43:24
  */
 
 /* Include Files */
