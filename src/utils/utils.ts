@@ -211,7 +211,7 @@ const CalculatAAndBPointsFn = (
 
   bottomA.map((p, i) => {
     p.color = "red";
-    p.key = bhKeys[i][0];
+    p.key = bhKeys[i][1];
     return p;
   });
   // .sort((a, b) => a.key - b.key);
@@ -221,7 +221,7 @@ const CalculatAAndBPointsFn = (
 
   bottomB.map((p, i) => {
     p.color = "#fab005";
-    p.key = bhKeys[i][1];
+    p.key = bhKeys[i][0];
     return p;
   });
 
