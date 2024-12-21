@@ -39,6 +39,7 @@ const options = [
   };
 }, {});
 export const transformJSON2Excel = (data: GlobalData, type = false) => {
+  console.log("%c Line:42 🍪 data", "color:#b03734", data);
   const csvData = [];
 
   const getDatas = (arr, title: string = "") => {
@@ -112,6 +113,21 @@ export const transformJSON2Excel = (data: GlobalData, type = false) => {
           z.push(p.z);
         }
       });
+    });
+    csvData.push([], label, x, y, z);
+  }
+
+  if (data?.firstPoints?.length > 0) {
+    const x = ["x"],
+      y = ["y"],
+      z = ["z"],
+      label = ["边界点"];
+
+    data?.firstPoints?.forEach?.((item: any) => {
+      label.push(`${item.label}${item.key}`);
+      x.push(item.x);
+      y.push(item.y);
+      z.push(item.z);
     });
     csvData.push([], label, x, y, z);
   }
