@@ -2,7 +2,7 @@
 ## Makefile generated for component 'QuanZhanYi'. 
 ## 
 ## Makefile     : QuanZhanYi_rtw.mk
-## Generated on : Fri Jan 03 11:29:03 2025
+## Generated on : Fri Jan 03 22:37:57 2025
 ## Final product: ./QuanZhanYi.lib
 ## Product type : static-library
 ## 

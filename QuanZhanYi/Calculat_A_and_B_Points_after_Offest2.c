@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points_after_Offest2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Jan-2025 11:27:52
+ * C/C++ source code generated on  : 03-Jan-2025 22:37:07
  */
 
 /* Include Files */
@@ -172,7 +172,7 @@ static void binary_expand_op_2(emxArray_real_T *in1, const emxArray_real_T *in2,
     b_in7_data[i] = in7_data[i];
   }
   for (i = 0; i <= loop_ub; i++) {
-    b_in7_data[i + in7->size[1]] = in7_data[in8 + in9 * i];
+    b_in7_data[i + in7->size[1]] = -in7_data[in8 + in9 * i];
   }
   emxInit_real_T(&b_in1, 2);
   i = b_in1->size[0] * b_in1->size[1];
@@ -494,7 +494,7 @@ void Calculat_A_and_B_Points_after_Offest2(
       BianHao_data[i] = rAng_data[i];
     }
     for (i = 0; i <= b_i; i++) {
-      BianHao_data[i + rAng->size[1]] = rAng_data[i3 + BianHao_tmp * i];
+      BianHao_data[i + rAng->size[1]] = -rAng_data[i3 + BianHao_tmp * i];
     }
     i = AngR->size[0] * AngR->size[1];
     AngR->size[0] = 1;
