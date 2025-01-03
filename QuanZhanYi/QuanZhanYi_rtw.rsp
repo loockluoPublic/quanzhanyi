@@ -12,9 +12,9 @@ pinv.obj
 svd.obj
 xnrm2.obj
 xdotc.obj
-mtimes.obj
 Calculat_A_and_B_Points_after_Offest2.obj
 Calculat_JuXing_A_and_B_Points_after_Offest.obj
+mtimes.obj
 Calculate_accurate_cylinders_from_multiple_measurement_points2.obj
 svd1.obj
 xzsvdc.obj
@@ -55,14 +55,12 @@ xaxpy.obj
 xrotg.obj
 xrot.obj
 xswap.obj
-sortrows.obj
 xgeqp3.obj
 xzgebal.obj
 xdlahqr.obj
 xzlascl.obj
-eml_mtimes_helper.obj
-cat.obj
 unsafeSxfun.obj
+cat.obj
 div.obj
 QuanZhanYi_emxutil.obj
 QuanZhanYi_emxAPI.obj

@@ -2,7 +2,7 @@
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 21-Dec-2024 00:53:50
+ * C/C++ source code generated on  : 03-Jan-2025 11:27:52
  */
 
 /* Include Files */
@@ -228,7 +228,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
       b_dv[2] = norm_vec - Mu2_idx_1;
       b_dv[5] = absxk + Merr;
       b_dv[8] = (1.0 - c) * b_n[2] * b_n[2] + c;
-      b_mtimes(points, b_dv, P);
+      mtimes(points, b_dv, P);
       P_data = P->data;
       xi = x_contents->size[0] * x_contents->size[1];
       x_contents->size[0] = 2;
@@ -275,7 +275,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         }
         b_svd(r, U, S, V);
       } else {
-        binary_expand_op_10(err, x2_contents, x_contents, U, S, V);
+        binary_expand_op_9(err, x2_contents, x_contents, U, S, V);
       }
       /*  For clarity, set the quadratic form variables */
       /*  Convert to centre/radius */
@@ -342,7 +342,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
             denom_data[xi] = absxk * absxk + Mu2_idx_1 * Mu2_idx_1;
           }
         } else {
-          binary_expand_op_9(denom, b_n, err, x2_contents);
+          binary_expand_op_8(denom, b_n, err, x2_contents);
           denom_data = denom->data;
         }
         ibtile = denom->size[0];
@@ -362,7 +362,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
             Err_every_data[xi] = absxk * absxk;
           }
         } else {
-          binary_expand_op_8(x, x_contents);
+          binary_expand_op_7(x, x_contents);
           Err_every_data = x->data;
         }
         if (x->size[1] == 0) {
@@ -413,7 +413,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
           }
           mldivide(n, b_y, h);
         } else {
-          binary_expand_op_7(b_n, err, denom, x2_contents, outsize, y, h);
+          binary_expand_op_6(b_n, err, denom, x2_contents, outsize, y, h);
         }
         /*  Check for convergence */
         Mu2_idx_1 = 0.0;

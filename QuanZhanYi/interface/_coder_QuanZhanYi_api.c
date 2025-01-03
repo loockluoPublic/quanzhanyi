@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 21-Dec-2024 00:53:50
+ * C/C++ source code generated on  : 03-Jan-2025 11:27:52
  */
 
 /* Include Files */
@@ -1522,7 +1522,6 @@ void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[10],
   emxArray_real_T *PointTable_B_off;
   emxArray_real_T *roff;
   emxArray_real_T *toff;
-  const mxArray *prhs_copy_idx_7;
   real_T(*Bottom_round_center1)[3];
   real_T(*Bottom_round_center2)[3];
   real_T(*MTaon)[3];
@@ -1532,7 +1531,6 @@ void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[10],
   real_T phi;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  prhs_copy_idx_7 = emlrtProtectR2012b(prhs[7], 7, false, -1);
   /* Marshall function inputs */
   Bottom_round_center1 =
       c_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "Bottom_round_center1");
@@ -1545,7 +1543,7 @@ void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[10],
   phi = emlrt_marshallIn(&st, emlrtAliasP(prhs[6]), "phi");
   emxInit_real_T(&st, &Ang, 2);
   Ang->canFreeData = false;
-  e_emlrt_marshallIn(&st, emlrtAlias(prhs_copy_idx_7), "Ang", Ang);
+  e_emlrt_marshallIn(&st, emlrtAlias(prhs[7]), "Ang", Ang);
   emxInit_real_T(&st, &toff, 2);
   toff->canFreeData = false;
   e_emlrt_marshallIn(&st, emlrtAlias(prhs[8]), "toff", toff);
