@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2023a">
-  <configuration build-checksum="397130280" file="C:\Users\XWT\Desktop\zongQZY\test3\QuanZhanYi.prj" location="C:\Users\XWT\Desktop\zongQZY\test3" name="QuanZhanYi" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="2223411059" file="C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\QuanZhanYi.prj" location="C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3" name="QuanZhanYi" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex />
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -179,8 +179,8 @@
     <profile key="profile.c">
       <param.WorkingFolder>option.WorkingFolder.Project</param.WorkingFolder>
       <param.SpecifiedWorkingFolder />
-      <param.BuildFolder>option.BuildFolder.Project</param.BuildFolder>
-      <param.SpecifiedBuildFolder />
+      <param.BuildFolder>option.BuildFolder.Specified</param.BuildFolder>
+      <param.SpecifiedBuildFolder>C:\Users\XWT\Desktop\quanzhanyi2\matlabBuild</param.SpecifiedBuildFolder>
       <param.SearchPaths />
       <var.SimdQueryHardwareVendor>Generic</var.SimdQueryHardwareVendor>
       <var.SimdQueryHardwareType>MATLAB Host Computer</var.SimdQueryHardwareType>
@@ -395,8 +395,6 @@
       <unset>
         <param.WorkingFolder />
         <param.SpecifiedWorkingFolder />
-        <param.BuildFolder />
-        <param.SpecifiedBuildFolder />
         <param.SearchPaths />
         <var.SimdQueryHardwareVendor />
         <var.SimdQueryHardwareType />
@@ -599,7 +597,7 @@
     <param.TestSnippets />
     <param.ExternalFcnMajority>column</param.ExternalFcnMajority>
     <param.UseGlobals>option.UseGlobals.No</param.UseGlobals>
-    <param.outputfile>${PROJECT_ROOT}\codegen\lib\QuanZhanYi\QuanZhanYi.lib</param.outputfile>
+    <param.outputfile>C:\Users\XWT\Desktop\quanzhanyi2\matlabBuild\QuanZhanYi.lib</param.outputfile>
     <param.version>R2012a</param.version>
     <param.HasECoderFeatures>true</param.HasECoderFeatures>
     <param.HasGpuCoder>true</param.HasGpuCoder>
@@ -614,7 +612,7 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>3659345408</param.AnnotationChecksum>
+    <param.AnnotationChecksum>2203026915</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
@@ -622,14 +620,14 @@
     <var.DismissScreener>true</var.DismissScreener>
     <param.unifiedParamStorage />
     <param.hdlParamStorage />
-    <var.gc.lastOutputRoot>codegen\lib\QuanZhanYi</var.gc.lastOutputRoot>
+    <var.gc.lastOutputRoot>..\..\matlabBuild</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>C_CODE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>397130280</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>1863533128</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot />
     <var.cfi.preBuildChecksum />
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\angle2point.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Calculat_A_and_B_Points.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Calculat_A_and_B_Points_after_Offest2.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Calculat_JuXing_A_and_B_Points_after_Offest.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Calculate_accurate_cylinders_from_multiple_measurement_points2.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Calculate_rectangle_from_vertex.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Calculate_rectangle_from_vertex8.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\CrossLine.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\fitcircle.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\foot_of_perpendicular_from_a_point_to_a_line.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Generate_multi_layered_measurement_points.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\generate_unit_circle_with_normal_vector.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\generate_unit_circle_with_normal_vector2.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\GenerateTrianglePoints.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\JuXingFuCe.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\myvrrotvec2mat.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\OffsetCalculate.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\planefit.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\planefit4.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\planefit8.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\RepeatSurvey.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\ShengDaoGaoDu.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\ShengLuJiaoJiSuan.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\YuanXingFuCe.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\YuanZhuJiaoDian.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;502229131&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
-    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\angle2point.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Calculat_A_and_B_Points.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Calculat_A_and_B_Points_after_Offest2.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Calculat_JuXing_A_and_B_Points_after_Offest.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Calculate_accurate_cylinders_from_multiple_measurement_points2.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Calculate_rectangle_from_vertex.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Calculate_rectangle_from_vertex8.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\CrossLine.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\fitcircle.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\foot_of_perpendicular_from_a_point_to_a_line.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\Generate_multi_layered_measurement_points.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\generate_unit_circle_with_normal_vector.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\generate_unit_circle_with_normal_vector2.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\GenerateTrianglePoints.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\JuXingFuCe.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\myvrrotvec2mat.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\OffsetCalculate.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\planefit.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\planefit4.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\planefit8.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\RepeatSurvey.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\ShengDaoGaoDu.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\ShengLuJiaoJiSuan.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\YuanXingFuCe.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\zongQZY\test3\YuanZhuJiaoDian.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\angle2point.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Calculat_A_and_B_Points.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Calculat_A_and_B_Points_after_Offest2.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Calculat_JuXing_A_and_B_Points_after_Offest.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Calculate_accurate_cylinders_from_multiple_measurement_points2.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Calculate_rectangle_from_vertex.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Calculate_rectangle_from_vertex8.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\CrossLine.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\fitcircle.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\foot_of_perpendicular_from_a_point_to_a_line.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Generate_multi_layered_measurement_points.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\generate_unit_circle_with_normal_vector.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\generate_unit_circle_with_normal_vector2.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\GenerateTrianglePoints.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\JuXingFuCe.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\myvrrotvec2mat.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\OffsetCalculate.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\planefit.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\planefit4.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\planefit8.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\RepeatSurvey.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\ShengDaoGaoDu.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\ShengLuJiaoJiSuan.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\YuanXingFuCe.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\YuanZhuJiaoDian.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;2251702728&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\angle2point.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Calculat_A_and_B_Points.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Calculat_A_and_B_Points_after_Offest2.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Calculat_JuXing_A_and_B_Points_after_Offest.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Calculate_accurate_cylinders_from_multiple_measurement_points2.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Calculate_rectangle_from_vertex.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Calculate_rectangle_from_vertex8.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\CrossLine.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\fitcircle.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\foot_of_perpendicular_from_a_point_to_a_line.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\Generate_multi_layered_measurement_points.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\generate_unit_circle_with_normal_vector.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\generate_unit_circle_with_normal_vector2.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\GenerateTrianglePoints.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\JuXingFuCe.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\myvrrotvec2mat.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\OffsetCalculate.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\planefit.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\planefit4.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\planefit8.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\RepeatSurvey.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\ShengDaoGaoDu.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\ShengLuJiaoJiSuan.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\YuanXingFuCe.m&lt;/file&gt;&lt;file&gt;C:\Users\XWT\Desktop\quanzhanyi2\zongQZY\test3\YuanZhuJiaoDian.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
     <param.configImportActive>false</param.configImportActive>
@@ -646,7 +644,7 @@
     <param.mex.outputfile>angle2point_mex</param.mex.outputfile>
     <param.grt.outputfile>QuanZhanYi</param.grt.outputfile>
     <param.artifact>option.target.artifact.lib</param.artifact>
-    <param.outputfile>${PROJECT_ROOT}\codegen\lib\QuanZhanYi\QuanZhanYi.lib</param.outputfile>
+    <param.outputfile>C:\Users\XWT\Desktop\quanzhanyi2\matlabBuild\QuanZhanYi.lib</param.outputfile>
     <param.CppNamespace />
     <param.CppPackagesToNamespaces>true</param.CppPackagesToNamespaces>
     <param.CppNamespaceForMathworksCode>coder</param.CppNamespaceForMathworksCode>
@@ -920,7 +918,7 @@
         <Marker>1729658822337</Marker>
       </file>
       <file custom-data-expanded="false" value="${PROJECT_ROOT}\generate_unit_circle_with_normal_vector2.m">
-        <Marker>1735918471775</Marker>
+        <Marker>1735919371008</Marker>
       </file>
       <file custom-data-expanded="false" value="${PROJECT_ROOT}\GenerateTrianglePoints.m">
         <Marker>1718682016033</Marker>
@@ -1386,17 +1384,35 @@
       <file custom-data-expanded="false" value="${PROJECT_ROOT}\generate_unit_circle_with_normal_vector2.m">
         <Inputs fileName="generate_unit_circle_with_normal_vector2.m" functionName="generate_unit_circle_with_normal_vector2">
           <Input Name="PointIn" typeId="0" />
-          <Input Name="num" typeId="0" />
-          <Input Name="laynum" typeId="0" />
-          <Input Name="PUp" typeId="0" />
-          <Input Name="PDown" typeId="0" />
+          <Input Name="num" typeId="1" />
+          <Input Name="laynum" typeId="1" />
+          <Input Name="PUp" typeId="2" />
+          <Input Name="PDown" typeId="2" />
           <idpTable>
             <type typeId="0">
-              <Class>&lt;Undefined&gt;</Class>
+              <Class>double</Class>
+              <Size>3 x :inf</Size>
+              <Value />
+              <InitialValue />
+              <UserDefined>true</UserDefined>
+              <Complex>false</Complex>
+              <Sparse>false</Sparse>
+            </type>
+            <type typeId="1">
+              <Class>double</Class>
               <Size>1 x 1</Size>
               <Value />
               <InitialValue />
-              <UserDefined>false</UserDefined>
+              <UserDefined>true</UserDefined>
+              <Complex>false</Complex>
+              <Sparse>false</Sparse>
+            </type>
+            <type typeId="2">
+              <Class>double</Class>
+              <Size>3 x 1</Size>
+              <Value />
+              <InitialValue />
+              <UserDefined>true</UserDefined>
               <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
@@ -1784,7 +1800,7 @@
       </file>
     </fileset.inputtypes>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\codegen\lib\QuanZhanYi" name="QuanZhanYi.lib" optional="false">C:\Users\XWT\Desktop\zongQZY\test3\codegen\lib\QuanZhanYi\QuanZhanYi.lib</file>
+      <file location="C:\Users\XWT\Desktop\quanzhanyi2\matlabBuild" name="QuanZhanYi.lib" optional="false">C:\Users\XWT\Desktop\quanzhanyi2\matlabBuild\QuanZhanYi.lib</file>
     </build-deliverables>
     <workflow />
     <matlab>
