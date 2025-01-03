@@ -1,18 +1,18 @@
-import CylinderModule from "../components/Module3D";
-import { useRecoilState } from "recoil";
-import { Data } from "../atom/globalState";
-import { Checkbox, InputNumber, message, Table, Tooltip } from "antd";
-import { SettingOutlined } from "@ant-design/icons";
-import { Point } from "../components/Point";
-import { useEffect, useRef } from "react";
-import Select, { DefaultOptionType } from "antd/es/select";
+import CylinderModule from '../components/Module3D';
+import { useRecoilState } from 'recoil';
+import { Data } from '../atom/globalState';
+import { Checkbox, InputNumber, message, Table, Tooltip } from 'antd';
+import { SettingOutlined } from '@ant-design/icons';
+import { Point } from '../components/Point';
+import { useEffect, useRef } from 'react';
+import Select, { DefaultOptionType } from 'antd/es/select';
 import {
   CalculatAAndBPoints,
   offsetCalculate,
   shengLuJiao2Ang,
-} from "../utils/utils";
-import PointsVector3 from "../components/PointVector3";
-import { CustomVector3 } from "../class/CustomVector3";
+} from '../utils/utils';
+import PointsVector3 from '../components/PointVector3';
+import { CustomVector3 } from '../class/CustomVector3';
 
 const SDFBOptions = (() => {
   const options: DefaultOptionType[] = [];
@@ -23,30 +23,14 @@ const SDFBOptions = (() => {
 })();
 
 const sdmOptions = [
-  { label: "声道面A", value: "A" },
-  { label: "声道面B", value: "B" },
+  { label: '声道面A', value: 'A' },
+  { label: '声道面B', value: 'B' },
 ];
 
 function CylinderFit() {
   const [data, setData] = useRecoilState(Data);
 
-  const getSign = () => {
-    const zx = new CustomVector3();
-    zx.subVectors(
-      data.calulateRes.Bottom_round_center?.[0]?.toVector3(),
-      data.calulateRes.Bottom_round_center?.[1]?.toVector3()
-    );
-
-    const direct = new CustomVector3().fromSpherical(
-      1,
-      data.direct[1],
-      data.direct[0]
-    );
-
-    return zx.dot(direct) > 0;
-  };
-
-  const sdfbPreRef = useRef<any>("");
+  const sdfbPreRef = useRef<any>('');
 
   const onChange = (v: number, i: number, key: string) => {
     const tableData = data.resultTable.map((item, index) => {
@@ -86,35 +70,35 @@ function CylinderFit() {
 
   const columns: any = [
     {
-      title: "声道面",
-      dataIndex: "sdm",
-      align: "center",
-      key: "sdm",
+      title: '声道面',
+      dataIndex: 'sdm',
+      align: 'center',
+      key: 'sdm',
     },
     {
-      title: "声道",
-      dataIndex: "i",
-      align: "center",
-      key: "i",
+      title: '声道',
+      dataIndex: 'i',
+      align: 'center',
+      key: 'i',
       render: (i, _i) => {
         return <>第{i}声道</>;
       },
     },
     {
-      title: "插入深度",
-      dataIndex: "a",
-      key: "a",
-      align: "center",
+      title: '插入深度',
+      dataIndex: 'a',
+      key: 'a',
+      align: 'center',
       render: (v, row) => {
         return (
           <InputNumber
             step={0.01}
             value={v}
-            onChange={(v) => onChange(v, row.updateIndex, "a")}
+            onChange={(v) => onChange(v, row.updateIndex, 'a')}
             addonAfter={
               <div>
                 米
-                <Tooltip title="应用到全部" className="q-cursor-pointer">
+                <Tooltip title='应用到全部' className='q-cursor-pointer'>
                   <SettingOutlined onClick={() => setA(row.updateIndex)} />
                 </Tooltip>
               </div>
@@ -124,49 +108,49 @@ function CylinderFit() {
       },
     },
     {
-      title: "声道高度角",
-      dataIndex: "ang",
-      key: "ang",
-      align: "center",
+      title: '声道高度角',
+      dataIndex: 'ang',
+      key: 'ang',
+      align: 'center',
       render: (v, row) => {
         return (
           <InputNumber
             value={v}
-            onChange={(v) => onChange(v, row.updateIndex, "ang")}
+            onChange={(v) => onChange(v, row.updateIndex, 'ang')}
             addonAfter={`度`}
           />
         );
       },
     },
     {
-      title: "圆周偏移",
-      dataIndex: "rOff",
-      key: "rOff",
-      align: "center",
+      title: '圆周偏移',
+      dataIndex: 'rOff',
+      key: 'rOff',
+      align: 'center',
       render: (v) => {
-        return <>{v?.toFixed?.(4) ?? "--"}米</>;
+        return <>{v?.toFixed?.(4) ?? '--'}米</>;
       },
     },
     {
-      title: "轴向偏移",
-      dataIndex: "tOff",
-      key: "tOff",
-      align: "center",
+      title: '轴向偏移',
+      dataIndex: 'tOff',
+      key: 'tOff',
+      align: 'center',
       render: (v) => {
-        return <>{v?.toFixed?.(4) ?? "--"}米</>;
+        return <>{v?.toFixed?.(4) ?? '--'}米</>;
       },
     },
     {
-      title: "安装点",
-      dataIndex: "points",
-      key: "points",
-      align: "center",
+      title: '安装点',
+      dataIndex: 'points',
+      key: 'points',
+      align: 'center',
       render: (v) => {
         return (
-          <div className="q-flex q-justify-center">
+          <div className='q-flex q-justify-center'>
             {v?.map?.((p) => (
               <Point
-                className={`${p.key % 2 === 0 ? "q-ml-2" : ""}`}
+                className={`${p.key % 2 === 0 ? 'q-ml-2' : ''}`}
                 key={`${p.label}${p.key}`}
                 p={p}
               />
@@ -209,10 +193,10 @@ function CylinderFit() {
     });
   };
 
-  const key = `${data.sdfb}${data.sdm?.join("")}`;
+  const key = `${data.sdfb}${data.sdm?.join('')}`;
   const init = () => {
     if (
-      sdfbPreRef.current === "" &&
+      sdfbPreRef.current === '' &&
       data.resultTable?.length > 0 &&
       data.resultTable[0].tOff !== undefined
     )
@@ -267,19 +251,19 @@ function CylinderFit() {
         resultTable: updateOffset2(d, d.resultTable),
       };
     });
-  }, [[...paramAng, ...paramA, data.sdj].join(",")]);
+  }, [[...paramAng, ...paramA, data.sdj].join(',')]);
 
   const tOff =
     data.resultTable?.map?.((item) => {
       return item.tOff;
     }) ?? [];
 
-  console.log("%c Line:292 🍆 calulateRes", "color:#ed9ec7", data.calulateRes);
+  console.log('%c Line:292 🍆 calulateRes', 'color:#ed9ec7', data.calulateRes);
   const calcPoint = () => {
     const { calulateRes } = data;
 
     if (!calulateRes) {
-      message.error("缺少拟合参数，请退回上一步");
+      message.error('缺少拟合参数，请退回上一步');
       return;
     }
 
@@ -296,12 +280,12 @@ function CylinderFit() {
       data.centerPoint,
       data.sdj,
       tableData,
-      getSign()
+      false
     ).then((AB) => {
       const resultTable = tableData.map((row, i) => {
         console.log(
-          "%c Line:264 🥛 sdm,i",
-          "color:#4fff4B",
+          '%c Line:264 🥛 sdm,i',
+          'color:#4fff4B',
           row.sdm,
           row.i,
           AB
@@ -321,7 +305,7 @@ function CylinderFit() {
   useEffect(() => {
     if (data.centerPoint) calcPoint();
     else {
-      message.warning("请采集中心点");
+      message.warning('请采集中心点');
     }
   }, [data.centerPoint, data.key]);
 
@@ -333,7 +317,7 @@ function CylinderFit() {
           声道分布：
           <Select
             value={data.sdfb}
-            className=" !q-w-32"
+            className=' !q-w-32'
             options={SDFBOptions}
             onChange={(sdfb) => {
               setData({
@@ -343,11 +327,11 @@ function CylinderFit() {
             }}
           />
         </span>
-        <span className="q-ml-8">
+        <span className='q-ml-8'>
           声道角：
           <InputNumber
             value={data.sdj}
-            addonAfter="度"
+            addonAfter='度'
             min={0}
             max={90}
             onChange={(sdj) => {
@@ -359,13 +343,13 @@ function CylinderFit() {
           />
         </span>
       </div>
-      <div className="q-my-1">
+      <div className='q-my-1'>
         <span>
           声道面：
           <Checkbox.Group
             value={data.sdm}
             options={sdmOptions as any}
-            onChange={(sdm: ("A" | "B")[]) => {
+            onChange={(sdm: ('A' | 'B')[]) => {
               setData({
                 ...data,
                 sdm,
@@ -373,14 +357,14 @@ function CylinderFit() {
             }}
           ></Checkbox.Group>
         </span>
-        <span className="q-ml-8">
+        <span className='q-ml-8'>
           中心点：
           <PointsVector3
             hideLabel
-            className="!q-inline-flex"
+            className='!q-inline-flex'
             value={data.centerPoint as CustomVector3}
             before={() => {
-              CustomVector3.setPublicInfo("AB", 0);
+              CustomVector3.setPublicInfo('AB', 0);
             }}
             onChange={(v) => {
               setData({ ...data, centerPoint: v });
@@ -388,10 +372,10 @@ function CylinderFit() {
           />
         </span>
       </div>
-      <h3 className="q-mt-2 border-top q-pt-2">安装点详情：</h3>
+      <h3 className='q-mt-2 border-top q-pt-2'>安装点详情：</h3>
       <div>
         <Table
-          size="small"
+          size='small'
           key={data.sdfb}
           dataSource={data.resultTable ?? []}
           columns={columns}
