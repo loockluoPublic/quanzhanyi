@@ -2,7 +2,7 @@
  * File: cat.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Jan-2025 23:58:31
+ * C/C++ source code generated on  : 05-Jan-2025 00:11:00
  */
 
 #ifndef CAT_H

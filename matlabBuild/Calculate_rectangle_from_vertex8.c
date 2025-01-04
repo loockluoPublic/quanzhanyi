@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Jan-2025 23:58:31
+ * C/C++ source code generated on  : 05-Jan-2025 00:11:00
  */
 
 /* Include Files */
@@ -908,15 +908,15 @@ void Calculate_rectangle_from_vertex8(
   }
   for (b_i = 0; b_i < i; b_i++) {
     ab1 = 2.0 * ((double)b_i + 1.0);
-    XieMianPianYi_data[2 * b_i] = ab1;
-    XieMianPianYi_data[2 * b_i + 1] = ab1 - 1.0;
+    XieMianPianYi_data[2 * b_i] = ab1 - 1.0;
+    XieMianPianYi_data[2 * b_i + 1] = ab1;
   }
   for (b_i = 0; b_i < i1; b_i++) {
     ab4 = (shenglunum + 1.0) + (double)b_i;
     ab1 = ((2.0 * shenglunum + 1.0) - ab4) * 2.0;
     i = 2 * ((int)ab4 - 1);
-    XieMianPianYi_data[i] = ab1 - 1.0;
-    XieMianPianYi_data[i + 1] = ab1;
+    XieMianPianYi_data[i] = ab1;
+    XieMianPianYi_data[i + 1] = ab1 - 1.0;
   }
 }
 
