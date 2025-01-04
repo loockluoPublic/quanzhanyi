@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Jan-2025 23:51:41
+ * C/C++ source code generated on  : 04-Jan-2025 23:29:36
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
@@ -37,7 +37,7 @@ void unsafe_Calculate_accurate_cylinders_from_multiple_measurement_points2_mexFu
     int32_T nlhs, mxArray *plhs[6], int32_T nrhs, const mxArray *prhs[3]);
 
 void unsafe_Calculate_rectangle_from_vertex8_mexFunction(
-    int32_T nlhs, mxArray *plhs[3], int32_T nrhs, const mxArray *prhs[16]);
+    int32_T nlhs, mxArray *plhs[4], int32_T nrhs, const mxArray *prhs[16]);
 
 void unsafe_Calculate_rectangle_from_vertex_mexFunction(int32_T nlhs,
                                                         mxArray *plhs[8],

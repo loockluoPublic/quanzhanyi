@@ -2,7 +2,7 @@
  * File: QuanZhanYi_emxutil.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Jan-2025 23:51:41
+ * C/C++ source code generated on  : 04-Jan-2025 23:29:36
  */
 
 #ifndef QUANZHANYI_EMXUTIL_H
@@ -32,13 +32,13 @@ extern void emxEnsureCapacity_int32_T(emxArray_int32_T *emxArray, int oldNumel);
 
 extern void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel);
 
-extern void emxFreeMatrix_cell_wrap_1(cell_wrap_1 pMatrix[8]);
+extern void emxFreeMatrix_cell_wrap_1(cell_wrap_1 pMatrix[4]);
 
-extern void emxFreeMatrix_cell_wrap_11(cell_wrap_1 pMatrix[4]);
+extern void emxFreeMatrix_cell_wrap_11(cell_wrap_1 pMatrix[8]);
 
-extern void emxFreeMatrix_cell_wrap_4(cell_wrap_4 pMatrix[8]);
+extern void emxFreeMatrix_cell_wrap_4(cell_wrap_4 pMatrix[4]);
 
-extern void emxFreeMatrix_cell_wrap_41(cell_wrap_4 pMatrix[4]);
+extern void emxFreeMatrix_cell_wrap_41(cell_wrap_4 pMatrix[8]);
 
 extern void emxFreeStruct_cell_wrap_1(cell_wrap_1 *pStruct);
 
@@ -50,13 +50,13 @@ extern void emxFree_int32_T(emxArray_int32_T **pEmxArray);
 
 extern void emxFree_real_T(emxArray_real_T **pEmxArray);
 
-extern void emxInitMatrix_cell_wrap_1(cell_wrap_1 pMatrix[8]);
+extern void emxInitMatrix_cell_wrap_1(cell_wrap_1 pMatrix[4]);
 
-extern void emxInitMatrix_cell_wrap_11(cell_wrap_1 pMatrix[4]);
+extern void emxInitMatrix_cell_wrap_11(cell_wrap_1 pMatrix[8]);
 
-extern void emxInitMatrix_cell_wrap_4(cell_wrap_4 pMatrix[8]);
+extern void emxInitMatrix_cell_wrap_4(cell_wrap_4 pMatrix[4]);
 
-extern void emxInitMatrix_cell_wrap_41(cell_wrap_4 pMatrix[4]);
+extern void emxInitMatrix_cell_wrap_41(cell_wrap_4 pMatrix[8]);
 
 extern void emxInitStruct_cell_wrap_1(cell_wrap_1 *pStruct);
 
