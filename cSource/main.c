@@ -18,13 +18,10 @@
 #include "YuanXingFuCe.h"
 
 EMSCRIPTEN_KEEPALIVE
-void generateUnitCircleWithNormalVector(double azimuth, double elevation,
-                                        double num, double laynum, const double P1[3],
-                                        const double P2[3],
-                                        const double r,
-                                        emxArray_real_T *Point_out)
+void generateUnitCircleWithNormalVector(const emxArray_real_T *PointIn, double num, double laynum,
+                                        const double PUp[3], const double PDown[3], emxArray_real_T *Point_out)
 {
-    generate_unit_circle_with_normal_vector2(azimuth, elevation, num, laynum, P1, P2, r, Point_out);
+    generate_unit_circle_with_normal_vector2(PointIn, num, laynum, PUp, PDown, Point_out);
 }
 
 EMSCRIPTEN_KEEPALIVE

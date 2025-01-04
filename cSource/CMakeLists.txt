@@ -6,7 +6,7 @@ project(mycylinderfit2)
 
 set(ROOT /src)
 
-set(SRCDIR ${ROOT}/QuanZhanYi)
+set(SRCDIR ${ROOT}/matlabBuild)
 
 set(EXECUTABLE_OUTPUT_PATH ${ROOT}/public)
 

@@ -1,10 +1,10 @@
-import EmxArray_real_T from "../class/EmxArray_real_T";
-import { CustomVector3 } from "../class/CustomVector3";
-import { tableData } from "./config";
-import { ICycle } from "../atom/type";
-import _ from "loadsh";
-import { TType } from "../atom/globalState";
-import dayjs from "dayjs";
+import EmxArray_real_T from '../class/EmxArray_real_T';
+import { CustomVector3 } from '../class/CustomVector3';
+import { tableData } from './config';
+import { ICycle } from '../atom/type';
+import _ from 'loadsh';
+import { TType } from '../atom/globalState';
+import dayjs from 'dayjs';
 
 const {
   _generateUnitCircleWithNormalVector,
@@ -34,28 +34,26 @@ const {
  * @returns CustomVector3[] 算法坐标待测量点
  */
 export const generateUnitCircleWithNormalVector = async (
-  azimuth: number,
-  elevation: number,
+  Pin: CustomVector3[],
   numPerLay: number,
   laynum: number,
   P1: CustomVector3,
-  P2: CustomVector3,
-  r: number
+  P2: CustomVector3
 ): Promise<CustomVector3[]> => {
+  const pIn = new EmxArray_real_T(Pin);
   const points = new EmxArray_real_T(3, numPerLay * laynum);
   const p3 = new EmxArray_real_T(P1);
   const p4 = new EmxArray_real_T(P2);
-  console.log("%c Line:55 🥓 r", "color:#6ec1c2", r);
+
   _generateUnitCircleWithNormalVector(
-    azimuth,
-    elevation,
+    pIn.ptr,
     numPerLay,
     laynum,
     p3.arrayPtr,
     p4.arrayPtr,
-    r,
     points.ptr
   );
+
   const res = points.toVector3();
 
   console.table(res);
@@ -145,8 +143,8 @@ const CalculatAAndBPointsFn = (
   R: number,
   PAB: CustomVector3,
   phi: number,
-  resultTable: ICycle["resultTable"],
-  sdm: "A" | "B",
+  resultTable: ICycle['resultTable'],
+  sdm: 'A' | 'B',
   sign: boolean
 ) => {
   const tOff = fitArr(
@@ -197,35 +195,35 @@ const CalculatAAndBPointsFn = (
 
   const bhKeys = bh.toJSON();
   console.log(
-    "%c Line:198 🍎 bhKeys",
-    "color:#b03734",
+    '%c Line:198 🍎 bhKeys',
+    'color:#b03734',
     resultTable?.map?.((item) => {
       return item.ang;
     }) ?? [],
     bhKeys
   );
 
-  CustomVector3.setPublicInfo("A", 0);
+  CustomVector3.setPublicInfo('A', 0);
 
   const bottomA = A.toVector3();
 
   bottomA.map((p, i) => {
-    p.color = "red";
+    p.color = 'red';
     p.key = bhKeys[i][1];
     return p;
   });
   // .sort((a, b) => a.key - b.key);
 
-  CustomVector3.setPublicInfo("B", 0);
+  CustomVector3.setPublicInfo('B', 0);
   const bottomB = B.toVector3();
 
   bottomB.map((p, i) => {
-    p.color = "#fab005";
+    p.color = '#fab005';
     p.key = bhKeys[i][0];
     return p;
   });
 
-  const res = sdm === "A" ? toSd(bottomA) : toSd(bottomB);
+  const res = sdm === 'A' ? toSd(bottomA) : toSd(bottomB);
 
   mTaon.free();
   mCenter.free();
@@ -254,11 +252,11 @@ export const CalculatAAndBPoints = async (
   R: number,
   PAB: CustomVector3,
   phi: number,
-  resultTable: ICycle["resultTable"],
+  resultTable: ICycle['resultTable'],
   sign: boolean
 ) => {
   const res = _.partition(resultTable, (t) => {
-    return t.sdm === "A";
+    return t.sdm === 'A';
   }).reduce((acc, cur) => {
     if (cur?.length === 0) return acc;
     return [
@@ -282,7 +280,7 @@ export const CalculatAAndBPoints = async (
 
 export const CalculatAAndBPoints4 = (data) => {
   const res = _.partition(data.cubeTable, (t) => {
-    return t.sdm === "A";
+    return t.sdm === 'A';
   }).reduce((acc, cur) => {
     if (cur?.length === 0) return acc;
     const tOff =
@@ -314,7 +312,7 @@ export const CalculatAAndBPoints4 = (data) => {
 
 export const CalculatAAndBPoints8 = (data, MxPortsArr) => {
   const res = _.partition(data.cubeTable, (t) => {
-    return t.sdm === "A";
+    return t.sdm === 'A';
   }).reduce((acc, cur) => {
     if (cur?.length === 0) return acc;
     const a =
@@ -422,20 +420,20 @@ export const getDataFromTable = (sdfb: number, index: number) => {
 };
 
 export const downLoadFile = (data) => {
-  const mode = { second: "复测", first: "定位" }[data.mode];
+  const mode = { second: '复测', first: '定位' }[data.mode];
   const filename =
     data.type === TType.cube
-      ? `方涵-${mode}_${dayjs().format("_YYYY_MM_DD")}.json`
-      : `管道-${mode}_${dayjs().format("_YYYY_MM_DD")}.json`;
+      ? `方涵-${mode}_${dayjs().format('_YYYY_MM_DD')}.json`
+      : `管道-${mode}_${dayjs().format('_YYYY_MM_DD')}.json`;
 
   // 将JSON对象转换为字符串
   const jsonString = JSON.stringify({ ...data, import: true }, null, 2);
 
   // 创建一个Blob对象
-  const blob = new Blob([jsonString], { type: "application/json" });
+  const blob = new Blob([jsonString], { type: 'application/json' });
 
   // 创建一个链接元素
-  const link = document.createElement("a");
+  const link = document.createElement('a');
 
   // 创建一个URL对象
   const url = URL.createObjectURL(blob);
@@ -462,10 +460,10 @@ export const downLoadFile = (data) => {
 export const loadFile = (jsonStr: string) => {
   return JSON.parse(jsonStr, (_, v) => {
     if (
-      typeof v === "object" &&
-      Object.prototype.hasOwnProperty.call(v, "x") &&
-      Object.prototype.hasOwnProperty.call(v, "y") &&
-      Object.prototype.hasOwnProperty.call(v, "z")
+      typeof v === 'object' &&
+      Object.prototype.hasOwnProperty.call(v, 'x') &&
+      Object.prototype.hasOwnProperty.call(v, 'y') &&
+      Object.prototype.hasOwnProperty.call(v, 'z')
     ) {
       return new CustomVector3(v.x, v.y, v.z, v);
     }
@@ -528,7 +526,7 @@ export const Planefit = (
   const len = MPoints.length;
 
   if (![4, 8].includes(len)) {
-    console.error("采集面需要4或8个面");
+    console.error('采集面需要4或8个面');
     return {};
   }
 
@@ -659,7 +657,7 @@ export const CalculateRectangleFromVertex8 = (
   _ti: number[],
   __a: number[],
   distanceThreshold: number,
-  sdm: "A" | "B"
+  sdm: 'A' | 'B'
 ) => {
   const ti = fitArr(_ti);
   const a = fitArr(__a);
@@ -698,8 +696,8 @@ export const CalculateRectangleFromVertex8 = (
   );
   const rOff = XieMianPianYi.toJSON()[0];
   let res = [];
-  if (sdm === "A") {
-    CustomVector3.setPublicInfo("A", 0);
+  if (sdm === 'A') {
+    CustomVector3.setPublicInfo('A', 0);
     const bottomA = A.toVector3();
     for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
       bottomA[i].key = 2 * i + 1;
@@ -711,11 +709,11 @@ export const CalculateRectangleFromVertex8 = (
     bottomA
       .sort((a, b) => a.key - b.key)
       .forEach((p) => {
-        p.color = "red";
+        p.color = 'red';
       });
     res = toSd(bottomA);
   } else {
-    CustomVector3.setPublicInfo("B", 0);
+    CustomVector3.setPublicInfo('B', 0);
 
     const bottomB = B.toVector3();
     for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
@@ -728,7 +726,7 @@ export const CalculateRectangleFromVertex8 = (
     bottomB
       .sort((a, b) => a.key - b.key)
       .forEach((p) => {
-        p.color = "#fab005";
+        p.color = '#fab005';
       });
     res = toSd(bottomB);
   }
@@ -759,7 +757,7 @@ export const shengDaoGaoDu = (numShengLu: number) => {
   _shengDaoGaoDu(numShengLu, ti.ptr);
 
   const res = ti.toJSON();
-  console.log("%c Line:696 🥖 res", "color:#42b983", res);
+  console.log('%c Line:696 🥖 res', 'color:#42b983', res);
 
   ti.free();
   return res.slice(0, res.length / 2);
@@ -773,7 +771,7 @@ export const shengDaoGaoDu = (numShengLu: number) => {
  * @returns
  */
 export const cubeTOff = (a: number, sdj: number) => {
-  console.log("%c Line:710 🍤 90 - sdj", "color:#f5ce50", 90 - sdj);
+  console.log('%c Line:710 🍤 90 - sdj', 'color:#f5ce50', 90 - sdj);
   return Number((a / Math.tan(ang2rad(90 - sdj))).toFixed(4));
 };
 
@@ -791,7 +789,7 @@ export const CalcJuXingAAndBPointsAfterOffest = (
   sdfb: number,
   _Ti: number[],
   _TOff: number[],
-  sdm: "A" | "B"
+  sdm: 'A' | 'B'
 ) => {
   const Ti = fitArr(_Ti);
 
@@ -824,7 +822,7 @@ export const CalcJuXingAAndBPointsAfterOffest = (
 
   let res: any[] = [];
   CustomVector3.setPublicInfo(sdm, 0);
-  if (sdm === "A") {
+  if (sdm === 'A') {
     const bottomA = A.toVector3();
     for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
       bottomA[i].key = 2 * i + 1;
@@ -833,7 +831,7 @@ export const CalcJuXingAAndBPointsAfterOffest = (
     bottomA
       .sort((a, b) => a.key - b.key)
       .forEach((p) => {
-        p.color = "red";
+        p.color = 'red';
       });
     res = toSd(bottomA);
   } else {
@@ -845,7 +843,7 @@ export const CalcJuXingAAndBPointsAfterOffest = (
     bottomB
       .sort((a, b) => a.key - b.key)
       .forEach((p) => {
-        p.color = "#fab005";
+        p.color = '#fab005';
       });
     res = toSd(bottomB);
   }
@@ -875,13 +873,13 @@ export const shengLuJiao2Ang = (numSL: number) => {
     return Number(rad2ang(v).toFixed(6));
   });
   angs.free();
-  console.log("%c Line:727 🥐 res", "color:#465975", res);
+  console.log('%c Line:727 🥐 res', 'color:#465975', res);
   const nw: any = [];
   for (let i = res.length / 2; i < res.length; i++) {
     // const element = array[index];
     nw.push(res[i]);
   }
-  console.log("%c Line:728 🥐 nw", "color:#b03734", nw);
+  console.log('%c Line:728 🥐 nw', 'color:#b03734', nw);
   return nw;
 };
 
@@ -898,7 +896,7 @@ const juXingFuCeFn = (
   cubeAgainTable: { p1: CustomVector3; p2: CustomVector3 }[],
   sdfb: number
 ) => {
-  console.log("%c Line:780 🍒 sdfb", "color:#33a5ff", cubeRes.LenDaoJiao);
+  console.log('%c Line:780 🍒 sdfb', 'color:#33a5ff', cubeRes.LenDaoJiao);
   const PointIn = new EmxArray_real_T(
     cubeAgainTable?.reduce?.((acc, cur) => {
       return [...acc, cur.p1, cur.p2];
@@ -936,7 +934,7 @@ const juXingFuCeFn = (
   const _theta = theta.toJSON()[0];
   const _LTPY = LTPY.toJSON()[0];
   const _TiC = TiC.toJSON()[0];
-  console.log("%c Line:834 🥒 _TiC", "color:#f5ce50", _TiC);
+  console.log('%c Line:834 🥒 _TiC', 'color:#f5ce50', _TiC);
   const _Wquanzhong3 = Wquanzhong3.toJSON()[0];
   const _Wquanzhong4 = Wquanzhong4.toJSON()[0];
 

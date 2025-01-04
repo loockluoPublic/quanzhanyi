@@ -1,4 +1,4 @@
-import { CustomVector3 } from "../class/CustomVector3";
+import { CustomVector3 } from '../class/CustomVector3';
 
 interface BaseInfo {
   /**
@@ -9,7 +9,7 @@ interface BaseInfo {
   /**
    * 声道面
    */
-  sdm: ("A" | "B")[];
+  sdm: ('A' | 'B')[];
 
   /**
    * 声道角
@@ -30,7 +30,7 @@ interface AgainTable {
   /**
    * 所在声道面
    */
-  sdm: "A" | "B";
+  sdm: 'A' | 'B';
 
   /**
    * LT 偏移
@@ -73,6 +73,11 @@ interface ICycleBase {
    * 圆柱顶/底面点
    */
   firstPoints: [CustomVector3, CustomVector3];
+
+  /**
+   * 三角顶点
+   */
+  triPoints: [CustomVector3, CustomVector3, CustomVector3];
 
   /**
    * 中心点
@@ -136,7 +141,7 @@ interface ICycle {
     a: number;
     tOff: number;
     rOff: number;
-    sdm: "A" | "B";
+    sdm: 'A' | 'B';
     points?: CustomVector3[];
   }[];
 
@@ -146,7 +151,7 @@ interface ICycle {
     a: number;
     tOff: number;
     h: number;
-    sdm: "A" | "B";
+    sdm: 'A' | 'B';
     points?: CustomVector3[];
   }[];
   /**
@@ -163,7 +168,7 @@ interface ICycle {
   cylinderAgainTable: {
     p1: CustomVector3;
     p2: CustomVector3;
-    sdm?: "A" | "B";
+    sdm?: 'A' | 'B';
   }[];
 }
 
