@@ -159,9 +159,9 @@ void CalculateRectangleFromVertex8(
     const double P_bound2[3], const double PAB[3], double phi,
     double shenglunum, const emxArray_real_T *Ti, const emxArray_real_T *a,
     double distanceThreshold, emxArray_real_T *PointTable_A_off8,
-    emxArray_real_T *PointTable_B_off8, emxArray_real_T *XieMianPianYi)
+    emxArray_real_T *PointTable_B_off8, emxArray_real_T *XieMianPianYi, emxArray_real_T *BianHao)
 {
-    Calculate_rectangle_from_vertex8(side_faces_transformed1, side_faces_transformed2, side_faces_transformed3, side_faces_transformed4, side_faces_transformed5, side_faces_transformed6, side_faces_transformed7, side_faces_transformed8, P_bound1, P_bound2, PAB, phi, shenglunum, Ti, a, distanceThreshold, PointTable_A_off8, PointTable_B_off8, XieMianPianYi);
+    Calculate_rectangle_from_vertex8(side_faces_transformed1, side_faces_transformed2, side_faces_transformed3, side_faces_transformed4, side_faces_transformed5, side_faces_transformed6, side_faces_transformed7, side_faces_transformed8, P_bound1, P_bound2, PAB, phi, shenglunum, Ti, a, distanceThreshold, PointTable_A_off8, PointTable_B_off8, XieMianPianYi, BianHao);
 }
 
 EMSCRIPTEN_KEEPALIVE
