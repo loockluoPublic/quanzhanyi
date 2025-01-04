@@ -2,7 +2,7 @@
  * File: planefit.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Jan-2025 23:51:41
+ * C/C++ source code generated on  : 04-Jan-2025 23:29:36
  */
 
 /* Include Files */
@@ -494,7 +494,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     b_yfit[3] = PointTri[1];
     zfit[3] = PointTri[2];
     for (r2 = 0; r2 < 24; r2++) {
-      i1 = iv1[r2];
+      i1 = iv[r2];
       f_xfit[3 * r2] = b_xfit[i1];
       f_xfit[3 * r2 + 1] = b_yfit[i1];
       f_xfit[3 * r2 + 2] = zfit[i1];

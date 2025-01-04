@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Jan-2025 23:51:41
+ * C/C++ source code generated on  : 04-Jan-2025 23:29:36
  */
 
 #ifndef _CODER_QUANZHANYI_API_H
@@ -85,7 +85,7 @@ void Calculate_rectangle_from_vertex8(
     real_T P_bound2[3], real_T PAB[3], real_T phi, real_T shenglunum,
     emxArray_real_T *Ti, emxArray_real_T *a, real_T distanceThreshold,
     emxArray_real_T *PointTable_A_off8, emxArray_real_T *PointTable_B_off8,
-    emxArray_real_T *XieMianPianYi);
+    emxArray_real_T *XieMianPianYi, emxArray_real_T *BianHao);
 
 void CrossLine(real_T PlanePara1[4], real_T PlanePara2[4], real_T x_val,
                real_T P0[3], real_T d[3]);
@@ -190,7 +190,7 @@ void c_generate_unit_circle_with_nor(const mxArray *const prhs[4],
                                      const mxArray **plhs);
 
 void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
-                                     int32_T nlhs, const mxArray *plhs[3]);
+                                     int32_T nlhs, const mxArray *plhs[4]);
 
 void d_generate_unit_circle_with_nor(const mxArray *const prhs[5],
                                      const mxArray **plhs);

@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 03-Jan-2025 23:51:41
+ * C/C++ source code generated on  : 04-Jan-2025 23:29:36
  */
 
 /* Include Files */
@@ -1887,17 +1887,18 @@ void c_generate_unit_circle_with_nor(const mxArray *const prhs[4],
 /*
  * Arguments    : const mxArray * const prhs[16]
  *                int32_T nlhs
- *                const mxArray *plhs[3]
+ *                const mxArray *plhs[4]
  * Return Type  : void
  */
 void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
-                                     int32_T nlhs, const mxArray *plhs[3])
+                                     int32_T nlhs, const mxArray *plhs[4])
 {
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
       NULL  /* prev */
   };
+  emxArray_real_T *BianHao;
   emxArray_real_T *PointTable_A_off8;
   emxArray_real_T *PointTable_B_off8;
   emxArray_real_T *Ti;
@@ -1969,12 +1970,13 @@ void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
   emxInit_real_T(&st, &PointTable_A_off8, 2);
   emxInit_real_T(&st, &PointTable_B_off8, 2);
   emxInit_real_T(&st, &XieMianPianYi, 2);
+  emxInit_real_T(&st, &BianHao, 2);
   Calculate_rectangle_from_vertex8(
       side_faces_transformed1, side_faces_transformed2, side_faces_transformed3,
       side_faces_transformed4, side_faces_transformed5, side_faces_transformed6,
       side_faces_transformed7, side_faces_transformed8, *P_bound1, *P_bound2,
       *PAB, phi, shenglunum, Ti, a, distanceThreshold, PointTable_A_off8,
-      PointTable_B_off8, XieMianPianYi);
+      PointTable_B_off8, XieMianPianYi, BianHao);
   emxFree_real_T(&st, &a);
   emxFree_real_T(&st, &Ti);
   emxFree_real_T(&st, &side_faces_transformed8);
@@ -1999,6 +2001,11 @@ void d_Calculate_rectangle_from_vert(const mxArray *const prhs[16],
     plhs[2] = b_emlrt_marshallOut(XieMianPianYi);
   }
   emxFree_real_T(&st, &XieMianPianYi);
+  if (nlhs > 3) {
+    BianHao->canFreeData = false;
+    plhs[3] = b_emlrt_marshallOut(BianHao);
+  }
+  emxFree_real_T(&st, &BianHao);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }
 
