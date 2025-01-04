@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Jan-2025 23:29:36
+ * C/C++ source code generated on  : 04-Jan-2025 23:58:31
  */
 
 /* Include Files */
@@ -733,9 +733,9 @@ void Calculate_rectangle_from_vertex8(
   for (b_i = 0; b_i < loop_ub; b_i++) {
     ab2 = deltTib_data[b_i];
     if (ab2 == 0.0) {
-      Ti2A_data[b_i] = b * cos(phi);
+      Ti2A_data[b_i] = b / 2.0 * cos(phi);
     } else {
-      Ti2A_data[b_i] = (b - ab2) * cos(phi);
+      Ti2A_data[b_i] = (b / 2.0 - ab2) * cos(phi);
     }
   }
   emxFree_real_T(&deltTib);
