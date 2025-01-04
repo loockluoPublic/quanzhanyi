@@ -193,14 +193,6 @@ const CalculatAAndBPointsFn = (
   );
 
   const bhKeys = bh.toJSON();
-  console.log(
-    '%c Line:198 🍎 bhKeys',
-    'color:#b03734',
-    resultTable?.map?.((item) => {
-      return item.ang;
-    }) ?? [],
-    bhKeys
-  );
 
   CustomVector3.setPublicInfo('A', 0);
 
@@ -211,7 +203,6 @@ const CalculatAAndBPointsFn = (
     p.key = bhKeys[i][1];
     return p;
   });
-  // .sort((a, b) => a.key - b.key);
 
   CustomVector3.setPublicInfo('B', 0);
   const bottomB = B.toVector3();
@@ -330,7 +321,7 @@ export const CalculatAAndBPoints8 = (data, MxPortsArr) => {
         data.firstPoints[0],
         data.firstPoints[1],
         data.centerPoint,
-        ang2rad(data.sdj),
+        ang2rad(90 - data.sdj),
         data.sdfb,
         Ti,
         a,
@@ -677,6 +668,7 @@ export const CalculateRectangleFromVertex8 = (
   const A = new EmxArray_real_T(3, ti.length);
   const B = new EmxArray_real_T(3, ti.length);
   const XieMianPianYi = new EmxArray_real_T(ti.length, 1);
+  const bh = new EmxArray_real_T(2, ti.length);
 
   _CalculateRectangleFromVertex8(
     ...mP.map((p) => p.ptr),
@@ -690,44 +682,70 @@ export const CalculateRectangleFromVertex8 = (
     distanceThreshold,
     A.ptr,
     B.ptr,
-    XieMianPianYi.ptr
+    XieMianPianYi.ptr,
+    bh.ptr
   );
+  const bhKeys = bh.toJSON();
   const rOff = XieMianPianYi.toJSON()[0];
-  let res = [];
-  if (sdm === 'A') {
-    CustomVector3.setPublicInfo('A', 0);
-    const bottomA = A.toVector3();
-    for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
-      bottomA[i].key = 2 * i + 1;
-      bottomA[j].key = 2 * i + 2;
 
-      bottomA[i].difference = rOff[i];
-      bottomA[j].difference = rOff[j];
-    }
-    bottomA
-      .sort((a, b) => a.key - b.key)
-      .forEach((p) => {
-        p.color = 'red';
-      });
-    res = toSd(bottomA);
-  } else {
-    CustomVector3.setPublicInfo('B', 0);
+  CustomVector3.setPublicInfo('A', 0);
 
-    const bottomB = B.toVector3();
-    for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
-      bottomB[i].key = 2 * i + 1;
-      bottomB[j].key = 2 * i + 2;
+  const bottomA = A.toVector3();
 
-      bottomB[i].difference = rOff[i];
-      bottomB[j].difference = rOff[j];
-    }
-    bottomB
-      .sort((a, b) => a.key - b.key)
-      .forEach((p) => {
-        p.color = '#fab005';
-      });
-    res = toSd(bottomB);
-  }
+  bottomA.map((p, i) => {
+    p.color = 'red';
+    p.key = bhKeys[i][1];
+    p.difference = rOff[i];
+    return p;
+  });
+
+  CustomVector3.setPublicInfo('B', 0);
+  const bottomB = B.toVector3();
+
+  bottomB.map((p, i) => {
+    p.color = '#fab005';
+    p.key = bhKeys[i][0];
+    p.difference = rOff[i];
+    return p;
+  });
+
+  const res = sdm === 'A' ? toSd(bottomA) : toSd(bottomB);
+
+  // let res = [];
+  // if (sdm === 'A') {
+  //   CustomVector3.setPublicInfo('A', 0);
+  //   const bottomA = A.toVector3();
+  //   for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
+  //     bottomA[i].key = 2 * i + 1;
+  //     bottomA[j].key = 2 * i + 2;
+
+  //     bottomA[i].difference = rOff[i];
+  //     bottomA[j].difference = rOff[j];
+  //   }
+  //   bottomA
+  //     .sort((a, b) => a.key - b.key)
+  //     .forEach((p) => {
+  //       p.color = 'red';
+  //     });
+  //   res = toSd(bottomA);
+  // } else {
+  //   CustomVector3.setPublicInfo('B', 0);
+
+  //   const bottomB = B.toVector3();
+  //   for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
+  //     bottomB[i].key = 2 * i + 1;
+  //     bottomB[j].key = 2 * i + 2;
+
+  //     bottomB[i].difference = rOff[i];
+  //     bottomB[j].difference = rOff[j];
+  //   }
+  //   bottomB
+  //     .sort((a, b) => a.key - b.key)
+  //     .forEach((p) => {
+  //       p.color = '#fab005';
+  //     });
+  //   res = toSd(bottomB);
+  // }
 
   mP.map((p) => p.free());
 
