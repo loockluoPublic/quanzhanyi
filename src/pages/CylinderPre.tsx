@@ -224,16 +224,16 @@ function CylinderPre() {
       <div className='q-my-1 q-flex '>
         <div className='q-fle1x'>
           <span className=' '>
-            A：
+            圆周点1：
             <PointsVector3
               hideLabel
               className='!q-inline-flex !q-my-1'
               value={data.firstPoints[0] as CustomVector3}
               before={() => {
-                CustomVector3.setPublicInfo('三角点', 0);
+                CustomVector3.setPublicInfo('T', 0);
               }}
               onChange={(v) => {
-                v.color = 'blue';
+                v.color = 'red';
                 setData({
                   ...data,
                   triPoints: [v, data.triPoints[1], data.triPoints[2]],
@@ -242,15 +242,16 @@ function CylinderPre() {
             />
           </span>
           <span className='q-ml-8'>
-            B：
+            圆周点2：
             <PointsVector3
               hideLabel
               className='!q-inline-flex !q-my-1'
               value={data.firstPoints[1] as CustomVector3}
               before={() => {
-                CustomVector3.setPublicInfo('三角点', 1);
+                CustomVector3.setPublicInfo('T', 1);
               }}
               onChange={(v) => {
+                v.color = 'red';
                 setData({
                   ...data,
                   triPoints: [data.triPoints[0], v, data.triPoints[2]],
@@ -259,15 +260,16 @@ function CylinderPre() {
             />
           </span>
           <span className='q-block'>
-            C：
+            圆周点3：
             <PointsVector3
               hideLabel
               className='!q-inline-flex !q-my-1'
               value={data.firstPoints[1] as CustomVector3}
               before={() => {
-                CustomVector3.setPublicInfo('三角点', 1);
+                CustomVector3.setPublicInfo('T', 2);
               }}
               onChange={(v) => {
+                v.color = 'red';
                 setData({
                   ...data,
                   triPoints: [data.triPoints[0], data.triPoints[1], v],
@@ -440,7 +442,7 @@ function CylinderPre() {
   return (
     <CylinderModule
       direct={data.direct}
-      firstPoints={data.firstPoints}
+      firstPoints={[...data.firstPoints, ...data.triPoints]}
       component={comp}
       mPoints={data.mPoints}
       calulateRes={data.calulateRes}

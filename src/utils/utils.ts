@@ -690,8 +690,8 @@ export const CalculateRectangleFromVertex8 = (
     Ti.ptr,
     _a.ptr,
     distanceThreshold,
-    B.ptr,
     A.ptr,
+    B.ptr,
     XieMianPianYi.ptr
   );
   const rOff = XieMianPianYi.toJSON()[0];
