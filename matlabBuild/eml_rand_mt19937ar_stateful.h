@@ -2,7 +2,7 @@
  * File: eml_rand_mt19937ar_stateful.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 04-Jan-2025 23:58:31
+ * C/C++ source code generated on  : 05-Jan-2025 00:11:00
  */
 
 #ifndef EML_RAND_MT19937AR_STATEFUL_H

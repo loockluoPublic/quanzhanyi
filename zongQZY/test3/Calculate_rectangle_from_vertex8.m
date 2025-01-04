@@ -269,13 +269,13 @@ PointTable_B_off8 = ZhouDian - d'.*PYB;
 %% 8、编号
 BianHao = zeros(2,2*shenglunum);
 for i = 1:shenglunum
-    BianHao(1,i) = 2*i;
-    BianHao(2,i) = 2*i-1;
+    BianHao(1,i) = 2*i-1;
+    BianHao(2,i) = 2*i;
 end
 
 for i = 1+shenglunum:2*shenglunum
-    BianHao(1,i) = (2*shenglunum+1-i)*2-1;
-    BianHao(2,i) = (2*shenglunum+1-i)*2;
+    BianHao(1,i) = (2*shenglunum+1-i)*2;
+    BianHao(2,i) = (2*shenglunum+1-i)*2-1;
 end
 
 
