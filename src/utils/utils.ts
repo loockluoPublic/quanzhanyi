@@ -144,8 +144,7 @@ const CalculatAAndBPointsFn = (
   PAB: CustomVector3,
   phi: number,
   resultTable: ICycle['resultTable'],
-  sdm: 'A' | 'B',
-  sign: boolean
+  sdm: 'A' | 'B'
 ) => {
   const tOff = fitArr(
     resultTable?.map?.((item) => {
@@ -188,8 +187,8 @@ const CalculatAAndBPointsFn = (
     _ang.ptr,
     _tOff.ptr,
     _rOff.ptr,
-    sign ? B.ptr : A.ptr,
-    sign ? A.ptr : B.ptr,
+    A.ptr,
+    B.ptr,
     bh.ptr
   );
 
@@ -252,8 +251,7 @@ export const CalculatAAndBPoints = async (
   R: number,
   PAB: CustomVector3,
   phi: number,
-  resultTable: ICycle['resultTable'],
-  sign: boolean
+  resultTable: ICycle['resultTable']
 ) => {
   const res = _.partition(resultTable, (t) => {
     return t.sdm === 'A';
@@ -269,8 +267,7 @@ export const CalculatAAndBPoints = async (
         PAB,
         phi,
         cur,
-        cur[0].sdm,
-        sign
+        cur[0].sdm
       ),
     ];
   }, []);
@@ -296,6 +293,7 @@ export const CalculatAAndBPoints4 = (data) => {
     return [
       ...acc,
       ...CalcJuXingAAndBPointsAfterOffest(
+        data.firstPoints,
         data.cubeResult,
         data.centerPoint,
         ang2rad(data.sdj),
@@ -775,6 +773,20 @@ export const cubeTOff = (a: number, sdj: number) => {
   return Number((a / Math.tan(ang2rad(90 - sdj))).toFixed(4));
 };
 
+function isAngleGreaterThan90Normalized(vectorA, vectorB) {
+  // 先将向量标准化
+  const normalizedA = vectorA.clone().normalize();
+  const normalizedB = vectorB.clone().normalize();
+
+  // 计算点积
+  const dotProduct = normalizedA.dot(normalizedB);
+
+  // 考虑浮点数运算误差，设置一个小的阈值
+  const epsilon = 1e-10;
+
+  // 如果点积小于0，则夹角大于90度
+  return dotProduct < -epsilon;
+}
 /**
  * 计算矩形安装位置
  * @param cubeRes
@@ -783,6 +795,7 @@ export const cubeTOff = (a: number, sdj: number) => {
  * @param sdfb 声道分布
  */
 export const CalcJuXingAAndBPointsAfterOffest = (
+  BottomCenter: CustomVector3[],
   cubeRes: ReturnType<typeof CalculateRectangleFromVertex>,
   PAB: CustomVector3,
   sdj: number,
@@ -791,6 +804,11 @@ export const CalcJuXingAAndBPointsAfterOffest = (
   _TOff: number[],
   sdm: 'A' | 'B'
 ) => {
+  const calcNumSign = (points: CustomVector3[]) => {
+    const dir = BottomCenter[1].clone().sub(BottomCenter[0]).normalize();
+    const d = points[1].clone().sub(points[0]).normalize();
+    return isAngleGreaterThan90Normalized(dir, d);
+  };
   const Ti = fitArr(_Ti);
 
   const TOff = [..._TOff?.map((n) => -n), ..._TOff.reverse()];
@@ -816,35 +834,55 @@ export const CalcJuXingAAndBPointsAfterOffest = (
     sdfb,
     ti.ptr,
     tOff.ptr,
-    B.ptr,
-    A.ptr
+    A.ptr,
+    B.ptr
   );
 
   let res: any[] = [];
   CustomVector3.setPublicInfo(sdm, 0);
   if (sdm === 'A') {
     const bottomA = A.toVector3();
-    for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
-      bottomA[i].key = 2 * i + 1;
-      bottomA[j].key = 2 * i + 2;
+    const signA = calcNumSign([bottomA[0], bottomA[bottomA.length - 1]]);
+    console.log('%c Line:846 🌽 signA', 'color:#ed9ec7', signA);
+
+    if (signA) {
+      for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
+        bottomA[i].key = 2 * i + 1;
+        bottomA[j].key = 2 * i + 2;
+      }
+    } else {
+      for (let i = 0, j = bottomA.length - 1; i <= j; i++, j--) {
+        bottomA[j].key = 2 * i + 1;
+        bottomA[i].key = 2 * i + 2;
+      }
     }
-    bottomA
-      .sort((a, b) => a.key - b.key)
-      .forEach((p) => {
-        p.color = 'red';
-      });
+    bottomA.forEach((p) => {
+      p.color = 'red';
+    });
     res = toSd(bottomA);
   } else {
     const bottomB = B.toVector3();
-    for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
-      bottomB[i].key = 2 * i + 1;
-      bottomB[j].key = 2 * i + 2;
+    const signB = calcNumSign([bottomB[0], bottomB[bottomB.length - 1]]);
+    console.log('%c Line:846 🌽 signB', 'color:#ed9ec7', signB);
+
+    if (signB) {
+      for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
+        bottomB[i].key = 2 * i + 1;
+        bottomB[j].key = 2 * i + 2;
+      }
+    } else {
+      for (let i = 0, j = bottomB.length - 1; i <= j; i++, j--) {
+        bottomB[j].key = 2 * i + 1;
+        bottomB[i].key = 2 * i + 2;
+      }
     }
-    bottomB
-      .sort((a, b) => a.key - b.key)
-      .forEach((p) => {
-        p.color = '#fab005';
-      });
+    bottomB.forEach((p) => {
+      p.color = 'red';
+    });
+
+    bottomB.forEach((p) => {
+      p.color = '#fab005';
+    });
     res = toSd(bottomB);
   }
 

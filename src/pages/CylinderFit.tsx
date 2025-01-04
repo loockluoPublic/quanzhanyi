@@ -279,8 +279,7 @@ function CylinderFit() {
       calulateRes.R,
       data.centerPoint,
       data.sdj,
-      tableData,
-      false
+      tableData
     ).then((AB) => {
       const resultTable = tableData.map((row, i) => {
         console.log(

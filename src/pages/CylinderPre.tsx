@@ -228,7 +228,7 @@ function CylinderPre() {
             <PointsVector3
               hideLabel
               className='!q-inline-flex !q-my-1'
-              value={data.firstPoints[0] as CustomVector3}
+              value={data.triPoints[0] as CustomVector3}
               before={() => {
                 CustomVector3.setPublicInfo('T', 0);
               }}
@@ -246,7 +246,7 @@ function CylinderPre() {
             <PointsVector3
               hideLabel
               className='!q-inline-flex !q-my-1'
-              value={data.firstPoints[1] as CustomVector3}
+              value={data.triPoints[1] as CustomVector3}
               before={() => {
                 CustomVector3.setPublicInfo('T', 1);
               }}
@@ -264,7 +264,7 @@ function CylinderPre() {
             <PointsVector3
               hideLabel
               className='!q-inline-flex !q-my-1'
-              value={data.firstPoints[1] as CustomVector3}
+              value={data.triPoints[1] as CustomVector3}
               before={() => {
                 CustomVector3.setPublicInfo('T', 2);
               }}
