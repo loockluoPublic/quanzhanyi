@@ -170,13 +170,13 @@ function CylinderPre() {
             <PointsVector3
               hideLabel
               className='!q-inline-flex !q-my-1'
-              value={data.firstPoints[0] as CustomVector3}
+              value={data.firstPoints?.[0] as CustomVector3}
               before={() => {
                 CustomVector3.setPublicInfo('上游点', 0);
               }}
               onChange={(v) => {
                 v.color = 'blue';
-                setData({ ...data, firstPoints: [v, data.firstPoints[1]] });
+                setData({ ...data, firstPoints: [v, data.firstPoints?.[1]] });
               }}
             />
           </span>
@@ -185,12 +185,12 @@ function CylinderPre() {
             <PointsVector3
               hideLabel
               className='!q-inline-flex !q-my-1'
-              value={data.firstPoints[1] as CustomVector3}
+              value={data.firstPoints?.[1] as CustomVector3}
               before={() => {
                 CustomVector3.setPublicInfo('下游点', 1);
               }}
               onChange={(v) => {
-                setData({ ...data, firstPoints: [data.firstPoints[0], v] });
+                setData({ ...data, firstPoints: [data.firstPoints?.[0], v] });
               }}
             />
           </span>
@@ -228,7 +228,7 @@ function CylinderPre() {
             <PointsVector3
               hideLabel
               className='!q-inline-flex !q-my-1'
-              value={data.triPoints[0] as CustomVector3}
+              value={data.triPoints?.[0] as CustomVector3}
               before={() => {
                 CustomVector3.setPublicInfo('T', 0);
               }}
@@ -236,7 +236,7 @@ function CylinderPre() {
                 v.color = 'red';
                 setData({
                   ...data,
-                  triPoints: [v, data.triPoints[1], data.triPoints[2]],
+                  triPoints: [v, data.triPoints?.[1], data.triPoints?.[2]],
                 });
               }}
             />
@@ -246,7 +246,7 @@ function CylinderPre() {
             <PointsVector3
               hideLabel
               className='!q-inline-flex !q-my-1'
-              value={data.triPoints[1] as CustomVector3}
+              value={data.triPoints?.[1] as CustomVector3}
               before={() => {
                 CustomVector3.setPublicInfo('T', 1);
               }}
@@ -254,7 +254,7 @@ function CylinderPre() {
                 v.color = 'red';
                 setData({
                   ...data,
-                  triPoints: [data.triPoints[0], v, data.triPoints[2]],
+                  triPoints: [data.triPoints?.[0], v, data.triPoints?.[2]],
                 });
               }}
             />
@@ -264,7 +264,7 @@ function CylinderPre() {
             <PointsVector3
               hideLabel
               className='!q-inline-flex !q-my-1'
-              value={data.triPoints[1] as CustomVector3}
+              value={data.triPoints?.[1] as CustomVector3}
               before={() => {
                 CustomVector3.setPublicInfo('T', 2);
               }}
@@ -272,7 +272,7 @@ function CylinderPre() {
                 v.color = 'red';
                 setData({
                   ...data,
-                  triPoints: [data.triPoints[0], data.triPoints[1], v],
+                  triPoints: [data.triPoints?.[0], data.triPoints?.[1], v],
                 });
               }}
             />
