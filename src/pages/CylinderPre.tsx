@@ -442,7 +442,7 @@ function CylinderPre() {
   return (
     <CylinderModule
       direct={data.direct}
-      firstPoints={[...data.firstPoints, ...data.triPoints]}
+      firstPoints={[...data.firstPoints, ...data?.triPoints]}
       component={comp}
       mPoints={data.mPoints}
       calulateRes={data.calulateRes}
