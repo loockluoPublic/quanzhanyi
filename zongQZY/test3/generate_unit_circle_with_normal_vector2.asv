@@ -1,4 +1,4 @@
-function Point_out = generate_unit_circle_with_normal_vector2(PointIn,num,laynum,PUp,PDown)
+function [Point_out,deltP] = generate_unit_circle_with_normal_vector2(PointIn,num,laynum,PUp,PDown)
 
 P1 = PointIn(:,1);
 P2 = PointIn(:,2);
@@ -40,7 +40,7 @@ z0 = normal(3);
 
 
 Pl1 = center';
-Pl2 = Pl1 + [x0,y0,z0];
+Pl2 = Pl1 +[x0,y0,z0];
 
 
 [xN1,yN1,zN1] = foot_of_perpendicular_from_a_point_to_a_line(PUp,Pl1,Pl2);
@@ -101,6 +101,7 @@ for j = 1:laynum
     Point_out(:,(j-1)*num+1:j*num) = [x_circle1;y_circle1;z_circle1];
 end
 
+deltP = [deltx;delty;deltz];
 end
 
 

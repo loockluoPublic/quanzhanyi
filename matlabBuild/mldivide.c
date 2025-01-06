@@ -2,7 +2,7 @@
  * File: mldivide.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Jan-2025 00:11:00
+ * C/C++ source code generated on  : 06-Jan-2025 21:58:02
  */
 
 /* Include Files */
@@ -16,7 +16,25 @@
 #include <math.h>
 #include <string.h>
 
+/* Function Declarations */
+static int div_nde_s32_floor(int numerator);
+
 /* Function Definitions */
+/*
+ * Arguments    : int numerator
+ * Return Type  : int
+ */
+static int div_nde_s32_floor(int numerator)
+{
+  int i;
+  if ((numerator < 0) && (numerator % 3 != 0)) {
+    i = -1;
+  } else {
+    i = 0;
+  }
+  return numerator / 3 + i;
+}
+
 /*
  * Arguments    : const double A[9]
  *                const double B_data[]
@@ -220,7 +238,7 @@ void d_mldivide(const double A[6], const double B[2], double Y[3])
       t = b_A[ii];
       kend = ii + 2;
       tau[0] = 0.0;
-      smax = g_xnrm2(b_A, ii + 2);
+      smax = h_xnrm2(b_A, ii + 2);
       if (smax != 0.0) {
         scale = rt_hypotd_snf(b_A[ii], smax);
         if (b_A[ii] >= 0.0) {
@@ -236,7 +254,7 @@ void d_mldivide(const double A[6], const double B[2], double Y[3])
             scale *= 9.9792015476736E+291;
             t *= 9.9792015476736E+291;
           } while ((fabs(scale) < 1.0020841800044864E-292) && (pvt < 20));
-          scale = rt_hypotd_snf(t, g_xnrm2(b_A, ii + 2));
+          scale = rt_hypotd_snf(t, h_xnrm2(b_A, ii + 2));
           if (t >= 0.0) {
             scale = -scale;
           }
@@ -342,7 +360,7 @@ void d_mldivide(const double A[6], const double B[2], double Y[3])
         scale = smax * (scale * scale);
         if (scale <= 1.4901161193847656E-8) {
           if (b_i + 1 < 2) {
-            absxk = g_xnrm2(b_A, pvt + 2);
+            absxk = h_xnrm2(b_A, pvt + 2);
             vn1[j - 1] = absxk;
             vn2[j - 1] = absxk;
           } else {
@@ -390,6 +408,248 @@ void d_mldivide(const double A[6], const double B[2], double Y[3])
     Y[kend] /= b_A[(j + pvt) - 1];
     for (b_i = 0; b_i <= j - 2; b_i++) {
       Y[jpvt[0] - 1] -= Y[kend] * b_A[pvt];
+    }
+  }
+}
+
+/*
+ * Arguments    : const double A[6]
+ *                const double B[3]
+ *                double Y[2]
+ * Return Type  : void
+ */
+void e_mldivide(const double A[6], const double B[3], double Y[2])
+{
+  double b_A[6];
+  double b_B[3];
+  double tau[2];
+  double vn1[2];
+  double vn2[2];
+  double work[2];
+  double absxk;
+  double scale;
+  double t;
+  double temp;
+  int b_i;
+  int exitg1;
+  int i;
+  int ii;
+  int ip1;
+  int ix0;
+  int iy;
+  int kend;
+  int lastc;
+  int lastv;
+  int pvt;
+  signed char jpvt[2];
+  for (i = 0; i < 6; i++) {
+    b_A[i] = A[i];
+  }
+  for (pvt = 0; pvt < 2; pvt++) {
+    jpvt[pvt] = (signed char)(pvt + 1);
+    tau[pvt] = 0.0;
+    work[pvt] = 0.0;
+    ix0 = pvt * 3;
+    temp = 0.0;
+    scale = 3.3121686421112381E-170;
+    kend = ix0 + 3;
+    for (iy = ix0 + 1; iy <= kend; iy++) {
+      absxk = fabs(A[iy - 1]);
+      if (absxk > scale) {
+        t = scale / absxk;
+        temp = temp * t * t + 1.0;
+        scale = absxk;
+      } else {
+        t = absxk / scale;
+        temp += t * t;
+      }
+    }
+    temp = scale * sqrt(temp);
+    vn1[pvt] = temp;
+    vn2[pvt] = temp;
+  }
+  for (b_i = 0; b_i < 2; b_i++) {
+    ip1 = b_i + 2;
+    ii = b_i * 3 + b_i;
+    kend = 0;
+    if ((2 - b_i > 1) && (fabs(vn1[b_i + 1]) > fabs(vn1[b_i]))) {
+      kend = 1;
+    }
+    pvt = b_i + kend;
+    if (pvt != b_i) {
+      kend = pvt * 3;
+      iy = b_i * 3;
+      temp = b_A[kend];
+      b_A[kend] = b_A[iy];
+      b_A[iy] = temp;
+      temp = b_A[kend + 1];
+      b_A[kend + 1] = b_A[iy + 1];
+      b_A[iy + 1] = temp;
+      temp = b_A[kend + 2];
+      b_A[kend + 2] = b_A[iy + 2];
+      b_A[iy + 2] = temp;
+      kend = jpvt[pvt];
+      jpvt[pvt] = jpvt[b_i];
+      jpvt[b_i] = (signed char)kend;
+      vn1[pvt] = vn1[b_i];
+      vn2[pvt] = vn2[b_i];
+    }
+    absxk = b_A[ii];
+    ix0 = ii + 2;
+    tau[b_i] = 0.0;
+    temp = d_xnrm2(2 - b_i, b_A, ii + 2);
+    if (temp != 0.0) {
+      scale = rt_hypotd_snf(b_A[ii], temp);
+      if (b_A[ii] >= 0.0) {
+        scale = -scale;
+      }
+      if (fabs(scale) < 1.0020841800044864E-292) {
+        kend = 0;
+        i = (ii - b_i) + 3;
+        do {
+          kend++;
+          for (pvt = ix0; pvt <= i; pvt++) {
+            b_A[pvt - 1] *= 9.9792015476736E+291;
+          }
+          scale *= 9.9792015476736E+291;
+          absxk *= 9.9792015476736E+291;
+        } while ((fabs(scale) < 1.0020841800044864E-292) && (kend < 20));
+        scale = rt_hypotd_snf(absxk, d_xnrm2(2 - b_i, b_A, ii + 2));
+        if (absxk >= 0.0) {
+          scale = -scale;
+        }
+        tau[b_i] = (scale - absxk) / scale;
+        temp = 1.0 / (absxk - scale);
+        for (pvt = ix0; pvt <= i; pvt++) {
+          b_A[pvt - 1] *= temp;
+        }
+        for (pvt = 0; pvt < kend; pvt++) {
+          scale *= 1.0020841800044864E-292;
+        }
+        absxk = scale;
+      } else {
+        tau[b_i] = (scale - b_A[ii]) / scale;
+        temp = 1.0 / (b_A[ii] - scale);
+        i = (ii - b_i) + 3;
+        for (pvt = ix0; pvt <= i; pvt++) {
+          b_A[pvt - 1] *= temp;
+        }
+        absxk = scale;
+      }
+    }
+    b_A[ii] = absxk;
+    if (b_i + 1 < 2) {
+      b_A[ii] = 1.0;
+      pvt = ii + 4;
+      if (tau[0] != 0.0) {
+        lastv = 3;
+        kend = ii + 2;
+        while ((lastv > 0) && (b_A[kend] == 0.0)) {
+          lastv--;
+          kend--;
+        }
+        lastc = 1;
+        kend = ii + 3;
+        do {
+          exitg1 = 0;
+          if (kend + 1 <= (ii + lastv) + 3) {
+            if (b_A[kend] != 0.0) {
+              exitg1 = 1;
+            } else {
+              kend++;
+            }
+          } else {
+            lastc = 0;
+            exitg1 = 1;
+          }
+        } while (exitg1 == 0);
+      } else {
+        lastv = 0;
+        lastc = 0;
+      }
+      if (lastv > 0) {
+        if (lastc != 0) {
+          work[0] = 0.0;
+          for (iy = pvt; iy <= pvt; iy += 3) {
+            temp = 0.0;
+            i = (iy + lastv) - 1;
+            for (kend = iy; kend <= i; kend++) {
+              temp += b_A[kend - 1] * b_A[(ii + kend) - iy];
+            }
+            kend = div_nde_s32_floor((iy - ii) - 4);
+            work[kend] += temp;
+          }
+        }
+        if (!(-tau[0] == 0.0)) {
+          kend = ii;
+          for (ix0 = 0; ix0 < lastc; ix0++) {
+            if (work[0] != 0.0) {
+              temp = work[0] * -tau[0];
+              i = kend + 4;
+              iy = lastv + kend;
+              for (pvt = i; pvt <= iy + 3; pvt++) {
+                b_A[pvt - 1] += b_A[((ii + pvt) - kend) - 4] * temp;
+              }
+            }
+            kend += 3;
+          }
+        }
+      }
+      b_A[ii] = absxk;
+    }
+    for (ix0 = ip1; ix0 < 3; ix0++) {
+      if (vn1[1] != 0.0) {
+        temp = fabs(b_A[b_i + 3]) / vn1[1];
+        temp = 1.0 - temp * temp;
+        if (temp < 0.0) {
+          temp = 0.0;
+        }
+        scale = vn1[1] / vn2[1];
+        scale = temp * (scale * scale);
+        if (scale <= 1.4901161193847656E-8) {
+          temp = d_xnrm2(2 - b_i, b_A, b_i + 5);
+          vn1[1] = temp;
+          vn2[1] = temp;
+        } else {
+          vn1[1] *= sqrt(temp);
+        }
+      }
+    }
+  }
+  pvt = 0;
+  temp = 6.6613381477509392E-15 * fabs(b_A[0]);
+  while ((pvt < 2) && (!(fabs(b_A[pvt + 3 * pvt]) <= temp))) {
+    pvt++;
+  }
+  b_B[0] = B[0];
+  b_B[1] = B[1];
+  b_B[2] = B[2];
+  for (ix0 = 0; ix0 < 2; ix0++) {
+    Y[ix0] = 0.0;
+    if (tau[ix0] != 0.0) {
+      temp = b_B[ix0];
+      i = ix0 + 2;
+      for (b_i = i; b_i < 4; b_i++) {
+        temp += b_A[(b_i + 3 * ix0) - 1] * b_B[b_i - 1];
+      }
+      temp *= tau[ix0];
+      if (temp != 0.0) {
+        b_B[ix0] -= temp;
+        for (b_i = i; b_i < 4; b_i++) {
+          b_B[b_i - 1] -= b_A[(b_i + 3 * ix0) - 1] * temp;
+        }
+      }
+    }
+  }
+  for (b_i = 0; b_i < pvt; b_i++) {
+    Y[jpvt[b_i] - 1] = b_B[b_i];
+  }
+  for (ix0 = pvt; ix0 >= 1; ix0--) {
+    kend = jpvt[ix0 - 1] - 1;
+    iy = 3 * (ix0 - 1);
+    Y[kend] /= b_A[(ix0 + iy) - 1];
+    for (b_i = 0; b_i <= ix0 - 2; b_i++) {
+      Y[jpvt[0] - 1] -= Y[kend] * b_A[iy];
     }
   }
 }

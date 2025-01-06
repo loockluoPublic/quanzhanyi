@@ -2,7 +2,7 @@
  * File: xzgebal.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Jan-2025 00:11:00
+ * C/C++ source code generated on  : 06-Jan-2025 21:58:02
  */
 
 /* Include Files */
@@ -228,7 +228,7 @@ int xzgebal(double A_data[], int A_size[2], int *ihi, double scale_data[],
         if (b_i + 1 <= *ihi) {
           kend = *ihi - k;
           ix = b_i * n;
-          c = d_xnrm2(kend, A_data, (ix + k) + 1);
+          c = e_xnrm2(kend, A_data, (ix + k) + 1);
           iy = k * n + b_i;
           r = 0.0;
           if (kend >= 1) {
