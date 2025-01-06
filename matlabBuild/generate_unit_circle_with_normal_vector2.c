@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Jan-2025 00:11:00
+ * C/C++ source code generated on  : 06-Jan-2025 21:58:02
  */
 
 /* Include Files */
@@ -141,26 +141,26 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
   emxArray_real_T *y_circle;
   emxArray_real_T *z_circle;
   double n1[6];
-  double n2[3];
   double v1[3];
-  double c[2];
+  double v2[3];
+  double b_dv[2];
   const double *PointIn_data;
   double M1_idx_0;
   double M1_idx_1;
-  double M2_idx_0;
-  double M2_idx_1;
+  double M1_idx_2;
   double absxk;
   double d;
+  double n1_idx_0;
+  double n1_idx_1;
+  double n1_idx_2;
   double normal_idx_0;
   double normal_idx_1;
   double normal_idx_2;
   double r;
   double scale;
   double t;
-  double v2_idx_0;
-  double v2_idx_1;
-  double v2_idx_2;
-  double y;
+  double yN1;
+  double zN1;
   double *deltx_data;
   double *delty_data;
   double *deltz_data;
@@ -180,79 +180,73 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
   /*  1. 计算法向量 */
   d = PointIn_data[0];
   v1[0] = PointIn_data[3] - d;
-  v2_idx_0 = PointIn_data[6] - d;
+  v2[0] = PointIn_data[6] - d;
   d = PointIn_data[1];
   v1[1] = PointIn_data[4] - d;
-  v2_idx_1 = PointIn_data[7] - d;
+  v2[1] = PointIn_data[7] - d;
   d = PointIn_data[2];
   v1[2] = PointIn_data[5] - d;
-  v2_idx_2 = PointIn_data[8] - d;
-  normal_idx_0 = v1[1] * v2_idx_2 - v2_idx_1 * v1[2];
-  normal_idx_1 = v2_idx_0 * v1[2] - v1[0] * v2_idx_2;
-  normal_idx_2 = v1[0] * v2_idx_1 - v2_idx_0 * v1[1];
+  v2[2] = PointIn_data[8] - d;
+  normal_idx_0 = v1[1] * v2[2] - v2[1] * v1[2];
+  normal_idx_1 = v2[0] * v1[2] - v1[0] * v2[2];
+  normal_idx_2 = v1[0] * v2[1] - v2[0] * v1[1];
   /*  叉乘 */
   scale = 3.3121686421112381E-170;
   absxk = fabs(normal_idx_0);
   if (absxk > 3.3121686421112381E-170) {
-    y = 1.0;
+    M1_idx_2 = 1.0;
     scale = absxk;
   } else {
     t = absxk / 3.3121686421112381E-170;
-    y = t * t;
+    M1_idx_2 = t * t;
   }
   absxk = fabs(normal_idx_1);
   if (absxk > scale) {
     t = scale / absxk;
-    y = y * t * t + 1.0;
+    M1_idx_2 = M1_idx_2 * t * t + 1.0;
     scale = absxk;
   } else {
     t = absxk / scale;
-    y += t * t;
+    M1_idx_2 += t * t;
   }
   absxk = fabs(normal_idx_2);
   if (absxk > scale) {
     t = scale / absxk;
-    y = y * t * t + 1.0;
+    M1_idx_2 = M1_idx_2 * t * t + 1.0;
     scale = absxk;
   } else {
     t = absxk / scale;
-    y += t * t;
+    M1_idx_2 += t * t;
   }
-  y = scale * sqrt(y);
+  M1_idx_2 = scale * sqrt(M1_idx_2);
   /*  单位化 */
   /*  2. 计算中点 */
-  normal_idx_0 /= y;
-  d = PointIn_data[0];
-  M1_idx_0 = (d + PointIn_data[3]) / 2.0;
-  M2_idx_0 = (d + PointIn_data[6]) / 2.0;
-  normal_idx_1 /= y;
-  d = PointIn_data[1];
-  M1_idx_1 = (d + PointIn_data[4]) / 2.0;
-  M2_idx_1 = (d + PointIn_data[7]) / 2.0;
-  normal_idx_2 /= y;
-  d = PointIn_data[2];
+  normal_idx_0 /= M1_idx_2;
+  M1_idx_0 = (PointIn_data[0] + PointIn_data[3]) / 2.0;
+  normal_idx_1 /= M1_idx_2;
+  M1_idx_1 = (PointIn_data[1] + PointIn_data[4]) / 2.0;
+  normal_idx_2 /= M1_idx_2;
+  M1_idx_2 = (PointIn_data[2] + PointIn_data[5]) / 2.0;
   /*  3. 计算垂直向量 */
-  scale = v1[1] * normal_idx_2 - normal_idx_1 * v1[2];
-  absxk = normal_idx_0 * v1[2] - v1[0] * normal_idx_2;
-  t = v1[0] * normal_idx_1 - normal_idx_0 * v1[1];
-  n2[0] = v2_idx_1 * normal_idx_2 - normal_idx_1 * v2_idx_2;
-  n2[1] = normal_idx_0 * v2_idx_2 - v2_idx_0 * normal_idx_2;
-  n2[2] = v2_idx_0 * normal_idx_1 - normal_idx_0 * v2_idx_1;
+  n1_idx_0 = v1[1] * normal_idx_2 - normal_idx_1 * v1[2];
+  n1_idx_1 = normal_idx_0 * v1[2] - v1[0] * normal_idx_2;
+  n1_idx_2 = v1[0] * normal_idx_1 - normal_idx_0 * v1[1];
   /*  4. 求解圆心 */
+  n1[3] = -(v2[1] * normal_idx_2 - normal_idx_1 * v2[2]);
+  n1[4] = -(normal_idx_0 * v2[2] - v2[0] * normal_idx_2);
+  n1[5] = -(v2[0] * normal_idx_1 - normal_idx_0 * v2[1]);
+  n1[0] = n1_idx_0;
+  v1[0] = (PointIn_data[0] + PointIn_data[6]) / 2.0 - M1_idx_0;
+  n1[1] = n1_idx_1;
+  v1[1] = (PointIn_data[1] + PointIn_data[7]) / 2.0 - M1_idx_1;
+  n1[2] = n1_idx_2;
+  v1[2] = (PointIn_data[2] + PointIn_data[8]) / 2.0 - M1_idx_2;
+  e_mldivide(n1, v1, b_dv);
   /*  5. 计算半径 */
-  n1[0] = scale;
-  n1[1] = -n2[0];
-  n1[2] = absxk;
-  n1[3] = -n2[1];
-  n1[4] = t;
-  n1[5] = -n2[2];
-  c[0] =
-      (scale * M1_idx_0 + absxk * M1_idx_1) + t * ((d + PointIn_data[5]) / 2.0);
-  c[1] = (n2[0] * M2_idx_0 + n2[1] * M2_idx_1) +
-         n2[2] * ((d + PointIn_data[8]) / 2.0);
-  d_mldivide(n1, c, v1);
   scale = 3.3121686421112381E-170;
-  absxk = fabs(PointIn_data[0] - v1[0]);
+  d = M1_idx_0 + b_dv[0] * n1_idx_0;
+  M1_idx_0 = d;
+  absxk = fabs(PointIn_data[0] - d);
   if (absxk > 3.3121686421112381E-170) {
     r = 1.0;
     scale = absxk;
@@ -260,7 +254,9 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
     t = absxk / 3.3121686421112381E-170;
     r = t * t;
   }
-  absxk = fabs(PointIn_data[1] - v1[1]);
+  d = M1_idx_1 + b_dv[0] * n1_idx_1;
+  M1_idx_1 = d;
+  absxk = fabs(PointIn_data[1] - d);
   if (absxk > scale) {
     t = scale / absxk;
     r = r * t * t + 1.0;
@@ -269,7 +265,8 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
     t = absxk / scale;
     r += t * t;
   }
-  absxk = fabs(PointIn_data[2] - v1[2]);
+  d = M1_idx_2 + b_dv[0] * n1_idx_2;
+  absxk = fabs(PointIn_data[2] - d);
   if (absxk > scale) {
     t = scale / absxk;
     r = r * t * t + 1.0;
@@ -279,30 +276,29 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
     r += t * t;
   }
   r = scale * sqrt(r);
-  v2_idx_0 = normal_idx_0;
-  v2_idx_1 = normal_idx_1;
-  v2_idx_2 = normal_idx_2;
   /*  三个点定义 */
   /*  斜率计算 */
-  scale = (normal_idx_0 * normal_idx_0 + normal_idx_1 * normal_idx_1) +
-          normal_idx_2 * normal_idx_2;
-  absxk = -(((0.0 - PUp[0]) * normal_idx_0 + (0.0 - PUp[1]) * normal_idx_1) +
-            (0.0 - PUp[2]) * normal_idx_2) /
-          scale;
+  M1_idx_2 = (M1_idx_0 + normal_idx_0) - M1_idx_0;
+  absxk = (M1_idx_1 + normal_idx_1) - M1_idx_1;
+  n1_idx_0 = (d + normal_idx_2) - d;
+  scale = (M1_idx_2 * M1_idx_2 + absxk * absxk) + n1_idx_0 * n1_idx_0;
+  n1_idx_1 = -(((M1_idx_0 - PUp[0]) * M1_idx_2 + (M1_idx_1 - PUp[1]) * absxk) +
+               (d - PUp[2]) * n1_idx_0) /
+             scale;
   /*  P1点在轴线上的投影坐标 */
-  M2_idx_0 = absxk * normal_idx_0;
-  M1_idx_1 = absxk * normal_idx_1;
-  M2_idx_1 = absxk * normal_idx_2;
+  n1_idx_2 = n1_idx_1 * M1_idx_2 + M1_idx_0;
+  yN1 = n1_idx_1 * absxk + M1_idx_1;
+  zN1 = n1_idx_1 * n1_idx_0 + d;
   /*  三个点定义 */
   /*  斜率计算 */
-  absxk =
-      -(((0.0 - PDown[0]) * normal_idx_0 + (0.0 - PDown[1]) * normal_idx_1) +
-        (0.0 - PDown[2]) * normal_idx_2) /
+  n1_idx_1 =
+      -(((M1_idx_0 - PDown[0]) * M1_idx_2 + (M1_idx_1 - PDown[1]) * absxk) +
+        (d - PDown[2]) * n1_idx_0) /
       scale;
   /*  P1点在轴线上的投影坐标 */
-  t = absxk * normal_idx_0;
-  M1_idx_0 = absxk * normal_idx_1;
-  scale = absxk * normal_idx_2;
+  t = n1_idx_1 * M1_idx_2 + M1_idx_0;
+  absxk = n1_idx_1 * absxk + M1_idx_1;
+  M1_idx_2 = n1_idx_1 * n1_idx_0 + d;
   emxInit_real_T(&deltx, 2);
   i = deltx->size[0] * deltx->size[1];
   deltx->size[0] = 1;
@@ -323,12 +319,15 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
   emxEnsureCapacity_real_T(deltz, i);
   deltz_data = deltz->data;
   for (b_i = 0; b_i < i1; b_i++) {
-    absxk = ((double)b_i + 1.0) / ((laynum + 1.0) - ((double)b_i + 1.0));
-    deltx_data[b_i] = (M2_idx_0 + absxk * t) / (absxk + 1.0);
-    delty_data[b_i] = (M1_idx_1 + absxk * M1_idx_0) / (absxk + 1.0);
-    deltz_data[b_i] = (M2_idx_1 + absxk * scale) / (absxk + 1.0);
+    scale = ((double)b_i + 1.0) / ((laynum + 1.0) - ((double)b_i + 1.0));
+    deltx_data[b_i] = (n1_idx_2 + scale * t) / (scale + 1.0);
+    delty_data[b_i] = (yN1 + scale * absxk) / (scale + 1.0);
+    deltz_data[b_i] = (zN1 + scale * M1_idx_2) / (scale + 1.0);
   }
   /*  定义法向量 */
+  n1_idx_0 = normal_idx_0;
+  n1_idx_1 = normal_idx_1;
+  n1_idx_2 = normal_idx_2;
   /*  检查法向量是否是单位向量，如果不是则归一化 */
   scale = 3.3121686421112381E-170;
   absxk = fabs(normal_idx_0);
@@ -359,77 +358,77 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
   }
   d = scale * sqrt(d);
   if (d != 1.0) {
-    v2_idx_0 = normal_idx_0 / d;
-    v2_idx_1 = normal_idx_1 / d;
-    v2_idx_2 = normal_idx_2 / d;
+    n1_idx_0 = normal_idx_0 / d;
+    n1_idx_1 = normal_idx_1 / d;
+    n1_idx_2 = normal_idx_2 / d;
   }
-  v1[0] = v2_idx_1 - v2_idx_2 * 0.0;
-  v1[1] = v2_idx_2 * 0.0 - v2_idx_0;
-  v1[2] = v2_idx_0 * 0.0 - v2_idx_1 * 0.0;
+  v1[0] = n1_idx_1 - n1_idx_2 * 0.0;
+  v1[1] = n1_idx_2 * 0.0 - n1_idx_0;
+  v1[2] = n1_idx_0 * 0.0 - n1_idx_1 * 0.0;
   /*  找到与法向量垂直的一个向量 */
   scale = 3.3121686421112381E-170;
   absxk = fabs(v1[0]);
   if (absxk > 3.3121686421112381E-170) {
-    y = 1.0;
+    M1_idx_2 = 1.0;
     scale = absxk;
   } else {
     t = absxk / 3.3121686421112381E-170;
-    y = t * t;
+    M1_idx_2 = t * t;
   }
   absxk = fabs(v1[1]);
   if (absxk > scale) {
     t = scale / absxk;
-    y = y * t * t + 1.0;
+    M1_idx_2 = M1_idx_2 * t * t + 1.0;
     scale = absxk;
   } else {
     t = absxk / scale;
-    y += t * t;
+    M1_idx_2 += t * t;
   }
   t = v1[2] / scale;
-  y += t * t;
-  y = scale * sqrt(y);
-  if (y < 2.2204460492503131E-16) {
+  M1_idx_2 += t * t;
+  M1_idx_2 = scale * sqrt(M1_idx_2);
+  if (M1_idx_2 < 2.2204460492503131E-16) {
     /*  如果法向量与 [0, 0, 1] 平行，则选择另一个向量 */
-    v1[0] = v2_idx_1 * 0.0 - v2_idx_2;
-    v1[1] = v2_idx_2 * 0.0 - v2_idx_0 * 0.0;
-    v1[2] = v2_idx_0 - v2_idx_1 * 0.0;
+    v1[0] = n1_idx_1 * 0.0 - n1_idx_2;
+    v1[1] = n1_idx_2 * 0.0 - n1_idx_0 * 0.0;
+    v1[2] = n1_idx_0 - n1_idx_1 * 0.0;
   }
   scale = 3.3121686421112381E-170;
   absxk = fabs(v1[0]);
   if (absxk > 3.3121686421112381E-170) {
-    y = 1.0;
+    M1_idx_2 = 1.0;
     scale = absxk;
   } else {
     t = absxk / 3.3121686421112381E-170;
-    y = t * t;
+    M1_idx_2 = t * t;
   }
   absxk = fabs(v1[1]);
   if (absxk > scale) {
     t = scale / absxk;
-    y = y * t * t + 1.0;
+    M1_idx_2 = M1_idx_2 * t * t + 1.0;
     scale = absxk;
   } else {
     t = absxk / scale;
-    y += t * t;
+    M1_idx_2 += t * t;
   }
   absxk = fabs(v1[2]);
   if (absxk > scale) {
     t = scale / absxk;
-    y = y * t * t + 1.0;
+    M1_idx_2 = M1_idx_2 * t * t + 1.0;
     scale = absxk;
   } else {
     t = absxk / scale;
-    y += t * t;
+    M1_idx_2 += t * t;
   }
-  y = scale * sqrt(y);
-  v1[0] /= y;
-  v1[1] /= y;
-  v1[2] /= y;
+  M1_idx_2 = scale * sqrt(M1_idx_2);
+  v1[0] /= M1_idx_2;
+  v1[1] /= M1_idx_2;
+  v1[2] /= M1_idx_2;
   /*  归一化向量 */
   /*  创建另一个垂直向量 */
-  n2[0] = (v1[1] * v2_idx_2 - v2_idx_1 * v1[2]) * r;
-  n2[1] = (v2_idx_0 * v1[2] - v1[0] * v2_idx_2) * r;
-  n2[2] = (v1[0] * v2_idx_1 - v2_idx_0 * v1[1]) * r;
+  v2[0] = (v1[1] * n1_idx_2 - n1_idx_1 * v1[2]) * r;
+  v2[1] = (n1_idx_0 * v1[2] - v1[0] * n1_idx_2) * r;
+  v2[2] = (v1[0] * n1_idx_1 - n1_idx_0 * v1[1]) * r;
   v1[0] *= r;
   v1[1] *= r;
   v1[2] *= r;
@@ -453,10 +452,10 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
         if (theta->size[1] >= 2) {
           theta_data[0] = -2.0943951023931953;
           if (theta->size[1] >= 3) {
-            scale = 2.0943951023931953 / ((double)theta->size[1] - 1.0);
+            M1_idx_2 = 2.0943951023931953 / ((double)theta->size[1] - 1.0);
             for (k = 2; k <= b_i; k++) {
               theta_data[k - 1] =
-                  (double)(((k << 1) - theta->size[1]) - 1) * scale;
+                  (double)(((k << 1) - theta->size[1]) - 1) * M1_idx_2;
             }
             if ((theta->size[1] & 1) == 1) {
               theta_data[theta->size[1] >> 1] = 0.0;
@@ -480,10 +479,11 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
       if (theta->size[1] >= 2) {
         theta_data[0] = 1.0471975511965976;
         if (theta->size[1] >= 3) {
-          scale = 4.1887902047863914 / ((double)theta->size[1] - 1.0);
+          M1_idx_2 = 4.1887902047863914 / ((double)theta->size[1] - 1.0);
           i = theta->size[1];
           for (k = 0; k <= i - 3; k++) {
-            theta_data[k + 1] = ((double)k + 1.0) * scale + 1.0471975511965976;
+            theta_data[k + 1] =
+                ((double)k + 1.0) * M1_idx_2 + 1.0471975511965976;
           }
         }
       }
@@ -512,10 +512,10 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
     x_circle_data = x_circle->data;
     b_i = z_circle->size[1];
     for (i = 0; i < b_i; i++) {
-      x_circle_data[i] = z_circle_data[i] * v1[0] + theta_data[i] * n2[0];
+      x_circle_data[i] = z_circle_data[i] * v1[0] + theta_data[i] * v2[0];
     }
   } else {
-    binary_expand_op_21(x_circle, z_circle, v1, theta, n2);
+    binary_expand_op_21(x_circle, z_circle, v1, theta, v2);
     x_circle_data = x_circle->data;
   }
   emxInit_real_T(&y_circle, 2);
@@ -527,10 +527,10 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
     y_circle_data = y_circle->data;
     b_i = z_circle->size[1];
     for (i = 0; i < b_i; i++) {
-      y_circle_data[i] = z_circle_data[i] * v1[1] + theta_data[i] * n2[1];
+      y_circle_data[i] = z_circle_data[i] * v1[1] + theta_data[i] * v2[1];
     }
   } else {
-    binary_expand_op_20(y_circle, z_circle, v1, theta, n2);
+    binary_expand_op_20(y_circle, z_circle, v1, theta, v2);
     y_circle_data = y_circle->data;
   }
   if (z_circle->size[1] == theta->size[1]) {
@@ -540,10 +540,10 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
     emxEnsureCapacity_real_T(z_circle, i);
     z_circle_data = z_circle->data;
     for (i = 0; i <= b_i; i++) {
-      z_circle_data[i] = z_circle_data[i] * v1[2] + theta_data[i] * n2[2];
+      z_circle_data[i] = z_circle_data[i] * v1[2] + theta_data[i] * v2[2];
     }
   } else {
-    binary_expand_op_16(z_circle, v1, theta, n2);
+    binary_expand_op_16(z_circle, v1, theta, v2);
     z_circle_data = z_circle->data;
   }
   emxFree_real_T(&theta);
@@ -564,20 +564,20 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
     } else {
       i = (int)d - 1;
     }
-    scale = deltx_data[j];
-    absxk = delty_data[j];
-    t = deltz_data[j];
+    M1_idx_2 = deltx_data[j];
+    scale = delty_data[j];
+    absxk = deltz_data[j];
     b_i = x_circle->size[1];
     for (k = 0; k < b_i; k++) {
-      theta_data[3 * (i + k)] = x_circle_data[k] + scale;
+      theta_data[3 * (i + k)] = x_circle_data[k] + M1_idx_2;
     }
     b_i = y_circle->size[1];
     for (k = 0; k < b_i; k++) {
-      theta_data[3 * (i + k) + 1] = y_circle_data[k] + absxk;
+      theta_data[3 * (i + k) + 1] = y_circle_data[k] + scale;
     }
     b_i = z_circle->size[1];
     for (k = 0; k < b_i; k++) {
-      theta_data[3 * (i + k) + 2] = z_circle_data[k] + t;
+      theta_data[3 * (i + k) + 2] = z_circle_data[k] + absxk;
     }
   }
   emxFree_real_T(&z_circle);

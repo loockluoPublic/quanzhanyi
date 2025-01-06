@@ -2,7 +2,7 @@
  * File: xnrm2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Jan-2025 00:11:00
+ * C/C++ source code generated on  : 06-Jan-2025 21:58:02
  */
 
 /* Include Files */
@@ -85,11 +85,47 @@ double c_xnrm2(int n, const double x[4], int ix0)
 
 /*
  * Arguments    : int n
+ *                const double x[6]
+ *                int ix0
+ * Return Type  : double
+ */
+double d_xnrm2(int n, const double x[6], int ix0)
+{
+  double absxk;
+  double scale;
+  double t;
+  double y;
+  int k;
+  int kend;
+  y = 0.0;
+  if (n == 1) {
+    y = fabs(x[ix0 - 1]);
+  } else {
+    scale = 3.3121686421112381E-170;
+    kend = (ix0 + n) - 1;
+    for (k = ix0; k <= kend; k++) {
+      absxk = fabs(x[k - 1]);
+      if (absxk > scale) {
+        t = scale / absxk;
+        y = y * t * t + 1.0;
+        scale = absxk;
+      } else {
+        t = absxk / scale;
+        y += t * t;
+      }
+    }
+    y = scale * sqrt(y);
+  }
+  return y;
+}
+
+/*
+ * Arguments    : int n
  *                const double x_data[]
  *                int ix0
  * Return Type  : double
  */
-double d_xnrm2(int n, const double x_data[], int ix0)
+double e_xnrm2(int n, const double x_data[], int ix0)
 {
   double absxk;
   double scale;
@@ -125,7 +161,7 @@ double d_xnrm2(int n, const double x_data[], int ix0)
  * Arguments    : const double x[3]
  * Return Type  : double
  */
-double e_xnrm2(const double x[3])
+double f_xnrm2(const double x[3])
 {
   double absxk;
   double scale;
@@ -153,7 +189,7 @@ double e_xnrm2(const double x[3])
  *                int ix0
  * Return Type  : double
  */
-double f_xnrm2(const double x[8], int ix0)
+double g_xnrm2(const double x[8], int ix0)
 {
   double absxk;
   double scale;
@@ -183,7 +219,7 @@ double f_xnrm2(const double x[8], int ix0)
  *                int ix0
  * Return Type  : double
  */
-double g_xnrm2(const double x[6], int ix0)
+double h_xnrm2(const double x[6], int ix0)
 {
   return fabs(x[ix0 - 1]);
 }

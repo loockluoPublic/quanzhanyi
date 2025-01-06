@@ -2,7 +2,7 @@
  * File: xgeev.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 05-Jan-2025 00:11:00
+ * C/C++ source code generated on  : 06-Jan-2025 21:58:02
  */
 
 /* Include Files */
@@ -147,7 +147,7 @@ int xgeev(const double A_data[], const int A_size[2], creal_T W_data[],
         cfrom1 = x_data[1];
         tau_data = 0.0;
         if (ihi - 1 > 0) {
-          absxk = d_xnrm2(0, (double *)x->data, n);
+          absxk = e_xnrm2(0, (double *)x->data, n);
           if (absxk != 0.0) {
             ctoc = rt_hypotd_snf(cfrom1, absxk);
             if (cfrom1 >= 0.0) {
@@ -164,7 +164,7 @@ int xgeev(const double A_data[], const int A_size[2], creal_T W_data[],
                 ctoc *= 9.9792015476736E+291;
                 cfrom1 *= 9.9792015476736E+291;
               } while ((fabs(ctoc) < 1.0020841800044864E-292) && (knt < 20));
-              ctoc = rt_hypotd_snf(cfrom1, d_xnrm2(0, (double *)x->data, n));
+              ctoc = rt_hypotd_snf(cfrom1, e_xnrm2(0, (double *)x->data, n));
               if (cfrom1 >= 0.0) {
                 ctoc = -ctoc;
               }
