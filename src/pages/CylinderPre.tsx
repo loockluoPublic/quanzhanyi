@@ -243,7 +243,7 @@ function CylinderPre() {
             <PointsVector3
               hideLabel
               className='!q-inline-flex !q-my-1'
-              value={data.triPoints?.[1] as CustomVector3}
+              value={data.triPoints?.[2] as CustomVector3}
               before={() => {
                 CustomVector3.setPublicInfo('T', 2);
               }}
