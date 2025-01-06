@@ -24,8 +24,10 @@ function CylinderPre() {
   const { measure, loading, points } = useMeasure();
 
   const autoGetPoints = () => {
-    if (!(data?.direct?.[0] && data?.direct?.[1])) {
-      message.error('缺少轴线方向，请采集');
+    if (
+      !(data?.triPoints?.[0] && data?.triPoints?.[1] && data?.triPoints?.[1])
+    ) {
+      message.error('缺少圆周点');
       return;
     }
 
@@ -195,29 +197,6 @@ function CylinderPre() {
             />
           </span>
         </div>
-
-        {/* <span className=' q-block q-ml-8'>
-          管道轴线方向：
-          <span>
-            <PointsVector2 value={data.direct} />
-            <Button
-              disabled={!auth}
-              style={{ marginLeft: '10px' }}
-              type='primary'
-              onClick={() => {
-                getLine().then((direct) => {
-                  if (rad2ang(direct[1]) > 180) {
-                    direct[1] = ang2rad(360 - rad2ang(direct[1]));
-                  }
-                  setData({ ...data, direct });
-                });
-              }}
-              size='small'
-            >
-              采集
-            </Button>
-          </span>
-        </span> */}
       </div>
 
       <h3 className='border-top  q-mt-4 q-pt-2'></h3>
@@ -441,7 +420,6 @@ function CylinderPre() {
   );
   return (
     <CylinderModule
-      direct={data.direct}
       firstPoints={[...data.firstPoints, ...data?.triPoints]}
       component={comp}
       mPoints={data.mPoints}
