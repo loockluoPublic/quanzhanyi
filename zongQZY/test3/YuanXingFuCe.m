@@ -74,7 +74,7 @@ for i =  1:shenglunum
     TempA = theta(i);
     DisL = 2*sqrt(1 - TempT.^2).*Mradial;
     DisX = DisL./sin(TempA);
-    LTPY(1,i) = (Distance(i)-DisX)./2;
+    LTPY(1,i) = (Distance(i)-DisX);
 end
 
 
