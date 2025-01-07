@@ -22,6 +22,15 @@ function CylinderPre() {
   const auth = useRecoilValue(Auth);
 
   const { measure, loading, points } = useMeasure();
+  console.log("%c Line:25 🍣 points", "color:#f5ce50", points);
+
+  function getMaxKey(type: 'S' | "P") {
+    return Math.max(
+      0,
+      ...data.mPoints?.filter(p => p.label === type)?.map((item) => item.key)
+    );
+  }
+
 
   const autoGetPoints = () => {
     if (
@@ -70,6 +79,7 @@ function CylinderPre() {
   const [cyLoading, setLoading] = useState(false);
 
   const [customStandardDeviation, setStandardDeviation] = useState(3);
+
 
   const calculateCylinders = (curData: GlobalData, isFirst?: boolean) => {
     const enablePoints = curData.mPoints.filter((item) => item.enable);
@@ -124,9 +134,9 @@ function CylinderPre() {
         .fromCustomVector3()
         .setEnable(
           Math.abs(item.originDiff) <
-            (isFirst
-              ? 3 * curData.standardDeviation
-              : curData.standardDeviation)
+          (isFirst
+            ? 3 * curData.standardDeviation
+            : curData.standardDeviation)
         );
     });
 
@@ -314,12 +324,9 @@ function CylinderPre() {
           }}
           buttonText='手动采集'
           before={() => {
-            const maxKey = Math.max(
-              0,
-              ...data.mPoints?.map((item) => item.key)
-            );
+            const maxKey = getMaxKey("S");
 
-            CustomVector3.setPublicInfo('P', maxKey);
+            CustomVector3.setPublicInfo('S', maxKey);
           }}
           onChange={(v) => {
             setData((d) => ({
@@ -384,12 +391,6 @@ function CylinderPre() {
             style={{ width: '200px' }}
             value={customStandardDeviation}
             onChange={(standardDeviation) => {
-              // setData(() => {
-              //   return {
-              //     ...data,
-              //     // standardDeviation:standardDeviation*
-              //   };
-              // });
               setStandardDeviation(standardDeviation);
             }}
             addonAfter='δ'
@@ -426,6 +427,8 @@ function CylinderPre() {
       calulateRes={data.calulateRes}
     ></CylinderModule>
   );
+
+
 }
 
 export default CylinderPre;

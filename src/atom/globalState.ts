@@ -87,5 +87,5 @@ export const ShowCube = atom<boolean>({
 
 export const Auth = atom<boolean>({
   key: 'auth',
-  default: false,
+  default: location.href.includes('auth'),
 });

@@ -9,7 +9,7 @@ export default function useMeasure() {
 
   const addPoint = (point: CustomVector3) => {
     setPoints((p) => {
-      return [...p, point];
+      return [ point,...p];
     });
   };
 
@@ -19,11 +19,13 @@ export default function useMeasure() {
   ) => {
     setTrue();
     setPoints([]);
+    let i =0
     CustomVector3.setPublicInfo("P", 0);
     for await (const p of ps) {
       const np: any = await pointToAndMeasure(p).catch((err) => {
         console.log("%c Line:25 🌭 err", "color:#ffdd4d", err);
       });
+      np.key = ++i
       if (np) {
         addPoint?.(np);
         onData?.(np);

@@ -15,9 +15,10 @@ export default function CylinderTable() {
     }
   };
 
-  const remove = (i) => {
-    const m = [...d.mPoints];
-    m.splice(i, 1);
+  const remove = (item:any) => {
+    
+    const m = [...d.mPoints].filter(p=> !(item.key === p.key && item.label === p.label));
+
     sd((d) => {
       return {
         ...d,
@@ -54,7 +55,7 @@ export default function CylinderTable() {
             value={item}
             showGetPoints={false}
             remove={() => {
-              remove(i);
+              remove(item);
             }}
           />
         );

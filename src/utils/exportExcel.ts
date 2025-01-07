@@ -58,9 +58,9 @@ export const transformJSON2Excel = (data: GlobalData, type = false) => {
     csvData.push([], label, x, y, z);
   };
 
-  if (data.centerPoint) {
-    getDatas([data.centerPoint], '中心点');
-  }
+  // if (data.centerPoint) {
+  //   getDatas([data.centerPoint], '中心点');
+  // }
 
   if (data?.triPoints?.length > 0) {
     const x = ['x'],
@@ -93,10 +93,10 @@ export const transformJSON2Excel = (data: GlobalData, type = false) => {
   }
 
   if (data.type === TType.cycle) {
-    if (data.calulateRes.mTaon)
-      csvData.push(getDatas(data.calulateRes.mTaon, 'mTaon'));
-    if (data.calulateRes.center)
-      csvData.push(getDatas(data.calulateRes.center, 'center'));
+    // if (data.calulateRes.mTaon)
+    //   csvData.push(getDatas(data.calulateRes.mTaon, 'mTaon'));
+    // if (data.calulateRes.center)
+    //   csvData.push(getDatas(data.calulateRes.center, 'center'));
 
     csvData.push([  ['声道角', data.sdj]]);
   }

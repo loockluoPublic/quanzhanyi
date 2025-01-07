@@ -1116,8 +1116,8 @@ export const yuanXingFuCe = (
   sdmNum: number
 ) => {
   if (sdmNum === 2) {
-    const resA = yuanXingFuCeFn(calulateRes, cylinderAgainTable, sdfb, sdj);
-    const resB = yuanXingFuCeFn(calulateRes, cylinderAgainTable, sdfb, sdj);
+    const resA = yuanXingFuCeFn(calulateRes, cylinderAgainTable.slice(0,sdfb), sdfb, sdj);
+    const resB = yuanXingFuCeFn(calulateRes, cylinderAgainTable.slice(sdfb), sdfb, sdj);
     return [...resA, ...resB];
   } else {
     return yuanXingFuCeFn(calulateRes, cylinderAgainTable, sdfb, sdj);
