@@ -15,9 +15,9 @@ export default function CylinderTable() {
     }
   };
 
-  const remove = (item:any) => {
-    
-    const m = [...d.mPoints].filter(p=> !(item.key === p.key && item.label === p.label));
+  const remove = (item: any) => {
+
+    const m = [...d.mPoints].filter(p => !(item.key === p.key && item.label === p.label));
 
     sd((d) => {
       return {
@@ -48,7 +48,7 @@ export default function CylinderTable() {
       align: "left",
       key: "x",
 
-      render: (_, item, i) => {
+      render: (_, item) => {
         console.log("%c Line:51 🥪 item", "color:#ea7e5c", item);
         return (
           <PointsVector3
