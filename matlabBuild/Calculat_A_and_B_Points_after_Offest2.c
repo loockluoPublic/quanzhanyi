@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points_after_Offest2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 06-Jan-2025 21:58:02
+ * C/C++ source code generated on  : 07-Jan-2025 19:05:54
  */
 
 /* Include Files */
@@ -580,12 +580,12 @@ void Calculat_A_and_B_Points_after_Offest2(
       t = rAng_data[3 * b_i];
       y = rAng_data[i];
       scale = rAng_data[i1];
-      disPhiDian_data[b_i] = -sqrt((t * t + y * y) + scale * scale) * cos(phi);
+      disPhiDian_data[b_i] = -sqrt((t * t + y * y) + scale * scale) / tan(phi);
     } else {
       t = rAng_data[3 * b_i];
       y = rAng_data[i];
       scale = rAng_data[i1];
-      disPhiDian_data[b_i] = sqrt((t * t + y * y) + scale * scale) * cos(phi);
+      disPhiDian_data[b_i] = sqrt((t * t + y * y) + scale * scale) / tan(phi);
     }
   }
   /*  偏移移动 ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！ */
