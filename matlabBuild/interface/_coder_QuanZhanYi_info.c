@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Jan-2025 19:05:54
+ * C/C++ source code generated on  : 07-Jan-2025 22:39:55
  */
 
 /* Include Files */
@@ -514,7 +514,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\YuanXingFuCe."
           "m"));
   emlrtSetField(xEntryPoints, 23, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739594.9579513889));
+                emlrtMxCreateDoubleScalar(739624.9440509259));
   emlrtSetField(xEntryPoints, 23, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 23, "Visible", emlrtMxCreateLogicalScalar(true));

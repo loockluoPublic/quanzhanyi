@@ -2,7 +2,7 @@
  * File: YuanXingFuCe.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Jan-2025 19:05:54
+ * C/C++ source code generated on  : 07-Jan-2025 22:39:55
  */
 
 /* Include Files */
@@ -308,9 +308,8 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   }
   for (b_i = 0; b_i < loop_ub_tmp; b_i++) {
     b_scale = TiC_data[b_i];
-    LTPY_data[b_i] = (Distance_data[b_i] - 2.0 * sqrt(1.0 - b_scale * b_scale) *
-                                               Mradial / sin(theta_data[b_i])) /
-                     2.0;
+    LTPY_data[b_i] = Distance_data[b_i] - 2.0 * sqrt(1.0 - b_scale * b_scale) *
+                                              Mradial / sin(theta_data[b_i]);
   }
   /*  计算权重 1 */
   i = TiYiCe->size[0] * TiYiCe->size[1];
