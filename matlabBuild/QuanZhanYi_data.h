@@ -2,7 +2,7 @@
  * File: QuanZhanYi_data.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 06-Jan-2025 21:58:02
+ * C/C++ source code generated on  : 07-Jan-2025 19:05:54
  */
 
 #ifndef QUANZHANYI_DATA_H

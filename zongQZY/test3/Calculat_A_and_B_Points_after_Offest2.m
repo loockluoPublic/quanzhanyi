@@ -89,9 +89,9 @@ disPhiDian = zeros(1,numShengLu*2);
 for i = 1:2*numShengLu
     PhiDian(:,i) = v.*Mradial.*cos(AngR(i));
     if i <= numShengLu
-        disPhiDian(i) = -sqrt((PhiDian(1,i)).^2+(PhiDian(2,i)).^2+(PhiDian(3,i)).^2).*cos(phi);
+        disPhiDian(i) = -sqrt((PhiDian(1,i)).^2+(PhiDian(2,i)).^2+(PhiDian(3,i)).^2)./tan(phi);
     else
-        disPhiDian(i) = sqrt((PhiDian(1,i)).^2+(PhiDian(2,i)).^2+(PhiDian(3,i)).^2)*cos(phi);
+        disPhiDian(i) = sqrt((PhiDian(1,i)).^2+(PhiDian(2,i)).^2+(PhiDian(3,i)).^2)./tan(phi);
     end
 end
 

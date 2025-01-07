@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 06-Jan-2025 21:58:02
+ * C/C++ source code generated on  : 07-Jan-2025 19:05:54
  */
 
 /* Include Files */
@@ -148,7 +148,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\Calculat_A_"
           "and_B_Points_after_Offest2.m"));
   emlrtSetField(xEntryPoints, 2, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739620.93954861106));
+                emlrtMxCreateDoubleScalar(739624.45664351853));
   emlrtSetField(xEntryPoints, 2, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 2, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -330,7 +330,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\generate_unit_"
           "circle_with_normal_vector2.m"));
   emlrtSetField(xEntryPoints, 12, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739623.9145833333));
+                emlrtMxCreateDoubleScalar(739624.78620370373));
   emlrtSetField(xEntryPoints, 12, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 12, "Visible", emlrtMxCreateLogicalScalar(true));
