@@ -2,7 +2,7 @@
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Jan-2025 22:39:55
+ * C/C++ source code generated on  : 08-Jan-2025 23:39:18
  */
 
 /* Include Files */
@@ -132,12 +132,12 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   emxInit_real_T(&r, 2);
   emxInit_real_T(&n, 2);
   emxInit_real_T(&b_y, 1);
-  for (i = 0; i < 180; i++) {
-    d = 0.035101593894858021 * (double)i;
+  for (i = 0; i < 200; i++) {
+    d = 0.031573795513465258 * (double)i;
     d1 = cos(d);
     d2 = sin(d);
-    for (j = 0; j < 180; j++) {
-      rcoselev_tmp = 0.035101593894858021 * (double)j;
+    for (j = 0; j < 200; j++) {
+      rcoselev_tmp = 0.031573795513465258 * (double)j;
       rcoselev = cos(rcoselev_tmp);
       norm_vec = sin(rcoselev_tmp);
       b_n[0] = rcoselev * d1;
@@ -275,7 +275,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
         }
         b_svd(r, U, S, V);
       } else {
-        binary_expand_op_9(err, x2_contents, x_contents, U, S, V);
+        binary_expand_op_8(err, x2_contents, x_contents, U, S, V);
       }
       /*  For clarity, set the quadratic form variables */
       /*  Convert to centre/radius */
@@ -342,7 +342,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
             denom_data[xi] = absxk * absxk + Mu2_idx_1 * Mu2_idx_1;
           }
         } else {
-          binary_expand_op_8(denom, b_n, err, x2_contents);
+          binary_expand_op_7(denom, b_n, err, x2_contents);
           denom_data = denom->data;
         }
         ibtile = denom->size[0];
@@ -362,7 +362,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
             Err_every_data[xi] = absxk * absxk;
           }
         } else {
-          binary_expand_op_7(x, x_contents);
+          binary_expand_op_6(x, x_contents);
           Err_every_data = x->data;
         }
         if (x->size[1] == 0) {
@@ -413,7 +413,7 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
           }
           mldivide(n, b_y, h);
         } else {
-          binary_expand_op_6(b_n, err, denom, x2_contents, outsize, y, h);
+          binary_expand_op_5(b_n, err, denom, x2_contents, outsize, y, h);
         }
         /*  Check for convergence */
         Mu2_idx_1 = 0.0;

@@ -1,4 +1,4 @@
-function [PointTable_A_off,PointTable_B_off,BianHao] = Calculat_A_and_B_Points_after_Offest2(Bottom_round_center1,Bottom_round_center2,MTaon,Mcenter,Mradial,PAB,phi,Ang,toff,roff)
+function [PointTable_A_off2,PointTable_B_off2,BianHao] = Calculat_A_and_B_Points_after_Offest2(Bottom_round_center1,Bottom_round_center2,MTaon,Mcenter,Mradial,PAB,phi,Ang,toff,roff)
 
 %% 0、编号
 
@@ -63,12 +63,12 @@ v = -v / norm(v);  % 归一化
 Angt = Ang(1:numShengLu);
 AngR1 = [Angt,pi-Angt(end:-1:1)];
 
-% 角度偏移
+% % 角度偏移
+% 
+% rAng = roff(1:numShengLu)./Mradial;
+% roffAng = [rAng,-rAng(end:-1:1)];
 
-rAng = roff(1:numShengLu)./Mradial;
-roffAng = [rAng,-rAng(end:-1:1)];
-
-AngR = AngR1 + roffAng;
+AngR = AngR1;
 
 %% 3、生成圆周点
 YuanZhouDian = zeros(3,numShengLu*2);
@@ -89,9 +89,9 @@ disPhiDian = zeros(1,numShengLu*2);
 for i = 1:2*numShengLu
     PhiDian(:,i) = v.*Mradial.*cos(AngR(i));
     if i <= numShengLu
-        disPhiDian(i) = -sqrt((PhiDian(1,i)).^2+(PhiDian(2,i)).^2+(PhiDian(3,i)).^2)./tan(phi);
+        disPhiDian(i) = -norm(PhiDian(:,i))./tan(phi);
     else
-        disPhiDian(i) = sqrt((PhiDian(1,i)).^2+(PhiDian(2,i)).^2+(PhiDian(3,i)).^2)./tan(phi);
+        disPhiDian(i) = norm(PhiDian(:,i))./tan(phi);
     end
 end
 
@@ -110,9 +110,62 @@ PYallB = ztyd-disPhiDian-PYYD;
 for i = 1:2*numShengLu
     PointTable_B_off(:,i) = YuanZhouDian(:,i) - d'.*PYallB(i);
 end
-PointTable_B_off = PointTable_B_off(:,end:-1:1);
 
 
+
+%% 5、径向偏移
+
+% 角度偏移
+
+rAng = roff(1:numShengLu)./Mradial;
+roffAng = [rAng,-rAng(end:-1:1)];
+
+PointTable_A_off2= zeros(3,2*numShengLu);
+for i =1:size(PointTable_A_off,2)
+   
+    axis = Bottom_round_center2 - Bottom_round_center1;          % 旋转轴方向向量
+    axis = axis / norm(axis); % 归一化为单位向量
+    
+    % 旋转矩阵
+    vx = axis(1);
+    vy = axis(2);
+    vz = axis(3);
+    theta = roffAng(i);
+    R = [cos(theta) + vx^2 * (1 - cos(theta)), vx * vy * (1 - cos(theta)) - vz * sin(theta), vx * vz * (1 - cos(theta)) + vy * sin(theta);
+         vy * vx * (1 - cos(theta)) + vz * sin(theta), cos(theta) + vy^2 * (1 - cos(theta)), vy * vz * (1 - cos(theta)) - vx * sin(theta);
+         vz * vx * (1 - cos(theta)) - vy * sin(theta), vz * vy * (1 - cos(theta)) + vx * sin(theta), cos(theta) + vz^2 * (1 - cos(theta))];
+    
+    % 计算旋转后的点
+    P_rotated = R * (PointTable_A_off(:,i) - Bottom_round_center1') + Bottom_round_center1';  % 减去P1，然后旋转，再加回P1
+    PointTable_A_off2(:,i) = P_rotated;
+end
+
+
+
+
+PointTable_B_off2= zeros(3,2*numShengLu);
+for i =1:size(PointTable_B_off,2)
+   
+    axis = Bottom_round_center2 - Bottom_round_center1;          % 旋转轴方向向量
+    axis = axis / norm(axis); % 归一化为单位向量
+    
+    % 旋转矩阵
+    vx = axis(1);
+    vy = axis(2);
+    vz = axis(3);
+    theta = roffAng(i);
+    R = [cos(theta) + vx^2 * (1 - cos(theta)), vx * vy * (1 - cos(theta)) - vz * sin(theta), vx * vz * (1 - cos(theta)) + vy * sin(theta);
+         vy * vx * (1 - cos(theta)) + vz * sin(theta), cos(theta) + vy^2 * (1 - cos(theta)), vy * vz * (1 - cos(theta)) - vx * sin(theta);
+         vz * vx * (1 - cos(theta)) - vy * sin(theta), vz * vy * (1 - cos(theta)) + vx * sin(theta), cos(theta) + vz^2 * (1 - cos(theta))];
+    
+    % 计算旋转后的点
+    P_rotated = R * (PointTable_B_off(:,i) - Bottom_round_center1') + Bottom_round_center1';  % 减去P1，然后旋转，再加回P1
+    PointTable_B_off2(:,i) = P_rotated;
+end
+
+
+
+PointTable_B_off2 = PointTable_B_off2(:,end:-1:1);
 
 
 end

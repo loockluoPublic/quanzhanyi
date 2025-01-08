@@ -2,7 +2,7 @@
  * File: YuanXingFuCe.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Jan-2025 22:39:55
+ * C/C++ source code generated on  : 08-Jan-2025 23:39:18
  */
 
 /* Include Files */
@@ -56,14 +56,19 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   double b_Mcenter[3];
   double shengdao1[3];
   const double *PointIn_data;
+  double K;
+  double P_projected1_idx_0;
+  double P_projected1_idx_1;
+  double P_projected1_idx_2;
+  double a_tmp;
   double absxk;
   double b_scale;
-  double b_y;
-  double d;
-  double mul;
+  double c;
   double scale;
   double t;
-  double y;
+  double t_tmp;
+  double yN1;
+  double zN1;
   double *Distance_data;
   double *LTPY_data;
   double *TiC_data;
@@ -87,37 +92,37 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   emxEnsureCapacity_real_T(Distance, i);
   Distance_data = Distance->data;
   for (b_i = 0; b_i < loop_ub_tmp; b_i++) {
-    d = 2.0 * ((double)b_i + 1.0);
+    a_tmp = 2.0 * ((double)b_i + 1.0);
     scale = 3.3121686421112381E-170;
-    absxk_tmp = 3 * ((int)(d - 1.0) - 1);
-    b_absxk_tmp = 3 * ((int)d - 1);
+    absxk_tmp = 3 * ((int)(a_tmp - 1.0) - 1);
+    b_absxk_tmp = 3 * ((int)a_tmp - 1);
     absxk = fabs(PointIn_data[absxk_tmp] - PointIn_data[b_absxk_tmp]);
     if (absxk > 3.3121686421112381E-170) {
-      y = 1.0;
+      P_projected1_idx_0 = 1.0;
       scale = absxk;
     } else {
       t = absxk / 3.3121686421112381E-170;
-      y = t * t;
+      P_projected1_idx_0 = t * t;
     }
     absxk = fabs(PointIn_data[absxk_tmp + 1] - PointIn_data[b_absxk_tmp + 1]);
     if (absxk > scale) {
       t = scale / absxk;
-      y = y * t * t + 1.0;
+      P_projected1_idx_0 = P_projected1_idx_0 * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      y += t * t;
+      P_projected1_idx_0 += t * t;
     }
     absxk = fabs(PointIn_data[absxk_tmp + 2] - PointIn_data[b_absxk_tmp + 2]);
     if (absxk > scale) {
       t = scale / absxk;
-      y = y * t * t + 1.0;
+      P_projected1_idx_0 = P_projected1_idx_0 * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      y += t * t;
+      P_projected1_idx_0 += t * t;
     }
-    Distance_data[b_i] = scale * sqrt(y);
+    Distance_data[b_i] = scale * sqrt(P_projected1_idx_0);
   }
   /*  计算声道角度 */
   /*  计算水平方向向量 */
@@ -127,79 +132,79 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   emxEnsureCapacity_real_T(theta, i);
   theta_data = theta->data;
   for (b_i = 0; b_i < loop_ub_tmp; b_i++) {
-    d = 2.0 * ((double)b_i + 1.0);
+    a_tmp = 2.0 * ((double)b_i + 1.0);
     scale = 3.3121686421112381E-170;
     b_scale = 3.3121686421112381E-170;
-    i = 3 * ((int)d - 1);
-    absxk_tmp = 3 * ((int)(d - 1.0) - 1);
-    d = PointIn_data[i] - PointIn_data[absxk_tmp];
-    mul = MTaon[0] * d;
+    i = 3 * ((int)a_tmp - 1);
+    absxk_tmp = 3 * ((int)(a_tmp - 1.0) - 1);
+    a_tmp = PointIn_data[i] - PointIn_data[absxk_tmp];
+    c = MTaon[0] * a_tmp;
     absxk = fabs(MTaon[0]);
     if (absxk > 3.3121686421112381E-170) {
-      y = 1.0;
+      P_projected1_idx_0 = 1.0;
       scale = absxk;
     } else {
       t = absxk / 3.3121686421112381E-170;
-      y = t * t;
+      P_projected1_idx_0 = t * t;
     }
-    absxk = fabs(d);
+    absxk = fabs(a_tmp);
     if (absxk > 3.3121686421112381E-170) {
-      b_y = 1.0;
+      K = 1.0;
       b_scale = absxk;
     } else {
       t = absxk / 3.3121686421112381E-170;
-      b_y = t * t;
+      K = t * t;
     }
-    d = PointIn_data[i + 1] - PointIn_data[absxk_tmp + 1];
-    mul += MTaon[1] * d;
+    a_tmp = PointIn_data[i + 1] - PointIn_data[absxk_tmp + 1];
+    c += MTaon[1] * a_tmp;
     absxk = fabs(MTaon[1]);
     if (absxk > scale) {
       t = scale / absxk;
-      y = y * t * t + 1.0;
+      P_projected1_idx_0 = P_projected1_idx_0 * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      y += t * t;
+      P_projected1_idx_0 += t * t;
     }
-    absxk = fabs(d);
+    absxk = fabs(a_tmp);
     if (absxk > b_scale) {
       t = b_scale / absxk;
-      b_y = b_y * t * t + 1.0;
+      K = K * t * t + 1.0;
       b_scale = absxk;
     } else {
       t = absxk / b_scale;
-      b_y += t * t;
+      K += t * t;
     }
-    d = PointIn_data[i + 2] - PointIn_data[absxk_tmp + 2];
-    mul += MTaon[2] * d;
+    a_tmp = PointIn_data[i + 2] - PointIn_data[absxk_tmp + 2];
+    c += MTaon[2] * a_tmp;
     absxk = fabs(MTaon[2]);
     if (absxk > scale) {
       t = scale / absxk;
-      y = y * t * t + 1.0;
+      P_projected1_idx_0 = P_projected1_idx_0 * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      y += t * t;
+      P_projected1_idx_0 += t * t;
     }
-    absxk = fabs(d);
+    absxk = fabs(a_tmp);
     if (absxk > b_scale) {
       t = b_scale / absxk;
-      b_y = b_y * t * t + 1.0;
+      K = K * t * t + 1.0;
       b_scale = absxk;
     } else {
       t = absxk / b_scale;
-      b_y += t * t;
+      K += t * t;
     }
-    y = scale * sqrt(y);
-    b_y = b_scale * sqrt(b_y);
-    theta_data[b_i] = acos(mul / (y * b_y));
+    P_projected1_idx_0 = scale * sqrt(P_projected1_idx_0);
+    K = b_scale * sqrt(K);
+    theta_data[b_i] = acos(c / (P_projected1_idx_0 * K));
   }
   absxk_tmp = theta->size[1] - 1;
   for (b_i = 0; b_i <= absxk_tmp; b_i++) {
-    d = theta_data[b_i];
-    if (d > 1.5707963267948966) {
-      d = 3.1415926535897931 - d;
-      theta_data[b_i] = d;
+    a_tmp = theta_data[b_i];
+    if (a_tmp > 1.5707963267948966) {
+      a_tmp = 3.1415926535897931 - a_tmp;
+      theta_data[b_i] = a_tmp;
     }
   }
   /*  rad2deg(theta) */
@@ -213,54 +218,88 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
     b_Mcenter[0] = Mcenter[0] + MTaon[0];
     b_Mcenter[1] = Mcenter[1] + MTaon[1];
     b_Mcenter[2] = Mcenter[2] + MTaon[2];
+    t_tmp = (MTaon[0] * MTaon[0] + MTaon[1] * MTaon[1]) + MTaon[2] * MTaon[2];
   }
   for (b_i = 0; b_i < loop_ub_tmp; b_i++) {
-    d = 2.0 * ((double)b_i + 1.0);
-    absxk_tmp = 3 * ((int)(d - 1.0) - 1);
-    b_absxk_tmp = 3 * ((int)d - 1);
+    a_tmp = 2.0 * ((double)b_i + 1.0);
+    absxk_tmp = 3 * ((int)(a_tmp - 1.0) - 1);
+    b_absxk_tmp = 3 * ((int)a_tmp - 1);
     shengdao1[0] = (PointIn_data[absxk_tmp] + PointIn_data[b_absxk_tmp]) / 2.0;
     shengdao1[1] =
         (PointIn_data[absxk_tmp + 1] + PointIn_data[b_absxk_tmp + 1]) / 2.0;
     shengdao1[2] =
         (PointIn_data[absxk_tmp + 2] + PointIn_data[b_absxk_tmp + 2]) / 2.0;
     foot_of_perpendicular_from_a_point_to_a_line(shengdao1, Mcenter, b_Mcenter,
-                                                 &b_scale, &mul, &b_y);
+                                                 &absxk, &yN1, &zN1);
+    /* 法 */
+    /*  平面法向量 */
+    b_scale = -((MTaon[0] * absxk + MTaon[1] * yN1) + MTaon[2] * zN1);
+    /*  空间点坐标 */
+    /*  计算投影点 */
+    i = (b_i + 1) << 1;
+    absxk_tmp = 3 * (i - 2);
+    a_tmp = PointIn_data[absxk_tmp];
+    c = PointIn_data[absxk_tmp + 1];
+    K = PointIn_data[absxk_tmp + 2];
+    t = -(((MTaon[0] * a_tmp + MTaon[1] * c) + MTaon[2] * K) + b_scale) / t_tmp;
+    /*  返回投影点 */
+    P_projected1_idx_0 = a_tmp + MTaon[0] * t;
+    P_projected1_idx_1 = c + MTaon[1] * t;
+    P_projected1_idx_2 = K + MTaon[2] * t;
+    /*  空间点坐标 */
+    /*  计算投影点 */
+    i = 3 * (i - 1);
+    a_tmp = PointIn_data[i];
+    c = PointIn_data[i + 1];
+    K = PointIn_data[i + 2];
+    t = -(((MTaon[0] * a_tmp + MTaon[1] * c) + MTaon[2] * K) + b_scale) / t_tmp;
+    /*  返回投影点 */
+    /*  三个点定义 */
+    /*  斜率计算 */
+    b_scale = (a_tmp + MTaon[0] * t) - P_projected1_idx_0;
+    a_tmp = (c + MTaon[1] * t) - P_projected1_idx_1;
+    c = (K + MTaon[2] * t) - P_projected1_idx_2;
+    K = -(((P_projected1_idx_0 - absxk) * b_scale +
+           (P_projected1_idx_1 - yN1) * a_tmp) +
+          (P_projected1_idx_2 - zN1) * c) /
+        ((b_scale * b_scale + a_tmp * a_tmp) + c * c);
+    /*  P1点在轴线上的投影坐标 */
     scale = 3.3121686421112381E-170;
-    absxk = fabs(shengdao1[0] - b_scale);
+    absxk = fabs((K * b_scale + P_projected1_idx_0) - absxk);
     if (absxk > 3.3121686421112381E-170) {
-      y = 1.0;
+      P_projected1_idx_0 = 1.0;
       scale = absxk;
     } else {
       t = absxk / 3.3121686421112381E-170;
-      y = t * t;
+      P_projected1_idx_0 = t * t;
     }
-    absxk = fabs(shengdao1[1] - mul);
+    absxk = fabs((K * a_tmp + P_projected1_idx_1) - yN1);
     if (absxk > scale) {
       t = scale / absxk;
-      y = y * t * t + 1.0;
+      P_projected1_idx_0 = P_projected1_idx_0 * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      y += t * t;
+      P_projected1_idx_0 += t * t;
     }
-    absxk = fabs(shengdao1[2] - b_y);
+    absxk = fabs((K * c + P_projected1_idx_2) - zN1);
     if (absxk > scale) {
       t = scale / absxk;
-      y = y * t * t + 1.0;
+      P_projected1_idx_0 = P_projected1_idx_0 * t * t + 1.0;
       scale = absxk;
     } else {
       t = absxk / scale;
-      y += t * t;
+      P_projected1_idx_0 += t * t;
     }
-    y = scale * sqrt(y);
-    TiC_data[b_i] = y / Mradial;
+    P_projected1_idx_0 = scale * sqrt(P_projected1_idx_0);
+    TiC_data[b_i] = P_projected1_idx_0 / Mradial;
   }
   /*  alphaA = asin(TiC); */
-  d = floor(shenglunum / 2.0);
-  if (d < 1.0) {
+  a_tmp = floor(shenglunum / 2.0);
+  if (a_tmp < 1.0) {
     absxk_tmp = 0;
   } else {
-    absxk_tmp = (int)d;
+    absxk_tmp = (int)a_tmp;
   }
   emxInit_real_T(&TiYiCe, 2);
   i = TiYiCe->size[0] * TiYiCe->size[1];
@@ -307,9 +346,9 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
     LTPY_data[i] = 0.0;
   }
   for (b_i = 0; b_i < loop_ub_tmp; b_i++) {
-    b_scale = TiC_data[b_i];
-    LTPY_data[b_i] = Distance_data[b_i] - 2.0 * sqrt(1.0 - b_scale * b_scale) *
-                                              Mradial / sin(theta_data[b_i]);
+    c = TiC_data[b_i];
+    LTPY_data[b_i] = Distance_data[b_i] -
+                     2.0 * sqrt(1.0 - c * c) * Mradial / sin(theta_data[b_i]);
   }
   /*  计算权重 1 */
   i = TiYiCe->size[0] * TiYiCe->size[1];
@@ -323,15 +362,15 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   }
   /*  fprintf('%f,%f,%f,%f',TiYiCe(1),TiYiCe(2),TiYiCe(3),TiYiCe(4)); */
   if (rtIsInf(shenglunum)) {
-    b_scale = rtNaN;
+    c = rtNaN;
   } else if (shenglunum == 0.0) {
-    b_scale = 0.0;
+    c = 0.0;
   } else {
-    b_scale = fmod(shenglunum, 2.0);
+    c = fmod(shenglunum, 2.0);
   }
-  if (b_scale == 1.0) {
+  if (c == 1.0) {
     /* 奇数 */
-    TiYiCe_data[(int)(unsigned int)d] = 0.0;
+    TiYiCe_data[(int)(unsigned int)a_tmp] = 0.0;
   }
   emxInit_real_T(&t_k, 1);
   b_absxk_tmp = (int)(shenglunum - 1.0);
@@ -365,14 +404,14 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
       prod(r, r1);
       Distance_data[b_i] += b_dv[absxk_tmp] * -combineVectorElements(r1);
     }
-    mul = 1.0;
+    b_scale = 1.0;
     for (absxk_tmp = 0; absxk_tmp < loop_ub_tmp; absxk_tmp++) {
       if ((unsigned int)absxk_tmp != (unsigned int)b_i) {
-        mul *= TiYiCe_data[b_i] - TiYiCe_data[absxk_tmp];
+        b_scale *= TiYiCe_data[b_i] - TiYiCe_data[absxk_tmp];
       }
     }
-    b_y = TiYiCe_data[b_i];
-    Distance_data[b_i] /= sqrt(1.0 - b_y * b_y) * mul;
+    K = TiYiCe_data[b_i];
+    Distance_data[b_i] /= sqrt(1.0 - K * K) * b_scale;
   }
   i = Wquanzhong1->size[0];
   Wquanzhong1->size[0] = Wquanzhong2->size[0];
@@ -392,9 +431,9 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
   for (i = 0; i < absxk_tmp; i++) {
     TiYiCe_data[i] = TiC_data[i];
   }
-  if (b_scale == 1.0) {
+  if (c == 1.0) {
     /* 奇数 */
-    TiYiCe_data[(int)(unsigned int)d] = 0.0;
+    TiYiCe_data[(int)(unsigned int)a_tmp] = 0.0;
   }
   i = t_k->size[0];
   t_k->size[0] = (int)(shenglunum - 1.0);
@@ -424,14 +463,14 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
       prod(r, r1);
       Distance_data[b_i] += b_dv1[absxk_tmp] * -combineVectorElements(r1);
     }
-    mul = 1.0;
+    b_scale = 1.0;
     for (absxk_tmp = 0; absxk_tmp < loop_ub_tmp; absxk_tmp++) {
       if ((unsigned int)absxk_tmp != (unsigned int)b_i) {
-        mul *= TiYiCe_data[b_i] - TiYiCe_data[absxk_tmp];
+        b_scale *= TiYiCe_data[b_i] - TiYiCe_data[absxk_tmp];
       }
     }
-    d = TiYiCe_data[b_i];
-    Distance_data[b_i] /= rt_powd_snf(1.0 - d * d, 0.6) * mul;
+    a_tmp = TiYiCe_data[b_i];
+    Distance_data[b_i] /= rt_powd_snf(1.0 - a_tmp * a_tmp, 0.6) * b_scale;
   }
   emxFree_real_T(&r1);
   emxFree_real_T(&r);

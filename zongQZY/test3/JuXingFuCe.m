@@ -87,7 +87,51 @@ for i = 1:shenglunum
 
     [xN1,yN1,zN1] = foot_of_perpendicular_from_a_point_to_a_line(MidP,Pt1,Pt2);
     temp = [xN1;yN1;zN1];
-    TiC(i) = 2*norm(MidP-temp)./h;
+       nnn = Tao; %法
+
+
+    % 平面法向量
+    A = nnn(1);
+    B = nnn(2);
+    C = nnn(3);
+    D = -(A.*xN1+B.*yN1+C.*zN1);
+    
+    % 空间点坐标
+    x0 = shengdao1(1);
+    y0 = shengdao1(2);
+    z0 = shengdao1(3);
+    
+    % 计算投影点
+    t = -(A*x0 + B*y0 + C*z0 + D) / (A^2 + B^2 + C^2);
+    x_proj = x0 + A * t;
+    y_proj = y0 + B * t;
+    z_proj = z0 + C * t;
+    
+    % 返回投影点
+    P_projected1 = [x_proj, y_proj, z_proj];
+
+
+
+    % 空间点坐标
+    x0 = shengdao2(1);
+    y0 = shengdao2(2);
+    z0 = shengdao2(3);
+    
+    % 计算投影点
+    t = -(A*x0 + B*y0 + C*z0 + D) / (A^2 + B^2 + C^2);
+    x_proj = x0 + A * t;
+    y_proj = y0 + B * t;
+    z_proj = z0 + C * t;
+    
+    % 返回投影点
+    P_projected2 = [x_proj, y_proj, z_proj];
+
+    [xxN2,yyN2,zzN2] = foot_of_perpendicular_from_a_point_to_a_line(temp,P_projected1,P_projected2);
+    ttt =[xxN2;yyN2;zzN2];
+
+    High = norm(ttt-temp);
+
+    TiC(i) = 2*High./h;
 end
 
 % alphaA = asin(TiC);
@@ -112,7 +156,7 @@ gk4 = [1.838286,0.556753,0.315143,0.215852,0.162469];
 gk = gk3;
 k = k3;
 
-TiYiCe = TiC(1:2:2*shenglunum);
+TiYiCe = TiC(1:shenglunum);
 
 if mod(shenglunum,2)==1 %奇数
     temp6 = floor(shenglunum./2);
@@ -152,7 +196,7 @@ f = zeros(shenglunum,1);
 gk = gk4;
 k = k4;
 
-TiYiCe = TiC(1:2:2*shenglunum);
+TiYiCe = TiC(1:shenglunum);
 
 if mod(shenglunum,2)==1 %奇数
     temp6 = floor(shenglunum./2);

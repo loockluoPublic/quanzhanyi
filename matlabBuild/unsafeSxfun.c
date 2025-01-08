@@ -2,7 +2,7 @@
  * File: unsafeSxfun.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Jan-2025 22:39:55
+ * C/C++ source code generated on  : 08-Jan-2025 23:39:18
  */
 
 /* Include Files */
@@ -17,7 +17,7 @@
  *                const emxArray_real_T *in3
  * Return Type  : void
  */
-void binary_expand_op_7(emxArray_real_T *in1, const emxArray_real_T *in3)
+void binary_expand_op_6(emxArray_real_T *in1, const emxArray_real_T *in3)
 {
   emxArray_real_T *b_in1;
   const double *in3_data;

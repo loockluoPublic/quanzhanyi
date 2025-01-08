@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Jan-2025 22:39:55
+ * C/C++ source code generated on  : 08-Jan-2025 23:39:18
  */
 
 /* Include Files */
@@ -21,20 +21,20 @@
 #include <math.h>
 
 /* Function Declarations */
-static void binary_expand_op_11(emxArray_real_T *in1, int in2, double in4,
+static void binary_expand_op_10(emxArray_real_T *in1, int in2, double in4,
                                 const emxArray_real_T *in5, int in6, int in7,
                                 const emxArray_real_T *in8, int in9, int in10,
                                 double in11);
 
-static void binary_expand_op_13(emxArray_real_T *in1, int in2, double in4,
+static void binary_expand_op_12(emxArray_real_T *in1, int in2, double in4,
                                 const emxArray_real_T *in5, int in6, int in7,
                                 const emxArray_real_T *in8, int in9, int in10,
                                 double in11);
 
-static void binary_expand_op_14(emxArray_real_T *in1, const double in2[3],
+static void binary_expand_op_13(emxArray_real_T *in1, const double in2[3],
                                 const emxArray_real_T *in3);
 
-static void binary_expand_op_15(emxArray_real_T *in1,
+static void binary_expand_op_14(emxArray_real_T *in1,
                                 const emxArray_real_T *in2, const double in3[3],
                                 const emxArray_real_T *in4);
 
@@ -52,7 +52,7 @@ static void binary_expand_op_15(emxArray_real_T *in1,
  *                double in11
  * Return Type  : void
  */
-static void binary_expand_op_11(emxArray_real_T *in1, int in2, double in4,
+static void binary_expand_op_10(emxArray_real_T *in1, int in2, double in4,
                                 const emxArray_real_T *in5, int in6, int in7,
                                 const emxArray_real_T *in8, int in9, int in10,
                                 double in11)
@@ -94,7 +94,7 @@ static void binary_expand_op_11(emxArray_real_T *in1, int in2, double in4,
  *                double in11
  * Return Type  : void
  */
-static void binary_expand_op_13(emxArray_real_T *in1, int in2, double in4,
+static void binary_expand_op_12(emxArray_real_T *in1, int in2, double in4,
                                 const emxArray_real_T *in5, int in6, int in7,
                                 const emxArray_real_T *in8, int in9, int in10,
                                 double in11)
@@ -129,7 +129,7 @@ static void binary_expand_op_13(emxArray_real_T *in1, int in2, double in4,
  *                const emxArray_real_T *in3
  * Return Type  : void
  */
-static void binary_expand_op_14(emxArray_real_T *in1, const double in2[3],
+static void binary_expand_op_13(emxArray_real_T *in1, const double in2[3],
                                 const emxArray_real_T *in3)
 {
   emxArray_real_T *b_in1;
@@ -196,7 +196,7 @@ static void binary_expand_op_14(emxArray_real_T *in1, const double in2[3],
  *                const emxArray_real_T *in4
  * Return Type  : void
  */
-static void binary_expand_op_15(emxArray_real_T *in1,
+static void binary_expand_op_14(emxArray_real_T *in1,
                                 const emxArray_real_T *in2, const double in3[3],
                                 const emxArray_real_T *in4)
 {
@@ -787,7 +787,7 @@ void Calculate_rectangle_from_vertex8(
             (ab4 - Ti2A_data[i3 + i2]) + a_data[i5 + i2] / x;
       }
     } else {
-      binary_expand_op_11(XMFlagA, i7, ab4, Ti2A, i3, i4 - 1, a, i5, i6 - 1, x);
+      binary_expand_op_10(XMFlagA, i7, ab4, Ti2A, i3, i4 - 1, a, i5, i6 - 1, x);
       XMFlagA_data = XMFlagA->data;
     }
   }
@@ -809,7 +809,7 @@ void Calculate_rectangle_from_vertex8(
           PointTable_B_off8_data[i3] - d[2] * XMFlagA_data[i2];
     }
   } else {
-    binary_expand_op_15(PointTable_A_off8, PointTable_B_off8, d, XMFlagA);
+    binary_expand_op_14(PointTable_A_off8, PointTable_B_off8, d, XMFlagA);
   }
   /*  B测点 */
   i2 = XMFlagA->size[0] * XMFlagA->size[1];
@@ -858,7 +858,7 @@ void Calculate_rectangle_from_vertex8(
             (ab4 + Ti2A_data[i8 + i2]) - a_data[i10 + i2] / b_x;
       }
     } else {
-      binary_expand_op_13(XMFlagA, i12, ab4, Ti2A, i8, i9 - 1, a, i10, i11 - 1,
+      binary_expand_op_12(XMFlagA, i12, ab4, Ti2A, i8, i9 - 1, a, i10, i11 - 1,
                           b_x);
       XMFlagA_data = XMFlagA->data;
     }
@@ -892,7 +892,7 @@ void Calculate_rectangle_from_vertex8(
       PointTable_B_off8_data[i2] = XieMianPianYi_data[i2];
     }
   } else {
-    binary_expand_op_14(PointTable_B_off8, d, XMFlagA);
+    binary_expand_op_13(PointTable_B_off8, d, XMFlagA);
   }
   emxFree_real_T(&b_side_faces_transformed2);
   emxFree_real_T(&XMFlagA);

@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Jan-2025 22:39:55
+ * C/C++ source code generated on  : 08-Jan-2025 23:39:18
  */
 
 /*************************************************************************/
@@ -314,8 +314,8 @@ void main_Calculat_A_and_B_Points_after_Offest2(void)
 {
   emxArray_real_T *Ang;
   emxArray_real_T *BianHao;
-  emxArray_real_T *PointTable_A_off;
-  emxArray_real_T *PointTable_B_off;
+  emxArray_real_T *PointTable_A_off2;
+  emxArray_real_T *PointTable_B_off2;
   emxArray_real_T *roff;
   emxArray_real_T *toff;
   double Bottom_round_center1_tmp[3];
@@ -336,19 +336,19 @@ void main_Calculat_A_and_B_Points_after_Offest2(void)
   /* Initialize function input argument 'roff'. */
   roff = argInit_1xUnbounded_real_T();
   /* Call the entry-point 'Calculat_A_and_B_Points_after_Offest2'. */
-  emxInitArray_real_T(&PointTable_A_off, 2);
-  emxInitArray_real_T(&PointTable_B_off, 2);
+  emxInitArray_real_T(&PointTable_A_off2, 2);
+  emxInitArray_real_T(&PointTable_B_off2, 2);
   emxInitArray_real_T(&BianHao, 2);
   Calculat_A_and_B_Points_after_Offest2(
       Bottom_round_center1_tmp, Bottom_round_center1_tmp,
       Bottom_round_center1_tmp, Bottom_round_center1_tmp, Mradial_tmp,
-      Bottom_round_center1_tmp, Mradial_tmp, Ang, toff, roff, PointTable_A_off,
-      PointTable_B_off, BianHao);
+      Bottom_round_center1_tmp, Mradial_tmp, Ang, toff, roff, PointTable_A_off2,
+      PointTable_B_off2, BianHao);
   emxDestroyArray_real_T(roff);
   emxDestroyArray_real_T(toff);
   emxDestroyArray_real_T(Ang);
-  emxDestroyArray_real_T(PointTable_A_off);
-  emxDestroyArray_real_T(PointTable_B_off);
+  emxDestroyArray_real_T(PointTable_A_off2);
+  emxDestroyArray_real_T(PointTable_B_off2);
   emxDestroyArray_real_T(BianHao);
 }
 

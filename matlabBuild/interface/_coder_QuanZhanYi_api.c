@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Jan-2025 22:39:55
+ * C/C++ source code generated on  : 08-Jan-2025 23:39:18
  */
 
 /* Include Files */
@@ -1518,8 +1518,8 @@ void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[10],
   };
   emxArray_real_T *Ang;
   emxArray_real_T *BianHao;
-  emxArray_real_T *PointTable_A_off;
-  emxArray_real_T *PointTable_B_off;
+  emxArray_real_T *PointTable_A_off2;
+  emxArray_real_T *PointTable_B_off2;
   emxArray_real_T *roff;
   emxArray_real_T *toff;
   real_T(*Bottom_round_center1)[3];
@@ -1551,24 +1551,25 @@ void c_Calculat_A_and_B_Points_after(const mxArray *const prhs[10],
   roff->canFreeData = false;
   e_emlrt_marshallIn(&st, emlrtAlias(prhs[9]), "roff", roff);
   /* Invoke the target function */
-  emxInit_real_T(&st, &PointTable_A_off, 2);
-  emxInit_real_T(&st, &PointTable_B_off, 2);
+  emxInit_real_T(&st, &PointTable_A_off2, 2);
+  emxInit_real_T(&st, &PointTable_B_off2, 2);
   emxInit_real_T(&st, &BianHao, 2);
   Calculat_A_and_B_Points_after_Offest2(
       *Bottom_round_center1, *Bottom_round_center2, *MTaon, *Mcenter, Mradial,
-      *PAB, phi, Ang, toff, roff, PointTable_A_off, PointTable_B_off, BianHao);
+      *PAB, phi, Ang, toff, roff, PointTable_A_off2, PointTable_B_off2,
+      BianHao);
   emxFree_real_T(&st, &roff);
   emxFree_real_T(&st, &toff);
   emxFree_real_T(&st, &Ang);
   /* Marshall function outputs */
-  PointTable_A_off->canFreeData = false;
-  plhs[0] = b_emlrt_marshallOut(PointTable_A_off);
-  emxFree_real_T(&st, &PointTable_A_off);
+  PointTable_A_off2->canFreeData = false;
+  plhs[0] = b_emlrt_marshallOut(PointTable_A_off2);
+  emxFree_real_T(&st, &PointTable_A_off2);
   if (nlhs > 1) {
-    PointTable_B_off->canFreeData = false;
-    plhs[1] = b_emlrt_marshallOut(PointTable_B_off);
+    PointTable_B_off2->canFreeData = false;
+    plhs[1] = b_emlrt_marshallOut(PointTable_B_off2);
   }
-  emxFree_real_T(&st, &PointTable_B_off);
+  emxFree_real_T(&st, &PointTable_B_off2);
   if (nlhs > 2) {
     BianHao->canFreeData = false;
     plhs[2] = b_emlrt_marshallOut(BianHao);

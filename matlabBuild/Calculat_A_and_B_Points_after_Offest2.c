@@ -2,7 +2,7 @@
  * File: Calculat_A_and_B_Points_after_Offest2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Jan-2025 22:39:55
+ * C/C++ source code generated on  : 08-Jan-2025 23:39:18
  */
 
 /* Include Files */
@@ -22,11 +22,6 @@ static void binary_expand_op(emxArray_real_T *in1, double in2,
 static void binary_expand_op_1(emxArray_real_T *in1, double in2,
                                const emxArray_real_T *in3,
                                const emxArray_real_T *in4);
-
-static void binary_expand_op_2(emxArray_real_T *in1, const emxArray_real_T *in2,
-                               int in3, int in4, int in5, int in6,
-                               const emxArray_real_T *in7, int in8, int in9,
-                               int in10);
 
 /* Function Definitions */
 /*
@@ -116,94 +111,6 @@ static void binary_expand_op_1(emxArray_real_T *in1, double in2,
 }
 
 /*
- * Arguments    : emxArray_real_T *in1
- *                const emxArray_real_T *in2
- *                int in3
- *                int in4
- *                int in5
- *                int in6
- *                const emxArray_real_T *in7
- *                int in8
- *                int in9
- *                int in10
- * Return Type  : void
- */
-static void binary_expand_op_2(emxArray_real_T *in1, const emxArray_real_T *in2,
-                               int in3, int in4, int in5, int in6,
-                               const emxArray_real_T *in7, int in8, int in9,
-                               int in10)
-{
-  emxArray_real_T *b_in1;
-  emxArray_real_T *b_in7;
-  const double *in2_data;
-  const double *in7_data;
-  double *b_in1_data;
-  double *b_in7_data;
-  double *in1_data;
-  int b_loop_ub;
-  int i;
-  int loop_ub;
-  int stride_1_1;
-  in7_data = in7->data;
-  in2_data = in2->data;
-  i = in1->size[0] * in1->size[1];
-  in1->size[0] = 1;
-  emxEnsureCapacity_real_T(in1, i);
-  loop_ub = div_s32(in6 - in4, in5);
-  i = in1->size[0] * in1->size[1];
-  in1->size[1] = (in3 + loop_ub) + 1;
-  emxEnsureCapacity_real_T(in1, i);
-  in1_data = in1->data;
-  for (i = 0; i < in3; i++) {
-    in1_data[i] = in2_data[i];
-  }
-  for (i = 0; i <= loop_ub; i++) {
-    in1_data[i + in3] = 3.1415926535897931 - in2_data[in4 + in5 * i];
-  }
-  emxInit_real_T(&b_in7, 2);
-  i = b_in7->size[0] * b_in7->size[1];
-  b_in7->size[0] = 1;
-  loop_ub = div_s32(in10 - in8, in9);
-  b_in7->size[1] = (in7->size[1] + loop_ub) + 1;
-  emxEnsureCapacity_real_T(b_in7, i);
-  b_in7_data = b_in7->data;
-  b_loop_ub = in7->size[1];
-  for (i = 0; i < b_loop_ub; i++) {
-    b_in7_data[i] = in7_data[i];
-  }
-  for (i = 0; i <= loop_ub; i++) {
-    b_in7_data[i + in7->size[1]] = -in7_data[in8 + in9 * i];
-  }
-  emxInit_real_T(&b_in1, 2);
-  i = b_in1->size[0] * b_in1->size[1];
-  b_in1->size[0] = 1;
-  if (b_in7->size[1] == 1) {
-    loop_ub = in1->size[1];
-  } else {
-    loop_ub = b_in7->size[1];
-  }
-  b_in1->size[1] = loop_ub;
-  emxEnsureCapacity_real_T(b_in1, i);
-  b_in1_data = b_in1->data;
-  b_loop_ub = (in1->size[1] != 1);
-  stride_1_1 = (b_in7->size[1] != 1);
-  for (i = 0; i < loop_ub; i++) {
-    b_in1_data[i] = in1_data[i * b_loop_ub] + b_in7_data[i * stride_1_1];
-  }
-  emxFree_real_T(&b_in7);
-  i = in1->size[0] * in1->size[1];
-  in1->size[0] = 1;
-  in1->size[1] = b_in1->size[1];
-  emxEnsureCapacity_real_T(in1, i);
-  in1_data = in1->data;
-  loop_ub = b_in1->size[1];
-  for (i = 0; i < loop_ub; i++) {
-    in1_data[i] = b_in1_data[i];
-  }
-  emxFree_real_T(&b_in1);
-}
-
-/*
  * 0、编号
  *
  * Arguments    : const double Bottom_round_center1[3]
@@ -216,8 +123,8 @@ static void binary_expand_op_2(emxArray_real_T *in1, const emxArray_real_T *in2,
  *                const emxArray_real_T *Ang
  *                const emxArray_real_T *toff
  *                const emxArray_real_T *roff
- *                emxArray_real_T *PointTable_A_off
- *                emxArray_real_T *PointTable_B_off
+ *                emxArray_real_T *PointTable_A_off2
+ *                emxArray_real_T *PointTable_B_off2
  *                emxArray_real_T *BianHao
  * Return Type  : void
  */
@@ -226,19 +133,24 @@ void Calculat_A_and_B_Points_after_Offest2(
     const double MTaon[3], const double Mcenter[3], double Mradial,
     const double PAB[3], double phi, const emxArray_real_T *Ang,
     const emxArray_real_T *toff, const emxArray_real_T *roff,
-    emxArray_real_T *PointTable_A_off, emxArray_real_T *PointTable_B_off,
+    emxArray_real_T *PointTable_A_off2, emxArray_real_T *PointTable_B_off2,
     emxArray_real_T *BianHao)
 {
-  emxArray_real_T *AngR;
+  emxArray_real_T *AngR1;
+  emxArray_real_T *PYallA;
   emxArray_real_T *PhiDian;
+  emxArray_real_T *PointTable_B_off;
   emxArray_real_T *YuanZhouDian;
-  emxArray_real_T *b_rAng;
   emxArray_real_T *disPhiDian;
-  emxArray_real_T *rAng;
+  double R_tmp[9];
   const double *Ang_data;
   const double *roff_data;
   const double *toff_data;
   double absxk;
+  double absxk_tmp;
+  double b;
+  double b_absxk_tmp;
+  double c_absxk_tmp;
   double d_idx_0;
   double d_idx_0_tmp;
   double d_idx_1;
@@ -254,21 +166,18 @@ void Calculat_A_and_B_Points_after_Offest2(
   double u_idx_1;
   double u_idx_2;
   double y;
-  double *AngR_data;
+  double *AngR1_data;
   double *BianHao_data;
+  double *PYallA_data;
+  double *PhiDian_data;
+  double *PointTable_B_off_data;
   double *YuanZhouDian_data;
-  double *disPhiDian_data;
-  double *rAng_data;
   int BianHao_tmp;
   int b_BianHao_tmp;
   int b_i;
   int b_loop_ub;
-  int c_BianHao_tmp;
   int i;
   int i1;
-  int i2;
-  int i3;
-  int i4;
   int loop_ub;
   int numShengLu;
   (void)MTaon;
@@ -293,11 +202,11 @@ void Calculat_A_and_B_Points_after_Offest2(
   for (b_i = 0; b_i < numShengLu; b_i++) {
     BianHao_tmp = 2 * (b_i + 1) - 1;
     BianHao_data[2 * b_i] = BianHao_tmp;
-    b_BianHao_tmp = loop_ub - (b_i << 1);
-    c_BianHao_tmp = numShengLu + b_i;
-    BianHao_data[2 * c_BianHao_tmp] = b_BianHao_tmp;
+    b_loop_ub = loop_ub - (b_i << 1);
+    b_BianHao_tmp = numShengLu + b_i;
+    BianHao_data[2 * b_BianHao_tmp] = b_loop_ub;
     BianHao_data[2 * b_i + 1] = BianHao_tmp;
-    BianHao_data[2 * c_BianHao_tmp + 1] = b_BianHao_tmp;
+    BianHao_data[2 * b_BianHao_tmp + 1] = b_loop_ub;
   }
   /*  1、基底建立 */
   /*  计算圆柱底面的基底向量，其中第一个基底向量在竖直面内且朝上 */
@@ -311,30 +220,30 @@ void Calculat_A_and_B_Points_after_Offest2(
   d_idx_1_tmp = Bottom_round_center2[1] - Bottom_round_center1[1];
   d_idx_2_tmp = Bottom_round_center2[2] - Bottom_round_center1[2];
   scale = 3.3121686421112381E-170;
-  absxk = fabs(d_idx_0_tmp);
-  if (absxk > 3.3121686421112381E-170) {
+  absxk_tmp = fabs(d_idx_0_tmp);
+  if (absxk_tmp > 3.3121686421112381E-170) {
     y = 1.0;
-    scale = absxk;
+    scale = absxk_tmp;
   } else {
-    t = absxk / 3.3121686421112381E-170;
+    t = absxk_tmp / 3.3121686421112381E-170;
     y = t * t;
   }
-  absxk = fabs(d_idx_1_tmp);
-  if (absxk > scale) {
-    t = scale / absxk;
+  b_absxk_tmp = fabs(d_idx_1_tmp);
+  if (b_absxk_tmp > scale) {
+    t = scale / b_absxk_tmp;
     y = y * t * t + 1.0;
-    scale = absxk;
+    scale = b_absxk_tmp;
   } else {
-    t = absxk / scale;
+    t = b_absxk_tmp / scale;
     y += t * t;
   }
-  absxk = fabs(d_idx_2_tmp);
-  if (absxk > scale) {
-    t = scale / absxk;
+  c_absxk_tmp = fabs(d_idx_2_tmp);
+  if (c_absxk_tmp > scale) {
+    t = scale / c_absxk_tmp;
     y = y * t * t + 1.0;
-    scale = absxk;
+    scale = c_absxk_tmp;
   } else {
-    t = absxk / scale;
+    t = c_absxk_tmp / scale;
     y += t * t;
   }
   y = scale * sqrt(y);
@@ -439,78 +348,29 @@ void Calculat_A_and_B_Points_after_Offest2(
   if (numShengLu < 1) {
     i = 0;
     i1 = 1;
-    i2 = -1;
+    b_i = -1;
   } else {
     i = numShengLu - 1;
     i1 = -1;
-    i2 = 0;
+    b_i = 0;
   }
-  /*  角度偏移 */
-  emxInit_real_T(&rAng, 2);
-  i3 = rAng->size[0] * rAng->size[1];
-  rAng->size[0] = 1;
-  rAng->size[1] = numShengLu;
-  emxEnsureCapacity_real_T(rAng, i3);
-  rAng_data = rAng->data;
-  for (i3 = 0; i3 < numShengLu; i3++) {
-    rAng_data[i3] = roff_data[i3] / Mradial;
+  emxInit_real_T(&AngR1, 2);
+  BianHao_tmp = AngR1->size[0] * AngR1->size[1];
+  AngR1->size[0] = 1;
+  b_loop_ub = div_s32(b_i - i, i1);
+  AngR1->size[1] = (numShengLu + b_loop_ub) + 1;
+  emxEnsureCapacity_real_T(AngR1, BianHao_tmp);
+  AngR1_data = AngR1->data;
+  for (b_i = 0; b_i < numShengLu; b_i++) {
+    AngR1_data[b_i] = Ang_data[b_i];
   }
-  if (rAng->size[1] < 1) {
-    i3 = 0;
-    BianHao_tmp = 1;
-    b_BianHao_tmp = -1;
-  } else {
-    i3 = rAng->size[1] - 1;
-    BianHao_tmp = -1;
-    b_BianHao_tmp = 0;
+  for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+    AngR1_data[b_i + numShengLu] = 3.1415926535897931 - Ang_data[i + i1 * b_i];
   }
-  b_loop_ub = div_s32(i2 - i, i1);
-  c_BianHao_tmp = (numShengLu + b_loop_ub) + 1;
-  b_i = div_s32(b_BianHao_tmp - i3, BianHao_tmp);
-  i4 = (rAng->size[1] + b_i) + 1;
-  emxInit_real_T(&AngR, 2);
-  emxInit_real_T(&disPhiDian, 2);
-  if (c_BianHao_tmp == i4) {
-    i2 = disPhiDian->size[0] * disPhiDian->size[1];
-    disPhiDian->size[0] = 1;
-    disPhiDian->size[1] = c_BianHao_tmp;
-    emxEnsureCapacity_real_T(disPhiDian, i2);
-    disPhiDian_data = disPhiDian->data;
-    for (i2 = 0; i2 < numShengLu; i2++) {
-      disPhiDian_data[i2] = Ang_data[i2];
-    }
-    for (i2 = 0; i2 <= b_loop_ub; i2++) {
-      disPhiDian_data[i2 + numShengLu] =
-          3.1415926535897931 - Ang_data[i + i1 * i2];
-    }
-    emxInit_real_T(&b_rAng, 2);
-    i = b_rAng->size[0] * b_rAng->size[1];
-    b_rAng->size[0] = 1;
-    b_rAng->size[1] = i4;
-    emxEnsureCapacity_real_T(b_rAng, i);
-    BianHao_data = b_rAng->data;
-    b_loop_ub = rAng->size[1];
-    for (i = 0; i < b_loop_ub; i++) {
-      BianHao_data[i] = rAng_data[i];
-    }
-    for (i = 0; i <= b_i; i++) {
-      BianHao_data[i + rAng->size[1]] = -rAng_data[i3 + BianHao_tmp * i];
-    }
-    i = AngR->size[0] * AngR->size[1];
-    AngR->size[0] = 1;
-    AngR->size[1] = disPhiDian->size[1];
-    emxEnsureCapacity_real_T(AngR, i);
-    AngR_data = AngR->data;
-    b_loop_ub = disPhiDian->size[1];
-    for (i = 0; i < b_loop_ub; i++) {
-      AngR_data[i] = disPhiDian_data[i] + BianHao_data[i];
-    }
-    emxFree_real_T(&b_rAng);
-  } else {
-    binary_expand_op_2(AngR, Ang, numShengLu, i, i1, i2, rAng, i3, BianHao_tmp,
-                       b_BianHao_tmp);
-    AngR_data = AngR->data;
-  }
+  /*  % 角度偏移 */
+  /*   */
+  /*  rAng = roff(1:numShengLu)./Mradial; */
+  /*  roffAng = [rAng,-rAng(end:-1:1)]; */
   /*  3、生成圆周点 */
   emxInit_real_T(&YuanZhouDian, 2);
   i = YuanZhouDian->size[0] * YuanZhouDian->size[1];
@@ -518,22 +378,22 @@ void Calculat_A_and_B_Points_after_Offest2(
   YuanZhouDian->size[1] = loop_ub;
   emxEnsureCapacity_real_T(YuanZhouDian, i);
   YuanZhouDian_data = YuanZhouDian->data;
-  BianHao_tmp = 3 * loop_ub;
-  for (i = 0; i < BianHao_tmp; i++) {
+  b_BianHao_tmp = 3 * loop_ub;
+  for (i = 0; i < b_BianHao_tmp; i++) {
     YuanZhouDian_data[i] = 0.0;
   }
   for (b_i = 0; b_i < loop_ub; b_i++) {
-    scale = AngR_data[b_i];
-    y = sin(scale);
+    scale = AngR1_data[b_i];
+    b = sin(scale);
     scale = cos(scale);
     YuanZhouDian_data[3 * b_i] =
-        (Bottom_round_center2[0] + u_idx_0 * Mradial * y) +
+        (Bottom_round_center2[0] + u_idx_0 * Mradial * b) +
         e_idx_0 * Mradial * scale;
     YuanZhouDian_data[3 * b_i + 1] =
-        (Bottom_round_center2[1] + u_idx_1 * Mradial * y) +
+        (Bottom_round_center2[1] + u_idx_1 * Mradial * b) +
         e_idx_1 * Mradial * scale;
     YuanZhouDian_data[3 * b_i + 2] =
-        (Bottom_round_center2[2] + u_idx_2 * Mradial * y) +
+        (Bottom_round_center2[2] + u_idx_2 * Mradial * b) +
         e_idx_2 * Mradial * scale;
   }
   /*  4、计算轴向移动 */
@@ -548,162 +408,387 @@ void Calculat_A_and_B_Points_after_Offest2(
   /*  P1点在轴线上的投影坐标 */
   t = (scale * d_idx_2_tmp + Bottom_round_center1[2]) - Bottom_round_center2[2];
   y = (scale * d_idx_1_tmp + Bottom_round_center1[1]) - Bottom_round_center2[1];
-  scale =
-      (scale * d_idx_0_tmp + Bottom_round_center1[0]) - Bottom_round_center2[0];
-  absxk = sqrt((t * t + y * y) + scale * scale);
+  b = (scale * d_idx_0_tmp + Bottom_round_center1[0]) - Bottom_round_center2[0];
+  u_idx_0 = sqrt((t * t + y * y) + b * b);
   /*  phi角移动 */
   emxInit_real_T(&PhiDian, 2);
   i = PhiDian->size[0] * PhiDian->size[1];
   PhiDian->size[0] = 3;
   PhiDian->size[1] = loop_ub;
   emxEnsureCapacity_real_T(PhiDian, i);
-  rAng_data = PhiDian->data;
-  for (i = 0; i < BianHao_tmp; i++) {
-    rAng_data[i] = 0.0;
+  PhiDian_data = PhiDian->data;
+  for (i = 0; i < b_BianHao_tmp; i++) {
+    PhiDian_data[i] = 0.0;
   }
+  emxInit_real_T(&disPhiDian, 2);
   i = disPhiDian->size[0] * disPhiDian->size[1];
   disPhiDian->size[0] = 1;
   disPhiDian->size[1] = loop_ub;
   emxEnsureCapacity_real_T(disPhiDian, i);
-  disPhiDian_data = disPhiDian->data;
+  BianHao_data = disPhiDian->data;
   for (i = 0; i < loop_ub; i++) {
-    disPhiDian_data[i] = 0.0;
+    BianHao_data[i] = 0.0;
   }
   for (b_i = 0; b_i < loop_ub; b_i++) {
-    scale = cos(AngR_data[b_i]);
-    rAng_data[3 * b_i] = e_idx_0 * Mradial * scale;
+    scale = cos(AngR1_data[b_i]);
+    PhiDian_data[3 * b_i] = e_idx_0 * Mradial * scale;
     i = 3 * b_i + 1;
-    rAng_data[i] = e_idx_1 * Mradial * scale;
+    PhiDian_data[i] = e_idx_1 * Mradial * scale;
     i1 = 3 * b_i + 2;
-    rAng_data[i1] = e_idx_2 * Mradial * scale;
+    PhiDian_data[i1] = e_idx_2 * Mradial * scale;
     if (b_i + 1 <= numShengLu) {
-      t = rAng_data[3 * b_i];
-      y = rAng_data[i];
-      scale = rAng_data[i1];
-      disPhiDian_data[b_i] = -sqrt((t * t + y * y) + scale * scale) / tan(phi);
+      scale = 3.3121686421112381E-170;
+      absxk = fabs(PhiDian_data[3 * b_i]);
+      if (absxk > 3.3121686421112381E-170) {
+        y = 1.0;
+        scale = absxk;
+      } else {
+        t = absxk / 3.3121686421112381E-170;
+        y = t * t;
+      }
+      absxk = fabs(PhiDian_data[i]);
+      if (absxk > scale) {
+        t = scale / absxk;
+        y = y * t * t + 1.0;
+        scale = absxk;
+      } else {
+        t = absxk / scale;
+        y += t * t;
+      }
+      absxk = fabs(PhiDian_data[i1]);
+      if (absxk > scale) {
+        t = scale / absxk;
+        y = y * t * t + 1.0;
+        scale = absxk;
+      } else {
+        t = absxk / scale;
+        y += t * t;
+      }
+      y = scale * sqrt(y);
+      BianHao_data[b_i] = -y / tan(phi);
     } else {
-      t = rAng_data[3 * b_i];
-      y = rAng_data[i];
-      scale = rAng_data[i1];
-      disPhiDian_data[b_i] = sqrt((t * t + y * y) + scale * scale) / tan(phi);
+      scale = 3.3121686421112381E-170;
+      absxk = fabs(PhiDian_data[3 * b_i]);
+      if (absxk > 3.3121686421112381E-170) {
+        y = 1.0;
+        scale = absxk;
+      } else {
+        t = absxk / 3.3121686421112381E-170;
+        y = t * t;
+      }
+      absxk = fabs(PhiDian_data[i]);
+      if (absxk > scale) {
+        t = scale / absxk;
+        y = y * t * t + 1.0;
+        scale = absxk;
+      } else {
+        t = absxk / scale;
+        y += t * t;
+      }
+      absxk = fabs(PhiDian_data[i1]);
+      if (absxk > scale) {
+        t = scale / absxk;
+        y = y * t * t + 1.0;
+        scale = absxk;
+      } else {
+        t = absxk / scale;
+        y += t * t;
+      }
+      y = scale * sqrt(y);
+      BianHao_data[b_i] = y / tan(phi);
     }
   }
   /*  偏移移动 ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！ */
   if (numShengLu < 1) {
     i = 0;
     i1 = 1;
-    i2 = -1;
+    b_i = -1;
   } else {
     i = numShengLu - 1;
     i1 = -1;
-    i2 = 0;
+    b_i = 0;
   }
-  i3 = rAng->size[0] * rAng->size[1];
-  rAng->size[0] = 1;
-  b_loop_ub = div_s32(i2 - i, i1);
-  rAng->size[1] = (numShengLu + b_loop_ub) + 1;
-  emxEnsureCapacity_real_T(rAng, i3);
-  rAng_data = rAng->data;
-  for (i2 = 0; i2 < numShengLu; i2++) {
-    rAng_data[i2] = toff_data[i2];
+  BianHao_tmp = AngR1->size[0] * AngR1->size[1];
+  AngR1->size[0] = 1;
+  b_loop_ub = div_s32(b_i - i, i1);
+  AngR1->size[1] = (numShengLu + b_loop_ub) + 1;
+  emxEnsureCapacity_real_T(AngR1, BianHao_tmp);
+  AngR1_data = AngR1->data;
+  for (b_i = 0; b_i < numShengLu; b_i++) {
+    AngR1_data[b_i] = toff_data[b_i];
   }
-  for (i2 = 0; i2 <= b_loop_ub; i2++) {
-    rAng_data[i2 + numShengLu] = -toff_data[i + i1 * i2];
+  for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+    AngR1_data[b_i + numShengLu] = -toff_data[i + i1 * b_i];
   }
-  i = PointTable_A_off->size[0] * PointTable_A_off->size[1];
-  PointTable_A_off->size[0] = 3;
-  PointTable_A_off->size[1] = loop_ub;
-  emxEnsureCapacity_real_T(PointTable_A_off, i);
-  BianHao_data = PointTable_A_off->data;
-  for (i = 0; i < BianHao_tmp; i++) {
-    BianHao_data[i] = 0.0;
+  i = PhiDian->size[0] * PhiDian->size[1];
+  PhiDian->size[0] = 3;
+  PhiDian->size[1] = loop_ub;
+  emxEnsureCapacity_real_T(PhiDian, i);
+  PhiDian_data = PhiDian->data;
+  for (i = 0; i < b_BianHao_tmp; i++) {
+    PhiDian_data[i] = 0.0;
   }
-  if (disPhiDian->size[1] == rAng->size[1]) {
-    i = AngR->size[0] * AngR->size[1];
-    AngR->size[0] = 1;
-    AngR->size[1] = disPhiDian->size[1];
-    emxEnsureCapacity_real_T(AngR, i);
-    AngR_data = AngR->data;
+  emxInit_real_T(&PYallA, 2);
+  if (disPhiDian->size[1] == AngR1->size[1]) {
+    i = PYallA->size[0] * PYallA->size[1];
+    PYallA->size[0] = 1;
+    PYallA->size[1] = disPhiDian->size[1];
+    emxEnsureCapacity_real_T(PYallA, i);
+    PYallA_data = PYallA->data;
     b_loop_ub = disPhiDian->size[1];
     for (i = 0; i < b_loop_ub; i++) {
-      AngR_data[i] = (absxk + disPhiDian_data[i]) + rAng_data[i];
+      PYallA_data[i] = (u_idx_0 + BianHao_data[i]) + AngR1_data[i];
     }
   } else {
-    binary_expand_op_1(AngR, absxk, disPhiDian, rAng);
-    AngR_data = AngR->data;
+    binary_expand_op_1(PYallA, u_idx_0, disPhiDian, AngR1);
+    PYallA_data = PYallA->data;
   }
   for (b_i = 0; b_i < loop_ub; b_i++) {
-    scale = AngR_data[b_i];
-    BianHao_data[3 * b_i] = YuanZhouDian_data[3 * b_i] - d_idx_0 * scale;
+    t = PYallA_data[b_i];
+    PhiDian_data[3 * b_i] = YuanZhouDian_data[3 * b_i] - d_idx_0 * t;
     i = 3 * b_i + 1;
-    BianHao_data[i] = YuanZhouDian_data[i] - d_idx_1 * scale;
+    PhiDian_data[i] = YuanZhouDian_data[i] - d_idx_1 * t;
     i = 3 * b_i + 2;
-    BianHao_data[i] = YuanZhouDian_data[i] - d_idx_2 * scale;
+    PhiDian_data[i] = YuanZhouDian_data[i] - d_idx_2 * t;
   }
-  emxFree_real_T(&AngR);
+  emxInit_real_T(&PointTable_B_off, 2);
   i = PointTable_B_off->size[0] * PointTable_B_off->size[1];
   PointTable_B_off->size[0] = 3;
   PointTable_B_off->size[1] = loop_ub;
   emxEnsureCapacity_real_T(PointTable_B_off, i);
-  BianHao_data = PointTable_B_off->data;
-  for (i = 0; i < BianHao_tmp; i++) {
-    BianHao_data[i] = 0.0;
+  PointTable_B_off_data = PointTable_B_off->data;
+  for (i = 0; i < b_BianHao_tmp; i++) {
+    PointTable_B_off_data[i] = 0.0;
   }
-  if (disPhiDian->size[1] == rAng->size[1]) {
+  if (disPhiDian->size[1] == AngR1->size[1]) {
     b_loop_ub = disPhiDian->size[1] - 1;
     i = disPhiDian->size[0] * disPhiDian->size[1];
     disPhiDian->size[0] = 1;
     emxEnsureCapacity_real_T(disPhiDian, i);
-    disPhiDian_data = disPhiDian->data;
+    BianHao_data = disPhiDian->data;
     for (i = 0; i <= b_loop_ub; i++) {
-      disPhiDian_data[i] = (absxk - disPhiDian_data[i]) - rAng_data[i];
+      BianHao_data[i] = (u_idx_0 - BianHao_data[i]) - AngR1_data[i];
     }
   } else {
-    binary_expand_op(disPhiDian, absxk, rAng);
-    disPhiDian_data = disPhiDian->data;
+    binary_expand_op(disPhiDian, u_idx_0, AngR1);
+    BianHao_data = disPhiDian->data;
   }
-  emxFree_real_T(&rAng);
   for (b_i = 0; b_i < loop_ub; b_i++) {
-    scale = disPhiDian_data[b_i];
-    BianHao_data[3 * b_i] = YuanZhouDian_data[3 * b_i] - d_idx_0 * scale;
+    b = BianHao_data[b_i];
+    PointTable_B_off_data[3 * b_i] = YuanZhouDian_data[3 * b_i] - d_idx_0 * b;
     i = 3 * b_i + 1;
-    BianHao_data[i] = YuanZhouDian_data[i] - d_idx_1 * scale;
+    PointTable_B_off_data[i] = YuanZhouDian_data[i] - d_idx_1 * b;
     i = 3 * b_i + 2;
-    BianHao_data[i] = YuanZhouDian_data[i] - d_idx_2 * scale;
+    PointTable_B_off_data[i] = YuanZhouDian_data[i] - d_idx_2 * b;
   }
   emxFree_real_T(&disPhiDian);
-  emxFree_real_T(&YuanZhouDian);
-  if (PointTable_B_off->size[1] < 1) {
+  /*  5、径向偏移 */
+  /*  角度偏移 */
+  i = AngR1->size[0] * AngR1->size[1];
+  AngR1->size[0] = 1;
+  AngR1->size[1] = numShengLu;
+  emxEnsureCapacity_real_T(AngR1, i);
+  AngR1_data = AngR1->data;
+  for (i = 0; i < numShengLu; i++) {
+    AngR1_data[i] = roff_data[i] / Mradial;
+  }
+  if (AngR1->size[1] < 1) {
     i = 0;
     i1 = 1;
-    i2 = -1;
+    b_i = -1;
   } else {
-    i = PointTable_B_off->size[1] - 1;
+    i = AngR1->size[1] - 1;
     i1 = -1;
-    i2 = 0;
+    b_i = 0;
   }
-  i3 = PhiDian->size[0] * PhiDian->size[1];
-  PhiDian->size[0] = 3;
-  loop_ub = div_s32(i2 - i, i1);
-  PhiDian->size[1] = loop_ub + 1;
-  emxEnsureCapacity_real_T(PhiDian, i3);
-  rAng_data = PhiDian->data;
-  for (i2 = 0; i2 <= loop_ub; i2++) {
-    BianHao_tmp = i + i1 * i2;
-    rAng_data[3 * i2] = BianHao_data[3 * BianHao_tmp];
-    rAng_data[3 * i2 + 1] = BianHao_data[3 * BianHao_tmp + 1];
-    rAng_data[3 * i2 + 2] = BianHao_data[3 * BianHao_tmp + 2];
+  BianHao_tmp = PYallA->size[0] * PYallA->size[1];
+  PYallA->size[0] = 1;
+  b_loop_ub = div_s32(b_i - i, i1);
+  PYallA->size[1] = (AngR1->size[1] + b_loop_ub) + 1;
+  emxEnsureCapacity_real_T(PYallA, BianHao_tmp);
+  PYallA_data = PYallA->data;
+  BianHao_tmp = AngR1->size[1];
+  for (b_i = 0; b_i < BianHao_tmp; b_i++) {
+    PYallA_data[b_i] = AngR1_data[b_i];
   }
-  i = PointTable_B_off->size[0] * PointTable_B_off->size[1];
-  PointTable_B_off->size[0] = 3;
-  PointTable_B_off->size[1] = PhiDian->size[1];
-  emxEnsureCapacity_real_T(PointTable_B_off, i);
-  BianHao_data = PointTable_B_off->data;
-  loop_ub = 3 * PhiDian->size[1];
-  for (i = 0; i < loop_ub; i++) {
-    BianHao_data[i] = rAng_data[i];
+  for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+    PYallA_data[b_i + AngR1->size[1]] = -AngR1_data[i + i1 * b_i];
+  }
+  emxFree_real_T(&AngR1);
+  i = PointTable_A_off2->size[0] * PointTable_A_off2->size[1];
+  PointTable_A_off2->size[0] = 3;
+  PointTable_A_off2->size[1] = loop_ub;
+  emxEnsureCapacity_real_T(PointTable_A_off2, i);
+  BianHao_data = PointTable_A_off2->data;
+  for (i = 0; i < b_BianHao_tmp; i++) {
+    BianHao_data[i] = 0.0;
+  }
+  i = PhiDian->size[1];
+  for (b_i = 0; b_i < i; b_i++) {
+    /*  旋转轴方向向量 */
+    scale = 3.3121686421112381E-170;
+    if (absxk_tmp > 3.3121686421112381E-170) {
+      y = 1.0;
+      scale = absxk_tmp;
+    } else {
+      t = absxk_tmp / 3.3121686421112381E-170;
+      y = t * t;
+    }
+    if (b_absxk_tmp > scale) {
+      t = scale / b_absxk_tmp;
+      y = y * t * t + 1.0;
+      scale = b_absxk_tmp;
+    } else {
+      t = b_absxk_tmp / scale;
+      y += t * t;
+    }
+    if (c_absxk_tmp > scale) {
+      t = scale / c_absxk_tmp;
+      y = y * t * t + 1.0;
+      scale = c_absxk_tmp;
+    } else {
+      t = c_absxk_tmp / scale;
+      y += t * t;
+    }
+    y = scale * sqrt(y);
+    e_idx_0 = d_idx_0_tmp / y;
+    e_idx_1 = d_idx_1_tmp / y;
+    e_idx_2 = d_idx_2_tmp / y;
+    /*  归一化为单位向量 */
+    /*  旋转矩阵 */
+    scale = PYallA_data[b_i];
+    absxk = cos(scale);
+    t = sin(scale);
+    /*  计算旋转后的点 */
+    R_tmp[0] = absxk + e_idx_0 * e_idx_0 * (1.0 - absxk);
+    scale = e_idx_0 * e_idx_1 * (1.0 - absxk);
+    b = e_idx_2 * t;
+    R_tmp[3] = scale - b;
+    y = e_idx_0 * e_idx_2 * (1.0 - absxk);
+    u_idx_0 = e_idx_1 * t;
+    R_tmp[6] = y + u_idx_0;
+    R_tmp[1] = scale + b;
+    R_tmp[4] = absxk + e_idx_1 * e_idx_1 * (1.0 - absxk);
+    scale = e_idx_1 * e_idx_2 * (1.0 - absxk);
+    b = e_idx_0 * t;
+    R_tmp[7] = scale - b;
+    R_tmp[2] = y - u_idx_0;
+    R_tmp[5] = scale + b;
+    R_tmp[8] = absxk + e_idx_2 * e_idx_2 * (1.0 - absxk);
+    b = PhiDian_data[3 * b_i] - Bottom_round_center1[0];
+    t = PhiDian_data[3 * b_i + 1] - Bottom_round_center1[1];
+    scale = PhiDian_data[3 * b_i + 2] - Bottom_round_center1[2];
+    for (i1 = 0; i1 < 3; i1++) {
+      BianHao_data[i1 + 3 * b_i] =
+          ((R_tmp[i1] * b + R_tmp[i1 + 3] * t) + R_tmp[i1 + 6] * scale) +
+          Bottom_round_center1[i1];
+    }
+    /*  减去P1，然后旋转，再加回P1 */
   }
   emxFree_real_T(&PhiDian);
+  i = PointTable_B_off2->size[0] * PointTable_B_off2->size[1];
+  PointTable_B_off2->size[0] = 3;
+  PointTable_B_off2->size[1] = loop_ub;
+  emxEnsureCapacity_real_T(PointTable_B_off2, i);
+  BianHao_data = PointTable_B_off2->data;
+  for (i = 0; i < b_BianHao_tmp; i++) {
+    BianHao_data[i] = 0.0;
+  }
+  i = PointTable_B_off->size[1];
+  for (b_i = 0; b_i < i; b_i++) {
+    /*  旋转轴方向向量 */
+    scale = 3.3121686421112381E-170;
+    if (absxk_tmp > 3.3121686421112381E-170) {
+      y = 1.0;
+      scale = absxk_tmp;
+    } else {
+      t = absxk_tmp / 3.3121686421112381E-170;
+      y = t * t;
+    }
+    if (b_absxk_tmp > scale) {
+      t = scale / b_absxk_tmp;
+      y = y * t * t + 1.0;
+      scale = b_absxk_tmp;
+    } else {
+      t = b_absxk_tmp / scale;
+      y += t * t;
+    }
+    if (c_absxk_tmp > scale) {
+      t = scale / c_absxk_tmp;
+      y = y * t * t + 1.0;
+      scale = c_absxk_tmp;
+    } else {
+      t = c_absxk_tmp / scale;
+      y += t * t;
+    }
+    y = scale * sqrt(y);
+    e_idx_0 = d_idx_0_tmp / y;
+    e_idx_1 = d_idx_1_tmp / y;
+    e_idx_2 = d_idx_2_tmp / y;
+    /*  归一化为单位向量 */
+    /*  旋转矩阵 */
+    scale = PYallA_data[b_i];
+    absxk = cos(scale);
+    t = sin(scale);
+    /*  计算旋转后的点 */
+    R_tmp[0] = absxk + e_idx_0 * e_idx_0 * (1.0 - absxk);
+    scale = e_idx_0 * e_idx_1 * (1.0 - absxk);
+    b = e_idx_2 * t;
+    R_tmp[3] = scale - b;
+    y = e_idx_0 * e_idx_2 * (1.0 - absxk);
+    u_idx_0 = e_idx_1 * t;
+    R_tmp[6] = y + u_idx_0;
+    R_tmp[1] = scale + b;
+    R_tmp[4] = absxk + e_idx_1 * e_idx_1 * (1.0 - absxk);
+    scale = e_idx_1 * e_idx_2 * (1.0 - absxk);
+    b = e_idx_0 * t;
+    R_tmp[7] = scale - b;
+    R_tmp[2] = y - u_idx_0;
+    R_tmp[5] = scale + b;
+    R_tmp[8] = absxk + e_idx_2 * e_idx_2 * (1.0 - absxk);
+    b = PointTable_B_off_data[3 * b_i] - Bottom_round_center1[0];
+    t = PointTable_B_off_data[3 * b_i + 1] - Bottom_round_center1[1];
+    scale = PointTable_B_off_data[3 * b_i + 2] - Bottom_round_center1[2];
+    for (i1 = 0; i1 < 3; i1++) {
+      BianHao_data[i1 + 3 * b_i] =
+          ((R_tmp[i1] * b + R_tmp[i1 + 3] * t) + R_tmp[i1 + 6] * scale) +
+          Bottom_round_center1[i1];
+    }
+    /*  减去P1，然后旋转，再加回P1 */
+  }
+  emxFree_real_T(&PointTable_B_off);
+  emxFree_real_T(&PYallA);
+  if (PointTable_B_off2->size[1] < 1) {
+    i = 0;
+    i1 = 1;
+    b_i = -1;
+  } else {
+    i = PointTable_B_off2->size[1] - 1;
+    i1 = -1;
+    b_i = 0;
+  }
+  BianHao_tmp = YuanZhouDian->size[0] * YuanZhouDian->size[1];
+  YuanZhouDian->size[0] = 3;
+  loop_ub = div_s32(b_i - i, i1);
+  YuanZhouDian->size[1] = loop_ub + 1;
+  emxEnsureCapacity_real_T(YuanZhouDian, BianHao_tmp);
+  YuanZhouDian_data = YuanZhouDian->data;
+  for (b_i = 0; b_i <= loop_ub; b_i++) {
+    BianHao_tmp = i + i1 * b_i;
+    YuanZhouDian_data[3 * b_i] = BianHao_data[3 * BianHao_tmp];
+    YuanZhouDian_data[3 * b_i + 1] = BianHao_data[3 * BianHao_tmp + 1];
+    YuanZhouDian_data[3 * b_i + 2] = BianHao_data[3 * BianHao_tmp + 2];
+  }
+  i = PointTable_B_off2->size[0] * PointTable_B_off2->size[1];
+  PointTable_B_off2->size[0] = 3;
+  PointTable_B_off2->size[1] = YuanZhouDian->size[1];
+  emxEnsureCapacity_real_T(PointTable_B_off2, i);
+  BianHao_data = PointTable_B_off2->data;
+  loop_ub = 3 * YuanZhouDian->size[1];
+  for (i = 0; i < loop_ub; i++) {
+    BianHao_data[i] = YuanZhouDian_data[i];
+  }
+  emxFree_real_T(&YuanZhouDian);
 }
 
 /*
