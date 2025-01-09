@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Jan-2025 22:39:55
+ * C/C++ source code generated on  : 08-Jan-2025 23:39:18
  */
 
 /* Include Files */
@@ -17,12 +17,12 @@
 #include <math.h>
 
 /* Function Declarations */
-static void binary_expand_op_20(emxArray_real_T *in1,
+static void binary_expand_op_19(emxArray_real_T *in1,
                                 const emxArray_real_T *in2, const double in3[3],
                                 const emxArray_real_T *in4,
                                 const double in5[3]);
 
-static void binary_expand_op_21(emxArray_real_T *in1,
+static void binary_expand_op_20(emxArray_real_T *in1,
                                 const emxArray_real_T *in2, const double in3[3],
                                 const emxArray_real_T *in4,
                                 const double in5[3]);
@@ -36,7 +36,7 @@ static void binary_expand_op_21(emxArray_real_T *in1,
  *                const double in5[3]
  * Return Type  : void
  */
-static void binary_expand_op_20(emxArray_real_T *in1,
+static void binary_expand_op_19(emxArray_real_T *in1,
                                 const emxArray_real_T *in2, const double in3[3],
                                 const emxArray_real_T *in4, const double in5[3])
 {
@@ -81,7 +81,7 @@ static void binary_expand_op_20(emxArray_real_T *in1,
  *                const double in5[3]
  * Return Type  : void
  */
-static void binary_expand_op_21(emxArray_real_T *in1,
+static void binary_expand_op_20(emxArray_real_T *in1,
                                 const emxArray_real_T *in2, const double in3[3],
                                 const emxArray_real_T *in4, const double in5[3])
 {
@@ -506,7 +506,7 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
       x_circle_data[i] = z_circle_data[i] * v1[0] + theta_data[i] * n1[0];
     }
   } else {
-    binary_expand_op_21(x_circle, z_circle, v1, theta, n1);
+    binary_expand_op_20(x_circle, z_circle, v1, theta, n1);
     x_circle_data = x_circle->data;
   }
   emxInit_real_T(&y_circle, 2);
@@ -521,7 +521,7 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
       y_circle_data[i] = z_circle_data[i] * v1[1] + theta_data[i] * n1[1];
     }
   } else {
-    binary_expand_op_20(y_circle, z_circle, v1, theta, n1);
+    binary_expand_op_19(y_circle, z_circle, v1, theta, n1);
     y_circle_data = y_circle->data;
   }
   if (z_circle->size[1] == theta->size[1]) {
@@ -534,7 +534,7 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
       z_circle_data[i] = z_circle_data[i] * v1[2] + theta_data[i] * n1[2];
     }
   } else {
-    binary_expand_op_16(z_circle, v1, theta, n1);
+    binary_expand_op_15(z_circle, v1, theta, n1);
     z_circle_data = z_circle->data;
   }
   emxFree_real_T(&theta);

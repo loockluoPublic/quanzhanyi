@@ -2,7 +2,7 @@
  * File: cat.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Jan-2025 22:39:55
+ * C/C++ source code generated on  : 08-Jan-2025 23:39:18
  */
 
 /* Include Files */
@@ -23,7 +23,7 @@
  *                double in8
  * Return Type  : void
  */
-void binary_expand_op_22(emxArray_real_T *in1, double in2,
+void binary_expand_op_21(emxArray_real_T *in1, double in2,
                          const emxArray_real_T *in3, double in4,
                          const emxArray_real_T *in5, const emxArray_real_T *in6,
                          const emxArray_real_T *in7, double in8)

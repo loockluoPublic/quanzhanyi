@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 07-Jan-2025 22:39:55
+ * C/C++ source code generated on  : 08-Jan-2025 23:39:18
  */
 
 #ifndef GENERATE_UNIT_CIRCLE_WITH_NORMAL_VECTOR_H
@@ -19,7 +19,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void binary_expand_op_16(emxArray_real_T *in1, const double in2[3],
+void binary_expand_op_15(emxArray_real_T *in1, const double in2[3],
                          const emxArray_real_T *in3, const double in4[3]);
 
 extern void generate_unit_circle_with_normal_vector(double azimuth,
