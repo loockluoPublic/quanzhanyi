@@ -75,6 +75,7 @@ function CubeResult() {
   }, [key]);
 
   const updateOffset = () => {
+    console.log("%c Line:78 🍬", "color:#6ec1c2");
     if (!(data.cubeTable?.length > 0)) return;
 
     const tableData = data.cubeTable.map((item) => {

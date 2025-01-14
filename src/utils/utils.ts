@@ -694,7 +694,7 @@ export const CalculateRectangleFromVertex8 = (
 
   bottomA.map((p, i) => {
     p.color = 'red';
-    p.key = bhKeys[i][1];
+    p.key = bhKeys[i][0];
     p.difference = rOff[i];
     return p;
   });
@@ -704,7 +704,7 @@ export const CalculateRectangleFromVertex8 = (
 
   bottomB.map((p, i) => {
     p.color = '#fab005';
-    p.key = bhKeys[i][0];
+    p.key = bhKeys[i][1];
     p.difference = rOff[i];
     return p;
   });
@@ -1116,7 +1116,7 @@ export const yuanXingFuCe = (
   sdmNum: number
 ) => {
   if (sdmNum === 2) {
-    const resA = yuanXingFuCeFn(calulateRes, cylinderAgainTable.slice(0,sdfb), sdfb, sdj);
+    const resA = yuanXingFuCeFn(calulateRes, cylinderAgainTable.slice(0, sdfb), sdfb, sdj);
     const resB = yuanXingFuCeFn(calulateRes, cylinderAgainTable.slice(sdfb), sdfb, sdj);
     return [...resA, ...resB];
   } else {
