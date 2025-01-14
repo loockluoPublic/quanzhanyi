@@ -235,9 +235,9 @@ PhiPy = zeros(1,2*shenglunum);
 for i = 1:2*shenglunum
     tdb = deltTib(i);
     if tdb == 0
-        PhiPy(i) = b./2*cos(phi);
+        PhiPy(i) = b./2./tan(phi);
     else
-        PhiPy(i) = (b./2-tdb)*cos(phi);
+        PhiPy(i) = (b./2-tdb)./tan(phi);
     end
 end
 

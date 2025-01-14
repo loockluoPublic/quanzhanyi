@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_mex.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 08-Jan-2025 23:39:18
+ * C/C++ source code generated on  : 14-Jan-2025 20:59:01
  */
 
 #ifndef _CODER_QUANZHANYI_MEX_H
