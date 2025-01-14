@@ -1,0 +1,63 @@
+# 工作流名称
+name: Build Tauri App for Windows
+
+# 触发条件
+on:
+  # 当代码推送到main分支时触发
+  push:
+    branches: [main]
+  # 当创建针对main分支的pull request时触发
+  pull_request:
+    branches: [main]
+
+# 定义作业
+jobs:
+  # 作业名称
+  build:
+    # 使用Windows 11环境
+    runs-on: windows-latest
+
+    # 定义步骤
+    steps:
+      # 第一步：检出代码
+      - name: Checkout code
+        # 使用官方checkout action
+        uses: actions/checkout@v3
+
+      # 第二步：设置Node.js环境
+      - name: Set up Node.js 20
+        # 使用官方setup-node action
+        uses: actions/setup-node@v3
+        with:
+          # 指定Node.js版本为20
+          node-version: 20
+          # 启用pnpm缓存
+          cache: 'pnpm'
+
+      # 第三步：设置Rust环境
+      - name: Set up Rust 1.60
+        # 使用actions-rs提供的toolchain action
+        uses: actions-rs/toolchain@v1
+        with:
+          # 指定Rust版本为1.60
+          toolchain: 1.60
+          # 覆盖系统默认的Rust版本
+          override: true
+
+      # 第四步：安装pnpm包管理器
+      - name: Install pnpm
+        # 全局安装pnpm
+        run: npm install -g pnpm
+
+      # 第五步：安装项目依赖
+      - name: Install dependencies
+        # 使用pnpm安装依赖
+        run: pnpm install
+
+      # 第六步：构建Tauri应用
+      - name: Build Tauri app
+        # 使用pnpm运行tauri build命令
+        run: pnpm tauri build
+        env:
+          # 设置目标平台为Windows
+          TAURI_PLATFORM: windows
