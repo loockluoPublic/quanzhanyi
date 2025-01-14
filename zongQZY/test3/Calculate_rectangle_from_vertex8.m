@@ -215,11 +215,11 @@ deltTib = abs(deltTib);
 
 ZhouDian = zeros(3,2*shenglunum);
 for j = 1:shenglunum
-    ZhouDian(:,j) = Pout + u'.*Ti2A(j).*h./2 - v'.*(b./2-deltTib(j));
+    ZhouDian(:,j) = Pout + u'.*Ti2A(j).*h./2 + v'.*(b./2-deltTib(j));
 end
 
 for k = 1+shenglunum:2*shenglunum
-    ZhouDian(:,k) = Pout + u'.*Ti2A(k).*h./2 + v'.*(b./2-deltTib(k));
+    ZhouDian(:,k) = Pout + u'.*Ti2A(k).*h./2 - v'.*(b./2-deltTib(k));
 end
 
 
@@ -253,7 +253,7 @@ for i = 1+shenglunum:2*shenglunum
     PYA(1+shenglunum:2*shenglunum) = ztyd - PhiPy(1+shenglunum:2*shenglunum)  + a(1+shenglunum:2*shenglunum)./tan(phi);
 end
 
-PointTable_A_off8 = ZhouDian - d'.*PYA;
+PointTable_B_off8 = ZhouDian - d'.*PYA;
 
 % B测点
 PYB = zeros(1,2*shenglunum);
@@ -264,7 +264,7 @@ end
 for i = 1+shenglunum:2*shenglunum
     PYB(1+shenglunum:2*shenglunum) = ztyd + PhiPy(1+shenglunum:2*shenglunum)  - a(1+shenglunum:2*shenglunum)./tan(phi);
 end
-PointTable_B_off8 = ZhouDian - d'.*PYB;
+PointTable_A_off8 = ZhouDian - d'.*PYB;
 
 %% 8、编号
 BianHao = zeros(2,2*shenglunum);

@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 14-Jan-2025 20:59:01
+ * C/C++ source code generated on  : 14-Jan-2025 22:52:56
  */
 
 /* Include Files */
@@ -331,7 +331,7 @@ void Calculate_rectangle_from_vertex8(
   double theta3;
   double theta4;
   double x;
-  double *PointTable_B_off8_data;
+  double *PointTable_A_off8_data;
   double *Ti2A_data;
   double *XMFlagA_data;
   double *XieMianPianYi_data;
@@ -681,25 +681,25 @@ void Calculate_rectangle_from_vertex8(
     deltTib_data[b_i] = fabs(XMFlagA_data[b_i]);
   }
   /*  5、面上一周的点计算 */
-  i = PointTable_B_off8->size[0] * PointTable_B_off8->size[1];
-  PointTable_B_off8->size[0] = 3;
-  PointTable_B_off8->size[1] = loop_ub;
-  emxEnsureCapacity_real_T(PointTable_B_off8, i);
-  PointTable_B_off8_data = PointTable_B_off8->data;
+  i = PointTable_A_off8->size[0] * PointTable_A_off8->size[1];
+  PointTable_A_off8->size[0] = 3;
+  PointTable_A_off8->size[1] = loop_ub;
+  emxEnsureCapacity_real_T(PointTable_A_off8, i);
+  PointTable_A_off8_data = PointTable_A_off8->data;
   nx = 3 * loop_ub;
   for (i = 0; i < nx; i++) {
-    PointTable_B_off8_data[i] = 0.0;
+    PointTable_A_off8_data[i] = 0.0;
   }
   i = (int)shenglunum;
   for (nx = 0; nx < i; nx++) {
     ab1 = Ti2A_data[nx];
     ab4 = b / 2.0 - deltTib_data[nx];
-    PointTable_B_off8_data[3 * nx] =
-        (Pout[0] + u[0] * ab1 * h / 2.0) - v[0] * ab4;
-    PointTable_B_off8_data[3 * nx + 1] =
-        (Pout[1] + u[1] * ab1 * h / 2.0) - v[1] * ab4;
-    PointTable_B_off8_data[3 * nx + 2] =
-        (Pout[2] + u[2] * ab1 * h / 2.0) - v[2] * ab4;
+    PointTable_A_off8_data[3 * nx] =
+        (Pout[0] + u[0] * ab1 * h / 2.0) + v[0] * ab4;
+    PointTable_A_off8_data[3 * nx + 1] =
+        (Pout[1] + u[1] * ab1 * h / 2.0) + v[1] * ab4;
+    PointTable_A_off8_data[3 * nx + 2] =
+        (Pout[2] + u[2] * ab1 * h / 2.0) + v[2] * ab4;
   }
   i1 = (int)(2.0 * shenglunum + (1.0 - (shenglunum + 1.0)));
   for (b_i = 0; b_i < i1; b_i++) {
@@ -707,11 +707,11 @@ void Calculate_rectangle_from_vertex8(
     ab1 = Ti2A_data[(int)ab2 - 1];
     ab4 = b / 2.0 - deltTib_data[(int)ab2 - 1];
     i2 = 3 * ((int)ab2 - 1);
-    PointTable_B_off8_data[i2] = (Pout[0] + u[0] * ab1 * h / 2.0) + v[0] * ab4;
-    PointTable_B_off8_data[i2 + 1] =
-        (Pout[1] + u[1] * ab1 * h / 2.0) + v[1] * ab4;
-    PointTable_B_off8_data[i2 + 2] =
-        (Pout[2] + u[2] * ab1 * h / 2.0) + v[2] * ab4;
+    PointTable_A_off8_data[i2] = (Pout[0] + u[0] * ab1 * h / 2.0) - v[0] * ab4;
+    PointTable_A_off8_data[i2 + 1] =
+        (Pout[1] + u[1] * ab1 * h / 2.0) - v[1] * ab4;
+    PointTable_A_off8_data[i2 + 2] =
+        (Pout[2] + u[2] * ab1 * h / 2.0) - v[2] * ab4;
   }
   /*  6、计算轴线移动l */
   /* 整体移动 */
@@ -791,25 +791,25 @@ void Calculate_rectangle_from_vertex8(
       XMFlagA_data = XMFlagA->data;
     }
   }
-  if (PointTable_B_off8->size[1] == XMFlagA->size[1]) {
-    i2 = PointTable_A_off8->size[0] * PointTable_A_off8->size[1];
-    PointTable_A_off8->size[0] = 3;
-    PointTable_A_off8->size[1] = PointTable_B_off8->size[1];
-    emxEnsureCapacity_real_T(PointTable_A_off8, i2);
-    XieMianPianYi_data = PointTable_A_off8->data;
-    nx = PointTable_B_off8->size[1];
+  if (PointTable_A_off8->size[1] == XMFlagA->size[1]) {
+    i2 = PointTable_B_off8->size[0] * PointTable_B_off8->size[1];
+    PointTable_B_off8->size[0] = 3;
+    PointTable_B_off8->size[1] = PointTable_A_off8->size[1];
+    emxEnsureCapacity_real_T(PointTable_B_off8, i2);
+    XieMianPianYi_data = PointTable_B_off8->data;
+    nx = PointTable_A_off8->size[1];
     for (i2 = 0; i2 < nx; i2++) {
       XieMianPianYi_data[3 * i2] =
-          PointTable_B_off8_data[3 * i2] - d[0] * XMFlagA_data[i2];
+          PointTable_A_off8_data[3 * i2] - d[0] * XMFlagA_data[i2];
       i3 = 3 * i2 + 1;
       XieMianPianYi_data[i3] =
-          PointTable_B_off8_data[i3] - d[1] * XMFlagA_data[i2];
+          PointTable_A_off8_data[i3] - d[1] * XMFlagA_data[i2];
       i3 = 3 * i2 + 2;
       XieMianPianYi_data[i3] =
-          PointTable_B_off8_data[i3] - d[2] * XMFlagA_data[i2];
+          PointTable_A_off8_data[i3] - d[2] * XMFlagA_data[i2];
     }
   } else {
-    binary_expand_op_14(PointTable_A_off8, PointTable_B_off8, d, XMFlagA);
+    binary_expand_op_14(PointTable_B_off8, PointTable_A_off8, d, XMFlagA);
   }
   /*  B测点 */
   i2 = XMFlagA->size[0] * XMFlagA->size[1];
@@ -864,35 +864,35 @@ void Calculate_rectangle_from_vertex8(
     }
   }
   emxFree_real_T(&Ti2A);
-  if (PointTable_B_off8->size[1] == XMFlagA->size[1]) {
+  if (PointTable_A_off8->size[1] == XMFlagA->size[1]) {
     i2 =
         b_side_faces_transformed2->size[0] * b_side_faces_transformed2->size[1];
     b_side_faces_transformed2->size[0] = 3;
-    b_side_faces_transformed2->size[1] = PointTable_B_off8->size[1];
+    b_side_faces_transformed2->size[1] = PointTable_A_off8->size[1];
     emxEnsureCapacity_real_T(b_side_faces_transformed2, i2);
     XieMianPianYi_data = b_side_faces_transformed2->data;
-    nx = PointTable_B_off8->size[1];
+    nx = PointTable_A_off8->size[1];
     for (i2 = 0; i2 < nx; i2++) {
       XieMianPianYi_data[3 * i2] =
-          PointTable_B_off8_data[3 * i2] - d[0] * XMFlagA_data[i2];
+          PointTable_A_off8_data[3 * i2] - d[0] * XMFlagA_data[i2];
       i3 = 3 * i2 + 1;
       XieMianPianYi_data[i3] =
-          PointTable_B_off8_data[i3] - d[1] * XMFlagA_data[i2];
+          PointTable_A_off8_data[i3] - d[1] * XMFlagA_data[i2];
       i3 = 3 * i2 + 2;
       XieMianPianYi_data[i3] =
-          PointTable_B_off8_data[i3] - d[2] * XMFlagA_data[i2];
+          PointTable_A_off8_data[i3] - d[2] * XMFlagA_data[i2];
     }
-    i2 = PointTable_B_off8->size[0] * PointTable_B_off8->size[1];
-    PointTable_B_off8->size[0] = 3;
-    PointTable_B_off8->size[1] = b_side_faces_transformed2->size[1];
-    emxEnsureCapacity_real_T(PointTable_B_off8, i2);
-    PointTable_B_off8_data = PointTable_B_off8->data;
+    i2 = PointTable_A_off8->size[0] * PointTable_A_off8->size[1];
+    PointTable_A_off8->size[0] = 3;
+    PointTable_A_off8->size[1] = b_side_faces_transformed2->size[1];
+    emxEnsureCapacity_real_T(PointTable_A_off8, i2);
+    PointTable_A_off8_data = PointTable_A_off8->data;
     nx = 3 * b_side_faces_transformed2->size[1];
     for (i2 = 0; i2 < nx; i2++) {
-      PointTable_B_off8_data[i2] = XieMianPianYi_data[i2];
+      PointTable_A_off8_data[i2] = XieMianPianYi_data[i2];
     }
   } else {
-    binary_expand_op_13(PointTable_B_off8, d, XMFlagA);
+    binary_expand_op_13(PointTable_A_off8, d, XMFlagA);
   }
   emxFree_real_T(&b_side_faces_transformed2);
   emxFree_real_T(&XMFlagA);
