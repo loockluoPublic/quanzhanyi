@@ -38,7 +38,8 @@ function CubeResult() {
   const key = `${data.sdfb}${data.sdm?.join("")}`;
 
   const init = () => {
-    if (sdfbPreRef.current === "" && data.cubeTable?.length > 0) return;
+
+    if (data.cubeTable?.length > 0) return;
 
     if (key !== sdfbPreRef.current) {
       const sdgd = shengDaoGaoDu(data.sdfb);
@@ -60,6 +61,7 @@ function CubeResult() {
         });
       });
 
+      console.log("%c Line:67 🥔 cubeTable", "color:#b03734", cubeTable);
       setData((d) => {
         return {
           ...d,
@@ -75,7 +77,7 @@ function CubeResult() {
   }, [key]);
 
   const updateOffset = () => {
-    console.log("%c Line:78 🍬", "color:#6ec1c2");
+    console.log("%c Line:78 🍅", "color:#6ec1c2");
     if (!(data.cubeTable?.length > 0)) return;
 
     const tableData = data.cubeTable.map((item) => {
@@ -179,8 +181,8 @@ function CubeResult() {
   useEffect(() => {
     console.log("%c Line:194 🍅 a", "color:#33a5ff", a);
     if (data.centerPoint) calcPoint();
-  }, [[...Ti, ...tOff, ...a].join(","), data.centerPoint]);
-
+  }, [[...Ti, ...tOff, ...a].join(","), data.centerPoint, data.sdj]);
+  console.log("%c Line:183 🍅 a", "color:#33a5ff", Ti, tOff, a);
   const onChange = (v: number, i: number, key: string) => {
     console.log("%c Line:153 🌮 v", "color:#3f7cff", v, i, key);
     const tableData = data.cubeTable.map((item, index) => {
