@@ -1,4 +1,4 @@
-import { message, Steps } from "antd";
+import { message, Steps, Tag } from "antd";
 import { useEffect } from "react";
 import Connect from "../components/ConnectDevice";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -24,6 +24,7 @@ message.config({
 
 export default function Setting() {
   const deviceInfoData = useRecoilValue(deviceInfo);
+  console.log("%c Line:27 🍔 deviceInfoData", "color:#42b983", deviceInfoData);
   const data = useRecoilValue(Data);
   const [step, setStep] = useRecoilState(Step);
   const [mode] = useRecoilState(Mode);
@@ -41,9 +42,11 @@ export default function Setting() {
     }
   };
 
+  const connectStatus = <>设备连接 <Tag color={deviceInfoData.auth ? 'success' : 'default'}>{deviceInfoData.auth ? '已连接' : '未连接'} </Tag></>
+
   const CycleSteps = [
     {
-      title: "设备连接",
+      title: connectStatus,
       components: (
         <Connect
           next={() => {
@@ -72,7 +75,7 @@ export default function Setting() {
 
   const CubeSteps = [
     {
-      title: "设备连接",
+      title: connectStatus,
       components: (
         <Connect
           next={() => {

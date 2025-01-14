@@ -98,7 +98,7 @@ export const transformJSON2Excel = (data: GlobalData, type = false) => {
     // if (data.calulateRes.center)
     //   csvData.push(getDatas(data.calulateRes.center, 'center'));
 
-    csvData.push([  ['声道角', data.sdj]]);
+    // csvData.push([  ['声道角', data.sdj]]);
   }
 
   if (data.type === 'cube' && data?.MxPoints) {
@@ -204,7 +204,7 @@ const exportCylinder = (data: GlobalData) => {
         render: (row) => row?.p2?.z,
       },
       { title: '声道长', render: (row) => row.sdc },
-      { title: '声道角', render: (row) =>  rad2ang(row.sdj) },
+      { title: '声道角', render: (row) => rad2ang(row.sdj) },
       { title: 'LT偏移', render: (row) => row.ltOffset },
       {
         title: '声道相对高度',

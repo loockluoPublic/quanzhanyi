@@ -252,7 +252,7 @@ export default function () {
           {data?.calulateRes?.R?.toFixed(4) ?? "--"} 米
         </span>
         <span className="q-ml-8">
-          声道配置： {data.sdm.length}E{data.sdfb}P
+          声道配置： {data.sdm.length}E{data.sdfb * data.sdm.length}P
         </span>
       </div>
       <h3 className="border-top q-pt-4">
