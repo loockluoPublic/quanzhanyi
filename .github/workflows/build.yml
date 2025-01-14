@@ -20,12 +20,12 @@ jobs:
     # 定义步骤
     steps:
       # 第一步：检出代码
-      - name: Checkout code
+      - name: 检出代码
         # 使用官方checkout action
         uses: actions/checkout@v3
 
       # 第二步：设置Node.js环境
-      - name: Set up Node.js 20
+      - name: 设置Node.js环境
         # 使用官方setup-node action
         uses: actions/setup-node@v3
         with:
@@ -33,7 +33,7 @@ jobs:
           node-version: 20
 
       # 第三步：设置Rust环境
-      - name: Set up Rust 1.60
+      - name: 设置Rust环境
         # 使用actions-rs提供的toolchain action
         uses: actions-rs/toolchain@v1
         with:
@@ -43,12 +43,17 @@ jobs:
           override: true
 
       # 第五步：安装项目依赖
-      - name: Install pnpm
+      - name: 安装 pnpm
         # 使用pnpm安装依赖
         run: npm install -g pnpm
 
+      # 第五步：安装项目依赖
+      - name: 安装项目依赖
+        # 使用pnpm安装依赖
+        run: pnpm i
+
       # 第六步：构建Tauri应用
-      - name: Build Tauri app
+      - name: 构建Tauri应用
         # 使用pnpm运行tauri build命令
         run: pnpm run build
         env:
