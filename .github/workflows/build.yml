@@ -55,7 +55,7 @@ jobs:
       # 第六步：构建Tauri应用
       - name: 构建Tauri应用
         # 使用pnpm运行tauri build命令
-        run: pnpm run build
+        run: pnpm tauri build
         env:
           # 设置目标平台为Windows
           TAURI_PLATFORM: windows
