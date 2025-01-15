@@ -2,7 +2,7 @@
  * File: planefit8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 14-Jan-2025 22:52:56
+ * C/C++ source code generated on  : 15-Jan-2025 14:19:16
  */
 
 /* Include Files */
@@ -203,17 +203,17 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
          (double)Points8->size[1]);
   fflush(stdout);
   if (Points2->size[1] == 0) {
-    d = tempPP[0] + 0.01 * (tempPP[12] - tempPP[0]);
+    d = tempPP[0] + 0.0001 * (tempPP[12] - tempPP[0]);
     TPP10[0] = d;
     normaltao[0] =
-        tempPP[0] - ((tempPP[0] + 0.01 * (tempPP[3] - tempPP[0])) + d) / 2.0;
-    d = tempPP[1] + 0.01 * (tempPP[13] - tempPP[1]);
+        tempPP[0] - ((tempPP[0] + 0.0001 * (tempPP[3] - tempPP[0])) + d) / 2.0;
+    d = tempPP[1] + 0.0001 * (tempPP[13] - tempPP[1]);
     TPP10[1] = d;
     normaltao[1] =
-        tempPP[1] - ((tempPP[1] + 0.01 * (tempPP[4] - tempPP[1])) + d) / 2.0;
-    d = tempPP[2] + 0.01 * (tempPP[14] - tempPP[2]);
+        tempPP[1] - ((tempPP[1] + 0.0001 * (tempPP[4] - tempPP[1])) + d) / 2.0;
+    d = tempPP[2] + 0.0001 * (tempPP[14] - tempPP[2]);
     normaltao[2] =
-        tempPP[2] - ((tempPP[2] + 0.01 * (tempPP[5] - tempPP[2])) + d) / 2.0;
+        tempPP[2] - ((tempPP[2] + 0.0001 * (tempPP[5] - tempPP[2])) + d) / 2.0;
     /*  已知数据：平面法向量和平面上一点 */
     d1 = b_norm(normaltao);
     /*  归一化法向量 */
@@ -276,17 +276,20 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     }
   }
   if (Points4->size[1] == 0) {
-    d = tempPP[12] + 0.01 * (tempPP[0] - tempPP[12]);
+    d = tempPP[12] + 0.0001 * (tempPP[0] - tempPP[12]);
     TPP9[0] = d;
-    normaltao[0] = tempPP[12] -
-                   (d + (tempPP[12] + 0.01 * (tempPP[18] - tempPP[12]))) / 2.0;
-    d = tempPP[13] + 0.01 * (tempPP[1] - tempPP[13]);
+    normaltao[0] =
+        tempPP[12] -
+        (d + (tempPP[12] + 0.0001 * (tempPP[18] - tempPP[12]))) / 2.0;
+    d = tempPP[13] + 0.0001 * (tempPP[1] - tempPP[13]);
     TPP9[1] = d;
-    normaltao[1] = tempPP[13] -
-                   (d + (tempPP[13] + 0.01 * (tempPP[19] - tempPP[13]))) / 2.0;
-    d = tempPP[14] + 0.01 * (tempPP[2] - tempPP[14]);
-    normaltao[2] = tempPP[14] -
-                   (d + (tempPP[14] + 0.01 * (tempPP[20] - tempPP[14]))) / 2.0;
+    normaltao[1] =
+        tempPP[13] -
+        (d + (tempPP[13] + 0.0001 * (tempPP[19] - tempPP[13]))) / 2.0;
+    d = tempPP[14] + 0.0001 * (tempPP[2] - tempPP[14]);
+    normaltao[2] =
+        tempPP[14] -
+        (d + (tempPP[14] + 0.0001 * (tempPP[20] - tempPP[14]))) / 2.0;
     /*  已知数据：平面法向量和平面上一点 */
     d1 = b_norm(normaltao);
     /*  归一化法向量 */
@@ -349,17 +352,17 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     }
   }
   if (Points6->size[1] == 0) {
-    d = tempPP[18] + 0.01 * (tempPP[12] - tempPP[18]);
+    d = tempPP[18] + 0.0001 * (tempPP[12] - tempPP[18]);
     TPP9[0] = d;
-    normaltao[0] =
-        tempPP[18] - (d + (tempPP[18] + 0.01 * (tempPP[3] - tempPP[18]))) / 2.0;
-    d = tempPP[19] + 0.01 * (tempPP[13] - tempPP[19]);
+    normaltao[0] = tempPP[18] -
+                   (d + (tempPP[18] + 0.0001 * (tempPP[3] - tempPP[18]))) / 2.0;
+    d = tempPP[19] + 0.0001 * (tempPP[13] - tempPP[19]);
     TPP9[1] = d;
-    normaltao[1] =
-        tempPP[19] - (d + (tempPP[19] + 0.01 * (tempPP[4] - tempPP[19]))) / 2.0;
-    d = tempPP[20] + 0.01 * (tempPP[14] - tempPP[20]);
-    normaltao[2] =
-        tempPP[20] - (d + (tempPP[20] + 0.01 * (tempPP[5] - tempPP[20]))) / 2.0;
+    normaltao[1] = tempPP[19] -
+                   (d + (tempPP[19] + 0.0001 * (tempPP[4] - tempPP[19]))) / 2.0;
+    d = tempPP[20] + 0.0001 * (tempPP[14] - tempPP[20]);
+    normaltao[2] = tempPP[20] -
+                   (d + (tempPP[20] + 0.0001 * (tempPP[5] - tempPP[20]))) / 2.0;
     /*  已知数据：平面法向量和平面上一点 */
     d1 = b_norm(normaltao);
     /*  归一化法向量 */
@@ -422,17 +425,17 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     }
   }
   if (Points8->size[1] == 0) {
-    d = tempPP[3] + 0.01 * (tempPP[0] - tempPP[3]);
+    d = tempPP[3] + 0.0001 * (tempPP[0] - tempPP[3]);
     TPP9[0] = d;
     normaltao[0] =
-        tempPP[3] - (d + (tempPP[3] + 0.01 * (tempPP[18] - tempPP[3]))) / 2.0;
-    d = tempPP[4] + 0.01 * (tempPP[1] - tempPP[4]);
+        tempPP[3] - (d + (tempPP[3] + 0.0001 * (tempPP[18] - tempPP[3]))) / 2.0;
+    d = tempPP[4] + 0.0001 * (tempPP[1] - tempPP[4]);
     TPP9[1] = d;
     normaltao[1] =
-        tempPP[4] - (d + (tempPP[4] + 0.01 * (tempPP[19] - tempPP[4]))) / 2.0;
-    d = tempPP[5] + 0.01 * (tempPP[2] - tempPP[5]);
+        tempPP[4] - (d + (tempPP[4] + 0.0001 * (tempPP[19] - tempPP[4]))) / 2.0;
+    d = tempPP[5] + 0.0001 * (tempPP[2] - tempPP[5]);
     normaltao[2] =
-        tempPP[5] - (d + (tempPP[5] + 0.01 * (tempPP[20] - tempPP[5]))) / 2.0;
+        tempPP[5] - (d + (tempPP[5] + 0.0001 * (tempPP[20] - tempPP[5]))) / 2.0;
     /*  已知数据：平面法向量和平面上一点 */
     d1 = b_norm(normaltao);
     /*  归一化法向量 */
@@ -1527,17 +1530,20 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
          PlaneParaOut2[1], PlaneParaOut2[2], PlaneParaOut2[3]);
   fflush(stdout);
   if (Points2->size[1] == 0) {
-    RETL3 = tempPP[0] + 0.01 * (tempPP[12] - tempPP[0]);
+    RETL3 = tempPP[0] + 0.0001 * (tempPP[12] - tempPP[0]);
     TPP10[0] = RETL3;
-    normaltao[0] = tempPP[0] -
-                   ((tempPP[0] + 0.01 * (tempPP[3] - tempPP[0])) + RETL3) / 2.0;
-    RETL3 = tempPP[1] + 0.01 * (tempPP[13] - tempPP[1]);
+    normaltao[0] =
+        tempPP[0] -
+        ((tempPP[0] + 0.0001 * (tempPP[3] - tempPP[0])) + RETL3) / 2.0;
+    RETL3 = tempPP[1] + 0.0001 * (tempPP[13] - tempPP[1]);
     TPP10[1] = RETL3;
-    normaltao[1] = tempPP[1] -
-                   ((tempPP[1] + 0.01 * (tempPP[4] - tempPP[1])) + RETL3) / 2.0;
-    RETL3 = tempPP[2] + 0.01 * (tempPP[14] - tempPP[2]);
-    normaltao[2] = tempPP[2] -
-                   ((tempPP[2] + 0.01 * (tempPP[5] - tempPP[2])) + RETL3) / 2.0;
+    normaltao[1] =
+        tempPP[1] -
+        ((tempPP[1] + 0.0001 * (tempPP[4] - tempPP[1])) + RETL3) / 2.0;
+    RETL3 = tempPP[2] + 0.0001 * (tempPP[14] - tempPP[2]);
+    normaltao[2] =
+        tempPP[2] -
+        ((tempPP[2] + 0.0001 * (tempPP[5] - tempPP[2])) + RETL3) / 2.0;
     /*  已知数据：平面法向量和平面上一点 */
     RETL2 = b_norm(normaltao);
     /*  归一化法向量 */
@@ -1599,20 +1605,20 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     }
   }
   if (Points4->size[1] == 0) {
-    RETL3 = tempPP[12] + 0.01 * (tempPP[0] - tempPP[12]);
+    RETL3 = tempPP[12] + 0.0001 * (tempPP[0] - tempPP[12]);
     TPP9[0] = RETL3;
     normaltao[0] =
         tempPP[12] -
-        (RETL3 + (tempPP[12] + 0.01 * (tempPP[18] - tempPP[12]))) / 2.0;
-    RETL3 = tempPP[13] + 0.01 * (tempPP[1] - tempPP[13]);
+        (RETL3 + (tempPP[12] + 0.0001 * (tempPP[18] - tempPP[12]))) / 2.0;
+    RETL3 = tempPP[13] + 0.0001 * (tempPP[1] - tempPP[13]);
     TPP9[1] = RETL3;
     normaltao[1] =
         tempPP[13] -
-        (RETL3 + (tempPP[13] + 0.01 * (tempPP[19] - tempPP[13]))) / 2.0;
-    RETL3 = tempPP[14] + 0.01 * (tempPP[2] - tempPP[14]);
+        (RETL3 + (tempPP[13] + 0.0001 * (tempPP[19] - tempPP[13]))) / 2.0;
+    RETL3 = tempPP[14] + 0.0001 * (tempPP[2] - tempPP[14]);
     normaltao[2] =
         tempPP[14] -
-        (RETL3 + (tempPP[14] + 0.01 * (tempPP[20] - tempPP[14]))) / 2.0;
+        (RETL3 + (tempPP[14] + 0.0001 * (tempPP[20] - tempPP[14]))) / 2.0;
     /*  已知数据：平面法向量和平面上一点 */
     RETL2 = b_norm(normaltao);
     /*  归一化法向量 */
@@ -1674,20 +1680,20 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     }
   }
   if (Points6->size[1] == 0) {
-    RETL3 = tempPP[18] + 0.01 * (tempPP[12] - tempPP[18]);
+    RETL3 = tempPP[18] + 0.0001 * (tempPP[12] - tempPP[18]);
     TPP9[0] = RETL3;
     normaltao[0] =
         tempPP[18] -
-        (RETL3 + (tempPP[18] + 0.01 * (tempPP[3] - tempPP[18]))) / 2.0;
-    RETL3 = tempPP[19] + 0.01 * (tempPP[13] - tempPP[19]);
+        (RETL3 + (tempPP[18] + 0.0001 * (tempPP[3] - tempPP[18]))) / 2.0;
+    RETL3 = tempPP[19] + 0.0001 * (tempPP[13] - tempPP[19]);
     TPP9[1] = RETL3;
     normaltao[1] =
         tempPP[19] -
-        (RETL3 + (tempPP[19] + 0.01 * (tempPP[4] - tempPP[19]))) / 2.0;
-    RETL3 = tempPP[20] + 0.01 * (tempPP[14] - tempPP[20]);
+        (RETL3 + (tempPP[19] + 0.0001 * (tempPP[4] - tempPP[19]))) / 2.0;
+    RETL3 = tempPP[20] + 0.0001 * (tempPP[14] - tempPP[20]);
     normaltao[2] =
         tempPP[20] -
-        (RETL3 + (tempPP[20] + 0.01 * (tempPP[5] - tempPP[20]))) / 2.0;
+        (RETL3 + (tempPP[20] + 0.0001 * (tempPP[5] - tempPP[20]))) / 2.0;
     /*  已知数据：平面法向量和平面上一点 */
     RETL2 = b_norm(normaltao);
     /*  归一化法向量 */
@@ -1749,20 +1755,20 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     }
   }
   if (Points8->size[1] == 0) {
-    RETL3 = tempPP[3] + 0.01 * (tempPP[0] - tempPP[3]);
+    RETL3 = tempPP[3] + 0.0001 * (tempPP[0] - tempPP[3]);
     TPP9[0] = RETL3;
     normaltao[0] =
         tempPP[3] -
-        (RETL3 + (tempPP[3] + 0.01 * (tempPP[18] - tempPP[3]))) / 2.0;
-    RETL3 = tempPP[4] + 0.01 * (tempPP[1] - tempPP[4]);
+        (RETL3 + (tempPP[3] + 0.0001 * (tempPP[18] - tempPP[3]))) / 2.0;
+    RETL3 = tempPP[4] + 0.0001 * (tempPP[1] - tempPP[4]);
     TPP9[1] = RETL3;
     normaltao[1] =
         tempPP[4] -
-        (RETL3 + (tempPP[4] + 0.01 * (tempPP[19] - tempPP[4]))) / 2.0;
-    RETL3 = tempPP[5] + 0.01 * (tempPP[2] - tempPP[5]);
+        (RETL3 + (tempPP[4] + 0.0001 * (tempPP[19] - tempPP[4]))) / 2.0;
+    RETL3 = tempPP[5] + 0.0001 * (tempPP[2] - tempPP[5]);
     normaltao[2] =
         tempPP[5] -
-        (RETL3 + (tempPP[5] + 0.01 * (tempPP[20] - tempPP[5]))) / 2.0;
+        (RETL3 + (tempPP[5] + 0.0001 * (tempPP[20] - tempPP[5]))) / 2.0;
     /*  已知数据：平面法向量和平面上一点 */
     RETL2 = b_norm(normaltao);
     /*  归一化法向量 */
@@ -2732,28 +2738,28 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   normaltao[1] = tempPP[19] - tempPP[4];
   normaltao[2] = tempPP[20] - tempPP[5];
   RETL4 = b_norm(normaltao);
-  if (L1 < 0.01 * RETL1) {
+  if (L1 < 0.005 * RETL1) {
     L1 = 0.0;
   }
-  if (L2 < 0.01 * RETL2) {
+  if (L2 < 0.005 * RETL2) {
     L2 = 0.0;
   }
-  if (Tv_idx_0 < 0.01 * RETL2) {
+  if (Tv_idx_0 < 0.005 * RETL2) {
     Tv_idx_0 = 0.0;
   }
-  if (Tv_idx_1 < 0.01 * RETL3) {
+  if (Tv_idx_1 < 0.005 * RETL3) {
     Tv_idx_1 = 0.0;
   }
-  if (Tv_idx_2 < 0.01 * RETL3) {
+  if (Tv_idx_2 < 0.005 * RETL3) {
     Tv_idx_2 = 0.0;
   }
-  if (L6 < 0.01 * RETL4) {
+  if (L6 < 0.005 * RETL4) {
     L6 = 0.0;
   }
-  if (L7 < 0.01 * RETL4) {
+  if (L7 < 0.005 * RETL4) {
     L7 = 0.0;
   }
-  if (L8 < 0.01 * RETL1) {
+  if (L8 < 0.005 * RETL1) {
     L8 = 0.0;
   }
   LenDaoJiao[0] = L1;
