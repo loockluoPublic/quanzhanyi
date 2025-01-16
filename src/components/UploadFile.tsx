@@ -17,20 +17,12 @@ function AntdFileReader() {
     reader.onload = () => {
       const importData = loadFile((reader.result as string) || "{}");
       (window as any).mock = true;
-      setStep(1);
       setData(importData);
       setMode(importData.mode);
-    
-      if (!compareSdcs(data, importData)) {
-        setTimeout(() => {
-          setData(importData);
-          if (step === 0) {
-            setTimeout(() => {
-              setStep(1);
-            }, 200);
-          }
-        }, 100);
-      }
+      setTimeout(() => {
+        setStep(1);
+      }, 100);
+
     };
   };
 

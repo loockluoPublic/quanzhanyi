@@ -30,75 +30,57 @@ export const sdmOptions = [
   { label: "声道面B", value: "B" },
 ];
 const defaultA = 0.015;
-function CubeResult() {
-  const [data, setData] = useRecoilState(Data);
 
-  const sdfbPreRef = useRef("");
+enum EActions {
+  sdfb,
+  sdj,
+  sdm,
+  center,
+  h,
+  a,
+  cubeTable,
+  setAll
+}
 
-  const key = `${data.sdfb}${data.sdm?.join("")}`;
+/**
+ * 初始化表格
+ * @param data 
+ * @returns 
+ */
+const init = (data) => {
 
-  const init = () => {
+  const sdgd = shengDaoGaoDu(data.sdfb);
 
-    if (data.cubeTable?.length > 0) return;
+  const cubeTable: any = [];
 
-    if (key !== sdfbPreRef.current) {
-      const sdgd = shengDaoGaoDu(data.sdfb);
-
-      const cubeTable: any = [];
-
-      data.sdm?.forEach?.((m, p) => {
-        sdgd.forEach((ti, i) => {
-          const h = Number(ti.toFixed(6));
-          cubeTable.push({
-            ...ti,
-            sdm: m,
-            i: i + 1,
-            updateIndex: p * sdgd.length + i,
-            h,
-            a: defaultA,
-            tOff: cubeTOff(defaultA, data.sdj),
-          });
-        });
+  data.sdm?.forEach?.((m, p) => {
+    sdgd.forEach((ti, i) => {
+      const h = Number(ti.toFixed(6));
+      cubeTable.push({
+        ...ti,
+        sdm: m,
+        i: i + 1,
+        updateIndex: p * sdgd.length + i,
+        h,
+        a: defaultA,
+        tOff: cubeTOff(defaultA, data.sdj),
       });
-
-      console.log("%c Line:67 🥔 cubeTable", "color:#b03734", cubeTable);
-      setData((d) => {
-        return {
-          ...d,
-          cubeTable,
-        };
-      });
-    }
-  };
-
-  useEffect(() => {
-    init();
-    sdfbPreRef.current = key;
-  }, [key]);
-
-  const updateOffset = () => {
-    console.log("%c Line:78 🍅", "color:#6ec1c2");
-    if (!(data.cubeTable?.length > 0)) return;
-
-    const tableData = data.cubeTable.map((item) => {
-      const newItem = {
-        ...item,
-        tOff: cubeTOff(item.a, data.sdj),
-      };
-
-      return newItem;
     });
-    setData((d) => {
-      return {
-        ...d,
-        cubeTable: tableData,
-      };
-    });
-  };
+  });
 
-  useEffect(() => {
-    updateOffset();
-  }, [data.sdj]);
+  console.log("%c Line:67 🥔 cubeTable", "color:#b03734", cubeTable);
+  return cubeTable
+
+};
+
+/**
+ * 计算安装点
+ * @param data 
+ * @returns 
+ */
+const calcPoint = (data): any[] | undefined => {
+  console.log("%c Line:127 🍡", "color:#e41a6a");
+
 
   const tOff =
     data.cubeTable?.map?.((item) => {
@@ -115,77 +97,95 @@ function CubeResult() {
       return item.h;
     }) ?? [];
 
-  const calcPoint = () => {
-    console.log("%c Line:127 🍡", "color:#e41a6a");
-    if (!data.centerPoint) {
-      message.error("请采集中心点");
-      return;
-    }
 
-    if (!data.cubeResult) {
-      message.error("缺少拟合参数，请退回上一步拟合");
-      return;
-    }
+  if (!data.centerPoint) {
+    message.error("请采集中心点");
+    return;
+  }
 
-    if (tOff.length > 0 && Ti.length > 0) {
-      try {
-        let points;
+  if (!data.cubeResult) {
+    message.error("缺少拟合参数，请退回上一步拟合");
+    return;
+  }
 
-        if (data.hasChamfer) {
-          let MxPortsArr: CustomVector3[][] = [];
-          for (let i = 0; i < 9; i++) {
-            const key = `m${i}`;
-            if (i < 4) {
-              if (data.MxPoints[key]?.length > 4) {
-                MxPortsArr.push(data.MxPoints[key]);
-              } else {
-                message.error(`${key}面采集点少于4个，请补充采集点`);
-                return;
-              }
-            } else {
+  if (tOff.length > 0 && Ti.length > 0) {
+    try {
+      let points;
+
+      if (data.hasChamfer) {
+        let MxPortsArr: CustomVector3[][] = [];
+        for (let i = 0; i < 9; i++) {
+          const key = `m${i}`;
+          if (i < 4) {
+            if (data.MxPoints[key]?.length > 4) {
               MxPortsArr.push(data.MxPoints[key]);
+            } else {
+              message.error(`${key}面采集点少于4个，请补充采集点`);
+              return;
             }
+          } else {
+            MxPortsArr.push(data.MxPoints[key]);
           }
-
-          const [l, t, r, b, lb = [], lt = [], rt = [], rb = []] = MxPortsArr;
-
-          MxPortsArr = [l, lt, t, rt, r, rb, b, lb];
-
-          points = CalculatAAndBPoints8(data, MxPortsArr);
-        } else {
-          points = CalculatAAndBPoints4(data);
         }
 
-        setData((d) => {
-          return {
-            ...d,
-            cubeTable: d?.cubeTable?.map((item, i) => {
-              return {
-                ...item,
-                points: points[i],
-              };
-            }),
-          };
-        });
-      } catch (error) {
-        console.log(
-          "%c Line:108 🌰 error",
-          "color:#ed9ec7",
-          data.cubeResult,
-          error
-        );
-      }
-    }
-  };
+        const [l, t, r, b, lb = [], lt = [], rt = [], rb = []] = MxPortsArr;
 
-  useEffect(() => {
-    console.log("%c Line:194 🍅 a", "color:#33a5ff", a);
-    if (data.centerPoint) calcPoint();
-  }, [[...Ti, ...tOff, ...a].join(","), data.centerPoint, data.sdj]);
-  console.log("%c Line:183 🍅 a", "color:#33a5ff", Ti, tOff, a);
+        MxPortsArr = [l, lt, t, rt, r, rb, b, lb];
+
+        points = CalculatAAndBPoints8(data, MxPortsArr);
+      } else {
+        points = CalculatAAndBPoints4(data);
+      }
+
+
+      return data?.cubeTable?.map((item, i) => {
+        return {
+          ...item,
+          points: points[i],
+        };
+      })
+    } catch (error) {
+      console.log(
+        "%c Line:108 🌰 error",
+        "color:#ed9ec7",
+        data.cubeResult,
+        error
+      );
+    }
+  }
+};
+
+/**
+ * 计算轴向偏移
+ * @param data 
+ * @returns 
+ */
+const updateOffset = (data) => {
+  if (!(data.cubeTable?.length > 0)) return;
+
+  const tableData = data.cubeTable.map((item) => {
+    const newItem = {
+      ...item,
+      tOff: cubeTOff(item.a, data.sdj),
+    };
+
+    return newItem;
+  });
+
+  return tableData
+};
+
+function CubeResult() {
+  const [data, setData] = useRecoilState(Data);
+
+
+
+
+
+
   const onChange = (v: number, i: number, key: string) => {
     console.log("%c Line:153 🌮 v", "color:#3f7cff", v, i, key);
-    const tableData = data.cubeTable.map((item, index) => {
+    const cubeTable = data.cubeTable.map((item, index) => {
       const newItem = {
         ...item,
       };
@@ -197,36 +197,59 @@ function CubeResult() {
       }
       return newItem;
     });
-    setData((d) => {
-      return {
-        ...d,
-        cubeTable: tableData,
-      };
-    });
+
+    dispatch(EActions.cubeTable, cubeTable)
   };
 
-  /**
-   * 当前a值应用到全部
-   * @param i
-   */
-  const setA = (i: number) => {
-    const a = data.cubeTable[i].a;
-    const tableData = data.cubeTable.map((item) => {
-      const newItem = {
-        ...item,
-        a,
-      };
 
-      return newItem;
-    });
+  const dispatch = (type: EActions, payload: any) => {
+    let newData = { ...data }
+    switch (type) {
+      case EActions.sdfb:
+        newData.sdfb = payload
+        newData.cubeTable = init(newData)
+        if (newData.centerPoint) {
+          newData.cubeTable = calcPoint(newData)
+        }
 
-    setData((d) => {
-      return {
-        ...d,
-        cubeTable: tableData,
-      };
-    });
-  };
+        break;
+      case EActions.sdm:
+        newData.sdm = payload
+        newData.cubeTable = init(newData)
+        if (newData.centerPoint) {
+          newData.cubeTable = calcPoint(newData)
+        }
+
+        break;
+      case EActions.sdj:
+        newData.sdj = payload
+        newData.cubeTable = calcPoint(newData)
+        break;
+      case EActions.cubeTable:
+        newData.cubeTable = payload
+        newData.cubeTable = calcPoint(newData)
+        break;
+      case EActions.center:
+        newData.centerPoint = payload
+        newData.cubeTable = calcPoint(newData)
+        break;
+
+      case EActions.setAll:
+        const a = newData.cubeTable[payload].a;
+        newData.cubeTable = newData.cubeTable.map((item) => {
+          const newItem = {
+            ...item,
+            a,
+          };
+          return newItem;
+        });
+        newData.cubeTable = calcPoint(newData)
+        break
+    }
+
+    setData(newData)
+
+  }
 
   const columns: any = [
     {
@@ -252,7 +275,10 @@ function CubeResult() {
       render: (v, row) => {
         return (
           <InputNumber
+            step={0.1}
             value={v}
+            max={1}
+            min={-1}
             onChange={(v) => onChange(v, row.updateIndex, "h")}
           />
         );
@@ -273,7 +299,7 @@ function CubeResult() {
               <div>
                 米
                 <Tooltip title="应用到全部" className="q-cursor-pointer">
-                  <SettingOutlined onClick={() => setA(i)} />
+                  <SettingOutlined onClick={() => dispatch(EActions.setAll, i)} />
                 </Tooltip>
               </div>
             }
@@ -341,10 +367,7 @@ function CubeResult() {
             className=" !q-w-32"
             options={SDFBOptions}
             onChange={(sdfb) => {
-              setData({
-                ...data,
-                sdfb,
-              });
+              dispatch(EActions.sdfb, sdfb)
             }}
           />
         </span>
@@ -356,10 +379,7 @@ function CubeResult() {
             min={0}
             max={90}
             onChange={(sdj: number) => {
-              setData({
-                ...data,
-                sdj: sdj_v2n(sdj),
-              });
+              dispatch(EActions.sdj, sdj_v2n(sdj))
             }}
           />
         </span>
@@ -371,10 +391,7 @@ function CubeResult() {
             value={data.sdm}
             options={sdmOptions}
             onChange={(sdm: ("A" | "B")[]) => {
-              setData({
-                ...data,
-                sdm,
-              });
+              dispatch(EActions.sdm, sdm)
             }}
           ></Checkbox.Group>
         </span>
@@ -388,7 +405,7 @@ function CubeResult() {
               CustomVector3.setPublicInfo("AB", 0);
             }}
             onChange={(v) => {
-              setData({ ...data, centerPoint: v });
+              dispatch(EActions.center, v)
             }}
           />
         </span>
