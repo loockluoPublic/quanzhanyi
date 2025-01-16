@@ -289,12 +289,12 @@ function CubeResult() {
       dataIndex: "a",
       key: "a",
       align: "center",
-      render: (v, _, i) => {
+      render: (v, row, i) => {
         return (
           <InputNumber
             step={0.01}
             value={v}
-            onChange={(v) => onChange(v, i, "a")}
+            onChange={(v) => onChange(v, row.updateIndex, "a")}
             addonAfter={
               <div>
                 米
