@@ -6,6 +6,7 @@ const ArrowLine = ({
   showLine = true,
   showLabel = true,
   scale = 1,
+  arrLineOffset=20
 }) => {
   console.log("%c Line:5 🥪 points", "color:#e41a6a", scale, points);
 
@@ -31,17 +32,11 @@ const ArrowLine = ({
   const offset = fontSize; // 偏移量为1倍字号
 
   // 计算AC和BD的端点
-  const ax = pointA.x + offset * Math.cos(angle - Math.PI / 2);
-  const ay = pointA.y + offset * Math.sin(angle - Math.PI / 2);
-  const bx = pointB.x + offset * Math.cos(angle - Math.PI / 2);
-  const by = pointB.y + offset * Math.sin(angle - Math.PI / 2);
-  console.log(
-    "%c Line:35 🥟 Math.cos(angle - Math.PI / 2)",
-    "color:#ffdd4d",
-    length,
-    Math.cos(angle - Math.PI / 2),
-    Math.sin(angle - Math.PI / 2)
-  );
+  const ax = pointA.x + (offset + arrLineOffset) * Math.cos(angle - Math.PI / 2);
+  const ay = pointA.y +  (offset + arrLineOffset) * Math.sin(angle - Math.PI / 2);
+  const bx = pointB.x +  (offset + arrLineOffset) * Math.cos(angle - Math.PI / 2);
+  const by = pointB.y +  (offset + arrLineOffset) * Math.sin(angle - Math.PI / 2);
+
 
   // 计算EF中点
   const ex = (ax + bx) / 2 + offset * Math.cos(angle - Math.PI / 2);
@@ -100,7 +95,7 @@ const ArrowLine = ({
           <text
             x={ex}
             y={ey}
-            fontSize={fontSize}
+            fontSize={offset}
             fill="black"
             textAnchor="middle"
             // dy="-50%"

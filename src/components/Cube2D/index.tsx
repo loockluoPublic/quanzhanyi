@@ -30,22 +30,24 @@ export default function Cube2D(props: {
       {/* 宽 */}
       <ArrowLine
         points={[
-          { x: 0, y: h / 2 },
-          { x: w, y: h / 2 },
+          { x: w, y: h  },
+          { x: 0, y: h   },
         ]}
         scale={scale}
         showLabel={true}
         showLine={false}
+        arrLineOffset={60}
       />
       {/* 高 */}
       <ArrowLine
         points={[
-          { x: w / 2, y: 0 },
-          { x: w / 2, y: h },
+          { x: w  , y: 0 },
+          { x: w  , y: h },
         ]}
         scale={scale}
         showLabel={true}
         showLine={false}
+        arrLineOffset={70}
       />
       {/* 左上角斜边 */}
       <ArrowLine
