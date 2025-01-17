@@ -259,7 +259,6 @@ export default function () {
           拟合阈值：
           <InputNumber
             step={0.001}
-            min={0.001}
             max={0.1}
             value={data.distanceThreshold}
             style={{ width: 120 }}

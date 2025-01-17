@@ -209,6 +209,7 @@ function CubeResult() {
         newData.sdfb = payload
         newData.cubeTable = init(newData)
         if (newData.centerPoint) {
+          newData.cubeTable = updateOffset(newData)
           newData.cubeTable = calcPoint(newData)
         }
 
@@ -217,16 +218,19 @@ function CubeResult() {
         newData.sdm = payload
         newData.cubeTable = init(newData)
         if (newData.centerPoint) {
+          newData.cubeTable = updateOffset(newData)
           newData.cubeTable = calcPoint(newData)
         }
 
         break;
       case EActions.sdj:
         newData.sdj = payload
+        newData.cubeTable = updateOffset(newData)
         newData.cubeTable = calcPoint(newData)
         break;
       case EActions.cubeTable:
         newData.cubeTable = payload
+        newData.cubeTable = updateOffset(newData)
         newData.cubeTable = calcPoint(newData)
         break;
       case EActions.center:
@@ -243,6 +247,7 @@ function CubeResult() {
           };
           return newItem;
         });
+        newData.cubeTable = updateOffset(newData)
         newData.cubeTable = calcPoint(newData)
         break
     }
