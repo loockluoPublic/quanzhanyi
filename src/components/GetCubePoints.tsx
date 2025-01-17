@@ -258,8 +258,9 @@ export default function () {
         <span className="q-flex q-items-center">
           拟合阈值：
           <InputNumber
-            step={0.001}
+            step={0.01}
             max={0.1}
+            min={0.001}
             value={data.distanceThreshold}
             style={{ width: 120 }}
             onChange={(distanceThreshold) => {
