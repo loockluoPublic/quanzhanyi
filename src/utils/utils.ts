@@ -570,7 +570,7 @@ export const Planefit = (
   const res = {
     planeParaOut: planeParaOut.toJSON(),
     trianglePoints: trianglePoints.toVector3(),
-    distanceThreshold: _max,
+    maxDis: _max,
     MxPoints: MPoints.map((arr) => {
       return arr.map((p) => {
         const curDiff = _distancesFianal[i++];
