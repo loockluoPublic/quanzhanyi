@@ -304,7 +304,7 @@ function CubeResult() {
               <div>
                 米
                 <Tooltip title="应用到全部" className="q-cursor-pointer">
-                  <SettingOutlined onClick={() => dispatch(EActions.setAll, i)} />
+                  <SettingOutlined onClick={() => dispatch(EActions.setAll, row.updateIndex)} />
                 </Tooltip>
               </div>
             }

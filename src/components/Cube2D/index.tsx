@@ -26,12 +26,12 @@ export default function Cube2D(props: {
     );
 
   return (
-    <SvgCanvas viewBox={`-100 -100 700 700`} maxHeight={props.containerHeight}>
+    <SvgCanvas viewBox={`-100 -100 800 700`} maxHeight={props.containerHeight}>
       {/* 宽 */}
       <ArrowLine
         points={[
-          { x: w, y: h  },
-          { x: 0, y: h   },
+          { x: w, y: h },
+          { x: 0, y: h },
         ]}
         scale={scale}
         showLabel={true}
@@ -41,8 +41,8 @@ export default function Cube2D(props: {
       {/* 高 */}
       <ArrowLine
         points={[
-          { x: w  , y: 0 },
-          { x: w  , y: h },
+          { x: w, y: 0 },
+          { x: w, y: h },
         ]}
         scale={scale}
         showLabel={true}
