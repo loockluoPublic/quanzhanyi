@@ -81,6 +81,7 @@ export default function () {
         ...data.firstPoints,
         data.distanceThreshold
       );
+      console.log("%c Line:80 🍇 res", "color:#ed9ec7", res);
 
       let MxPoints = {};
       if (data.hasChamfer) {
@@ -194,6 +195,7 @@ export default function () {
         <Checkbox
           checked={data.hasChamfer}
           onChange={({ target }) => {
+            setNum(0)
             setData({
               ...data,
               hasChamfer: target.checked,
@@ -202,7 +204,7 @@ export default function () {
         >
           是否包含导角
         </Checkbox>
-        <span className="q-ml-8">
+        <span className="q-ml-8" key={data.hasChamfer?.toString()}>
           采集面：
           <Select
             defaultValue={0}
@@ -268,6 +270,16 @@ export default function () {
             }}
             addonAfter="米"
           />
+          <span>
+
+            {data.maxDis && <>
+              <span className="q-ml-10">
+                实际阈值：
+                {data.maxDis?.toFixed(6)}
+              </span>
+            </>
+            }
+          </span>
         </span>
       </div>
 

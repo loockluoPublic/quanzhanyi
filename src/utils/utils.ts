@@ -519,9 +519,12 @@ export const Planefit = (
     return {};
   }
 
-  let totalPoints = 0;
+  let distancesFianalTotal4 = 0
+  const distancesFianalArr: EmxArray_real_T[] = []
   const mP = MPoints.map((item) => {
-    totalPoints += item.length;
+    distancesFianalTotal4 += item.length
+    console.log("%c Line:526 🍿 item.length", "color:#4fff4B", item.length);
+    distancesFianalArr.push(new EmxArray_real_T(1, item.length ? item.length : 40))
     return new EmxArray_real_T(item);
   });
 
@@ -534,8 +537,10 @@ export const Planefit = (
 
   const LenDaoJiao = new EmxArray_real_T(8, 1);
 
-  const distancesFianal = new EmxArray_real_T(totalPoints, 1);
+  const distancesFianal4 = new EmxArray_real_T(distancesFianalTotal4, 8);
 
+
+  let res
   if (len === 4) {
     _Planefit4(
       ...mP.map((p) => p.ptr),
@@ -545,8 +550,32 @@ export const Planefit = (
       planeParaOut.ptr,
       trianglePoints.ptr,
       MaxDis.arrayPtr,
-      distancesFianal.ptr
+      distancesFianal4.ptr
     );
+
+    const _max = Number(Math.max(...MaxDis.toJSON()?.[0]).toFixed(4));
+
+    let _distancesFianal = distancesFianal4.toJSON()?.[0];
+    console.log("%c Line:567 🥛 _distancesFianal", "color:#33a5ff", MPoints, distancesFianalTotal4, _distancesFianal);
+
+    let i = 0;
+
+    res = {
+      planeParaOut: planeParaOut.toJSON(),
+      trianglePoints: trianglePoints.toVector3(),
+      maxDis: _max,
+      MxPoints: MPoints.map((arr) => {
+        return arr.map((p) => {
+          const curDiff = _distancesFianal[i++];
+          const newP = p.cloneCustomVector3();
+          newP.difference = curDiff;
+          newP.enable = curDiff < _max;
+          return newP;
+        });
+      }),
+      LenDaoJiao: LenDaoJiao.toJSON()?.[0],
+    };
+
   } else {
     _Planefit8(
       ...mP.map((p) => p.ptr),
@@ -556,32 +585,40 @@ export const Planefit = (
       planeParaOut.ptr,
       trianglePoints.ptr,
       MaxDis.arrayPtr,
-      distancesFianal.ptr,
+      ...distancesFianalArr.map(d => d.ptr),
       LenDaoJiao.arrayPtr
     );
+
+    const _max = Number(Math.max(...MaxDis.toJSON()?.[0]).toFixed(4));
+
+    let _distancesFianal = distancesFianalArr.map(item => {
+      let arr = item.toJSON()
+      console.log("%c Line:596 🥒 arr", "color:#ed9ec7", arr);
+      return arr
+    });
+
+    console.log("%c Line:567 🥒 _distancesFianal", "color:#33a5ff", MPoints, distancesFianalTotal4, _distancesFianal);
+
+
+
+    res = {
+      planeParaOut: planeParaOut.toJSON(),
+      trianglePoints: trianglePoints.toVector3(),
+      maxDis: _max,
+      MxPoints: MPoints.map((arr, i) => {
+        return arr.map((p, j) => {
+          const curDiff = _distancesFianal?.[i]?.[j];
+          const newP = p.cloneCustomVector3();
+          newP.difference = curDiff;
+          newP.enable = curDiff < _max;
+          return newP;
+        });
+      }),
+      LenDaoJiao: LenDaoJiao.toJSON()?.[0],
+    };
   }
 
-  const _max = Number(Math.max(...MaxDis.toJSON()?.[0]).toFixed(4));
 
-  let _distancesFianal = distancesFianal.toJSON()?.[0];
-
-  let i = 0;
-
-  const res = {
-    planeParaOut: planeParaOut.toJSON(),
-    trianglePoints: trianglePoints.toVector3(),
-    maxDis: _max,
-    MxPoints: MPoints.map((arr) => {
-      return arr.map((p) => {
-        const curDiff = _distancesFianal[i++];
-        const newP = p.cloneCustomVector3();
-        newP.difference = curDiff;
-        newP.enable = curDiff < _max;
-        return newP;
-      });
-    }),
-    LenDaoJiao: LenDaoJiao.toJSON()?.[0],
-  };
 
   mP.forEach((p) => p.free()), boundPoint1.free();
 
