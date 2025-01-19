@@ -294,7 +294,7 @@ function CubeResult() {
       dataIndex: "a",
       key: "a",
       align: "center",
-      render: (v, row, i) => {
+      render: (v, row) => {
         return (
           <InputNumber
             step={0.01}
