@@ -139,7 +139,7 @@ XieMianPianYi = zeros(1,2*shenglunum);
 for j = 1:2*shenglunum
     if j <= temp
         if XMFlagA(j) == 1 %斜面上
-            Ti2A(j) = Ti(j) + a(j) *sin(theta4);
+            Ti2A(j) = Ti(j) - a(j) *sin(theta4);
             XieMianPianYi(j) = a(j) *tan(theta4);
         else
             Ti2A(j) = Ti(j);
@@ -147,7 +147,7 @@ for j = 1:2*shenglunum
         end
     elseif j <= 2*temp
         if XMFlagA(j) == 1 %斜面上
-            Ti2A(j) = Ti(j) - a(j) *sin(theta1);
+            Ti2A(j) = Ti(j) + a(j) *sin(theta1);
             XieMianPianYi(j) = a(j) *tan(theta1);
         else
             Ti2A(j) = Ti(j);
@@ -155,7 +155,7 @@ for j = 1:2*shenglunum
         end
     elseif j <= 3*temp
         if XMFlagA(j) == 1 %斜面上
-            Ti2A(j) = Ti(j) - a(j) *sin(theta2);
+            Ti2A(j) = Ti(j) + a(j) *sin(theta2);
             XieMianPianYi(j) = a(j) *tan(theta2);
         else
             Ti2A(j) = Ti(j);
@@ -163,7 +163,7 @@ for j = 1:2*shenglunum
         end
     else
         if XMFlagA(j) == 1 %斜面上
-            Ti2A(j) = Ti(j) + a(j) *sin(theta3);
+            Ti2A(j) = Ti(j) - a(j) *sin(theta3);
             XieMianPianYi(j) = a(j) *tan(theta3);
         else
             Ti2A(j) = Ti(j);

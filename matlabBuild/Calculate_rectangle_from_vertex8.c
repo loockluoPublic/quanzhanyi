@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 15-Jan-2025 14:19:16
+ * C/C++ source code generated on  : 19-Jan-2025 23:31:20
  */
 
 /* Include Files */
@@ -591,7 +591,7 @@ void Calculate_rectangle_from_vertex8(
       if (XMFlagA_data[nx] == 1.0) {
         /* 斜面上 */
         ab2 = a_data[nx];
-        Ti2A_data[nx] = Ti_data[nx] + ab2 * sin(theta4);
+        Ti2A_data[nx] = Ti_data[nx] - ab2 * sin(theta4);
         XieMianPianYi_data[nx] = ab2 * tan(theta4);
       } else {
         Ti2A_data[nx] = Ti_data[nx];
@@ -601,7 +601,7 @@ void Calculate_rectangle_from_vertex8(
       if (XMFlagA_data[nx] == 1.0) {
         /* 斜面上 */
         ab2 = a_data[nx];
-        Ti2A_data[nx] = Ti_data[nx] - ab2 * sin(theta1);
+        Ti2A_data[nx] = Ti_data[nx] + ab2 * sin(theta1);
         XieMianPianYi_data[nx] = ab2 * tan(theta1);
       } else {
         Ti2A_data[nx] = Ti_data[nx];
@@ -611,7 +611,7 @@ void Calculate_rectangle_from_vertex8(
       if (XMFlagA_data[nx] == 1.0) {
         /* 斜面上 */
         ab2 = a_data[nx];
-        Ti2A_data[nx] = Ti_data[nx] - ab2 * sin(theta2);
+        Ti2A_data[nx] = Ti_data[nx] + ab2 * sin(theta2);
         XieMianPianYi_data[nx] = ab2 * tan(theta2);
       } else {
         Ti2A_data[nx] = Ti_data[nx];
@@ -620,7 +620,7 @@ void Calculate_rectangle_from_vertex8(
     } else if (XMFlagA_data[nx] == 1.0) {
       /* 斜面上 */
       ab2 = a_data[nx];
-      Ti2A_data[nx] = Ti_data[nx] + ab2 * sin(theta3);
+      Ti2A_data[nx] = Ti_data[nx] - ab2 * sin(theta3);
       XieMianPianYi_data[nx] = ab2 * tan(theta3);
     } else {
       Ti2A_data[nx] = Ti_data[nx];

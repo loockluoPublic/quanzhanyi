@@ -1,4 +1,4 @@
-function [PlaneParaOut,TrianglePoints,MaxDis,distancesFianal,LenDaoJiao] = planefit8(Points1,Points2,Points3,Points4,Points5,Points6,Points7,Points8,P_bound1,P_bound2,distanceThreshold)
+function [PlaneParaOut,TrianglePoints,MaxDis,tt1,tt2,tt3,tt4,tt5,tt6,tt7,tt8,LenDaoJiao] = planefit8(Points1,Points2,Points3,Points4,Points5,Points6,Points7,Points8,P_bound1,P_bound2,distanceThreshold)
 % Points 输入点 3*n
 % BoundPoint1 边界点1
 % BoundPoint2 边界点2
