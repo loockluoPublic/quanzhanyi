@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_api.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 15-Jan-2025 14:19:16
+ * C/C++ source code generated on  : 19-Jan-2025 23:31:20
  */
 
 /* Include Files */
@@ -2192,11 +2192,11 @@ void planefit4_api(const mxArray *const prhs[7], int32_T nlhs,
 /*
  * Arguments    : const mxArray * const prhs[11]
  *                int32_T nlhs
- *                const mxArray *plhs[5]
+ *                const mxArray *plhs[12]
  * Return Type  : void
  */
 void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
-                   const mxArray *plhs[5])
+                   const mxArray *plhs[12])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -2213,7 +2213,14 @@ void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
   emxArray_real_T *Points7;
   emxArray_real_T *Points8;
   emxArray_real_T *TrianglePoints;
-  emxArray_real_T *distancesFianal;
+  emxArray_real_T *tt1;
+  emxArray_real_T *tt2;
+  emxArray_real_T *tt3;
+  emxArray_real_T *tt4;
+  emxArray_real_T *tt5;
+  emxArray_real_T *tt6;
+  emxArray_real_T *tt7;
+  emxArray_real_T *tt8;
   const mxArray *prhs_copy_idx_1;
   const mxArray *prhs_copy_idx_3;
   const mxArray *prhs_copy_idx_5;
@@ -2263,10 +2270,18 @@ void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
   /* Invoke the target function */
   emxInit_real_T(&st, &PlaneParaOut, 2);
   emxInit_real_T(&st, &TrianglePoints, 2);
-  emxInit_real_T(&st, &distancesFianal, 2);
+  emxInit_real_T(&st, &tt1, 2);
+  emxInit_real_T(&st, &tt2, 2);
+  emxInit_real_T(&st, &tt3, 2);
+  emxInit_real_T(&st, &tt4, 2);
+  emxInit_real_T(&st, &tt5, 2);
+  emxInit_real_T(&st, &tt6, 2);
+  emxInit_real_T(&st, &tt7, 2);
+  emxInit_real_T(&st, &tt8, 2);
   planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7,
             Points8, *P_bound1, *P_bound2, distanceThreshold, PlaneParaOut,
-            TrianglePoints, *MaxDis, distancesFianal, *LenDaoJiao);
+            TrianglePoints, *MaxDis, tt1, tt2, tt3, tt4, tt5, tt6, tt7, tt8,
+            *LenDaoJiao);
   emxFree_real_T(&st, &Points8);
   emxFree_real_T(&st, &Points7);
   emxFree_real_T(&st, &Points6);
@@ -2288,12 +2303,47 @@ void planefit8_api(const mxArray *const prhs[11], int32_T nlhs,
     plhs[2] = k_emlrt_marshallOut(*MaxDis);
   }
   if (nlhs > 3) {
-    distancesFianal->canFreeData = false;
-    plhs[3] = b_emlrt_marshallOut(distancesFianal);
+    tt1->canFreeData = false;
+    plhs[3] = b_emlrt_marshallOut(tt1);
   }
-  emxFree_real_T(&st, &distancesFianal);
+  emxFree_real_T(&st, &tt1);
   if (nlhs > 4) {
-    plhs[4] = k_emlrt_marshallOut(*LenDaoJiao);
+    tt2->canFreeData = false;
+    plhs[4] = b_emlrt_marshallOut(tt2);
+  }
+  emxFree_real_T(&st, &tt2);
+  if (nlhs > 5) {
+    tt3->canFreeData = false;
+    plhs[5] = b_emlrt_marshallOut(tt3);
+  }
+  emxFree_real_T(&st, &tt3);
+  if (nlhs > 6) {
+    tt4->canFreeData = false;
+    plhs[6] = b_emlrt_marshallOut(tt4);
+  }
+  emxFree_real_T(&st, &tt4);
+  if (nlhs > 7) {
+    tt5->canFreeData = false;
+    plhs[7] = b_emlrt_marshallOut(tt5);
+  }
+  emxFree_real_T(&st, &tt5);
+  if (nlhs > 8) {
+    tt6->canFreeData = false;
+    plhs[8] = b_emlrt_marshallOut(tt6);
+  }
+  emxFree_real_T(&st, &tt6);
+  if (nlhs > 9) {
+    tt7->canFreeData = false;
+    plhs[9] = b_emlrt_marshallOut(tt7);
+  }
+  emxFree_real_T(&st, &tt7);
+  if (nlhs > 10) {
+    tt8->canFreeData = false;
+    plhs[10] = b_emlrt_marshallOut(tt8);
+  }
+  emxFree_real_T(&st, &tt8);
+  if (nlhs > 11) {
+    plhs[11] = k_emlrt_marshallOut(*LenDaoJiao);
   }
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);
 }

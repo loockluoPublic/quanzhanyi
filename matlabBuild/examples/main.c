@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 15-Jan-2025 14:19:16
+ * C/C++ source code generated on  : 19-Jan-2025 23:31:20
  */
 
 /*************************************************************************/
@@ -971,7 +971,14 @@ void main_planefit8(void)
   emxArray_real_T *Points7;
   emxArray_real_T *Points8;
   emxArray_real_T *TrianglePoints;
-  emxArray_real_T *distancesFianal;
+  emxArray_real_T *tt1;
+  emxArray_real_T *tt2;
+  emxArray_real_T *tt3;
+  emxArray_real_T *tt4;
+  emxArray_real_T *tt5;
+  emxArray_real_T *tt6;
+  emxArray_real_T *tt7;
+  emxArray_real_T *tt8;
   double LenDaoJiao[8];
   double MaxDis[8];
   double P_bound1_tmp[3];
@@ -998,10 +1005,18 @@ void main_planefit8(void)
   /* Call the entry-point 'planefit8'. */
   emxInitArray_real_T(&PlaneParaOut, 2);
   emxInitArray_real_T(&TrianglePoints, 2);
-  emxInitArray_real_T(&distancesFianal, 2);
+  emxInitArray_real_T(&tt1, 2);
+  emxInitArray_real_T(&tt2, 2);
+  emxInitArray_real_T(&tt3, 2);
+  emxInitArray_real_T(&tt4, 2);
+  emxInitArray_real_T(&tt5, 2);
+  emxInitArray_real_T(&tt6, 2);
+  emxInitArray_real_T(&tt7, 2);
+  emxInitArray_real_T(&tt8, 2);
   planefit8(Points1, Points2, Points3, Points4, Points5, Points6, Points7,
             Points8, P_bound1_tmp, P_bound1_tmp, argInit_real_T(), PlaneParaOut,
-            TrianglePoints, MaxDis, distancesFianal, LenDaoJiao);
+            TrianglePoints, MaxDis, tt1, tt2, tt3, tt4, tt5, tt6, tt7, tt8,
+            LenDaoJiao);
   emxDestroyArray_real_T(Points8);
   emxDestroyArray_real_T(Points7);
   emxDestroyArray_real_T(Points6);
@@ -1012,7 +1027,14 @@ void main_planefit8(void)
   emxDestroyArray_real_T(Points1);
   emxDestroyArray_real_T(PlaneParaOut);
   emxDestroyArray_real_T(TrianglePoints);
-  emxDestroyArray_real_T(distancesFianal);
+  emxDestroyArray_real_T(tt1);
+  emxDestroyArray_real_T(tt2);
+  emxDestroyArray_real_T(tt3);
+  emxDestroyArray_real_T(tt4);
+  emxDestroyArray_real_T(tt5);
+  emxDestroyArray_real_T(tt6);
+  emxDestroyArray_real_T(tt7);
+  emxDestroyArray_real_T(tt8);
 }
 
 /*
