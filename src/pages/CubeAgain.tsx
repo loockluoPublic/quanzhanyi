@@ -16,13 +16,17 @@ export default function () {
   const hight = data?.cubeResult?.h?.toFixed(4);
 
   const onChange = (v: CustomVector3, i: number, key: string) => {
+    if(v.label==="A"){
+      v.color = 'red'
+    }else if(v.label === "B"){
+      v.color = '#fab005'
+    }
     const tableData: any =
-      data.cubeAgainTable?.map?.((item, index) => {
+      data.cubeAgainTable?.map?.((item) => {
         const newItem = {
           ...item,
         };
-        if (index === i) {
-          debugger;
+        if (item.i === i) {
           newItem[key] = v;
         }
         return newItem;
@@ -56,7 +60,7 @@ export default function () {
       dataIndex: "p1",
       key: "p1",
       align: "center",
-      render: (_v, row, i) => {
+      render: (_v, row ) => {
         console.log("%c Line:55 🍕 row", "color:#2eafb0", row.i, 2 * row.i - 1);
         return (
           <PointsVector3
@@ -68,7 +72,8 @@ export default function () {
                   : row.i;
               CustomVector3.setPublicInfo(row.sdm, 2 * slnum - 2);
             }}
-            onChange={(v) => onChange(v, i, "p1")}
+            onChange={(v) => {onChange(v, row.i, "p1")
+            }}
           />
         );
       },
@@ -76,9 +81,9 @@ export default function () {
     {
       title: "上游换能器",
       dataIndex: "p2",
-      key: "p3",
+      key: "p2",
       align: "center",
-      render: (_v, row, i) => {
+      render: (_v, row,) => {
         return (
           <PointsVector3
             before={() => {
@@ -89,7 +94,7 @@ export default function () {
               CustomVector3.setPublicInfo(row.sdm, 2 * slnum - 1);
             }}
             value={_v}
-            onChange={(v) => onChange(v, i, "p2")}
+            onChange={(v) => onChange(v, row.i, "p2")}
           />
         );
       },
@@ -248,7 +253,7 @@ export default function () {
         </span>
         <span className="q-ml-8">方涵高度：{hight ?? "--"} 米</span>
         <span className="q-ml-8">
-          声道配置： {data.sdm.length}E{data.sdfb}P
+          声道配置：  {data.sdm.length}E{data.sdfb * data.sdm.length}P
         </span>
       </div>
       <h3 className="border-top q-pt-4">
@@ -273,31 +278,28 @@ export default function () {
     </div>
   );
 
-  const mPoints = [];
-  const pA = [],
-    pB = [];
+  const mPoints =  data.cubeAgainTable?.reduce((acc,cur)=>{
+    return [...acc,cur.p1,cur.p2]
+  },[]);
+  // const pA = [],
+  //   pB = [];
 
-  data.cubeAgainTable?.forEach((item: any) => {
-    item.p1 && mPoints.push(item.p1);
-    item.p2 && mPoints.push(item.p2);
-    if (item.sdm === "A") {
-      pA.push(item.p1, item.p2);
-    } else {
-      pB.push(item.p1, item.p2);
-    }
-  });
+  // data.cubeAgainTable?.forEach((item: any) => {
+  //   item.p1 && mPoints.push(item.p1);
+  //   item.p2 && mPoints.push(item.p2);
+  //   if (item.sdm === "A") {
+  //     pA.push(item.p1, item.p2);
+  //   } else {
+  //     pB.push(item.p1, item.p2);
+  //   }
+  // });
 
   return (
     <CubeFitting
       component={comp}
       firstPoints={data.firstPoints}
       trianglePoints={data.trianglePoints}
-      AB={pA.map((item, i) => {
-        return {
-          pointA: item,
-          pointB: pB[i],
-        };
-      })}
+      points={mPoints}
       sdm={data.sdm}
     ></CubeFitting>
   );
