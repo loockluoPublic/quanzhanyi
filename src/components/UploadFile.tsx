@@ -21,6 +21,8 @@ function AntdFileReader() {
       setMode(importData.mode);
       setTimeout(() => {
         setStep(1);
+        //重复导入，避免全局Effect 将table数据初始化
+        setData(importData);
       }, 100);
 
     };
