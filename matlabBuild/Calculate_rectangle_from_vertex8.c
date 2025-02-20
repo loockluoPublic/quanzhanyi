@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jan-2025 23:31:20
+ * C/C++ source code generated on  : 20-Feb-2025 18:54:26
  */
 
 /* Include Files */
@@ -366,8 +366,7 @@ void Calculate_rectangle_from_vertex8(
   emxInit_real_T(&TrianglePoints4, 2);
   b_planefit4(side_faces_transformed1, side_faces_transformed3,
               side_faces_transformed5, side_faces_transformed7, P_bound1,
-              P_bound2, distanceThreshold, a__1, TrianglePoints4, a__2,
-              XMFlagA);
+              P_bound2, a__1, TrianglePoints4, a__2, XMFlagA);
   /* 调用矩形参数计算 */
   Calculate_rectangle_from_vertex(TrianglePoints4, Pin, Pout, e, &b, &h, &ab4,
                                   v, a__7);

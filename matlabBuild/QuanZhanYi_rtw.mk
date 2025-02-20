@@ -2,7 +2,7 @@
 ## Makefile generated for component 'QuanZhanYi'. 
 ## 
 ## Makefile     : QuanZhanYi_rtw.mk
-## Generated on : Sun Jan 05 00:11:50 2025
+## Generated on : Thu Feb 20 18:56:17 2025
 ## Final product: ./QuanZhanYi.lib
 ## Product type : static-library
 ## 
@@ -154,7 +154,7 @@ DEFINES = $(DEFINES_CUSTOM) $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/QuanZhanYi_data.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c $(START_DIR)/QuanZhanYi_initialize.c $(START_DIR)/QuanZhanYi_terminate.c $(START_DIR)/angle2point.c $(START_DIR)/Calculat_A_and_B_Points.c $(START_DIR)/norm.c $(START_DIR)/dot.c $(START_DIR)/pinv.c $(START_DIR)/svd.c $(START_DIR)/xnrm2.c $(START_DIR)/xdotc.c $(START_DIR)/Calculat_A_and_B_Points_after_Offest2.c $(START_DIR)/Calculat_JuXing_A_and_B_Points_after_Offest.c $(START_DIR)/mtimes.c $(START_DIR)/Calculate_accurate_cylinders_from_multiple_measurement_points2.c $(START_DIR)/svd1.c $(START_DIR)/xzsvdc.c $(START_DIR)/mldivide.c $(START_DIR)/ixfun.c $(START_DIR)/combineVectorElements.c $(START_DIR)/Calculate_rectangle_from_vertex.c $(START_DIR)/Calculate_rectangle_from_vertex8.c $(START_DIR)/planefit4.c $(START_DIR)/nchoosek.c $(START_DIR)/find.c $(START_DIR)/mean.c $(START_DIR)/polyfit.c $(START_DIR)/minOrMax.c $(START_DIR)/CrossLine.c $(START_DIR)/GenerateTrianglePoints.c $(START_DIR)/planefit8.c $(START_DIR)/validate_print_arguments.c $(START_DIR)/rand.c $(START_DIR)/foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)/fitcircle.c $(START_DIR)/Generate_multi_layered_measurement_points.c $(START_DIR)/generate_unit_circle_with_normal_vector.c $(START_DIR)/generate_unit_circle_with_normal_vector2.c $(START_DIR)/JuXingFuCe.c $(START_DIR)/prod.c $(START_DIR)/myvrrotvec2mat.c $(START_DIR)/OffsetCalculate.c $(START_DIR)/planefit.c $(START_DIR)/RepeatSurvey.c $(START_DIR)/ShengDaoGaoDu.c $(START_DIR)/ShengLuJiaoJiSuan.c $(START_DIR)/YuanXingFuCe.c $(START_DIR)/YuanZhuJiaoDian.c $(START_DIR)/xgeev.c $(START_DIR)/eml_rand_mt19937ar_stateful.c $(START_DIR)/xaxpy.c $(START_DIR)/xrotg.c $(START_DIR)/xrot.c $(START_DIR)/xswap.c $(START_DIR)/xgeqp3.c $(START_DIR)/xzgebal.c $(START_DIR)/xdlahqr.c $(START_DIR)/xzlascl.c $(START_DIR)/unsafeSxfun.c $(START_DIR)/cat.c $(START_DIR)/div.c $(START_DIR)/QuanZhanYi_emxutil.c $(START_DIR)/QuanZhanYi_emxAPI.c $(START_DIR)/QuanZhanYi_rtwutil.c
+SRCS = $(START_DIR)/QuanZhanYi_data.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c $(START_DIR)/QuanZhanYi_initialize.c $(START_DIR)/QuanZhanYi_terminate.c $(START_DIR)/angle2point.c $(START_DIR)/Calculat_A_and_B_Points.c $(START_DIR)/norm.c $(START_DIR)/dot.c $(START_DIR)/pinv.c $(START_DIR)/svd.c $(START_DIR)/xnrm2.c $(START_DIR)/xdotc.c $(START_DIR)/Calculat_A_and_B_Points_after_Offest2.c $(START_DIR)/Calculat_JuXing_A_and_B_Points_after_Offest.c $(START_DIR)/mtimes.c $(START_DIR)/Calculate_accurate_cylinders_from_multiple_measurement_points2.c $(START_DIR)/svd1.c $(START_DIR)/xzsvdc.c $(START_DIR)/mldivide.c $(START_DIR)/ixfun.c $(START_DIR)/combineVectorElements.c $(START_DIR)/Calculate_rectangle_from_vertex.c $(START_DIR)/Calculate_rectangle_from_vertex8.c $(START_DIR)/planefit4.c $(START_DIR)/polyfit.c $(START_DIR)/fminsearch.c $(START_DIR)/minOrMax.c $(START_DIR)/planefit8.c $(START_DIR)/validate_print_arguments.c $(START_DIR)/rand.c $(START_DIR)/nchoosek.c $(START_DIR)/find.c $(START_DIR)/mean.c $(START_DIR)/foot_of_perpendicular_from_a_point_to_a_line.c $(START_DIR)/CrossLine.c $(START_DIR)/fitcircle.c $(START_DIR)/Generate_multi_layered_measurement_points.c $(START_DIR)/generate_unit_circle_with_normal_vector.c $(START_DIR)/generate_unit_circle_with_normal_vector2.c $(START_DIR)/GenerateTrianglePoints.c $(START_DIR)/JuXingFuCe.c $(START_DIR)/prod.c $(START_DIR)/myvrrotvec2mat.c $(START_DIR)/OffsetCalculate.c $(START_DIR)/planefit.c $(START_DIR)/RepeatSurvey.c $(START_DIR)/ShengDaoGaoDu.c $(START_DIR)/ShengLuJiaoJiSuan.c $(START_DIR)/YuanXingFuCe.c $(START_DIR)/YuanZhuJiaoDian.c $(START_DIR)/xgeev.c $(START_DIR)/eml_rand_mt19937ar_stateful.c $(START_DIR)/xaxpy.c $(START_DIR)/xrotg.c $(START_DIR)/xrot.c $(START_DIR)/xswap.c $(START_DIR)/xgeqp3.c $(START_DIR)/xzgebal.c $(START_DIR)/xdlahqr.c $(START_DIR)/xzlascl.c $(START_DIR)/unsafeSxfun.c $(START_DIR)/cat.c $(START_DIR)/div.c $(START_DIR)/QuanZhanYi_emxutil.c $(START_DIR)/QuanZhanYi_emxAPI.c $(START_DIR)/QuanZhanYi_rtwutil.c
 
 ALL_SRCS = $(SRCS)
 
@@ -162,7 +162,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = QuanZhanYi_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj QuanZhanYi_initialize.obj QuanZhanYi_terminate.obj angle2point.obj Calculat_A_and_B_Points.obj norm.obj dot.obj pinv.obj svd.obj xnrm2.obj xdotc.obj Calculat_A_and_B_Points_after_Offest2.obj Calculat_JuXing_A_and_B_Points_after_Offest.obj mtimes.obj Calculate_accurate_cylinders_from_multiple_measurement_points2.obj svd1.obj xzsvdc.obj mldivide.obj ixfun.obj combineVectorElements.obj Calculate_rectangle_from_vertex.obj Calculate_rectangle_from_vertex8.obj planefit4.obj nchoosek.obj find.obj mean.obj polyfit.obj minOrMax.obj CrossLine.obj GenerateTrianglePoints.obj planefit8.obj validate_print_arguments.obj rand.obj foot_of_perpendicular_from_a_point_to_a_line.obj fitcircle.obj Generate_multi_layered_measurement_points.obj generate_unit_circle_with_normal_vector.obj generate_unit_circle_with_normal_vector2.obj JuXingFuCe.obj prod.obj myvrrotvec2mat.obj OffsetCalculate.obj planefit.obj RepeatSurvey.obj ShengDaoGaoDu.obj ShengLuJiaoJiSuan.obj YuanXingFuCe.obj YuanZhuJiaoDian.obj xgeev.obj eml_rand_mt19937ar_stateful.obj xaxpy.obj xrotg.obj xrot.obj xswap.obj xgeqp3.obj xzgebal.obj xdlahqr.obj xzlascl.obj unsafeSxfun.obj cat.obj div.obj QuanZhanYi_emxutil.obj QuanZhanYi_emxAPI.obj QuanZhanYi_rtwutil.obj
+OBJS = QuanZhanYi_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj QuanZhanYi_initialize.obj QuanZhanYi_terminate.obj angle2point.obj Calculat_A_and_B_Points.obj norm.obj dot.obj pinv.obj svd.obj xnrm2.obj xdotc.obj Calculat_A_and_B_Points_after_Offest2.obj Calculat_JuXing_A_and_B_Points_after_Offest.obj mtimes.obj Calculate_accurate_cylinders_from_multiple_measurement_points2.obj svd1.obj xzsvdc.obj mldivide.obj ixfun.obj combineVectorElements.obj Calculate_rectangle_from_vertex.obj Calculate_rectangle_from_vertex8.obj planefit4.obj polyfit.obj fminsearch.obj minOrMax.obj planefit8.obj validate_print_arguments.obj rand.obj nchoosek.obj find.obj mean.obj foot_of_perpendicular_from_a_point_to_a_line.obj CrossLine.obj fitcircle.obj Generate_multi_layered_measurement_points.obj generate_unit_circle_with_normal_vector.obj generate_unit_circle_with_normal_vector2.obj GenerateTrianglePoints.obj JuXingFuCe.obj prod.obj myvrrotvec2mat.obj OffsetCalculate.obj planefit.obj RepeatSurvey.obj ShengDaoGaoDu.obj ShengLuJiaoJiSuan.obj YuanXingFuCe.obj YuanZhuJiaoDian.obj xgeev.obj eml_rand_mt19937ar_stateful.obj xaxpy.obj xrotg.obj xrot.obj xswap.obj xgeqp3.obj xzgebal.obj xdlahqr.obj xzlascl.obj unsafeSxfun.obj cat.obj div.obj QuanZhanYi_emxutil.obj QuanZhanYi_emxAPI.obj QuanZhanYi_rtwutil.obj
 
 ALL_OBJS = $(OBJS)
 
@@ -365,31 +365,15 @@ planefit4.obj : $(START_DIR)/planefit4.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-nchoosek.obj : $(START_DIR)/nchoosek.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
-
-
-find.obj : $(START_DIR)/find.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
-
-
-mean.obj : $(START_DIR)/mean.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
-
-
 polyfit.obj : $(START_DIR)/polyfit.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
+fminsearch.obj : $(START_DIR)/fminsearch.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
 minOrMax.obj : $(START_DIR)/minOrMax.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
-
-
-CrossLine.obj : $(START_DIR)/CrossLine.c
-	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
-
-
-GenerateTrianglePoints.obj : $(START_DIR)/GenerateTrianglePoints.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
@@ -405,7 +389,23 @@ rand.obj : $(START_DIR)/rand.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
+nchoosek.obj : $(START_DIR)/nchoosek.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
+find.obj : $(START_DIR)/find.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
+mean.obj : $(START_DIR)/mean.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
 foot_of_perpendicular_from_a_point_to_a_line.obj : $(START_DIR)/foot_of_perpendicular_from_a_point_to_a_line.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
+CrossLine.obj : $(START_DIR)/CrossLine.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
@@ -422,6 +422,10 @@ generate_unit_circle_with_normal_vector.obj : $(START_DIR)/generate_unit_circle_
 
 
 generate_unit_circle_with_normal_vector2.obj : $(START_DIR)/generate_unit_circle_with_normal_vector2.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
+GenerateTrianglePoints.obj : $(START_DIR)/GenerateTrianglePoints.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 

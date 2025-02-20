@@ -2,7 +2,7 @@
  * File: Generate_multi_layered_measurement_points.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jan-2025 23:31:20
+ * C/C++ source code generated on  : 20-Feb-2025 18:54:26
  */
 
 /* Include Files */
@@ -12,9 +12,9 @@
 #include "QuanZhanYi_initialize.h"
 #include "QuanZhanYi_rtwutil.h"
 #include "QuanZhanYi_types.h"
+#include "combineVectorElements.h"
 #include "foot_of_perpendicular_from_a_point_to_a_line.h"
 #include "generate_unit_circle_with_normal_vector.h"
-#include "mean.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 
@@ -182,7 +182,7 @@ void Generate_multi_layered_measurement_points(const emxArray_real_T *Point_out,
         sqrt((p12f_idx_1 * p12f_idx_1 + p2_idx_2 * p2_idx_2) + ds * ds);
   }
   /* %%%%%%%           圆柱参数          %%%%%%%%%%% */
-  Radius = mean(Dist);
+  Radius = b_combineVectorElements(Dist) / (double)Dist->size[1];
   scale = 3.3121686421112381E-170;
   absxk = fabs(pf_idx_0);
   if (absxk > 3.3121686421112381E-170) {
