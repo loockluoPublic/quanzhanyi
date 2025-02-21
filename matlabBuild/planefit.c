@@ -2,7 +2,7 @@
  * File: planefit.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jan-2025 23:31:20
+ * C/C++ source code generated on  : 20-Feb-2025 18:54:26
  */
 
 /* Include Files */
@@ -42,9 +42,11 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
               const double BoundPoint1[3], const double BoundPoint2[3],
               emxArray_real_T *PlaneParaOut, emxArray_real_T *TrianglePoints)
 {
-  static const signed char b_iv1[18] = {0, 1, 2, 1, 2, 3, 0, 2, 4,
-                                        2, 4, 5, 4, 5, 6, 5, 6, 7};
-  static const signed char iv2[12] = {0, 1, 2, 1, 2, 3, 0, 2, 4, 2, 4, 5};
+  static const signed char iv2[24] = {0, 1, 2, 1, 2, 3, 0, 2, 4, 2, 4, 5,
+                                      4, 5, 6, 5, 6, 7, 1, 3, 6, 3, 6, 7};
+  static const signed char iv1[18] = {0, 1, 2, 1, 2, 3, 0, 2, 4,
+                                      2, 4, 5, 4, 5, 6, 5, 6, 7};
+  static const signed char iv3[12] = {0, 1, 2, 1, 2, 3, 0, 2, 4, 2, 4, 5};
   static const signed char b_iv[6] = {0, 1, 2, 0, 2, 3};
   emxArray_real_T *a__1;
   emxArray_real_T *b_Points;
@@ -121,7 +123,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     }
   }
   /*  Fit a plane through the points */
-  b_mean(pointss, coefficients);
+  mean(pointss, coefficients);
   emxInit_real_T(&b_pointss, 2);
   r2 = b_pointss->size[0] * b_pointss->size[1];
   b_pointss->size[0] = pointss->size[0];
@@ -295,7 +297,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     coefficients[1] = (bb[r1] - yz_idx_1 * yz_idx_1_tmp) / yfit[r1];
     coefficients[2] = yz_idx_1;
     /*  找到边界，确定三角点 */
-    c_GenerateTrianglePoints(PlaneParaIn, BoundPoint1, coefficients, D,
+    b_GenerateTrianglePoints(PlaneParaIn, BoundPoint1, coefficients, D,
                              PointTri);
     d_xfit[0] = PointTri[0];
     c_yfit[0] = PointTri[1];
@@ -303,7 +305,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     d_xfit[1] = PointTri[3];
     c_yfit[1] = PointTri[4];
     b_zfit[1] = PointTri[5];
-    c_GenerateTrianglePoints(PlaneParaIn, BoundPoint2, coefficients, D,
+    b_GenerateTrianglePoints(PlaneParaIn, BoundPoint2, coefficients, D,
                              PointTri);
     d_xfit[2] = PointTri[0];
     c_yfit[2] = PointTri[1];
@@ -315,7 +317,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     xfit[1] = b;
     xfit[2] = c;
     xfit[3] = d;
-    d_GenerateTrianglePoints(xfit, BoundPoint1, coefficients, D, PointTri);
+    c_GenerateTrianglePoints(xfit, BoundPoint1, coefficients, D, PointTri);
     d_xfit[4] = PointTri[3];
     c_yfit[4] = PointTri[4];
     b_zfit[4] = PointTri[5];
@@ -323,12 +325,12 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     xfit[1] = b;
     xfit[2] = c;
     xfit[3] = d;
-    d_GenerateTrianglePoints(xfit, BoundPoint2, coefficients, D, PointTri);
+    c_GenerateTrianglePoints(xfit, BoundPoint2, coefficients, D, PointTri);
     d_xfit[5] = PointTri[3];
     c_yfit[5] = PointTri[4];
     b_zfit[5] = PointTri[5];
     for (r2 = 0; r2 < 12; r2++) {
-      i1 = iv2[r2];
+      i1 = iv3[r2];
       g_xfit[3 * r2] = d_xfit[i1];
       g_xfit[3 * r2 + 1] = c_yfit[i1];
       g_xfit[3 * r2 + 2] = b_zfit[i1];
@@ -367,7 +369,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     CrossLine(&PlaneParaIn_data[0], &PlaneParaIn_data[4], x_val, coefficients,
               D);
     /*  找到边界，确定三角点 */
-    b_GenerateTrianglePoints(&PlaneParaOut_data[0], BoundPoint1, coefficients,
+    d_GenerateTrianglePoints(&PlaneParaOut_data[0], BoundPoint1, coefficients,
                              D, PointTri);
     b_xfit[0] = PointTri[0];
     b_yfit[0] = PointTri[1];
@@ -375,7 +377,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     b_xfit[1] = PointTri[3];
     b_yfit[1] = PointTri[4];
     zfit[1] = PointTri[5];
-    b_GenerateTrianglePoints(&PlaneParaOut_data[0], BoundPoint2, coefficients,
+    d_GenerateTrianglePoints(&PlaneParaOut_data[0], BoundPoint2, coefficients,
                              D, PointTri);
     b_xfit[2] = PointTri[0];
     b_yfit[2] = PointTri[1];
@@ -387,7 +389,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     CrossLine(&PlaneParaOut_data[4], &PlaneParaOut_data[8], x_val, coefficients,
               D);
     /*  找到边界，确定三角点 */
-    b_GenerateTrianglePoints(&PlaneParaOut_data[8], BoundPoint1, coefficients,
+    d_GenerateTrianglePoints(&PlaneParaOut_data[8], BoundPoint1, coefficients,
                              D, PointTri);
     b_xfit[4] = PointTri[0];
     b_yfit[4] = PointTri[1];
@@ -395,7 +397,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     b_xfit[6] = PointTri[3];
     b_yfit[6] = PointTri[4];
     zfit[6] = PointTri[5];
-    b_GenerateTrianglePoints(&PlaneParaOut_data[8], BoundPoint2, coefficients,
+    d_GenerateTrianglePoints(&PlaneParaOut_data[8], BoundPoint2, coefficients,
                              D, PointTri);
     b_xfit[5] = PointTri[0];
     b_yfit[5] = PointTri[1];
@@ -404,7 +406,7 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     b_yfit[7] = PointTri[4];
     zfit[7] = PointTri[5];
     for (r2 = 0; r2 < 18; r2++) {
-      i1 = b_iv1[r2];
+      i1 = iv1[r2];
       e_xfit[3 * r2] = b_xfit[i1];
       e_xfit[3 * r2 + 1] = b_yfit[i1];
       e_xfit[3 * r2 + 2] = zfit[i1];
@@ -443,12 +445,12 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     CrossLine(&PlaneParaIn_data[0], &PlaneParaIn_data[4], x_val, coefficients,
               D);
     /*  找到边界，确定三角点 */
-    b_GenerateTrianglePoints(&PlaneParaOut_data[0], BoundPoint1, coefficients,
+    d_GenerateTrianglePoints(&PlaneParaOut_data[0], BoundPoint1, coefficients,
                              D, PointTri);
     b_xfit[0] = PointTri[0];
     b_yfit[0] = PointTri[1];
     zfit[0] = PointTri[2];
-    b_GenerateTrianglePoints(&PlaneParaOut_data[0], BoundPoint2, coefficients,
+    d_GenerateTrianglePoints(&PlaneParaOut_data[0], BoundPoint2, coefficients,
                              D, PointTri);
     b_xfit[2] = PointTri[0];
     b_yfit[2] = PointTri[1];
@@ -457,12 +459,12 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     CrossLine(&PlaneParaOut_data[4], &PlaneParaOut_data[8], x_val, coefficients,
               D);
     /*  找到边界，确定三角点 */
-    b_GenerateTrianglePoints(&PlaneParaOut_data[8], BoundPoint1, coefficients,
+    d_GenerateTrianglePoints(&PlaneParaOut_data[8], BoundPoint1, coefficients,
                              D, PointTri);
     b_xfit[4] = PointTri[0];
     b_yfit[4] = PointTri[1];
     zfit[4] = PointTri[2];
-    b_GenerateTrianglePoints(&PlaneParaOut_data[8], BoundPoint2, coefficients,
+    d_GenerateTrianglePoints(&PlaneParaOut_data[8], BoundPoint2, coefficients,
                              D, PointTri);
     b_xfit[5] = PointTri[0];
     b_yfit[5] = PointTri[1];
@@ -470,12 +472,12 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     /* %%%%% 第3、4个面的交点 %%%% */
     CrossLine(&PlaneParaOut_data[8], &PlaneParaOut_data[12], x_val,
               coefficients, D);
-    b_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint1, coefficients,
+    d_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint1, coefficients,
                              D, PointTri);
     b_xfit[6] = PointTri[0];
     b_yfit[6] = PointTri[1];
     zfit[6] = PointTri[2];
-    b_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint2, coefficients,
+    d_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint2, coefficients,
                              D, PointTri);
     b_xfit[7] = PointTri[0];
     b_yfit[7] = PointTri[1];
@@ -483,18 +485,18 @@ void planefit(const emxArray_real_T *Points, const emxArray_real_T *PlaneParaIn,
     /* %%%%% 第1、4个面的交点 %%%% */
     CrossLine(&PlaneParaOut_data[0], &PlaneParaOut_data[12], x_val,
               coefficients, D);
-    b_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint1, coefficients,
+    d_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint1, coefficients,
                              D, PointTri);
     b_xfit[1] = PointTri[0];
     b_yfit[1] = PointTri[1];
     zfit[1] = PointTri[2];
-    b_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint2, coefficients,
+    d_GenerateTrianglePoints(&PlaneParaOut_data[12], BoundPoint2, coefficients,
                              D, PointTri);
     b_xfit[3] = PointTri[0];
     b_yfit[3] = PointTri[1];
     zfit[3] = PointTri[2];
     for (r2 = 0; r2 < 24; r2++) {
-      i1 = iv[r2];
+      i1 = iv2[r2];
       f_xfit[3 * r2] = b_xfit[i1];
       f_xfit[3 * r2 + 1] = b_yfit[i1];
       f_xfit[3 * r2 + 2] = zfit[i1];

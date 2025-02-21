@@ -232,7 +232,7 @@ for i =1:8
 
     PIner = [x,y,z];
 
-    threshold  = 0.5;
+    threshold  = 2.5;
     % Fit a plane through the points
     [~, ~, V] = svd(PIner - mean(PIner, 1));
     normal = V(:, 3); % Normal vector of the plane
@@ -259,6 +259,34 @@ for i =1:8
     end
     PlaneParaOut(:,i) = [a;b;c;d];
 end
+
+
+
+
+
+%%%%%%%%% 测试 %%%%%%%%%%%%
+
+PlaneParaOut(1,3) = 0;
+PlaneParaOut(2,3) = 0;
+PlaneParaOut(4,3) = mean(Points3(3,:));
+
+
+PlaneParaOut(1,7) = 0;
+PlaneParaOut(2,7) = 0;
+PlaneParaOut(4,7) = mean(Points7(3,:));
+
+
+PlaneParaOut(1:2,1) = (PlaneParaOut(1:2,1)+PlaneParaOut(1:2,5))./2 ;
+PlaneParaOut(1:2,5) = PlaneParaOut(1:2,1) ;
+%%%%%%%%% 测试 %%%%%%%%%%%%
+
+
+
+
+
+
+
+
 id1 = inlierIdxFinal{1};
 id2 = inlierIdxFinal{2};
 id3 = inlierIdxFinal{3};

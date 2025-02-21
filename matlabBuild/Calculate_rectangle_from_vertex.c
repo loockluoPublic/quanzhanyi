@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jan-2025 23:31:20
+ * C/C++ source code generated on  : 20-Feb-2025 18:54:26
  */
 
 /* Include Files */
@@ -178,10 +178,6 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
   /*  计算出口中心 */
   /*  计算上顶点 */
   /*  计算长宽高 */
-  scale = Pdd[0] - Pdd[12];
-  b_scale = Pdd[1] - Pdd[13];
-  c_scale = Pdd[2] - Pdd[14];
-  *b = sqrt((scale * scale + b_scale * b_scale) + c_scale * c_scale);
   scale = Pdd[0] - Pdd[3];
   b_scale = Pdd[1] - Pdd[4];
   c_scale = Pdd[2] - Pdd[5];
@@ -190,6 +186,10 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
   b_scale = Pdd[1] - Pdd[7];
   c_scale = Pdd[2] - Pdd[8];
   *w = sqrt((scale * scale + b_scale * b_scale) + c_scale * c_scale);
+  scale = Pdd[6] - Pdd[15];
+  b_scale = Pdd[7] - Pdd[16];
+  c_scale = Pdd[8] - Pdd[17];
+  *b = sqrt((scale * scale + b_scale * b_scale) + c_scale * c_scale);
   Tao[0] = (((Tao[0] / y + Tao2_tmp_idx_0 / b_y) + Tao3_tmp_idx_0 / Tao3_tmp) +
             (Pdd[21] - Pdd[18]) / Tao3_tmp) /
            4.0;

@@ -2,7 +2,7 @@
  * File: planefit8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jan-2025 23:31:20
+ * C/C++ source code generated on  : 20-Feb-2025 18:54:26
  */
 
 /* Include Files */
@@ -11,6 +11,7 @@
 #include "QuanZhanYi_emxutil.h"
 #include "QuanZhanYi_initialize.h"
 #include "QuanZhanYi_types.h"
+#include "combineVectorElements.h"
 #include "dot.h"
 #include "find.h"
 #include "mean.h"
@@ -30,14 +31,14 @@
 #include <string.h>
 
 /* Variable Definitions */
-static const double dv[3] = {1.0, 0.0, 0.0};
+static const double dv1[3] = {1.0, 0.0, 0.0};
 
-static const double dv1[3] = {0.0, 0.0, 1.0};
+static const double dv2[3] = {0.0, 0.0, 1.0};
 
-static const signed char iv1[48] = {0, 7, 8,  7, 8,  15, 0, 1, 9,  0, 8,  9,
-                                    1, 2, 9,  2, 9,  10, 2, 3, 10, 3, 10, 11,
-                                    3, 4, 11, 4, 11, 12, 4, 5, 12, 5, 12, 13,
-                                    5, 6, 13, 6, 13, 14, 6, 7, 14, 7, 14, 15};
+static const signed char iv[48] = {0, 7, 8,  7, 8,  15, 0, 1, 9,  0, 8,  9,
+                                   1, 2, 9,  2, 9,  10, 2, 3, 10, 3, 10, 11,
+                                   3, 4, 11, 4, 11, 12, 4, 5, 12, 5, 12, 13,
+                                   5, 6, 13, 6, 13, 14, 6, 7, 14, 7, 14, 15};
 
 /* Function Definitions */
 /*
@@ -103,7 +104,6 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   cell_wrap_4 r7;
   emxArray_boolean_T *b_distances;
   emxArray_int32_T *r24;
-  emxArray_real_T *B;
   emxArray_real_T *C;
   emxArray_real_T *Cnum;
   emxArray_real_T *TrianglePoints4;
@@ -115,6 +115,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   emxArray_real_T *b_pointss;
   emxArray_real_T *c_distancesFianal1;
   emxArray_real_T *c_inlierPoints;
+  emxArray_real_T *c_pointss;
   emxArray_real_T *d_distancesFianal1;
   emxArray_real_T *distances;
   emxArray_real_T *e_distancesFianal1;
@@ -155,7 +156,6 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   double *Points6_data;
   double *Points8_data;
   int b_i;
-  int b_j;
   int b_loop_ub;
   int b_result_idx_1;
   int c;
@@ -164,6 +164,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   int e_loop_ub;
   int i;
   int j;
+  int k;
   int loop_ub;
   int nx;
   int result;
@@ -185,8 +186,8 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   emxInit_real_T(&Cnum, 2);
   emxInit_real_T(&a__1, 2);
   emxInit_real_T(&TrianglePoints4, 2);
-  b_planefit4(Points1, Points3, Points5, Points7, P_bound1, P_bound2,
-              distanceThreshold, a__1, TrianglePoints4, Isempty, Cnum);
+  b_planefit4(Points1, Points3, Points5, Points7, P_bound1, P_bound2, a__1,
+              TrianglePoints4, Isempty, Cnum);
   PlaneParaOut_data = TrianglePoints4->data;
   emxFree_real_T(&a__1);
   for (i = 0; i < 8; i++) {
@@ -228,7 +229,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Tv1[1] = 0.0;
     normaltao[2] /= d1;
     Tv1[2] = 0.0;
-    if (fabs(dot(normaltao, dv)) > 1.0E-6) {
+    if (fabs(dot(normaltao, dv1)) > 1.0E-6) {
       /*  如果v1与法向量平行，则换一个向量 */
       Tv1[0] = 0.0;
       Tv1[1] = 1.0;
@@ -304,7 +305,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Tv1[1] = 0.0;
     normaltao[2] /= d1;
     Tv1[2] = 0.0;
-    if (fabs(dot(normaltao, dv)) > 1.0E-6) {
+    if (fabs(dot(normaltao, dv1)) > 1.0E-6) {
       /*  如果v1与法向量平行，则换一个向量 */
       Tv1[0] = 0.0;
       Tv1[1] = 1.0;
@@ -377,7 +378,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Tv1[1] = 0.0;
     normaltao[2] /= d1;
     Tv1[2] = 0.0;
-    if (fabs(dot(normaltao, dv)) > 1.0E-6) {
+    if (fabs(dot(normaltao, dv1)) > 1.0E-6) {
       /*  如果v1与法向量平行，则换一个向量 */
       Tv1[0] = 0.0;
       Tv1[1] = 1.0;
@@ -450,7 +451,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Tv1[1] = 0.0;
     normaltao[2] /= d1;
     Tv1[2] = 0.0;
-    if (fabs(dot(normaltao, dv)) > 1.0E-6) {
+    if (fabs(dot(normaltao, dv1)) > 1.0E-6) {
       /*  如果v1与法向量平行，则换一个向量 */
       Tv1[0] = 0.0;
       Tv1[1] = 1.0;
@@ -568,7 +569,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < nx; i++) {
     r7.f1->data[i] = Points8_data[i];
   }
-  emxInitMatrix_cell_wrap_41(PointAll);
+  emxInitMatrix_cell_wrap_4(PointAll);
   emxCopyStruct_cell_wrap_4(&PointAll[0], &r);
   emxFreeStruct_cell_wrap_4(&r);
   emxCopyStruct_cell_wrap_4(&PointAll[1], &r1);
@@ -641,7 +642,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   r15.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r15.f1, i);
   r15.f1->data[0] = 8.0;
-  emxInitMatrix_cell_wrap_11(inlierIdxFinal);
+  emxInitMatrix_cell_wrap_1(inlierIdxFinal);
   emxCopyStruct_cell_wrap_1(&inlierIdxFinal[0], &r8);
   emxFreeStruct_cell_wrap_1(&r8);
   emxCopyStruct_cell_wrap_1(&inlierIdxFinal[1], &r9);
@@ -706,7 +707,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   r23.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r23.f1, i);
   r23.f1->data[0] = 8.0;
-  emxInitMatrix_cell_wrap_11(distancesFianal1);
+  emxInitMatrix_cell_wrap_1(distancesFianal1);
   emxCopyStruct_cell_wrap_1(&distancesFianal1[0], &r16);
   emxFreeStruct_cell_wrap_1(&r16);
   emxCopyStruct_cell_wrap_1(&distancesFianal1[1], &r17);
@@ -728,12 +729,12 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   emxInit_real_T(&distances, 2);
   emxInit_real_T(&inlierPoints, 2);
   emxInit_real_T(&a__4, 2);
-  emxInit_real_T(&B, 2);
   emxInit_int32_T(&r24);
   emxInit_real_T(&b_inlierPoints, 1);
   emxInit_real_T(&c_inlierPoints, 1);
-  emxInit_boolean_T(&b_distances);
   emxInit_real_T(&b_pointss, 2);
+  emxInit_boolean_T(&b_distances);
+  emxInit_real_T(&c_pointss, 2);
   for (b_i = 0; b_i < 8; b_i++) {
     /*  平面拟合 */
     nx = PointAll[b_i].f1->size[1];
@@ -743,9 +744,9 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     emxEnsureCapacity_real_T(pointss, i);
     Points2_data = pointss->data;
     for (i = 0; i < 3; i++) {
-      for (j = 0; j < nx; j++) {
-        Points2_data[j + pointss->size[0] * i] =
-            PointAll[b_i].f1->data[i + 3 * j];
+      for (k = 0; k < nx; k++) {
+        Points2_data[k + pointss->size[0] * i] =
+            PointAll[b_i].f1->data[i + 3 * k];
       }
     }
     c = pointss->size[0];
@@ -763,10 +764,10 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
       Cnum->size[0] = 1;
       Cnum->size[1] = c;
       emxEnsureCapacity_real_T(Cnum, i);
-      Points6_data = Cnum->data;
+      Points8_data = Cnum->data;
       nx = c - 1;
       for (i = 0; i <= nx; i++) {
-        Points6_data[i] = (double)i + 1.0;
+        Points8_data[i] = (double)i + 1.0;
       }
     }
     Tv_idx_0 = 99999.0;
@@ -803,19 +804,19 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
       } else {
         sizes_idx_1 = 0;
       }
-      Isempty[2] = -1.0;
       result_idx_1 = i1;
       b_result_idx_1 = sizes_idx_1;
+      Isempty[2] = -1.0;
       d_loop_ub = i1;
       e_loop_ub = sizes_idx_1;
     }
-    for (b_j = 0; b_j < c; b_j++) {
+    for (j = 0; j < c; j++) {
       /*  随机选择三个点 */
       nx = C->size[1];
       for (i = 0; i < 3; i++) {
-        for (j = 0; j < loop_ub; j++) {
-          samplePoints_data[j + nx * i] =
-              Points2_data[((int)Points4_data[b_j + C->size[0] * j] +
+        for (k = 0; k < loop_ub; k++) {
+          samplePoints_data[k + nx * i] =
+              Points2_data[((int)Points4_data[j + C->size[0] * k] +
                             pointss->size[0] * i) -
                            1];
         }
@@ -831,58 +832,49 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
       for (i = 0; i < c_loop_ub; i++) {
         TPP9[i] = samplePoints_data[i + nx * 2];
       }
-      b_mldivide(A, TPP9, TPP10);
+      c_mldivide(A, TPP9, TPP10);
       Tv_idx_1 = sqrt((TPP10[0] * TPP10[0] + TPP10[1] * TPP10[1]) + 1.0);
       Isempty[0] = TPP10[0];
       Isempty[1] = TPP10[1];
       Isempty[3] = TPP10[2];
-      i = B->size[0] * B->size[1];
-      B->size[0] = result;
-      B->size[1] = result_idx_1 + b_result_idx_1;
-      emxEnsureCapacity_real_T(B, i);
-      Points8_data = B->data;
+      i = b_pointss->size[0] * b_pointss->size[1];
+      b_pointss->size[0] = result;
+      b_pointss->size[1] = result_idx_1 + b_result_idx_1;
+      emxEnsureCapacity_real_T(b_pointss, i);
+      Points8_data = b_pointss->data;
       for (i = 0; i < d_loop_ub; i++) {
-        for (j = 0; j < result; j++) {
-          Points8_data[j + B->size[0] * i] = Points2_data[j + result * i];
+        for (k = 0; k < result; k++) {
+          Points8_data[k + b_pointss->size[0] * i] =
+              Points2_data[k + result * i];
         }
       }
       for (i = 0; i < e_loop_ub; i++) {
-        for (j = 0; j < result; j++) {
-          Points8_data[j + B->size[0] * result_idx_1] = 1.0;
+        for (k = 0; k < result; k++) {
+          Points8_data[k + b_pointss->size[0] * result_idx_1] = 1.0;
         }
       }
-      nx = B->size[0];
-      i = Cnum->size[0] * Cnum->size[1];
-      Cnum->size[0] = 1;
-      Cnum->size[1] = B->size[0];
-      emxEnsureCapacity_real_T(Cnum, i);
-      Points6_data = Cnum->data;
-      for (j = 0; j < nx; j++) {
-        Points6_data[j] = ((Isempty[0] * Points8_data[j] +
-                            Isempty[1] * Points8_data[B->size[0] + j]) +
-                           Isempty[2] * Points8_data[(B->size[0] << 1) + j]) +
-                          Isempty[3] * Points8_data[3 * B->size[0] + j];
-      }
+      b_mtimes(Isempty, b_pointss, Cnum);
+      Points8_data = Cnum->data;
       nx = Cnum->size[1];
       i = distances->size[0] * distances->size[1];
       distances->size[0] = 1;
       distances->size[1] = Cnum->size[1];
       emxEnsureCapacity_real_T(distances, i);
-      Points8_data = distances->data;
-      for (j = 0; j < nx; j++) {
-        Points8_data[j] = fabs(Points6_data[j]);
+      Points6_data = distances->data;
+      for (k = 0; k < nx; k++) {
+        Points6_data[k] = fabs(Points8_data[k]);
       }
       i = distances->size[0] * distances->size[1];
       distances->size[0] = 1;
       emxEnsureCapacity_real_T(distances, i);
-      Points8_data = distances->data;
+      Points6_data = distances->data;
       nx = distances->size[1] - 1;
       for (i = 0; i <= nx; i++) {
-        Points8_data[i] /= Tv_idx_1;
+        Points6_data[i] /= Tv_idx_1;
       }
       /*  确定内点 */
       /*  更新最优平面模型 */
-      d = mean(distances);
+      d = b_combineVectorElements(distances) / (double)distances->size[1];
       if (d < Tv_idx_0) {
         Tv_idx_0 = d;
         i = b_distances->size[0] * b_distances->size[1];
@@ -892,7 +884,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
         distances_data = b_distances->data;
         nx = distances->size[1];
         for (i = 0; i < nx; i++) {
-          distances_data[i] = (Points8_data[i] < distanceThreshold);
+          distances_data[i] = (Points6_data[i] < distanceThreshold);
         }
         eml_find(b_distances, r24);
         r25 = r24->data;
@@ -911,7 +903,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
         emxEnsureCapacity_real_T(distancesFianal1[b_i].f1, i);
         nx = distances->size[1];
         for (i = 0; i < nx; i++) {
-          distancesFianal1[b_i].f1->data[i] = Points8_data[i];
+          distancesFianal1[b_i].f1->data[i] = Points6_data[i];
         }
       }
     }
@@ -923,9 +915,9 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     emxEnsureCapacity_real_T(inlierPoints, i);
     Points6_data = inlierPoints->data;
     for (i = 0; i < 3; i++) {
-      for (j = 0; j < nx; j++) {
-        Points6_data[j + inlierPoints->size[0] * i] = Points2_data
-            [((int)inlierIdxFinal[b_i].f1->data[j] + pointss->size[0] * i) - 1];
+      for (k = 0; k < nx; k++) {
+        Points6_data[k + inlierPoints->size[0] * i] = Points2_data
+            [((int)inlierIdxFinal[b_i].f1->data[k] + pointss->size[0] * i) - 1];
       }
     }
     nx = inlierIdxFinal[b_i].f1->size[1];
@@ -946,36 +938,36 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
           Points6_data[i + inlierPoints->size[0] * 2];
     }
     /*  Fit a plane through the points */
-    b_mean(pointss, TPP10);
-    i = b_pointss->size[0] * b_pointss->size[1];
-    b_pointss->size[0] = pointss->size[0];
-    b_pointss->size[1] = 3;
-    emxEnsureCapacity_real_T(b_pointss, i);
-    Points8_data = b_pointss->data;
+    mean(pointss, TPP10);
+    i = c_pointss->size[0] * c_pointss->size[1];
+    c_pointss->size[0] = pointss->size[0];
+    c_pointss->size[1] = 3;
+    emxEnsureCapacity_real_T(c_pointss, i);
+    Points8_data = c_pointss->data;
     nx = pointss->size[0];
     for (i = 0; i < 3; i++) {
-      for (j = 0; j < nx; j++) {
-        Points8_data[j + b_pointss->size[0] * i] =
-            Points2_data[j + pointss->size[0] * i] - TPP10[i];
+      for (k = 0; k < nx; k++) {
+        Points8_data[k + c_pointss->size[0] * i] =
+            Points2_data[k + pointss->size[0] * i] - TPP10[i];
       }
     }
     i = pointss->size[0] * pointss->size[1];
-    pointss->size[0] = b_pointss->size[0];
+    pointss->size[0] = c_pointss->size[0];
     pointss->size[1] = 3;
     emxEnsureCapacity_real_T(pointss, i);
     Points2_data = pointss->data;
-    nx = b_pointss->size[0];
+    nx = c_pointss->size[0];
     for (i = 0; i < 3; i++) {
-      for (j = 0; j < nx; j++) {
-        Points2_data[j + pointss->size[0] * i] =
-            Points8_data[j + b_pointss->size[0] * i];
+      for (k = 0; k < nx; k++) {
+        Points2_data[k + pointss->size[0] * i] =
+            Points8_data[k + c_pointss->size[0] * i];
       }
     }
-    c_svd(pointss, a__4, b_pointss, A);
+    c_svd(pointss, a__4, c_pointss, A);
     /*  Normal vector of the plane */
     /*  Calculate angle between normal vector and z-axis */
     /*  Check if angle is below threshold */
-    if (fabs(90.0 - 57.295779513082323 * acos(fabs(dot(&A[6], dv1)))) < 0.5) {
+    if (fabs(90.0 - 57.295779513082323 * acos(fabs(dot(&A[6], dv2)))) < 2.5) {
       c = 0;
       nx = inlierIdxFinal[b_i].f1->size[1];
       i = b_inlierPoints->size[0];
@@ -1035,17 +1027,51 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     PlaneParaOut_data[4 * b_i + 2] = c;
     PlaneParaOut_data[4 * b_i + 3] = Tv_idx_0;
   }
-  emxFree_real_T(&b_pointss);
+  emxFree_real_T(&c_pointss);
   emxFree_boolean_T(&b_distances);
+  emxFree_real_T(&b_pointss);
   emxFree_real_T(&c_inlierPoints);
   emxFree_real_T(&b_inlierPoints);
   emxFree_int32_T(&r24);
-  emxFree_real_T(&B);
-  emxFreeMatrix_cell_wrap_41(PointAll);
+  emxFreeMatrix_cell_wrap_4(PointAll);
   emxFree_real_T(&a__4);
   emxFree_real_T(&inlierPoints);
   emxFree_real_T(&C);
   emxFree_real_T(&pointss);
+  /* %%%%%%%% 测试 %%%%%%%%%%%% */
+  PlaneParaOut_data[8] = 0.0;
+  PlaneParaOut_data[9] = 0.0;
+  i = Cnum->size[0] * Cnum->size[1];
+  Cnum->size[0] = 1;
+  Cnum->size[1] = Points3->size[1];
+  emxEnsureCapacity_real_T(Cnum, i);
+  Points8_data = Cnum->data;
+  nx = Points3->size[1];
+  for (i = 0; i < nx; i++) {
+    Points8_data[i] = Points3_data[3 * i + 2];
+  }
+  PlaneParaOut_data[11] =
+      b_combineVectorElements(Cnum) / (double)Points3->size[1];
+  PlaneParaOut_data[24] = 0.0;
+  PlaneParaOut_data[25] = 0.0;
+  i = Cnum->size[0] * Cnum->size[1];
+  Cnum->size[0] = 1;
+  Cnum->size[1] = Points7->size[1];
+  emxEnsureCapacity_real_T(Cnum, i);
+  Points8_data = Cnum->data;
+  nx = Points7->size[1];
+  for (i = 0; i < nx; i++) {
+    Points8_data[i] = Points7_data[3 * i + 2];
+  }
+  PlaneParaOut_data[27] =
+      b_combineVectorElements(Cnum) / (double)Points7->size[1];
+  d = (PlaneParaOut_data[0] + PlaneParaOut_data[16]) / 2.0;
+  PlaneParaOut_data[0] = d;
+  PlaneParaOut_data[16] = d;
+  d = (PlaneParaOut_data[1] + PlaneParaOut_data[17]) / 2.0;
+  PlaneParaOut_data[1] = d;
+  PlaneParaOut_data[17] = d;
+  /* %%%%%%%% 测试 %%%%%%%%%%%% */
   i = tt1->size[0] * tt1->size[1];
   tt1->size[0] = 1;
   tt1->size[1] = distancesFianal1[0].f1->size[1];
@@ -1059,20 +1085,20 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   Cnum->size[0] = 1;
   Cnum->size[1] = inlierIdxFinal[0].f1->size[1];
   emxEnsureCapacity_real_T(Cnum, i);
-  Points6_data = Cnum->data;
+  Points8_data = Cnum->data;
   nx = inlierIdxFinal[0].f1->size[1];
   for (i = 0; i < nx; i++) {
-    Points6_data[i] =
+    Points8_data[i] =
         distancesFianal1[0].f1->data[(int)inlierIdxFinal[0].f1->data[i] - 1];
   }
   i = distances->size[0] * distances->size[1];
   distances->size[0] = 1;
   distances->size[1] = inlierIdxFinal[1].f1->size[1];
   emxEnsureCapacity_real_T(distances, i);
-  Points8_data = distances->data;
+  Points6_data = distances->data;
   nx = inlierIdxFinal[1].f1->size[1];
   for (i = 0; i < nx; i++) {
-    Points8_data[i] =
+    Points6_data[i] =
         distancesFianal1[1].f1->data[(int)inlierIdxFinal[1].f1->data[i] - 1];
   }
   emxInit_real_T(&b_distancesFianal1, 2);
@@ -1141,8 +1167,8 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Points8_data[i] =
         distancesFianal1[7].f1->data[(int)inlierIdxFinal[7].f1->data[i] - 1];
   }
-  emxFreeMatrix_cell_wrap_11(distancesFianal1);
-  emxFreeMatrix_cell_wrap_11(inlierIdxFinal);
+  emxFreeMatrix_cell_wrap_1(distancesFianal1);
+  emxFreeMatrix_cell_wrap_1(inlierIdxFinal);
   MaxDis[0] = maximum(Cnum);
   emxFree_real_T(&Cnum);
   MaxDis[1] = maximum(distances);
@@ -1166,9 +1192,9 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   emxEnsureCapacity_real_T(b_PlaneParaOut, i);
   Points8_data = b_PlaneParaOut->data;
   for (i = 0; i < 4; i++) {
-    for (j = 0; j < 8; j++) {
-      Points8_data[j + b_PlaneParaOut->size[0] * i] =
-          PlaneParaOut_data[i + 4 * j];
+    for (k = 0; k < 8; k++) {
+      Points8_data[k + b_PlaneParaOut->size[0] * i] =
+          PlaneParaOut_data[i + 4 * k];
     }
   }
   for (i = 0; i < 32; i++) {
@@ -1229,7 +1255,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     }
   }
   /*  计算平均方向向量，并归一化 */
-  c_mean(tempPP, TPP9);
+  b_mean(tempPP, TPP9);
   /*  计算顶面方程的 d 值 */
   /*  计算底面方程的 d 值 */
   Tv_idx_2 =
@@ -1275,7 +1301,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     normaltao[0] = -Isempty[3];
     normaltao[1] = -PlaneParaOut2_idx_3;
     normaltao[2] = Tv_idx_2;
-    c_mldivide(A, normaltao, TPP10);
+    b_mldivide(A, normaltao, TPP10);
     PP[b_i] = TPP10[0];
     PP[b_i + 16] = TPP10[1];
     PP[b_i + 32] = TPP10[2];
@@ -1283,7 +1309,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     normaltao[0] = -Isempty[3];
     normaltao[1] = -PlaneParaOut2_idx_3;
     normaltao[2] = b_c;
-    c_mldivide(A, normaltao, TPP10);
+    b_mldivide(A, normaltao, TPP10);
     PP[b_i + 8] = TPP10[0];
     PP[b_i + 24] = TPP10[1];
     PP[b_i + 40] = TPP10[2];
@@ -1294,7 +1320,7 @@ void b_planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   emxEnsureCapacity_real_T(TrianglePoints, i);
   Points8_data = TrianglePoints->data;
   for (i = 0; i < 48; i++) {
-    i1 = iv1[i];
+    i1 = iv[i];
     Points8_data[3 * i] = PP[i1];
     Points8_data[3 * i + 1] = PP[i1 + 16];
     Points8_data[3 * i + 2] = PP[i1 + 32];
@@ -1510,7 +1536,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Tv1[1] = 0.0;
     normaltao[2] /= RETL2;
     Tv1[2] = 0.0;
-    if (fabs(dot(normaltao, dv)) > 1.0E-6) {
+    if (fabs(dot(normaltao, dv1)) > 1.0E-6) {
       /*  如果v1与法向量平行，则换一个向量 */
       Tv1[0] = 0.0;
       Tv1[1] = 1.0;
@@ -1585,7 +1611,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Tv1[1] = 0.0;
     normaltao[2] /= RETL2;
     Tv1[2] = 0.0;
-    if (fabs(dot(normaltao, dv)) > 1.0E-6) {
+    if (fabs(dot(normaltao, dv1)) > 1.0E-6) {
       /*  如果v1与法向量平行，则换一个向量 */
       Tv1[0] = 0.0;
       Tv1[1] = 1.0;
@@ -1660,7 +1686,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Tv1[1] = 0.0;
     normaltao[2] /= RETL2;
     Tv1[2] = 0.0;
-    if (fabs(dot(normaltao, dv)) > 1.0E-6) {
+    if (fabs(dot(normaltao, dv1)) > 1.0E-6) {
       /*  如果v1与法向量平行，则换一个向量 */
       Tv1[0] = 0.0;
       Tv1[1] = 1.0;
@@ -1735,7 +1761,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Tv1[1] = 0.0;
     normaltao[2] /= RETL2;
     Tv1[2] = 0.0;
-    if (fabs(dot(normaltao, dv)) > 1.0E-6) {
+    if (fabs(dot(normaltao, dv1)) > 1.0E-6) {
       /*  如果v1与法向量平行，则换一个向量 */
       Tv1[0] = 0.0;
       Tv1[1] = 1.0;
@@ -1852,7 +1878,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   for (i = 0; i < nx; i++) {
     r7.f1->data[i] = Points8_data[i];
   }
-  emxInitMatrix_cell_wrap_41(PointAll);
+  emxInitMatrix_cell_wrap_4(PointAll);
   emxCopyStruct_cell_wrap_4(&PointAll[0], &r);
   emxFreeStruct_cell_wrap_4(&r);
   emxCopyStruct_cell_wrap_4(&PointAll[1], &r1);
@@ -1925,7 +1951,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   r15.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r15.f1, i);
   r15.f1->data[0] = 8.0;
-  emxInitMatrix_cell_wrap_11(inlierIdxFinal);
+  emxInitMatrix_cell_wrap_1(inlierIdxFinal);
   emxCopyStruct_cell_wrap_1(&inlierIdxFinal[0], &r8);
   emxFreeStruct_cell_wrap_1(&r8);
   emxCopyStruct_cell_wrap_1(&inlierIdxFinal[1], &r9);
@@ -1990,7 +2016,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   r23.f1->size[1] = 1;
   emxEnsureCapacity_real_T(r23.f1, i);
   r23.f1->data[0] = 8.0;
-  emxInitMatrix_cell_wrap_11(distancesFianal1);
+  emxInitMatrix_cell_wrap_1(distancesFianal1);
   emxCopyStruct_cell_wrap_1(&distancesFianal1[0], &r16);
   emxFreeStruct_cell_wrap_1(&r16);
   emxCopyStruct_cell_wrap_1(&distancesFianal1[1], &r17);
@@ -2115,7 +2141,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
       for (i = 0; i < c_loop_ub; i++) {
         TPP9[i] = samplePoints_data[i + nx * 2];
       }
-      b_mldivide(A, TPP9, TPP10);
+      c_mldivide(A, TPP9, TPP10);
       Tv_idx_1 = sqrt((TPP10[0] * TPP10[0] + TPP10[1] * TPP10[1]) + 1.0);
       Isempty[0] = TPP10[0];
       Isempty[1] = TPP10[1];
@@ -2157,7 +2183,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
       }
       /*  确定内点 */
       /*  更新最优平面模型 */
-      RETL3 = mean(distances);
+      RETL3 = b_combineVectorElements(distances) / (double)distances->size[1];
       if (RETL3 < Tv_idx_0) {
         Tv_idx_0 = RETL3;
         i = b_distances->size[0] * b_distances->size[1];
@@ -2221,7 +2247,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
           Points6_data[i + inlierPoints->size[0] * 2];
     }
     /*  Fit a plane through the points */
-    b_mean(pointss, TPP10);
+    mean(pointss, TPP10);
     i = c_pointss->size[0] * c_pointss->size[1];
     c_pointss->size[0] = pointss->size[0];
     c_pointss->size[1] = 3;
@@ -2250,7 +2276,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     /*  Normal vector of the plane */
     /*  Calculate angle between normal vector and z-axis */
     /*  Check if angle is below threshold */
-    if (fabs(90.0 - 57.295779513082323 * acos(fabs(dot(&A[6], dv1)))) < 0.5) {
+    if (fabs(90.0 - 57.295779513082323 * acos(fabs(dot(&A[6], dv2)))) < 2.5) {
       c = 0;
       nx = inlierIdxFinal[b_i].f1->size[1];
       i = b_inlierPoints->size[0];
@@ -2316,11 +2342,45 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   emxFree_real_T(&c_inlierPoints);
   emxFree_real_T(&b_inlierPoints);
   emxFree_int32_T(&r24);
-  emxFreeMatrix_cell_wrap_41(PointAll);
+  emxFreeMatrix_cell_wrap_4(PointAll);
   emxFree_real_T(&a__4);
   emxFree_real_T(&inlierPoints);
   emxFree_real_T(&C);
   emxFree_real_T(&pointss);
+  /* %%%%%%%% 测试 %%%%%%%%%%%% */
+  PlaneParaOut_data[8] = 0.0;
+  PlaneParaOut_data[9] = 0.0;
+  i = Cnum->size[0] * Cnum->size[1];
+  Cnum->size[0] = 1;
+  Cnum->size[1] = Points3->size[1];
+  emxEnsureCapacity_real_T(Cnum, i);
+  Points8_data = Cnum->data;
+  nx = Points3->size[1];
+  for (i = 0; i < nx; i++) {
+    Points8_data[i] = Points3_data[3 * i + 2];
+  }
+  PlaneParaOut_data[11] =
+      b_combineVectorElements(Cnum) / (double)Points3->size[1];
+  PlaneParaOut_data[24] = 0.0;
+  PlaneParaOut_data[25] = 0.0;
+  i = Cnum->size[0] * Cnum->size[1];
+  Cnum->size[0] = 1;
+  Cnum->size[1] = Points7->size[1];
+  emxEnsureCapacity_real_T(Cnum, i);
+  Points8_data = Cnum->data;
+  nx = Points7->size[1];
+  for (i = 0; i < nx; i++) {
+    Points8_data[i] = Points7_data[3 * i + 2];
+  }
+  PlaneParaOut_data[27] =
+      b_combineVectorElements(Cnum) / (double)Points7->size[1];
+  RETL3 = (PlaneParaOut_data[0] + PlaneParaOut_data[16]) / 2.0;
+  PlaneParaOut_data[0] = RETL3;
+  PlaneParaOut_data[16] = RETL3;
+  RETL3 = (PlaneParaOut_data[1] + PlaneParaOut_data[17]) / 2.0;
+  PlaneParaOut_data[1] = RETL3;
+  PlaneParaOut_data[17] = RETL3;
+  /* %%%%%%%% 测试 %%%%%%%%%%%% */
   i = tt1->size[0] * tt1->size[1];
   tt1->size[0] = 1;
   tt1->size[1] = distancesFianal1[0].f1->size[1];
@@ -2479,8 +2539,8 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     Points8_data[i] =
         distancesFianal1[7].f1->data[(int)inlierIdxFinal[7].f1->data[i] - 1];
   }
-  emxFreeMatrix_cell_wrap_11(distancesFianal1);
-  emxFreeMatrix_cell_wrap_11(inlierIdxFinal);
+  emxFreeMatrix_cell_wrap_1(distancesFianal1);
+  emxFreeMatrix_cell_wrap_1(inlierIdxFinal);
   MaxDis[0] = maximum(Cnum);
   emxFree_real_T(&Cnum);
   MaxDis[1] = maximum(distances);
@@ -2567,7 +2627,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     }
   }
   /*  计算平均方向向量，并归一化 */
-  c_mean(tempPP, TPP9);
+  b_mean(tempPP, TPP9);
   /*  计算顶面方程的 d 值 */
   Tv_idx_0 = -dot(TPP9, P_bound1);
   /*  计算底面方程的 d 值 */
@@ -2612,7 +2672,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     normaltao[0] = -Isempty[3];
     normaltao[1] = -PlaneParaOut2[3];
     normaltao[2] = -Tv_idx_0;
-    c_mldivide(A, normaltao, TPP10);
+    b_mldivide(A, normaltao, TPP10);
     PP[b_i] = TPP10[0];
     PP[b_i + 16] = TPP10[1];
     PP[b_i + 32] = TPP10[2];
@@ -2620,7 +2680,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
     normaltao[0] = -Isempty[3];
     normaltao[1] = -PlaneParaOut2[3];
     normaltao[2] = -Tv_idx_1;
-    c_mldivide(A, normaltao, TPP10);
+    b_mldivide(A, normaltao, TPP10);
     PP[b_i + 8] = TPP10[0];
     PP[b_i + 24] = TPP10[1];
     PP[b_i + 40] = TPP10[2];
@@ -2636,7 +2696,7 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   emxEnsureCapacity_real_T(TrianglePoints, i);
   Points8_data = TrianglePoints->data;
   for (i = 0; i < 48; i++) {
-    c = 3 * iv1[i];
+    c = 3 * iv[i];
     Points8_data[3 * i] = b_PP[c];
     Points8_data[3 * i + 1] = b_PP[c + 1];
     Points8_data[3 * i + 2] = b_PP[c + 2];
