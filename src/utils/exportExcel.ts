@@ -280,8 +280,12 @@ const exportCube = (data: GlobalData) => {
       { title: '声道角', render: (row) => rad2ang(row.sdj) },
       { title: 'LT偏移', render: (row) => row.ltOffset },
       {
+        title: '声道高度',
+        render: (row) => row.sdH,
+      },
+      {
         title: '声道相对高度',
-        render: (row) => data?.cubeResult?.h * row.sdH,
+        render: (row) => (data?.cubeResult?.h / 2) * row.sdH,
       },
       { title: '高斯-勒让德', render: (row) => row.Wquanzhong3 },
       { title: '矩形优化', render: (row) => row.Wquanzhong4 },

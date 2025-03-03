@@ -411,7 +411,6 @@ export const getDataFromTable = (sdfb: number, index: number) => {
 
 export const downLoadFile = (data) => {
 
-  console.log("%c Line:413 🍎", "color:#33a5ff", message.info(JSON.stringify(data.cubeAgainTable[0])));
 
   // if (data) return
   const mode = { second: '复测', first: '定位' }[data.mode];
