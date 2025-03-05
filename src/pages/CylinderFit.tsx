@@ -85,7 +85,7 @@ function CylinderFit() {
       },
     },
     {
-      title: '插入深度',
+      title: '换能器凸出',
       dataIndex: 'a',
       key: 'a',
       align: 'center',

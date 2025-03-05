@@ -822,7 +822,7 @@ export const shengDaoGaoDu = (numShengLu: number) => {
 
 /**
  * 矩形tOff计算
- * @param a 插入深度
+ * @param a 换能器凸出
  * @param sdj 声道角
  * @param sign 符号
  * @returns

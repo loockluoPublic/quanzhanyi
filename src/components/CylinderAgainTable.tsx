@@ -2,15 +2,15 @@ import {
   CheckCircleOutlined,
   CloseCircleOutlined,
   SettingOutlined,
-} from "@ant-design/icons";
-import { InputNumber, Table, Tooltip } from "antd";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { Data } from "../atom/globalState";
-import { shengLuJiao2Ang } from "../utils/utils";
-import { useEffect, useRef } from "react";
+} from '@ant-design/icons';
+import { InputNumber, Table, Tooltip } from 'antd';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { Data } from '../atom/globalState';
+import { shengLuJiao2Ang } from '../utils/utils';
+import { useEffect, useRef } from 'react';
 
 export default function CylinderAgainTable(props) {
-  console.log("%c Line:49 🍬 props", "color:#fca650", props);
+  console.log('%c Line:49 🍬 props', 'color:#fca650', props);
   const sdfbPreRef = useRef<any>();
   const [data, setData] = useRecoilState(Data);
 
@@ -52,35 +52,35 @@ export default function CylinderAgainTable(props) {
 
   const columns: any = [
     {
-      title: "声道面",
-      dataIndex: "sdm",
-      align: "center",
-      key: "sdm",
+      title: '声道面',
+      dataIndex: 'sdm',
+      align: 'center',
+      key: 'sdm',
     },
     {
-      title: "声道",
-      dataIndex: "i",
-      align: "center",
-      key: "i",
+      title: '声道',
+      dataIndex: 'i',
+      align: 'center',
+      key: 'i',
       render: (i, _i) => {
         return <>第{i}声道</>;
       },
     },
     {
-      title: "插入深度",
-      dataIndex: "a",
-      key: "a",
-      align: "center",
+      title: '换能器凸出',
+      dataIndex: 'a',
+      key: 'a',
+      align: 'center',
       render: (v, _, i) => {
         return (
           <InputNumber
             step={0.01}
             value={v}
-            onChange={(v) => onChange(v, i, "a")}
+            onChange={(v) => onChange(v, i, 'a')}
             addonAfter={
               <div>
                 米
-                <Tooltip title="应用到全部" className="q-cursor-pointer">
+                <Tooltip title='应用到全部' className='q-cursor-pointer'>
                   <SettingOutlined onClick={() => setA(i)} />
                 </Tooltip>
               </div>
@@ -90,50 +90,50 @@ export default function CylinderAgainTable(props) {
       },
     },
     {
-      title: "声道高度角",
-      dataIndex: "ang",
-      key: "ang",
-      align: "center",
+      title: '声道高度角',
+      dataIndex: 'ang',
+      key: 'ang',
+      align: 'center',
       render: (v, _, i) => {
         return (
           <InputNumber
             value={v}
-            onChange={(v) => onChange(v, i, "ang")}
+            onChange={(v) => onChange(v, i, 'ang')}
             addonAfter={`度`}
           />
         );
       },
     },
     {
-      title: "圆周偏移",
-      dataIndex: "rOff",
-      key: "rOff",
-      align: "center",
+      title: '圆周偏移',
+      dataIndex: 'rOff',
+      key: 'rOff',
+      align: 'center',
       render: (v) => {
-        return <>{v?.toFixed?.(3) ?? "--"}米</>;
+        return <>{v?.toFixed?.(3) ?? '--'}米</>;
       },
     },
     {
-      title: "轴向偏移",
-      dataIndex: "tOff",
-      key: "tOff",
-      align: "center",
+      title: '轴向偏移',
+      dataIndex: 'tOff',
+      key: 'tOff',
+      align: 'center',
       render: (v) => {
-        return <>{v?.toFixed?.(3) ?? "--"}米</>;
+        return <>{v?.toFixed?.(3) ?? '--'}米</>;
       },
     },
     {
-      title: "安装点",
-      dataIndex: "tOff11",
-      key: "tOff",
-      align: "center",
+      title: '安装点',
+      dataIndex: 'tOff11',
+      key: 'tOff',
+      align: 'center',
     },
   ];
 
   useEffect(() => {
     if (
-      (typeof data?.resultTable?.[0]?.ang !== "number" &&
-        typeof data.sdfb === "number") ||
+      (typeof data?.resultTable?.[0]?.ang !== 'number' &&
+        typeof data.sdfb === 'number') ||
       data.sdfb !== sdfbPreRef.current
     ) {
       const plant = shengLuJiao2Ang(data.sdfb).map((ang) => {
@@ -160,7 +160,7 @@ export default function CylinderAgainTable(props) {
 
   return (
     <Table
-      size="small"
+      size='small'
       key={data.sdfb}
       dataSource={
         data.resultTable?.map((item, i) => {
