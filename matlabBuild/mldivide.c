@@ -2,7 +2,7 @@
  * File: mldivide.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jan-2025 23:31:20
+ * C/C++ source code generated on  : 07-Mar-2025 21:42:51
  */
 
 /* Include Files */
@@ -650,6 +650,108 @@ void e_mldivide(const double A[6], const double B[3], double Y[2])
     Y[kend] /= b_A[(ix0 + iy) - 1];
     for (b_i = 0; b_i <= ix0 - 2; b_i++) {
       Y[jpvt[0] - 1] -= Y[kend] * b_A[iy];
+    }
+  }
+}
+
+/*
+ * Arguments    : const double A[16]
+ *                double B[4]
+ * Return Type  : void
+ */
+void f_mldivide(const double A[16], double B[4])
+{
+  double b_A[16];
+  double s;
+  double smax;
+  int a;
+  int b_tmp;
+  int i;
+  int j;
+  int jA;
+  int jp1j;
+  int k;
+  int mmj_tmp;
+  signed char ipiv[4];
+  signed char i1;
+  memcpy(&b_A[0], &A[0], 16U * sizeof(double));
+  ipiv[0] = 1;
+  ipiv[1] = 2;
+  ipiv[2] = 3;
+  ipiv[3] = 4;
+  for (j = 0; j < 3; j++) {
+    mmj_tmp = 2 - j;
+    b_tmp = j * 5;
+    jp1j = b_tmp + 2;
+    jA = 4 - j;
+    a = 0;
+    smax = fabs(b_A[b_tmp]);
+    for (k = 2; k <= jA; k++) {
+      s = fabs(b_A[(b_tmp + k) - 1]);
+      if (s > smax) {
+        a = k - 1;
+        smax = s;
+      }
+    }
+    if (b_A[b_tmp + a] != 0.0) {
+      if (a != 0) {
+        jA = j + a;
+        ipiv[j] = (signed char)(jA + 1);
+        smax = b_A[j];
+        b_A[j] = b_A[jA];
+        b_A[jA] = smax;
+        smax = b_A[j + 4];
+        b_A[j + 4] = b_A[jA + 4];
+        b_A[jA + 4] = smax;
+        smax = b_A[j + 8];
+        b_A[j + 8] = b_A[jA + 8];
+        b_A[jA + 8] = smax;
+        smax = b_A[j + 12];
+        b_A[j + 12] = b_A[jA + 12];
+        b_A[jA + 12] = smax;
+      }
+      i = (b_tmp - j) + 4;
+      for (a = jp1j; a <= i; a++) {
+        b_A[a - 1] /= b_A[b_tmp];
+      }
+    }
+    jA = b_tmp;
+    for (jp1j = 0; jp1j <= mmj_tmp; jp1j++) {
+      smax = b_A[(b_tmp + (jp1j << 2)) + 4];
+      if (smax != 0.0) {
+        i = jA + 6;
+        a = (jA - j) + 8;
+        for (k = i; k <= a; k++) {
+          b_A[k - 1] += b_A[((b_tmp + k) - jA) - 5] * -smax;
+        }
+      }
+      jA += 4;
+    }
+    i1 = ipiv[j];
+    if (i1 != j + 1) {
+      smax = B[j];
+      B[j] = B[i1 - 1];
+      B[i1 - 1] = smax;
+    }
+  }
+  for (k = 0; k < 4; k++) {
+    jA = k << 2;
+    if (B[k] != 0.0) {
+      i = k + 2;
+      for (a = i; a < 5; a++) {
+        B[a - 1] -= B[k] * b_A[(a + jA) - 1];
+      }
+    }
+  }
+  for (k = 3; k >= 0; k--) {
+    jA = k << 2;
+    smax = B[k];
+    if (smax != 0.0) {
+      smax /= b_A[k + jA];
+      B[k] = smax;
+      for (a = 0; a < k; a++) {
+        B[a] -= B[k] * b_A[a + jA];
+      }
     }
   }
 }

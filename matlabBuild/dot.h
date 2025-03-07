@@ -2,7 +2,7 @@
  * File: dot.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jan-2025 23:31:20
+ * C/C++ source code generated on  : 07-Mar-2025 21:42:51
  */
 
 #ifndef DOT_H
@@ -18,6 +18,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+double b_dot(const double a_data[], const double b[3]);
+
 double dot(const double a[3], const double b[3]);
 
 #ifdef __cplusplus

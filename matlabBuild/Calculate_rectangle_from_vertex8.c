@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jan-2025 23:31:20
+ * C/C++ source code generated on  : 07-Mar-2025 21:42:51
  */
 
 /* Include Files */
@@ -315,6 +315,7 @@ void Calculate_rectangle_from_vertex8(
   double TiYuZhi1;
   double TiYuZhi2;
   double TiYuZhi3;
+  double TiYuZhi4;
   double ab1;
   double ab2;
   double ab4;
@@ -325,7 +326,6 @@ void Calculate_rectangle_from_vertex8(
   double d_PP16_tmp;
   double e_PP16_tmp;
   double h;
-  double temp;
   double theta1;
   double theta2;
   double theta3;
@@ -376,10 +376,10 @@ void Calculate_rectangle_from_vertex8(
   d[0] = Pout[0] - Pin[0];
   d[1] = Pout[1] - Pin[1];
   d[2] = Pout[2] - Pin[2];
-  ab2 = b_norm(d);
-  d[0] /= ab2;
-  d[1] /= ab2;
-  d[2] /= ab2;
+  ab4 = b_norm(d);
+  d[0] /= ab4;
+  d[1] /= ab4;
+  d[2] /= ab4;
   /*  选择竖直平面内的向量 e */
   if (fabs(d[0]) > fabs(d[1])) {
     /*  如果轴向向量大致沿 X 轴 */
@@ -397,10 +397,10 @@ void Calculate_rectangle_from_vertex8(
   u[1] = e[0] * d[2] - d[0] * 0.0;
   u[2] = d[0] * e[1] - e[0] * d[1];
   /*  计算与 d 和 e 正交的向量 */
-  ab2 = b_norm(u);
-  u[0] /= ab2;
-  u[1] /= ab2;
-  u[2] /= ab2;
+  ab4 = b_norm(u);
+  u[0] /= ab4;
+  u[1] /= ab4;
+  u[2] /= ab4;
   /*  归一化 */
   /*  确保 u 的方向朝上 */
   if (u[2] <= 0.0) {
@@ -414,10 +414,10 @@ void Calculate_rectangle_from_vertex8(
   v[1] = u[0] * d[2] - d[0] * u[2];
   v[2] = d[0] * u[1] - u[0] * d[1];
   /*  计算第二个正交向量 */
-  ab2 = b_norm(v);
-  v[0] = -v[0] / ab2;
-  v[1] = -v[1] / ab2;
-  v[2] = -v[2] / ab2;
+  ab4 = b_norm(v);
+  v[0] = -v[0] / ab4;
+  v[1] = -v[1] / ab4;
+  v[2] = -v[2] / ab4;
   /*  归一化 */
   /*  2、判断是否在斜面上 */
   /* 计算八面参数 */
@@ -498,7 +498,7 @@ void Calculate_rectangle_from_vertex8(
   }
   emxFree_real_T(&TrianglePoints4);
   foot_of_perpendicular_from_a_point_to_a_line(&PP16[0], &PP16[3], &PP16[18],
-                                               &temp, &ab4, &ab2);
+                                               &ab2, &ab4, &TiYuZhi4);
   PP16_tmp = PP16[3] - PP16[18];
   e[0] = PP16_tmp;
   b_PP16_tmp = PP16[4] - PP16[19];
@@ -506,12 +506,12 @@ void Calculate_rectangle_from_vertex8(
   c_PP16_tmp = PP16[5] - PP16[20];
   e[2] = c_PP16_tmp;
   ab1 = b_norm(e) / 2.0;
-  e[0] = PP16[3] - temp;
+  e[0] = PP16[3] - ab2;
   e[1] = PP16[4] - ab4;
-  e[2] = PP16[5] - ab2;
+  e[2] = PP16[5] - TiYuZhi4;
   TiYuZhi1 = (ab1 - b_norm(e)) / ab1;
   foot_of_perpendicular_from_a_point_to_a_line(&PP16[9], &PP16[6], &PP16[15],
-                                               &ab1, &ab4, &temp);
+                                               &ab1, &ab4, &TiYuZhi4);
   TiYuZhi3 = PP16[6] - PP16[15];
   e[0] = TiYuZhi3;
   d_PP16_tmp = PP16[7] - PP16[16];
@@ -521,30 +521,30 @@ void Calculate_rectangle_from_vertex8(
   ab2 = b_norm(e) / 2.0;
   e[0] = PP16[6] - ab1;
   e[1] = PP16[7] - ab4;
-  e[2] = PP16[8] - temp;
+  e[2] = PP16[8] - TiYuZhi4;
   TiYuZhi2 = (ab2 - b_norm(e)) / ab2;
   foot_of_perpendicular_from_a_point_to_a_line(&PP16[12], &PP16[6], &PP16[15],
-                                               &ab1, &ab4, &temp);
+                                               &ab4, &TiYuZhi4, &ab2);
   e[0] = TiYuZhi3;
   e[1] = d_PP16_tmp;
   e[2] = e_PP16_tmp;
-  ab2 = b_norm(e) / 2.0;
-  e[0] = PP16[6] - ab1;
-  e[1] = PP16[7] - ab4;
-  e[2] = PP16[8] - temp;
-  TiYuZhi3 = (ab2 - b_norm(e)) / ab2;
+  ab1 = b_norm(e) / 2.0;
+  e[0] = PP16[6] - ab4;
+  e[1] = PP16[7] - TiYuZhi4;
+  e[2] = PP16[8] - ab2;
+  TiYuZhi3 = (ab1 - b_norm(e)) / ab1;
   foot_of_perpendicular_from_a_point_to_a_line(&PP16[21], &PP16[3], &PP16[18],
-                                               &ab1, &temp, &ab2);
+                                               &ab1, &TiYuZhi4, &ab2);
   e[0] = PP16_tmp;
   e[1] = b_PP16_tmp;
   e[2] = c_PP16_tmp;
   ab4 = b_norm(e) / 2.0;
   e[0] = PP16[3] - ab1;
-  e[1] = PP16[4] - temp;
+  e[1] = PP16[4] - TiYuZhi4;
   e[2] = PP16[5] - ab2;
-  ab1 = (ab4 - b_norm(e)) / ab4;
+  TiYuZhi4 = (ab4 - b_norm(e)) / ab4;
   /* 判断点是否在斜面上（利用阈值 */
-  temp = shenglunum / 2.0;
+  ab1 = shenglunum / 2.0;
   i = XMFlagA->size[0] * XMFlagA->size[1];
   XMFlagA->size[0] = 1;
   loop_ub = (int)(2.0 * shenglunum);
@@ -556,11 +556,11 @@ void Calculate_rectangle_from_vertex8(
   }
   for (b_i = 0; b_i < loop_ub; b_i++) {
     ab4 = fabs(Ti_data[b_i]);
-    if ((double)b_i + 1.0 <= temp) {
-      XMFlagA_data[b_i] = !(ab4 < fabs(ab1));
-    } else if ((double)b_i + 1.0 <= 2.0 * temp) {
+    if ((double)b_i + 1.0 <= ab1) {
+      XMFlagA_data[b_i] = !(ab4 < fabs(TiYuZhi4));
+    } else if ((double)b_i + 1.0 <= 2.0 * ab1) {
       XMFlagA_data[b_i] = !(ab4 < fabs(TiYuZhi1));
-    } else if ((double)b_i + 1.0 <= 3.0 * temp) {
+    } else if ((double)b_i + 1.0 <= 3.0 * ab1) {
       XMFlagA_data[b_i] = !(ab4 < fabs(TiYuZhi2));
     } else {
       XMFlagA_data[b_i] = !(ab4 < fabs(TiYuZhi3));
@@ -587,41 +587,41 @@ void Calculate_rectangle_from_vertex8(
   /* %%%%%%%%%%%%%%%%%%%%%  对斜面上的点进行偏移（修正Ti）
    * %%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
   for (nx = 0; nx < loop_ub; nx++) {
-    if ((double)nx + 1.0 <= temp) {
+    if ((double)nx + 1.0 <= ab1) {
       if (XMFlagA_data[nx] == 1.0) {
         /* 斜面上 */
-        ab2 = a_data[nx];
-        Ti2A_data[nx] = Ti_data[nx] - ab2 * sin(theta4);
-        XieMianPianYi_data[nx] = ab2 * tan(theta4);
+        ab4 = a_data[nx];
+        Ti2A_data[nx] = Ti_data[nx] - ab4 * sin(theta4);
+        XieMianPianYi_data[nx] = ab4 * tan(theta4);
       } else {
         Ti2A_data[nx] = Ti_data[nx];
         XieMianPianYi_data[nx] = 0.0;
       }
-    } else if ((double)nx + 1.0 <= 2.0 * temp) {
+    } else if ((double)nx + 1.0 <= 2.0 * ab1) {
       if (XMFlagA_data[nx] == 1.0) {
         /* 斜面上 */
-        ab2 = a_data[nx];
-        Ti2A_data[nx] = Ti_data[nx] + ab2 * sin(theta1);
-        XieMianPianYi_data[nx] = ab2 * tan(theta1);
+        ab4 = a_data[nx];
+        Ti2A_data[nx] = Ti_data[nx] + ab4 * sin(theta1);
+        XieMianPianYi_data[nx] = ab4 * tan(theta1);
       } else {
         Ti2A_data[nx] = Ti_data[nx];
         XieMianPianYi_data[nx] = 0.0;
       }
-    } else if ((double)nx + 1.0 <= 3.0 * temp) {
+    } else if ((double)nx + 1.0 <= 3.0 * ab1) {
       if (XMFlagA_data[nx] == 1.0) {
         /* 斜面上 */
-        ab2 = a_data[nx];
-        Ti2A_data[nx] = Ti_data[nx] + ab2 * sin(theta2);
-        XieMianPianYi_data[nx] = ab2 * tan(theta2);
+        ab4 = a_data[nx];
+        Ti2A_data[nx] = Ti_data[nx] + ab4 * sin(theta2);
+        XieMianPianYi_data[nx] = ab4 * tan(theta2);
       } else {
         Ti2A_data[nx] = Ti_data[nx];
         XieMianPianYi_data[nx] = 0.0;
       }
     } else if (XMFlagA_data[nx] == 1.0) {
       /* 斜面上 */
-      ab2 = a_data[nx];
-      Ti2A_data[nx] = Ti_data[nx] - ab2 * sin(theta3);
-      XieMianPianYi_data[nx] = ab2 * tan(theta3);
+      ab4 = a_data[nx];
+      Ti2A_data[nx] = Ti_data[nx] - ab4 * sin(theta3);
+      XieMianPianYi_data[nx] = ab4 * tan(theta3);
     } else {
       Ti2A_data[nx] = Ti_data[nx];
       XieMianPianYi_data[nx] = 0.0;
@@ -638,28 +638,28 @@ void Calculate_rectangle_from_vertex8(
     deltTib_data[i] = 0.0;
   }
   for (b_i = 0; b_i < loop_ub; b_i++) {
-    if ((double)b_i + 1.0 <= temp) {
+    if ((double)b_i + 1.0 <= ab1) {
       if (XMFlagA_data[b_i] == 1.0) {
         /* 斜面上 */
-        deltTib_data[b_i] = fabs(Ti2A_data[b_i] - ab1) * h / 2.0 /
-                            tan(1.5707963267948966 - theta4);
+        deltTib_data[b_i] =
+            fabs(Ti2A_data[b_i] - TiYuZhi4) * h / 2.0 * tan(theta4);
       }
-    } else if ((double)b_i + 1.0 <= 2.0 * temp) {
+    } else if ((double)b_i + 1.0 <= 2.0 * ab1) {
       if (XMFlagA_data[b_i] == 1.0) {
         /* 斜面上 */
-        deltTib_data[b_i] = fabs(Ti2A_data[b_i] - TiYuZhi1) * h / 2.0 /
-                            tan(1.5707963267948966 - theta1);
+        deltTib_data[b_i] =
+            fabs(Ti2A_data[b_i] - TiYuZhi1) * h / 2.0 * tan(theta1);
       }
-    } else if ((double)b_i + 1.0 <= 3.0 * temp) {
+    } else if ((double)b_i + 1.0 <= 3.0 * ab1) {
       if (XMFlagA_data[b_i] == 1.0) {
         /* 斜面上 */
-        deltTib_data[b_i] = fabs(Ti2A_data[b_i] - TiYuZhi2) * h / 2.0 /
-                            tan(1.5707963267948966 - theta2);
+        deltTib_data[b_i] =
+            fabs(Ti2A_data[b_i] - TiYuZhi2) * h / 2.0 * tan(theta2);
       }
     } else if (XMFlagA_data[b_i] == 1.0) {
       /* 斜面上 */
-      deltTib_data[b_i] = fabs(Ti2A_data[b_i] - TiYuZhi3) * h / 2.0 /
-                          tan(1.5707963267948966 - theta3);
+      deltTib_data[b_i] =
+          fabs(Ti2A_data[b_i] - TiYuZhi3) * h / 2.0 * tan(theta3);
     }
   }
   i = XMFlagA->size[0] * XMFlagA->size[1];
@@ -692,35 +692,36 @@ void Calculate_rectangle_from_vertex8(
   }
   i = (int)shenglunum;
   for (nx = 0; nx < i; nx++) {
-    ab1 = Ti2A_data[nx];
-    ab4 = b / 2.0 - deltTib_data[nx];
+    ab4 = Ti2A_data[nx];
+    ab1 = b / 2.0 - deltTib_data[nx];
     PointTable_A_off8_data[3 * nx] =
-        (Pout[0] + u[0] * ab1 * h / 2.0) + v[0] * ab4;
+        (Pout[0] + u[0] * ab4 * h / 2.0) + v[0] * ab1;
     PointTable_A_off8_data[3 * nx + 1] =
-        (Pout[1] + u[1] * ab1 * h / 2.0) + v[1] * ab4;
+        (Pout[1] + u[1] * ab4 * h / 2.0) + v[1] * ab1;
     PointTable_A_off8_data[3 * nx + 2] =
-        (Pout[2] + u[2] * ab1 * h / 2.0) + v[2] * ab4;
+        (Pout[2] + u[2] * ab4 * h / 2.0) + v[2] * ab1;
   }
   i1 = (int)(2.0 * shenglunum + (1.0 - (shenglunum + 1.0)));
   for (b_i = 0; b_i < i1; b_i++) {
-    ab2 = (shenglunum + 1.0) + (double)b_i;
-    ab1 = Ti2A_data[(int)ab2 - 1];
-    ab4 = b / 2.0 - deltTib_data[(int)ab2 - 1];
-    i2 = 3 * ((int)ab2 - 1);
-    PointTable_A_off8_data[i2] = (Pout[0] + u[0] * ab1 * h / 2.0) - v[0] * ab4;
+    TiYuZhi4 = (shenglunum + 1.0) + (double)b_i;
+    ab4 = Ti2A_data[(int)TiYuZhi4 - 1];
+    ab1 = b / 2.0 - deltTib_data[(int)TiYuZhi4 - 1];
+    i2 = 3 * ((int)TiYuZhi4 - 1);
+    PointTable_A_off8_data[i2] = (Pout[0] + u[0] * ab4 * h / 2.0) - v[0] * ab1;
     PointTable_A_off8_data[i2 + 1] =
-        (Pout[1] + u[1] * ab1 * h / 2.0) - v[1] * ab4;
+        (Pout[1] + u[1] * ab4 * h / 2.0) - v[1] * ab1;
     PointTable_A_off8_data[i2 + 2] =
-        (Pout[2] + u[2] * ab1 * h / 2.0) - v[2] * ab4;
+        (Pout[2] + u[2] * ab4 * h / 2.0) - v[2] * ab1;
   }
+  emxFree_real_T(&deltTib);
   /*  6、计算轴线移动l */
   /* 整体移动 */
-  foot_of_perpendicular_from_a_point_to_a_line(PAB, Pin, Pout, &temp, &ab4,
-                                               &ab2);
-  ab2 -= Pout[2];
+  foot_of_perpendicular_from_a_point_to_a_line(PAB, Pin, Pout, &ab2, &ab4,
+                                               &TiYuZhi4);
+  TiYuZhi4 -= Pout[2];
   ab4 -= Pout[1];
-  ab1 = temp - Pout[0];
-  ab4 = sqrt((ab2 * ab2 + ab4 * ab4) + ab1 * ab1);
+  ab1 = ab2 - Pout[0];
+  ab4 = sqrt((TiYuZhi4 * TiYuZhi4 + ab4 * ab4) + ab1 * ab1);
   /*  距离*cos(phi) 无正负 全为正 */
   i2 = Ti2A->size[0] * Ti2A->size[1];
   Ti2A->size[0] = 1;
@@ -731,14 +732,10 @@ void Calculate_rectangle_from_vertex8(
     Ti2A_data[i2] = 0.0;
   }
   for (b_i = 0; b_i < loop_ub; b_i++) {
-    ab2 = deltTib_data[b_i];
-    if (ab2 == 0.0) {
-      Ti2A_data[b_i] = b / 2.0 / tan(phi);
-    } else {
-      Ti2A_data[b_i] = (b / 2.0 - ab2) / tan(phi);
-    }
+    /*  tdb = deltTib(i); */
+    /* %%%%%%  !!!! 不需要斜面偏移转到轴向  %%%%%%%%%%%%%%%%%%% */
+    Ti2A_data[b_i] = b / 2.0 / tan(phi);
   }
-  emxFree_real_T(&deltTib);
   /*  7、偏移 */
   /*  A测点 */
   i2 = XMFlagA->size[0] * XMFlagA->size[1];

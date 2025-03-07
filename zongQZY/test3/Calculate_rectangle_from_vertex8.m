@@ -182,28 +182,28 @@ for k = 1:2*shenglunum
     if k <= temp
         if XMFlagA(k) == 1 %斜面上
             deltTih(k) = abs(Ti2A(k)-TiYuZhi4).*h./2;
-            deltTib(k) = deltTih(k)./tan(pi./2-theta4);
+            deltTib(k) = deltTih(k).*tan(theta4);
         else
             deltTih(k) = 0;
         end
     elseif k <= 2*temp
         if XMFlagA(k) == 1 %斜面上
             deltTih(k) = abs(Ti2A(k)-TiYuZhi1).*h./2;
-            deltTib(k) = deltTih(k)./tan(pi./2-theta1);
+            deltTib(k) = deltTih(k).*tan(theta1);
         else
             deltTih(k) = 0;
         end
     elseif k <= 3*temp
         if XMFlagA(k) == 1 %斜面上
             deltTih(k) = abs(Ti2A(k)-TiYuZhi2).*h./2;
-            deltTib(k) = deltTih(k)./tan(pi./2-theta2);
+            deltTib(k) = deltTih(k).*tan(theta2);
         else
             deltTih(k) = 0;
         end
     else
         if XMFlagA(k) == 1 %斜面上
             deltTih(k) = abs(Ti2A(k)-TiYuZhi3).*h./2;
-            deltTib(k) = deltTih(k)./tan(pi./2-theta3);
+            deltTib(k) = deltTih(k).*tan(theta3);
         else
             deltTih(k) = 0;
         end
@@ -233,7 +233,10 @@ ztyd = sqrt((zN1-Pout(3)).^2+(yN1-Pout(2)).^2+(xN1-Pout(1)).^2);
 % 距离*cos(phi) 无正负 全为正
 PhiPy = zeros(1,2*shenglunum);
 for i = 1:2*shenglunum
-    tdb = deltTib(i);
+    % tdb = deltTib(i);
+
+    %%%%%%%  !!!! 不需要斜面偏移转到轴向  %%%%%%%%%%%%%%%%%%%
+    tdb = zeros(1,2*shenglunum);
     if tdb == 0
         PhiPy(i) = b./2./tan(phi);
     else

@@ -190,7 +190,7 @@ f = zeros(shenglunum,1);
         w(i)=w(i)/((1-TiYiCe(i)*TiYiCe(i))^k * mul);    
     end
 
-    Wquanzhong3 = abs(repelem(w,2));
+    Wquanzhong3 = abs(w);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 gk = gk4;
@@ -230,6 +230,6 @@ f = zeros(shenglunum,1);
         w(i)=w(i)/((1-TiYiCe(i)*TiYiCe(i))^k * mul);    
     end
 
-    Wquanzhong4 = abs(repelem(w,2));
+    Wquanzhong4 = abs(w);
 
 end

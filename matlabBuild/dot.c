@@ -2,7 +2,7 @@
  * File: dot.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jan-2025 23:31:20
+ * C/C++ source code generated on  : 07-Mar-2025 21:42:51
  */
 
 /* Include Files */
@@ -10,6 +10,16 @@
 #include "rt_nonfinite.h"
 
 /* Function Definitions */
+/*
+ * Arguments    : const double a_data[]
+ *                const double b[3]
+ * Return Type  : double
+ */
+double b_dot(const double a_data[], const double b[3])
+{
+  return (a_data[0] * b[0] + a_data[1] * b[1]) + a_data[2] * b[2];
+}
+
 /*
  * Arguments    : const double a[3]
  *                const double b[3]
