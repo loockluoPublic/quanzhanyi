@@ -49,7 +49,7 @@ export const Data = atom<GlobalData>({
     customStandardDeviation: 3,
     sdm: ['A', 'B'],
     MxPoints: {},
-    hasChamfer: false,
+    hasChamfer: true,
     firstPoints: [] as any,
     triPoints: [] as any,
     type: TType.cycle,

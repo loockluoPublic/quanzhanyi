@@ -192,7 +192,7 @@ export default function () {
   return (
     <div>
       <div className="q-mt-2">
-        <Checkbox
+        {/* <Checkbox
           checked={data.hasChamfer}
           onChange={({ target }) => {
             setNum(0)
@@ -203,8 +203,8 @@ export default function () {
           }}
         >
           是否包含导角
-        </Checkbox>
-        <span className="q-ml-8" key={data.hasChamfer?.toString()}>
+        </Checkbox> */}
+        <span   key={data.hasChamfer?.toString()}>
           采集面：
           <Select
             defaultValue={0}
