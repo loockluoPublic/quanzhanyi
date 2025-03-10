@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex8.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Feb-2025 18:54:26
+ * C/C++ source code generated on  : 10-Mar-2025 22:41:07
  */
 
 #ifndef CALCULATE_RECTANGLE_FROM_VERTEX8_H

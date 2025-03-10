@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Feb-2025 18:54:26
+ * C/C++ source code generated on  : 10-Mar-2025 22:41:07
  */
 
 /* Include Files */

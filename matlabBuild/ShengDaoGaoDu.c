@@ -2,7 +2,7 @@
  * File: ShengDaoGaoDu.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 20-Feb-2025 18:54:26
+ * C/C++ source code generated on  : 10-Mar-2025 22:41:07
  */
 
 /* Include Files */
@@ -29,8 +29,8 @@ void ShengDaoGaoDu(double numShengLu, emxArray_real_T *Ti)
                                 0.324253, 0.613371,  0.836031,  0.96816};
   static const double dv3[8] = {-0.96029, -0.796666, -0.525532, -0.183435,
                                 0.183435, 0.525532,  0.796666,  0.96029};
-  static const double b_dv2[7] = {-0.949108, -0.741531, -0.405845, 0.0,
-                                  0.405845,  0.741531,  0.949108};
+  static const double dv2[7] = {-0.949108, -0.741531, -0.405845, 0.0,
+                                0.405845,  0.741531,  0.949108};
   static const double b_dv1[6] = {-0.93247, -0.661209, -0.238619,
                                   0.238619, 0.661209,  0.93247};
   static const double b_dv[5] = {-0.90618, -0.538469, 0.0, 0.538469, 0.90618};
@@ -121,7 +121,7 @@ void ShengDaoGaoDu(double numShengLu, emxArray_real_T *Ti)
     emxEnsureCapacity_real_T(Ti1, i);
     Ti1_data = Ti1->data;
     for (i = 0; i < 7; i++) {
-      Ti1_data[i] = b_dv2[i];
+      Ti1_data[i] = dv2[i];
     }
     break;
   case 8:
