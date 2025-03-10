@@ -471,7 +471,7 @@ RETL4 = norm(PPP4OUT(:,7) - PPP4OUT(:,2));
 
 
 
-if L1 < 0.005*RETL1
+if L1 < 0.05*RETL1
     L1 = 0;
 end
 
@@ -500,7 +500,7 @@ if L7 < 0.005*RETL4
     L7 = 0;
 end
 
-if L8 < 0.005*RETL1
+if L8 < 0.05*RETL1
     L8 = 0;
 end
 LenDaoJiao = [L1,L2,L3,L4,L5,L6,L7,L8];
