@@ -2,7 +2,7 @@
  * File: planefit8.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 10-Mar-2025 20:27:52
+ * C/C++ source code generated on  : 10-Mar-2025 22:41:07
  */
 
 /* Include Files */
@@ -2981,22 +2981,22 @@ void planefit8(const emxArray_real_T *Points1, emxArray_real_T *Points2,
   if (L1 < 0.05 * RETL1) {
     L1 = 0.0;
   }
-  if (L2 < 0.005 * RETL2) {
+  if (L2 < 0.05 * RETL2) {
     L2 = 0.0;
   }
-  if (Tv_idx_0 < 0.005 * RETL2) {
+  if (Tv_idx_0 < 0.05 * RETL2) {
     Tv_idx_0 = 0.0;
   }
-  if (Tv_idx_1 < 0.005 * RETL3) {
+  if (Tv_idx_1 < 0.05 * RETL3) {
     Tv_idx_1 = 0.0;
   }
-  if (Tv_idx_2 < 0.005 * RETL3) {
+  if (Tv_idx_2 < 0.05 * RETL3) {
     Tv_idx_2 = 0.0;
   }
-  if (L6 < 0.005 * RETL4) {
+  if (L6 < 0.05 * RETL4) {
     L6 = 0.0;
   }
-  if (L7 < 0.005 * RETL4) {
+  if (L7 < 0.05 * RETL4) {
     L7 = 0.0;
   }
   if (L8 < 0.05 * RETL1) {

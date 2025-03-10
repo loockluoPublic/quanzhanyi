@@ -475,28 +475,28 @@ if L1 < 0.05*RETL1
     L1 = 0;
 end
 
-if L2 < 0.005*RETL2
+if L2 < 0.05*RETL2
     L2 = 0;
 end
 
-if L3 < 0.005*RETL2
+if L3 < 0.05*RETL2
     L3 = 0;
 end
 
-if L4 < 0.005*RETL3
+if L4 < 0.05*RETL3
     L4 = 0;
 end
 
-if L5 < 0.005*RETL3
+if L5 < 0.05*RETL3
     L5 = 0;
 end
 
 
-if L6 < 0.005*RETL4
+if L6 < 0.05*RETL4
     L6 = 0;
 end
 
-if L7 < 0.005*RETL4
+if L7 < 0.05*RETL4
     L7 = 0;
 end
 
