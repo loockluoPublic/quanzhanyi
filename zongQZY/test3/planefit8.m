@@ -232,7 +232,7 @@ for i =1:8
 
     PIner = [x,y,z];
 
-    threshold  = 2.5;
+    threshold  =2;
     % Fit a plane through the points
     [~, ~, V] = svd(PIner - mean(PIner, 1));
     normal = V(:, 3); % Normal vector of the plane
@@ -261,25 +261,91 @@ for i =1:8
 end
 
 
+%%%%%%%%% 约束 %%%%%%%%%%%%
 
-
-
-%%%%%%%%% 测试 %%%%%%%%%%%%
-
-PlaneParaOut(1,3) = 0;
-PlaneParaOut(2,3) = 0;
-PlaneParaOut(4,3) = mean(Points3(3,:));
-
-
-PlaneParaOut(1,7) = 0;
-PlaneParaOut(2,7) = 0;
-PlaneParaOut(4,7) = mean(Points7(3,:));
-
-
+% 左、右面竖直
+PlaneParaOut(3,1) = 0;
+PlaneParaOut(3,5) = 0;
+% 左右面平行
 PlaneParaOut(1:2,1) = (PlaneParaOut(1:2,1)+PlaneParaOut(1:2,5))./2 ;
 PlaneParaOut(1:2,5) = PlaneParaOut(1:2,1) ;
-%%%%%%%%% 测试 %%%%%%%%%%%%
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 约束只能前后倾斜  %%%%%%%%%%%%%%%%%%%%
+    t1 = PlaneParaOut(1,5);
+    t2 = PlaneParaOut(2,5);
+
+    % 输入:
+    % points: n×3 矩阵，每行 (xi, yi, zi)
+    % t1, t2: 约束参数
+    
+    X = Points3(1,:)';  % 提取 x 坐标
+    Y = Points3(2,:)';  % 提取 y 坐标
+    Z = Points3(3,:)';  % 提取 z 坐标
+    
+    % 构造设计矩阵 A 和观测向量 b
+    A = [X, Y, ones(size(X))]; % A矩阵对应于 ax + by + d = z
+    b = Z; % 目标值
+    
+    % 约束矩阵
+    C = [t1, t2, 0]; % a*t1 + b*t2 + 0*d = 0
+    
+    % 使用约束最小二乘求解
+    n = size(A, 2);
+    M = [A'*A, C'; C, 0];  % 扩展矩阵
+    rhs = [A'*b; 0];  % 右端项
+    solution = M \ rhs; % 求解
+    
+    % 提取参数 a, b, d
+    a = solution(1);
+    b = solution(2);
+    d = solution(3);
+    
+    % 输出参数
+    params = [a, b, d];
+    PlaneParaOut(:,3) = [a; b;-1 ;d];
+
+
+
+
+
+
+
+
+    % 输入:
+    % points: n×3 矩阵，每行 (xi, yi, zi)
+    % t1, t2: 约束参数
+    
+    X = Points7(1,:)';  % 提取 x 坐标
+    Y = Points7(2,:)';  % 提取 y 坐标
+    Z = Points7(3,:)';  % 提取 z 坐标
+    
+    % 构造设计矩阵 A 和观测向量 b
+    A = [X, Y, ones(size(X))]; % A矩阵对应于 ax + by + d = z
+    b = Z; % 目标值
+    
+    % 约束矩阵
+    C = [t1, t2, 0]; % a*t1 + b*t2 + 0*d = 0
+    
+    % 使用约束最小二乘求解
+    n = size(A, 2);
+    M = [A'*A, C'; C, 0];  % 扩展矩阵
+    rhs = [A'*b; 0];  % 右端项
+    solution = M \ rhs; % 求解
+    
+    % 提取参数 a, b, d
+    a = solution(1);
+    b = solution(2);
+    d = solution(3);
+    
+    % 输出参数
+    params = [a, b, d];
+    PlaneParaOut(:,7) = [a; b;-1 ;d];
+
+
+PlaneParaOut(1:2,3) = (PlaneParaOut(1:2,3)+PlaneParaOut(1:2,7))./2 ;
+PlaneParaOut(1:2,7) = PlaneParaOut(1:2,3) ;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 约束只能前后倾斜  %%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -405,36 +471,36 @@ RETL4 = norm(PPP4OUT(:,7) - PPP4OUT(:,2));
 
 
 
-if L1 < 0.005*RETL1
+if L1 < 0.05*RETL1
     L1 = 0;
 end
 
-if L2 < 0.005*RETL2
+if L2 < 0.05*RETL2
     L2 = 0;
 end
 
-if L3 < 0.005*RETL2
+if L3 < 0.05*RETL2
     L3 = 0;
 end
 
-if L4 < 0.005*RETL3
+if L4 < 0.05*RETL3
     L4 = 0;
 end
 
-if L5 < 0.005*RETL3
+if L5 < 0.05*RETL3
     L5 = 0;
 end
 
 
-if L6 < 0.005*RETL4
+if L6 < 0.05*RETL4
     L6 = 0;
 end
 
-if L7 < 0.005*RETL4
+if L7 < 0.05*RETL4
     L7 = 0;
 end
 
-if L8 < 0.005*RETL1
+if L8 < 0.05*RETL1
     L8 = 0;
 end
 LenDaoJiao = [L1,L2,L3,L4,L5,L6,L7,L8];
