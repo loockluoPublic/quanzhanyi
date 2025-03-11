@@ -271,14 +271,13 @@ export default function () {
             addonAfter="米"
           />
           <span>
-
-            {data.maxDis && <>
+            {/*  {data.maxDis && <>
               <span className="q-ml-10">
                 实际阈值：
                 {data.maxDis?.toFixed(6)}
               </span>
             </>
-            }
+            } */}
           </span>
         </span>
       </div>
