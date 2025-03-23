@@ -2,7 +2,7 @@
  * File: Calculate_rectangle_from_vertex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 10-Mar-2025 22:41:07
+ * C/C++ source code generated on  : 23-Mar-2025 18:24:20
  */
 
 /* Include Files */
@@ -53,11 +53,18 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
   double Tao3_tmp_idx_0;
   double Tao3_tmp_idx_1;
   double Tao3_tmp_idx_2;
+  double a;
   double absxk;
+  double b_a;
   double b_scale;
   double b_y;
+  double c_a;
   double c_scale;
   double d;
+  double d_a;
+  double e_a;
+  double f_a;
+  double g_a;
   double scale;
   double t;
   double y;
@@ -181,15 +188,23 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
   scale = Pdd[0] - Pdd[12];
   b_scale = Pdd[1] - Pdd[13];
   c_scale = Pdd[2] - Pdd[14];
-  *b = sqrt((scale * scale + b_scale * b_scale) + c_scale * c_scale);
-  scale = Pdd[0] - Pdd[3];
-  b_scale = Pdd[1] - Pdd[4];
-  c_scale = Pdd[2] - Pdd[5];
-  *h = sqrt((scale * scale + b_scale * b_scale) + c_scale * c_scale);
-  scale = Pdd[0] - Pdd[6];
-  b_scale = Pdd[1] - Pdd[7];
-  c_scale = Pdd[2] - Pdd[8];
-  *w = sqrt((scale * scale + b_scale * b_scale) + c_scale * c_scale);
+  absxk = Pdd[0] - Pdd[3];
+  t = Pdd[1] - Pdd[4];
+  a = Pdd[2] - Pdd[5];
+  *h = sqrt((absxk * absxk + t * t) + a * a);
+  absxk = Pdd[0] - Pdd[6];
+  t = Pdd[1] - Pdd[7];
+  a = Pdd[2] - Pdd[8];
+  *w = sqrt((absxk * absxk + t * t) + a * a);
+  absxk = Pdd[6] - Pdd[15];
+  t = Pdd[7] - Pdd[16];
+  a = Pdd[8] - Pdd[17];
+  b_a = Pdd[9] - Pdd[21];
+  c_a = Pdd[10] - Pdd[22];
+  d_a = Pdd[11] - Pdd[23];
+  e_a = Pdd[3] - Pdd[18];
+  f_a = Pdd[4] - Pdd[19];
+  g_a = Pdd[5] - Pdd[20];
   Tao[0] = (((Tao[0] / y + Tao2_tmp_idx_0 / b_y) + Tao3_tmp_idx_0 / Tao3_tmp) +
             (Pdd[21] - Pdd[18]) / Tao3_tmp) /
            4.0;
@@ -232,6 +247,11 @@ void Calculate_rectangle_from_vertex(const emxArray_real_T *TrianglePoints4,
   PP[21] = Pdd[17];
   PP[22] = Pdd[20];
   PP[23] = Pdd[23];
+  *b = (((sqrt((scale * scale + b_scale * b_scale) + c_scale * c_scale) +
+          sqrt((absxk * absxk + t * t) + a * a)) +
+         sqrt((b_a * b_a + c_a * c_a) + d_a * d_a)) +
+        sqrt((e_a * e_a + f_a * f_a) + g_a * g_a)) /
+       4.0;
   /*  8个顶点 */
 }
 

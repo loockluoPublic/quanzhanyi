@@ -132,48 +132,40 @@ for i = 1:2*shenglunum
     end
 end
 
-%% 3、修正Ti
-Ti2A = zeros(1,2*shenglunum);
+%% 3、计算斜面偏移值
+
 XieMianPianYi = zeros(1,2*shenglunum);
-%%%%%%%%%%%%%%%%%%%%%%  对斜面上的点进行偏移（修正Ti）  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 for j = 1:2*shenglunum
     if j <= temp
         if XMFlagA(j) == 1 %斜面上
-            Ti2A(j) = Ti(j) - a(j) *sin(theta4);
-            XieMianPianYi(j) = a(j) *tan(theta4);
+            XieMianPianYi(j) = a(j) *tan(theta4-pi/2);     
         else
-            Ti2A(j) = Ti(j);
             XieMianPianYi(j) = 0;
         end
     elseif j <= 2*temp
         if XMFlagA(j) == 1 %斜面上
-            Ti2A(j) = Ti(j) + a(j) *sin(theta1);
             XieMianPianYi(j) = a(j) *tan(theta1);
         else
-            Ti2A(j) = Ti(j);
             XieMianPianYi(j) = 0;
         end
     elseif j <= 3*temp
         if XMFlagA(j) == 1 %斜面上
-            Ti2A(j) = Ti(j) + a(j) *sin(theta2);
-            XieMianPianYi(j) = a(j) *tan(theta2);
+            XieMianPianYi(j) = a(j) *tan(theta2-pi/2);
         else
-            Ti2A(j) = Ti(j);
             XieMianPianYi(j) = 0;
         end
     else
         if XMFlagA(j) == 1 %斜面上
-            Ti2A(j) = Ti(j) - a(j) *sin(theta3);
             XieMianPianYi(j) = a(j) *tan(theta3);
         else
-            Ti2A(j) = Ti(j);
             XieMianPianYi(j) = 0;
         end
     end
 end
 
 
-%% 4、径向移动
+%% 4、计算宽b向移动
 
 
 deltTih = zeros(1,2*shenglunum);
@@ -181,29 +173,33 @@ deltTib = zeros(1,2*shenglunum);
 for k = 1:2*shenglunum
     if k <= temp
         if XMFlagA(k) == 1 %斜面上
-            deltTih(k) = abs(Ti2A(k)-TiYuZhi4).*h./2;
-            deltTib(k) = deltTih(k).*tan(theta4);
+            deltTih(k) = abs(Ti(k)-TiYuZhi4).*h./2;
+            % deltTib(k) = deltTih(k).*tan(theta4);
+            deltTib(k) = deltTih(k).*tan(theta4-pi/2)-XieMianPianYi(k).*sin(theta4);
         else
             deltTih(k) = 0;
         end
     elseif k <= 2*temp
         if XMFlagA(k) == 1 %斜面上
-            deltTih(k) = abs(Ti2A(k)-TiYuZhi1).*h./2;
-            deltTib(k) = deltTih(k).*tan(theta1);
+            deltTih(k) = abs(Ti(k)-TiYuZhi1).*h./2;
+            % deltTib(k) = deltTih(k).*tan(theta1);
+            deltTib(k) = deltTih(k).*tan(theta1)-XieMianPianYi(k).*sin(theta1);
         else
             deltTih(k) = 0;
         end
     elseif k <= 3*temp
         if XMFlagA(k) == 1 %斜面上
-            deltTih(k) = abs(Ti2A(k)-TiYuZhi2).*h./2;
-            deltTib(k) = deltTih(k).*tan(theta2);
+            deltTih(k) = abs(Ti(k)-TiYuZhi2).*h./2;
+            % deltTib(k) = deltTih(k).*tan(theta2);
+            deltTib(k) = deltTih(k).*tan(theta2-pi/2)+XieMianPianYi(k).*sin(theta2);
         else
             deltTih(k) = 0;
         end
     else
         if XMFlagA(k) == 1 %斜面上
-            deltTih(k) = abs(Ti2A(k)-TiYuZhi3).*h./2;
-            deltTib(k) = deltTih(k).*tan(theta3);
+            deltTih(k) = abs(Ti(k)-TiYuZhi3).*h./2;
+            % deltTib(k) = deltTih(k).*tan(theta3);
+            deltTib(k) = deltTih(k).*tan(theta3)+XieMianPianYi(k).*sin(theta3);
         else
             deltTih(k) = 0;
         end
@@ -211,19 +207,56 @@ for k = 1:2*shenglunum
 end
 
 deltTib = abs(deltTib);
+
+
+
+%% 4、计算高h向移动
+
+
+deltTih = zeros(1,2*shenglunum);
+
+for k = 1:2*shenglunum
+    if k <= temp
+        if XMFlagA(k) == 1 %斜面上
+            deltTih(k) = -XieMianPianYi(k).*cos(theta4-pi/2);
+        else
+            deltTih(k) = 0;
+        end
+    elseif k <= 2*temp
+        if XMFlagA(k) == 1 %斜面上
+            deltTih(k) = XieMianPianYi(k).*cos(theta1);
+        else
+            deltTih(k) = 0;
+        end
+    elseif k <= 3*temp
+        if XMFlagA(k) == 1 %斜面上
+            deltTih(k) = XieMianPianYi(k).*cos(theta2-pi/2);
+        else
+            deltTih(k) = 0;
+        end
+    else
+        if XMFlagA(k) == 1 %斜面上
+            deltTih(k) = -XieMianPianYi(k).*cos(theta3);
+        else
+            deltTih(k) = 0;
+        end
+    end
+end
+
+
 %% 5、面上一周的点计算
 
 ZhouDian = zeros(3,2*shenglunum);
 for j = 1:shenglunum
-    ZhouDian(:,j) = Pout + u'.*Ti2A(j).*h./2 + v'.*(b./2-deltTib(j));
+    ZhouDian(:,j) = Pout + u'.*(Ti(j).*h./2+deltTih(j)) + v'.*(b./2-deltTib(j));
 end
 
 for k = 1+shenglunum:2*shenglunum
-    ZhouDian(:,k) = Pout + u'.*Ti2A(k).*h./2 - v'.*(b./2-deltTib(k));
+    ZhouDian(:,k) = Pout + u'.*(Ti(k).*h./2+deltTih(k)) - v'.*(b./2-deltTib(k));
 end
 
 
-%% 6、计算轴线移动l
+%% 6、计算轴线h向移动l
 
 %整体移动
 [xN1,yN1,zN1] = foot_of_perpendicular_from_a_point_to_a_line(PAB,Pin,Pout);
@@ -250,10 +283,12 @@ end
 PYA = zeros(1,2*shenglunum);
 for i = 1:shenglunum
     PYA(1:shenglunum) = ztyd + PhiPy(1:shenglunum)  - a(1:shenglunum)./tan(phi);
+    % PYA(1:shenglunum) = ztyd + PhiPy(1:shenglunum);
 end
 
 for i = 1+shenglunum:2*shenglunum
     PYA(1+shenglunum:2*shenglunum) = ztyd - PhiPy(1+shenglunum:2*shenglunum)  + a(1+shenglunum:2*shenglunum)./tan(phi);
+    % PYA(1+shenglunum:2*shenglunum) = ztyd - PhiPy(1+shenglunum:2*shenglunum);
 end
 
 PointTable_B_off8 = ZhouDian - d'.*PYA;

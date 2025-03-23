@@ -2,7 +2,7 @@
  * File: generate_unit_circle_with_normal_vector2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 10-Mar-2025 22:41:07
+ * C/C++ source code generated on  : 23-Mar-2025 18:24:20
  */
 
 /* Include Files */
@@ -239,7 +239,7 @@ void generate_unit_circle_with_normal_vector2(const emxArray_real_T *PointIn,
   v1[1] = (PointIn_data[1] + PointIn_data[7]) / 2.0 - M1_idx_1;
   b_n1[2] = n1[2];
   v1[2] = (PointIn_data[2] + PointIn_data[8]) / 2.0 - M1_idx_2;
-  e_mldivide(b_n1, v1, b_dv);
+  d_mldivide(b_n1, v1, b_dv);
   /*  5. 计算半径 */
   scale = 3.3121686421112381E-170;
   d = M1_idx_0 + b_dv[0] * n1[0];

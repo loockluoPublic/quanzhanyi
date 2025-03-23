@@ -2,7 +2,7 @@
  * File: QuanZhanYi_emxutil.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 10-Mar-2025 22:41:07
+ * C/C++ source code generated on  : 23-Mar-2025 18:24:20
  */
 
 /* Include Files */
@@ -186,22 +186,10 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
 }
 
 /*
- * Arguments    : cell_wrap_1 pMatrix[4]
- * Return Type  : void
- */
-void emxFreeMatrix_cell_wrap_1(cell_wrap_1 pMatrix[4])
-{
-  int i;
-  for (i = 0; i < 4; i++) {
-    emxFreeStruct_cell_wrap_1(&pMatrix[i]);
-  }
-}
-
-/*
  * Arguments    : cell_wrap_1 pMatrix[8]
  * Return Type  : void
  */
-void emxFreeMatrix_cell_wrap_11(cell_wrap_1 pMatrix[8])
+void emxFreeMatrix_cell_wrap_1(cell_wrap_1 pMatrix[8])
 {
   int i;
   for (i = 0; i < 8; i++) {
@@ -210,22 +198,10 @@ void emxFreeMatrix_cell_wrap_11(cell_wrap_1 pMatrix[8])
 }
 
 /*
- * Arguments    : cell_wrap_4 pMatrix[4]
- * Return Type  : void
- */
-void emxFreeMatrix_cell_wrap_4(cell_wrap_4 pMatrix[4])
-{
-  int i;
-  for (i = 0; i < 4; i++) {
-    emxFreeStruct_cell_wrap_4(&pMatrix[i]);
-  }
-}
-
-/*
  * Arguments    : cell_wrap_4 pMatrix[8]
  * Return Type  : void
  */
-void emxFreeMatrix_cell_wrap_41(cell_wrap_4 pMatrix[8])
+void emxFreeMatrix_cell_wrap_4(cell_wrap_4 pMatrix[8])
 {
   int i;
   for (i = 0; i < 8; i++) {
@@ -301,22 +277,10 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
 }
 
 /*
- * Arguments    : cell_wrap_1 pMatrix[4]
- * Return Type  : void
- */
-void emxInitMatrix_cell_wrap_1(cell_wrap_1 pMatrix[4])
-{
-  int i;
-  for (i = 0; i < 4; i++) {
-    emxInitStruct_cell_wrap_1(&pMatrix[i]);
-  }
-}
-
-/*
  * Arguments    : cell_wrap_1 pMatrix[8]
  * Return Type  : void
  */
-void emxInitMatrix_cell_wrap_11(cell_wrap_1 pMatrix[8])
+void emxInitMatrix_cell_wrap_1(cell_wrap_1 pMatrix[8])
 {
   int i;
   for (i = 0; i < 8; i++) {
@@ -325,22 +289,10 @@ void emxInitMatrix_cell_wrap_11(cell_wrap_1 pMatrix[8])
 }
 
 /*
- * Arguments    : cell_wrap_4 pMatrix[4]
- * Return Type  : void
- */
-void emxInitMatrix_cell_wrap_4(cell_wrap_4 pMatrix[4])
-{
-  int i;
-  for (i = 0; i < 4; i++) {
-    emxInitStruct_cell_wrap_4(&pMatrix[i]);
-  }
-}
-
-/*
  * Arguments    : cell_wrap_4 pMatrix[8]
  * Return Type  : void
  */
-void emxInitMatrix_cell_wrap_41(cell_wrap_4 pMatrix[8])
+void emxInitMatrix_cell_wrap_4(cell_wrap_4 pMatrix[8])
 {
   int i;
   for (i = 0; i < 8; i++) {
