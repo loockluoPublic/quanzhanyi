@@ -2,7 +2,7 @@
  * File: combineVectorElements.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 10-Mar-2025 22:41:07
+ * C/C++ source code generated on  : 23-Mar-2025 18:24:20
  */
 
 #ifndef COMBINEVECTORELEMENTS_H
@@ -19,6 +19,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+double b_combineVectorElements(const emxArray_real_T *x);
+
 double combineVectorElements(const emxArray_real_T *x);
 
 #ifdef __cplusplus

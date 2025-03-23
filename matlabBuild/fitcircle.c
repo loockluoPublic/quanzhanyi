@@ -2,7 +2,7 @@
  * File: fitcircle.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 10-Mar-2025 22:41:07
+ * C/C++ source code generated on  : 23-Mar-2025 18:24:20
  */
 
 /* Include Files */
@@ -402,7 +402,7 @@ void fitcircle(const emxArray_real_T *x, double z[2], double *r,
     }
     y[0] -= u[2];
     y[1] -= u[2];
-    d_mldivide(b_u, y, h);
+    c_mldivide(b_u, y, h);
     /*  Check for convergence */
     b_y = 0.0;
     absxk = 0.0;

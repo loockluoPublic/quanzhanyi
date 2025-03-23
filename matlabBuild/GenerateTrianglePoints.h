@@ -2,7 +2,7 @@
  * File: GenerateTrianglePoints.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 10-Mar-2025 22:41:07
+ * C/C++ source code generated on  : 23-Mar-2025 18:24:20
  */
 
 #ifndef GENERATETRIANGLEPOINTS_H
@@ -25,11 +25,11 @@ extern void GenerateTrianglePoints(const double PlaneParaIn[4],
                                    const double Direction[3],
                                    double PointTri[6]);
 
-void b_GenerateTrianglePoints(const double PlaneParaIn[4],
+void b_GenerateTrianglePoints(const emxArray_real_T *PlaneParaIn,
                               const double BoundPoint1[3], const double P0[3],
                               const double Direction[3], double PointTri[6]);
 
-void c_GenerateTrianglePoints(const emxArray_real_T *PlaneParaIn,
+void c_GenerateTrianglePoints(const double PlaneParaIn[4],
                               const double BoundPoint1[3], const double P0[3],
                               const double Direction[3], double PointTri[6]);
 

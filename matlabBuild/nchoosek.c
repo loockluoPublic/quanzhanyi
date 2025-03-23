@@ -2,7 +2,7 @@
  * File: nchoosek.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 10-Mar-2025 22:41:07
+ * C/C++ source code generated on  : 23-Mar-2025 18:24:20
  */
 
 /* Include Files */
@@ -141,7 +141,7 @@ static double rt_roundd_snf(double u)
  *                emxArray_real_T *y
  * Return Type  : void
  */
-void b_nchoosek(const emxArray_real_T *x, double k, emxArray_real_T *y)
+void nchoosek(const emxArray_real_T *x, double k, emxArray_real_T *y)
 {
   emxArray_int32_T *comb;
   const double *x_data;
@@ -249,102 +249,6 @@ void b_nchoosek(const emxArray_real_T *x, double k, emxArray_real_T *y)
       }
     }
     emxFree_int32_T(&comb);
-  }
-}
-
-/*
- * Arguments    : const emxArray_real_T *x
- *                emxArray_real_T *y
- * Return Type  : void
- */
-void nchoosek(const emxArray_real_T *x, emxArray_real_T *y)
-{
-  const double *x_data;
-  double r;
-  double *y_data;
-  int comb[3];
-  int a;
-  int b_r;
-  int combj;
-  int nmkpi;
-  int nrows;
-  int row;
-  x_data = x->data;
-  if (x->size[1] == 1) {
-    r = 3.0;
-    if (x_data[0] - 3.0 < 3.0) {
-      r = x_data[0] - 3.0;
-    }
-    if (r == 0.0) {
-      b_r = y->size[0] * y->size[1];
-      y->size[0] = 1;
-      y->size[1] = 1;
-      emxEnsureCapacity_real_T(y, b_r);
-      y_data = y->data;
-      y_data[0] = 1.0;
-    } else if (r == 1.0) {
-      b_r = y->size[0] * y->size[1];
-      y->size[0] = 1;
-      y->size[1] = 1;
-      emxEnsureCapacity_real_T(y, b_r);
-      y_data = y->data;
-      y_data[0] = x_data[0];
-    } else {
-      b_r = y->size[0] * y->size[1];
-      y->size[0] = 1;
-      y->size[1] = 1;
-      emxEnsureCapacity_real_T(y, b_r);
-      y_data = y->data;
-      y_data[0] = nCk(x_data[0], r);
-    }
-  } else if (x->size[1] < 3) {
-    y->size[0] = 0;
-    y->size[1] = 3;
-  } else {
-    b_r = 3;
-    if (x->size[1] - 3 < 3) {
-      b_r = x->size[1] - 3;
-    }
-    if (b_r == 0) {
-      r = 1.0;
-    } else if (b_r == 1) {
-      r = x->size[1];
-    } else {
-      r = nCk(x->size[1], b_r);
-    }
-    nrows = (int)floor(r);
-    b_r = y->size[0] * y->size[1];
-    y->size[0] = nrows;
-    y->size[1] = 3;
-    emxEnsureCapacity_real_T(y, b_r);
-    y_data = y->data;
-    comb[0] = 1;
-    comb[1] = 2;
-    comb[2] = 3;
-    b_r = 2;
-    nmkpi = x->size[1];
-    for (row = 0; row < nrows; row++) {
-      y_data[row] = x_data[comb[0] - 1];
-      y_data[row + y->size[0]] = x_data[comb[1] - 1];
-      y_data[row + y->size[0] * 2] = x_data[comb[2] - 1];
-      if (b_r + 1 > 0) {
-        a = comb[b_r];
-        combj = comb[b_r] + 1;
-        comb[b_r]++;
-        if (a + 1 < nmkpi) {
-          b_r += 2;
-          for (nmkpi = b_r; nmkpi < 4; nmkpi++) {
-            combj++;
-            comb[nmkpi - 1] = combj;
-          }
-          b_r = 2;
-          nmkpi = x->size[1];
-        } else {
-          b_r--;
-          nmkpi--;
-        }
-      }
-    }
   }
 }
 

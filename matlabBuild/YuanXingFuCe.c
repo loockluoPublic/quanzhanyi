@@ -2,7 +2,7 @@
  * File: YuanXingFuCe.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 10-Mar-2025 22:41:07
+ * C/C++ source code generated on  : 23-Mar-2025 18:24:20
  */
 
 /* Include Files */
@@ -400,7 +400,7 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
     }
     i = (int)((shenglunum + 1.0) / 2.0);
     for (absxk_tmp = 0; absxk_tmp < i; absxk_tmp++) {
-      b_nchoosek(t_k, (shenglunum + 1.0) - 2.0 * ((double)absxk_tmp + 1.0), r);
+      nchoosek(t_k, (shenglunum + 1.0) - 2.0 * ((double)absxk_tmp + 1.0), r);
       prod(r, r1);
       Distance_data[b_i] += b_dv[absxk_tmp] * -combineVectorElements(r1);
     }
@@ -459,7 +459,7 @@ void YuanXingFuCe(const emxArray_real_T *PointIn, double shenglunum,
     }
     i = (int)((shenglunum + 1.0) / 2.0);
     for (absxk_tmp = 0; absxk_tmp < i; absxk_tmp++) {
-      b_nchoosek(t_k, (shenglunum + 1.0) - 2.0 * ((double)absxk_tmp + 1.0), r);
+      nchoosek(t_k, (shenglunum + 1.0) - 2.0 * ((double)absxk_tmp + 1.0), r);
       prod(r, r1);
       Distance_data[b_i] += b_dv1[absxk_tmp] * -combineVectorElements(r1);
     }
