@@ -2,7 +2,7 @@
  * File: planefit4.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Mar-2025 19:14:18
+ * C/C++ source code generated on  : 17-Aug-2025 14:06:05
  */
 
 /* Include Files */
@@ -1216,10 +1216,40 @@ void b_planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
   }
   emxFree_real_T(&b_Points2);
   emxFree_real_T(&y);
+  /*  %%% test0816 */
+  /*  X1 = [Points1(1,:)]'; */
+  /*  Y1 = [Points1(2,:)]'; */
+  /*   */
+  /*  X2 = [Points3(1,:)]'; */
+  /*  Y2 = [Points3(2,:)]'; */
+  /*   */
+  /*  n1 = numel(X1); */
+  /*  n2 = numel(X2); */
+  /*   */
+  /*  A = [ [X1, ones(n1,1), zeros(n1,1)]; */
+  /*        [X2, zeros(n2,1), ones(n2,1)] ]; */
+  /*   */
+  /*  rhs = [Y1; Y2]; */
+  /*   */
+  /*  params = A \ rhs;      % 一次求出最优解 */
+  /*  kkk  = params(1); */
+  /*  bB1 = params(2); */
+  /*  bB3 = params(3); */
+  /*   */
+  /*  distancess1 = abs(kkk*X1 - Y1 + bB1) ./ sqrt(kkk^2 + 1);   % 第1组点到线1
+   */
+  /*  distancess3 = abs(kkk*X2 - Y2 + bB3) ./ sqrt(kkk^2 + 1);   % 第2组点到线2
+   */
+  /*  distancess1 = distancess1'; */
+  /*  distancess3 = distancess3'; */
+  /*   */
+  /*  % D = abs(bB1 - bB3) / sqrt(kkk^2 + 1); */
+  /*  %%% test0816 */
   PlaneParaOut_data[0] = OptPara2[0];
   PlaneParaOut_data[1] = OptPara2[1];
   PlaneParaOut_data[2] = 0.0;
   PlaneParaOut_data[3] = OptPara2[3];
+  /*  PlaneParaOut(1:4,1) = [kkk;-1;0;bB1]; */
   PlaneParaOut_data[4] = 0.0;
   PlaneParaOut_data[5] = 0.0;
   PlaneParaOut_data[6] = -1.0;
@@ -1228,6 +1258,7 @@ void b_planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
   PlaneParaOut_data[9] = OptPara2[1];
   PlaneParaOut_data[10] = 0.0;
   PlaneParaOut_data[11] = OptPara2[4];
+  /*  PlaneParaOut(1:4,3) = [kkk;-1;0;bB3]; */
   PlaneParaOut_data[12] = 0.0;
   PlaneParaOut_data[13] = 0.0;
   PlaneParaOut_data[14] = -1.0;
@@ -2206,10 +2237,40 @@ void planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
   }
   emxFree_real_T(&b_Points2);
   emxFree_real_T(&y);
+  /*  %%% test0816 */
+  /*  X1 = [Points1(1,:)]'; */
+  /*  Y1 = [Points1(2,:)]'; */
+  /*   */
+  /*  X2 = [Points3(1,:)]'; */
+  /*  Y2 = [Points3(2,:)]'; */
+  /*   */
+  /*  n1 = numel(X1); */
+  /*  n2 = numel(X2); */
+  /*   */
+  /*  A = [ [X1, ones(n1,1), zeros(n1,1)]; */
+  /*        [X2, zeros(n2,1), ones(n2,1)] ]; */
+  /*   */
+  /*  rhs = [Y1; Y2]; */
+  /*   */
+  /*  params = A \ rhs;      % 一次求出最优解 */
+  /*  kkk  = params(1); */
+  /*  bB1 = params(2); */
+  /*  bB3 = params(3); */
+  /*   */
+  /*  distancess1 = abs(kkk*X1 - Y1 + bB1) ./ sqrt(kkk^2 + 1);   % 第1组点到线1
+   */
+  /*  distancess3 = abs(kkk*X2 - Y2 + bB3) ./ sqrt(kkk^2 + 1);   % 第2组点到线2
+   */
+  /*  distancess1 = distancess1'; */
+  /*  distancess3 = distancess3'; */
+  /*   */
+  /*  % D = abs(bB1 - bB3) / sqrt(kkk^2 + 1); */
+  /*  %%% test0816 */
   PlaneParaOut_data[0] = OptPara2[0];
   PlaneParaOut_data[1] = OptPara2[1];
   PlaneParaOut_data[2] = 0.0;
   PlaneParaOut_data[3] = OptPara2[3];
+  /*  PlaneParaOut(1:4,1) = [kkk;-1;0;bB1]; */
   PlaneParaOut_data[4] = 0.0;
   PlaneParaOut_data[5] = 0.0;
   PlaneParaOut_data[6] = -1.0;
@@ -2218,6 +2279,7 @@ void planefit4(const emxArray_real_T *Points1, const emxArray_real_T *Points2,
   PlaneParaOut_data[9] = OptPara2[1];
   PlaneParaOut_data[10] = 0.0;
   PlaneParaOut_data[11] = OptPara2[4];
+  /*  PlaneParaOut(1:4,3) = [kkk;-1;0;bB3]; */
   PlaneParaOut_data[12] = 0.0;
   PlaneParaOut_data[13] = 0.0;
   PlaneParaOut_data[14] = -1.0;

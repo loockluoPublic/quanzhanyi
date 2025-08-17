@@ -2,7 +2,7 @@
 ## Makefile generated for component 'QuanZhanYi'. 
 ## 
 ## Makefile     : QuanZhanYi_rtw.mk
-## Generated on : Sun Mar 23 19:15:10 2025
+## Generated on : Sun Aug 17 14:07:24 2025
 ## Final product: ./QuanZhanYi.lib
 ## Product type : static-library
 ## 
@@ -137,7 +137,7 @@ BUILD_TYPE = "Static Library"
 ## INCLUDE PATHS
 ###########################################################################
 
-INCLUDES_BUILDINFO = -I$(START_DIR) -IC:/Users/XWT/Desktop/QUANZH~2/zongQZY/test3 -I$(MATLAB_ROOT)/extern/include
+INCLUDES_BUILDINFO = -I$(START_DIR) -IC:/Users/XWT/Desktop/QUANZH~1/zongQZY/test3 -I$(MATLAB_ROOT)/extern/include
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 

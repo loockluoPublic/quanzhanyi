@@ -268,24 +268,18 @@ end
 
 %%%%%%%%% 测试 %%%%%%%%%%%%
 
-% PlaneParaOut(1,3) = 0;
-% PlaneParaOut(2,3) = 0;
-% PlaneParaOut(4,3) = mean(Points3(3,:));
-% 
-% 
-% PlaneParaOut(1,7) = 0;
-% PlaneParaOut(2,7) = 0;
-% PlaneParaOut(4,7) = mean(Points7(3,:));
-% 
-% 
-% PlaneParaOut(1:2,1) = (PlaneParaOut(1:2,1)+PlaneParaOut(1:2,5))./2 ;
-% PlaneParaOut(1:2,5) = PlaneParaOut(1:2,1) ;
+PlaneParaOut(1,3) = 0;
+PlaneParaOut(2,3) = 0;
+PlaneParaOut(4,3) = mean(Points3(3,:));
 
-PlaneParaOut(:,1)=PlaneParaOut4(:,1);
-PlaneParaOut(:,3)=PlaneParaOut4(:,2);
-PlaneParaOut(:,5)=PlaneParaOut4(:,3);
-PlaneParaOut(:,7)=PlaneParaOut4(:,4);
 
+PlaneParaOut(1,7) = 0;
+PlaneParaOut(2,7) = 0;
+PlaneParaOut(4,7) = mean(Points7(3,:));
+
+
+PlaneParaOut(1:2,1) = (PlaneParaOut(1:2,1)+PlaneParaOut(1:2,5))./2 ;
+PlaneParaOut(1:2,5) = PlaneParaOut(1:2,1) ;
 %%%%%%%%% 测试 %%%%%%%%%%%%
 
 
@@ -478,15 +472,14 @@ coder.varsize('TrianglePoints',[3 3000],[0 1]);
 %% 倒角计算
 LenDaoJiao = zeros(1,8);
 PPP4OUT = TrianglePoints4(:,[1,2,3,6,9,12,15,18]);
-PPP8OUT = TrianglePoints(:,[1;8;14;20;26;32;38;2;3;9;18;24;30;36;42;6]);
-L1 = norm(PPP4OUT(:,1) - PPP8OUT(:,1));
-L2 = norm(PPP4OUT(:,1) - PPP8OUT(:,2));
-L3 = norm(PPP4OUT(:,5) - PPP8OUT(:,3));
-L4 = norm(PPP4OUT(:,5) - PPP8OUT(:,4));
-L5 = norm(PPP4OUT(:,7) - PPP8OUT(:,5));
-L6 = norm(PPP4OUT(:,7) - PPP8OUT(:,6));
-L7 = norm(PPP4OUT(:,2) - PPP8OUT(:,7));
-L8 = norm(PPP4OUT(:,2) - PPP8OUT(:,8));
+L1 = norm(PPP4OUT(:,1) - PP(:,1));
+L2 = norm(PPP4OUT(:,1) - PP(:,2));
+L3 = norm(PPP4OUT(:,5) - PP(:,3));
+L4 = norm(PPP4OUT(:,5) - PP(:,4));
+L5 = norm(PPP4OUT(:,7) - PP(:,5));
+L6 = norm(PPP4OUT(:,7) - PP(:,6));
+L7 = norm(PPP4OUT(:,2) - PP(:,7));
+L8 = norm(PPP4OUT(:,2) - PP(:,8));
 
 
 
@@ -497,36 +490,36 @@ RETL4 = norm(PPP4OUT(:,7) - PPP4OUT(:,2));
 
 
 
-if L1 < 0.01*RETL1
+if L1 < 0.05*RETL1
     L1 = 0;
 end
 
-if L2 < 0.01*RETL2
+if L2 < 0.05*RETL2
     L2 = 0;
 end
 
-if L3 < 0.01*RETL2
+if L3 < 0.05*RETL2
     L3 = 0;
 end
 
-if L4 < 0.01*RETL3
+if L4 < 0.05*RETL3
     L4 = 0;
 end
 
-if L5 < 0.01*RETL3
+if L5 < 0.05*RETL3
     L5 = 0;
 end
 
 
-if L6 < 0.01*RETL4
+if L6 < 0.05*RETL4
     L6 = 0;
 end
 
-if L7 < 0.01*RETL4
+if L7 < 0.05*RETL4
     L7 = 0;
 end
 
-if L8 < 0.01*RETL1
+if L8 < 0.05*RETL1
     L8 = 0;
 end
 LenDaoJiao = [L1,L2,L3,L4,L5,L6,L7,L8];
