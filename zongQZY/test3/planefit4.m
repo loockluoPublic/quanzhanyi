@@ -398,6 +398,7 @@ OptPara2 = zeros(1,5);
 OptAllErr1 =  zeros(size(Points1,2),1);
 OptAllErr3 =  zeros(size(Points3,2),1);
 
+
 thet = 0:0.01:2*pi;
 for ll = 1:length(thet)
 
@@ -432,11 +433,42 @@ for ll = 1:length(thet)
     end
 end
 
+
+
+% %%% test0816
+% X1 = [Points1(1,:)]';
+% Y1 = [Points1(2,:)]';
+% 
+% X2 = [Points3(1,:)]';
+% Y2 = [Points3(2,:)]';
+% 
+% n1 = numel(X1);
+% n2 = numel(X2);
+% 
+% A = [ [X1, ones(n1,1), zeros(n1,1)];
+%       [X2, zeros(n2,1), ones(n2,1)] ];
+% 
+% rhs = [Y1; Y2];
+% 
+% params = A \ rhs;      % 一次求出最优解
+% kkk  = params(1);
+% bB1 = params(2);
+% bB3 = params(3);
+% 
+% distancess1 = abs(kkk*X1 - Y1 + bB1) ./ sqrt(kkk^2 + 1);   % 第1组点到线1
+% distancess3 = abs(kkk*X2 - Y2 + bB3) ./ sqrt(kkk^2 + 1);   % 第2组点到线2
+% distancess1 = distancess1';
+% distancess3 = distancess3';
+% 
+% % D = abs(bB1 - bB3) / sqrt(kkk^2 + 1);
+% %%% test0816
 PlaneParaOut(1:4,1) = [OptPara2(1);OptPara2(2);0;OptPara2(4)];
+% PlaneParaOut(1:4,1) = [kkk;-1;0;bB1];
 
 PlaneParaOut(1:4,2) = [0;0;-1;ddd2];
 
 PlaneParaOut(1:4,3) = [OptPara2(1);OptPara2(2);0;OptPara2(5)];
+% PlaneParaOut(1:4,3) = [kkk;-1;0;bB3];
 
 PlaneParaOut(1:4,4) = [0;0;-1;ddd4];
 

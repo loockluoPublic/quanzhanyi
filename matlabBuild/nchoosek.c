@@ -2,7 +2,7 @@
  * File: nchoosek.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 23-Mar-2025 19:14:18
+ * C/C++ source code generated on  : 17-Aug-2025 14:06:05
  */
 
 /* Include Files */
