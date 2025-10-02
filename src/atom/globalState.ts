@@ -15,7 +15,7 @@ export const connectState = atom({
 export const deviceInfo = atom<any>({
   key: 'deviceInfo', // 唯一标识这个状态
   default: {
-    auth: false,
+    auth: false
   }, // 默认值
 });
 

@@ -16,7 +16,9 @@ export const serial = new SerialMonitor({ mode: "text", parseLines: true });
 
 export default function Connect(props: { next: () => void }) {
   const [deviceInfoData, setDeviceInfo] = useRecoilState(deviceInfo);
-  const [_, setAuth] = useRecoilState(Auth);
+  const [auth, setAuth] = useRecoilState(Auth);
+  console.log("%c Line:20 🥕 auth", "color:#465975", auth);
+  console.log("%c Line:21 🍏", "color:#2eafb0");
 
   const [pwd, setPwd] = useState("");
 
@@ -46,14 +48,15 @@ export default function Connect(props: { next: () => void }) {
 
         {deviceInfoData?.SerialNo ? (
           <>
-            <div className="q-inline-flex q-items-center  ">
+          {!auth && <div className="q-inline-flex q-items-center">
               <div className="q-w-14">秘钥：</div>
               <Input.Password
                 value={pwd}
                 type="password"
                 onChange={(v) => setPwd(v.target.value)}
               />
-            </div>
+            </div>}
+           
             <div className="q-text-center q-mt-2">
               <Button
                 className="q-mt-2 q-mr-2"
@@ -66,7 +69,7 @@ export default function Connect(props: { next: () => void }) {
               >
                 断开连接
               </Button>
-              <Button
+              {!auth &&  <Button
                 className="q-mt-2"
                 type="primary"
                 onClick={() => {
@@ -82,6 +85,8 @@ export default function Connect(props: { next: () => void }) {
               >
                 验证秘钥
               </Button>
+              }
+             
             </div>
           </>
         ) : (

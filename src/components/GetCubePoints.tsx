@@ -146,7 +146,7 @@ export default function () {
 
   const [num, setNum] = useState(0);
 
-  const points = data.MxPoints?.[`m${num}`];
+  const points = data.MxPoints?.[`m${num}`]; 
 
   const getMaxKey = () => {
     return Math.max(0, ...(points?.map((p) => p.key) ?? []));
