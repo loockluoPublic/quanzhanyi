@@ -612,8 +612,6 @@ export const Planefit = (
       MxPoints: MPoints.map((arr, i) => {
         return arr.map((p, j) => {
           const curDiff = _distancesFianal?.[i]?.[j];
-          if (p.key === 5 && p.label === 'R')
-            console.log("%c Line:618 🍇 curDiff < _max", "color:#fca650", p, _max, curDiff < _max);
           const newP = p.cloneCustomVector3();
           newP.difference = curDiff;
           newP.enable = curDiff <= _max;
