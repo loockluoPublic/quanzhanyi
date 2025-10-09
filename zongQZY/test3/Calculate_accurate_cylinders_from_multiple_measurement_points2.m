@@ -1,7 +1,7 @@
 function [Mcenter,MTaon,Mradial,Err_every,Bottom_round_center1,Bottom_round_center2] = Calculate_accurate_cylinders_from_multiple_measurement_points2(points,P_bound1,P_bound2)
 
 % points = points';
-num = 200;
+num = 1000;
 sp = linspace(0,2*pi,num);
 sz = linspace(0,2*pi,num);
 
