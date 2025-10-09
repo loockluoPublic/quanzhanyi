@@ -2,7 +2,7 @@
  * File: _coder_QuanZhanYi_info.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 17-Aug-2025 14:06:05
+ * C/C++ source code generated on  : 09-Oct-2025 22:40:58
  */
 
 /* Include Files */
@@ -22,53 +22,51 @@ static const mxArray *c_emlrtMexFcnResolvedFunctionsI(void)
 {
   const mxArray *nameCaptureInfo;
   const char_T *data[13] = {
-      "789ced5ccf6fe3441476d1528110c5075871e38410125aa569da4d11bf9a344d9b364da2"
-      "a6dd269b95eb3a93c4ad7fa4e371d2f480b8c18d9590388090ca0dc1"
-      "658f1c8bc4890b170e2b017f069c49e2b88d474c63c7a9d35aef5d9cd1e779df9b37f1a7"
-      "d7e769b8998dec0cc771739c65eb4debfaea60cc0fae2f704ea3f199",
-      "c1f5756a6cdb8bdc3dc73c1bff727095748da053620d3451459733abba2a6ba2468a9d26"
-      "e2303274a585aa7da4262ba828ab686778b0dd1ba96b43d0e5a007f5"
-      "3e271b483ade31550e378cab0895e1c1653e9e31d67bcf653e3619f9e029fc71ea49f2fd"
-      "caae81b051d97f54acac22e398e8cdca89296a670d51ebc8d1ca99ae",
-      "d50be5528520832c5492a222998a48841541d4aa4242c8ebb2468c07aa23fea73ee37f6f"
-      "44fc365ed37522e835a18970136955b9171a166a5857055168f62213"
-      "88defda8c81a1a8eefc0677cb3ccf82ca4aa9b870abae2bbf0c977408d39ea3e1bf7be9f"
-      "5e32f8401d95bfd75cae87be5eddff52fffaf5ec9f7d28283eedcd7f",
-      "1341f2d9362dbe53863fb7dfc7fb0c3e9ec225595c2cc4529d482d522ecf97d3b9c2c26e"
-      "6eed2a8efc089e5171708c7150feefba4e377dc63f478de9f86d5ced"
-      "b430d6490b49515524d3d3e11f7cf225987c4edcfb7e393334d8a6c0f401f4f666f982d2"
-      "db4854de4d6c3e2a5465948cc4f6b26d2dd3584b83de86456f5f1911",
-      "bf8d8b5a5d41d17ef9e6e03ff0c9ef556fcf7df27dcce473e2def76b2843dd3d0aabce7e"
-      "fef73fa0b39cfbefdb1b0c3e9ec2f327182737563623fbebe5edc872"
-      "a2b5ac8a8b5c7874f68231df6d1e4b0cff3c854f4c6705b146101672b55af7aea85d3e41"
-      "3f02fa11aed673db741bea63cba01fe1cdff0563bedb3c0a0cff3c85",
-      "fbd0ed8cb92f6bf5ebe47ba81e83fe84373ee84f4c860ff4d732e84f78f3ff9c31df6d1e"
-      "31c33f4fe1e3eb2f1244493271ef83d4e91651d5ae0babbc524d85c8"
-      "4d05092a120d132315756bad7ec56544e9e71d74d91b1fe8f264f840972d035df6e61f74"
-      "d9dd3a5f1eb14e1bafc94492b1a4d8e765ee6a7ff943269f131fa38f",
-      "6167a8bf45a0c793e1b32dec7a2ca64eea8d7a7beb30df52334b4573be7a961657418fef"
-      "9a1e43df19faced7ad07f4dcb2b0eb79d8fbce3f33e6bbcd6391e19f"
-      "a7703f7a8e9144fa6ffdada7ba853041a7714bb183ae9f9b8aa8a16e89181b8ca17ea6f7"
-      "ed324381d6cfbfcefd15a8debebbf9cbf320f96c0bbbde3edc6b9425",
-      "126fb712874bbb2524efadd78f6329d0dbdba6b79ff95cc75b23d661e323a29a9afefadd"
-      "c71d269f139ff83e52e71a0f18714e4a473efd26d83af8a7ef7fff2a"
-      "483edbc2aecb6226764aeae5d3955cb95456f3cbc6ea5eb110a2be46587439e83a383e18"
-      "431dccaa83e381d6c1bf055c072f7ff707e82d37f973ca2ddcc81652",
-      "f195eeb7ec613a5d882daa1b8938171ebd3d67ccbfadcf2df417bcf1417fc11f1ff4172c"
-      "83fe8237ff61a9639ffa5c07bc7f73fa3fa0c61c759f8dc3fbb7f1f8"
-      "e0fd9b65f0fecd9bff0bc67cb7797cc2f0cf53b8f7e73a8d34d43f45d13f362128620761"
-      "54fd9fb3138e3a0c741b74fbbaf5806e5b06ba7d3dcfa83838c61874",
-      "7b3cddfec2e77ade19b11e1bafdbd1999a4c04eba0add0964943d074ac8a4af7af0189e8"
-      "f8ceeaf563269f13f7beaf2e3317f0fbbdd9b783d5eb6ff18f42907c"
-      "b6855dafe70f238babe5b3a37676c994f7a3520de5775221ea8b5c30e6bbcd6385e19fa7"
-      "f01b7baea3d01fb1ee833adbcd7aa0ceb62cecba1df63afb9c31df6d",
-      "1e3f62f8e729dcfb736dfd1cc69a99ecffa318e832e8b29bf5802e5b06ba7c3dcfa83838"
-      "c6f8aee8f2070cff3c858f7f3e603ae7e29258378cad81e872d3d3dd"
-      "739f7c37777ee33243f0ffd513e4b32decba5a388ac777334d753b9735b6b3a8bd56d572"
-      "6a88fa14e78cf9b7555783da77bbab5dc472ffe888f5eb73d3d3d767",
-      "3ef9324c3e273e7effdf9929f87da1c9f2d91676bd2db672ad13b2204b3b5a6a2bd7a94a"
-      "47fba57612f4d6f6f709c33f4fe1de9fe35217b9ea30407f01fa0b6e"
-      "d603ba6c59d87539acfd85ff008bc2cf8c",
+      "789ced5c4f6fe2461477aaddaa55d5ada5767badd44ba5aa5d1142b2a4eabf4008090901"
+      "14920d2c2bc7310338f11f321e43c8a9c7deba1f21c71ef7d8633e46"
+      "0ffd18fd000506133cea041b7b2158ef5dcce8e779bf376ff04f2fcf138495bdfc8a2008"
+      "cf046abb6d7afd74341647d70f04b7b1f8cae8fa053376eca9f0c435",
+      "cfc1ff185d15d320e89ad08121eb683cb36eeaaa211ba4dc6b230123cbd43aa83e441aaa"
+      "86caaa8e8e2607878391be33018d070368f039dd42cae591ad0bb865"
+      "dd47a84d0ec6f978c759ef138ff9d8e7e44364f0d79937e91f6ac716c256edf455b9b68d"
+      "ac4b62b66b57b66cdcb464a3a7c66b37a6d12c552b35822cb2564bcb",
+      "9a626b3291b624d9a84b29a968aa06b15ee8aef8df068cffbb29f13b78c334896436a436"
+      "c26d64d4d54168586a60539764a93d884c2266ffa3a61a6832beb380"
+      "f17dc88d8f2275d33ed7d03ddf5d40be33662c30f739b8fffdf493c117fab4fc7de6713d"
+      "ecf5fefe8f86d76f37ff1942f3e2fbf7e9d5d7f3e4736c517cd71c7f",
+      "5ebf8f5f72f84406575479bd94c8f4628d58b5ba5acd164a6bc7859dfb388a5378a6c521"
+      "70c6f3f2bfec3add0e18ff3366ccc6efe07aaf83b1493a4889eb3259"
+      "9c0eff19902fc5e573e3fef7cb9da1d136cd4d1fe6adb79f7f0f7a3bb0b0f53616578f53"
+      "fbaf4a7515a56389937cd7c8b576b2a0b751d1db4fa6c4efe0b2d1d4",
+      "507c58beb9f8cf02f2fbd5dbdb807cbf70f9dcb8fffd9ac8507f8fa2aab350d752f3fa7d"
+      "7bcee11319bc7885717a6f6b3f76ba5b3d8c6da63a9bbabc2e444767"
+      "ef38f3bde6b1c2f12f3278683a2bc90d82b0546834fa77c59df209fa11d08ff0b41ed06d"
+      "6acbaadbd08fa076c799ef358f12c7bfc8e001743b679faa46f321f9",
+      "9ea8c7a03fe18f0ffa13e1f0417f821af427fcf9ff9b33df6b1e31c7bfc8e0b3eb2f9264"
+      "45b1f1e083d2eb1751f5be0b5a5ee9b646d4b686241dc9968d918efa"
+      "b5d6b0e2b2e2ecf30ebaec8f0f74391c3ed0656aa0cbfefc832e7b5be7c753d6e9e00d95"
+      "282a5634e7bcccb2f6977fe2f2b9f119fa184e86865b14553d863e05",
+      "b5b0f558ce5c355bcdeec179b1a3e736caf66afd262b6f831e2f9b1e43df19face0fad07"
+      "f49c5ad4f53cea7de7bf38f3bde6b1ccf12f3278103dc74821c3b7fe"
+      "f4a9ee204cd075922af6bcebe7b6261ba85f22264663a89fd97d1b6728d2f533f433a885"
+      "adb72f4f5a558524bb9dd4f9c67105a927bbcdcb4406f4f6b1e9ed6f",
+      "01d7f1d5947538f894a816a6bf41f7f188cbe7c643df47e65ce31927ce65d565a883a985"
+      "ded7c825ae49b37abd55a856aa7a71d3da3e299722d4d7888a2ecfbb"
+      "0e4e8ec65007f3eae024d4c121f239b6ac7aebf59c7207b7f2a54c72abff2d7b99cd9612"
+      "ebfa5e2a2944476f6f39f31feb730bfd057f7cd05f08c607ba4a0dfa",
+      "0bfefc47a58e7d1b701df0fecdedff8c190bcc7d0e0eefdf66e383be033578ffe6cfff1d"
+      "67bed73cbee1f81719dcff739d45061a9ea2181e9b9034b98730aaff"
+      "cfd909571d06ba0dbafdd07a40b7a9816e3fcc332d0e813306dd9e4db77f0fb89e6fa6ac"
+      "c7c19b4e74b6a112891eb495ba2a694986897559ebff35a010132fad",
+      "5ebfe6f2b971fffbea3173f07e2f543ec7a2aed7abe7b1f5edeacd4537bf61aba771a581"
+      "8a479908f545ee38f3bde6b1c6f12f32f87b7baee3d01fa1f7419ded"
+      "653da0dbd4a2aedb51afb36f39f3bde6f1678e7f91c1fd3fd7f4e73076ecf4f01fc54097"
+      "4197bdac0774991ae8f2c33cd3e21038e365d1e51f39fe45069ffd7c",
+      "c062cec5a5b169590723d11516a7bbb701f9dedff98d7186227d7e0374955ad8ba5aba48"
+      "268f736dfdb090b70ef3a8bb53370a7a84fa14b79cf98f5557e7b5ef"
+      "4e57bb8cd5e1d111faeb738bd3d77701f9725c3e373e7bffdf9da9a8ffbe10e82db5b09f"
+      "bb72a7d0b9226baa7264640e0abdba72715ae9a6416f1d7fbf72fc8b",
+      "0ceeff39aef491fb0e03f417a0bfe0653da0cbd4a2aecb51ed2ffc07fe4cbef6",
       ""};
   nameCaptureInfo = NULL;
   emlrtNameCaptureMxArrayR2016a(&data[0], 28768U, &nameCaptureInfo);
@@ -111,7 +109,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\angle2point."
           "m"));
   emlrtSetField(xEntryPoints, 0, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739509.796724537));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 0, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 0, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -129,7 +127,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\Calculat_A_"
           "and_B_Points.m"));
   emlrtSetField(xEntryPoints, 1, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739509.796724537));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 1, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 1, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -147,7 +145,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\Calculat_A_"
           "and_B_Points_after_Offest2.m"));
   emlrtSetField(xEntryPoints, 2, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739625.96627314819));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 2, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 2, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -166,7 +164,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\Calculat_"
           "JuXing_A_and_B_Points_after_Offest.m"));
   emlrtSetField(xEntryPoints, 3, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739509.796724537));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 3, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 3, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -186,7 +184,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\Calculate_"
           "accurate_cylinders_from_multiple_measurement_points2.m"));
   emlrtSetField(xEntryPoints, 4, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739625.94745370373));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 4, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 4, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -204,7 +202,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\Calculate_"
           "rectangle_from_vertex.m"));
   emlrtSetField(xEntryPoints, 5, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739698.02126157412));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 5, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 5, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -222,7 +220,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\Calculate_"
           "rectangle_from_vertex8.m"));
   emlrtSetField(xEntryPoints, 6, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739699.76319444447));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 6, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 6, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -238,7 +236,7 @@ mxArray *emlrtMexFcnProperties(void)
       emlrtMxCreateString(
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\CrossLine.m"));
   emlrtSetField(xEntryPoints, 7, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739509.796724537));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 7, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 7, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -254,7 +252,7 @@ mxArray *emlrtMexFcnProperties(void)
       emlrtMxCreateString(
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\fitcircle.m"));
   emlrtSetField(xEntryPoints, 8, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739509.796724537));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 8, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 8, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -273,7 +271,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\foot_of_"
           "perpendicular_from_a_point_to_a_line.m"));
   emlrtSetField(xEntryPoints, 9, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739509.796724537));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 9, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 9, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -292,7 +290,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\Generate_"
           "multi_layered_measurement_points.m"));
   emlrtSetField(xEntryPoints, 10, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739548.53447916661));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 10, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 10, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -310,7 +308,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\generate_unit_"
           "circle_with_normal_vector.m"));
   emlrtSetField(xEntryPoints, 11, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739548.53152777778));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 11, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 11, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -329,7 +327,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\generate_unit_"
           "circle_with_normal_vector2.m"));
   emlrtSetField(xEntryPoints, 12, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739624.78620370373));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 12, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 12, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -346,7 +344,7 @@ mxArray *emlrtMexFcnProperties(void)
                                     "\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZ"
                                     "Y\\test3\\GenerateTrianglePoints.m"));
   emlrtSetField(xEntryPoints, 13, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739509.796724537));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 13, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 13, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -363,7 +361,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\JuXingFuCe."
           "m"));
   emlrtSetField(xEntryPoints, 14, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739682.97775462968));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 14, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 14, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -380,7 +378,7 @@ mxArray *emlrtMexFcnProperties(void)
                                     "\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZ"
                                     "Y\\test3\\myvrrotvec2mat.m"));
   emlrtSetField(xEntryPoints, 15, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739509.796724537));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 15, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 15, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -397,7 +395,7 @@ mxArray *emlrtMexFcnProperties(void)
                                     "\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZ"
                                     "Y\\test3\\OffsetCalculate.m"));
   emlrtSetField(xEntryPoints, 16, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739509.796724537));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 16, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 16, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -413,7 +411,7 @@ mxArray *emlrtMexFcnProperties(void)
       emlrtMxCreateString(
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\planefit.m"));
   emlrtSetField(xEntryPoints, 17, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739509.796724537));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 17, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 17, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -429,7 +427,7 @@ mxArray *emlrtMexFcnProperties(void)
       emlrtMxCreateString(
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\planefit4.m"));
   emlrtSetField(xEntryPoints, 18, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739845.99018518522));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 18, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 18, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -445,7 +443,7 @@ mxArray *emlrtMexFcnProperties(void)
       emlrtMxCreateString(
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\planefit8.m"));
   emlrtSetField(xEntryPoints, 19, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739846.01868055551));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 19, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 19, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -462,7 +460,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\RepeatSurvey."
           "m"));
   emlrtSetField(xEntryPoints, 20, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739509.796724537));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 20, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 20, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -479,7 +477,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\ShengDaoGaoDu."
           "m"));
   emlrtSetField(xEntryPoints, 21, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739509.796724537));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 21, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 21, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -496,7 +494,7 @@ mxArray *emlrtMexFcnProperties(void)
                                     "\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZ"
                                     "Y\\test3\\ShengLuJiaoJiSuan.m"));
   emlrtSetField(xEntryPoints, 22, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739509.796724537));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 22, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 22, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -513,7 +511,7 @@ mxArray *emlrtMexFcnProperties(void)
           "C:\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZY\\test3\\YuanXingFuCe."
           "m"));
   emlrtSetField(xEntryPoints, 23, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739625.97748842591));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 23, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 23, "Visible", emlrtMxCreateLogicalScalar(true));
@@ -530,7 +528,7 @@ mxArray *emlrtMexFcnProperties(void)
                                     "\\Users\\XWT\\Desktop\\quanzhanyi2\\zongQZ"
                                     "Y\\test3\\YuanZhuJiaoDian.m"));
   emlrtSetField(xEntryPoints, 24, "TimeStamp",
-                emlrtMxCreateDoubleScalar(739524.05966435187));
+                emlrtMxCreateDoubleScalar(739899.942175926));
   emlrtSetField(xEntryPoints, 24, "Constructor",
                 emlrtMxCreateLogicalScalar(false));
   emlrtSetField(xEntryPoints, 24, "Visible", emlrtMxCreateLogicalScalar(true));

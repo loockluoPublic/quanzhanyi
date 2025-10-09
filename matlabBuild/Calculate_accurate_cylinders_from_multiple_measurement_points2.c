@@ -2,7 +2,7 @@
  * File: Calculate_accurate_cylinders_from_multiple_measurement_points2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 17-Aug-2025 14:06:05
+ * C/C++ source code generated on  : 09-Oct-2025 22:40:58
  */
 
 /* Include Files */
@@ -132,12 +132,12 @@ void Calculate_accurate_cylinders_from_multiple_measurement_points2(
   emxInit_real_T(&r, 2);
   emxInit_real_T(&n, 2);
   emxInit_real_T(&b_y, 1);
-  for (i = 0; i < 200; i++) {
-    d = 0.031573795513465258 * (double)i;
+  for (i = 0; i < 1000; i++) {
+    d = 0.0062894747819615474 * (double)i;
     d1 = cos(d);
     d2 = sin(d);
-    for (j = 0; j < 200; j++) {
-      rcoselev_tmp = 0.031573795513465258 * (double)j;
+    for (j = 0; j < 1000; j++) {
+      rcoselev_tmp = 0.0062894747819615474 * (double)j;
       rcoselev = cos(rcoselev_tmp);
       norm_vec = sin(rcoselev_tmp);
       b_n[0] = rcoselev * d1;
