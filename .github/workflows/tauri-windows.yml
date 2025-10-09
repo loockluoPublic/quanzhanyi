@@ -48,7 +48,7 @@ jobs:
         shell: pwsh
 
       - name: Build frontend
-        run: pnpm build
+        run: pnpm tauri build
         shell: pwsh
 
       - name: Tauri build (Windows)
