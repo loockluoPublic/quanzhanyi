@@ -1,0 +1,74 @@
+name: Build Tauri (Windows)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      # Tauri CLI uses these to cache and speed up builds
+      CI: true
+      TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
+      TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install Rust stable
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - name: Show Rust/Cargo versions
+        run: |
+          rustc -V
+          cargo -V
+        shell: pwsh
+
+      - name: Install frontend deps
+        run: pnpm install --frozen-lockfile
+        shell: pwsh
+
+      - name: Build frontend
+        run: pnpm build
+        shell: pwsh
+
+      - name: Tauri build (Windows)
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: 'app-v__VERSION__'
+          releaseName: 'App v__VERSION__'
+          releaseDraft: true
+          prerelease: false
+          includeDebug: false
+          tauriScript: 'pnpm tauri'
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tauri-windows-build
+          path: |
+            src-tauri/target/release/bundle/**
+            src-tauri/target/release/*.exe
+
