@@ -1,0 +1,52 @@
+name: Docker Emscripten 构建
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'cSource/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'cSource/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: 设置 Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Emscripten 构建
+        run: |
+          mkdir -p cSource/build
+          docker run --rm \
+            -v ${{ github.workspace }}:/src \
+            -w /src/cSource/build \
+            emscripten/emsdk \
+            /bin/bash -c "emcmake cmake .. && emmake make"
+          
+      - name: 配置 Git
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+      - name: 提交更新的构建产物
+        run: |
+          git add public/
+          current_time=$(date '+%Y%m%d-%H%M%S')
+          git commit -m "更新 Emscripten 构建产物 ($current_time)" || echo "没有变更需要提交"
+          
+      - name: 推送更改
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
