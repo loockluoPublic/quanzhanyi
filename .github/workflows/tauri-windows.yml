@@ -1,4 +1,4 @@
-name: Build Tauri (Windows)
+name: 构建 Tauri 应用 (Windows)
 
 on:
   push:
@@ -11,43 +11,43 @@ jobs:
   build:
     runs-on: windows-latest
     env:
-      # Tauri CLI uses these to cache and speed up builds
+      # Tauri CLI 用于缓存和加速构建
       CI: true
       TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
       TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
     steps:
-      - name: Checkout
+      - name: 检出代码
         uses: actions/checkout@v4
 
-      - name: Setup PNPM
+      - name: 配置 PNPM
         uses: pnpm/action-setup@v4
         with:
           version: 9
 
-      - name: Setup Node.js
+      - name: 配置 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'pnpm'
 
-      - name: Install Rust stable
+      - name: 安装 Rust 稳定版
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
           toolchain: stable
           override: true
 
-      - name: Show Rust/Cargo versions
+      - name: 显示 Rust/Cargo 版本信息
         run: |
           rustc -V
           cargo -V
         shell: pwsh
 
-      - name: Install frontend deps
+      - name: 安装前端依赖
         run: pnpm install --frozen-lockfile
         shell: pwsh
 
-      - name: Tauri build (Windows)
+      - name: 构建 Tauri 应用
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -56,12 +56,20 @@ jobs:
           includeDebug: false
           tauriScript: 'pnpm tauri'
 
-      - name: Upload artifacts
+      - name: 重命名可执行文件（添加日期）
+        run: |
+          $date = Get-Date -Format "yyyyMMdd"
+          Get-ChildItem "src-tauri/target/release/*.exe" | 
+          ForEach-Object {
+            $newName = $_.BaseName + "-$date" + $_.Extension
+            Rename-Item $_.FullName -NewName $newName
+          }
+        shell: pwsh
+
+      - name: 上传构建产物
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: tauri-windows-build
-          path: |
-            src-tauri/target/release/bundle/**
-            src-tauri/target/release/*.exe
+          path: src-tauri/target/release/*.exe
 
