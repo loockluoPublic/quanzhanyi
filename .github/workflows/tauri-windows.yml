@@ -5,6 +5,8 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  repository_dispatch:
+    types: [trigger-tauri-build]
   workflow_dispatch:
 
 jobs:
