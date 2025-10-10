@@ -31,7 +31,7 @@ jobs:
           docker run --rm \
             -v ${{ github.workspace }}:/src \
             -w /src/cSource/build \
-            emscripten/emsdk \
+            emscripten/emsdk:4.0.6 \
             /bin/bash -c "emcmake cmake .. && emmake make"
           
       - name: 配置 Git
