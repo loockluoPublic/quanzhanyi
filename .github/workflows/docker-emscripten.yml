@@ -54,5 +54,5 @@ jobs:
       - name: 触发 Tauri Windows 构建
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.WORKFLOW_TOKEN }}
           event-type: trigger-tauri-build
