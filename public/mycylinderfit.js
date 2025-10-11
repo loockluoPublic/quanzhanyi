@@ -38,7 +38,7 @@ if (ENVIRONMENT_IS_NODE) {
 // we collect those properties and reapply _after_ we configure
 // the current environment's defaults to avoid having to be so
 // defensive during initialization.
-var moduleOverrides = Object.assign({}, Module);
+var moduleOverrides = {...Module};
 
 var arguments_ = [];
 var thisProgram = './this.program';
@@ -477,8 +477,11 @@ function unexportedRuntimeSymbol(sym) {
   }
 }
 
+var runtimeDebug = true; // Switch to false at runtime to disable logging at the right times
+
 // Used by XXXXX_DEBUG settings to output debug messages.
 function dbg(...args) {
+  if (!runtimeDebug && typeof runtimeDebug != 'undefined') return;
   // TODO(sbc): Make this configurable somehow.  Its not always convenient for
   // logging to show up as warnings.
   console.warn(...args);
@@ -692,6 +695,7 @@ function createExportWrapper(name, nargs) {
 }
 
 var wasmBinaryFile;
+
 function findWasmBinary() {
     return locateFile('mycylinderfit.wasm');
 }
@@ -834,14 +838,14 @@ async function createWasm() {
   }
 
   wasmBinaryFile ??= findWasmBinary();
-
     var result = await instantiateAsync(wasmBinary, wasmBinaryFile, info);
     var exports = receiveInstantiationResult(result);
     return exports;
 }
 
-// === Body ===
 // end include: preamble.js
+
+// Begin JS library code
 
 
   class ExitStatus {
@@ -1103,7 +1107,7 @@ async function createWasm() {
   function _fd_seek(fd, offset, whence, newOffset) {
     offset = bigintToI53Checked(offset);
   
-    
+  
       return 70;
     ;
   }
@@ -1297,6 +1301,8 @@ async function createWasm() {
       return ret;
     };
 
+
+// End JS library code
 
 function checkIncomingModuleAPI() {
   ignoredModuleProp('fetchSettings');
@@ -1527,7 +1533,6 @@ var missingLibrarySymbols = [
   'allocate',
   'writeStringToMemory',
   'writeAsciiToMemory',
-  'setErrNo',
   'demangle',
   'stackTrace',
 ];
