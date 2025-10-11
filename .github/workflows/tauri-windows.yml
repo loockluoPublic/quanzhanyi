@@ -58,12 +58,15 @@ jobs:
           includeDebug: false
           tauriScript: 'pnpm tauri'
 
-      - name: 重命名可执行文件（添加日期）
+      - name: 重命名可执行文件（添加日期和分钟数）
         run: |
           $date = Get-Date -Format "yyyyMMdd"
+          $now = Get-Date
+          $midnight = $now.Date
+          $minutes = [int]($now - $midnight).TotalMinutes
           Get-ChildItem "src-tauri/target/release/*.exe" | 
           ForEach-Object {
-            $newName = $_.BaseName + "-$date" + $_.Extension
+            $newName = $_.BaseName + "-$date-" + $minutes + $_.Extension
             Rename-Item $_.FullName -NewName $newName
           }
         shell: pwsh
